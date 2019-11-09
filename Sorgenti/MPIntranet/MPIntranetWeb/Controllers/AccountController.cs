@@ -45,7 +45,7 @@ namespace MPIntranetWeb.Controllers
                            DateTime.Now,
                            DateTime.Now.AddMinutes(30),
                            false,
-                           "User"
+                           "Account"
                      );
 
                 string formsCookieStr = FormsAuthentication.Encrypt(ticket);
@@ -57,5 +57,6 @@ namespace MPIntranetWeb.Controllers
             ModelState.AddModelError(string.Empty, "User or password incorrect.");
             return View(model);
         }
+      
     }
 }

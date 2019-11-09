@@ -14,7 +14,7 @@
   <xs:element name="SecurityDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="SecurityDS" msprop:Generator_UserDSName="SecurityDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="TOKEN" msprop:Generator_TableClassName="TOKENDataTable" msprop:Generator_TableVarName="tableTOKEN" msprop:Generator_TablePropName="TOKEN" msprop:Generator_RowDeletingName="TOKENRowDeleting" msprop:Generator_RowChangingName="TOKENRowChanging" msprop:Generator_RowEvHandlerName="TOKENRowChangeEventHandler" msprop:Generator_RowDeletedName="TOKENRowDeleted" msprop:Generator_UserTableName="TOKEN" msprop:Generator_RowChangedName="TOKENRowChanged" msprop:Generator_RowEvArgName="TOKENRowChangeEvent" msprop:Generator_RowClassName="TOKENRow">
+        <xs:element name="TOKEN" msprop:Generator_TableClassName="TOKENDataTable" msprop:Generator_TableVarName="tableTOKEN" msprop:Generator_RowChangedName="TOKENRowChanged" msprop:Generator_TablePropName="TOKEN" msprop:Generator_RowDeletingName="TOKENRowDeleting" msprop:Generator_RowChangingName="TOKENRowChanging" msprop:Generator_RowEvHandlerName="TOKENRowChangeEventHandler" msprop:Generator_RowDeletedName="TOKENRowDeleted" msprop:Generator_RowClassName="TOKENRow" msprop:Generator_UserTableName="TOKEN" msprop:Generator_RowEvArgName="TOKENRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="TOKEN" msprop:Generator_ColumnVarNameInTable="columnTOKEN" msprop:Generator_ColumnPropNameInRow="TOKEN" msprop:Generator_ColumnPropNameInTable="TOKENColumn" msprop:Generator_UserColumnName="TOKEN">
@@ -43,7 +43,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="ABILITAZIONI" msprop:Generator_TableClassName="ABILITAZIONIDataTable" msprop:Generator_TableVarName="tableABILITAZIONI" msprop:Generator_TablePropName="ABILITAZIONI" msprop:Generator_RowDeletingName="ABILITAZIONIRowDeleting" msprop:Generator_RowChangingName="ABILITAZIONIRowChanging" msprop:Generator_RowEvHandlerName="ABILITAZIONIRowChangeEventHandler" msprop:Generator_RowDeletedName="ABILITAZIONIRowDeleted" msprop:Generator_UserTableName="ABILITAZIONI" msprop:Generator_RowChangedName="ABILITAZIONIRowChanged" msprop:Generator_RowEvArgName="ABILITAZIONIRowChangeEvent" msprop:Generator_RowClassName="ABILITAZIONIRow">
+        <xs:element name="ABILITAZIONI" msprop:Generator_TableClassName="ABILITAZIONIDataTable" msprop:Generator_TableVarName="tableABILITAZIONI" msprop:Generator_RowChangedName="ABILITAZIONIRowChanged" msprop:Generator_TablePropName="ABILITAZIONI" msprop:Generator_RowDeletingName="ABILITAZIONIRowDeleting" msprop:Generator_RowChangingName="ABILITAZIONIRowChanging" msprop:Generator_RowEvHandlerName="ABILITAZIONIRowChangeEventHandler" msprop:Generator_RowDeletedName="ABILITAZIONIRowDeleted" msprop:Generator_RowClassName="ABILITAZIONIRow" msprop:Generator_UserTableName="ABILITAZIONI" msprop:Generator_RowEvArgName="ABILITAZIONIRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="UTENTE" msprop:Generator_ColumnVarNameInTable="columnUTENTE" msprop:Generator_ColumnPropNameInRow="UTENTE" msprop:Generator_ColumnPropNameInTable="UTENTEColumn" msprop:Generator_UserColumnName="UTENTE" minOccurs="0">
@@ -98,6 +98,13 @@
                 </xs:simpleType>
               </xs:element>
               <xs:element name="SEQUENZA" msprop:Generator_ColumnVarNameInTable="columnSEQUENZA" msprop:Generator_ColumnPropNameInRow="SEQUENZA" msprop:Generator_ColumnPropNameInTable="SEQUENZAColumn" msprop:Generator_UserColumnName="SEQUENZA" type="xs:decimal" />
+              <xs:element name="AZIONE" msprop:Generator_ColumnVarNameInTable="columnAZIONE" msprop:Generator_ColumnPropNameInRow="AZIONE" msprop:Generator_ColumnPropNameInTable="AZIONEColumn" msprop:Generator_UserColumnName="AZIONE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>

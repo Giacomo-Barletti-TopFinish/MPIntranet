@@ -8,7 +8,7 @@
   <Shapes>
     <Shape ID="DesignTable:TOKEN" ZOrder="3" X="67" Y="47" Height="124" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="120" />
     <Shape ID="DesignTable:ABILITAZIONI" ZOrder="2" X="288" Y="46" Height="67" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="63" />
-    <Shape ID="DesignTable:MENU" ZOrder="1" X="505" Y="51" Height="181" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="177" />
+    <Shape ID="DesignTable:MENU" ZOrder="1" X="538" Y="60" Height="200" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="244" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

@@ -935,6 +935,8 @@ namespace MPIntranet.Entities {
             
             private global::System.Data.DataColumn columnSEQUENZA;
             
+            private global::System.Data.DataColumn columnAZIONE;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public MENUDataTable() {
@@ -1034,6 +1036,14 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn AZIONEColumn {
+                get {
+                    return this.columnAZIONE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1069,7 +1079,7 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public MENURow AddMENURow(decimal IDMENU, decimal IDMENUPADRE, string ETICHETTA, string DESCRIZIONE, string ONCLICK, string HREF, string FONT, decimal SEQUENZA) {
+            public MENURow AddMENURow(decimal IDMENU, decimal IDMENUPADRE, string ETICHETTA, string DESCRIZIONE, string ONCLICK, string HREF, string FONT, decimal SEQUENZA, string AZIONE) {
                 MENURow rowMENURow = ((MENURow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDMENU,
@@ -1079,7 +1089,8 @@ namespace MPIntranet.Entities {
                         ONCLICK,
                         HREF,
                         FONT,
-                        SEQUENZA};
+                        SEQUENZA,
+                        AZIONE};
                 rowMENURow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMENURow);
                 return rowMENURow;
@@ -1110,6 +1121,7 @@ namespace MPIntranet.Entities {
                 this.columnHREF = base.Columns["HREF"];
                 this.columnFONT = base.Columns["FONT"];
                 this.columnSEQUENZA = base.Columns["SEQUENZA"];
+                this.columnAZIONE = base.Columns["AZIONE"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1131,6 +1143,8 @@ namespace MPIntranet.Entities {
                 base.Columns.Add(this.columnFONT);
                 this.columnSEQUENZA = new global::System.Data.DataColumn("SEQUENZA", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSEQUENZA);
+                this.columnAZIONE = new global::System.Data.DataColumn("AZIONE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAZIONE);
                 this.columnIDMENU.AllowDBNull = false;
                 this.columnETICHETTA.AllowDBNull = false;
                 this.columnETICHETTA.MaxLength = 20;
@@ -1140,6 +1154,7 @@ namespace MPIntranet.Entities {
                 this.columnHREF.MaxLength = 150;
                 this.columnFONT.MaxLength = 50;
                 this.columnSEQUENZA.AllowDBNull = false;
+                this.columnAZIONE.MaxLength = 1;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1582,6 +1597,22 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string AZIONE {
+                get {
+                    try {
+                        return ((string)(this[this.tableMENU.AZIONEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'AZIONE\' in table \'MENU\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMENU.AZIONEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsIDMENUPADRENull() {
                 return this.IsNull(this.tableMENU.IDMENUPADREColumn);
             }
@@ -1626,6 +1657,18 @@ namespace MPIntranet.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetFONTNull() {
                 this[this.tableMENU.FONTColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsAZIONENull() {
+                return this.IsNull(this.tableMENU.AZIONEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetAZIONENull() {
+                this[this.tableMENU.AZIONEColumn] = global::System.Convert.DBNull;
             }
         }
         

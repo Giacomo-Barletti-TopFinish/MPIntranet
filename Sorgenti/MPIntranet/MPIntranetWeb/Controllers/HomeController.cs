@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MPIntranet.Models.Security;
+using MPIntranet.Security;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +13,13 @@ namespace MPIntranetWeb.Controllers
         public ActionResult Index()
         {
             return View();
-        }     
+        }
+
+        public ActionResult LeftMenu()
+        {
+            Account a = new Account();
+            List<MenuModel> menu = a.CreateMenuModel(ConnectedUser);
+            return PartialView(menu);
+        }
     }
 }

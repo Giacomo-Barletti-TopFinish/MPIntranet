@@ -95,9 +95,6 @@ namespace MPIntranet.Security
                 MenuModel elementoMenu = CreaMenu(ds, row.IDMENU, idMenuAbilitati);
                 menu.Add(elementoMenu);
             }
-
-
-
             return menu;
         }
 
@@ -114,7 +111,7 @@ namespace MPIntranet.Security
             padre.MenuFiglio = new List<MenuModel>();
             padre.Abilitato = idMenuAbilitati.Contains(padre.IdMenu) ? true : false;
 
-            foreach (SecurityDS.MENURow rowFiglio in ds.MENU.Where(x => !x.IsIDMENUPADRENull() && x.IDMENUPADRE == row.IDMENU).OrderBy(x => x.SEQUENZA))
+            foreach (SecurityDS.MENURow rowFiglio in ds.MENU.Where(x => !x.IsIDMENUPADRENull() && x.IDMENUPADRE == row.IDMENU && x.IsAZIONENull()).OrderBy(x => x.SEQUENZA))
             {
                 MenuModel figlio = CreaMenu(ds, rowFiglio.IDMENU, idMenuAbilitati);
                 padre.MenuFiglio.Add(figlio);

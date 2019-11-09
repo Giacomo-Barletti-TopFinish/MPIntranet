@@ -15,7 +15,7 @@ namespace MPIntranet.Security
                 valid = domainctx.ValidateCredentials(account, password);
                 UserPrincipal userPrincipal = UserPrincipal.FindByIdentity(domainctx, IdentityType.SamAccountName, account);
 
-                if (userPrincipal.Enabled.HasValue && userPrincipal.Enabled.Value == false) return false;
+                if (userPrincipal != null && userPrincipal.Enabled.HasValue && userPrincipal.Enabled.Value == false) return false;
             }
             return valid;
         }

@@ -386,6 +386,7 @@
     <Content Include="Views\ErrorPage\Error.cshtml" />
     <Content Include="Views\Shared\_LayoutApplication.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Home\LeftMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
