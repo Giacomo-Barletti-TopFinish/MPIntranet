@@ -12,13 +12,19 @@ namespace MPIntranet.DataAccess.Security
     {
         public SecurityBusiness() : base() { }
 
-        [DataContext]
+        [DataContext(true)]
         public void SaveToken(string account, string token, int durata, string ipAddress)
         {
             SecurityAdapter a = new SecurityAdapter(DbConnection, DbTransaction);
             a.SaveToken(account, token, durata, ipAddress);
         }
 
+        [DataContext(true)]
+        public void SaveMessaggioLog(string messaggio, string stack, string modulo, string tipoMessaggio)
+        {
+            SecurityAdapter a = new SecurityAdapter(DbConnection, DbTransaction);
+            a.SaveMessaggioLog(messaggio, stack, modulo, tipoMessaggio);
+        }
         [DataContext]
         public void GetToken(SecurityDS ds, string token)
         {

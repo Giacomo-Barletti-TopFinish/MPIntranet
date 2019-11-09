@@ -34,6 +34,27 @@ namespace MPIntranet.DataAccess.Security
             }
         }
 
+        public void SaveMessaggioLog(string messaggio, string stack, string modulo, string tipoMessaggio)
+        {
+            messaggio = messaggio.Length > 200 ? messaggio.Substring(0, 200) : messaggio;
+            stack = stack.Length > 200 ? stack.Substring(0, 200) : stack;
+            modulo = modulo.Length > 200 ? modulo.Substring(0, 200) : modulo;
+            tipoMessaggio = tipoMessaggio.Length > 15 ? tipoMessaggio.Substring(0, 15) : tipoMessaggio;
+
+            string insert = @"insert into $T{LOGMESSAGGI} (IDLOG,MESSAGGIO,STACK,MODULO,TIPOMESAGGIO)
+                                values (NULL,$P{MESSAGGIO},$P{STACK},$P{MODULO},$P{TIPOMESAGGIO})";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("MESSAGGIO", DbType.String, messaggio);
+            ps.AddParam("STACK", DbType.String, stack);
+            ps.AddParam("MODULO", DbType.String, modulo);
+            ps.AddParam("TIPOMESAGGIO", DbType.String, tipoMessaggio);
+            using (DbCommand cmd = BuildCommand(insert, ps))
+            {
+                object o = cmd.ExecuteNonQuery();
+            }
+        }
+
         public void GetToken(SecurityDS ds, string token)
         {
             string select = @"SELECT * FROM TOKEN where TOKEN = $P{token}";

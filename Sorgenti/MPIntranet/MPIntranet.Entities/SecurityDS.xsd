@@ -14,7 +14,7 @@
   <xs:element name="SecurityDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="SecurityDS" msprop:Generator_UserDSName="SecurityDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="TOKEN" msprop:Generator_TableClassName="TOKENDataTable" msprop:Generator_TableVarName="tableTOKEN" msprop:Generator_RowChangedName="TOKENRowChanged" msprop:Generator_TablePropName="TOKEN" msprop:Generator_RowDeletingName="TOKENRowDeleting" msprop:Generator_RowChangingName="TOKENRowChanging" msprop:Generator_RowEvHandlerName="TOKENRowChangeEventHandler" msprop:Generator_RowDeletedName="TOKENRowDeleted" msprop:Generator_RowClassName="TOKENRow" msprop:Generator_UserTableName="TOKEN" msprop:Generator_RowEvArgName="TOKENRowChangeEvent">
+        <xs:element name="TOKEN" msprop:Generator_TableClassName="TOKENDataTable" msprop:Generator_TableVarName="tableTOKEN" msprop:Generator_TablePropName="TOKEN" msprop:Generator_RowDeletingName="TOKENRowDeleting" msprop:Generator_RowChangingName="TOKENRowChanging" msprop:Generator_RowEvHandlerName="TOKENRowChangeEventHandler" msprop:Generator_RowDeletedName="TOKENRowDeleted" msprop:Generator_UserTableName="TOKEN" msprop:Generator_RowChangedName="TOKENRowChanged" msprop:Generator_RowEvArgName="TOKENRowChangeEvent" msprop:Generator_RowClassName="TOKENRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="TOKEN" msprop:Generator_ColumnVarNameInTable="columnTOKEN" msprop:Generator_ColumnPropNameInRow="TOKEN" msprop:Generator_ColumnPropNameInTable="TOKENColumn" msprop:Generator_UserColumnName="TOKEN">
@@ -43,7 +43,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="ABILITAZIONI" msprop:Generator_TableClassName="ABILITAZIONIDataTable" msprop:Generator_TableVarName="tableABILITAZIONI" msprop:Generator_RowChangedName="ABILITAZIONIRowChanged" msprop:Generator_TablePropName="ABILITAZIONI" msprop:Generator_RowDeletingName="ABILITAZIONIRowDeleting" msprop:Generator_RowChangingName="ABILITAZIONIRowChanging" msprop:Generator_RowEvHandlerName="ABILITAZIONIRowChangeEventHandler" msprop:Generator_RowDeletedName="ABILITAZIONIRowDeleted" msprop:Generator_RowClassName="ABILITAZIONIRow" msprop:Generator_UserTableName="ABILITAZIONI" msprop:Generator_RowEvArgName="ABILITAZIONIRowChangeEvent">
+        <xs:element name="ABILITAZIONI" msprop:Generator_TableClassName="ABILITAZIONIDataTable" msprop:Generator_TableVarName="tableABILITAZIONI" msprop:Generator_TablePropName="ABILITAZIONI" msprop:Generator_RowDeletingName="ABILITAZIONIRowDeleting" msprop:Generator_RowChangingName="ABILITAZIONIRowChanging" msprop:Generator_RowEvHandlerName="ABILITAZIONIRowChangeEventHandler" msprop:Generator_RowDeletedName="ABILITAZIONIRowDeleted" msprop:Generator_UserTableName="ABILITAZIONI" msprop:Generator_RowChangedName="ABILITAZIONIRowChanged" msprop:Generator_RowEvArgName="ABILITAZIONIRowChangeEvent" msprop:Generator_RowClassName="ABILITAZIONIRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="UTENTE" msprop:Generator_ColumnVarNameInTable="columnUTENTE" msprop:Generator_ColumnPropNameInRow="UTENTE" msprop:Generator_ColumnPropNameInTable="UTENTEColumn" msprop:Generator_UserColumnName="UTENTE" minOccurs="0">
@@ -57,7 +57,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="MENU" msprop:Generator_TableClassName="MENUDataTable" msprop:Generator_TableVarName="tableMENU" msprop:Generator_TablePropName="MENU" msprop:Generator_RowDeletingName="MENURowDeleting" msprop:Generator_RowChangingName="MENURowChanging" msprop:Generator_RowEvHandlerName="MENURowChangeEventHandler" msprop:Generator_RowDeletedName="MENURowDeleted" msprop:Generator_UserTableName="MENU" msprop:Generator_RowChangedName="MENURowChanged" msprop:Generator_RowEvArgName="MENURowChangeEvent" msprop:Generator_RowClassName="MENURow">
+        <xs:element name="MENU" msprop:Generator_TableClassName="MENUDataTable" msprop:Generator_TableVarName="tableMENU" msprop:Generator_RowChangedName="MENURowChanged" msprop:Generator_TablePropName="MENU" msprop:Generator_RowDeletingName="MENURowDeleting" msprop:Generator_RowChangingName="MENURowChanging" msprop:Generator_RowEvHandlerName="MENURowChangeEventHandler" msprop:Generator_RowDeletedName="MENURowDeleted" msprop:Generator_RowClassName="MENURow" msprop:Generator_UserTableName="MENU" msprop:Generator_RowEvArgName="MENURowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDMENU" msprop:Generator_ColumnVarNameInTable="columnIDMENU" msprop:Generator_ColumnPropNameInRow="IDMENU" msprop:Generator_ColumnPropNameInTable="IDMENUColumn" msprop:Generator_UserColumnName="IDMENU" type="xs:decimal" />
@@ -102,6 +102,41 @@
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="LOGMESSAGGI" msprop:Generator_TableClassName="LOGMESSAGGIDataTable" msprop:Generator_TableVarName="tableLOGMESSAGGI" msprop:Generator_TablePropName="LOGMESSAGGI" msprop:Generator_RowDeletingName="LOGMESSAGGIRowDeleting" msprop:Generator_RowChangingName="LOGMESSAGGIRowChanging" msprop:Generator_RowEvHandlerName="LOGMESSAGGIRowChangeEventHandler" msprop:Generator_RowDeletedName="LOGMESSAGGIRowDeleted" msprop:Generator_UserTableName="LOGMESSAGGI" msprop:Generator_RowChangedName="LOGMESSAGGIRowChanged" msprop:Generator_RowEvArgName="LOGMESSAGGIRowChangeEvent" msprop:Generator_RowClassName="LOGMESSAGGIRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDLOG" msprop:Generator_ColumnVarNameInTable="columnIDLOG" msprop:Generator_ColumnPropNameInRow="IDLOG" msprop:Generator_ColumnPropNameInTable="IDLOGColumn" msprop:Generator_UserColumnName="IDLOG" type="xs:decimal" />
+              <xs:element name="MESSAGGIO" msprop:Generator_ColumnVarNameInTable="columnMESSAGGIO" msprop:Generator_ColumnPropNameInRow="MESSAGGIO" msprop:Generator_ColumnPropNameInTable="MESSAGGIOColumn" msprop:Generator_UserColumnName="MESSAGGIO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="STACK" msprop:Generator_ColumnVarNameInTable="columnSTACK" msprop:Generator_ColumnPropNameInRow="STACK" msprop:Generator_ColumnPropNameInTable="STACKColumn" msprop:Generator_UserColumnName="STACK" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MODULO" msprop:Generator_ColumnVarNameInTable="columnMODULO" msprop:Generator_ColumnPropNameInRow="MODULO" msprop:Generator_ColumnPropNameInTable="MODULOColumn" msprop:Generator_UserColumnName="MODULO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TIPOMESAGGIO" msprop:Generator_ColumnVarNameInTable="columnTIPOMESAGGIO" msprop:Generator_ColumnPropNameInRow="TIPOMESAGGIO" msprop:Generator_ColumnPropNameInTable="TIPOMESAGGIOColumn" msprop:Generator_UserColumnName="TIPOMESAGGIO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
