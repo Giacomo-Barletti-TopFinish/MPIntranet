@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -13,6 +14,7 @@ namespace MPIntranetWeb.Controllers
 {
     public class ControllerBase : Controller
     {
+
         private string _user;
         protected string ConnectedUser
         {
@@ -23,6 +25,19 @@ namespace MPIntranetWeb.Controllers
             set
             {
                 _user = value;
+            }
+        }
+
+        private List<decimal> _menuAbilitati = new List<decimal>();
+        protected List<decimal> MenuAbilitati
+        {
+            get
+            {
+                if (_menuAbilitati.Count == 0)
+                {
+                    _menuAbilitati = Account.MenuAbilitatiPerUtente(_user);
+                }
+                return _menuAbilitati;
             }
         }
         protected string ClientIPAddress
@@ -67,34 +82,37 @@ namespace MPIntranetWeb.Controllers
             string actionName = filterContext.ActionDescriptor.ActionName;
             string controllerName = filterContext.ActionDescriptor.ControllerDescriptor.ControllerName;
 
-            if (controllerName == "Account")
+            if (controllerName == "Account" && actionName == "Login")
                 return;
-            switch (controllerName)
-            {
-                case "Home":
 
-                    HttpCookie coockie = filterContext.RequestContext.HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName];
-                    if (coockie == null)
+            HttpCookie coockie = filterContext.RequestContext.HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName];
+            if (coockie == null)
+                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Account" }, { "action", "Login" } });
+            else
+            {
+                try
+                {
+                    FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(coockie.Value);
+                    string token = ticket.Name;
+                    TokenModel tokenModel = Account.GetTokenModel(token);
+                    if (tokenModel == null)
                         filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Account" }, { "action", "Login" } });
-                    else
-                    {
-                        try
+                    if (tokenModel.IpAddress != ClientIPAddress)
+                        filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Account" }, { "action", "Login" } });
+                    ConnectedUser = tokenModel.Account;
+                    filterContext.Controller.ViewData["MenuAbilitati"] = MenuAbilitati;
+
+                    if (controllerName != "Home")
+                        if (!VerificaAbilitazioneUtente(controllerName, actionName))
                         {
-                            FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(coockie.Value);
-                            string token = ticket.Name;
-                            TokenModel tokenModel = Account.GetTokenModel(token);
-                            if (tokenModel == null)
-                                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Account" }, { "action", "Login" } });
-                            if (tokenModel.IpAddress != ClientIPAddress)
-                                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Account" }, { "action", "Login" } });
-                            ConnectedUser = tokenModel.Account;
+                            filterContext.Result = new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                            return;
                         }
-                        catch
-                        {
-                            filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Account" }, { "action", "Login" } });
-                        }
-                    }
-                    break;
+                }
+                catch
+                {
+                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Account" }, { "action", "Login" } });
+                }
             }
         }
 
@@ -107,10 +125,25 @@ namespace MPIntranetWeb.Controllers
             }
         }
 
+        protected void VerificaAbilitazioneUtenteConUscita(string controller, string action)
+        {
+            Account a = new Account();
+            if (!a.VerificaAbilitazioneUtente(controller, action, ConnectedUser))
+            {
+                RedirectToAction("LogOut", "Account");
+            }
+        }
+
         protected bool VerificaAbilitazioneUtente(int idMenu)
         {
             Account a = new Account();
             return a.VerificaAbilitazioneUtente(idMenu, ConnectedUser);
+        }
+
+        protected bool VerificaAbilitazioneUtente(string controller, string action)
+        {
+            Account a = new Account();
+            return a.VerificaAbilitazioneUtente(controller, action, ConnectedUser);
         }
     }
 }

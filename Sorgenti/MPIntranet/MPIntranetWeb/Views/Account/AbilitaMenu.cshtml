@@ -1,0 +1,187 @@
+﻿@using MPIntranet.Models.Common
+@{
+    ViewBag.Title = "Abilita Menu";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+
+<div class="content-top">
+    <h2>Abilita Menu</h2>
+    <div class="row">
+        <div class="col-sm-1">
+            <input type="button" onclick="SelezionaTutto()" class="btn btn-primary" value="Seleziona tutto" />
+
+        </div>
+        <div class="col-sm-1">
+            <input type="button" onclick="Salva();" class="btn btn-primary" value="Salva" />
+
+        </div>
+        <div class="col-sm-1">
+            @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(4))
+            {
+                <input type="button" onclick="Rimuovi();" class="btn btn-primary" value="Rimuovi" />
+            }
+
+        </div>
+        <div class="col-sm-3">
+            @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(3))
+            {
+                <input type="text" id="txtNuovoAccount" maxlength="50" />
+                <input type="button" onclick="NuovoAccount();" class="btn btn-primary" value="Nuovo account" />
+                <span> Copia profilo </span><input type="checkbox" id="chkCopiaAccount"/>
+            }
+
+        </div>
+    </div>
+    <div class="col-md-2">
+        @Html.Label("Selezionare un utente", new { @class = "input-sm" })
+        @Html.DropDownList("ddlUtente", new SelectList(ViewData["ListaUtenti"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm ", @style = "height: 21px;" })
+    </div>
+    <div id="divMenu"></div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+        $("#ddlUtente").change(function ()
+        {
+            var selectedText = $(this).find("option:selected").text();
+            var selectedValue = $(this).val();
+
+            var url = '@Url.Action("GetMenuUtente", "Account")';
+            $.ajax({
+                url: url,
+                data: { account: selectedValue },
+                cache: false,
+                type: "POST",
+                success: function (data)
+                {
+                    $('#divMenu').html(data).show();
+                },
+                error: function (response)
+                {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+                }
+            });
+        });
+    });
+    function SelezionaTutto()
+    {
+        $('.RWCHK').each(function ()
+        {
+            $(this).attr('checked', 'checked');
+        });
+    }
+
+    function Salva()
+    {
+        var utente = $('#ddlUtente').val();
+        if (utente == null || utente == '')
+        {
+            InfoPopup('Selezionare un utente');
+            return;
+        }
+
+        var checkboxes = $('.RWCHK');
+        var idmenu = [];
+
+        for (i = 0; i < checkboxes.length; i++)
+        {
+            var checkbox = $(checkboxes[i]).prop('checked');
+            var idm = $(checkboxes[i]).attr('data-IDMENU');
+            if (checkbox)
+                idmenu.push(idm);
+        }
+
+    //    var menuJSON = JSON.stringify(idmenu);
+        var url = '@Url.Action("SalvaMenuUtente", "Account")';
+        $.ajax({
+            url: url,
+            data: { account: utente, idMenu: idmenu },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                AlertPopup('Dati salvati');
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+       function Rimuovi()
+    {
+        var utente = $('#ddlUtente').val();
+        if (utente == null || utente == '')
+        {
+            InfoPopup('Selezionare un utente');
+            return;
+        }
+
+        var url = '@Url.Action("RimuoviAccount", "Account")';
+        $.ajax({
+            url: url,
+            data: { account: utente},
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                AlertPopup('Dati salvati');
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+      function NuovoAccount()
+      {
+          var nuovoAccount = $('#txtNuovoAccount').val();
+          var copia = $('#chkCopiaAccount').prop('checked');
+          var utente = $('#ddlUtente').val();
+
+          if (nuovoAccount == null || nuovoAccount == '')
+            {
+                InfoPopup('Indicare il nuovo account');
+                return;
+            }
+          if (copia == true)
+          {
+              if (utente == null || utente == '') {
+                  InfoPopup('Selezionare un utente da copiare');
+                  return;
+              }
+          }
+          if (utente == null) utente = '';
+
+        var url = '@Url.Action("CreaNuovoAccount", "Account")';
+        $.ajax({
+            url: url,
+            data: {
+                account: nuovoAccount,
+                copia: copia,
+                daCopiare:utente
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                AlertPopup(data);
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+</script>

@@ -88,6 +88,26 @@ namespace MPIntranet.DataAccess.Security
             }
         }
 
+        public List<string> EstraiListaUtentiAbilitati()
+        {
+            string select = @"select distinct utente from abilitazioni order by utente";
+
+            List<string> strs = new List<string>();
+
+            using (DbCommand cmd = BuildCommand(select))
+            {
+                using (IDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string result = reader.GetString(0);
+                        strs.Add(result);
+                    }
+                }
+            }
+            return strs;
+        }
+
         public void UpdateSecurityDSTable(string tablename, SecurityDS ds)
         {
             string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);

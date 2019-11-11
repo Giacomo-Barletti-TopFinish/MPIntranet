@@ -20,6 +20,15 @@ namespace MPIntranet.Security
             return valid;
         }
 
+        public static bool VerificaAccountEsiste(string account)
+        {
+            using (PrincipalContext domainctx = new PrincipalContext(ContextType.Domain))
+            {
+                UserPrincipal userPrincipal = UserPrincipal.FindByIdentity(domainctx, IdentityType.SamAccountName, account);
+                return userPrincipal != null;
+            }
+        }
+
         private static bool AppartieneAlGruppo(string gruppo)
         {
             string username = Environment.UserName;

@@ -20,7 +20,6 @@
                 lastTap = now;
                 if (diff > 1000 && diff < 1500)
                 {
-                    debugger;
                     if ($.isFunction(doubleTapCallback))
                     {
                         doubleTapCallback.call(elm);

@@ -52,5 +52,12 @@ namespace MPIntranet.DataAccess.Security
             SecurityAdapter a = new SecurityAdapter(DbConnection, DbTransaction);
             a.UpdateSecurityDSTable(ds.ABILITAZIONI.TableName, ds);
         }
+
+        [DataContext]
+        public List<string> EstraiListaUtentiAbilitati()
+        {
+            SecurityAdapter a = new SecurityAdapter(DbConnection, DbTransaction);
+            return a.EstraiListaUtentiAbilitati();
+        }
     }
 }

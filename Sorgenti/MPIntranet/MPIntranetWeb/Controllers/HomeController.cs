@@ -18,7 +18,7 @@ namespace MPIntranetWeb.Controllers
         public ActionResult LeftMenu()
         {
             Account a = new Account();
-            List<MenuModel> menu = a.CreateMenuModel(ConnectedUser);
+            List<MenuModel> menu = a.CreateMenuModel(ConnectedUser,false);
             return PartialView(menu);
         }
     }

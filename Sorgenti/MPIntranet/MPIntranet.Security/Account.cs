@@ -78,7 +78,42 @@ namespace MPIntranet.Security
             }
         }
 
-        public List<MenuModel> CreateMenuModel(string account)
+        public void CreaAccount(string account, bool copia, string daCopiare)
+        {
+            SecurityDS ds = new SecurityDS();
+            using (SecurityBusiness bSecurity = new SecurityBusiness())
+            {
+                if (copia)
+                {
+                    bSecurity.FillAccountMenu(daCopiare, ds);
+                    List<decimal> menu = ds.ABILITAZIONI.Where(x => x.UTENTE == daCopiare).Select(x => x.IDMENU).Distinct().ToList();
+
+                    foreach (decimal idm in menu)
+                    {
+                        SecurityDS.ABILITAZIONIRow newrow = ds.ABILITAZIONI.NewABILITAZIONIRow();
+                        newrow.IDMENU = idm;
+                        newrow.UTENTE = account;
+                        ds.ABILITAZIONI.AddABILITAZIONIRow(newrow);
+                    }
+                }
+                else
+                {
+                    bSecurity.FillMenu(ds);
+
+                    foreach (int idm in ds.MENU.Where(x => x.IsAZIONENull()).Select(x => x.IDMENU))
+                    {
+                        SecurityDS.ABILITAZIONIRow newrow = ds.ABILITAZIONI.NewABILITAZIONIRow();
+                        newrow.IDMENU = idm;
+                        newrow.UTENTE = account;
+                        ds.ABILITAZIONI.AddABILITAZIONIRow(newrow);
+                    }
+
+                }
+                bSecurity.SalvaMenuUtente(ds);
+            }
+        }
+
+        public List<MenuModel> CreateMenuModel(string account, bool mostratutto)
         {
             SecurityDS ds = new SecurityDS();
             using (SecurityBusiness bSecurity = new SecurityBusiness())
@@ -92,13 +127,14 @@ namespace MPIntranet.Security
             List<MenuModel> menu = new List<MenuModel>();
             foreach (SecurityDS.MENURow row in ds.MENU.Where(x => x.IsIDMENUPADRENull()))
             {
-                MenuModel elementoMenu = CreaMenu(ds, row.IDMENU, idMenuAbilitati);
+                MenuModel elementoMenu = CreaMenu(ds, row.IDMENU, idMenuAbilitati, mostratutto);
                 menu.Add(elementoMenu);
             }
             return menu;
         }
 
-        private MenuModel CreaMenu(SecurityDS ds, decimal idMenu, List<int> idMenuAbilitati)
+
+        private MenuModel CreaMenu(SecurityDS ds, decimal idMenu, List<int> idMenuAbilitati, bool mostratutto)
         {
             SecurityDS.MENURow row = ds.MENU.Where(x => x.IDMENU == idMenu).FirstOrDefault();
 
@@ -110,14 +146,22 @@ namespace MPIntranet.Security
             padre.Font = row.IsFONTNull() ? string.Empty : row.FONT;
             padre.MenuFiglio = new List<MenuModel>();
             padre.Abilitato = idMenuAbilitati.Contains(padre.IdMenu) ? true : false;
+            padre.Azione = !row.IsAZIONENull();
 
-            foreach (SecurityDS.MENURow rowFiglio in ds.MENU.Where(x => !x.IsIDMENUPADRENull() && x.IDMENUPADRE == row.IDMENU && x.IsAZIONENull()).OrderBy(x => x.SEQUENZA))
-            {
-                MenuModel figlio = CreaMenu(ds, rowFiglio.IDMENU, idMenuAbilitati);
-                padre.MenuFiglio.Add(figlio);
-            }
+            if (mostratutto)
+                foreach (SecurityDS.MENURow rowFiglio in ds.MENU.Where(x => !x.IsIDMENUPADRENull() && x.IDMENUPADRE == row.IDMENU).OrderBy(x => x.SEQUENZA))
+                {
+                    MenuModel figlio = CreaMenu(ds, rowFiglio.IDMENU, idMenuAbilitati, mostratutto);
+                    padre.MenuFiglio.Add(figlio);
+                }
+            else
+                foreach (SecurityDS.MENURow rowFiglio in ds.MENU.Where(x => !x.IsIDMENUPADRENull() && x.IDMENUPADRE == row.IDMENU && x.IsAZIONENull()).OrderBy(x => x.SEQUENZA))
+                {
+                    MenuModel figlio = CreaMenu(ds, rowFiglio.IDMENU, idMenuAbilitati, mostratutto);
+                    padre.MenuFiglio.Add(figlio);
+                }
             return padre;
-        }      
+        }
 
         public void SalvaMenuUtente(string account, int[] idMenu)
         {
@@ -152,6 +196,20 @@ namespace MPIntranet.Security
             }
         }
 
+        public void RimuoviAccount(string account)
+        {
+            SecurityDS ds = new SecurityDS();
+            using (SecurityBusiness bSecurity = new SecurityBusiness())
+            {
+                bSecurity.FillAccountMenu(account, ds);
+
+                foreach (SecurityDS.ABILITAZIONIRow row in ds.ABILITAZIONI.ToList())
+                    row.Delete();
+                bSecurity.SalvaMenuUtente(ds);
+                return;
+            }
+        }
+
         public bool VerificaAbilitazioneUtente(int idMenu, string account)
         {
             using (SecurityBusiness bSecurity = new SecurityBusiness())
@@ -160,6 +218,38 @@ namespace MPIntranet.Security
                 bSecurity.FillAccountMenu(account, ds);
 
                 return ds.ABILITAZIONI.Any(x => x.IDMENU == idMenu);
+            }
+        }
+
+        public static List<decimal> MenuAbilitatiPerUtente(string account)
+        {
+            using (SecurityBusiness bSecurity = new SecurityBusiness())
+            {
+                SecurityDS ds = new SecurityDS();
+                bSecurity.FillAccountMenu(account, ds);
+                return ds.ABILITAZIONI.Select(x => x.IDMENU).Distinct().ToList();
+            }
+        }
+        public bool VerificaAbilitazioneUtente(string controller, string action, string account)
+        {
+            using (SecurityBusiness bSecurity = new SecurityBusiness())
+            {
+                SecurityDS ds = new SecurityDS();
+                bSecurity.FillAccountMenu(account, ds);
+                bSecurity.FillMenu(ds);
+
+                string azione = string.Format("/{0}/{1}", controller.ToUpper(), action.ToUpper());
+                SecurityDS.MENURow menu = ds.MENU.Where(x => !x.IsHREFNull() && x.HREF == azione).FirstOrDefault();
+                if (menu == null) return true; // non esiste nella tabella manu allora accesso libero
+                return ds.ABILITAZIONI.Any(x => x.IDMENU == menu.IDMENU);
+            }
+        }
+
+        public List<string> EstraiListaUtentiAbilitati()
+        {
+            using (SecurityBusiness bSecurity = new SecurityBusiness())
+            {
+                return bSecurity.EstraiListaUtentiAbilitati();
             }
         }
     }
