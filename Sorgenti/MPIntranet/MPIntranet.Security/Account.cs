@@ -239,7 +239,7 @@ namespace MPIntranet.Security
                 bSecurity.FillMenu(ds);
 
                 string azione = string.Format("/{0}/{1}", controller.ToUpper(), action.ToUpper());
-                SecurityDS.MENURow menu = ds.MENU.Where(x => !x.IsHREFNull() && x.HREF == azione).FirstOrDefault();
+                SecurityDS.MENURow menu = ds.MENU.Where(x => !x.IsHREFNull() && x.HREF.ToUpper() == azione).FirstOrDefault();
                 if (menu == null) return true; // non esiste nella tabella manu allora accesso libero
                 return ds.ABILITAZIONI.Any(x => x.IDMENU == menu.IDMENU);
             }

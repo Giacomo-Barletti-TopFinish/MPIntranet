@@ -41,8 +41,8 @@ namespace MPIntranet.DataAccess.Security
             modulo = modulo.Length > 200 ? modulo.Substring(0, 200) : modulo;
             tipoMessaggio = tipoMessaggio.Length > 15 ? tipoMessaggio.Substring(0, 15) : tipoMessaggio;
 
-            string insert = @"insert into $T{LOGMESSAGGI} (IDLOG,MESSAGGIO,STACK,MODULO,TIPOMESAGGIO)
-                                values (NULL,$P{MESSAGGIO},$P{STACK},$P{MODULO},$P{TIPOMESAGGIO})";
+            string insert = @"insert into $T{LOGMESSAGGI} (IDLOG,MESSAGGIO,STACK,MODULO,TIPOMESAGGIO,DATA)
+                                values (NULL,$P{MESSAGGIO},$P{STACK},$P{MODULO},$P{TIPOMESAGGIO},SYSDATE)";
 
             ParamSet ps = new ParamSet();
             ps.AddParam("MESSAGGIO", DbType.String, messaggio);

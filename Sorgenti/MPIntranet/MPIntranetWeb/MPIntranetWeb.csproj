@@ -122,8 +122,10 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AnagraficaController.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\ErrorPageController.cs" />
+    <Compile Include="Controllers\GalvanicaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -389,6 +391,12 @@
     <Content Include="Views\Home\LeftMenu.cshtml" />
     <Content Include="Views\Account\AbilitaMenu.cshtml" />
     <Content Include="Views\Account\GetMenuUtentePartial.cshtml" />
+    <Content Include="Views\Anagrafica\Brand.cshtml" />
+    <Content Include="Views\Anagrafica\Colore.cshtml" />
+    <Content Include="Views\Anagrafica\TipiDocumento.cshtml" />
+    <Content Include="Views\Galvanica\Impianti.cshtml" />
+    <Content Include="Views\Galvanica\Materiali.cshtml" />
+    <Content Include="Views\Galvanica\Vasche.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
