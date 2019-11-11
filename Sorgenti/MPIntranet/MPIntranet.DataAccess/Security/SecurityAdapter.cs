@@ -68,7 +68,7 @@ namespace MPIntranet.DataAccess.Security
 
         public void FillMenu(SecurityDS ds)
         {
-            string select = @"SELECT * FROM MENU ORDER BY SEQUENZA";
+            string select = @"SELECT * FROM MENU ORDER BY IDMENU,SEQUENZA";
             using (DbDataAdapter da = BuildDataAdapter(select))
             {
                 da.Fill(ds.MENU);

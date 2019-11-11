@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace MPIntranetWeb.Controllers
 {
-    public class AnagraficaController : Controller
+    public class AnagraficaController : ControllerBase
     {
         // GET: Anagrafica
         public ActionResult Brand()
