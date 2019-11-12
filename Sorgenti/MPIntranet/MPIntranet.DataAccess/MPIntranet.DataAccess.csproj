@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Anagrafica\AnagraficaAdapter.cs" />
+    <Compile Include="Anagrafica\AnagraficaBusiness.cs" />
     <Compile Include="Core\AdapterBase.cs" />
     <Compile Include="Core\BusinessBase.cs" />
     <Compile Include="Core\ColumnMapAttribute.cs" />

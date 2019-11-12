@@ -1,7 +1,91 @@
 ﻿
 @{
     ViewBag.Title = "Brand";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
 }
 
-<h2>Brand</h2>
 
+<div class="content-top">
+    <h2>Gestione Brand</h2>
+</div>
+<div id="ArticleScrolledContent" class="content-scheda" style="overflow-y:auto; overflow-x:hidden">
+
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+    });
+
+
+    function Salva()
+    {
+
+        var barcode = $('#hdBarcode').val();
+        var IDCHECKQT = $('#hdIDCHECKQT').val();
+        var difettosi =$('#hdQtaDifettosa').val();
+        var inseriti = $('#txtQuantita').val();
+        var lavorante = $('#ddlLavoranti').val();
+        var nota = $('#txtNota').val();
+        var azienda = $('#hdAzienda').val();
+
+        var esito = true;
+        var messaggio = '';
+
+        if(inseriti =='' )
+        {
+            esito=false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Quantità" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        if(inseriti =='0' )
+        {
+            esito=false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Quantità non può essere 0" + "</br>";
+        }
+
+        if(lavorante ==null || lavorante =='' )
+        {
+            esito=false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Lavorante esterno" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+        $('#lblMessage').html(messaggio);
+        if(!esito) return;
+
+        var checked_DEF = $('#CHKDEFINITIVO').prop('checked');
+        var checked_GRA = $('#CHECKGRATUTITA').prop('checked');
+        var ODL = $('#hfODL').val();
+
+        var url = '@Url.Action("SalvaInserimento", "ALE")';
+        $.ajax({
+            url: url,
+            data: {
+                Azienda:azienda,
+                Barcode: barcode,
+                IDCHECKQT:IDCHECKQT,
+                Difettosi:difettosi,
+                Inseriti:inseriti,
+                Lavorante:lavorante,
+                Nota: nota,
+                ScartoDefinitivo: checked_DEF,
+                RiparazioneGratuita: checked_GRA,
+                ODL: ODL
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                var label = '<label class="text-red input-sm" id="lblMessage">DATI INSERITI</label>';
+                $('#divScheda').html(label).show();
+                $('#txtBarcode').focus();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+        $('#txtBarcode').focus();
+    }
+</script>

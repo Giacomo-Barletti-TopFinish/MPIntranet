@@ -1,7 +1,139 @@
 ﻿
 @{
-    ViewBag.Title = "TipiDocumento";
+    ViewBag.Title = "Tipi Documento";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
 }
 
-<h2>TipiDocumento</h2>
 
+<div class="content-top">
+    <h2>Gestione Tipi Documento</h2>
+</div>
+<div id="ArticleScrolledContent" class="content-scheda" style="overflow-y:auto; overflow-x:hidden">
+    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(14))
+    {
+        <div class="row col-lg-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th width="15%">Descrizione</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td width="15%">
+                            @Html.TextBox("txtNuovaDescrizione", null, new { @class = "form-control input-sm spcLocalSearchField", @id = "txtNuovaDescrizione", @maxlength = "25" })
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row col-lg-2">
+
+            <button class="btn btn-box-tool" id="aggiungiNuovoTipoDocumento" title="Aggiungi" onclick="AggiungiNuovoDocumento()" type="button">Nuovo tipo documento</button>
+
+        </div>
+    }
+    <label class="text-red input-sm" id="lblMessage"></label>
+    <br />
+    <div class="col-md-12" id="divRisultati">
+
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+        caricaDati();
+    });
+
+    function CancellaTipoDocumento(idTipoDocumento) {
+     var url = '@Url.Action("RimuoviTipoDocumento", "Anagrafica")';
+            $.ajax({
+                url: url,
+                data: {
+                    idTipoDocumento: idTipoDocumento
+                },
+                cache: false,
+                type: "POST",
+                success: function (data)
+                {
+                    caricaDati();
+                },
+                error: function (response)
+                {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+                }
+            });
+    }
+
+    function caricaDati() {
+         var url = '@Url.Action("CaricaTipiDocumento", "Anagrafica")';
+        $.ajax({
+            url: url,
+            data: {
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divRisultati').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function AggiungiNuovoDocumento()
+    {
+
+        var descrizione = $('#txtNuovaDescrizione').val();
+
+        var esito = true;
+        var messaggio = '';
+
+        if (descrizione =='' )
+        {
+            esito=false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Descrizione" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        $('#lblMessage').html(messaggio);
+        if(!esito) return;
+
+
+        var url = '@Url.Action("CreaTipoDocumento", "Anagrafica")';
+        $.ajax({
+            url: url,
+            data: {
+                descrizione: descrizione
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+
+                if (data == null || data == '') {
+                    caricaDati();
+                }
+                else {
+                    $('#lblMessage').html(data);
+                }
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+        $('#txtBarcode').focus();
+    }
+</script>

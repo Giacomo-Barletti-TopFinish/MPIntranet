@@ -17,8 +17,8 @@
                     <td width="15px"><input type="checkbox" data-IDMENU="@m.IdMenu" class="RWCHK"></td>
                 }
                 <td width="120px">@m.Etichetta</td>
-                <td width="120px"></td>
-                <td width="120px"></td>
+                <td width="180px"></td>
+                <td width="220px"></td>
                 <td></td>
             </tr>
             foreach (MenuModel figlio in m.MenuFiglio)
@@ -33,8 +33,8 @@
                         <td width="15px"><input type="checkbox" data-IDMENU="@figlio.IdMenu" class="RWCHK"></td>
                     }
                     <td width="120px"></td>
-                    <td width="120px">@figlio.Etichetta</td>
-                    <td width="120px"></td>
+                    <td width="180px">@figlio.Etichetta</td>
+                    <td width="220px"></td>
                     <td></td>
                 </tr>
                 foreach (MenuModel figlioInterno in figlio.MenuFiglio)
@@ -49,8 +49,8 @@
                             <td width="15px"><input type="checkbox" data-IDMENU="@figlioInterno.IdMenu" class="RWCHK"></td>
                         }
                         <td width="120px"></td>
-                        <td width="120px"></td>
-                        <td width="120px">@figlioInterno.Etichetta</td>
+                        <td width="180px"></td>
+                        <td width="220px">@figlioInterno.Etichetta</td>
                         <td>
                             @if (figlioInterno.Azione)
                             {<text>(azione)</text>}

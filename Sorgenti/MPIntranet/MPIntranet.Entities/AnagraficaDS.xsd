@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="AnagraficaDS" targetNamespace="http://tempuri.org/AnagraficaDS.xsd" xmlns:mstns="http://tempuri.org/AnagraficaDS.xsd" xmlns="http://tempuri.org/AnagraficaDS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (Settings)" PropertyReference="ApplicationSettings.MPIntranet.Entities.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="System.Data.OracleClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="AnagraficaDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="AnagraficaDS" msprop:Generator_UserDSName="AnagraficaDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="BRAND" msprop:Generator_TableClassName="BRANDDataTable" msprop:Generator_TableVarName="tableBRAND" msprop:Generator_TablePropName="BRAND" msprop:Generator_RowDeletingName="BRANDRowDeleting" msprop:Generator_RowChangingName="BRANDRowChanging" msprop:Generator_RowEvHandlerName="BRANDRowChangeEventHandler" msprop:Generator_RowDeletedName="BRANDRowDeleted" msprop:Generator_UserTableName="BRAND" msprop:Generator_RowChangedName="BRANDRowChanged" msprop:Generator_RowEvArgName="BRANDRowChangeEvent" msprop:Generator_RowClassName="BRANDRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDBRAND" msprop:Generator_ColumnVarNameInTable="columnIDBRAND" msprop:Generator_ColumnPropNameInRow="IDBRAND" msprop:Generator_ColumnPropNameInTable="IDBRANDColumn" msprop:Generator_UserColumnName="IDBRAND" type="xs:decimal" minOccurs="0" />
+              <xs:element name="BRAND" msprop:Generator_ColumnVarNameInTable="columnBRAND" msprop:Generator_ColumnPropNameInRow="BRAND" msprop:Generator_ColumnPropNameInTable="BRANDColumn" msprop:Generator_UserColumnName="BRAND">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CODICEGESTIONALE" msprop:Generator_ColumnVarNameInTable="columnCODICEGESTIONALE" msprop:Generator_ColumnPropNameInRow="CODICEGESTIONALE" msprop:Generator_ColumnPropNameInTable="CODICEGESTIONALEColumn" msprop:Generator_UserColumnName="CODICEGESTIONALE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="8" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PREFISSOCOLORE" msprop:Generator_ColumnVarNameInTable="columnPREFISSOCOLORE" msprop:Generator_ColumnPropNameInRow="PREFISSOCOLORE" msprop:Generator_ColumnPropNameInTable="PREFISSOCOLOREColumn" msprop:Generator_UserColumnName="PREFISSOCOLORE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CANCELLATO" msprop:Generator_ColumnVarNameInTable="columnCANCELLATO" msprop:Generator_ColumnPropNameInRow="CANCELLATO" msprop:Generator_ColumnPropNameInTable="CANCELLATOColumn" msprop:Generator_UserColumnName="CANCELLATO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATAMODIFICA" msprop:Generator_ColumnVarNameInTable="columnDATAMODIFICA" msprop:Generator_ColumnPropNameInRow="DATAMODIFICA" msprop:Generator_ColumnPropNameInTable="DATAMODIFICAColumn" msprop:Generator_UserColumnName="DATAMODIFICA" type="xs:dateTime" />
+              <xs:element name="UtenteModifica" msprop:Generator_ColumnVarNameInTable="columnUtenteModifica" msprop:Generator_ColumnPropNameInRow="UtenteModifica" msprop:Generator_ColumnPropNameInTable="UtenteModificaColumn" msprop:Generator_UserColumnName="UtenteModifica">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="COLORI" msprop:Generator_TableClassName="COLORIDataTable" msprop:Generator_TableVarName="tableCOLORI" msprop:Generator_TablePropName="COLORI" msprop:Generator_RowDeletingName="COLORIRowDeleting" msprop:Generator_RowChangingName="COLORIRowChanging" msprop:Generator_RowEvHandlerName="COLORIRowChangeEventHandler" msprop:Generator_RowDeletedName="COLORIRowDeleted" msprop:Generator_UserTableName="COLORI" msprop:Generator_RowChangedName="COLORIRowChanged" msprop:Generator_RowEvArgName="COLORIRowChangeEvent" msprop:Generator_RowClassName="COLORIRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDCOLORE" msprop:Generator_ColumnVarNameInTable="columnIDCOLORE" msprop:Generator_ColumnPropNameInRow="IDCOLORE" msprop:Generator_ColumnPropNameInTable="IDCOLOREColumn" msprop:Generator_UserColumnName="IDCOLORE" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CODICE" msprop:Generator_ColumnVarNameInTable="columnCODICE" msprop:Generator_ColumnPropNameInRow="CODICE" msprop:Generator_ColumnPropNameInTable="CODICEColumn" msprop:Generator_UserColumnName="CODICE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DESCRIZIONE" msprop:Generator_ColumnVarNameInTable="columnDESCRIZIONE" msprop:Generator_ColumnPropNameInRow="DESCRIZIONE" msprop:Generator_ColumnPropNameInTable="DESCRIZIONEColumn" msprop:Generator_UserColumnName="DESCRIZIONE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IDBRAND" msprop:Generator_ColumnVarNameInTable="columnIDBRAND" msprop:Generator_ColumnPropNameInRow="IDBRAND" msprop:Generator_ColumnPropNameInTable="IDBRANDColumn" msprop:Generator_UserColumnName="IDBRAND" type="xs:decimal" />
+              <xs:element name="CODICEFIGURATIVO" msprop:Generator_ColumnVarNameInTable="columnCODICEFIGURATIVO" msprop:Generator_ColumnPropNameInRow="CODICEFIGURATIVO" msprop:Generator_ColumnPropNameInTable="CODICEFIGURATIVOColumn" msprop:Generator_UserColumnName="CODICEFIGURATIVO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CODICECLIENTE" msprop:Generator_ColumnVarNameInTable="columnCODICECLIENTE" msprop:Generator_ColumnPropNameInRow="CODICECLIENTE" msprop:Generator_ColumnPropNameInTable="CODICECLIENTEColumn" msprop:Generator_UserColumnName="CODICECLIENTE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="8" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CANCELLATO" msprop:Generator_ColumnVarNameInTable="columnCANCELLATO" msprop:Generator_ColumnPropNameInRow="CANCELLATO" msprop:Generator_ColumnPropNameInTable="CANCELLATOColumn" msprop:Generator_UserColumnName="CANCELLATO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATAMODIFICA" msprop:Generator_ColumnVarNameInTable="columnDATAMODIFICA" msprop:Generator_ColumnPropNameInRow="DATAMODIFICA" msprop:Generator_ColumnPropNameInTable="DATAMODIFICAColumn" msprop:Generator_UserColumnName="DATAMODIFICA" type="xs:dateTime" />
+              <xs:element name="UtenteModifica" msprop:Generator_ColumnVarNameInTable="columnUtenteModifica" msprop:Generator_ColumnPropNameInRow="UtenteModifica" msprop:Generator_ColumnPropNameInTable="UtenteModificaColumn" msprop:Generator_UserColumnName="UtenteModifica">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TIPIDOCUMENTO" msprop:Generator_TableClassName="TIPIDOCUMENTODataTable" msprop:Generator_TableVarName="tableTIPIDOCUMENTO" msprop:Generator_TablePropName="TIPIDOCUMENTO" msprop:Generator_RowDeletingName="TIPIDOCUMENTORowDeleting" msprop:Generator_RowChangingName="TIPIDOCUMENTORowChanging" msprop:Generator_RowEvHandlerName="TIPIDOCUMENTORowChangeEventHandler" msprop:Generator_RowDeletedName="TIPIDOCUMENTORowDeleted" msprop:Generator_UserTableName="TIPIDOCUMENTO" msprop:Generator_RowChangedName="TIPIDOCUMENTORowChanged" msprop:Generator_RowEvArgName="TIPIDOCUMENTORowChangeEvent" msprop:Generator_RowClassName="TIPIDOCUMENTORow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDTIPODOCUMENTO" msprop:Generator_ColumnVarNameInTable="columnIDTIPODOCUMENTO" msprop:Generator_ColumnPropNameInRow="IDTIPODOCUMENTO" msprop:Generator_ColumnPropNameInTable="IDTIPODOCUMENTOColumn" msprop:Generator_UserColumnName="IDTIPODOCUMENTO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DESCRIZIONE" msprop:Generator_ColumnVarNameInTable="columnDESCRIZIONE" msprop:Generator_ColumnPropNameInRow="DESCRIZIONE" msprop:Generator_ColumnPropNameInTable="DESCRIZIONEColumn" msprop:Generator_UserColumnName="DESCRIZIONE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CANCELLATO" msprop:Generator_ColumnVarNameInTable="columnCANCELLATO" msprop:Generator_ColumnPropNameInRow="CANCELLATO" msprop:Generator_ColumnPropNameInTable="CANCELLATOColumn" msprop:Generator_UserColumnName="CANCELLATO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATAMODIFICA" msprop:Generator_ColumnVarNameInTable="columnDATAMODIFICA" msprop:Generator_ColumnPropNameInRow="DATAMODIFICA" msprop:Generator_ColumnPropNameInTable="DATAMODIFICAColumn" msprop:Generator_UserColumnName="DATAMODIFICA" type="xs:dateTime" />
+              <xs:element name="UtenteModifica" msprop:Generator_ColumnVarNameInTable="columnUtenteModifica" msprop:Generator_ColumnPropNameInRow="UtenteModifica" msprop:Generator_ColumnPropNameInTable="UtenteModificaColumn" msprop:Generator_UserColumnName="UtenteModifica">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

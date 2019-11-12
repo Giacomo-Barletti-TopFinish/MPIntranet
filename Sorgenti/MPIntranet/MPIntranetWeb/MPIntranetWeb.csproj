@@ -399,6 +399,7 @@
     <Content Include="Views\Galvanica\Materiali.cshtml" />
     <Content Include="Views\Galvanica\Vasche.cshtml" />
     <Content Include="Views\ErrorPage\AccountNonAutorizzato.cshtml" />
+    <Content Include="Views\Anagrafica\CaricaTipiDocumentoPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -418,6 +419,10 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MPIntranet.Business\MPIntranet.Business.csproj">
+      <Project>{11EE71D3-C51C-4B99-A5C9-431099326DA7}</Project>
+      <Name>MPIntranet.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MPIntranet.Models\MPIntranet.Models.csproj">
       <Project>{fecd5686-e3f2-4eff-ba4d-88a23a4ea08a}</Project>
       <Name>MPIntranet.Models</Name>

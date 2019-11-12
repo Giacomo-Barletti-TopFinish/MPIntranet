@@ -1,0 +1,39 @@
+﻿@using MPIntranet.Models.Anagrafica
+@model List<TipoDocumentoModel>
+
+@if (Model != null && Model.Count() == 0)
+{
+    <text><b>Nessun risultato trovato</b></text>
+}
+else
+{
+          <table id="grigliaRisultati" class="table table-condensed table-hover">
+              <thead style="background-color:aliceblue">
+                  <tr>
+                      <th width="15%">Descrizione</th>
+                      <th width="15%">Data modifica</th>
+                      <th width="15%">Utente</th>
+                      <th width="2%"></th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody>
+                  @foreach (TipoDocumentoModel td in Model)
+                  {
+                      <tr>
+                          <td>@td.Descrizione</td>
+                          <td>@td.DataModifica</td>
+                          <td>@td.UtenteModifica</td>
+                          <td align="right">
+                              @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(15))
+                              {
+                                  <a onclick="CancellaTipoDocumento(@td.IdTipoDocumento)" title="Cancella"><i class="fa fa-fw fa-remove"></i></a>
+                              }
+                          </td>
+                          <td></td>
+                      </tr>
+
+                  }
+              </tbody>
+          </table>
+}
