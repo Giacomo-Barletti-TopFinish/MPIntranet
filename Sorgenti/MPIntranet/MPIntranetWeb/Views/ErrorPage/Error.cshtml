@@ -21,7 +21,13 @@
 <body class="skin-blue content-wrapper spcBody">
     <section class="content">
         <div class="list-header clearfix">
-            <H1></H1>
+            <H1><b>ERRORE - ECCEZIONE</b></H1>
+        </div>
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-11">
+                <img src="~/Content/Image/it2.gif" height="200" />
+            </div>
         </div>
         <div>
             <div class="alert alert-error">
@@ -44,7 +50,9 @@
                     </p>
                 </div>
             }
-        </div>
+        </div> <p style="font-size:14pt">
+            @Html.ActionLink("Esegui login", "Login", "Account")
+        </p>
     </section>
 </body>
 </html>

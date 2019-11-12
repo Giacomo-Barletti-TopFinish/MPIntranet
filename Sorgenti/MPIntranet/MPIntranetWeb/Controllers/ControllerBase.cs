@@ -105,7 +105,9 @@ namespace MPIntranetWeb.Controllers
                     if (controllerName != "Home")
                         if (!VerificaAbilitazioneUtente(controllerName, actionName))
                         {
-                            filterContext.Result = new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                            filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "ErrorPage" }, { "action", "AccountNonAutorizzato" } });
+                       //     throw new Exception("Account non autorizzato per l'operazione");
+                        //    filterContext.Result = new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
                             return;
                         }
                 }

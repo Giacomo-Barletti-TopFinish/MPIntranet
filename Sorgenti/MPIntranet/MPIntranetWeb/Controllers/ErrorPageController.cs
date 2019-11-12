@@ -21,5 +21,14 @@ namespace MPIntranetWeb.Controllers
             Response.StatusCode = 200;
             return View(model);
         }
+
+        public ActionResult AccountNonAutorizzato(WebException ex)
+        {
+            if (ex == null) return null;
+            var model = new HandleErrorInfo(ex.InnerException, ex.Controller, ex.Action);
+            Response.Clear();
+            Response.StatusCode = 200;
+            return View(model);
+        }
     }
 }
