@@ -400,6 +400,7 @@
     <Content Include="Views\Galvanica\Vasche.cshtml" />
     <Content Include="Views\ErrorPage\AccountNonAutorizzato.cshtml" />
     <Content Include="Views\Anagrafica\CaricaTipiDocumentoPartial.cshtml" />
+    <Content Include="Views\Anagrafica\CaricaBrandPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -30,9 +30,9 @@
             </table>
         </div>
         <div class="row col-lg-2">
-
-            <button class="btn btn-box-tool" id="aggiungiNuovoTipoDocumento" title="Aggiungi" onclick="AggiungiNuovoDocumento()" type="button">Nuovo tipo documento</button>
-
+            <div style="display:inline-block; width:50%">
+                <input type="button" onclick="AggiungiNuovoDocumento();" class="btn btn-primary" value="Nuovo tipo documento" />
+            </div>
         </div>
     }
     <label class="text-red input-sm" id="lblMessage"></label>
@@ -134,6 +134,5 @@
                 document.close();
             }
         });
-        $('#txtBarcode').focus();
     }
 </script>

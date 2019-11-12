@@ -22,7 +22,7 @@ namespace MPIntranet.DataAccess.Anagrafica
             if (soloNonCancellati)
                 select += "WHERE CANCELLATO = 'N'";
 
-            select += "ORDER BY BRAND CANCELLATO = 'N'";
+            select += "ORDER BY BRAND ";
 
             using (DbDataAdapter da = BuildDataAdapter(select))
             {

@@ -9,75 +9,87 @@
     <h2>Gestione Brand</h2>
 </div>
 <div id="ArticleScrolledContent" class="content-scheda" style="overflow-y:auto; overflow-x:hidden">
+    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(16))
+    {
+        <div class="row col-lg-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th width="15%">Brand</th>
+                        <th width="10%">Codice gestionale</th>
+                        <th width="8%">Prefisso colore</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td width="15%">
+                            @Html.TextBox("txtBrand", null, new { @class = "form-control input-sm spcLocalSearchField", @id = "txtBrand", @maxlength = "20" })
+                        </td>
+                        <th width="10%">
+                            @Html.TextBox("txtCodiceGestionale", null, new { @class = "form-control input-sm spcLocalSearchField", @id = "txtCodiceGestionale", @maxlength = "8" })
+                        </th>
+                        <th width="8%">
+                            @Html.TextBox("txtPrefissoColore", null, new { @class = "form-control input-sm spcLocalSearchField", @id = "txtPrefissoColore", @maxlength = "2" })
+                        </th>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row col-lg-2">
+            <div style="display:inline-block; width:50%">
+                <input type="button" onclick="AggiungiNuovo();" class="btn btn-primary" value="Nuovo brand" />
+            </div>
+        </div>
+    }
+    <label class="text-red input-sm" id="lblMessage"></label>
+    <br />
+    <div class="col-md-12" id="divRisultati">
 
+    </div>
 </div>
 
 <script language="javascript" type="text/javascript">
     $(function ()
     {
+        caricaDati();
     });
 
+    function CancellaBrand(idBrand) {
+     var url = '@Url.Action("RimuoviBrand", "Anagrafica")';
+            $.ajax({
+                url: url,
+                data: {
+                    idBrand: idBrand
+                },
+                cache: false,
+                type: "POST",
+                success: function (data)
+                {
+                    caricaDati();
+                },
+                error: function (response)
+                {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+                }
+            });
+    }
 
-    function Salva()
-    {
-
-        var barcode = $('#hdBarcode').val();
-        var IDCHECKQT = $('#hdIDCHECKQT').val();
-        var difettosi =$('#hdQtaDifettosa').val();
-        var inseriti = $('#txtQuantita').val();
-        var lavorante = $('#ddlLavoranti').val();
-        var nota = $('#txtNota').val();
-        var azienda = $('#hdAzienda').val();
-
-        var esito = true;
-        var messaggio = '';
-
-        if(inseriti =='' )
-        {
-            esito=false;
-            messaggio += MESSAGGIO_PUNTINO + " " + "Quantità" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
-        }
-
-        if(inseriti =='0' )
-        {
-            esito=false;
-            messaggio += MESSAGGIO_PUNTINO + " " + "Quantità non può essere 0" + "</br>";
-        }
-
-        if(lavorante ==null || lavorante =='' )
-        {
-            esito=false;
-            messaggio += MESSAGGIO_PUNTINO + " " + "Lavorante esterno" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
-        }
-        $('#lblMessage').html(messaggio);
-        if(!esito) return;
-
-        var checked_DEF = $('#CHKDEFINITIVO').prop('checked');
-        var checked_GRA = $('#CHECKGRATUTITA').prop('checked');
-        var ODL = $('#hfODL').val();
-
-        var url = '@Url.Action("SalvaInserimento", "ALE")';
+    function caricaDati() {
+         var url = '@Url.Action("CaricaBrand", "Anagrafica")';
         $.ajax({
             url: url,
             data: {
-                Azienda:azienda,
-                Barcode: barcode,
-                IDCHECKQT:IDCHECKQT,
-                Difettosi:difettosi,
-                Inseriti:inseriti,
-                Lavorante:lavorante,
-                Nota: nota,
-                ScartoDefinitivo: checked_DEF,
-                RiparazioneGratuita: checked_GRA,
-                ODL: ODL
             },
             cache: false,
             type: "POST",
             success: function (data)
             {
-                var label = '<label class="text-red input-sm" id="lblMessage">DATI INSERITI</label>';
-                $('#divScheda').html(label).show();
-                $('#txtBarcode').focus();
+                $('#divRisultati').html(data).show();
             },
             error: function (response)
             {
@@ -86,6 +98,116 @@
                 document.close();
             }
         });
-        $('#txtBarcode').focus();
+    }
+
+    function AggiungiNuovo()
+    {
+        var brand = $('#txtBrand').val();
+        var codiceGestionale = $('#txtCodiceGestionale').val();
+        var prefissoColore = $('#txtPrefissoColore').val();
+
+        var esito = true;
+        var messaggio = '';
+
+        if (brand =='' )
+        {
+            esito=false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Brand" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        if (prefissoColore == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Prefisso colore" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        $('#lblMessage').html(messaggio);
+        if(!esito) return;
+
+
+        var url = '@Url.Action("CreaBrand", "Anagrafica")';
+        $.ajax({
+            url: url,
+            data: {
+                brand: brand,
+                codiceGestionale: codiceGestionale,
+                prefissoColore: prefissoColore
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+
+                if (data == null || data == '') {
+                    caricaDati();
+                }
+                else {
+                    $('#lblMessage').html(data);
+                }
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function ModificaBrand(sender, idBrand)
+    {
+          debugger;
+          var parent = $(sender).closest('tr');
+          var tds = parent.find('td');
+
+        var brand = $(parent).find('#txtBrandS').val();
+        var codiceGestionale = $(parent).find('#txtCodiceGestionaleS').val();
+        var prefissoColore = $(parent).find('#txtPrefissoColoreS').val();
+
+        var esito = true;
+        var messaggio = '';
+
+        if (brand =='' )
+        {
+            esito=false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Brand" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        if (prefissoColore == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Prefisso colore" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        $('#lblMessage').html(messaggio);
+        if(!esito) return;
+
+
+        var url = '@Url.Action("ModificaBrand", "Anagrafica")';
+        $.ajax({
+            url: url,
+            data: {
+                idBrand: idBrand,
+                brand: brand,
+                codiceGestionale: codiceGestionale,
+                prefissoColore: prefissoColore
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+
+                if (data == null || data == '') {
+                    caricaDati();
+                }
+                else {
+                    $('#lblMessage').html(data);
+                }
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
     }
 </script>

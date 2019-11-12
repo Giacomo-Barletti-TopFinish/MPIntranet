@@ -1,0 +1,53 @@
+﻿@using MPIntranet.Models.Anagrafica
+@model List<BrandModel>
+
+@if (Model != null && Model.Count() == 0)
+{
+    <text><b>Nessun risultato trovato</b></text>
+}
+else
+{
+    <table id="grigliaRisultati" class="table table-condensed table-hover">
+        <thead style="background-color:aliceblue">
+            <tr>
+                <th width="15%">Brand</th>
+                <th width="10%">Codice gestionale</th>
+                <th width="8%">Prefisso colore</th>
+                <th width="2%"></th>
+                <th width="2%"></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (BrandModel td in Model)
+            {
+            <tr>
+                <td width="15%">
+                    @Html.TextBox("txtBrandS", td.Brand, new { @class = "form-control input-sm", @id = "txtBrandS", @maxlength = "20" })
+                </td>
+                <th width="10%">
+                    @Html.TextBox("txtCodiceGestionaleS", td.CodiceGestionale, new { @class = "form-control input-sm", @id = "txtCodiceGestionaleS", @maxlength = "8" })
+                </th>
+                <th width="8%">
+                    @Html.TextBox("txtPrefissoColoreS", td.PrefissoColore, new { @class = "form-control input-sm", @id = "txtPrefissoColoreS", @maxlength = "2" })
+                </th>
+                <td align="right">
+                    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(18))
+                    {
+                        <a onclick="ModificaBrand(this,@td.IdBrand)" title="Modifica"><i class="fa fa-fw fa-pencil"></i></a>
+                    }
+                </td>
+                <td align="right">
+                    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(17))
+                    {
+                        <a onclick="CancellaBrand(@td.IdBrand)" title="Cancella"><i class="fa fa-fw fa-remove"></i></a>
+                    }
+                </td>
+                <td></td>
+            </tr>
+
+            }
+        </tbody>
+    </table>
+}
+
