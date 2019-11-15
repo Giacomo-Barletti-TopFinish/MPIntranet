@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Anagrafica\MaterialeModel.cs" />
     <Compile Include="Anagrafica\BrandModel.cs" />
     <Compile Include="Anagrafica\ColoreModel.cs" />
     <Compile Include="Anagrafica\TipoDocumento.cs" />

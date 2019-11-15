@@ -33,6 +33,13 @@ namespace MPIntranet.DataAccess.Anagrafica
             a.FillTipiDocumento(ds, soloNonCancellati);
         }
 
+        [DataContext]
+        public void FillMateriali(AnagraficaDS ds, bool soloNonCancellati)
+        {
+            AnagraficaAdapter a = new AnagraficaAdapter(DbConnection, DbTransaction);
+            a.FillMateriali(ds, soloNonCancellati);
+        }
+
         [DataContext(true)]
         public void UpdateTable(AnagraficaDS ds, string tabella)
         {

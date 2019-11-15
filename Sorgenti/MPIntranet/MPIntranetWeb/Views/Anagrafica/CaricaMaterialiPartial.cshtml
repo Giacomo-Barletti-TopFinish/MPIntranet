@@ -1,0 +1,52 @@
+﻿@using MPIntranet.Models.Anagrafica
+@model List<MaterialeModel>
+
+@if (Model != null && Model.Count() == 0)
+{
+    <text><b>Nessun risultato trovato</b></text>
+}
+else
+{
+    <table id="grigliaRisultati" class="table table-condensed table-hover">
+        <thead style="background-color:aliceblue">
+            <tr>
+                <th width="10%">Codice</th>
+                <th width="20%">Descrizione</th>
+                <th width="8%">Prezioso</th>
+                <th width="2%"></th>
+                <th width="2%"></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (MaterialeModel td in Model)
+            {
+            <tr>
+                <td width="10%">
+                    @Html.TextBox("txtCodiceS", td.Codice, new { @class = "form-control input-sm", @id = "txtCodiceS", @maxlength = "8" })
+                </td>
+                <td width="20%">
+                    @Html.TextBox("txtDescrizioneS", td.Descrizione, new { @class = "form-control input-sm", @id = "txtDescrizioneS", @maxlength = "25" })
+                </td>
+                <td width="8%">
+                    @Html.CheckBox("chkPreziosoS", td.Prezioso=="S")
+                </td>
+                <td align="right">
+                    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(28))
+                    {
+                        <a onclick="ModificaMateriale(this,@td.IdMateriale)" title="Modifica"><i class="fa fa-fw fa-pencil"></i></a>
+                    }
+                </td>
+                <td align="right">
+                    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(27))
+                    {
+                        <a onclick="CancellaMateriale(@td.IdMateriale)" title="Cancella"><i class="fa fa-fw fa-remove"></i></a>
+                    }
+                </td>
+                <td></td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+

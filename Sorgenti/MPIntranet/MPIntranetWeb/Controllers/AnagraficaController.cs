@@ -1,5 +1,6 @@
 ﻿using MPIntranet.Business;
 using MPIntranet.Models.Anagrafica;
+using MPIntranet.Models.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +47,42 @@ namespace MPIntranetWeb.Controllers
         }
         public ActionResult Colore()
         {
+            Anagrafica a = new Anagrafica();
+            List<BrandModel> listaBrand = a.CreaListaBrandModel();
+            List<MPIntranetListItem> ddlBrand = listaBrand.Select(x => new MPIntranetListItem(string.Format("{0} ({1})", x.Brand, x.PrefissoColore), x.IdBrand.ToString())).ToList();
+            ddlBrand.Insert(0, new MPIntranetListItem(string.Empty, "-1"));
+            ViewData.Add("dllBrand", ddlBrand);
+
             return View();
+        }
+
+        public ActionResult CaricaColori(string codice, string descrizione, string codiceFigurativo, string codiceCliente, decimal idBrand)
+        {
+            Anagrafica a = new Anagrafica();
+            List<ColoreModel> lista = a.CreaListaColoreModel(codice, descrizione, codiceFigurativo, codiceCliente, idBrand);
+
+            return PartialView("CaricaColoriPartial", lista);
+        }
+
+        public ActionResult RimuoviColore(decimal idColore)
+        {
+            Anagrafica a = new Anagrafica();
+            a.CancellaColore(idColore, ConnectedUser);
+            return null;
+        }
+
+        public ActionResult CreaColore(string descrizione, string codiceCliente, decimal idBrand)
+        {
+            Anagrafica a = new Anagrafica();
+            string messaggio = a.CreaColore(descrizione, codiceCliente, idBrand, ConnectedUser);
+            return Content(messaggio);
+        }
+
+        public ActionResult ModificaColore(decimal idColore, string descrizione)
+        {
+            Anagrafica a = new Anagrafica();
+            a.ModificaColore(idColore, descrizione, ConnectedUser);
+            return null;
         }
 
         public ActionResult TipiDocumento()
@@ -74,6 +110,40 @@ namespace MPIntranetWeb.Controllers
             Anagrafica a = new Anagrafica();
             string messaggio = a.CreaTipoDocumento(descrizione, ConnectedUser);
             return Content(messaggio);
+        }
+
+        public ActionResult Materiali()
+        {
+            return View();
+        }
+
+        public ActionResult CaricaMateriali()
+        {
+            Anagrafica a = new Anagrafica();
+            List<MaterialeModel> lista = a.CreaListaMaterialeModel();
+
+            return PartialView("CaricaMaterialiPartial", lista);
+        }
+
+        public ActionResult RimuoviMateriale(decimal idMateriale)
+        {
+            Anagrafica a = new Anagrafica();
+            a.CancellaMateriale(idMateriale, ConnectedUser);
+            return null;
+        }
+
+        public ActionResult CreaMateriale(string codice, string descrizione, bool prezioso)
+        {
+            Anagrafica a = new Anagrafica();
+            string messaggio = a.CreaMateriale(codice, descrizione, prezioso, ConnectedUser);
+            return Content(messaggio);
+        }
+
+        public ActionResult ModificaMateriale(decimal idMateriale, string codice, string descrizione, bool prezioso)
+        {
+            Anagrafica a = new Anagrafica();
+            a.ModificaMateriale(idMateriale, codice, descrizione, prezioso, ConnectedUser);
+            return null;
         }
     }
 }

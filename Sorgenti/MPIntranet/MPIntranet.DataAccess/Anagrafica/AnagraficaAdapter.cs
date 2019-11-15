@@ -34,8 +34,9 @@ namespace MPIntranet.DataAccess.Anagrafica
         {
             string select = @"SELECT * FROM COLORI ";
             if (soloNonCancellati)
-                select += "WHERE CANCELLATO = 'N'";
+                select += "WHERE CANCELLATO = 'N' ";
 
+            select += "ORDER BY CODICE";
             using (DbDataAdapter da = BuildDataAdapter(select))
             {
                 da.Fill(ds.COLORI);
@@ -53,6 +54,16 @@ namespace MPIntranet.DataAccess.Anagrafica
             }
         }
 
+        public void FillMateriali(AnagraficaDS ds, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM MATERIALI ";
+            if (soloNonCancellati)
+                select += "WHERE CANCELLATO = 'N'";
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.MATERIALI);
+            }
+        }
         public void UpdateTable(string tablename, AnagraficaDS ds)
         {
             string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);

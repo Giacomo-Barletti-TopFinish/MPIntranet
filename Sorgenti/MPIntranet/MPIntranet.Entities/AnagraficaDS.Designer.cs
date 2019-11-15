@@ -30,6 +30,8 @@ namespace MPIntranet.Entities {
         
         private TIPIDOCUMENTODataTable tableTIPIDOCUMENTO;
         
+        private MATERIALIDataTable tableMATERIALI;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -66,6 +68,9 @@ namespace MPIntranet.Entities {
                 }
                 if ((ds.Tables["TIPIDOCUMENTO"] != null)) {
                     base.Tables.Add(new TIPIDOCUMENTODataTable(ds.Tables["TIPIDOCUMENTO"]));
+                }
+                if ((ds.Tables["MATERIALI"] != null)) {
+                    base.Tables.Add(new MATERIALIDataTable(ds.Tables["MATERIALI"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -112,6 +117,16 @@ namespace MPIntranet.Entities {
         public TIPIDOCUMENTODataTable TIPIDOCUMENTO {
             get {
                 return this.tableTIPIDOCUMENTO;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public MATERIALIDataTable MATERIALI {
+            get {
+                return this.tableMATERIALI;
             }
         }
         
@@ -191,6 +206,9 @@ namespace MPIntranet.Entities {
                 if ((ds.Tables["TIPIDOCUMENTO"] != null)) {
                     base.Tables.Add(new TIPIDOCUMENTODataTable(ds.Tables["TIPIDOCUMENTO"]));
                 }
+                if ((ds.Tables["MATERIALI"] != null)) {
+                    base.Tables.Add(new MATERIALIDataTable(ds.Tables["MATERIALI"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -242,6 +260,12 @@ namespace MPIntranet.Entities {
                     this.tableTIPIDOCUMENTO.InitVars();
                 }
             }
+            this.tableMATERIALI = ((MATERIALIDataTable)(base.Tables["MATERIALI"]));
+            if ((initTable == true)) {
+                if ((this.tableMATERIALI != null)) {
+                    this.tableMATERIALI.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -258,6 +282,8 @@ namespace MPIntranet.Entities {
             base.Tables.Add(this.tableCOLORI);
             this.tableTIPIDOCUMENTO = new TIPIDOCUMENTODataTable();
             base.Tables.Add(this.tableTIPIDOCUMENTO);
+            this.tableMATERIALI = new MATERIALIDataTable();
+            base.Tables.Add(this.tableMATERIALI);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -275,6 +301,12 @@ namespace MPIntranet.Entities {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private bool ShouldSerializeTIPIDOCUMENTO() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        private bool ShouldSerializeMATERIALI() {
             return false;
         }
         
@@ -341,6 +373,9 @@ namespace MPIntranet.Entities {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public delegate void TIPIDOCUMENTORowChangeEventHandler(object sender, TIPIDOCUMENTORowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public delegate void MATERIALIRowChangeEventHandler(object sender, MATERIALIRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -1366,6 +1401,347 @@ namespace MPIntranet.Entities {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class MATERIALIDataTable : global::System.Data.TypedTableBase<MATERIALIRow> {
+            
+            private global::System.Data.DataColumn columnIDMATERIALE;
+            
+            private global::System.Data.DataColumn columnCODICE;
+            
+            private global::System.Data.DataColumn columnDESCRIZIONE;
+            
+            private global::System.Data.DataColumn columnCANCELLATO;
+            
+            private global::System.Data.DataColumn columnDATAMODIFICA;
+            
+            private global::System.Data.DataColumn columnUTENTEMODIFICA;
+            
+            private global::System.Data.DataColumn columnPREZIOSO;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public MATERIALIDataTable() {
+                this.TableName = "MATERIALI";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal MATERIALIDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected MATERIALIDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDMATERIALEColumn {
+                get {
+                    return this.columnIDMATERIALE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CODICEColumn {
+                get {
+                    return this.columnCODICE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DESCRIZIONEColumn {
+                get {
+                    return this.columnDESCRIZIONE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CANCELLATOColumn {
+                get {
+                    return this.columnCANCELLATO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DATAMODIFICAColumn {
+                get {
+                    return this.columnDATAMODIFICA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn UTENTEMODIFICAColumn {
+                get {
+                    return this.columnUTENTEMODIFICA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn PREZIOSOColumn {
+                get {
+                    return this.columnPREZIOSO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public MATERIALIRow this[int index] {
+                get {
+                    return ((MATERIALIRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event MATERIALIRowChangeEventHandler MATERIALIRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event MATERIALIRowChangeEventHandler MATERIALIRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event MATERIALIRowChangeEventHandler MATERIALIRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event MATERIALIRowChangeEventHandler MATERIALIRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void AddMATERIALIRow(MATERIALIRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public MATERIALIRow AddMATERIALIRow(decimal IDMATERIALE, string CODICE, string DESCRIZIONE, string CANCELLATO, System.DateTime DATAMODIFICA, string UTENTEMODIFICA, string PREZIOSO) {
+                MATERIALIRow rowMATERIALIRow = ((MATERIALIRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        IDMATERIALE,
+                        CODICE,
+                        DESCRIZIONE,
+                        CANCELLATO,
+                        DATAMODIFICA,
+                        UTENTEMODIFICA,
+                        PREZIOSO};
+                rowMATERIALIRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowMATERIALIRow);
+                return rowMATERIALIRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                MATERIALIDataTable cln = ((MATERIALIDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new MATERIALIDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal void InitVars() {
+                this.columnIDMATERIALE = base.Columns["IDMATERIALE"];
+                this.columnCODICE = base.Columns["CODICE"];
+                this.columnDESCRIZIONE = base.Columns["DESCRIZIONE"];
+                this.columnCANCELLATO = base.Columns["CANCELLATO"];
+                this.columnDATAMODIFICA = base.Columns["DATAMODIFICA"];
+                this.columnUTENTEMODIFICA = base.Columns["UTENTEMODIFICA"];
+                this.columnPREZIOSO = base.Columns["PREZIOSO"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            private void InitClass() {
+                this.columnIDMATERIALE = new global::System.Data.DataColumn("IDMATERIALE", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDMATERIALE);
+                this.columnCODICE = new global::System.Data.DataColumn("CODICE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCODICE);
+                this.columnDESCRIZIONE = new global::System.Data.DataColumn("DESCRIZIONE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDESCRIZIONE);
+                this.columnCANCELLATO = new global::System.Data.DataColumn("CANCELLATO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCANCELLATO);
+                this.columnDATAMODIFICA = new global::System.Data.DataColumn("DATAMODIFICA", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDATAMODIFICA);
+                this.columnUTENTEMODIFICA = new global::System.Data.DataColumn("UTENTEMODIFICA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUTENTEMODIFICA);
+                this.columnPREZIOSO = new global::System.Data.DataColumn("PREZIOSO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPREZIOSO);
+                this.columnCODICE.AllowDBNull = false;
+                this.columnCODICE.MaxLength = 8;
+                this.columnDESCRIZIONE.MaxLength = 25;
+                this.columnCANCELLATO.AllowDBNull = false;
+                this.columnCANCELLATO.MaxLength = 1;
+                this.columnDATAMODIFICA.AllowDBNull = false;
+                this.columnUTENTEMODIFICA.AllowDBNull = false;
+                this.columnUTENTEMODIFICA.MaxLength = 50;
+                this.columnPREZIOSO.AllowDBNull = false;
+                this.columnPREZIOSO.MaxLength = 1;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public MATERIALIRow NewMATERIALIRow() {
+                return ((MATERIALIRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new MATERIALIRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(MATERIALIRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.MATERIALIRowChanged != null)) {
+                    this.MATERIALIRowChanged(this, new MATERIALIRowChangeEvent(((MATERIALIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.MATERIALIRowChanging != null)) {
+                    this.MATERIALIRowChanging(this, new MATERIALIRowChangeEvent(((MATERIALIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.MATERIALIRowDeleted != null)) {
+                    this.MATERIALIRowDeleted(this, new MATERIALIRowChangeEvent(((MATERIALIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.MATERIALIRowDeleting != null)) {
+                    this.MATERIALIRowDeleting(this, new MATERIALIRowChangeEvent(((MATERIALIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void RemoveMATERIALIRow(MATERIALIRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                AnagraficaDS ds = new AnagraficaDS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "MATERIALIDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class BRANDRow : global::System.Data.DataRow {
@@ -1727,6 +2103,132 @@ namespace MPIntranet.Entities {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class MATERIALIRow : global::System.Data.DataRow {
+            
+            private MATERIALIDataTable tableMATERIALI;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal MATERIALIRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableMATERIALI = ((MATERIALIDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal IDMATERIALE {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableMATERIALI.IDMATERIALEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDMATERIALE\' in table \'MATERIALI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMATERIALI.IDMATERIALEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string CODICE {
+                get {
+                    return ((string)(this[this.tableMATERIALI.CODICEColumn]));
+                }
+                set {
+                    this[this.tableMATERIALI.CODICEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string DESCRIZIONE {
+                get {
+                    try {
+                        return ((string)(this[this.tableMATERIALI.DESCRIZIONEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DESCRIZIONE\' in table \'MATERIALI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMATERIALI.DESCRIZIONEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string CANCELLATO {
+                get {
+                    return ((string)(this[this.tableMATERIALI.CANCELLATOColumn]));
+                }
+                set {
+                    this[this.tableMATERIALI.CANCELLATOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime DATAMODIFICA {
+                get {
+                    return ((global::System.DateTime)(this[this.tableMATERIALI.DATAMODIFICAColumn]));
+                }
+                set {
+                    this[this.tableMATERIALI.DATAMODIFICAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string UTENTEMODIFICA {
+                get {
+                    return ((string)(this[this.tableMATERIALI.UTENTEMODIFICAColumn]));
+                }
+                set {
+                    this[this.tableMATERIALI.UTENTEMODIFICAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string PREZIOSO {
+                get {
+                    return ((string)(this[this.tableMATERIALI.PREZIOSOColumn]));
+                }
+                set {
+                    this[this.tableMATERIALI.PREZIOSOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsIDMATERIALENull() {
+                return this.IsNull(this.tableMATERIALI.IDMATERIALEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetIDMATERIALENull() {
+                this[this.tableMATERIALI.IDMATERIALEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsDESCRIZIONENull() {
+                return this.IsNull(this.tableMATERIALI.DESCRIZIONEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetDESCRIZIONENull() {
+                this[this.tableMATERIALI.DESCRIZIONEColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -1814,6 +2316,40 @@ namespace MPIntranet.Entities {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public TIPIDOCUMENTORow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public class MATERIALIRowChangeEvent : global::System.EventArgs {
+            
+            private MATERIALIRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public MATERIALIRowChangeEvent(MATERIALIRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public MATERIALIRow Row {
                 get {
                     return this.eventRow;
                 }

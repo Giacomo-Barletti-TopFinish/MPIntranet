@@ -1,37 +1,37 @@
 ﻿
 @{
-    ViewBag.Title = "Brand";
+    ViewBag.Title = "Materiali";
     Layout = "~/Views/Shared/_LayoutApplication.cshtml";
 }
 
 
 <div class="content-top">
-    <h2>Gestione Brand</h2>
+    <h2>Gestione Materiali</h2>
 </div>
 <div id="ArticleScrolledContent" class="content-scheda" style="overflow-y:auto; overflow-x:hidden">
-    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(16))
+    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(26))
     {
         <div class="row col-lg-12">
             <table class="table">
                 <thead>
                     <tr>
-                        <th width="15%">Brand</th>
-                        <th width="10%">Codice gestionale</th>
-                        <th width="8%">Prefisso colore</th>
+                        <th width="10%">Codice</th>
+                        <th width="20%">Descrizione</th>
+                        <th width="8%">Prezioso</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td width="15%">
-                            @Html.TextBox("txtBrand", null, new { @class = "form-control input-sm spcLocalSearchField", @id = "txtBrand", @maxlength = "20" })
+                        <td width="10%">
+                            @Html.TextBox("txtCodice", null, new { @class = "form-control input-sm spcLocalSearchField", @id = "txtCodice", @maxlength = "8" })
                         </td>
-                        <th width="10%">
-                            @Html.TextBox("txtCodiceGestionale", null, new { @class = "form-control input-sm spcLocalSearchField", @id = "txtCodiceGestionale", @maxlength = "8" })
-                        </th>
-                        <th width="8%">
-                            @Html.TextBox("txtPrefissoColore", null, new { @class = "form-control input-sm spcLocalSearchField", @id = "txtPrefissoColore", @maxlength = "2" })
-                        </th>
+                        <td width="20%">
+                            @Html.TextBox("txtDescrizione", null, new { @class = "form-control input-sm spcLocalSearchField", @id = "txtDescrizione", @maxlength = "25" })
+                        </td>
+                        <td width="8%">
+                            @Html.CheckBox("chkPrezioso")
+                        </td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -40,7 +40,7 @@
         </div>
         <div class="row col-lg-2">
             <div style="display:inline-block; width:50%">
-                <input type="button" onclick="AggiungiNuovo();" class="btn btn-primary" value="Nuovo brand" />
+                <input type="button" onclick="AggiungiNuovo();" class="btn btn-primary" value="Nuovo materiale" />
             </div>
         </div>
     }
@@ -57,12 +57,12 @@
         caricaDati();
     });
 
-    function CancellaBrand(idBrand) {
-     var url = '@Url.Action("RimuoviBrand", "Anagrafica")';
+    function CancellaMateriale(idMateriale) {
+     var url = '@Url.Action("RimuoviMateriale", "Anagrafica")';
             $.ajax({
                 url: url,
                 data: {
-                    idBrand: idBrand
+                    idMateriale: idMateriale
                 },
                 cache: false,
                 type: "POST",
@@ -80,7 +80,7 @@
     }
 
     function caricaDati() {
-         var url = '@Url.Action("CaricaBrand", "Anagrafica")';
+         var url = '@Url.Action("CaricaMateriali", "Anagrafica")';
         $.ajax({
             url: url,
             data: {
@@ -102,35 +102,32 @@
 
     function AggiungiNuovo()
     {
-        var brand = $('#txtBrand').val();
-        var codiceGestionale = $('#txtCodiceGestionale').val();
-        var prefissoColore = $('#txtPrefissoColore').val();
+        var codice = $('#txtCodice').val();
+        var descrizione = $('#txtDescrizione').val();
+        var prezioso = $('#chkPrezioso').prop('checked');
 
         var esito = true;
         var messaggio = '';
 
-        if (brand =='' )
+        if (codice =='' )
         {
             esito=false;
-            messaggio += MESSAGGIO_PUNTINO + " " + "Brand" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+            messaggio += MESSAGGIO_PUNTINO + " " + "Codice" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
         }
 
-        if (prefissoColore == '') {
-            esito = false;
-            messaggio += MESSAGGIO_PUNTINO + " " + "Prefisso colore" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
-        }
+        if (descrizione == null) descrizione = '';
 
         $('#lblMessage').html(messaggio);
         if(!esito) return;
 
 
-        var url = '@Url.Action("CreaBrand", "Anagrafica")';
+        var url = '@Url.Action("CreaMateriale", "Anagrafica")';
         $.ajax({
             url: url,
             data: {
-                brand: brand,
-                codiceGestionale: codiceGestionale,
-                prefissoColore: prefissoColore
+                codice: codice,
+                descrizione: descrizione,
+                prezioso, prezioso
             },
             cache: false,
             type: "POST",
@@ -153,41 +150,37 @@
         });
     }
 
-    function ModificaBrand(sender, idBrand)
+    function ModificaMateriale(sender, idMateriale)
     {
           var parent = $(sender).closest('tr');
           var tds = parent.find('td');
-
-        var brand = $(parent).find('#txtBrandS').val();
-        var codiceGestionale = $(parent).find('#txtCodiceGestionaleS').val();
-        var prefissoColore = $(parent).find('#txtPrefissoColoreS').val();
+        var codice = $(parent).find('#txtCodiceS').val();
+        var descrizione = $(parent).find('#txtDescrizioneS').val();
+        var prezioso = $(parent).find('#chkPreziosoS').prop('checked');
 
         var esito = true;
         var messaggio = '';
 
-        if (brand =='' )
+        if (codice =='' )
         {
             esito=false;
-            messaggio += MESSAGGIO_PUNTINO + " " + "Brand" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+            messaggio += MESSAGGIO_PUNTINO + " " + "Codice" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
         }
 
-        if (prefissoColore == '') {
-            esito = false;
-            messaggio += MESSAGGIO_PUNTINO + " " + "Prefisso colore" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
-        }
+        if (descrizione == null) descrizione = '';
 
         $('#lblMessage').html(messaggio);
         if(!esito) return;
 
 
-        var url = '@Url.Action("ModificaBrand", "Anagrafica")';
+        var url = '@Url.Action("ModificaMateriale", "Anagrafica")';
         $.ajax({
             url: url,
             data: {
-                idBrand: idBrand,
-                brand: brand,
-                codiceGestionale: codiceGestionale,
-                prefissoColore: prefissoColore
+                idMateriale: idMateriale,
+                codice: codice,
+                descrizione: descrizione,
+                prezioso: prezioso
             },
             cache: false,
             type: "POST",

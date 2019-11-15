@@ -14,11 +14,6 @@ namespace MPIntranetWeb.Controllers
             return View();
         }
 
-        public ActionResult Materiali()
-        {
-            return View();
-        }
-
         public ActionResult Vasche()
         {
             return View();
