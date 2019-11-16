@@ -395,7 +395,6 @@
     <Content Include="Views\Anagrafica\Brand.cshtml" />
     <Content Include="Views\Anagrafica\Colore.cshtml" />
     <Content Include="Views\Anagrafica\TipiDocumento.cshtml" />
-    <Content Include="Views\Galvanica\Impianti.cshtml" />
     <Content Include="Views\Galvanica\Vasche.cshtml" />
     <Content Include="Views\ErrorPage\AccountNonAutorizzato.cshtml" />
     <Content Include="Views\Anagrafica\CaricaTipiDocumentoPartial.cshtml" />
@@ -403,6 +402,8 @@
     <Content Include="Views\Anagrafica\CaricaColoriPartial.cshtml" />
     <Content Include="Views\Anagrafica\Materiali.cshtml" />
     <Content Include="Views\Anagrafica\CaricaMaterialiPartial.cshtml" />
+    <Content Include="Views\Galvanica\CaricaImpiantiPartial.cshtml" />
+    <Content Include="Views\Galvanica\Impianti.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

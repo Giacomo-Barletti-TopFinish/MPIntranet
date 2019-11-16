@@ -8,8 +8,7 @@
 <div class="content-top">
     <h2>Gestione Impianti</h2>
 </div>
-
-<div class="content-scheda" style="overflow-y:auto; overflow-x:hidden">
+<div id="ArticleScrolledContent" class="content-scheda" style="overflow-y:auto; overflow-x:hidden">
     @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(36))
     {
         <div class="row col-lg-12">
@@ -33,7 +32,7 @@
         </div>
         <div class="row col-lg-2">
             <div style="display:inline-block; width:50%">
-                <input type="button" onclick="AggiungiNuovo();" class="btn btn-primary" value="Nuovo impianto" />
+                <input type="button" onclick="AggiungiNuovo();" class="btn btn-primary" value="Nuovo brand" />
             </div>
         </div>
     }
@@ -49,7 +48,7 @@
     {
         caricaDati();
     });
-   
+
     function CancellaImpianto(idImpianto) {
      var url = '@Url.Action("RimuoviImpianto", "Galvanica")';
             $.ajax({

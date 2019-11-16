@@ -47,10 +47,13 @@
     <Compile Include="Anagrafica\ColoreModel.cs" />
     <Compile Include="Anagrafica\TipoDocumento.cs" />
     <Compile Include="Common\MPIntranetListItem.cs" />
+    <Compile Include="Galvanica\ImpiantoModel.cs" />
+    <Compile Include="Galvanica\VascaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\LoginModel.cs" />
     <Compile Include="Security\MenuModel.cs" />
     <Compile Include="Security\TokenModel.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
