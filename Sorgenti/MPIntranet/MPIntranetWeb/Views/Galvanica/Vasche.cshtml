@@ -1,7 +1,233 @@
-﻿
+﻿@using MPIntranet.Models.Common
 @{
-    ViewBag.Title = "Vasche";
+    ViewBag.Title = "Impianti";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
 }
 
-<h2>Vasche</h2>
 
+<div class="content-top">
+    <h2>Gestione Impianti</h2>
+</div>
+
+<div class="content-scheda" style="overflow-y:auto; overflow-x:hidden; height:700px">
+    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(41))
+    {
+        <div class="row col-lg-6">
+            @Html.Label("Selezionare l'impianto")
+            @Html.DropDownList("ddlImpianto", new SelectList(@ViewData["Impianti"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlImpianto" })
+        </div>
+        <div class="row col-lg-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th width="20%">Descrizione breve</th>
+                        <th width="30%">Descrizione</th>
+                        <th width="8%">Abilita strato</th>
+                        <th width="10%">Materiale</th>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td width="20%">
+                            @Html.TextBox("txtDescrizioneBreve", null, new { @class = "form-control input-sm", @id = "txtDescrizioneBreve", @maxlength = "30" })
+                        </td>
+                        <td width="30%">
+                            @Html.TextBox("txtDescrizione", null, new { @class = "form-control input-sm", @id = "txtDescrizione", @maxlength = "60" })
+                        </td>
+                        <td width="8%">
+                            @Html.CheckBox("chkAbilita")
+                        </td>
+                        <td width="8%">
+                            @Html.DropDownList("ddlMateriale", new SelectList(ViewData["Materiali"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlMateriale" })
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row col-lg-2">
+            <div style="display:inline-block; width:50%">
+                <input type="button" onclick="AggiungiNuovo();" class="btn btn-primary" value="Nuova vasca" />
+            </div>
+        </div>
+    }
+    <label class="text-red input-sm" id="lblMessage"></label>
+    <br />
+    <div class="col-md-12" id="divRisultati">
+
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+        $("#ddlImpianto").change(function () {
+            var selectedText = $(this).find("option:selected").text();
+            var selectedValue = $(this).val();
+            caricaDati();
+        });
+
+        $('#ddlImpianto').val('1').trigger("change");
+    });
+
+    function CancellaVasca(idVasca) {
+     var url = '@Url.Action("RimuoviVasca", "Galvanica")';
+            $.ajax({
+                url: url,
+                data: {
+                    idVasca: idVasca
+                },
+                cache: false,
+                type: "POST",
+                success: function (data)
+                {
+                    caricaDati();
+                },
+                error: function (response)
+                {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+                }
+            });
+    }
+
+    function caricaDati() {
+        idImpianto = $('#ddlImpianto').val();
+         var url = '@Url.Action("CaricaVasche", "Galvanica")';
+        $.ajax({
+            url: url,
+            data: {
+                idImpianto: idImpianto
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divRisultati').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function AggiungiNuovo()
+    {
+        var descrizioneBreve = $('#txtDescrizioneBreve').val();
+        var descrizione = $('#txtDescrizione').val();
+        var abilitaStrato = $('#chkAbilita').val();
+        var idMateriale = $('#ddlMateriale').val();
+        var idImpianto = $('#ddlImpianto').val();
+
+        var esito = true;
+        var messaggio = '';
+
+        if (descrizioneBreve =='' )
+        {
+            esito=false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Descrizione breve" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        if (descrizione == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Descrizione" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        $('#lblMessage').html(messaggio);
+        if(!esito) return;
+
+
+        var url = '@Url.Action("CreaVasca", "Galvanica")';
+        $.ajax({
+            url: url,
+            data: {
+                descrizioneBreve: descrizioneBreve,
+                descrizione: descrizione,
+                abilitaStrato: abilitaStrato,
+                idImpianto: idImpianto,
+                idMateriale: idMateriale
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+
+                if (data == null || data == '') {
+                    caricaDati();
+                }
+                else {
+                    $('#lblMessage').html(data);
+                }
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function ModificaVasca(sender, idVasca)
+    {
+          var parent = $(sender).closest('tr');
+          var tds = parent.find('td');
+
+        var descrizioneBreve = $(parent).find('#txtDescrizioneBreveS').val();
+        var descrizione = $(parent).find('#txtDescrizioneS').val();
+        var abilitaStrato = $(parent).find('#chkAbilitaS').prop('checked');
+        
+        var esito = true;
+        var messaggio = '';
+
+        if (descrizioneBreve == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Descrizione breve" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        if (descrizione == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Descrizione" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        $('#lblMessage').html(messaggio);
+        if(!esito) return;
+
+
+        var url = '@Url.Action("ModificaVasca", "Galvanica")';
+        $.ajax({
+            url: url,
+            data: {
+                idVasca: idVasca,
+                descrizioneBreve: descrizioneBreve,
+                descrizione: descrizione,
+                abilitaStrato: abilitaStrato
+           },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+
+                if (data == null || data == '') {
+                    caricaDati();
+                }
+                else {
+                    $('#lblMessage').html(data);
+                }
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+</script>

@@ -1,4 +1,6 @@
 ﻿using MPIntranet.Business;
+using MPIntranet.Models.Anagrafica;
+using MPIntranet.Models.Common;
 using MPIntranet.Models.Galvanica;
 using System;
 using System.Collections.Generic;
@@ -46,7 +48,48 @@ namespace MPIntranetWeb.Controllers
 
         public ActionResult Vasche()
         {
+            Galvanica g = new Galvanica();
+            List<ImpiantoModel> impiantiModel = g.CreaListaImpiantoModel();
+            List<MPIntranetListItem> impianti = impiantiModel.Select(x => new MPIntranetListItem(x.Descrizione, x.IdImpianto.ToString())).ToList();
+
+            Anagrafica a = new Anagrafica();
+            List<MaterialeModel> materialiModel = a.CreaListaMaterialeModel();
+            List<MPIntranetListItem> materiali = materialiModel.Select(x => new MPIntranetListItem(x.Descrizione, x.IdMateriale.ToString())).ToList();
+            materiali.Add(new MPIntranetListItem(string.Empty, "-1"));
+
+            ViewData.Add("Impianti", impianti);
+            ViewData.Add("Materiali", materiali);
+
             return View();
+        }
+
+        public ActionResult CaricaVasche(decimal idImpianto)
+        {
+            Galvanica a = new Galvanica();
+            List<VascaModel> lista = a.CreaListaVascaModel(idImpianto);
+
+            return PartialView("CaricaVaschePartial", lista);
+        }
+
+        public ActionResult RimuoviVasca(decimal idVasca)
+        {
+            Galvanica a = new Galvanica();
+            a.CancellaVasca(idVasca, ConnectedUser);
+            return null;
+        }
+
+        public ActionResult CreaVasca(string descrizioneBreve, string descrizione, bool abilitaStrato, decimal idImpianto, decimal idMateriale)
+        {
+            Galvanica a = new Galvanica();
+            string messaggio = a.CreaVasca(descrizioneBreve, descrizione, abilitaStrato, idImpianto, idMateriale, ConnectedUser);
+            return Content(messaggio);
+        }
+
+        public ActionResult ModificaVasca(decimal idVasca, string descrizioneBreve, string descrizione, bool abilitaStrato)
+        {
+            Galvanica a = new Galvanica();
+            a.ModificaVasca(idVasca, descrizioneBreve, descrizione, abilitaStrato, ConnectedUser);
+            return null;
         }
     }
 }

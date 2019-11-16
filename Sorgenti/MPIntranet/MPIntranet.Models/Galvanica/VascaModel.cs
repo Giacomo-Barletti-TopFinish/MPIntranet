@@ -14,6 +14,8 @@ namespace MPIntranet.Models.Galvanica
         public bool AbilitaStato{ get; set; }
         public decimal IdImpianto{ get; set; }
         public decimal IdMateriale { get; set; }
+        public string Impianto { get; set; }
+        public string Materiale{ get; set; }
         public DateTime DataModifica { get; set; }
         public string UtenteModifica { get; set; }
     }

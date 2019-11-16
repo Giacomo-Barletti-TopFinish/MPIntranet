@@ -404,6 +404,7 @@
     <Content Include="Views\Anagrafica\CaricaMaterialiPartial.cshtml" />
     <Content Include="Views\Galvanica\CaricaImpiantiPartial.cshtml" />
     <Content Include="Views\Galvanica\Impianti.cshtml" />
+    <Content Include="Views\Galvanica\CaricaVaschePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

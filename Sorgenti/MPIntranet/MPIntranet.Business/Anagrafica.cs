@@ -13,6 +13,15 @@ namespace MPIntranet.Business
     {
         private AnagraficaDS _ds = new AnagraficaDS();
 
+        public bool MaterialeEsiste(decimal idMateriale)
+        {
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillMateriali(_ds, true);
+                return _ds.MATERIALI.Any(x => x.IDMATERIALE == idMateriale);
+            }
+        }
+
         public List<BrandModel> CreaListaBrandModel()
         {
             List<BrandModel> lista = new List<BrandModel>();
