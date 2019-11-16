@@ -123,6 +123,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnagraficaController.cs" />
+    <Compile Include="Controllers\ArticoloController.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\ErrorPageController.cs" />
     <Compile Include="Controllers\GalvanicaController.cs" />
@@ -405,6 +406,7 @@
     <Content Include="Views\Galvanica\CaricaImpiantiPartial.cshtml" />
     <Content Include="Views\Galvanica\Impianti.cshtml" />
     <Content Include="Views\Galvanica\CaricaVaschePartial.cshtml" />
+    <Content Include="Views\Articolo\Scheda.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -46,6 +46,7 @@
     <Compile Include="Anagrafica\BrandModel.cs" />
     <Compile Include="Anagrafica\ColoreModel.cs" />
     <Compile Include="Anagrafica\TipoDocumento.cs" />
+    <Compile Include="Articolo\ArticoloModel.cs" />
     <Compile Include="Common\MPIntranetListItem.cs" />
     <Compile Include="Galvanica\ImpiantoModel.cs" />
     <Compile Include="Galvanica\VascaModel.cs" />

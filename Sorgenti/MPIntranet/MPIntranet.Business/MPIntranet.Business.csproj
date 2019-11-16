@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Anagrafica.cs" />
+    <Compile Include="Articolo.cs" />
     <Compile Include="Galvanica.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
