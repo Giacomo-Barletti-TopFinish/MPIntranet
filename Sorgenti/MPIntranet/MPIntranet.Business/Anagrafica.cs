@@ -31,22 +31,74 @@ namespace MPIntranet.Business
                 bAnagrafica.FillBrand(_ds, true);
                 foreach (AnagraficaDS.BRANDRow brand in _ds.BRAND)
                 {
-                    BrandModel bm = new BrandModel()
-                    {
-                        Brand = brand.BRAND,
-                        CodiceGestionale = brand.IsCODICEGESTIONALENull() ? string.Empty : brand.CODICEGESTIONALE,
-                        DataModifica = brand.DATAMODIFICA,
-                        IdBrand = brand.IDBRAND,
-                        PrefissoColore = brand.PREFISSOCOLORE,
-                        UtenteModifica = brand.UtenteModifica
-                    };
-                    lista.Add(bm);
+                    lista.Add(creaBrandModel(brand));
                 }
             }
             return lista;
         }
 
+        public AnagraficaDS.BRANDRow EstraiBrand(decimal idBrand)
+        {
+            if (_ds.BRAND.Count == 0)
+            {
+                using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+                    bAnagrafica.FillBrand(_ds, true);
+            }
+            return _ds.BRAND.Where(x => x.IDBRAND == idBrand).FirstOrDefault();
+        }
+        private BrandModel creaBrandModel(AnagraficaDS.BRANDRow brand)
+        {
+            BrandModel bm = new BrandModel()
+            {
+                Brand = brand.BRAND,
+                CodiceGestionale = brand.IsCODICEGESTIONALENull() ? string.Empty : brand.CODICEGESTIONALE,
+                DataModifica = brand.DATAMODIFICA,
+                IdBrand = brand.IDBRAND,
+                PrefissoColore = brand.PREFISSOCOLORE,
+                UtenteModifica = brand.UTENTEMODIFICA
+            };
+            return bm;
+        }
+        public BrandModel EstraiBrandModel(decimal idBrand)
+        {
+            AnagraficaDS.BRANDRow elemento = EstraiBrand(idBrand);
+            if (elemento == null) return null;
+            return creaBrandModel(elemento);
+        }
 
+        public AnagraficaDS.COLORIRow EstraiColore(decimal idColore)
+        {
+            if (_ds.COLORI.Count == 0)
+            {
+                using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+                    bAnagrafica.FillColori(_ds, true);
+            }
+            return _ds.COLORI.Where(x => x.IDCOLORE == idColore).FirstOrDefault();
+        }
+
+        public AnagraficaDS.COLORIRow EstraiColore(string codiceColore)
+        {
+            if (_ds.COLORI.Count == 0)
+            {
+                using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+                    bAnagrafica.FillColori(_ds, true);
+            }
+            return _ds.COLORI.Where(x => x.CODICE == codiceColore).FirstOrDefault();
+        }
+
+        public ColoreModel EstraiColoreModel(decimal idColore)
+        {
+            AnagraficaDS.COLORIRow elemento = EstraiColore(idColore);
+            if (elemento == null) return null;
+            return creaColoreModel(elemento);
+        }
+
+        public ColoreModel EstraiColoreModel(string codiceColore)
+        {
+            AnagraficaDS.COLORIRow elemento = EstraiColore(codiceColore);
+            if (elemento == null) return null;
+            return creaColoreModel(elemento);
+        }
         public void CancellaBrand(decimal idBrand, string account)
         {
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
@@ -57,7 +109,7 @@ namespace MPIntranet.Business
                 {
                     brand.CANCELLATO = "S";
                     brand.DATAMODIFICA = DateTime.Now;
-                    brand.UtenteModifica = account;
+                    brand.UTENTEMODIFICA = account;
 
                     bAnagrafica.UpdateTable(_ds, _ds.BRAND.TableName);
                 }
@@ -79,7 +131,7 @@ namespace MPIntranet.Business
                     br.CODICEGESTIONALE = codiceGestionale;
                     br.PREFISSOCOLORE = prefissoColore;
                     br.DATAMODIFICA = DateTime.Now;
-                    br.UtenteModifica = account;
+                    br.UTENTEMODIFICA = account;
 
                     bAnagrafica.UpdateTable(_ds, _ds.BRAND.TableName);
                 }
@@ -123,7 +175,7 @@ namespace MPIntranet.Business
 
                 br.CANCELLATO = "N";
                 br.DATAMODIFICA = DateTime.Now;
-                br.UtenteModifica = account;
+                br.UTENTEMODIFICA = account;
 
                 _ds.BRAND.AddBRANDRow(br);
                 bAnagrafica.UpdateTable(_ds, _ds.BRAND.TableName);
@@ -142,7 +194,7 @@ namespace MPIntranet.Business
 
                 List<AnagraficaDS.COLORIRow> colori = _ds.COLORI.ToList();
                 if (idBrand >= 0)
-                    colori = colori.Where(x => x.IDBRAND == idBrand).ToList();
+                    colori = colori.Where(x =>!x.IsIDBRANDNull() && x.IDBRAND == idBrand).ToList();
 
                 if (!string.IsNullOrWhiteSpace(codice))
                     colori = colori.Where(x => x.CODICE.Contains(codice.ToUpper())).ToList();
@@ -158,26 +210,33 @@ namespace MPIntranet.Business
 
                 foreach (AnagraficaDS.COLORIRow colore in colori)
                 {
-                    string brand = string.Empty;
-                    AnagraficaDS.BRANDRow b = _ds.BRAND.Where(x => x.IDBRAND == colore.IDBRAND).FirstOrDefault();
-                    if (b != null) brand = b.BRAND;
-
-                    ColoreModel c = new ColoreModel()
-                    {
-                        Codice = colore.CODICE,
-                        Brand = brand,
-                        CodiceCliente = colore.CODICECLIENTE,
-                        CodiceFigurativo = colore.CODICEFIGURATIVO,
-                        Descrizione = colore.DESCRIZIONE,
-                        IdBrand = colore.IDBRAND,
-                        IdColore = colore.IDCOLORE,
-                        DataModifica = colore.DATAMODIFICA,
-                        UtenteModifica = colore.UtenteModifica
-                    };
-                    lista.Add(c);
+                    lista.Add(creaColoreModel(colore));
                 }
             }
             return lista;
+        }
+
+        private ColoreModel creaColoreModel(AnagraficaDS.COLORIRow colore)
+        {
+            string brand = string.Empty;
+            if (!colore.IsIDBRANDNull())
+            {
+                AnagraficaDS.BRANDRow b = EstraiBrand(colore.IDBRAND);
+                if (b != null) brand = b.BRAND;
+            }
+            ColoreModel c = new ColoreModel()
+            {
+                Codice = colore.CODICE,
+                Brand = brand,
+                CodiceCliente = colore.CODICECLIENTE,
+                CodiceFigurativo = colore.CODICEFIGURATIVO,
+                Descrizione = colore.DESCRIZIONE,
+                IdBrand = colore.IsIDBRANDNull() ? -1 : colore.IDBRAND,
+                IdColore = colore.IDCOLORE,
+                DataModifica = colore.DATAMODIFICA,
+                UtenteModifica = colore.UTENTEMODIFICA
+            };
+            return c;
         }
         public void CancellaColore(decimal idColore, string account)
         {
@@ -189,7 +248,7 @@ namespace MPIntranet.Business
                 {
                     colore.CANCELLATO = "S";
                     colore.DATAMODIFICA = DateTime.Now;
-                    colore.UtenteModifica = account;
+                    colore.UTENTEMODIFICA = account;
 
                     bAnagrafica.UpdateTable(_ds, _ds.COLORI.TableName);
                 }
@@ -226,7 +285,7 @@ namespace MPIntranet.Business
                         return "Un brand con questo codice figurativo è già presente";
                 }
 
-                col = _ds.COLORI.Where(x => x.CODICECLIENTE == codiceCliente && x.IDBRAND == idBrand).FirstOrDefault();
+                col = _ds.COLORI.Where(x => x.CODICECLIENTE == codiceCliente &&!x.IsIDBRANDNull() && x.IDBRAND == idBrand).FirstOrDefault();
                 if (col != null)
                 {
                     if (col.CANCELLATO == "S")
@@ -251,7 +310,7 @@ namespace MPIntranet.Business
 
                 colore.CANCELLATO = "N";
                 colore.DATAMODIFICA = DateTime.Now;
-                colore.UtenteModifica = account;
+                colore.UTENTEMODIFICA = account;
 
                 _ds.COLORI.AddCOLORIRow(colore);
                 bAnagrafica.UpdateTable(_ds, _ds.COLORI.TableName);
@@ -304,7 +363,7 @@ namespace MPIntranet.Business
                 colore.DESCRIZIONE = descrizione;
 
                 colore.DATAMODIFICA = DateTime.Now;
-                colore.UtenteModifica = account;
+                colore.UTENTEMODIFICA = account;
 
                 bAnagrafica.UpdateTable(_ds, _ds.COLORI.TableName);
 

@@ -1,0 +1,161 @@
+﻿@using MPIntranet.Models.Common
+@{
+    ViewBag.Title = "Crea Articolo";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+
+
+<div class="content-top">
+    <h2>Crea articolo</h2>
+</div>
+<div class="content-scheda">
+    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(62))
+    {
+        <div class="row col-lg-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th width="10%">Brand</th>
+                        <th width="10%">Codice SAM</th>
+                        <th width="6%">Progressivo</th>
+                        <th width="6%">Modello (RVL)</th>
+                        <th width="20%">Descrizione</th>
+                        <th width="6%">Codice cliente</th>
+                        <th width="6%">Codice provvisorio</th>
+                        <th width="6%">Codice colore</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td width="10%">
+                            @Html.DropDownList("ddlBrand", new SelectList(ViewData["dllBrand"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @style = "height: 21px;" })
+                        </td>
+                        <td width="10%">
+                            @Html.TextBox("txtCodiceSAM", null, new { @class = "form-control input-sm ", @id = "txtCodiceSAM", @maxlength = "17" })
+                        </td>
+                        <th width="6%">
+                            @Html.TextBox("txtProgressivo", null, new { @class = "form-control input-sm ", @id = "txtProgressivo", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,2,0)" })
+                        </th>
+                        <th width="6%">
+                            @Html.TextBox("txtModello", null, new { @class = "form-control input-sm ", @id = "txtModello", @maxlength = "30" })
+                        </th>
+                        <th width="20%">
+                            @Html.TextBox("txtDescrizione", null, new { @class = "form-control input-sm ", @id = "txtDescrizione", @maxlength = "80" })
+                        </th>
+                        <th width="6%">
+                            @Html.TextBox("txtCodiceCliente", null, new { @class = "form-control input-sm ", @id = "txtCodiceCliente", @maxlength = "15" })
+                        </th>
+                        <th width="6%">
+                            @Html.TextBox("CodiceProvvisorio", null, new { @class = "form-control input-sm ", @id = "CodiceProvvisorio", @maxlength = "15" })
+                        </th>
+                        <th width="6%">
+                            @Html.TextBox("txtCodiceColore", null, new { @class = "form-control input-sm ", @id = "txtCodiceColore", @maxlength = "3" })
+                        </th>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row col-lg-2">
+            <div style="display:inline-block; width:50%">
+                <input type="button" onclick="AggiungiNuovo();" class="btn btn-primary" value="Nuovo articolo" />
+            </div>
+        </div>
+    }
+    <div class="row">
+        <label class="text-red input-sm" id="lblMessage"></label>
+        <br />
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+    });
+
+
+
+    function AggiungiNuovo()
+    {
+        var idBrand = $('#ddlBrand').val();
+        var codiceSAM = $('#txtCodiceSAM').val();
+        var progressivo= $('#txtProgressivo').val();
+        var modello = $('#txtModello').val();
+        var descrizione= $('#txtDescrizione').val();
+        var codiceCliente = $('#txtCodiceCliente').val();
+        var provvisorio = $('#CodiceProvvisorio').val();
+        var codiceColore = $('#txtCodiceColore').val();
+
+        var esito = true;
+        var messaggio = '';
+
+        if (idBrand =='-1' )
+        {
+            esito=false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Brand" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        if (descrizione == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Descrizione" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        if (codiceCliente == '' && codiceSAM == '' && modello == '' && provvisorio=='') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Almeno uno tra i campi Codice SAM, Modello, Codice Cliente, Codice Provvisorio " + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        if (codiceColore == null || codiceColore == '') codiceColore = '000';
+
+        if (progressivo == null || progressivo == '') progressivo = -1;
+
+        $('#lblMessage').html(messaggio);
+        if(!esito) return;
+
+
+        var url = '@Url.Action("SalvaArticolo", "Articolo")';
+        $.ajax({
+            url: url,
+            data: {
+                idBrand: idBrand,
+                codiceSAM: codiceSAM,
+                progressivo: progressivo,
+                modello: modello,
+                descrizione: descrizione,
+                codiceCliente: codiceCliente,
+                provvisorio: provvisorio,
+                codiceColore: codiceColore
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#lblMessage').html(data);
+                if (data == 'Articolo creato correttamente')
+                    svuotaCampi();
+
+
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function svuotaCampi() {
+        $('#txtCodiceSAM').val('');
+        $('#txtProgressivo').val('');
+        $('#txtModello').val('');
+        $('#txtDescrizione').val('');
+        $('#txtCodiceCliente').val('');
+        $('#CodiceProvvisorio').val('');
+        $('#txtCodiceColore').val('');
+    }
+
+</script>

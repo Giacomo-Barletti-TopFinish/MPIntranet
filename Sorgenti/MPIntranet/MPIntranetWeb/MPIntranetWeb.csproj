@@ -407,6 +407,9 @@
     <Content Include="Views\Galvanica\Impianti.cshtml" />
     <Content Include="Views\Galvanica\CaricaVaschePartial.cshtml" />
     <Content Include="Views\Articolo\Scheda.cshtml" />
+    <Content Include="Views\Articolo\RicercaArticolo.cshtml" />
+    <Content Include="Views\Articolo\CaricaArticoliModel.cshtml" />
+    <Content Include="Views\Articolo\CreaArticolo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

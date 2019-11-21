@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MPIntranet.Models.Anagrafica;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,9 +17,9 @@ namespace MPIntranet.Models.Articolo
         public string IDMAGAZZ { get; set; }
         public string CodiceCliente { get; set; }
         public string CodiceProvvisorio { get; set; }
-        public decimal IdColore { get; set; }
-        public decimal IdBrand { get; set; }
         public DateTime DataModifica { get; set; }
         public string UtenteModifica { get; set; }
+        public BrandModel Brand { get; set; }
+        public ColoreModel Colore { get; set; }
     }
 }

@@ -63,6 +63,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="RVLDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RVLDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="SecurityDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -107,6 +112,17 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="RVLDS.xsc">
+      <DependentUpon>RVLDS.xsd</DependentUpon>
+    </None>
+    <None Include="RVLDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RVLDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="RVLDS.xss">
+      <DependentUpon>RVLDS.xsd</DependentUpon>
     </None>
     <None Include="SecurityDS.xsc">
       <DependentUpon>SecurityDS.xsd</DependentUpon>

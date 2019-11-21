@@ -1,7 +1,246 @@
 ﻿
 @{
-    ViewBag.Title = "Scheda";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
 }
 
-<h2>Scheda</h2>
+<div class="content-top">
+    <h2>Gestione Articolo</h2>
+    <div class="row">
+        <div class="col-sm-1 text-right">
+            <input type="radio" name="tipoRicerca" value="SAM" />
+        </div>
+        <div class="col-sm-1">
+            Codice sam
+        </div>
+        <div class="col-sm-1">
+            @Html.TextBox("txtCodiceSam", null, new { @class = "form-control input-sm ", @id = "txtCodiceSam", @maxlength = "17" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-1 text-right">
+            <input type="radio" name="tipoRicerca" value="RVL" />
+        </div>
+        <div class="col-sm-1">
+            Modello RVL
+        </div>
+        <div class="col-sm-1">
+            @Html.TextBox("txtModelloRVL", null, new { @class = "form-control input-sm ", @id = "txtModelloRVL", @maxlength = "30" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-1 text-right">
+            <input type="radio" name="tipoRicerca" value="Codice" />
+        </div>
+        <div class="col-sm-1">
+            Codice cliente
+        </div>
+        <div class="col-sm-1">
+            @Html.TextBox("txtCodiceCliente", null, new { @class = "form-control input-sm ", @id = "txtCodiceCliente", @maxlength = "30" })
+        </div>
+    </div>
+    <div style="display:inline-block; width:50%">
+        <button class="btn btn-box-tool" id="spcSearchButton" title="Trova" onclick="StartFindTaglio(this)" type="button"><i class="fa fa-search input-sm"></i></button>
 
+        <input type="button" onclick="SubmitForm(this);" class="btn btn-primary" value="Salva" />
+        <input type="button" id="btnStampaScheda" onclick="DatiNonSalvatiAlert(ScegliStampaSprodotto);" class="btn btn-primary" value="Stampa" />
+        <input type="button" onclick="DatiNonSalvatiSiNoCancelConfirmationPopup(salvaScheda,EseguiChiudiArticolo);" class="btn btn-primary" value="Chiudi" />
+        <input type="button" onclick="DatiNonSalvatiSiNoCancelConfirmationPopup(salvaScheda,EseguiNuovaRicerca);" class="btn btn-primary" value="Nuova ricerca" />
+    </div>
+    <div style="display:inline-block; float:right">
+        <input type="button" id="btnNuovaVersione" onclick="DatiNonSalvatiAlert(ApriNuovaVersione)" class="btn btn-primary" value="Crea versione" />
+        <input type="button" id="btnCopiaArticolo" onclick="DatiNonSalvatiAlert(ApriCopiaArticoloPopup)" class="btn btn-primary" value="Copia" />
+        <input type="button" id="btnExportGSC" onclick="DatiNonSalvatiAlert(ApriExportGSCPopup)" class="btn btn-primary" value="Copia su schede articolo" />
+        <input type="button" id="btnCancellaArticolo" onclick="ConfermaCancellaArticolo();" class="btn btn-primary" value="Elimina" />
+    </div>
+</div>
+<div id="ArticleScrolledContent" class="content-scheda" style="overflow-y:auto; overflow-x:hidden; height:500px">
+
+    <div class="box" id="sectionDatiGenerali">
+        <div class="box-header with-border">
+            <h4 class="box-title text-bold">Dati generali</h4>
+            <div class="box-tools pull-right">
+                <button id="btnCollapseDatiGenerali" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-chevron-up"></i></button>
+            </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body form-group-sm">
+            <div class="row">
+                <div class="col-md-8" id="headRow">
+                    <div class="row">
+                        <div class="col-md-2">
+                            label + ddl
+                        </div>
+                        <div class="col-md-4">
+                            partial
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            partial
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            @Html.Label("label", new { @class = "input-sm" })
+                            @Html.TextBox("text", new { @maxlength = "11", @class = "form-control input-sm text-uppercase", @onkeypress = "return FilterInput(event,this)", placeholder = "AAAL_X11XAA", @onblur = "ToUpper(this)", @id = "articleCodProv" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.Label("label", new { @class = "input-sm" })
+                            @Html.TextBox("text", new { @maxlength = "11", @class = "form-control input-sm text-uppercase", @onkeypress = "return FilterInput(event,this)", placeholder = "AAAL_X11XAA", @onblur = "ToUpper(this)", @id = "articleCodProv" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.Label("label", new { @class = "input-sm" })
+                            @Html.TextBox("text", new { @maxlength = "11", @class = "form-control input-sm text-uppercase", @onkeypress = "return FilterInput(event,this)", placeholder = "AAAL_X11XAA", @onblur = "ToUpper(this)", @id = "articleCodProv" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.Label("label", new { @class = "input-sm" })
+                            @Html.TextBox("ddl", new { @maxlength = "11", @class = "form-control input-sm text-uppercase", @onkeypress = "return FilterInput(event,this)", placeholder = "AAAL_X11XAA", @onblur = "ToUpper(this)", @id = "articleCodProv" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.Label("label", new { @class = "input-sm" })
+                            @Html.TextBox("ddl", new { @maxlength = "11", @class = "form-control input-sm text-uppercase", @onkeypress = "return FilterInput(event,this)", placeholder = "AAAL_X11XAA", @onblur = "ToUpper(this)", @id = "articleCodProv" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            @Html.Label("label", new { @class = "input-sm" })
+                            @Html.TextBox("ddl", new { @maxlength = "11", @class = "form-control input-sm text-uppercase", @onkeypress = "return FilterInput(event,this)", placeholder = "AAAL_X11XAA", @onblur = "ToUpper(this)", @id = "articleCodProv" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.Label("label", new { @class = "input-sm" })
+                            @Html.TextBox("ddl", new { @maxlength = "11", @class = "form-control input-sm text-uppercase", @onkeypress = "return FilterInput(event,this)", placeholder = "AAAL_X11XAA", @onblur = "ToUpper(this)", @id = "articleCodProv" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.Label("label", new { @class = "input-sm" })
+                            @Html.TextBox("ddl", new { @maxlength = "11", @class = "form-control input-sm text-uppercase", @onkeypress = "return FilterInput(event,this)", placeholder = "AAAL_X11XAA", @onblur = "ToUpper(this)", @id = "articleCodProv" })
+                        </div>
+                    </div>
+                </div>
+                <div id="divImage" class="col-md-4">
+                    <a onclick="GetPuntiImmagine();return false;">
+                        <img id="articleImg" style="height:auto; max-width:100%; display: block; margin: auto;" src="">
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-12">
+                            partial
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            partial
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+render action                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+
+                    <label>Forma</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-8">
+                            @Html.Label("label", new { @class = "input-sm" })
+                            @Html.TextBox("text", new { @maxlength = "11", @class = "form-control input-sm text-uppercase", @onkeypress = "return FilterInput(event,this)", placeholder = "AAAL_X11XAA", @onblur = "ToUpper(this)", @id = "articleCodProv" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.Label("label", new { @class = "input-sm" })
+                            @Html.TextBox("text", new { @maxlength = "11", @class = "form-control input-sm text-uppercase", @onkeypress = "return FilterInput(event,this)", placeholder = "AAAL_X11XAA", @onblur = "ToUpper(this)", @id = "articleCodProv" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.Label("label", new { @class = "input-sm" })
+                            @Html.TextBox("text", new { @maxlength = "11", @class = "form-control input-sm text-uppercase", @onkeypress = "return FilterInput(event,this)", placeholder = "AAAL_X11XAA", @onblur = "ToUpper(this)", @id = "articleCodProv" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="box box-primary" id="sectionTaglio">
+        <div class="box-header with-border">
+            <h4 class="box-title text-bold">Taglio</h4>
+            <div class="box-tools pull-right">
+                <button id="btnCollapseTaglio" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-chevron-up"></i></button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div id="divTaglioContainer"></div>
+        </div>
+    </div>
+    <div class="box box-primary" id="sectionAccessori">
+        <div class="box-header with-border">
+            <h4 class="box-title text-bold">Accessori</h4>
+            <div class="box-tools pull-right">
+                <button id="btnCollapseAccessori" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-chevron-up"></i></button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div id="divAccessoriContainer"></div>
+        </div>
+    </div>
+    <div class="box box-primary" id="sectionPartiSpeciali">
+        <div class="box-header with-border">
+            <h3 class="box-title text-bold">Parti speciali</h3>
+            <div class="box-tools pull-right">
+                <button id="btnCollapsePSpeciali" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-chevron-up"></i></button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div id="divPSpecialiContainer"></div>
+        </div>
+    </div>
+    <div class="box box-primary" id="sectionGiunteria">
+        <div class="box-header with-border">
+            <h3 class="box-title text-bold">Giunteria</h3>
+            <div class="box-tools pull-right">
+                <button id="btnCollapseGiunteria" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-chevron-up"></i></button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div id="divGiunteriaContainer"></div>
+        </div>
+    </div>
+    <div class="box box-primary" id="sectionMarcature">
+        <div class="box-header with-border">
+            <h3 class="box-title text-bold">Marcature</h3>
+            <div class="box-tools pull-right">
+                <button id="btnCollapseMarcature" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-chevron-up"></i></button>
+            </div>
+        </div>
+        <div class="box-body">
+            <div id="divMarcatureContainer"></div>
+        </div>
+    </div>
+
+    <br />
+</div>
+
+<div class="control-sidebar-bg"></div>
+<script language="javascript" type="text/javascript">
+
+    $(function () {
+
+
+    });
+
+
+</script>

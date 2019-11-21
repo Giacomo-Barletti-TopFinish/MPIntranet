@@ -47,6 +47,8 @@
     <Compile Include="Anagrafica\AnagraficaBusiness.cs" />
     <Compile Include="Articolo\ArticoloAdapter.cs" />
     <Compile Include="Articolo\ArticoloBusiness.cs" />
+    <Compile Include="Articolo\RVLAdapter.cs" />
+    <Compile Include="Articolo\RVLBusiness.cs" />
     <Compile Include="Core\AdapterBase.cs" />
     <Compile Include="Core\BusinessBase.cs" />
     <Compile Include="Core\ColumnMapAttribute.cs" />
@@ -66,6 +68,10 @@
     <ProjectReference Include="..\MPIntranet.Entities\MPIntranet.Entities.csproj">
       <Project>{055d9b2d-98fd-417e-ab6a-970203561b5c}</Project>
       <Name>MPIntranet.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MPIntranet.Models\MPIntranet.Models.csproj">
+      <Project>{FECD5686-E3F2-4EFF-BA4D-88A23A4EA08A}</Project>
+      <Name>MPIntranet.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

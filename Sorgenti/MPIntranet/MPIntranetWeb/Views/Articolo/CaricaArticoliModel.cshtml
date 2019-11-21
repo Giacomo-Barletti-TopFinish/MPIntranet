@@ -1,0 +1,50 @@
+﻿
+@using MPIntranet.Models.Articolo
+@model List<ArticoloModel>
+
+@if (Model != null && Model.Count() == 0)
+{
+    <text><b>Nessun risultato trovato</b></text>
+}
+else
+{
+    <table id="grigliaRisultati" class="table table-condensed table-hover">
+        <thead style="background-color:aliceblue">
+            <tr>
+                <th width="10%"></th>
+                <th width="10%">Codice SAM</th>
+                <th width="5%">Progressivo</th>
+                <th width="10%">Modello</th>
+                <th width="5%">Codice cliente</th>
+                <th width="20%">Descrizione</th>
+                <th width="10%">Brand</th>
+                <th width="8%">Colore</th>
+                <th width="8%">Colore figurativo</th>
+                <th width="2%"></th>
+                <th width="2%"></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ArticoloModel td in Model)
+            {
+            <tr>
+                <td>@Html.ActionLink("Apri", "Scheda", "Articolo",new { idArticolo = td.IdArticolo },null)</td>
+                <td width="5%">@td.CodiceSAM</td>
+                <td width="5%">@td.ProgressivoSAM</td>
+                <td width="10%">@td.Modello</td>
+                <td width="5%">@td.CodiceCliente</td>
+                <td width="20%">@td.Descrizione</td>
+                <td width="10%">@td.Brand.Brand</td>
+                <td width="8%">@td.Colore.Codice</td>
+                <td width="8%">@td.Colore.CodiceFigurativo</td>
+                <td width="2%"></td>
+                <td width="2%"></td>
+                <td></td>
+            </tr>
+
+            }
+        </tbody>
+    </table>
+}
+

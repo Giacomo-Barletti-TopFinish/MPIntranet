@@ -28,10 +28,10 @@
                             @Html.DropDownList("ddlBrand", new SelectList(ViewData["dllBrand"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @style = "height: 21px;" })
                         </td>
                         <td width="23%">
-                            @Html.TextBox("txtDescrizione", null, new { @class = "form-control input-sm spcLocalSearchField", @id = "txtDescrizione", @maxlength = "40" })
+                            @Html.TextBox("txtDescrizione", null, new { @class = "form-control input-sm ", @id = "txtDescrizione", @maxlength = "40" })
                         </td>
                         <th width="6%">
-                            @Html.TextBox("txtCodiceCliente", null, new { @class = "form-control input-sm spcLocalSearchField", @id = "txtCodiceCliente", @maxlength = "8" })
+                            @Html.TextBox("txtCodiceCliente", null, new { @class = "form-control input-sm ", @id = "txtCodiceCliente", @maxlength = "8" })
                         </th>
                         <td></td>
                         <td></td>
@@ -75,16 +75,16 @@
                             @Html.DropDownList("ddlBrandR", new SelectList(ViewData["dllBrand"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @style = "height: 21px;" })
                         </td>
                         <td width="8%">
-                            @Html.TextBox("txtCodiceR", null, new { @class = "form-control input-sm spcLocalSearchField", @id = "txtCodiceR", @maxlength = "3" })
+                            @Html.TextBox("txtCodiceR", null, new { @class = "form-control input-sm ", @id = "txtCodiceR", @maxlength = "3" })
                         </td>
                         <td width="23%">
-                            @Html.TextBox("txtDescrizioneR", null, new { @class = "form-control input-sm spcLocalSearchField", @id = "txtDescrizioneR", @maxlength = "40" })
+                            @Html.TextBox("txtDescrizioneR", null, new { @class = "form-control input-sm ", @id = "txtDescrizioneR", @maxlength = "40" })
                         </td>
                         <th width="6%">
-                            @Html.TextBox("txtFigurativoR", null, new { @class = "form-control input-sm spcLocalSearchField", @id = "txtFigurativoR", @maxlength = "10" })
+                            @Html.TextBox("txtFigurativoR", null, new { @class = "form-control input-sm ", @id = "txtFigurativoR", @maxlength = "10" })
                         </th>
                         <th width="6%">
-                            @Html.TextBox("txtCodiceClienteR", null, new { @class = "form-control input-sm spcLocalSearchField", @id = "txtCodiceClienteR", @maxlength = "8" })
+                            @Html.TextBox("txtCodiceClienteR", null, new { @class = "form-control input-sm ", @id = "txtCodiceClienteR", @maxlength = "8" })
                         </th>
                         <td><a class="spciconbtn" onclick="caricaDati()"><i class="fa fa-search input-sm"></i></a></td>
                         <td></td>

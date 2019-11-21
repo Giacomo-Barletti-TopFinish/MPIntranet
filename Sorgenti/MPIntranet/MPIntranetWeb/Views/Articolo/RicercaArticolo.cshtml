@@ -1,0 +1,99 @@
+﻿@using MPIntranet.Models.Common
+@{
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+
+<div class="content-top">
+    <h2>Ricerca Articolo</h2>
+    <div class="row">
+        <div class="col-sm-1">
+            @Html.Label("Modello (RVL)")
+            @Html.TextBox("txtModello", "", new { @maxlength = "30", @class = "form-control input-sm" })
+        </div>
+        <div class="col-sm-1">
+            @Html.Label("Codice SAM")
+            @Html.TextBox("txtSAM", "", new { @maxlength = "17", @class = "form-control input-sm" })
+        </div>
+        <div class="col-sm-1">
+            @Html.Label("Codice colore")
+            @Html.TextBox("txtColore", "", new { @maxlength = "3", @class = "form-control input-sm" })
+        </div>
+        <div class="col-md-1">
+            @Html.Label("Brand")
+            @Html.DropDownList("ddlBrand", new SelectList(@ViewData["Brand"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlBrand" })
+        </div>
+        <div class="col-sm-1">
+            @Html.Label("Codice cliente")
+            @Html.TextBox("txtCodiceCliente", "", new { @maxlength = "15", @class = "form-control input-sm" })
+        </div>
+        <div class="col-sm-2">
+            @Html.Label("Codice colore cliente")
+            @Html.TextBox("txtColoreCliente", "", new { @maxlength = "8", @class = "form-control input-sm" })
+        </div>
+        <div class="col-sm-1">
+            @Html.Label("Codice provvisorio")
+            @Html.TextBox("txtCodiceProvvisorio", "", new { @maxlength = "15", @class = "form-control input-sm" })
+        </div>
+        <div class="col-sm-1" style="padding-top:15px">
+            <button class="btn btn-box-tool" onclick="TrovaArticolo()" title="Trova" type="button"><i class="fa fa-search input-sm"></i></button>
+        </div>
+    </div>
+</div>
+<div class="content-scheda">
+
+    <div class="row">
+        <div id="divRisultati" class="content-searchSPC">
+        </div>
+    </div>
+
+    <br />
+</div>
+
+<div class="control-sidebar-bg"></div>
+<script language="javascript" type="text/javascript">
+
+    $(function () {
+
+
+    });
+
+    function TrovaArticolo() {
+        var modello = $('#txtModello').val();
+        var codiceSam = $('#txtSAM').val();
+        var coloreInterno = $('#txtColore').val();
+        var brand= $('#ddlBrand').val();
+        var codiceCliente = $('#txtCodiceCliente').val();
+        var coloreCliente = $('#txtColoreCliente').val();
+        var codiceProvvisorio = $('#txtCodiceProvvisorio').val();
+
+        if (brand == null) brand = -1;
+
+          var url = '@Url.Action("TrovaArticolo", "Articolo")';
+            $.ajax({
+                url: url,
+                data: {
+                    modello: modello,
+                    codiceSam: codiceSam,
+                    coloreInterno: coloreInterno,
+                    idBrand: brand,
+                    codiceCliente: codiceCliente,
+                    coloreCliente: coloreCliente,
+                    codiceProvvisorio: codiceProvvisorio
+                },
+                cache: false,
+                type: "POST",
+                success: function (data)
+                {
+                    $('#divRisultati').html(data).show();
+                },
+                error: function (response)
+                {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+                }
+            });
+    }
+
+
+</script>
