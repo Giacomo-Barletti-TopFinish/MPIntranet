@@ -6,6 +6,7 @@
 <div class="content-top">
     <h2>Ricerca Articolo</h2>
     <div class="row">
+        @Html.Hidden("hdTipoRicerca",ViewData["TipoRicerca"])
         <div class="col-sm-1">
             @Html.Label("Modello (RVL)")
             @Html.TextBox("txtModello", "", new { @maxlength = "30", @class = "form-control input-sm" })
@@ -58,6 +59,7 @@
     });
 
     function TrovaArticolo() {
+        var tipoRicerca = $('#hdTipoRicerca').val();
         var modello = $('#txtModello').val();
         var codiceSam = $('#txtSAM').val();
         var coloreInterno = $('#txtColore').val();
@@ -78,7 +80,8 @@
                     idBrand: brand,
                     codiceCliente: codiceCliente,
                     coloreCliente: coloreCliente,
-                    codiceProvvisorio: codiceProvvisorio
+                    codiceProvvisorio: codiceProvvisorio,
+                    TipoRicerca: tipoRicerca
                 },
                 cache: false,
                 type: "POST",

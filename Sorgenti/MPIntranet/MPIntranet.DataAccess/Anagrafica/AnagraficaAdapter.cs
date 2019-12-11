@@ -36,7 +36,7 @@ namespace MPIntranet.DataAccess.Anagrafica
             if (soloNonCancellati)
                 select += "WHERE CANCELLATO = 'N' ";
 
-            select += "ORDER BY CODICE";
+            select += "ORDER BY IDCOLORE";
             using (DbDataAdapter da = BuildDataAdapter(select))
             {
                 da.Fill(ds.COLORI);

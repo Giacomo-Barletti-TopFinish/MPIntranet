@@ -47,7 +47,9 @@
     <Compile Include="Anagrafica\ColoreModel.cs" />
     <Compile Include="Anagrafica\TipoDocumento.cs" />
     <Compile Include="Articolo\ArticoloModel.cs" />
+    <Compile Include="Articolo\ProcessoModel.cs" />
     <Compile Include="Common\MPIntranetListItem.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="Galvanica\ImpiantoModel.cs" />
     <Compile Include="Galvanica\VascaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

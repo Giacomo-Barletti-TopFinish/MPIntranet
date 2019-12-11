@@ -46,9 +46,9 @@ namespace MPIntranet.DataAccess.Articolo
         }
 
         [DataContext]
-        public void FillArticoli(ArticoloDS ds, decimal idArticolo, bool soloNonCancellati)
+        public void FillArticolo(ArticoloDS ds, decimal idArticolo, bool soloNonCancellati)
         {
-            FillArticoli(ds, new List<decimal>(new decimal[] { idArticolo }), soloNonCancellati);
+            FillArticoli(ds, new List<decimal>(new decimal[] { idArticolo }), soloNonCancellati);         
         }
 
         [DataContext]

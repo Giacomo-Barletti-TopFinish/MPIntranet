@@ -28,20 +28,20 @@ else
         <tbody>
             @foreach (ArticoloModel td in Model)
             {
-            <tr>
-                <td>@Html.ActionLink("Apri", "Scheda", "Articolo",new { idArticolo = td.IdArticolo },null)</td>
-                <td width="5%">@td.CodiceSAM</td>
-                <td width="5%">@td.ProgressivoSAM</td>
-                <td width="10%">@td.Modello</td>
-                <td width="5%">@td.CodiceCliente</td>
-                <td width="20%">@td.Descrizione</td>
-                <td width="10%">@td.Brand.Brand</td>
-                <td width="8%">@td.Colore.Codice</td>
-                <td width="8%">@td.Colore.CodiceFigurativo</td>
-                <td width="2%"></td>
-                <td width="2%"></td>
-                <td></td>
-            </tr>
+                <tr>
+                    <td>@Html.ActionLink("Apri", ViewData["ActionName"] as string, ViewData["ControllerName"] as string, new { idArticolo = td.IdArticolo }, null)</td>
+                    <td width="5%">@td.CodiceSAM</td>
+                    <td width="5%">@td.ProgressivoSAM</td>
+                    <td width="10%">@td.Modello</td>
+                    <td width="5%">@td.CodiceCliente</td>
+                    <td width="20%">@td.Descrizione</td>
+                    <td width="10%">@td.Brand.Brand</td>
+                    <td width="8%">@td.Colore.Codice</td>
+                    <td width="8%">@td.Colore.CodiceFigurativo</td>
+                    <td width="2%"></td>
+                    <td width="2%"></td>
+                    <td></td>
+                </tr>
 
             }
         </tbody>

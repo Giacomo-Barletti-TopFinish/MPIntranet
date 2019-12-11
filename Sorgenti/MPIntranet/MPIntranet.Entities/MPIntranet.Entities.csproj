@@ -52,6 +52,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ArticoloDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Enums.cs" />
     <Compile Include="GalvanicaDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

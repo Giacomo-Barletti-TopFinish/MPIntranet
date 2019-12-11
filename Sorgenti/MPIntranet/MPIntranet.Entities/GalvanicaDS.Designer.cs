@@ -1247,6 +1247,7 @@ namespace MPIntranet.Entities {
                 this.columnABILITASTRATO.AllowDBNull = false;
                 this.columnABILITASTRATO.MaxLength = 1;
                 this.columnIDIMPIANTO.AllowDBNull = false;
+                this.columnIDMATERIALE.AllowDBNull = false;
                 this.columnCANCELLATO.AllowDBNull = false;
                 this.columnCANCELLATO.MaxLength = 1;
                 this.columnDATAMODIFICA.AllowDBNull = false;
@@ -1663,12 +1664,7 @@ namespace MPIntranet.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public decimal IDMATERIALE {
                 get {
-                    try {
-                        return ((decimal)(this[this.tableVASCHE.IDMATERIALEColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'IDMATERIALE\' in table \'VASCHE\' is DBNull.", e);
-                    }
+                    return ((decimal)(this[this.tableVASCHE.IDMATERIALEColumn]));
                 }
                 set {
                     this[this.tableVASCHE.IDMATERIALEColumn] = value;
@@ -1718,18 +1714,6 @@ namespace MPIntranet.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetIDVASCANull() {
                 this[this.tableVASCHE.IDVASCAColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsIDMATERIALENull() {
-                return this.IsNull(this.tableVASCHE.IDMATERIALEColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetIDMATERIALENull() {
-                this[this.tableVASCHE.IDMATERIALEColumn] = global::System.Convert.DBNull;
             }
         }
         

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MPIntranet.Models.Anagrafica;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,10 +14,9 @@ namespace MPIntranet.Models.Galvanica
         public string Descrizione { get; set; }
         public bool AbilitaStato{ get; set; }
         public decimal IdImpianto{ get; set; }
-        public decimal IdMateriale { get; set; }
         public string Impianto { get; set; }
-        public string Materiale{ get; set; }
         public DateTime DataModifica { get; set; }
         public string UtenteModifica { get; set; }
+        public MaterialeModel Materiale { get; set; }
     }
 }

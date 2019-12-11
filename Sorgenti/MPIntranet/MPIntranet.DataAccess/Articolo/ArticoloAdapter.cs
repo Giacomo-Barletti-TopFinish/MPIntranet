@@ -29,11 +29,12 @@ namespace MPIntranet.DataAccess.Articolo
             }
         }
 
+    
         public List<decimal> TrovaArticoli(bool soloNonCancellati, decimal idBrand, string codiceSam, string modello, string codiceCliente, string codiceProvvisorio)
         {
             ParamSet ps = new ParamSet();
 
-            if(idBrand<=0 && string.IsNullOrEmpty(codiceSam)&&string.IsNullOrEmpty(modello) && string.IsNullOrEmpty(codiceCliente) && string.IsNullOrEmpty(codiceProvvisorio))
+            if (idBrand <= 0 && string.IsNullOrEmpty(codiceSam) && string.IsNullOrEmpty(modello) && string.IsNullOrEmpty(codiceCliente) && string.IsNullOrEmpty(codiceProvvisorio))
                 return new List<decimal>(); ;
 
             string query = @"SELECT IDARTICOLO FROM ARTICOLI ";

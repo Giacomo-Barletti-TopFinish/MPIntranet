@@ -123,10 +123,16 @@ namespace MPIntranet.Business
             {
                 using (ArticoloBusiness bArticolo = new ArticoloBusiness())
                 {
-                    bArticolo.FillArticoli(_ds, idArticolo, true);
+                    bArticolo.FillArticolo(_ds, idArticolo, true);
                 }
             }
             return _ds.ARTICOLI.Where(x => x.IDARTICOLO == idArticolo).FirstOrDefault();
+        }
+
+        public ArticoloModel CreaArticoloModel(decimal idArticolo)
+        {
+            ArticoloDS.ARTICOLIRow articolo = EstraiArticolo(idArticolo);
+            return CreaArticoloModel(articolo);
         }
 
         private ArticoloModel CreaArticoloModel(ArticoloDS.ARTICOLIRow articolo)

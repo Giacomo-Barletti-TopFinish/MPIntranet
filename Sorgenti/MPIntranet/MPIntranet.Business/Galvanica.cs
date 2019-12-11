@@ -124,21 +124,17 @@ namespace MPIntranet.Business
                 {
                     GalvanicaDS.IMPIANTIRow impianto = _ds.IMPIANTI.Where(x => x.IDIMPIANTO == vasca.IDIMPIANTO).FirstOrDefault();
                     string materiale = string.Empty;
-                    if (!vasca.IsIDMATERIALENull())
-                    {
-                        MaterialeModel materialeModel = materiali.Where(x => x.IdMateriale == vasca.IDMATERIALE).FirstOrDefault();
-                        materiale = materialeModel.Descrizione;
-                    }
+                    MaterialeModel materialeModel = materiali.Where(x => x.IdMateriale == vasca.IDMATERIALE).FirstOrDefault();
+
                     VascaModel m = new VascaModel()
                     {
                         IdVasca = vasca.IDVASCA,
-                        IdMateriale = vasca.IsIDMATERIALENull() ? -1 : vasca.IDMATERIALE,
                         AbilitaStato = vasca.ABILITASTRATO == "S",
                         DescrizioneBreve = vasca.DESCRIZIONEBREVE,
                         IdImpianto = vasca.IDIMPIANTO,
                         Descrizione = vasca.DESCRIZIONE,
                         Impianto = (impianto == null) ? string.Empty : impianto.DESCRIZIONE,
-                        Materiale = (materiale == null) ? string.Empty : materiale,
+                        Materiale = materialeModel,
                         DataModifica = vasca.DATAMODIFICA,
                         UtenteModifica = vasca.UTENTEMODIFICA
                     };
@@ -194,7 +190,7 @@ namespace MPIntranet.Business
             if (!ImpiantoEsiste(idImpianto))
                 return "Impianto non presente in archivio";
 
-            if (idMateriale > 0 && !_anagrafica.MaterialeEsiste(idMateriale))
+            if (!_anagrafica.MaterialeEsiste(idMateriale))
                 return "Materiale non presente in archivio";
 
             using (GalvanicaBusiness bGalvanica = new GalvanicaBusiness())

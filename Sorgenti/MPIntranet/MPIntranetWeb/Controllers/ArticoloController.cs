@@ -14,10 +14,12 @@ namespace MPIntranetWeb.Controllers
     {
         public ActionResult Scheda(decimal idArticolo)
         {
+            Articolo a = new Articolo();
+            ArticoloModel model = a.CreaArticoloModel(idArticolo);
             return View();
         }
 
-        public ActionResult RicercaArticolo()
+        public ActionResult RicercaArticolo(int TipoRicerca)
         {
 
             Anagrafica a = new Anagrafica();
@@ -26,15 +28,31 @@ namespace MPIntranetWeb.Controllers
             brands.Insert(0, new MPIntranetListItem(string.Empty, "-1"));
 
             ViewData.Add("Brand", brands);
+            ViewData.Add("TipoRicerca", TipoRicerca);
             return View();
         }
 
-        public ActionResult TrovaArticolo(string modello, string codiceSam, string coloreInterno, decimal idBrand, string codiceCliente, string coloreCliente, string codiceProvvisorio)
+        public ActionResult TrovaArticolo(string modello, string codiceSam, string coloreInterno, decimal idBrand, string codiceCliente, string coloreCliente, string codiceProvvisorio, int TipoRicerca)
         {
             Articolo articolo = new Articolo();
 
             List<ArticoloModel> articoli = articolo.TrovaArticoli(modello, codiceSam, coloreInterno, idBrand, codiceCliente, coloreCliente, codiceProvvisorio);
 
+            switch (TipoRicerca)
+            {
+                case (int)MPIntranet.Models.TipoRicerca.Scheda:
+                    ViewData.Add("ControllerName", "Articolo");
+                    ViewData.Add("ActionName", "Scheda");
+                    break;
+                case (int)MPIntranet.Models.TipoRicerca.Impianto:
+                    ViewData.Add("ControllerName", "Articolo");
+                    ViewData.Add("ActionName", "Scheda");
+                    break;
+                default:
+                    ViewData.Add("ControllerName", string.Empty);
+                    ViewData.Add("ActionName", string.Empty);
+                    break;
+            }
             return PartialView("CaricaArticoliModel", articoli);
         }
 

@@ -14,7 +14,7 @@
   <xs:element name="GalvanicaDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="GalvanicaDS" msprop:Generator_UserDSName="GalvanicaDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="IMPIANTI" msprop:Generator_TableClassName="IMPIANTIDataTable" msprop:Generator_TableVarName="tableIMPIANTI" msprop:Generator_TablePropName="IMPIANTI" msprop:Generator_RowDeletingName="IMPIANTIRowDeleting" msprop:Generator_RowChangingName="IMPIANTIRowChanging" msprop:Generator_RowEvHandlerName="IMPIANTIRowChangeEventHandler" msprop:Generator_RowDeletedName="IMPIANTIRowDeleted" msprop:Generator_UserTableName="IMPIANTI" msprop:Generator_RowChangedName="IMPIANTIRowChanged" msprop:Generator_RowEvArgName="IMPIANTIRowChangeEvent" msprop:Generator_RowClassName="IMPIANTIRow">
+        <xs:element name="IMPIANTI" msprop:Generator_TableClassName="IMPIANTIDataTable" msprop:Generator_TableVarName="tableIMPIANTI" msprop:Generator_RowChangedName="IMPIANTIRowChanged" msprop:Generator_TablePropName="IMPIANTI" msprop:Generator_RowDeletingName="IMPIANTIRowDeleting" msprop:Generator_RowChangingName="IMPIANTIRowChanging" msprop:Generator_RowEvHandlerName="IMPIANTIRowChangeEventHandler" msprop:Generator_RowDeletedName="IMPIANTIRowDeleted" msprop:Generator_RowClassName="IMPIANTIRow" msprop:Generator_UserTableName="IMPIANTI" msprop:Generator_RowEvArgName="IMPIANTIRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDIMPIANTO" msprop:Generator_ColumnVarNameInTable="columnIDIMPIANTO" msprop:Generator_ColumnPropNameInRow="IDIMPIANTO" msprop:Generator_ColumnPropNameInTable="IDIMPIANTOColumn" msprop:Generator_UserColumnName="IDIMPIANTO" type="xs:decimal" minOccurs="0" />
@@ -43,7 +43,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="PROCESSI" msprop:Generator_TableClassName="PROCESSIDataTable" msprop:Generator_TableVarName="tablePROCESSI" msprop:Generator_TablePropName="PROCESSI" msprop:Generator_RowDeletingName="PROCESSIRowDeleting" msprop:Generator_RowChangingName="PROCESSIRowChanging" msprop:Generator_RowEvHandlerName="PROCESSIRowChangeEventHandler" msprop:Generator_RowDeletedName="PROCESSIRowDeleted" msprop:Generator_UserTableName="PROCESSI" msprop:Generator_RowChangedName="PROCESSIRowChanged" msprop:Generator_RowEvArgName="PROCESSIRowChangeEvent" msprop:Generator_RowClassName="PROCESSIRow">
+        <xs:element name="PROCESSI" msprop:Generator_TableClassName="PROCESSIDataTable" msprop:Generator_TableVarName="tablePROCESSI" msprop:Generator_RowChangedName="PROCESSIRowChanged" msprop:Generator_TablePropName="PROCESSI" msprop:Generator_RowDeletingName="PROCESSIRowDeleting" msprop:Generator_RowChangingName="PROCESSIRowChanging" msprop:Generator_RowEvHandlerName="PROCESSIRowChangeEventHandler" msprop:Generator_RowDeletedName="PROCESSIRowDeleted" msprop:Generator_RowClassName="PROCESSIRow" msprop:Generator_UserTableName="PROCESSI" msprop:Generator_RowEvArgName="PROCESSIRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDPROCESSO" msprop:Generator_ColumnVarNameInTable="columnIDPROCESSO" msprop:Generator_ColumnPropNameInRow="IDPROCESSO" msprop:Generator_ColumnPropNameInTable="IDPROCESSOColumn" msprop:Generator_UserColumnName="IDPROCESSO" type="xs:decimal" minOccurs="0" />
@@ -75,7 +75,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="VASCHE" msprop:Generator_TableClassName="VASCHEDataTable" msprop:Generator_TableVarName="tableVASCHE" msprop:Generator_RowChangedName="VASCHERowChanged" msprop:Generator_TablePropName="VASCHE" msprop:Generator_RowDeletingName="VASCHERowDeleting" msprop:Generator_RowChangingName="VASCHERowChanging" msprop:Generator_RowEvHandlerName="VASCHERowChangeEventHandler" msprop:Generator_RowDeletedName="VASCHERowDeleted" msprop:Generator_RowClassName="VASCHERow" msprop:Generator_UserTableName="VASCHE" msprop:Generator_RowEvArgName="VASCHERowChangeEvent">
+        <xs:element name="VASCHE" msprop:Generator_TableClassName="VASCHEDataTable" msprop:Generator_TableVarName="tableVASCHE" msprop:Generator_TablePropName="VASCHE" msprop:Generator_RowDeletingName="VASCHERowDeleting" msprop:Generator_RowChangingName="VASCHERowChanging" msprop:Generator_RowEvHandlerName="VASCHERowChangeEventHandler" msprop:Generator_RowDeletedName="VASCHERowDeleted" msprop:Generator_UserTableName="VASCHE" msprop:Generator_RowChangedName="VASCHERowChanged" msprop:Generator_RowEvArgName="VASCHERowChangeEvent" msprop:Generator_RowClassName="VASCHERow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDVASCA" msprop:Generator_ColumnVarNameInTable="columnIDVASCA" msprop:Generator_ColumnPropNameInRow="IDVASCA" msprop:Generator_ColumnPropNameInTable="IDVASCAColumn" msprop:Generator_UserColumnName="IDVASCA" type="xs:decimal" minOccurs="0" />
@@ -101,7 +101,7 @@
                 </xs:simpleType>
               </xs:element>
               <xs:element name="IDIMPIANTO" msprop:Generator_ColumnVarNameInTable="columnIDIMPIANTO" msprop:Generator_ColumnPropNameInRow="IDIMPIANTO" msprop:Generator_ColumnPropNameInTable="IDIMPIANTOColumn" msprop:Generator_UserColumnName="IDIMPIANTO" type="xs:decimal" />
-              <xs:element name="IDMATERIALE" msprop:Generator_ColumnVarNameInTable="columnIDMATERIALE" msprop:Generator_ColumnPropNameInRow="IDMATERIALE" msprop:Generator_ColumnPropNameInTable="IDMATERIALEColumn" msprop:Generator_UserColumnName="IDMATERIALE" type="xs:decimal" minOccurs="0" />
+              <xs:element name="IDMATERIALE" msprop:Generator_ColumnVarNameInTable="columnIDMATERIALE" msprop:Generator_ColumnPropNameInRow="IDMATERIALE" msprop:Generator_ColumnPropNameInTable="IDMATERIALEColumn" msprop:Generator_UserColumnName="IDMATERIALE" type="xs:decimal" />
               <xs:element name="CANCELLATO" msprop:Generator_ColumnVarNameInTable="columnCANCELLATO" msprop:Generator_ColumnPropNameInRow="CANCELLATO" msprop:Generator_ColumnPropNameInTable="CANCELLATOColumn" msprop:Generator_UserColumnName="CANCELLATO">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
