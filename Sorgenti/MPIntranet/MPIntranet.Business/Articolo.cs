@@ -157,8 +157,21 @@ namespace MPIntranet.Business
             };
             return articoloModel;
         }
+
+        public void RimuoviArticolo(decimal idArticolo, string account)
+        {
+            ArticoloDS.ARTICOLIRow articolo = EstraiArticolo(idArticolo);
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                articolo.CANCELLATO = "S";
+                articolo.DATAMODIFICA = DateTime.Now;
+                articolo.UTENTEMODIFICA = account;
+
+                bArticolo.UpdateTable(_ds.ARTICOLI.TableName, _ds);
+            }
+
+        }
+
     }
-
-
 
 }

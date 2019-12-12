@@ -16,7 +16,7 @@ namespace MPIntranetWeb.Controllers
         {
             Articolo a = new Articolo();
             ArticoloModel model = a.CreaArticoloModel(idArticolo);
-            return View();
+            return View(model);
         }
 
         public ActionResult RicercaArticolo(int TipoRicerca)
@@ -74,6 +74,14 @@ namespace MPIntranetWeb.Controllers
             Articolo a = new Articolo();
             string messaggio = a.CreaArticolo(idBrand, codiceSAM, progressivo, modello, descrizione, codiceCliente, provvisorio, codiceColore, ConnectedUser);
             return Content(messaggio);
+        }
+
+        public ActionResult RimuoviArticolo(decimal idArticolo)
+        {
+            Articolo a = new Articolo();
+
+            a.RimuoviArticolo(idArticolo, ConnectedUser);
+            return null;
         }
 
     }
