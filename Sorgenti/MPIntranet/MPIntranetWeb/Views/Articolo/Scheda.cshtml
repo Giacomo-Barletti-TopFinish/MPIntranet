@@ -11,8 +11,8 @@
         {
             <input type="button" onclick="SubmitForm(this);" class="btn btn-primary" value="Salva" />
         }
-        <input type="button" onclick="DatiNonSalvatiSiNoCancelConfirmationPopup(salvaScheda,EseguiChiudiArticolo);" class="btn btn-primary" value="Chiudi" />
-        <input type="button" onclick="DatiNonSalvatiSiNoCancelConfirmationPopup(salvaScheda,EseguiNuovaRicerca);" class="btn btn-primary" value="Nuova ricerca" />
+        <input type="button" onclick="EseguiChiudiArticolo();" class="btn btn-primary" value="Chiudi" />
+        <input type="button" onclick="EseguiNuovaRicerca();" class="btn btn-primary" value="Nuova ricerca" />
     </div>
     <div style="display:inline-block; float:right">
         @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(63))
@@ -188,5 +188,16 @@
                     document.close();
                 }
             });
+    }
+
+     function EseguiChiudiArticolo()
+        {
+            var url = '/ARTICOLO/RICERCAARTICOLO/?TipoRicerca=1';
+            window.location.href=url;
+        }
+
+    function EseguiNuovaRicerca() {
+        var url = '/ARTICOLO/RICERCAARTICOLO/?TipoRicerca=1';
+        window.location.href = url;
     }
 </script>

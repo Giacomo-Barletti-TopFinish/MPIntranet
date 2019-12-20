@@ -14,5 +14,6 @@ namespace MPIntranet.Models.Anagrafica
         public string Prezioso { get; set; }
         public DateTime DataModifica { get; set; }
         public string UtenteModifica { get; set; }
+        public decimal PesoSpecifico{ get; set; }
     }
 }

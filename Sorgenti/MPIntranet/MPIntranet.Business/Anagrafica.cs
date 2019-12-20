@@ -194,7 +194,7 @@ namespace MPIntranet.Business
 
                 List<AnagraficaDS.COLORIRow> colori = _ds.COLORI.ToList();
                 if (idBrand >= 0)
-                    colori = colori.Where(x =>!x.IsIDBRANDNull() && x.IDBRAND == idBrand).ToList();
+                    colori = colori.Where(x => !x.IsIDBRANDNull() && x.IDBRAND == idBrand).ToList();
 
                 if (!string.IsNullOrWhiteSpace(codice))
                     colori = colori.Where(x => x.CODICE.Contains(codice.ToUpper())).ToList();
@@ -285,7 +285,7 @@ namespace MPIntranet.Business
                         return "Un brand con questo codice figurativo è già presente";
                 }
 
-                col = _ds.COLORI.Where(x => x.CODICECLIENTE == codiceCliente &&!x.IsIDBRANDNull() && x.IDBRAND == idBrand).FirstOrDefault();
+                col = _ds.COLORI.Where(x => x.CODICECLIENTE == codiceCliente && !x.IsIDBRANDNull() && x.IDBRAND == idBrand).FirstOrDefault();
                 if (col != null)
                 {
                     if (col.CANCELLATO == "S")
@@ -452,6 +452,7 @@ namespace MPIntranet.Business
                         Codice = materiale.CODICE,
                         Descrizione = materiale.IsDESCRIZIONENull() ? string.Empty : materiale.DESCRIZIONE,
                         Prezioso = materiale.PREZIOSO,
+                        PesoSpecifico = materiale.IsPESOSPECIFICONull() ? 0 : materiale.PESOSPECIFICO,
                         DataModifica = materiale.DATAMODIFICA,
                         UtenteModifica = materiale.UTENTEMODIFICA
                     };
@@ -478,7 +479,7 @@ namespace MPIntranet.Business
                 }
             }
         }
-        public void ModificaMateriale(decimal idMateriale, string codice, string descrizione, bool prezioso, string account)
+        public void ModificaMateriale(decimal idMateriale, string codice, string descrizione, bool prezioso, decimal pesoSpecifico, string account)
         {
             descrizione = (descrizione.Length > 25 ? descrizione.Substring(0, 20) : descrizione).ToUpper();
             codice = (codice.Length > 8 ? codice.Substring(0, 8) : codice).ToUpper();
@@ -494,13 +495,14 @@ namespace MPIntranet.Business
                     br.PREZIOSO = prezioso ? "S" : "N";
                     br.DATAMODIFICA = DateTime.Now;
                     br.UTENTEMODIFICA = account;
+                    br.PESOSPECIFICO = pesoSpecifico;
 
                     bAnagrafica.UpdateTable(_ds, _ds.MATERIALI.TableName);
                 }
             }
         }
 
-        public string CreaMateriale(string codice, string descrizione, bool prezioso, string account)
+        public string CreaMateriale(string codice, string descrizione, bool prezioso, decimal pesoSpecifico, string account)
         {
             descrizione = (descrizione.Length > 25 ? descrizione.Substring(0, 20) : descrizione).ToUpper();
             codice = (codice.Length > 8 ? codice.Substring(0, 8) : codice).ToUpper();
@@ -521,6 +523,7 @@ namespace MPIntranet.Business
                 br.CODICE = codice;
                 br.DESCRIZIONE = descrizione;
                 br.PREZIOSO = prezioso ? "S" : "N";
+                br.PESOSPECIFICO = pesoSpecifico;
 
                 br.CANCELLATO = "N";
                 br.DATAMODIFICA = DateTime.Now;

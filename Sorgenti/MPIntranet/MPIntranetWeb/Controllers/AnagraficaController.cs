@@ -132,17 +132,17 @@ namespace MPIntranetWeb.Controllers
             return null;
         }
 
-        public ActionResult CreaMateriale(string codice, string descrizione, bool prezioso)
+        public ActionResult CreaMateriale(string codice, string descrizione, bool prezioso, decimal pesoSpecifico)
         {
             Anagrafica a = new Anagrafica();
-            string messaggio = a.CreaMateriale(codice, descrizione, prezioso, ConnectedUser);
+            string messaggio = a.CreaMateriale(codice, descrizione, prezioso,pesoSpecifico, ConnectedUser);
             return Content(messaggio);
         }
 
-        public ActionResult ModificaMateriale(decimal idMateriale, string codice, string descrizione, bool prezioso)
+        public ActionResult ModificaMateriale(decimal idMateriale, string codice, string descrizione, bool prezioso, decimal pesoSpecifico)
         {
             Anagrafica a = new Anagrafica();
-            a.ModificaMateriale(idMateriale, codice, descrizione, prezioso, ConnectedUser);
+            a.ModificaMateriale(idMateriale, codice, descrizione, prezioso, pesoSpecifico, ConnectedUser);
             return null;
         }
     }
