@@ -73,5 +73,19 @@ namespace MPIntranet.DataAccess.Articolo
             a.UpdateTable(tablename, ds);
         }
 
+        [DataContext]
+        public void FillProcessi(ArticoloDS ds, decimal idArticolo, bool soloNonCancellati)
+        {
+            ArticoloAdapter a = new ArticoloAdapter(DbConnection, DbTransaction);
+            a.FillProcessi(ds, idArticolo, soloNonCancellati);
+        }
+
+        [DataContext]
+        public void FillFasiProcesso(ArticoloDS ds, decimal idArticolo, bool soloNonCancellati)
+        {
+            ArticoloAdapter a = new ArticoloAdapter(DbConnection, DbTransaction);
+            a.FillFasiProcesso(ds, idArticolo, soloNonCancellati);
+        }
+
     }
 }

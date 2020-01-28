@@ -144,6 +144,38 @@ namespace MPIntranet.Business
             return lista;
         }
 
+        public List<VascaModel> CreaListaVascaModel()
+        {
+            List<VascaModel> lista = new List<VascaModel>();
+
+            using (GalvanicaBusiness bGalvanica = new GalvanicaBusiness())
+            {
+                bGalvanica.FillVasche(_ds, true);
+                bGalvanica.FillImpianti(_ds, true);
+                List<MaterialeModel> materiali = _anagrafica.CreaListaMaterialeModel();
+                foreach (GalvanicaDS.VASCHERow vasca in _ds.VASCHE)
+                {
+                    GalvanicaDS.IMPIANTIRow impianto = _ds.IMPIANTI.Where(x => x.IDIMPIANTO == vasca.IDIMPIANTO).FirstOrDefault();
+                    string materiale = string.Empty;
+                    MaterialeModel materialeModel = materiali.Where(x => x.IdMateriale == vasca.IDMATERIALE).FirstOrDefault();
+
+                    VascaModel m = new VascaModel()
+                    {
+                        IdVasca = vasca.IDVASCA,
+                        AbilitaStato = vasca.ABILITASTRATO == "S",
+                        DescrizioneBreve = vasca.DESCRIZIONEBREVE,
+                        IdImpianto = vasca.IDIMPIANTO,
+                        Descrizione = vasca.DESCRIZIONE,
+                        Impianto = (impianto == null) ? string.Empty : impianto.DESCRIZIONE,
+                        Materiale = materialeModel,
+                        DataModifica = vasca.DATAMODIFICA,
+                        UtenteModifica = vasca.UTENTEMODIFICA
+                    };
+                    lista.Add(m);
+                }
+            }
+            return lista;
+        }
         public void CancellaVasca(decimal idVasca, string account)
         {
             using (GalvanicaBusiness bGalvanica = new GalvanicaBusiness())
@@ -202,7 +234,7 @@ namespace MPIntranet.Business
                 vasca.DESCRIZIONE = descrizione;
                 vasca.ABILITASTRATO = abilitaStrato ? "S" : "N";
                 vasca.IDIMPIANTO = idImpianto;
-                if (idMateriale > 0)
+       //         if (idMateriale > 0)
                     vasca.IDMATERIALE = idMateriale;
 
                 vasca.CANCELLATO = "N";

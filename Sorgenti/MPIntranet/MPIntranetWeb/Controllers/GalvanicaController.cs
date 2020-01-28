@@ -91,5 +91,13 @@ namespace MPIntranetWeb.Controllers
             a.ModificaVasca(idVasca, descrizioneBreve, descrizione, abilitaStrato, ConnectedUser);
             return null;
         }
+
+        public ActionResult CaricaVascaModel(decimal idVasca)
+        {
+            Galvanica a = new Galvanica();
+            List<VascaModel> lista = a.CreaListaVascaModel();
+            VascaModel vasca = lista.Where(x => x.IdVasca == idVasca).FirstOrDefault();
+            return Json(vasca);
+        }
     }
 }

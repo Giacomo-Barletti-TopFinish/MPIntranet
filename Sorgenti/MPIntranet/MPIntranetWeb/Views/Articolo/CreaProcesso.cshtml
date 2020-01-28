@@ -1,0 +1,187 @@
+﻿@using MPIntranet.Models.Articolo
+@using MPIntranet.Models.Common
+@model ArticoloModel
+@{
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+
+<div class="content-top">
+    <h2>Processo Galvanico</h2>
+    <div style="display:inline-block; width:50%">
+        <input type="button" onclick="EseguiChiudiArticolo();" class="btn btn-primary" value="Chiudi" />
+        <input type="button" onclick="EseguiNuovaRicerca();" class="btn btn-primary" value="Nuova ricerca" />
+    </div>
+</div>
+<div class="row col-lg-12">
+    @Html.Hidden("hdIdBrand", Model.Brand.IdBrand)
+    @Html.Hidden("hdIdArticolo", Model.IdArticolo)
+    @Html.Hidden("hdIdColore", Model.Colore.IdColore)
+
+    @Html.Partial("DatiGeneraliPartial", Model)
+</div>
+
+<div class="row">
+    <div class="col-sm-2">
+        @Html.Label("Impianto")
+        @Html.DropDownList("ddlImpianto", new SelectList(@ViewData["Impianti"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlImpianto" })
+    </div>
+    <div class="col-sm-2">
+        @Html.Label("Processo")
+        @Html.DropDownList("ddlProcesso", Enumerable.Empty<SelectListItem>(), new { @class = "form-control input-sm", @id = "ddlProcesso" })
+    </div>
+</div>
+<label class="text-red input-sm" id="lblMessage"></label>
+<div class="row">
+    <div id="divProcesso"></div>
+</div>
+<div id="ArticleScrolledContent" class="content-scheda" style="overflow-y:auto; overflow-x:hidden; height:500px">
+
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $("#ddlImpianto").change(function () {
+            var selectedText = $(this).find("option:selected").text();
+            var selectedValue = $(this).val();
+            caricaListaProcessi(selectedValue);
+        });
+
+        $('#ddlImpianto').val('1').trigger('change');
+
+
+        $("#ddlProcesso").change(function () {
+            debugger;
+            var selectedText = $(this).find("option:selected").text();
+            var selectedValue = $(this).val();
+            if (selectedValue == @MPIntranet.Entities.ElementiVuoti.ProcessoGalvanicoVuoto) return;
+
+            caricaProcesso(selectedValue);
+        });
+
+    });
+
+    function caricaListaProcessi(idImpianto) {
+        var idArticolo = $('#hdIdArticolo').val();
+           var url = '@Url.Action("CaricaListaProcessi", "Articolo")';
+         $.ajax({
+                url: url,
+             data: {
+                 idArticolo, idArticolo,
+                    idImpianto: idImpianto
+                },
+                cache: false,
+                type: "POST",
+                success: function (data)
+                {
+                    var markup = '';
+                    for (var x = 0; x < data.length; x++)
+                    {
+                        markup += '<option value="' + data[x].Value + '">' + data[x].Text + '</option>';
+                    }
+                    $('#ddlProcesso').html(markup).show();
+
+                },
+                error: function (response)
+                {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+             }
+         });
+    }
+
+      function caricaProcesso(idProcesso) {
+          var idArticolo = $('#hdIdArticolo').val();
+          var idImpianto = $('#ddlImpianto').val();
+           var url = '@Url.Action("CaricaProcessoPartial", "Articolo")';
+         $.ajax({
+                url: url,
+             data: {
+                 idArticolo, idArticolo,
+                 idProcesso: idProcesso,
+                 idImpianto: idImpianto
+                },
+                cache: false,
+                type: "POST",
+                success: function (data)
+                {
+                    $('#divProcesso').html(data).show();
+                    var idImpianto = $('#ddlImpianto').val();
+                    caricaListaVasche(idImpianto);
+
+                },
+                error: function (response)
+                {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+             }
+         });
+    }
+      function caricaListaVasche(idImpianto) {
+           var url = '@Url.Action("CaricaListaVasche", "Articolo")';
+         $.ajax({
+                url: url,
+             data: {
+                    idImpianto: idImpianto
+                },
+                cache: false,
+                type: "POST",
+                success: function (data)
+                {
+                    var markup = '';
+                    for (var x = 0; x < data.length; x++)
+                    {
+                        markup += '<option value="' + data[x].Value + '">' + data[x].Text + '</option>';
+                    }
+                    $('#ddlVasca').html(markup).show();
+                },
+                error: function (response)
+                {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+             }
+         });
+    }
+    function ConfermaCancellaArticolo() {
+        var idArticolo = $('#hdIdArticolo').val();
+        if (idArticolo != null && idArticolo!='')
+            ConfirmPopup("Eliminare l''articolo?", EseguiCancellaArticolo);
+    }
+
+    function EseguiCancellaArticolo() {
+        var idArticolo = $('#hdIdArticolo').val();
+          var url = '@Url.Action("RimuoviArticolo", "Articolo")';
+         $.ajax({
+                url: url,
+                data: {
+                    idArticolo: idArticolo
+                },
+                cache: false,
+                type: "POST",
+                success: function (data)
+                {
+                    window.location.href =' @Url.Action("Index", "Home")'
+                },
+                error: function (response)
+                {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+                }
+            });
+    }
+
+     function EseguiChiudiArticolo()
+        {
+            var url = '/ARTICOLO/RICERCAARTICOLO/?TipoRicerca=2';
+            window.location.href=url;
+        }
+
+    function EseguiNuovaRicerca() {
+        var url = '/ARTICOLO/RICERCAARTICOLO/?TipoRicerca=2';
+        window.location.href = url;
+    }
+</script>

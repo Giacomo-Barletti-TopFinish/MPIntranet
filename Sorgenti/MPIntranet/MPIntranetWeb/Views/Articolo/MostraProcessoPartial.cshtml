@@ -1,0 +1,142 @@
+﻿@using MPIntranet.Models.Articolo
+@model ProcessoModel
+
+<div class="row">
+    <div class="col-lg-3">
+        @Html.Label("Descrizione")
+    </div>
+    <div class="col-sm-2">
+        @Html.Label("Vasche")
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-3">
+        @Html.TextBox("txtDescrizione", @Model.Descrizione, new { @class = "form-control input-sm ", @id = "txtDescrizione", @maxlength = "30" })
+    </div>
+    <div class="col-sm-2">
+        @Html.DropDownList("ddlVasca", Enumerable.Empty<SelectListItem>(), new { @class = "form-control input-sm", @id = "ddlVasca" })
+    </div>
+    <div class="col-sm-1">
+        <input type="button" onclick="AggiungiVasca();" class="btn btn-primary" value="Aggiungi vasca" />
+    </div>
+    <div class="col-sm-1">
+        <input type="button" onclick="EseguiChiudiArticolo();" class="btn btn-primary" value="Salva modifiche" />
+    </div>
+</div>
+<div class="row col-lg-12">
+    <table id="tblFasi" class="table">
+        <thead>
+            <tr>
+                <th width="15%">Vasca</th>
+                <th width="15%">Materiale</th>
+                <th width="10%">Durata</th>
+                <th width="10%">Corrente</th>
+                <th width="3%"></th>
+                <th width="3%"></th>
+                <th width="3%"></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (FaseProcessoModel fase in Model.Fasi)
+            {
+                if (fase.Vasca.Materiale.Prezioso == "S")
+                {
+            <tr bgcolor="#FFF200">
+                <td width="15%">@fase.Vasca.DescrizioneBreve</td>
+                <td width="15%">@fase.Vasca.Materiale.Descrizione</td>
+                <td width="8%">@fase.Durata</td>
+                <td width="8%">@Html.TextBox("txtCorrente", "", new { @class = "form-control input-sm", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,7,3)" })</td>
+
+                <td width="3%"></td>
+                <td width="3%"></td>
+                <td width="3%"></td>
+                <td></td>
+
+            </tr>
+
+                }
+                else
+                {
+            <tr>
+                <td width="15%">@fase.Vasca.DescrizioneBreve</td>
+                <td width="15%">@fase.Vasca.Materiale.Descrizione</td>
+                <td width="10%">@fase.Durata</td>
+                <td width="8%">@Html.TextBox("txtCorrente", "", new { @class = "form-control input-sm", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,7,3)" })</td>
+
+                <td width="3%"></td>
+                <td width="3%"></td>
+                <td width="3%"></td>
+                <th></th>
+            </tr>
+
+                }
+
+            }
+        </tbody>
+    </table>
+</div>
+
+<script language="javascript" type="text/javascript">
+
+    function AggiungiVasca() {
+        debugger;
+
+        var idVasca = $('#ddlVasca').val();
+
+          var url = '@Url.Action("CaricaVascaModel", "Galvanica")';
+         $.ajax({
+                url: url,
+             data: {
+                 idVasca, idVasca
+                },
+                cache: false,
+                type: "POST",
+                success: function (data)
+                {
+                    var idVasca = $('#ddlVasca').val();
+                    var vasca = $('#ddlVasca').find("option:selected").text();
+
+                    var materiale = '';
+                    var prezioso = '';
+                    debugger;
+                    materiale = data.Materiale.Descrizione;
+                    prezioso = data.Materiale.Prezioso;
+                    AggiungiRigaInTabella(idVasca,vasca,materiale, prezioso);
+
+                },
+                error: function (response)
+                {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+             }
+         });
+
+    }
+
+    function AggiungiRigaInTabella(idVasca, vasca, materiale, prezioso) {
+        debugger;
+        var nuovariga = '<tr>';
+        if (prezioso == "S") {
+            var nuovariga = '<tr style="font-weight:bold; color:limegreen">';
+        }
+        nuovariga += '<input type="hidden" value ="' + idVasca + '" class="hdVasca" />';
+
+        nuovariga += '<td>' + vasca + '</td>';
+        nuovariga += '<td>' + materiale + '</td>';
+        nuovariga += '<td><input type="text" maxlength="8"/></td>';
+        nuovariga +='<td>@Html.TextBox("txtCorrente", "", new { @class = "form-control input-sm", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,7,3)" })</td>';
+
+        nuovariga += '<td> <a class="disabilitaVersione" onclick="CambioSequenzaElemento(+1, "", "",""); return false" title="Sposta in basso"><i class="fa fa-fw fa-arrow-down"></i></a></td>';
+        nuovariga += '<td><a class="disabilitaVersione" onclick="CambioSequenzaElemento(+1, "", "",""); return false" title="Sposta in basso"><i class="fa fa-fw fa-arrow-up"></i></a></td>';
+
+
+        nuovariga += '<td><a title="Cancella" onClick="SetBtnSaveDisabledState(true)"><i class="fa fa-fw fa-remove"></i></a></td>';
+        nuovariga += '<td></td>';
+
+        nuovariga += '</tr>';
+
+        $('#tblFasi').last().append(nuovariga);
+    }
+</script>

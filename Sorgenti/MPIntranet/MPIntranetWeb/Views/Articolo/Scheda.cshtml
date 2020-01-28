@@ -34,80 +34,24 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body form-group-sm">
-            <div class="row">
-                <div class="col-md-8" id="headRow">
-                    <div class="row">
-                        <div class="col-md-3">
-                            @Html.Label("Codice Provvisorio", new { @class = "input-sm" })
-                            @Html.TextBox("txtCodiceProvvisorio", @Model.CodiceProvvisorio, new { @class = "form-control input-sm ", @readonly = true, @id = "txtCodiceProvvisorio", @maxlength = "15" })
-
-                        </div>
-                        <div class="col-md-3">
-                            @Html.Label("Brand", new { @class = "input-sm" })
-                            @Html.TextBox("txtBrand", @Model.Brand.Brand, new { @class = "form-control input-sm ", @readonly = true, @id = "txtBrand", @maxlength = "15" })
-                        </div>
-                        <div class="col-md-6">
-                            @Html.Label("Descrizione", new { @class = "input-sm" })
-                            @Html.TextBox("txtDescrizione", @Model.Descrizione, new { @class = "form-control input-sm ", @readonly = true, @id = "txtDescrizione", @maxlength = "15" })
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            @Html.Label("Codice Cliente", new { @class = "input-sm" })
-                            @Html.TextBox("txtCodiceCliente", @Model.CodiceCliente, new { @class = "form-control input-sm ", @readonly = true, @id = "txtCodiceCliente", @maxlength = "17" })
-                        </div>
-                        <div class="col-md-3">
-                            @Html.Label("Codice SAM", new { @class = "input-sm" })
-                            @Html.TextBox("txtCodiceSAM", @Model.CodiceSAM, new { @class = "form-control input-sm ", @readonly = true, @id = "txtCodiceSAM", @maxlength = "17" })
-                        </div>
-                        <div class="col-md-1">
-                            @Html.Label("Progressivo", new { @class = "input-sm" })
-                            @Html.TextBox("txtCodiceProgressivoSAM", @Model.ProgressivoSAM, new { @class = "form-control input-sm ", @readonly = true, @id = "txtCodiceProgressivoSAM", @maxlength = "3" })
-                        </div>
-                        <div class="col-md-3">
-                            @Html.Label("Modello", new { @class = "input-sm" })
-                            @Html.TextBox("txtModello", @Model.Modello, new { @class = "form-control input-sm ", @readonly = true, @id = "txtModello", @maxlength = "30" })
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2">
-                            @Html.Label("Colore", new { @class = "input-sm" })
-                            @Html.TextBox("txtCodiceColore", Model.Colore.Codice, new { @maxlength = "11", @class = "form-control input-sm text-uppercase", @readonly = true, @id = "txtCodiceColore" })
-                        </div>
-                        <div class="col-md-2">
-                            @Html.Label("Figurativo", new { @class = "input-sm" })
-                            @Html.TextBox("txtCodiceColoreFigurativo", Model.Colore.CodiceFigurativo, new { @maxlength = "11", @class = "form-control input-sm text-uppercase", @readonly = true, @id = "txtCodiceColoreFigurativo" })
-                        </div>
-                        <div class="col-md-2">
-                            @Html.Label("Cliente", new { @class = "input-sm" })
-                            @Html.TextBox("txtCodiceColoreCliente", Model.Colore.CodiceCliente, new { @maxlength = "11", @class = "form-control input-sm text-uppercase", @readonly = true, @id = "txtCodiceColoreCliente" })
-                        </div>
-                        <div class="col-md-6">
-                            @Html.Label("Descrizione", new { @class = "input-sm" })
-                            @Html.TextBox("txtDecrizioneColore", Model.Colore.Descrizione, new { @maxlength = "11", @class = "form-control input-sm text-uppercase", @readonly = true, @id = "txtDecrizioneColore" })
-                        </div>
-                    </div>
-                </div>
-                <div id="divImage" class="col-md-4">
-                    <a onclick="GetPuntiImmagine();return false;">
-                        <img id="articleImg" style="height:auto; max-width:100%; display: block; margin: auto;" src="">
-                    </a>
-                </div>
-            </div>
+            @Html.Partial("DatiGeneraliPartial",Model)
         </div>
 
     </div>
-    <div class="box box-primary" id="sectionProcessoGalvanico">
-        <div class="box-header with-border">
-            <h4 class="box-title text-bold">Processo Galvanico</h4>
-            <div class="box-tools pull-right">
-                <button id="btnCollapseProcessoGalvanico" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-chevron-up"></i></button>
+    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(66))
+    {
+        <div class="box box-primary" id="sectionProcessoGalvanico">
+            <div class="box-header with-border">
+                <h4 class="box-title text-bold">Processo Galvanico</h4>
+                <div class="box-tools pull-right">
+                    <button id="btnCollapseProcessoGalvanico" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-chevron-up"></i></button>
+                </div>
+            </div>
+            <div class="box-body">
+                <div id="divProcessoGalvanicoContainer"></div>
             </div>
         </div>
-        <div class="box-body">
-            <div id="divProcessoGalvanicoContainer"></div>
-        </div>
-    </div>
+    }
     <div class="box box-primary" id="sectionDeroghe">
         <div class="box-header with-border">
             <h4 class="box-title text-bold">Deroghe</h4>
@@ -158,6 +102,32 @@
 
 
 <script language="javascript" type="text/javascript">
+    $(function () {
+        CaricaProcessi();
+    });
+
+    function CaricaProcessi() {
+         var idArticolo = $('#hdIdBrand').val();
+          var url = '@Url.Action("CaricaProcessiPartial", "Articolo")';
+         $.ajax({
+                url: url,
+                data: {
+                    idArticolo: idArticolo
+                },
+                cache: false,
+                type: "POST",
+                success: function (data)
+                {
+                    $('#divProcessoGalvanicoContainer').html(data).show();
+                },
+                error: function (response)
+                {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+                }
+            });
+    }
 
     function ConfermaCancellaArticolo() {
         debugger;

@@ -409,6 +409,10 @@
     <Content Include="Views\Articolo\RicercaArticolo.cshtml" />
     <Content Include="Views\Articolo\CaricaArticoliModel.cshtml" />
     <Content Include="Views\Articolo\CreaArticolo.cshtml" />
+    <Content Include="Views\Articolo\ProcessiPartial.cshtml" />
+    <Content Include="Views\Articolo\MostraProcessoPartial.cshtml" />
+    <Content Include="Views\Articolo\CreaProcesso.cshtml" />
+    <Content Include="Views\Articolo\DatiGeneraliPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -431,6 +435,10 @@
     <ProjectReference Include="..\MPIntranet.Business\MPIntranet.Business.csproj">
       <Project>{11EE71D3-C51C-4B99-A5C9-431099326DA7}</Project>
       <Name>MPIntranet.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MPIntranet.Entities\MPIntranet.Entities.csproj">
+      <Project>{055D9B2D-98FD-417E-AB6A-970203561B5C}</Project>
+      <Name>MPIntranet.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\MPIntranet.Models\MPIntranet.Models.csproj">
       <Project>{fecd5686-e3f2-4eff-ba4d-88a23a4ea08a}</Project>

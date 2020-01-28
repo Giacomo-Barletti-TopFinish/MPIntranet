@@ -2,6 +2,7 @@
 using MPIntranet.Entities;
 using MPIntranet.Models.Anagrafica;
 using MPIntranet.Models.Articolo;
+using MPIntranet.Models.Galvanica;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace MPIntranet.Business
         private ArticoloDS _ds = new ArticoloDS();
         private RVLDS _dsRVL = new RVLDS();
         private Anagrafica _anagrafica = new Anagrafica();
+        private Galvanica _galvanica = new Galvanica();
 
         public string CreaArticolo(decimal idBrand, string codiceSAM, decimal progressivo, string modello, string descrizione, string codiceCliente, string provvisorio, string codiceColore, string account)
         {
@@ -171,6 +173,7 @@ namespace MPIntranet.Business
             }
 
         }
+
 
     }
 

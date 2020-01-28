@@ -1,7 +1,9 @@
 ﻿using MPIntranet.Business;
+using MPIntranet.Entities;
 using MPIntranet.Models.Anagrafica;
 using MPIntranet.Models.Articolo;
 using MPIntranet.Models.Common;
+using MPIntranet.Models.Galvanica;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +19,38 @@ namespace MPIntranetWeb.Controllers
             Articolo a = new Articolo();
             ArticoloModel model = a.CreaArticoloModel(idArticolo);
             return View(model);
+        }
+
+        public ActionResult CreaProcesso(decimal idArticolo)
+        {
+            Articolo a = new Articolo();
+            ArticoloModel model = a.CreaArticoloModel(idArticolo);
+
+            Galvanica g = new Galvanica();
+            List<ImpiantoModel> impiantiModel = g.CreaListaImpiantoModel();
+            List<MPIntranetListItem> impianti = impiantiModel.Select(x => new MPIntranetListItem(x.Descrizione, x.IdImpianto.ToString())).ToList();
+
+            ViewData.Add("Impianti", impianti);
+
+            return View(model);
+        }
+
+        public ActionResult CaricaListaProcessi(decimal idArticolo, decimal idImpianto)
+        {
+            ProcessoGalvanico p = new ProcessoGalvanico();
+            List<ProcessoModel> processiModel = p.CaricaProcessi(idArticolo, idImpianto);
+            List<MPIntranetListItem> processi = processiModel.Select(x => new MPIntranetListItem(x.Descrizione, x.IdProcesso.ToString())).ToList();
+            processi.Insert(processi.Count, new MPIntranetListItem("Nuovo processo", ElementiVuoti.ProcessoGalvanicoNuovo.ToString()));
+            processi.Insert(0, new MPIntranetListItem(string.Empty, ElementiVuoti.ProcessoGalvanicoVuoto.ToString()));
+            return Json(processi);
+        }
+
+        public ActionResult CaricaListaVasche(decimal idImpianto)
+        {
+            Galvanica g = new Galvanica();
+            List<VascaModel> vascheModel = g.CreaListaVascaModel(idImpianto);
+            List<MPIntranetListItem> vasche = vascheModel.Select(x => new MPIntranetListItem(x.Descrizione, x.IdVasca.ToString())).ToList();
+            return Json(vasche);
         }
 
         public ActionResult RicercaArticolo(int TipoRicerca)
@@ -44,9 +78,9 @@ namespace MPIntranetWeb.Controllers
                     ViewData.Add("ControllerName", "Articolo");
                     ViewData.Add("ActionName", "Scheda");
                     break;
-                case (int)MPIntranet.Models.TipoRicerca.Impianto:
+                case (int)MPIntranet.Models.TipoRicerca.Processo:
                     ViewData.Add("ControllerName", "Articolo");
-                    ViewData.Add("ActionName", "Scheda");
+                    ViewData.Add("ActionName", "CreaProcesso");
                     break;
                 default:
                     ViewData.Add("ControllerName", string.Empty);
@@ -82,6 +116,42 @@ namespace MPIntranetWeb.Controllers
 
             a.RimuoviArticolo(idArticolo, ConnectedUser);
             return null;
+        }
+
+        public ActionResult CaricaProcessiPartial(decimal idArticolo)
+        {
+            Galvanica g = new Galvanica();
+            List<ImpiantoModel> impiantiModel = g.CreaListaImpiantoModel();
+            List<MPIntranetListItem> impianti = impiantiModel.Select(x => new MPIntranetListItem(x.Descrizione, x.IdImpianto.ToString())).ToList();
+            ViewData.Add("Impianti", impianti);
+
+            ProcessoGalvanico p = new ProcessoGalvanico();
+            List<ProcessoModel> processiModel = p.CaricaProcessi(idArticolo, impiantiModel[0].IdImpianto);
+            List<MPIntranetListItem> processi = processiModel.Select(x => new MPIntranetListItem(x.Descrizione, x.IdProcesso.ToString())).ToList();
+            ViewData.Add("Processi", processi);
+
+            return PartialView("ProcessiPartial");
+        }
+
+        public ActionResult CaricaProcessoPartial(decimal idArticolo, decimal idProcesso, decimal idImpianto)
+        {
+            ProcessoModel processoModel = new ProcessoModel();
+            Galvanica g = new Galvanica();
+            ImpiantoModel impianto = g.CreaListaImpiantoModel().Where(x => x.IdImpianto == idImpianto).FirstOrDefault();
+            if (idProcesso == ElementiVuoti.ProcessoGalvanicoNuovo)
+            {
+                processoModel.Descrizione = string.Empty;
+                processoModel.Fasi = new List<FaseProcessoModel>();
+                processoModel.IdArticolo = idArticolo;
+                processoModel.IdProcesso = idProcesso;
+                processoModel.Impianto = impianto;
+            }
+            else
+            {
+
+            }
+
+            return PartialView("MostraProcessoPartial", processoModel);
         }
 
     }

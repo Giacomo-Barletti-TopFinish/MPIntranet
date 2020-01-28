@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace MPIntranet.Models
 {
-    public enum TipoRicerca { Scheda = 1, Impianto }
+    public enum TipoRicerca { Scheda = 1, Processo }
 }

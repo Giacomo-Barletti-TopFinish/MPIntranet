@@ -1,0 +1,54 @@
+﻿
+@using MPIntranet.Models.Common
+
+<div class="row col-lg-3">
+    @Html.Label("Selezionare l'impianto")
+    @Html.DropDownList("ddlImpianto", new SelectList(@ViewData["Impianti"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlImpianto" })
+</div>
+<div class="col-lg-3">
+    @Html.Label("Selezionare il processo")
+    @Html.DropDownList("ddlProcesso", new SelectList(@ViewData["Processi"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlProcesso" })
+</div>
+<div class="row col-lg-3" id="divProcessoGalvanico">
+
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+        debugger;
+        var impianto = $('#ddlImpianto');
+        impianto.selectedIndex = 0;
+
+        var processo = $('#ddlProcesso');
+        processo.selectedIndex = 0;
+
+        var idProcesso = $('#ddlProcesso').val();
+        if (idProcesso == null || idProcesso == '')
+            idProcesso = -1;
+        caricaProcesso(idProcesso)
+    });
+
+    function caricaProcesso(idProcesso) {
+          var url = '@Url.Action("CaricaProcessoPartial", "Articolo")';
+         $.ajax({
+                url: url,
+                data: {
+                    idProcesso: idProcesso
+                },
+                cache: false,
+                type: "POST",
+                success: function (data)
+                {
+                    $('#divProcessoGalvanico').html(data).show();
+                },
+                error: function (response)
+                {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+                }
+            });
+    }
+
+</script>

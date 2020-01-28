@@ -29,7 +29,7 @@ namespace MPIntranet.DataAccess.Articolo
             }
         }
 
-    
+
         public List<decimal> TrovaArticoli(bool soloNonCancellati, decimal idBrand, string codiceSam, string modello, string codiceCliente, string codiceProvvisorio)
         {
             ParamSet ps = new ParamSet();
@@ -117,6 +117,40 @@ namespace MPIntranet.DataAccess.Articolo
                 a.DeleteCommand = cmd.GetDeleteCommand();
                 a.InsertCommand = cmd.GetInsertCommand();
                 a.Update(dt);
+            }
+        }
+
+        public void FillProcessi(ArticoloDS ds, decimal idArticolo, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM PROCESSI WHERE IDARTICOLO = $P<IDARTICOLO> ";
+            if (soloNonCancellati)
+                select += "AND CANCELLATO = 'N' ";
+
+            select += "ORDER BY DESCRIZIONE";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDARTICOLO", DbType.Decimal, idArticolo);
+            using (DbDataAdapter da = BuildDataAdapter(select,ps))
+            {
+                da.Fill(ds.PROCESSI);
+            }
+        }
+
+        public void FillFasiProcesso(ArticoloDS ds, decimal idArticolo, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM FASIPROCESSO FP 
+                                    INNER JOIN PROCESSI PR ON PR.IDPROCESSO = FP.IDPROCESSO
+                                    WHERE IDARTICOLO = $P<IDARTICOLO> ";
+            if (soloNonCancellati)
+                select += "AND FP.CANCELLATO = 'N' ";
+
+            select += "ORDER BY FP.IDPROCESSO,SEQUENZA";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDARTICOLO", DbType.Decimal, idArticolo);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.FASIPROCESSO);
             }
         }
     }
