@@ -99,5 +99,17 @@ namespace MPIntranetWeb.Controllers
             VascaModel vasca = lista.Where(x => x.IdVasca == idVasca).FirstOrDefault();
             return Json(vasca);
         }
+
+        public ActionResult PROCESSISTANDARD()
+        {
+
+            Galvanica g = new Galvanica();
+            List<ImpiantoModel> impiantiModel = g.CreaListaImpiantoModel();
+            List<MPIntranetListItem> impianti = impiantiModel.Select(x => new MPIntranetListItem(x.Descrizione, x.IdImpianto.ToString())).ToList();
+
+            ViewData.Add("Impianti", impianti);
+
+            return View();
+        }
     }
 }

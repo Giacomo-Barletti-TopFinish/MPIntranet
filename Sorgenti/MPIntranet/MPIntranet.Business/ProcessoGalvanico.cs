@@ -1,7 +1,10 @@
 ﻿using MPIntranet.DataAccess.Articolo;
 using MPIntranet.Entities;
+using MPIntranet.Helpers;
+using MPIntranet.Models;
 using MPIntranet.Models.Articolo;
 using MPIntranet.Models.Galvanica;
+using MPIntranet.Models.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +39,7 @@ namespace MPIntranet.Business
         }
 
         public ProcessoModel CreaProcessoModel(decimal idProcesso)
-        {           
+        {
             ArticoloDS.PROCESSIRow processo = _ds.PROCESSI.Where(x => x.IDPROCESSO == idProcesso).FirstOrDefault();
             if (processo == null) return null;
 
@@ -56,7 +59,7 @@ namespace MPIntranet.Business
                 {
                     Corrente = fase.CORRENTE,
                     Durata = fase.DURATA,
-                    idFaseProcesso = fase.IDFASEPROCESSO,
+                    IdFaseProcesso = fase.IDFASEPROCESSO,
                     IdProcesso = fase.IDPROCESSO,
                     Sequenza = fase.SEQUENZA,
                     Vasca = vasche.Where(x => x.IdVasca == fase.IDVASCA).FirstOrDefault()
@@ -65,6 +68,190 @@ namespace MPIntranet.Business
             }
 
             return processoModel;
+        }
+
+        public void CreaNuovoProcesso(decimal idArticolo, decimal idImpianto, string descrizione, string utente)
+        {
+            ArticoloDS.PROCESSIRow processo;
+
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                processo = _ds.PROCESSI.NewPROCESSIRow();
+                processo.CANCELLATO = SiNo.No;
+                processo.DATAMODIFICA = DateTime.Now;
+                processo.DESCRIZIONE = descrizione;
+                processo.IDARTICOLO = idArticolo;
+                processo.IDIMPIANTO = idImpianto;
+                processo.UTENTEMODIFICA = utente;
+                _ds.PROCESSI.AddPROCESSIRow(processo);
+
+                bArticolo.UpdateTable(_ds.PROCESSI.TableName, _ds);
+
+            }
+
+        }
+        public string SalvaProcesso(decimal idArticolo, decimal idImpianto, decimal idProcesso, string descrizione, string vascheJSON, string utente)
+        {
+            string messaggio = string.Empty;
+            bool esito = true;
+            SalvaProcessoJson[] vasche = JSonSerializer.Deserialize<SalvaProcessoJson[]>(vascheJSON);
+            foreach (SalvaProcessoJson vasca in vasche)
+            {
+                decimal aux;
+                if (string.IsNullOrEmpty(vasca.Durata)) esito = false;
+            }
+
+            if (!esito)
+            {
+                messaggio = "Valorizzare la durata delle vasche";
+                return messaggio;
+            }
+
+            ArticoloDS.PROCESSIRow processo;
+
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                bArticolo.FillProcessi(_ds, idArticolo, true);
+                bArticolo.FillFasiProcesso(_ds, idArticolo, true);
+
+                processo = _ds.PROCESSI.Where(x => x.IDPROCESSO == idProcesso).FirstOrDefault();
+                if (processo != null)
+                {
+                    processo.DESCRIZIONE = descrizione;
+
+                    List<ArticoloDS.FASIPROCESSORow> fasi = _ds.FASIPROCESSO.Where(x => x.IDPROCESSO == idProcesso).ToList();
+                    List<decimal> idFaseProcesso = vasche.Select(x => x.IdFaseProcesso).ToList();
+
+                    foreach (ArticoloDS.FASIPROCESSORow faseDaCancellare in fasi.Where(x => !idFaseProcesso.Contains(x.IDFASEPROCESSO)))
+                    {
+                        faseDaCancellare.CANCELLATO = SiNo.Si;
+                        faseDaCancellare.DATAMODIFICA = DateTime.Now;
+                        faseDaCancellare.UTENTEMODIFICA = utente;
+                    }
+
+                    for (int i = 0; i < vasche.Length; i++)
+                    {
+                        SalvaProcessoJson vasca = vasche[i];
+                        decimal corrente = decimal.Parse(vasca.Corrente.Replace(".", ","));
+
+                        ArticoloDS.FASIPROCESSORow fase = fasi.Where(x => x.IDFASEPROCESSO == vasca.IdFaseProcesso).FirstOrDefault();
+                        if (fase == null)
+                        {
+                            fase = _ds.FASIPROCESSO.NewFASIPROCESSORow();
+                            fase.CANCELLATO = SiNo.No;
+                            fase.CORRENTE = corrente;
+                            fase.DURATA = vasca.Durata;
+                            fase.DATAMODIFICA = DateTime.Now;
+                            fase.IDPROCESSO = idProcesso;
+                            fase.IDVASCA = vasca.IdVasca;
+                            fase.SEQUENZA = i;
+                            fase.UTENTEMODIFICA = utente;
+                            _ds.FASIPROCESSO.AddFASIPROCESSORow(fase);
+                        }
+                        else
+                        {
+                            fase.CORRENTE = corrente;
+                            fase.DURATA = vasca.Durata;
+                            fase.DATAMODIFICA = DateTime.Now;
+                            fase.SEQUENZA = i;
+                            fase.UTENTEMODIFICA = utente;
+                        }
+                    }
+
+                    bArticolo.UpdateTable(_ds.FASIPROCESSO.TableName, _ds);
+                    bArticolo.UpdateTable(_ds.PROCESSI.TableName, _ds);
+                    messaggio = "Salvataggio riuscito";
+                }
+
+            }
+
+            return messaggio;
+        }
+
+        public string CancellaProcesso(decimal idArticolo, decimal idImpianto, decimal idProcesso, string utente)
+        {
+            string messaggio = string.Empty;
+
+            ArticoloDS.PROCESSIRow processo;
+
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                bArticolo.FillProcessi(_ds, idArticolo, true);
+                bArticolo.FillFasiProcesso(_ds, idArticolo, true);
+
+                processo = _ds.PROCESSI.Where(x => x.IDPROCESSO == idProcesso).FirstOrDefault();
+                if (processo != null)
+                {
+                    processo.CANCELLATO = SiNo.Si;
+                    processo.DATAMODIFICA = DateTime.Now;
+                    processo.UTENTEMODIFICA = utente;
+
+                    List<ArticoloDS.FASIPROCESSORow> fasi = _ds.FASIPROCESSO.Where(x => x.IDPROCESSO == idProcesso).ToList();
+
+                    foreach (ArticoloDS.FASIPROCESSORow faseDaCancellare in fasi)
+                    {
+                        faseDaCancellare.CANCELLATO = SiNo.Si;
+                        faseDaCancellare.DATAMODIFICA = DateTime.Now;
+                        faseDaCancellare.UTENTEMODIFICA = utente;
+                    }
+
+                    bArticolo.UpdateTable(_ds.FASIPROCESSO.TableName, _ds);
+                    bArticolo.UpdateTable(_ds.PROCESSI.TableName, _ds);
+                    messaggio = "Cancellazione riuscita";
+                }
+
+            }
+
+            return messaggio;
+        }
+        public string CopiaProcesso(decimal idProcessoStandard, decimal idArticolo, decimal idImpianto, string utente)
+        {
+            string descrizione = "€#@#[]";
+
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                bArticolo.FillProcessi(_ds, -1, true);
+                bArticolo.FillFasiProcesso(_ds, -1, true);
+                ArticoloDS.PROCESSIRow processoStandard = _ds.PROCESSI.Where(x => x.IDPROCESSO == idProcessoStandard).FirstOrDefault();
+                if (processoStandard == null)
+                {
+                    return "Errore durante la copia. Processo standard non trovato.";
+                }
+                string nuovaDescrizione = processoStandard.DESCRIZIONE;
+
+                CreaNuovoProcesso(idArticolo, idImpianto, descrizione, utente);
+                _ds.PROCESSI.Clear();
+
+                bArticolo.FillProcessi(_ds, idArticolo, true);
+                bArticolo.FillFasiProcesso(_ds, idArticolo, true);
+
+
+                ArticoloDS.PROCESSIRow processo = _ds.PROCESSI.Where(x => x.DESCRIZIONE == descrizione).FirstOrDefault();
+                if (processo != null)
+                {
+                    processo.DESCRIZIONE = nuovaDescrizione;
+
+                    List<ArticoloDS.FASIPROCESSORow> fasiStandard = _ds.FASIPROCESSO.Where(x => x.IDPROCESSO == idProcessoStandard).ToList();
+                    foreach (ArticoloDS.FASIPROCESSORow faseStandard in fasiStandard)
+                    {
+                        ArticoloDS.FASIPROCESSORow fase = _ds.FASIPROCESSO.NewFASIPROCESSORow();
+                        fase.CANCELLATO = SiNo.No;
+                        fase.CORRENTE = faseStandard.CORRENTE;
+                        fase.DURATA = faseStandard.DURATA;
+                        fase.DATAMODIFICA = DateTime.Now;
+                        fase.IDPROCESSO = processo.IDPROCESSO;
+                        fase.IDVASCA = faseStandard.IDVASCA;
+                        fase.SEQUENZA = faseStandard.SEQUENZA;
+                        fase.UTENTEMODIFICA = utente;
+                        _ds.FASIPROCESSO.AddFASIPROCESSORow(fase);
+                    }
+
+                    bArticolo.UpdateTable(_ds.FASIPROCESSO.TableName, _ds);
+                    bArticolo.UpdateTable(_ds.PROCESSI.TableName, _ds);
+                    return "Salvataggio riuscito";
+                }
+                return "Errore durante la copia. Impossibile creare un nuovo processo.";
+            }
         }
 
     }

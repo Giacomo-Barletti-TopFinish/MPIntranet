@@ -1,5 +1,6 @@
 ﻿using MPIntranet.DataAccess.Articolo;
 using MPIntranet.Entities;
+using MPIntranet.Models;
 using MPIntranet.Models.Anagrafica;
 using MPIntranet.Models.Articolo;
 using MPIntranet.Models.Galvanica;
@@ -17,7 +18,12 @@ namespace MPIntranet.Business
         private RVLDS _dsRVL = new RVLDS();
         private Anagrafica _anagrafica = new Anagrafica();
         private Galvanica _galvanica = new Galvanica();
+        private string _rvlImageSite;
 
+        public Articolo(string RvlImageSite)
+        {
+            this._rvlImageSite = RvlImageSite;
+        }
         public string CreaArticolo(decimal idBrand, string codiceSAM, decimal progressivo, string modello, string descrizione, string codiceCliente, string provvisorio, string codiceColore, string account)
         {
             BrandModel brand = _anagrafica.EstraiBrandModel(idBrand);
@@ -60,7 +66,7 @@ namespace MPIntranet.Business
                 articolo.CODICEPROVVISORIO = provvisorio;
                 articolo.IDCOLORE = colore.IdColore;
                 articolo.IDBRAND = idBrand;
-                articolo.CANCELLATO = "N";
+                articolo.CANCELLATO = SiNo.No;
                 articolo.DATAMODIFICA = DateTime.Now;
                 articolo.UTENTEMODIFICA = account;
                 articolo.MODELLO = modello;
@@ -137,8 +143,31 @@ namespace MPIntranet.Business
             return CreaArticoloModel(articolo);
         }
 
+        private string GetImageUrl(ArticoloDS.ARTICOLIRow articolo)
+        {
+            if (articolo.IsIDMAGAZZNull()) return _rvlImageSite + "NoImage.png";
+
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                string nomeFile = bArticolo.GetImageNameFile(articolo.IDMAGAZZ);
+
+                if (string.IsNullOrEmpty(nomeFile)) return _rvlImageSite + "NoImage.png";
+
+                if (System.IO.Path.GetPathRoot(nomeFile) == "R:\\")
+                {
+                    string newUrl = _rvlImageSite.Replace("rvlimmagini", "rvlimmaginir");
+                    string newPath = nomeFile.ToUpper().Replace("R:\\", string.Empty);
+                    newPath = newPath.Replace("\\", "/");
+                    return newUrl + newPath;
+                }
+                return _rvlImageSite + nomeFile;
+            }
+
+        }
+
         private ArticoloModel CreaArticoloModel(ArticoloDS.ARTICOLIRow articolo)
         {
+
             ColoreModel coloreModel = _anagrafica.EstraiColoreModel(articolo.IDCOLORE);
             BrandModel brandModel = _anagrafica.EstraiBrandModel(articolo.IDBRAND);
             ArticoloModel articoloModel = new ArticoloModel()
@@ -155,6 +184,7 @@ namespace MPIntranet.Business
                 CodiceCliente = articolo.IsCODICECLIENTENull() ? string.Empty : articolo.CODICECLIENTE,
                 CodiceProvvisorio = articolo.IsCODICEPROVVISORIONull() ? string.Empty : articolo.CODICEPROVVISORIO,
                 CodiceSAM = articolo.IsCODICESAMNull() ? string.Empty : articolo.CODICESAM,
+                ImageUrl = GetImageUrl(articolo)
 
             };
             return articoloModel;
@@ -165,7 +195,7 @@ namespace MPIntranet.Business
             ArticoloDS.ARTICOLIRow articolo = EstraiArticolo(idArticolo);
             using (ArticoloBusiness bArticolo = new ArticoloBusiness())
             {
-                articolo.CANCELLATO = "S";
+                articolo.CANCELLATO = SiNo.Si;
                 articolo.DATAMODIFICA = DateTime.Now;
                 articolo.UTENTEMODIFICA = account;
 

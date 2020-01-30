@@ -21,5 +21,6 @@ namespace MPIntranet.Models.Articolo
         public string UtenteModifica { get; set; }
         public BrandModel Brand { get; set; }
         public ColoreModel Colore { get; set; }
+        public string ImageUrl{ get; set; }
     }
 }

@@ -69,6 +69,17 @@ namespace MPIntranetWeb.Controllers
             return View();
         }
 
+        public ActionResult CaricaListaUtenti()
+        {
+
+            Account a = new Account();
+            List<string> utenti = a.EstraiListaUtentiAbilitati();
+            List<MPIntranetListItem> UtentiAbilitati = utenti.Select(x => new MPIntranetListItem(x, x)).ToList();
+            UtentiAbilitati.Insert(0, new MPIntranetListItem("** NESSUN UTENTE **", string.Empty));
+
+            return Json(UtentiAbilitati);
+
+        }
         public ActionResult GetMenuUtente(string account)
         {
             Account a = new Account();

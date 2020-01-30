@@ -18,9 +18,9 @@ namespace MPIntranet.DataAccess.Articolo
 
         public void FillArticoli(ArticoloDS ds, bool soloNonCancellati)
         {
-            string select = @"SELECT * FROM ARTICOLI ";
+            string select = @"SELECT * FROM ARTICOLI WHERE IDARTICOLO >=0 ";
             if (soloNonCancellati)
-                select += "WHERE CANCELLATO = 'N' ";
+                select += "AND CANCELLATO = 'N' ";
 
             select += "ORDER BY MODELLO";
             using (DbDataAdapter da = BuildDataAdapter(select))
@@ -29,6 +29,27 @@ namespace MPIntranet.DataAccess.Articolo
             }
         }
 
+        public string GetImageNameFile(string idMagazz)
+        {
+            string select = @"select nomefile from gruppo.USR_PDM_FILES fi
+                                inner join gruppo.USR_PDM_IMG_MAGAZZ ma on ma.IDPDMFILE = fi.IDPDMFILE
+                                where ma.idmagazz = $P<IDMAGAZZ>";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDMAGAZZ", DbType.String, idMagazz);
+
+            string nomefile;
+            using (DbCommand cmd = BuildCommand(select, ps))
+            {
+                object returned = cmd.ExecuteScalar();
+                if (returned == null)
+                    nomefile = string.Empty;
+                else
+                    nomefile = (string)returned;
+            }
+
+            return nomefile;
+        }
 
         public List<decimal> TrovaArticoli(bool soloNonCancellati, decimal idBrand, string codiceSam, string modello, string codiceCliente, string codiceProvvisorio)
         {
@@ -130,7 +151,7 @@ namespace MPIntranet.DataAccess.Articolo
 
             ParamSet ps = new ParamSet();
             ps.AddParam("IDARTICOLO", DbType.Decimal, idArticolo);
-            using (DbDataAdapter da = BuildDataAdapter(select,ps))
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
                 da.Fill(ds.PROCESSI);
             }

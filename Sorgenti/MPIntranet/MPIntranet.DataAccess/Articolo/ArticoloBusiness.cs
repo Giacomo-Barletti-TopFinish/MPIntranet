@@ -15,6 +15,13 @@ namespace MPIntranet.DataAccess.Articolo
 
 
         [DataContext]
+        public string GetImageNameFile(string idMagazz)
+        {
+            ArticoloAdapter a = new ArticoloAdapter(DbConnection, DbTransaction);
+            return a.GetImageNameFile(idMagazz);
+        }
+
+        [DataContext]
         public void FillArticoli(ArticoloDS ds, bool soloNonCancellati)
         {
             ArticoloAdapter a = new ArticoloAdapter(DbConnection, DbTransaction);

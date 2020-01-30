@@ -8,7 +8,8 @@ namespace MPIntranet.Entities
 {
     public static class ElementiVuoti
     {
-        public const decimal ProcessoGalvanicoNuovo= -1;
-        public const decimal ProcessoGalvanicoVuoto = -2;
+        public const decimal ProcessoGalvanicoVuoto = -1;
+        public const decimal ArticoloStandard = -1;
+
     }
 }

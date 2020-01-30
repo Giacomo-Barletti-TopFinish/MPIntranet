@@ -16,14 +16,14 @@ namespace MPIntranetWeb.Controllers
     {
         public ActionResult Scheda(decimal idArticolo)
         {
-            Articolo a = new Articolo();
+            Articolo a = new Articolo(RvlImageSite);
             ArticoloModel model = a.CreaArticoloModel(idArticolo);
             return View(model);
         }
 
         public ActionResult CreaProcesso(decimal idArticolo)
         {
-            Articolo a = new Articolo();
+            Articolo a = new Articolo(RvlImageSite);
             ArticoloModel model = a.CreaArticoloModel(idArticolo);
 
             Galvanica g = new Galvanica();
@@ -40,7 +40,6 @@ namespace MPIntranetWeb.Controllers
             ProcessoGalvanico p = new ProcessoGalvanico();
             List<ProcessoModel> processiModel = p.CaricaProcessi(idArticolo, idImpianto);
             List<MPIntranetListItem> processi = processiModel.Select(x => new MPIntranetListItem(x.Descrizione, x.IdProcesso.ToString())).ToList();
-            processi.Insert(processi.Count, new MPIntranetListItem("Nuovo processo", ElementiVuoti.ProcessoGalvanicoNuovo.ToString()));
             processi.Insert(0, new MPIntranetListItem(string.Empty, ElementiVuoti.ProcessoGalvanicoVuoto.ToString()));
             return Json(processi);
         }
@@ -68,7 +67,7 @@ namespace MPIntranetWeb.Controllers
 
         public ActionResult TrovaArticolo(string modello, string codiceSam, string coloreInterno, decimal idBrand, string codiceCliente, string coloreCliente, string codiceProvvisorio, int TipoRicerca)
         {
-            Articolo articolo = new Articolo();
+            Articolo articolo = new Articolo(RvlImageSite);
 
             List<ArticoloModel> articoli = articolo.TrovaArticoli(modello, codiceSam, coloreInterno, idBrand, codiceCliente, coloreCliente, codiceProvvisorio);
 
@@ -105,14 +104,14 @@ namespace MPIntranetWeb.Controllers
         public ActionResult SalvaArticolo(decimal idBrand, string codiceSAM, decimal progressivo, string modello, string descrizione, string codiceCliente, string provvisorio, string codiceColore)
         {
 
-            Articolo a = new Articolo();
+            Articolo a = new Articolo(RvlImageSite);
             string messaggio = a.CreaArticolo(idBrand, codiceSAM, progressivo, modello, descrizione, codiceCliente, provvisorio, codiceColore, ConnectedUser);
             return Content(messaggio);
         }
 
         public ActionResult RimuoviArticolo(decimal idArticolo)
         {
-            Articolo a = new Articolo();
+            Articolo a = new Articolo(RvlImageSite);
 
             a.RimuoviArticolo(idArticolo, ConnectedUser);
             return null;
@@ -135,24 +134,45 @@ namespace MPIntranetWeb.Controllers
 
         public ActionResult CaricaProcessoPartial(decimal idArticolo, decimal idProcesso, decimal idImpianto)
         {
-            ProcessoModel processoModel = new ProcessoModel();
-            Galvanica g = new Galvanica();
-            ImpiantoModel impianto = g.CreaListaImpiantoModel().Where(x => x.IdImpianto == idImpianto).FirstOrDefault();
-            if (idProcesso == ElementiVuoti.ProcessoGalvanicoNuovo)
-            {
-                processoModel.Descrizione = string.Empty;
-                processoModel.Fasi = new List<FaseProcessoModel>();
-                processoModel.IdArticolo = idArticolo;
-                processoModel.IdProcesso = idProcesso;
-                processoModel.Impianto = impianto;
-            }
-            else
-            {
 
-            }
+            ProcessoGalvanico p = new ProcessoGalvanico();
+            List<ProcessoModel> processi = p.CaricaProcessi(idArticolo, idImpianto);
+            ProcessoModel processo = processi.Where(x => x.IdProcesso == idProcesso).FirstOrDefault();
+            if (processo == null) return null;
 
-            return PartialView("MostraProcessoPartial", processoModel);
+
+            return PartialView("MostraProcessoPartial", processo);
         }
 
+        public ActionResult SalvaProcesso(decimal idArticolo, decimal idImpianto, decimal idProcesso, string descrizione, string vascheJSON)
+        {
+
+            ProcessoGalvanico p = new ProcessoGalvanico();
+            string messaggio = p.SalvaProcesso(idArticolo, idImpianto, idProcesso, descrizione.ToUpper(), vascheJSON, ConnectedUser);
+            return Content(messaggio);
+        }
+
+        public ActionResult CreaNuovoProcesso(decimal idArticolo, decimal idImpianto)
+        {
+
+            ProcessoGalvanico p = new ProcessoGalvanico();
+            p.CreaNuovoProcesso(idArticolo, idImpianto, "** NUOVO PROCESSO **", ConnectedUser);
+            return Content("ok");
+        }
+
+        public ActionResult CopiaProcesso(decimal idProcessoStandard, decimal idArticolo, decimal idImpianto)
+        {
+            ProcessoGalvanico p = new ProcessoGalvanico();
+            string messaggio = p.CopiaProcesso(idProcessoStandard, idArticolo, idImpianto, ConnectedUser);
+            return Content(messaggio);
+        }
+
+        public ActionResult CancellaProcesso(decimal idArticolo, decimal idImpianto, decimal idProcesso)
+        {
+
+            ProcessoGalvanico p = new ProcessoGalvanico();
+            string messaggio = p.CancellaProcesso(idArticolo, idImpianto, idProcesso, ConnectedUser);
+            return Content(messaggio);
+        }
     }
 }

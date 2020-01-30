@@ -18,7 +18,7 @@ namespace MPIntranet.Models.Articolo
 
     public class FaseProcessoModel
     {
-        public decimal idFaseProcesso { get; set; }
+        public decimal IdFaseProcesso { get; set; }
         public decimal IdProcesso { get; set; }
         public VascaModel Vasca { get; set; }
         public string Durata { get; set; }

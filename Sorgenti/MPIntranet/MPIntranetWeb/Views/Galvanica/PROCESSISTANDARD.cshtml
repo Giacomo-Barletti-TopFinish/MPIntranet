@@ -1,25 +1,13 @@
 ﻿@using MPIntranet.Models.Articolo
 @using MPIntranet.Models.Common
-@model ArticoloModel
 @{
     Layout = "~/Views/Shared/_LayoutApplication.cshtml";
 }
 
 <div class="content-top">
-    <h2>Processo Galvanico</h2>
-    <div style="display:inline-block; width:50%">
-        <input type="button" onclick="EseguiChiudiArticolo();" class="btn btn-primary" value="Chiudi" />
-        <input type="button" onclick="EseguiNuovaRicerca();" class="btn btn-primary" value="Nuova ricerca" />
-    </div>
+    <h2>Processi standard</h2>
 </div>
-<div class="row col-lg-12">
-    @Html.Hidden("hdIdBrand", Model.Brand.IdBrand)
-    @Html.Hidden("hdIdArticolo", Model.IdArticolo)
-    @Html.Hidden("hdIdColore", Model.Colore.IdColore)
-
-    @Html.Partial("DatiGeneraliPartial", Model)
-</div>
-
+@Html.Hidden("hdIdArticolo",MPIntranet.Entities.ElementiVuoti.ArticoloStandard)
 <div class="row">
     <div class="col-sm-2">
         @Html.Label("Impianto")
@@ -36,13 +24,7 @@
         @Html.DropDownList("ddlProcesso", Enumerable.Empty<SelectListItem>(), new { @class = "form-control input-sm", @id = "ddlProcesso" })
     </div>
     <div class="col-sm-1">
-        <input type="button" onclick="CreaNuovoProcesso();" class="btn btn-primary" value="Nuovo processo" />
-    </div>
-    <div class="col-sm-1">
-        @Html.DropDownList("ddlProcessoStandard", Enumerable.Empty<SelectListItem>(), new { @class = "form-control input-sm", @id = "ddlProcessoStandard" })
-    </div>
-    <div class="col-sm-1">
-        <input type="button" onclick="CopiaProcesso();" class="btn btn-primary" value="Copia processo" />
+        <input type="button" onclick="CreaNuovoProcesso();" class="btn btn-primary" value="Crea nuovo processo" />
     </div>
 
 </div>
@@ -55,7 +37,6 @@
 
 </div>
 
-
 <script language="javascript" type="text/javascript">
     $(function () {
         $("#ddlImpianto").change(function () {
@@ -63,7 +44,6 @@
             var selectedValue = $(this).val();
             $('#divProcesso').html('').show();
             caricaListaProcessi(selectedValue);
-            caricaListaProcessiStandard(selectedValue);
         });
 
         $('#ddlImpianto').val('1').trigger('change');
@@ -80,7 +60,7 @@
 
     });
     function CreaNuovoProcesso() {
-          var idArticolo = $('#hdIdArticolo').val();
+                  var idArticolo = $('#hdIdArticolo').val();
         var idImpianto = $('#ddlImpianto').val();
         if (idImpianto == null || idImpianto == '') {
             $('#lblMessage').html("Selezionare un impianto");
@@ -109,7 +89,7 @@
          });
     }
     function caricaListaProcessi(idImpianto) {
-        var idArticolo = $('#hdIdArticolo').val();
+                var idArticolo = $('#hdIdArticolo').val();
            var url = '@Url.Action("CaricaListaProcessi", "Articolo")';
          $.ajax({
                 url: url,
@@ -138,38 +118,8 @@
          });
     }
 
-    function caricaListaProcessiStandard(idImpianto) {
-        var idArticolo = -1;
-           var url = '@Url.Action("CaricaListaProcessi", "Articolo")';
-         $.ajax({
-                url: url,
-             data: {
-                 idArticolo, idArticolo,
-                    idImpianto: idImpianto
-                },
-                cache: false,
-                type: "POST",
-                success: function (data)
-                {
-                    var markup = '';
-                    for (var x = 0; x < data.length; x++)
-                    {
-                        markup += '<option value="' + data[x].Value + '">' + data[x].Text + '</option>';
-                    }
-                    $('#ddlProcessoStandard').html(markup).show();
-
-                },
-                error: function (response)
-                {
-                    document.open();
-                    document.write(response.responseText);
-                    document.close();
-             }
-         });
-    }
-
       function caricaProcesso(idProcesso) {
-          var idArticolo = $('#hdIdArticolo').val();
+            var idArticolo = $('#hdIdArticolo').val();
           var idImpianto = $('#ddlImpianto').val();
            var url = '@Url.Action("CaricaProcessoPartial", "Articolo")';
          $.ajax({
@@ -232,41 +182,5 @@
     function EseguiNuovaRicerca() {
         var url = '/ARTICOLO/RICERCAARTICOLO/?TipoRicerca=2';
         window.location.href = url;
-    }
-
-    function CopiaProcesso() {
-        var idArticolo = $('#hdIdArticolo').val();
-        var idImpianto = $('#ddlImpianto').val();
-        var idProcessoStandard = $('#ddlProcessoStandard').val();
-        if (idProcessoStandard == null || idProcessoStandard == '' || idProcessoStandard ==@MPIntranet.Entities.ElementiVuoti.ProcessoGalvanicoVuoto) {
-            $('#lblMessage').html("Selezionare un processo standard");
-            return;
-        }
-
-         var url = '@Url.Action("CopiaProcesso", "Articolo")';
-         $.ajax({
-                url: url,
-             data: {
-                 idProcessoStandard: idProcessoStandard,
-                 idArticolo: idArticolo,
-                 idImpianto: idImpianto
-                },
-                cache: false,
-                type: "POST",
-                success: function (data)
-                {
-                    InfoPopup(data);
-                    var idImpianto = $('#ddlImpianto').val();
-                    caricaListaProcessi(idImpianto);
-                    caricaListaProcessiStandard(idImpianto);
-
-                },
-                error: function (response)
-                {
-                    document.open();
-                    document.write(response.responseText);
-                    document.close();
-             }
-         });
     }
 </script>

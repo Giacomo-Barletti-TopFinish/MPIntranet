@@ -66,6 +66,32 @@
             });
         });
     });
+     function caricaListaUtenti() {
+           var url = '@Url.Action("CaricaListaUtenti", "Account")';
+         $.ajax({
+                url: url,
+             data: {
+                },
+                cache: false,
+                type: "POST",
+                success: function (data)
+                {
+                    var markup = '';
+                    for (var x = 0; x < data.length; x++)
+                    {
+                        markup += '<option value="' + data[x].Value + '">' + data[x].Text + '</option>';
+                    }
+                    $('#ddlUtente').html(markup).show();
+
+                },
+                error: function (response)
+                {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+             }
+         });
+    }
     function SelezionaTutto()
     {
         $('.RWCHK').each(function ()
@@ -104,6 +130,7 @@
             success: function (data)
             {
                 AlertPopup('Dati salvati');
+                caricaListaUtenti();
             },
             error: function (response)
             {
@@ -132,6 +159,7 @@
             success: function (data)
             {
                 AlertPopup('Dati salvati');
+                caricaListaUtenti();
             },
             error: function (response)
             {
@@ -175,6 +203,7 @@
             success: function (data)
             {
                 AlertPopup(data);
+                caricaListaUtenti();
             },
             error: function (response)
             {

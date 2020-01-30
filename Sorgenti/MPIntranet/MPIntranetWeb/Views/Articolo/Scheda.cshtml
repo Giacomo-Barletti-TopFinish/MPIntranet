@@ -130,14 +130,14 @@
     }
 
     function ConfermaCancellaArticolo() {
-        debugger;
+        
         var idArticolo = $('#hdIdBrand').val();
         if (idArticolo != null && idArticolo!='')
             ConfirmPopup("Eliminare l''articolo?", EseguiCancellaArticolo);
     }
 
     function EseguiCancellaArticolo() {
-        debugger;
+        
         var idArticolo = $('#hdIdBrand').val();
           var url = '@Url.Action("RimuoviArticolo", "Articolo")';
          $.ajax({

@@ -1,5 +1,6 @@
 ﻿using MPIntranet.DataAccess.Anagrafica;
 using MPIntranet.Entities;
+using MPIntranet.Models;
 using MPIntranet.Models.Anagrafica;
 using System;
 using System.Collections.Generic;
@@ -107,7 +108,7 @@ namespace MPIntranet.Business
                 AnagraficaDS.BRANDRow brand = _ds.BRAND.Where(x => x.IDBRAND == idBrand).FirstOrDefault();
                 if (brand != null)
                 {
-                    brand.CANCELLATO = "S";
+                    brand.CANCELLATO = SiNo.Si;
                     brand.DATAMODIFICA = DateTime.Now;
                     brand.UTENTEMODIFICA = account;
 
@@ -150,7 +151,7 @@ namespace MPIntranet.Business
                 AnagraficaDS.BRANDRow b = _ds.BRAND.Where(x => x.BRAND == brand).FirstOrDefault();
                 if (b != null)
                 {
-                    if (b.CANCELLATO == "S")
+                    if (b.CANCELLATO == SiNo.Si)
                         return "Un brand con questa descrizione era presente ma è stato cancellato";
                     else
                         return "Un brand con questa descrizione è già presente";
@@ -161,7 +162,7 @@ namespace MPIntranet.Business
                     b = _ds.BRAND.Where(x => !x.IsCODICEGESTIONALENull() && x.CODICEGESTIONALE == codiceGestionale).FirstOrDefault();
                     if (b != null)
                     {
-                        if (b.CANCELLATO == "S")
+                        if (b.CANCELLATO == SiNo.Si)
                             return "Un brand con questo codice gestionale era presente ma è stato cancellato";
                         else
                             return "Un brand con questo codice gestionale è già presente";
@@ -173,7 +174,7 @@ namespace MPIntranet.Business
                 br.CODICEGESTIONALE = codiceGestionale;
                 br.PREFISSOCOLORE = prefissoColore;
 
-                br.CANCELLATO = "N";
+                br.CANCELLATO = SiNo.No;
                 br.DATAMODIFICA = DateTime.Now;
                 br.UTENTEMODIFICA = account;
 
@@ -246,7 +247,7 @@ namespace MPIntranet.Business
                 AnagraficaDS.COLORIRow colore = _ds.COLORI.Where(x => x.IDCOLORE == idColore).FirstOrDefault();
                 if (colore != null)
                 {
-                    colore.CANCELLATO = "S";
+                    colore.CANCELLATO = SiNo.Si;
                     colore.DATAMODIFICA = DateTime.Now;
                     colore.UTENTEMODIFICA = account;
 
@@ -270,7 +271,7 @@ namespace MPIntranet.Business
                 {
                     return "Nessun brand con questo codice id";
                 }
-                else if (brandRow.CANCELLATO == "S")
+                else if (brandRow.CANCELLATO == SiNo.Si)
                     return "Il brand con questo codice id è stao cancellato";
 
                 string codiceFigurativo = string.Format("{0}{1}", brandRow.PREFISSOCOLORE, codiceCliente);
@@ -279,7 +280,7 @@ namespace MPIntranet.Business
                 AnagraficaDS.COLORIRow col = _ds.COLORI.Where(x => x.CODICEFIGURATIVO == codiceFigurativo).FirstOrDefault();
                 if (col != null)
                 {
-                    if (col.CANCELLATO == "S")
+                    if (col.CANCELLATO == SiNo.Si)
                         return "Un brand con questo codice figurativo era presente ma è stato cancellato";
                     else
                         return "Un brand con questo codice figurativo è già presente";
@@ -288,7 +289,7 @@ namespace MPIntranet.Business
                 col = _ds.COLORI.Where(x => x.CODICECLIENTE == codiceCliente && !x.IsIDBRANDNull() && x.IDBRAND == idBrand).FirstOrDefault();
                 if (col != null)
                 {
-                    if (col.CANCELLATO == "S")
+                    if (col.CANCELLATO == SiNo.Si)
                         return "Un brand con questo codice cliente per questo brand era presente ma è stato cancellato";
                     else
                         return "Un brand con questo codice cliente per questo brand è già presente";
@@ -308,7 +309,7 @@ namespace MPIntranet.Business
                 colore.CODICEFIGURATIVO = codiceFigurativo;
                 colore.CODICECLIENTE = codiceCliente;
 
-                colore.CANCELLATO = "N";
+                colore.CANCELLATO = SiNo.No;
                 colore.DATAMODIFICA = DateTime.Now;
                 colore.UTENTEMODIFICA = account;
 
@@ -400,7 +401,7 @@ namespace MPIntranet.Business
                 AnagraficaDS.TIPIDOCUMENTORow tipoDocumento = _ds.TIPIDOCUMENTO.Where(x => x.IDTIPODOCUMENTO == idTipoDocumento).FirstOrDefault();
                 if (tipoDocumento != null)
                 {
-                    tipoDocumento.CANCELLATO = "S";
+                    tipoDocumento.CANCELLATO = SiNo.Si;
                     tipoDocumento.DATAMODIFICA = DateTime.Now;
                     tipoDocumento.UtenteModifica = account;
 
@@ -418,14 +419,14 @@ namespace MPIntranet.Business
                 AnagraficaDS.TIPIDOCUMENTORow tipoDocumento = _ds.TIPIDOCUMENTO.Where(x => x.DESCRIZIONE == descrizione).FirstOrDefault();
                 if (tipoDocumento != null)
                 {
-                    if (tipoDocumento.CANCELLATO == "S")
+                    if (tipoDocumento.CANCELLATO == SiNo.Si)
                         return "Un tipo documento con questa descrizione era presente ma è stato cancellato";
                     else
                         return "Un tipo documento con questa descrizione è già presente";
                 }
 
                 AnagraficaDS.TIPIDOCUMENTORow td = _ds.TIPIDOCUMENTO.NewTIPIDOCUMENTORow();
-                td.CANCELLATO = "N";
+                td.CANCELLATO = SiNo.No;
                 td.DESCRIZIONE = descrizione;
                 td.DATAMODIFICA = DateTime.Now;
                 td.UtenteModifica = account;
@@ -471,7 +472,7 @@ namespace MPIntranet.Business
                 AnagraficaDS.MATERIALIRow materiale = _ds.MATERIALI.Where(x => x.IDMATERIALE == idMateriale).FirstOrDefault();
                 if (materiale != null)
                 {
-                    materiale.CANCELLATO = "S";
+                    materiale.CANCELLATO = SiNo.Si;
                     materiale.DATAMODIFICA = DateTime.Now;
                     materiale.UTENTEMODIFICA = account;
 
@@ -513,7 +514,7 @@ namespace MPIntranet.Business
                 AnagraficaDS.MATERIALIRow b = _ds.MATERIALI.Where(x => x.CODICE == codice).FirstOrDefault();
                 if (b != null)
                 {
-                    if (b.CANCELLATO == "S")
+                    if (b.CANCELLATO == SiNo.Si)
                         return "Un materiale con questo codice era presente ma è stato cancellato";
                     else
                         return "Un materiale con questo codice è già presente";
@@ -525,7 +526,7 @@ namespace MPIntranet.Business
                 br.PREZIOSO = prezioso ? "S" : "N";
                 br.PESOSPECIFICO = pesoSpecifico;
 
-                br.CANCELLATO = "N";
+                br.CANCELLATO = SiNo.No;
                 br.DATAMODIFICA = DateTime.Now;
                 br.UTENTEMODIFICA = account;
 

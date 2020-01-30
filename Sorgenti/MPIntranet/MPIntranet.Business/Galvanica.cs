@@ -1,5 +1,6 @@
 ﻿using MPIntranet.DataAccess.Galvanica;
 using MPIntranet.Entities;
+using MPIntranet.Models;
 using MPIntranet.Models.Anagrafica;
 using MPIntranet.Models.Galvanica;
 using System;
@@ -54,7 +55,7 @@ namespace MPIntranet.Business
                 GalvanicaDS.IMPIANTIRow impianto = _ds.IMPIANTI.Where(x => x.IDIMPIANTO == idImpianto).FirstOrDefault();
                 if (impianto != null)
                 {
-                    impianto.CANCELLATO = "S";
+                    impianto.CANCELLATO = SiNo.Si;
                     impianto.DATAMODIFICA = DateTime.Now;
                     impianto.UTENTEMODIFICA = account;
 
@@ -91,7 +92,7 @@ namespace MPIntranet.Business
                 GalvanicaDS.IMPIANTIRow b = _ds.IMPIANTI.Where(x => x.DESCRIZIONE == descrizione).FirstOrDefault();
                 if (b != null)
                 {
-                    if (b.CANCELLATO == "S")
+                    if (b.CANCELLATO == SiNo.Si)
                         return "Un impianto con questa descrizione era presente ma è stato cancellato";
                     else
                         return "Un impianto con questa descrizione è già presente";
@@ -100,7 +101,7 @@ namespace MPIntranet.Business
                 GalvanicaDS.IMPIANTIRow br = _ds.IMPIANTI.NewIMPIANTIRow();
                 br.DESCRIZIONE = descrizione;
 
-                br.CANCELLATO = "N";
+                br.CANCELLATO = SiNo.No;
                 br.DATAMODIFICA = DateTime.Now;
                 br.UTENTEMODIFICA = account;
 
@@ -184,7 +185,7 @@ namespace MPIntranet.Business
                 GalvanicaDS.VASCHERow vasca = _ds.VASCHE.Where(x => x.IDVASCA == idVasca).FirstOrDefault();
                 if (vasca != null)
                 {
-                    vasca.CANCELLATO = "S";
+                    vasca.CANCELLATO = SiNo.Si;
                     vasca.DATAMODIFICA = DateTime.Now;
                     vasca.UTENTEMODIFICA = account;
 
@@ -237,7 +238,7 @@ namespace MPIntranet.Business
        //         if (idMateriale > 0)
                     vasca.IDMATERIALE = idMateriale;
 
-                vasca.CANCELLATO = "N";
+                vasca.CANCELLATO = SiNo.No;
                 vasca.DATAMODIFICA = DateTime.Now;
                 vasca.UTENTEMODIFICA = account;
 

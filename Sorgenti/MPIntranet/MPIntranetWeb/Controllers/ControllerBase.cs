@@ -1,5 +1,6 @@
 ﻿using MPIntranet.Models.Security;
 using MPIntranet.Security;
+using MPIntranetWeb.Properties;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -69,6 +70,13 @@ namespace MPIntranetWeb.Controllers
             }
         }
 
+        protected string RvlImageSite
+        {
+            get
+            {
+                return Settings.Default.RvlImageSite;
+            }
+        }
         protected override void OnException(ExceptionContext filterContext)
         {
             string actionName = this.ControllerContext.RouteData.Values["action"].ToString();
