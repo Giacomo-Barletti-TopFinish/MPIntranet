@@ -33,7 +33,7 @@ else
                     @Html.CheckBox("chkPreziosoS", td.Prezioso == "S")
                 </td>
                 <td width="8%">
-                    @Html.TextBox("txtPesoSpecificoS", td.Descrizione, new { @class = "form-control input-sm", @id = "txtPesoSpecificoS", @maxlength = "25" })
+                    @Html.TextBox("txtPesoSpecificoS", td.PesoSpecifico, new { @class = "form-control input-sm", @id = "txtPesoSpecificoS", @maxlength = "25" })
                 </td>
                 <td align="right">
                     @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(28))

@@ -90,6 +90,9 @@
             success: function (data)
             {
                 $('#divRisultati').html(data).show();
+                $('#txtBrand').val('');
+                $('#txtPrefissoColore').val('');
+                $('#txtCodiceGestionale').val('');
             },
             error: function (response)
             {
