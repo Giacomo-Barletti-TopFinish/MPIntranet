@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ManutenzioneDS" targetNamespace="http://tempuri.org/ManutenzioneDS.xsd" xmlns:mstns="http://tempuri.org/ManutenzioneDS.xsd" xmlns="http://tempuri.org/ManutenzioneDS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (Settings)" PropertyReference="ApplicationSettings.MPIntranet.Entities.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="System.Data.OracleClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ManutenzioneDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ManutenzioneDS" msprop:Generator_UserDSName="ManutenzioneDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DITTA" msprop:Generator_TableClassName="DITTADataTable" msprop:Generator_TableVarName="tableDITTA" msprop:Generator_TablePropName="DITTA" msprop:Generator_RowDeletingName="DITTARowDeleting" msprop:Generator_RowChangingName="DITTARowChanging" msprop:Generator_RowEvHandlerName="DITTARowChangeEventHandler" msprop:Generator_RowDeletedName="DITTARowDeleted" msprop:Generator_UserTableName="DITTA" msprop:Generator_RowChangedName="DITTARowChanged" msprop:Generator_RowEvArgName="DITTARowChangeEvent" msprop:Generator_RowClassName="DITTARow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDDITTA" msprop:Generator_ColumnVarNameInTable="columnIDDITTA" msprop:Generator_ColumnPropNameInRow="IDDITTA" msprop:Generator_ColumnPropNameInTable="IDDITTAColumn" msprop:Generator_UserColumnName="IDDITTA" type="xs:decimal" minOccurs="0" />
+              <xs:element name="RAGIONESOCIALE" msprop:Generator_ColumnVarNameInTable="columnRAGIONESOCIALE" msprop:Generator_ColumnPropNameInRow="RAGIONESOCIALE" msprop:Generator_ColumnPropNameInTable="RAGIONESOCIALEColumn" msprop:Generator_UserColumnName="RAGIONESOCIALE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="45" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CANCELLATO" msprop:Generator_ColumnVarNameInTable="columnCANCELLATO" msprop:Generator_ColumnPropNameInRow="CANCELLATO" msprop:Generator_ColumnPropNameInTable="CANCELLATOColumn" msprop:Generator_UserColumnName="CANCELLATO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATAMODIFICA" msprop:Generator_ColumnVarNameInTable="columnDATAMODIFICA" msprop:Generator_ColumnPropNameInRow="DATAMODIFICA" msprop:Generator_ColumnPropNameInTable="DATAMODIFICAColumn" msprop:Generator_UserColumnName="DATAMODIFICA" type="xs:dateTime" />
+              <xs:element name="UTENTEMODIFICA" msprop:Generator_ColumnVarNameInTable="columnUTENTEMODIFICA" msprop:Generator_ColumnPropNameInRow="UTENTEMODIFICA" msprop:Generator_ColumnPropNameInTable="UTENTEMODIFICAColumn" msprop:Generator_UserColumnName="UTENTEMODIFICA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

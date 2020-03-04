@@ -58,6 +58,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GalvanicaDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="ManutenzioneDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ManutenzioneDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -109,6 +114,17 @@
     </None>
     <None Include="GalvanicaDS.xss">
       <DependentUpon>GalvanicaDS.xsd</DependentUpon>
+    </None>
+    <None Include="ManutenzioneDS.xsc">
+      <DependentUpon>ManutenzioneDS.xsd</DependentUpon>
+    </None>
+    <None Include="ManutenzioneDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ManutenzioneDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="ManutenzioneDS.xss">
+      <DependentUpon>ManutenzioneDS.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
