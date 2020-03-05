@@ -14,7 +14,7 @@
   <xs:element name="ManutenzioneDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ManutenzioneDS" msprop:Generator_UserDSName="ManutenzioneDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="DITTA" msprop:Generator_TableClassName="DITTADataTable" msprop:Generator_TableVarName="tableDITTA" msprop:Generator_TablePropName="DITTA" msprop:Generator_RowDeletingName="DITTARowDeleting" msprop:Generator_RowChangingName="DITTARowChanging" msprop:Generator_RowEvHandlerName="DITTARowChangeEventHandler" msprop:Generator_RowDeletedName="DITTARowDeleted" msprop:Generator_UserTableName="DITTA" msprop:Generator_RowChangedName="DITTARowChanged" msprop:Generator_RowEvArgName="DITTARowChangeEvent" msprop:Generator_RowClassName="DITTARow">
+        <xs:element name="DITTE" msprop:Generator_TableClassName="DITTEDataTable" msprop:Generator_TableVarName="tableDITTE" msprop:Generator_TablePropName="DITTE" msprop:Generator_RowDeletingName="DITTERowDeleting" msprop:Generator_RowChangingName="DITTERowChanging" msprop:Generator_RowEvHandlerName="DITTERowChangeEventHandler" msprop:Generator_RowDeletedName="DITTERowDeleted" msprop:Generator_UserTableName="DITTE" msprop:Generator_RowChangedName="DITTERowChanged" msprop:Generator_RowEvArgName="DITTERowChangeEvent" msprop:Generator_RowClassName="DITTERow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDDITTA" msprop:Generator_ColumnVarNameInTable="columnIDDITTA" msprop:Generator_ColumnPropNameInRow="IDDITTA" msprop:Generator_ColumnPropNameInTable="IDDITTAColumn" msprop:Generator_UserColumnName="IDDITTA" type="xs:decimal" minOccurs="0" />

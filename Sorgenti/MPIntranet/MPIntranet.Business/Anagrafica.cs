@@ -84,9 +84,18 @@ namespace MPIntranet.Business
                 using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
                     bAnagrafica.FillColori(_ds, true);
             }
-            return _ds.COLORI.Where(x => x.CODICE == codiceColore).FirstOrDefault();
+            return _ds.COLORI.Where(x => x.CODICE == codiceColore.ToUpper().Trim()).FirstOrDefault();
         }
 
+        public AnagraficaDS.COLORIRow EstraiColorePerCodiceFigurativo(string codiceFigurativoColore)
+        {
+            if (_ds.COLORI.Count == 0)
+            {
+                using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+                    bAnagrafica.FillColori(_ds, true);
+            }
+            return _ds.COLORI.Where(x => x.CODICEFIGURATIVO == codiceFigurativoColore.ToUpper().Trim()).FirstOrDefault();
+        }
         public ColoreModel EstraiColoreModel(decimal idColore)
         {
             AnagraficaDS.COLORIRow elemento = EstraiColore(idColore);
@@ -100,6 +109,14 @@ namespace MPIntranet.Business
             if (elemento == null) return null;
             return creaColoreModel(elemento);
         }
+
+        public ColoreModel EstraiColoreModelPerCodiceFigurativo(string codiceFigurativoColore)
+        {
+            AnagraficaDS.COLORIRow elemento = EstraiColorePerCodiceFigurativo(codiceFigurativoColore);
+            if (elemento == null) return null;
+            return creaColoreModel(elemento);
+        }
+
         public void CancellaBrand(decimal idBrand, string account)
         {
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())

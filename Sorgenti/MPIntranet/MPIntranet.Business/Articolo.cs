@@ -28,9 +28,9 @@ namespace MPIntranet.Business
         {
             BrandModel brand = _anagrafica.EstraiBrandModel(idBrand);
             if (brand == null) return "Brand non valido";
-            if (codiceColore.Length != 3) return "Codice colore non valido";
+//            if (codiceColore.Length != 3) return "Codice colore non valido";
 
-            ColoreModel colore = _anagrafica.EstraiColoreModel(codiceColore);
+            ColoreModel colore = _anagrafica.EstraiColoreModelPerCodiceFigurativo(codiceColore);
             if (colore == null) return "Codice colore non valido";
 
             if (colore.IdBrand > 0 && colore.IdBrand != idBrand)
@@ -39,9 +39,10 @@ namespace MPIntranet.Business
             if (TrovaArticoli(modello, string.Empty, string.Empty, -1, string.Empty, string.Empty, string.Empty).Count > 0)
                 return "Esiste già un articolo con questo modello";
 
-            if (TrovaArticoli(string.Empty, codiceSAM, string.Empty, -1, string.Empty, string.Empty, string.Empty).Count > 0)
+            if (!string.IsNullOrEmpty(codiceSAM) && TrovaArticoli(string.Empty, codiceSAM, string.Empty, -1, string.Empty, string.Empty, string.Empty).Count > 0)
                 return "Esiste già un articolo con questo codice SAM";
-            if (TrovaArticoli(string.Empty, string.Empty, string.Empty, -1, string.Empty, string.Empty, provvisorio).Count > 0)
+
+            if (!string.IsNullOrEmpty(provvisorio) && TrovaArticoli(string.Empty, string.Empty, string.Empty, -1, string.Empty, string.Empty, provvisorio).Count > 0)
                 return "Esiste già un articolo con questo codice provvisorio";
 
             string idMagazz = string.Empty;
@@ -193,6 +194,7 @@ namespace MPIntranet.Business
         public void RimuoviArticolo(decimal idArticolo, string account)
         {
             ArticoloDS.ARTICOLIRow articolo = EstraiArticolo(idArticolo);
+            if (articolo == null) return;
             using (ArticoloBusiness bArticolo = new ArticoloBusiness())
             {
                 articolo.CANCELLATO = SiNo.Si;

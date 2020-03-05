@@ -24,7 +24,7 @@ namespace MPIntranet.Entities {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class ManutenzioneDS : global::System.Data.DataSet {
         
-        private DITTADataTable tableDITTA;
+        private DITTEDataTable tableDITTE;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -54,8 +54,8 @@ namespace MPIntranet.Entities {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["DITTA"] != null)) {
-                    base.Tables.Add(new DITTADataTable(ds.Tables["DITTA"]));
+                if ((ds.Tables["DITTE"] != null)) {
+                    base.Tables.Add(new DITTEDataTable(ds.Tables["DITTE"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -79,9 +79,9 @@ namespace MPIntranet.Entities {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public DITTADataTable DITTA {
+        public DITTEDataTable DITTE {
             get {
-                return this.tableDITTA;
+                return this.tableDITTE;
             }
         }
         
@@ -152,8 +152,8 @@ namespace MPIntranet.Entities {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["DITTA"] != null)) {
-                    base.Tables.Add(new DITTADataTable(ds.Tables["DITTA"]));
+                if ((ds.Tables["DITTE"] != null)) {
+                    base.Tables.Add(new DITTEDataTable(ds.Tables["DITTE"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -188,10 +188,10 @@ namespace MPIntranet.Entities {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tableDITTA = ((DITTADataTable)(base.Tables["DITTA"]));
+            this.tableDITTE = ((DITTEDataTable)(base.Tables["DITTE"]));
             if ((initTable == true)) {
-                if ((this.tableDITTA != null)) {
-                    this.tableDITTA.InitVars();
+                if ((this.tableDITTE != null)) {
+                    this.tableDITTE.InitVars();
                 }
             }
         }
@@ -204,13 +204,13 @@ namespace MPIntranet.Entities {
             this.Namespace = "http://tempuri.org/ManutenzioneDS.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableDITTA = new DITTADataTable();
-            base.Tables.Add(this.tableDITTA);
+            this.tableDITTE = new DITTEDataTable();
+            base.Tables.Add(this.tableDITTE);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private bool ShouldSerializeDITTA() {
+        private bool ShouldSerializeDITTE() {
             return false;
         }
         
@@ -270,14 +270,14 @@ namespace MPIntranet.Entities {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public delegate void DITTARowChangeEventHandler(object sender, DITTARowChangeEvent e);
+        public delegate void DITTERowChangeEventHandler(object sender, DITTERowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class DITTADataTable : global::System.Data.TypedTableBase<DITTARow> {
+        public partial class DITTEDataTable : global::System.Data.TypedTableBase<DITTERow> {
             
             private global::System.Data.DataColumn columnIDDITTA;
             
@@ -291,8 +291,8 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DITTADataTable() {
-                this.TableName = "DITTA";
+            public DITTEDataTable() {
+                this.TableName = "DITTE";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -300,7 +300,7 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal DITTADataTable(global::System.Data.DataTable table) {
+            internal DITTEDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -317,7 +317,7 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected DITTADataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected DITTEDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -373,49 +373,49 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DITTARow this[int index] {
+            public DITTERow this[int index] {
                 get {
-                    return ((DITTARow)(this.Rows[index]));
+                    return ((DITTERow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event DITTARowChangeEventHandler DITTARowChanging;
+            public event DITTERowChangeEventHandler DITTERowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event DITTARowChangeEventHandler DITTARowChanged;
+            public event DITTERowChangeEventHandler DITTERowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event DITTARowChangeEventHandler DITTARowDeleting;
+            public event DITTERowChangeEventHandler DITTERowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event DITTARowChangeEventHandler DITTARowDeleted;
+            public event DITTERowChangeEventHandler DITTERowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void AddDITTARow(DITTARow row) {
+            public void AddDITTERow(DITTERow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DITTARow AddDITTARow(decimal IDDITTA, string RAGIONESOCIALE, string CANCELLATO, System.DateTime DATAMODIFICA, string UTENTEMODIFICA) {
-                DITTARow rowDITTARow = ((DITTARow)(this.NewRow()));
+            public DITTERow AddDITTERow(decimal IDDITTA, string RAGIONESOCIALE, string CANCELLATO, System.DateTime DATAMODIFICA, string UTENTEMODIFICA) {
+                DITTERow rowDITTERow = ((DITTERow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         IDDITTA,
                         RAGIONESOCIALE,
                         CANCELLATO,
                         DATAMODIFICA,
                         UTENTEMODIFICA};
-                rowDITTARow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowDITTARow);
-                return rowDITTARow;
+                rowDITTERow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowDITTERow);
+                return rowDITTERow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                DITTADataTable cln = ((DITTADataTable)(base.Clone()));
+                DITTEDataTable cln = ((DITTEDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -423,7 +423,7 @@ namespace MPIntranet.Entities {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new DITTADataTable();
+                return new DITTEDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -460,28 +460,28 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DITTARow NewDITTARow() {
-                return ((DITTARow)(this.NewRow()));
+            public DITTERow NewDITTERow() {
+                return ((DITTERow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new DITTARow(builder);
+                return new DITTERow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(DITTARow);
+                return typeof(DITTERow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.DITTARowChanged != null)) {
-                    this.DITTARowChanged(this, new DITTARowChangeEvent(((DITTARow)(e.Row)), e.Action));
+                if ((this.DITTERowChanged != null)) {
+                    this.DITTERowChanged(this, new DITTERowChangeEvent(((DITTERow)(e.Row)), e.Action));
                 }
             }
             
@@ -489,8 +489,8 @@ namespace MPIntranet.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.DITTARowChanging != null)) {
-                    this.DITTARowChanging(this, new DITTARowChangeEvent(((DITTARow)(e.Row)), e.Action));
+                if ((this.DITTERowChanging != null)) {
+                    this.DITTERowChanging(this, new DITTERowChangeEvent(((DITTERow)(e.Row)), e.Action));
                 }
             }
             
@@ -498,8 +498,8 @@ namespace MPIntranet.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.DITTARowDeleted != null)) {
-                    this.DITTARowDeleted(this, new DITTARowChangeEvent(((DITTARow)(e.Row)), e.Action));
+                if ((this.DITTERowDeleted != null)) {
+                    this.DITTERowDeleted(this, new DITTERowChangeEvent(((DITTERow)(e.Row)), e.Action));
                 }
             }
             
@@ -507,14 +507,14 @@ namespace MPIntranet.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.DITTARowDeleting != null)) {
-                    this.DITTARowDeleting(this, new DITTARowChangeEvent(((DITTARow)(e.Row)), e.Action));
+                if ((this.DITTERowDeleting != null)) {
+                    this.DITTERowDeleting(this, new DITTERowChangeEvent(((DITTERow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void RemoveDITTARow(DITTARow row) {
+            public void RemoveDITTERow(DITTERow row) {
                 this.Rows.Remove(row);
             }
             
@@ -541,7 +541,7 @@ namespace MPIntranet.Entities {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "DITTADataTable";
+                attribute2.FixedValue = "DITTEDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -585,15 +585,15 @@ namespace MPIntranet.Entities {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class DITTARow : global::System.Data.DataRow {
+        public partial class DITTERow : global::System.Data.DataRow {
             
-            private DITTADataTable tableDITTA;
+            private DITTEDataTable tableDITTE;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal DITTARow(global::System.Data.DataRowBuilder rb) : 
+            internal DITTERow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableDITTA = ((DITTADataTable)(this.Table));
+                this.tableDITTE = ((DITTEDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -601,14 +601,14 @@ namespace MPIntranet.Entities {
             public decimal IDDITTA {
                 get {
                     try {
-                        return ((decimal)(this[this.tableDITTA.IDDITTAColumn]));
+                        return ((decimal)(this[this.tableDITTE.IDDITTAColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'IDDITTA\' in table \'DITTA\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDDITTA\' in table \'DITTE\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDITTA.IDDITTAColumn] = value;
+                    this[this.tableDITTE.IDDITTAColumn] = value;
                 }
             }
             
@@ -616,10 +616,10 @@ namespace MPIntranet.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string RAGIONESOCIALE {
                 get {
-                    return ((string)(this[this.tableDITTA.RAGIONESOCIALEColumn]));
+                    return ((string)(this[this.tableDITTE.RAGIONESOCIALEColumn]));
                 }
                 set {
-                    this[this.tableDITTA.RAGIONESOCIALEColumn] = value;
+                    this[this.tableDITTE.RAGIONESOCIALEColumn] = value;
                 }
             }
             
@@ -627,10 +627,10 @@ namespace MPIntranet.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string CANCELLATO {
                 get {
-                    return ((string)(this[this.tableDITTA.CANCELLATOColumn]));
+                    return ((string)(this[this.tableDITTE.CANCELLATOColumn]));
                 }
                 set {
-                    this[this.tableDITTA.CANCELLATOColumn] = value;
+                    this[this.tableDITTE.CANCELLATOColumn] = value;
                 }
             }
             
@@ -638,10 +638,10 @@ namespace MPIntranet.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public System.DateTime DATAMODIFICA {
                 get {
-                    return ((global::System.DateTime)(this[this.tableDITTA.DATAMODIFICAColumn]));
+                    return ((global::System.DateTime)(this[this.tableDITTE.DATAMODIFICAColumn]));
                 }
                 set {
-                    this[this.tableDITTA.DATAMODIFICAColumn] = value;
+                    this[this.tableDITTE.DATAMODIFICAColumn] = value;
                 }
             }
             
@@ -649,23 +649,23 @@ namespace MPIntranet.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string UTENTEMODIFICA {
                 get {
-                    return ((string)(this[this.tableDITTA.UTENTEMODIFICAColumn]));
+                    return ((string)(this[this.tableDITTE.UTENTEMODIFICAColumn]));
                 }
                 set {
-                    this[this.tableDITTA.UTENTEMODIFICAColumn] = value;
+                    this[this.tableDITTE.UTENTEMODIFICAColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsIDDITTANull() {
-                return this.IsNull(this.tableDITTA.IDDITTAColumn);
+                return this.IsNull(this.tableDITTE.IDDITTAColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetIDDITTANull() {
-                this[this.tableDITTA.IDDITTAColumn] = global::System.Convert.DBNull;
+                this[this.tableDITTE.IDDITTAColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -673,22 +673,22 @@ namespace MPIntranet.Entities {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public class DITTARowChangeEvent : global::System.EventArgs {
+        public class DITTERowChangeEvent : global::System.EventArgs {
             
-            private DITTARow eventRow;
+            private DITTERow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DITTARowChangeEvent(DITTARow row, global::System.Data.DataRowAction action) {
+            public DITTERowChangeEvent(DITTERow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DITTARow Row {
+            public DITTERow Row {
                 get {
                     return this.eventRow;
                 }

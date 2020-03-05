@@ -107,7 +107,7 @@
     });
 
     function CaricaProcessi() {
-         var idArticolo = $('#hdIdBrand').val();
+        var idArticolo = $('#hdIdArticolo').val();
           var url = '@Url.Action("CaricaProcessiPartial", "Articolo")';
          $.ajax({
                 url: url,
@@ -131,14 +131,14 @@
 
     function ConfermaCancellaArticolo() {
         
-        var idArticolo = $('#hdIdBrand').val();
+        var idArticolo = $('#hdIdArticolo').val();
         if (idArticolo != null && idArticolo!='')
             ConfirmPopup("Eliminare l''articolo?", EseguiCancellaArticolo);
     }
 
     function EseguiCancellaArticolo() {
         
-        var idArticolo = $('#hdIdBrand').val();
+        var idArticolo = $('#hdIdArticolo').val();
           var url = '@Url.Action("RimuoviArticolo", "Articolo")';
          $.ajax({
                 url: url,
