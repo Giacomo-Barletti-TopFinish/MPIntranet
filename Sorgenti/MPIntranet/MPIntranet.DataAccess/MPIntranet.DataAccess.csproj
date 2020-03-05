@@ -61,6 +61,8 @@
     <Compile Include="Core\DataContextAttribute.cs" />
     <Compile Include="Galvanica\GalvanicaAdapter.cs" />
     <Compile Include="Galvanica\GalvanicaBusiness.cs" />
+    <Compile Include="Manutenzione\ManutenzioneAdapter.cs" />
+    <Compile Include="Manutenzione\ManutezioneBusiness.cs" />
     <Compile Include="MPIntranetAdapterBase.cs" />
     <Compile Include="MPIntranetBusinessBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

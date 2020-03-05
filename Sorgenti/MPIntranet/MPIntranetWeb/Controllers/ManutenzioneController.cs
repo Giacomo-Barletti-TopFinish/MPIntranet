@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MPIntranet.Business;
+using MPIntranet.Models.Manutenzione;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,6 +19,23 @@ namespace MPIntranetWeb.Controllers
             //return PartialView("CaricaDittePartial", lista);
             return View();
         }
+
+        public ActionResult CreaDitta(string RagioneSociale)
+        {
+            Manutenzione m = new Manutenzione();
+            string messaggio = m.CreaDitta(RagioneSociale, ConnectedUser);
+
+            return Content(messaggio);
+        }
+
+        public ActionResult CaricaDitte()
+        {
+            Manutenzione m = new Manutenzione();
+            List<DittaModel> ditte = m.CreaListaDittaModel();
+
+            return PartialView("CaricaDittePartial", ditte);
+        }
+
 
         public ActionResult RimuoviDitta(decimal idDitta)
         {
