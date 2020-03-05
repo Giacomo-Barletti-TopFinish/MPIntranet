@@ -425,11 +425,11 @@
     <Content Include="Views\Articolo\CreaProcesso.cshtml" />
     <Content Include="Views\Articolo\DatiGeneraliPartial.cshtml" />
     <Content Include="Views\Galvanica\PROCESSISTANDARD.cshtml" />
+    <Content Include="Views\Manutenzione\Ditte.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\ControllerBase\" />
-    <Folder Include="Views\Manutenzione\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

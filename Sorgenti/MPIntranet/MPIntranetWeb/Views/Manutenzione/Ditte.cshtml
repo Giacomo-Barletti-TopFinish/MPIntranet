@@ -1,0 +1,219 @@
+﻿
+@{
+    ViewBag.Title = "Ditte";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+
+<div class="content-top">
+    <h2>Gestione Ditte</h2>
+</div>
+<div id="ArticleScrolledContent" class="content-scheda" style="overflow-y:auto; overflow-x:hidden">
+
+    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(16))
+    {
+        <div class="row col-lg-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th width="15%">Ragione Sociale</th>
+                     @*   <th width="10%">Riferimenti</th>*@
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td width="15%">
+                            @Html.TextBox("txtRagioneSociale", null, new { @class = "form-control input-sm ", @id = "txtRagioneSociale", @maxlength = "45" })
+                        </td>
+                        @*<th width="10%">
+                            @Html.TextBox("txtRiferimenti", null, new { @class = "form-control input-sm ", @id = "txtRiferimenti", @maxlength = "45" })
+                        </th>*@
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row col-lg-2">
+            <div style="display:inline-block; width:50%">
+                <input type="button" onclick="AggiungiNuovo();" class="btn btn-primary" value="Nuova Ditta" />
+            </div>
+        </div>
+    }
+    <label class="text-red input-sm" id="lblMessage"></label>
+    <br />
+    <div class="col-md-12" id="divRisultati">
+
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+     //   caricaDati();
+    });
+    function CancellaDitta(idDitta) {
+     var url = '@Url.Action("RimuoviDitta", "Manutenzione")';
+            $.ajax({
+                url: url,
+                data: {
+                    idDitta: idDitta
+                },
+                cache: false,
+                type: "POST",
+                success: function (data)
+                {
+                    caricaDati();
+                },
+                error: function (response)
+                {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+                }
+            });
+    }
+
+    function caricaDati() {
+         var url = '@Url.Action("CaricaDitte", "Manutenzione")';
+        $.ajax({
+            url: url,
+            data: {
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divRisultati').html(data).show();
+                $('#txtRagioneSociale').val('');
+                //$('#txtRiferimenti').val('');
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+     function AggiungiNuovo()
+    {
+        var RagioneSociale = $('#txtRagioneSociale').val();
+        //var Riferimenti = $('#txtRiferimenti').val();
+
+        var esito = true;
+        var messaggio = '';
+
+        if (RagioneSociale =='' )
+        {
+            esito=false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Ragione sociale" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        //if (Riferimenti == '') {
+        //    esito = false;
+        //    messaggio += MESSAGGIO_PUNTINO + " " + "Riferimenti" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        //}
+
+        $('#lblMessage').html(messaggio);
+        if(!esito) return;
+
+
+        var url = '@Url.Action("CreaDitta", "Manutenzione")';
+        $.ajax({
+            url: url,
+            data: {
+                RagioneSociale: RagioneSociale,
+                //Riferimenti: Riferimenti,
+                
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+
+                if (data == null || data == '') {
+                    caricaDati();
+                }
+                else {
+                    $('#lblMessage').html(data);
+                }
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function ModificaDitta(sender, idDitta)
+    {
+          var parent = $(sender).closest('tr');
+          var tds = parent.find('td');
+
+        var RagineSociale = $(parent).find('#txtRagioneSocialeS').val();
+        //var Riferimenti = $(parent).find('#txtRiferimentiS').val();
+       
+
+        var esito = true;
+        var messaggio = '';
+
+        if (RagioneSociale == '')
+        {
+            esito=false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Ragione Sociale" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        //if (Riferimenti == '')
+        //{
+        //    esito = false;
+        //    messaggio += MESSAGGIO_PUNTINO + " " + "Riferimenti" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        //}
+
+        $('#lblMessage').html(messaggio);
+        if(!esito) return;
+
+
+        var url = '@Url.Action("ModificaDitta", "Manutenzione")';
+        $.ajax({
+            url: url,
+            data: {
+                idDitta: idDitta,
+                RagioneSociale: RagioneSociale,
+                //Riferimenti: Riferimenti,
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+
+                if (data == null || data == '') {
+                    caricaDati();
+                }
+                else {
+                    $('#lblMessage').html(data);
+                }
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+ 
