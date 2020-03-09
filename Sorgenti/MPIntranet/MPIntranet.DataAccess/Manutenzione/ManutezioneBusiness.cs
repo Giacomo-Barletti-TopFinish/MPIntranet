@@ -13,10 +13,10 @@ namespace MPIntranet.DataAccess.Manutenzione
         public ManutezioneBusiness() : base() { }
 
         [DataContext]
-        public void FillDitte(ManutenzioneDS ds)
+        public void FillDitte(ManutenzioneDS ds, bool soloNonCancellati)
         {
             ManutenzioneAdapter a = new ManutenzioneAdapter(DbConnection, DbTransaction);
-            a.FillDitte(ds);
+            a.FillDitte(ds,soloNonCancellati);
         }
 
         [DataContext(true)]

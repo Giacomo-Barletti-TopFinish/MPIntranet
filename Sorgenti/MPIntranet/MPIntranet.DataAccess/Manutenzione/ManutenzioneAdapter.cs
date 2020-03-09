@@ -16,16 +16,20 @@ namespace MPIntranet.DataAccess.Manutenzione
     base(connection, transaction)
         { }
 
-        public void FillDitte(ManutenzioneDS ds)
+        public void FillDitte(ManutenzioneDS ds, bool soloNonCancellati)
         {
-            string query = "select * from ditte order by ragionesociale";
+            string query = @"SELECT * FROM DITTE ";
+            if (soloNonCancellati)
+                query += "WHERE CANCELLATO = 'N' ";
+
+            query += " order by ragionesociale";
 
             using (DbDataAdapter da = BuildDataAdapter(query))
             {
                 da.Fill(ds.DITTE);
             }
         }
-
+        
         public void UpdateTable(string tablename, ManutenzioneDS ds)
         {
             string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);

@@ -1,3 +1,57 @@
 ﻿@using MPIntranet.Models.Manutenzione
 @model List<DittaModel>
 
+@if (Model != null && Model.Count() == 0)
+{
+    <text><b>Nessun risultato trovato</b></text>
+}
+
+else
+{
+<table id="grigliaRisultati" class="table table-condensed table-hover">
+    <thead style="background-color:aliceblue">
+        <tr>
+            <th>Ragione Sociale</th>
+            <th width="2%"></th>
+            <th width="2%"></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    <tbody>
+        @foreach (DittaModel td in Model)
+        {
+        <tr>
+            <td>
+                @Html.TextBox("txtRagioneSocialeS", td.RagioneSociale, new { @class = "form-control input-sm", @id = "txtRagioneSocialeS", @maxlength = "45" })
+            </td>
+            <td align="right">
+                @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(113))
+                {
+                    <a onclick="ModificaDitta(this,@td.IdDitta)" title="Modifica"><i class="fa fa-fw fa-pencil"></i></a>
+                }
+            </td>
+            <td align="right">
+                @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(112))
+                {
+                    <a onclick="CancellaDitta(@td.IdDitta)" title="Cancella"><i class="fa fa-fw fa-remove"></i></a>
+                }
+            </td>
+            <td></td>
+
+        </tr>
+        }
+        </tbody>
+</table>
+}
+
+
+
+
+
+
+
+
+
+
+

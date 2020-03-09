@@ -20,14 +20,14 @@ namespace MPIntranet.Business
 
             using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
             {
-                bManutenzione.FillDitte(_ds);
+                bManutenzione.FillDitte(_ds,false);
 
                 if (_ds.DITTE.Any(x => x.RAGIONESOCIALE.Trim() == dittaStr))
                     return "Ditta già inserita a sistema";
 
                 ManutenzioneDS.DITTERow ditta = _ds.DITTE.NewDITTERow();
 
-                ditta.CANCELLATO = SiNo.Si;
+                ditta.CANCELLATO = SiNo.No;
                 ditta.DATAMODIFICA = DateTime.Now;
                 ditta.UTENTEMODIFICA = account;
                 ditta.RAGIONESOCIALE = dittaStr.Length > 45 ? dittaStr.Substring(0, 45) : dittaStr;
@@ -44,9 +44,9 @@ namespace MPIntranet.Business
 
             using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
             {
-                bManutenzione.FillDitte(_ds);
+                bManutenzione.FillDitte(_ds,true);
 
-                foreach(ManutenzioneDS.DITTERow d in _ds.DITTE)
+                foreach (ManutenzioneDS.DITTERow d in _ds.DITTE)
                     lista.Add(CreaDittaModel(d));
             }
 
@@ -61,5 +61,43 @@ namespace MPIntranet.Business
 
             return dm;
         }
+
+        public void CancellaDitta(decimal idDitta, string account)
+        {
+            using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
+            {
+                bManutenzione.FillDitte(_ds,true);
+                ManutenzioneDS.DITTERow ditta = _ds.DITTE.Where(x => x.IDDITTA == idDitta).FirstOrDefault();
+                if (ditta != null)
+                {
+                    ditta.CANCELLATO = SiNo.Si;
+                    ditta.DATAMODIFICA = DateTime.Now;
+                    ditta.UTENTEMODIFICA = account;
+
+                    bManutenzione.UpdateTable(_ds.DITTE.TableName,_ds);
+                }
+            }
+        }
+        public void ModificaDitta(decimal idDitta, string ragioneSociale, string account)
+        {
+            ragioneSociale = (ragioneSociale.Length > 45 ? ragioneSociale.Substring(0, 45) : ragioneSociale).ToUpper();
+
+
+            using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
+            {
+                bManutenzione.FillDitte(_ds,true);
+                ManutenzioneDS.DITTERow ditta = _ds.DITTE.Where(x => x.IDDITTA == idDitta).FirstOrDefault();
+                if (ditta != null)
+                {
+                    ditta.RAGIONESOCIALE = ragioneSociale.Length > 45 ? ragioneSociale.Substring(0, 45) : ragioneSociale;
+
+                    ditta.DATAMODIFICA = DateTime.Now;
+                    ditta.UTENTEMODIFICA = account;
+
+                    bManutenzione.UpdateTable(_ds.DITTE.TableName,_ds);
+                }
+            }
+        }
     }
 }
+

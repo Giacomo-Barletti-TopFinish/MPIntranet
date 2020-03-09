@@ -9,7 +9,7 @@
 </div>
 <div id="ArticleScrolledContent" class="content-scheda" style="overflow-y:auto; overflow-x:hidden">
 
-    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(16))
+    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(111))
     {
         <div class="row col-lg-12">
             <table class="table">
@@ -45,7 +45,8 @@
         caricaDati();
     });
     function CancellaDitta(idDitta) {
-     var url = '@Url.Action("RimuoviDitta", "Manutenzione")';
+        
+     var url = '@Url.Action("CancellaDitta", "Manutenzione")';
             $.ajax({
                 url: url,
                 data: {
@@ -138,7 +139,7 @@
           var parent = $(sender).closest('tr');
           var tds = parent.find('td');
 
-        var RagineSociale = $(parent).find('#txtRagioneSocialeS').val();
+        var RagioneSociale = $(parent).find('#txtRagioneSocialeS').val();
         //var Riferimenti = $(parent).find('#txtRiferimentiS').val();
        
 
