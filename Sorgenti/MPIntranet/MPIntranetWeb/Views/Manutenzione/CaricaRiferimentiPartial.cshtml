@@ -13,18 +13,95 @@
     {
         <tr>
             <td>@riferimento.Tipologia</td>
-            <td>@riferimento.Etichetta                                </td>
-            <td>@riferimento.Riferimento</td>
+            <td>@Html.TextBox("txtEtichettaS",  new { @class = "form-control input-sm", @id = "txtEtichettaS", @maxlength = "45" })</td>
+            <td>@Html.TextBox("txtRiferimentoS",  new { @class = "form-control input-sm", @id = "txtRiferimentoS", @maxlength = "45" })</td>
             <td><a onclick="ModificaRiferimento(this,@riferimento.IdRiferimento)" title="Modifica"><i class="fa fa-fw fa-pencil"></i></a></td>
             <td><a onclick="CancellaRiferimento(@riferimento.IdRiferimento)" title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>
         </tr>
     }
     <tr>
-        <td>  dropdownlist</td>
-        <td>  @Html.TextBox("txtRagioneSocialeS", string.Empty, new { @class = "form-control input-sm", @id = "txtRagioneSocialeS", @maxlength = "45" })                                </td>
-        <td>  @Html.TextBox("txtRagioneSocialeS", string.Empty, new { @class = "form-control input-sm", @id = "txtRagioneSocialeS", @maxlength = "45" })</td>
+        <td> ddlRiferimenti.Insert(0, new MPIntranetListItem(Model.Riferimenti)); </td>
+        <td>  @Html.TextBox("txtEtichettaS", string.Empty, new { @class = "form-control input-sm", @id = "txtEtichettaS", @maxlength = "45" })</td>
+        <td>  @Html.TextBox("txtRiferimentoS", string.Empty, new { @class = "form-control input-sm", @id = "txtRiferimentoS", @maxlength = "45" })</td>
         <td><a onclick="AggiungiRiferimento(this,@Model.IdEsterna,'@Model.TabellaEsterna' )" title="Aggiungi"><i class="fa fa-fw fa-plus"></i></a></td>
         <td></td>
     </tr>
 
 </table>
+
+
+    var url = '@Url.Action("CancellaRiferimento", "Manutenzione")';
+    $.ajax({
+    url: url,
+    data: {
+    idRiferimento: idRiferimento
+    },
+    cache: false,
+    type: "POST",
+    success: function (data)
+    {
+    caricaDati();
+    },
+    error: function (response)
+    {
+    document.open();
+    document.write(response.responseText);
+    document.close();
+    }
+    });
+    
+
+    var url = '@Url.Action("AggiungiRiferimento", "Manutenzione")';
+    $.ajax({
+    url: url,
+    data: {
+    },
+    cache: false,
+    type: "POST",
+    success: function (data)
+    {
+    $('#divRisultati').html(data).show();
+    $('#txtRiferimento').val('');
+    $('#txtEtichetta').val('');
+    $('#txtTipologia').val('');
+
+    },
+    error: function (response)
+    {
+    document.open();
+    document.write(response.responseText);
+    document.close();
+    }
+    });
+    
+
+    var url = '@Url.Action("ModificaRiferimento", "Manutenzione")';
+    $.ajax({
+    url: url,
+    data: {
+    IdRiferimento: IdRiferimento,
+    Riferimento: Riferimento,
+    Etichetta: Etichetta,
+    Tipologia: Tipologia
+
+    },
+    cache: false,
+    type: "POST",
+    success: function (data)
+    {
+
+    if (data == null || data == '') {
+    caricaDati();
+    }
+    else {
+    $('#lblMessage').html(data);
+    }
+    },
+    error: function (response)
+    {
+    document.open();
+    document.write(response.responseText);
+    document.close();
+    }
+    });
+    
