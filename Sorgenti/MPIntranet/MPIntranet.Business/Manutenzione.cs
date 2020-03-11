@@ -119,15 +119,27 @@ namespace MPIntranet.Business
             }
         }
 
-        public string CreaRiferimento(string Etichetta, string Riferimento, string Tipologia, string account)
+        public string CreaRiferimento(decimal IdEsterna, string TabellaEsterna, string Tipologia, string Etichetta, string Riferimento, string account)
         {
-            string riferimentoStr = Riferimento.ToUpper().Trim();
+            Riferimento = Riferimento.ToUpper().Trim();
+            Etichetta = Etichetta.ToUpper().Trim();
+            Tipologia = Tipologia.ToUpper().Trim();
+            TabellaEsterna = TabellaEsterna.ToUpper().Trim();
+
+            if (string.IsNullOrEmpty(Riferimento))
+                return "Riferimento assente";
+            if (string.IsNullOrEmpty(Etichetta))
+                return "Etichetta assente";
+            if (string.IsNullOrEmpty(Tipologia))
+                return "Tipologia assente";
+            if (string.IsNullOrEmpty(TabellaEsterna))
+                return "Tabella esterna assente";
 
             using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
             {
                 bManutenzione.FillRiferimenti(_ds, false);
 
-                if (_ds.RIFERIMENTI.Any(x => x.RIFERIMENTO.Trim() == riferimentoStr))
+                if (_ds.RIFERIMENTI.Any(x => x.RIFERIMENTO.Trim() == Riferimento && x.IDESTERNA == IdEsterna && x.TABELLAESTERNA == TabellaEsterna))
                     return "Riferimento già inserito a sistema";
 
                 ManutenzioneDS.RIFERIMENTIRow riferimento = _ds.RIFERIMENTI.NewRIFERIMENTIRow();
@@ -135,14 +147,18 @@ namespace MPIntranet.Business
                 riferimento.CANCELLATO = SiNo.No;
                 riferimento.DATAMODIFICA = DateTime.Now;
                 riferimento.UTENTEMODIFICA = account;
-                riferimento.RIFERIMENTO = riferimentoStr.Length > 45 ? riferimentoStr.Substring(0, 45) : riferimentoStr;
+                riferimento.RIFERIMENTO = Riferimento.Length > 45 ? Riferimento.Substring(0, 45) : Riferimento;
+                riferimento.IDESTERNA = IdEsterna;
+                riferimento.TABELLAESTERNA = TabellaEsterna.Length > 45 ? TabellaEsterna.Substring(0, 45) : TabellaEsterna;
+                riferimento.TIPOLOGIA = Tipologia.Length > 45 ? Tipologia.Substring(0, 45) : Tipologia;
                 _ds.RIFERIMENTI.AddRIFERIMENTIRow(riferimento);
 
                 bManutenzione.UpdateTable(_ds.RIFERIMENTI.TableName, _ds);
             }
+
             return string.Empty;
         }
-     
+
         public void CancellaRiferimento(decimal idRiferimento, string account)
         {
             using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())

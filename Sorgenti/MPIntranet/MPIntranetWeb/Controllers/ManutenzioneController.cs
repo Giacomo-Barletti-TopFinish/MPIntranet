@@ -23,6 +23,12 @@ namespace MPIntranetWeb.Controllers
             Manutenzione a = new Manutenzione();
             List<DittaModel> lista = a.CreaListaDittaModel();
 
+            List<MPIntranetListItem> ddlTipologia = new List<MPIntranetListItem>();
+            ddlTipologia.Add(new MPIntranetListItem(TipologiaRiferimento.Email, TipologiaRiferimento.Email));
+            ddlTipologia.Add(new MPIntranetListItem(TipologiaRiferimento.Telefono, TipologiaRiferimento.Telefono));
+
+            ViewData.Add("ddlTipologia", ddlTipologia);
+
             return PartialView("CaricaDittePartial", lista);
 
         }
@@ -49,10 +55,10 @@ namespace MPIntranetWeb.Controllers
             return null;
         }
       
-        public ActionResult CreaRiferimenti(string Etichetta, string Riferimento, string Tipologia)
+        public ActionResult CreaRiferimento(decimal IdEsterna, string TabellaEsterna,string Tipologia, string Etichetta, string Riferimento)
         {
             Manutenzione a = new Manutenzione();
-            string messaggio = a.CreaRiferimento(Etichetta, Riferimento, Tipologia, ConnectedUser);
+            string messaggio = a.CreaRiferimento(IdEsterna,TabellaEsterna, Tipologia,Etichetta, Riferimento, ConnectedUser);
 
             return Content(messaggio);
         }
