@@ -22,7 +22,7 @@ else
             @foreach (DittaModel td in Model)
             {
                 <tr>
-                    <td colspan="2">
+                    <td colspan="2" height="60">
                         <input type="hidden" class="hdIdDitta" value="@td.IdDitta" />
                         @Html.TextBox("txtRagioneSocialeS", td.RagioneSociale, new { @class = "form-control input-sm", @id = "txtRagioneSocialeS", @maxlength = "45" })
                     </td>
@@ -54,6 +54,7 @@ else
         </tbody>
     </table>
     <div id="divRiferimenti"></div>
+   
 }
 
 <script language="javascript" type="text/javascript">

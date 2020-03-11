@@ -3,35 +3,48 @@
 
 @model RiferimentoModelContainer
 
-<table class="table table-condensed table-hover">
-    <tr>
-        <th>Tipologia</th>
-        <th>Etichetta</th>
-        <th>Riferimento</th>
-        <th width="2%"></th>
-        <th width="2%"></th>
-    </tr>
-    @foreach (RiferimentoModel riferimento in Model.Riferimenti)
-    {
-        <tr>
-            <td>@riferimento.Tipologia</td>
-            <td>@Html.TextBox("txtEtichettaS",riferimento.Etichetta, new { @class = "form-control input-sm", @id = "txtEtichettaS", @maxlength = "45" })</td>
-            <td>@Html.TextBox("txtRiferimentoS", riferimento.Riferimento,new { @class = "form-control input-sm", @id = "txtRiferimentoS", @maxlength = "45" })</td>
-            <td><a onclick="ModificaRiferimento(this,@riferimento.IdRiferimento)" title="Modifica"><i class="fa fa-fw fa-pencil"></i></a></td>
-            <td><a onclick="CancellaRiferimento(@riferimento.IdRiferimento)" title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>
+    <table class="table table-condensed table-hover">
+        <tr style="background-color:aliceblue">
+            <th>Tipologia</th>
+            <th>Etichetta</th>
+            <th>Riferimento</th>
+            <th width="2%"></th>
+            <th width="2%"></th>
         </tr>
-    }
-    <tr>
-        <td>
-            @Html.DropDownList("ddlTipologia", new SelectList(ViewData["ddlTipologia"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @style = "height: 21px;" })
-        </td>
-        <td>  @Html.TextBox("txtEtichettaS", string.Empty, new { @class = "form-control input-sm", @id = "txtEtichettaS", @maxlength = "45" })</td>
-        <td>  @Html.TextBox("txtRiferimentoS", string.Empty, new { @class = "form-control input-sm", @id = "txtRiferimentoS", @maxlength = "45" })</td>
-        <td><a onclick="AggiungiRiferimento(this,@Model.IdEsterna,'@Model.TabellaEsterna' )" title="Aggiungi"><i class="fa fa-fw fa-plus"></i></a></td>
-        <td></td>
-    </tr>
+        @foreach (RiferimentoModel riferimento in Model.Riferimenti)
+        {
+            <tr>
+                <td>@riferimento.Tipologia</td>
+                <td>@Html.TextBox("txtEtichettaS", riferimento.Etichetta, new { @class = "form-control input-sm", @id = "txtEtichettaS", @maxlength = "45" })</td>
+                <td>@Html.TextBox("txtRiferimentoS", riferimento.Riferimento, new { @class = "form-control input-sm", @id = "txtRiferimentoS", @maxlength = "45" })</td>
 
-</table>
+                <td>
+                    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(113))
+                    {
+                        <a onclick="ModificaRiferimento(this,@riferimento.IdRiferimento)" title="Modifica"><i class="fa fa-fw fa-pencil"></i></a>
+                    }
+                </td>
+                <td>
+                    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(112))
+                    {
+                        <a onclick="CancellaRiferimento(@riferimento.IdRiferimento)" title="Cancella"><i class="fa fa-fw fa-remove"></i></a>
+                    }
+                </td>
+            </tr>
+        }
+        <tr>
+            <td>
+                @Html.DropDownList("ddlTipologia", new SelectList(ViewData["ddlTipologia"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @style = "height: 21px;" })
+            </td>
+            <td>  @Html.TextBox("txtEtichettaS", string.Empty, new { @class = "form-control input-sm", @id = "txtEtichettaS", @maxlength = "45" })</td>
+            <td>  @Html.TextBox("txtRiferimentoS", string.Empty, new { @class = "form-control input-sm", @id = "txtRiferimentoS", @maxlength = "45" })</td>
+            <td><a onclick="AggiungiRiferimento(this,@Model.IdEsterna,'@Model.TabellaEsterna' )" title="Aggiungi"><i class="fa fa-fw fa-plus"></i></a></td>
+            <td></td>
+        </tr>
+        
+
+    </table>
+
 
 
 <script language="javascript" type="text/javascript">
@@ -91,7 +104,7 @@
     }
 
     function AggiungiRiferimento(sender, IdEsterna, TabellaEsterna) {
-
+        
         var parent = $(sender).closest('tr');
         var tds = parent.find('td');
 
@@ -134,9 +147,14 @@
         type: "POST",
             success: function (data)
             {
-                $(parent).find('#txtEtichettaS').val('');
-                $(parent).find('#txtRiferimentoS').val('');
-                caricaDati();
+                if (data == null || data == '') {
+                    $(parent).find('#txtEtichettaS').val('');
+                    $(parent).find('#txtRiferimentoS').val('');
+                    caricaDati();
+                }
+                else {
+                     $('#lblMessage').html(data);
+                }
             },
             error: function (response)
             {
