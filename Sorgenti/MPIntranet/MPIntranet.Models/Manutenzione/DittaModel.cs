@@ -10,7 +10,8 @@ namespace MPIntranet.Models.Manutenzione
     {
         public decimal IdDitta { get; set; }
 
-        public string RagioneSociale{ get; set; }
+        public string RagioneSociale { get; set; }
 
+        public RiferimentoModelContainer Riferimenti { get; set; }
     }
 }

@@ -48,25 +48,7 @@ namespace MPIntranetWeb.Controllers
             a.ModificaDitta(idDitta, ragioneSociale, ConnectedUser);
             return null;
         }
-
-        public ActionResult Riferimenti()
-        {
-            return View();
-        }
-        public ActionResult CaricaRiferimenti(decimal IdDitta, string TabellaEsterna)
-        {
-            Manutenzione a = new Manutenzione();
-            List<RiferimentiModel> lista = a.CreaListaRiferimentiModel(IdDitta, TabellaEsterna);
-
-            List<MPIntranetListItem> tipoRiferimenti = new List<MPIntranetListItem>();
-            tipoRiferimenti.Add(new MPIntranetListItem(TipologiaRiferimento.Email, TipologiaRiferimento.Email));
-            tipoRiferimenti.Add(new MPIntranetListItem(TipologiaRiferimento.Telefono, TipologiaRiferimento.Telefono));
-
-            ViewData.Add("ddlTipoRiferimento", tipoRiferimenti);
-            return PartialView("CaricaRiferimentiPartial", lista);
-
-        }
-
+      
         public ActionResult CreaRiferimenti(string Etichetta, string Riferimento, string Tipologia)
         {
             Manutenzione a = new Manutenzione();

@@ -11,18 +11,18 @@ else
     <table id="grigliaDitte" class="table table-condensed table-hover">
         <thead style="background-color:aliceblue">
             <tr>
-                <th>Ragione Sociale</th>
+                <th colspan="2">Ragione Sociale</th>
                 <th width="2%"></th>
                 <th width="2%"></th>
                 <th></th>
+
             </tr>
         </thead>
-        <tbody>
         <tbody>
             @foreach (DittaModel td in Model)
             {
                 <tr>
-                    <td>
+                    <td colspan="2">
                         <input type="hidden" class="hdIdDitta" value="@td.IdDitta" />
                         @Html.TextBox("txtRagioneSocialeS", td.RagioneSociale, new { @class = "form-control input-sm", @id = "txtRagioneSocialeS", @maxlength = "45" })
                     </td>
@@ -39,7 +39,16 @@ else
                         }
                     </td>
                     <td></td>
+                </tr>
+                <tr>
+                    <td width="2%"></td>
+                    <td>
+                        @Html.Partial("CaricaRiferimentiPartial", td.Riferimenti)
 
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
             }
         </tbody>
@@ -54,13 +63,13 @@ else
 
             var tds = $(this).find('td');
 
-           
+
         });
     });
 
     function CaricaRiferimenti(idDitta) {
   var url = '@Url.Action("CaricaRiferimenti", "Manutenzione")';
-       
+
 </script>
 
 

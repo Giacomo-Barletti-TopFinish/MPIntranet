@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MPIntranet.Models.Manutenzione
 {
-    public class RiferimentiModel
+    public class RiferimentoModel
     {
         public decimal IdRiferimento { get; set; }
 
@@ -17,5 +17,14 @@ namespace MPIntranet.Models.Manutenzione
         public string Tipologia { get; set; }
 
 
+    }
+
+    public class RiferimentoModelContainer
+    {
+        public decimal IdEsterna { get; set; }
+
+        public string TabellaEsterna { get; set; }
+
+        public List<RiferimentoModel> Riferimenti { get; set; }
     }
 }

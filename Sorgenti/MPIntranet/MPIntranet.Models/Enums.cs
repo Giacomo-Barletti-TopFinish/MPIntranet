@@ -20,4 +20,10 @@ namespace MPIntranet.Models
         public const string Telefono = "TELEFONO";
     }
 
+    public class TabelleEsterne
+    {
+        public const string Ditte = "DITTE";
+        public const string Manutentori= "MANUTENTORI";
+    }
+
 }

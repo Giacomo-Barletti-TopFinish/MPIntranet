@@ -1,0 +1,30 @@
+﻿@using MPIntranet.Models.Manutenzione
+@model RiferimentoModelContainer
+
+<table class="table table-condensed table-hover">
+    <tr>
+        <th>Tipologia</th>
+        <th>Etichetta</th>
+        <th>Riferimento</th>
+        <th width="2%"></th>
+        <th width="2%"></th>
+    </tr>
+    @foreach (RiferimentoModel riferimento in Model.Riferimenti)
+    {
+        <tr>
+            <td>@riferimento.Tipologia</td>
+            <td>@riferimento.Etichetta                                </td>
+            <td>@riferimento.Riferimento</td>
+            <td><a onclick="ModificaRiferimento(this,@riferimento.IdRiferimento)" title="Modifica"><i class="fa fa-fw fa-pencil"></i></a></td>
+            <td><a onclick="CancellaRiferimento(@riferimento.IdRiferimento)" title="Cancella"><i class="fa fa-fw fa-remove"></i></a></td>
+        </tr>
+    }
+    <tr>
+        <td>  dropdownlist</td>
+        <td>  @Html.TextBox("txtRagioneSocialeS", string.Empty, new { @class = "form-control input-sm", @id = "txtRagioneSocialeS", @maxlength = "45" })                                </td>
+        <td>  @Html.TextBox("txtRagioneSocialeS", string.Empty, new { @class = "form-control input-sm", @id = "txtRagioneSocialeS", @maxlength = "45" })</td>
+        <td><a onclick="AggiungiRiferimento(this,@Model.IdEsterna,'@Model.TabellaEsterna' )" title="Aggiungi"><i class="fa fa-fw fa-plus"></i></a></td>
+        <td></td>
+    </tr>
+
+</table>

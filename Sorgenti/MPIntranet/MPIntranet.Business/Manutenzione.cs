@@ -45,23 +45,43 @@ namespace MPIntranet.Business
             using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
             {
                 bManutenzione.FillDitte(_ds, true);
+                bManutenzione.FillRiferimenti(_ds, true);
 
                 foreach (ManutenzioneDS.DITTERow d in _ds.DITTE)
-                    lista.Add(CreaDittaModel(d));
+                    lista.Add(CreaDittaModel(d, _ds));
             }
 
             return lista;
         }
 
-        private DittaModel CreaDittaModel(ManutenzioneDS.DITTERow ditta)
+        private DittaModel CreaDittaModel(ManutenzioneDS.DITTERow ditta, ManutenzioneDS ds)
         {
             DittaModel dm = new DittaModel();
             dm.IdDitta = ditta.IDDITTA;
             dm.RagioneSociale = ditta.RAGIONESOCIALE;
 
+            RiferimentoModelContainer rmc = new RiferimentoModelContainer();
+            dm.Riferimenti = rmc;
+
+            rmc.TabellaEsterna = TabelleEsterne.Ditte;
+            rmc.IdEsterna = ditta.IDDITTA;
+            rmc.Riferimenti = new List<RiferimentoModel>();
+
+            foreach (ManutenzioneDS.RIFERIMENTIRow riferimento in ds.RIFERIMENTI.Where(x => x.IDESTERNA == ditta.IDDITTA && x.TABELLAESTERNA == TabelleEsterne.Ditte))
+                rmc.Riferimenti.Add(CreaRiferimentoModel(riferimento));
+
             return dm;
         }
+        private RiferimentoModel CreaRiferimentoModel(ManutenzioneDS.RIFERIMENTIRow riferimento)
+        {
+            RiferimentoModel rm = new RiferimentoModel();
+            rm.Etichetta = riferimento.ETICHETTA;
+            rm.IdRiferimento = riferimento.IDRIFERIMENTO;
+            rm.Riferimento = riferimento.RIFERIMENTO;
+            rm.Tipologia = riferimento.TIPOLOGIA;
 
+            return rm;
+        }
         public void CancellaDitta(decimal idDitta, string account)
         {
             using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
@@ -105,7 +125,7 @@ namespace MPIntranet.Business
 
             using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
             {
-                bManutenzione.FillRIFERIMENTI(_ds, false);
+                bManutenzione.FillRiferimenti(_ds, false);
 
                 if (_ds.RIFERIMENTI.Any(x => x.RIFERIMENTO.Trim() == riferimentoStr))
                     return "Riferimento già inserito a sistema";
@@ -122,40 +142,12 @@ namespace MPIntranet.Business
             }
             return string.Empty;
         }
-
-        public List<RiferimentiModel> CreaListaRiferimentiModel(decimal idEsterno, string tabellaEsterna)
-        {
-            List<RiferimentiModel> lista = new List<RiferimentiModel>();
-
-            using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
-            {
-                bManutenzione.FillRIFERIMENTI(_ds, true);
-
-                foreach (ManutenzioneDS.RIFERIMENTIRow d in _ds.RIFERIMENTI.Where(x => x.IDESTERNA == idEsterno && x.TABELLAESTERNA == tabellaEsterna.ToUpper().Trim()))
-                    lista.Add(CreaRiferimentoModel(d));
-            }
-
-            return lista;
-        }
-
-        private RiferimentiModel CreaRiferimentoModel(ManutenzioneDS.RIFERIMENTIRow riferimento)
-        {
-            if (riferimento == null) return null;
-
-            RiferimentiModel dm = new RiferimentiModel();
-            dm.IdRiferimento = riferimento.IDRIFERIMENTO;
-            dm.Etichetta = riferimento.ETICHETTA;
-            dm.Riferimento = riferimento.RIFERIMENTO;
-            dm.Tipologia = riferimento.TIPOLOGIA;
-
-            return dm;
-        }
-
+     
         public void CancellaRiferimento(decimal idRiferimento, string account)
         {
             using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
             {
-                bManutenzione.FillRIFERIMENTI(_ds, true);
+                bManutenzione.FillRiferimenti(_ds, true);
                 ManutenzioneDS.RIFERIMENTIRow riferimento = _ds.RIFERIMENTI.Where(x => x.IDRIFERIMENTO == idRiferimento).FirstOrDefault();
                 if (riferimento != null)
                 {
@@ -175,7 +167,7 @@ namespace MPIntranet.Business
             ManutenzioneDS.RIFERIMENTIRow riferimento = _ds.RIFERIMENTI.Where(x => x.IDRIFERIMENTO == idRiferimenti).FirstOrDefault();
             using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
             {
-                bManutenzione.FillRIFERIMENTI(_ds, true);
+                bManutenzione.FillRiferimenti(_ds, true);
 
                 if (riferimento != null)
                 {
