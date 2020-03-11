@@ -14,4 +14,10 @@ namespace MPIntranet.Models
         public const string No = "N";
     }
 
+    public class TipologiaRiferimento
+    {
+        public const string Email = "EMAIL";
+        public const string Telefono = "TELEFONO";
+    }
+
 }

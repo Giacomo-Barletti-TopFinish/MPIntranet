@@ -8,42 +8,60 @@
 
 else
 {
-<table id="grigliaRisultati" class="table table-condensed table-hover">
-    <thead style="background-color:aliceblue">
-        <tr>
-            <th>Ragione Sociale</th>
-            <th width="2%"></th>
-            <th width="2%"></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-    <tbody>
-        @foreach (DittaModel td in Model)
-        {
-        <tr>
-            <td>
-                @Html.TextBox("txtRagioneSocialeS", td.RagioneSociale, new { @class = "form-control input-sm", @id = "txtRagioneSocialeS", @maxlength = "45" })
-            </td>
-            <td align="right">
-                @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(113))
-                {
-                    <a onclick="ModificaDitta(this,@td.IdDitta)" title="Modifica"><i class="fa fa-fw fa-pencil"></i></a>
-                }
-            </td>
-            <td align="right">
-                @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(112))
-                {
-                    <a onclick="CancellaDitta(@td.IdDitta)" title="Cancella"><i class="fa fa-fw fa-remove"></i></a>
-                }
-            </td>
-            <td></td>
+    <table id="grigliaDitte" class="table table-condensed table-hover">
+        <thead style="background-color:aliceblue">
+            <tr>
+                <th>Ragione Sociale</th>
+                <th width="2%"></th>
+                <th width="2%"></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        <tbody>
+            @foreach (DittaModel td in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="hidden" class="hdIdDitta" value="@td.IdDitta" />
+                        @Html.TextBox("txtRagioneSocialeS", td.RagioneSociale, new { @class = "form-control input-sm", @id = "txtRagioneSocialeS", @maxlength = "45" })
+                    </td>
+                    <td align="right">
+                        @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(113))
+                        {
+                            <a onclick="ModificaDitta(this,@td.IdDitta)" title="Modifica"><i class="fa fa-fw fa-pencil"></i></a>
+                        }
+                    </td>
+                    <td align="right">
+                        @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(112))
+                        {
+                            <a onclick="CancellaDitta(@td.IdDitta)" title="Cancella"><i class="fa fa-fw fa-remove"></i></a>
+                        }
+                    </td>
+                    <td></td>
 
-        </tr>
-        }
+                </tr>
+            }
         </tbody>
-</table>
+    </table>
+    <div id="divRiferimenti"></div>
 }
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+
+        $('#grigliaDitte tbody tr').click(function () {
+
+            var tds = $(this).find('td');
+
+           
+        });
+    });
+
+    function CaricaRiferimenti(idDitta) {
+  var url = '@Url.Action("CaricaRiferimenti", "Manutenzione")';
+       
+</script>
 
 
 

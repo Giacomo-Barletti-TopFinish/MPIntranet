@@ -29,7 +29,22 @@ namespace MPIntranet.DataAccess.Manutenzione
                 da.Fill(ds.DITTE);
             }
         }
-        
+
+        public void FillRiferimenti(ManutenzioneDS ds, bool soloNonCancellati)
+        {
+            string query = @"SELECT * FROM RIFERIMENTI ";
+            if (soloNonCancellati)
+                query += "WHERE CANCELLATO = 'N' ";
+
+            query += " order by riferimento";
+
+            using (DbDataAdapter da = BuildDataAdapter(query))
+            {
+                da.Fill(ds.RIFERIMENTI);
+
+            }
+        }
+
         public void UpdateTable(string tablename, ManutenzioneDS ds)
         {
             string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);
@@ -45,5 +60,22 @@ namespace MPIntranet.DataAccess.Manutenzione
                 a.Update(dt);
             }
         }
+
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+

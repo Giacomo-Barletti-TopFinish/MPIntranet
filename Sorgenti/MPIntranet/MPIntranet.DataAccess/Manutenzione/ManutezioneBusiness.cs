@@ -18,6 +18,12 @@ namespace MPIntranet.DataAccess.Manutenzione
             ManutenzioneAdapter a = new ManutenzioneAdapter(DbConnection, DbTransaction);
             a.FillDitte(ds,soloNonCancellati);
         }
+        [DataContext]
+        public void FillRIFERIMENTI(ManutenzioneDS ds, bool soloNonCancellati)
+        {
+            ManutenzioneAdapter a = new ManutenzioneAdapter(DbConnection, DbTransaction);
+            a.FillRiferimenti(ds, soloNonCancellati);
+        }
 
         [DataContext(true)]
         public void UpdateTable(string tablename, ManutenzioneDS ds)

@@ -20,7 +20,7 @@ namespace MPIntranet.Business
 
             using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
             {
-                bManutenzione.FillDitte(_ds,false);
+                bManutenzione.FillDitte(_ds, false);
 
                 if (_ds.DITTE.Any(x => x.RAGIONESOCIALE.Trim() == dittaStr))
                     return "Ditta già inserita a sistema";
@@ -44,7 +44,7 @@ namespace MPIntranet.Business
 
             using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
             {
-                bManutenzione.FillDitte(_ds,true);
+                bManutenzione.FillDitte(_ds, true);
 
                 foreach (ManutenzioneDS.DITTERow d in _ds.DITTE)
                     lista.Add(CreaDittaModel(d));
@@ -66,7 +66,7 @@ namespace MPIntranet.Business
         {
             using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
             {
-                bManutenzione.FillDitte(_ds,true);
+                bManutenzione.FillDitte(_ds, true);
                 ManutenzioneDS.DITTERow ditta = _ds.DITTE.Where(x => x.IDDITTA == idDitta).FirstOrDefault();
                 if (ditta != null)
                 {
@@ -74,7 +74,7 @@ namespace MPIntranet.Business
                     ditta.DATAMODIFICA = DateTime.Now;
                     ditta.UTENTEMODIFICA = account;
 
-                    bManutenzione.UpdateTable(_ds.DITTE.TableName,_ds);
+                    bManutenzione.UpdateTable(_ds.DITTE.TableName, _ds);
                 }
             }
         }
@@ -85,7 +85,7 @@ namespace MPIntranet.Business
 
             using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
             {
-                bManutenzione.FillDitte(_ds,true);
+                bManutenzione.FillDitte(_ds, true);
                 ManutenzioneDS.DITTERow ditta = _ds.DITTE.Where(x => x.IDDITTA == idDitta).FirstOrDefault();
                 if (ditta != null)
                 {
@@ -94,7 +94,99 @@ namespace MPIntranet.Business
                     ditta.DATAMODIFICA = DateTime.Now;
                     ditta.UTENTEMODIFICA = account;
 
-                    bManutenzione.UpdateTable(_ds.DITTE.TableName,_ds);
+                    bManutenzione.UpdateTable(_ds.DITTE.TableName, _ds);
+                }
+            }
+        }
+
+        public string CreaRiferimento(string Etichetta, string Riferimento, string Tipologia, string account)
+        {
+            string riferimentoStr = Riferimento.ToUpper().Trim();
+
+            using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
+            {
+                bManutenzione.FillRIFERIMENTI(_ds, false);
+
+                if (_ds.RIFERIMENTI.Any(x => x.RIFERIMENTO.Trim() == riferimentoStr))
+                    return "Riferimento già inserito a sistema";
+
+                ManutenzioneDS.RIFERIMENTIRow riferimento = _ds.RIFERIMENTI.NewRIFERIMENTIRow();
+                riferimento.ETICHETTA = Etichetta.Length > 45 ? Etichetta.Substring(0, 45) : Etichetta;
+                riferimento.CANCELLATO = SiNo.No;
+                riferimento.DATAMODIFICA = DateTime.Now;
+                riferimento.UTENTEMODIFICA = account;
+                riferimento.RIFERIMENTO = riferimentoStr.Length > 45 ? riferimentoStr.Substring(0, 45) : riferimentoStr;
+                _ds.RIFERIMENTI.AddRIFERIMENTIRow(riferimento);
+
+                bManutenzione.UpdateTable(_ds.RIFERIMENTI.TableName, _ds);
+            }
+            return string.Empty;
+        }
+
+        public List<RiferimentiModel> CreaListaRiferimentiModel(decimal idEsterno, string tabellaEsterna)
+        {
+            List<RiferimentiModel> lista = new List<RiferimentiModel>();
+
+            using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
+            {
+                bManutenzione.FillRIFERIMENTI(_ds, true);
+
+                foreach (ManutenzioneDS.RIFERIMENTIRow d in _ds.RIFERIMENTI.Where(x => x.IDESTERNA == idEsterno && x.TABELLAESTERNA == tabellaEsterna.ToUpper().Trim()))
+                    lista.Add(CreaRiferimentoModel(d));
+            }
+
+            return lista;
+        }
+
+        private RiferimentiModel CreaRiferimentoModel(ManutenzioneDS.RIFERIMENTIRow riferimento)
+        {
+            if (riferimento == null) return null;
+
+            RiferimentiModel dm = new RiferimentiModel();
+            dm.IdRiferimento = riferimento.IDRIFERIMENTO;
+            dm.Etichetta = riferimento.ETICHETTA;
+            dm.Riferimento = riferimento.RIFERIMENTO;
+            dm.Tipologia = riferimento.TIPOLOGIA;
+
+            return dm;
+        }
+
+        public void CancellaRiferimento(decimal idRiferimento, string account)
+        {
+            using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
+            {
+                bManutenzione.FillRIFERIMENTI(_ds, true);
+                ManutenzioneDS.RIFERIMENTIRow riferimento = _ds.RIFERIMENTI.Where(x => x.IDRIFERIMENTO == idRiferimento).FirstOrDefault();
+                if (riferimento != null)
+                {
+                    riferimento.CANCELLATO = SiNo.Si;
+                    riferimento.DATAMODIFICA = DateTime.Now;
+                    riferimento.UTENTEMODIFICA = account;
+
+                    bManutenzione.UpdateTable(_ds.DITTE.TableName, _ds);
+                }
+            }
+        }
+        public void ModificaRiferimenti(decimal idRiferimenti, string Etichetta, string Riferimento, string Tipologia, string account)
+        {
+            Etichetta = (Etichetta.Length > 45 ? Etichetta.Substring(0, 45) : Etichetta).ToUpper();
+            Riferimento = (Riferimento.Length > 45 ? Riferimento.Substring(0, 45) : Riferimento).ToUpper();
+            Tipologia = (Tipologia.Length > 45 ? Tipologia.Substring(0, 45) : Tipologia).ToUpper();
+            ManutenzioneDS.RIFERIMENTIRow riferimento = _ds.RIFERIMENTI.Where(x => x.IDRIFERIMENTO == idRiferimenti).FirstOrDefault();
+            using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
+            {
+                bManutenzione.FillRIFERIMENTI(_ds, true);
+
+                if (riferimento != null)
+                {
+                    riferimento.ETICHETTA = Etichetta;
+                    riferimento.RIFERIMENTO = Riferimento;
+                    riferimento.TIPOLOGIA = Tipologia;
+
+                    riferimento.DATAMODIFICA = DateTime.Now;
+                    riferimento.UTENTEMODIFICA = account;
+
+                    bManutenzione.UpdateTable(_ds.RIFERIMENTI.TableName, _ds);
                 }
             }
         }

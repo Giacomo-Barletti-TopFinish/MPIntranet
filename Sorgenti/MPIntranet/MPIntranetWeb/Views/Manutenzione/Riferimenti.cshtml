@@ -1,0 +1,229 @@
+﻿@{
+    ViewBag.Title = "Riferimenti";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+
+<div class="content-top">
+    <h2>Gestione Riferimenti</h2>
+</div>
+
+<div id="ArticleScrolledContent" class="content-scheda" style="overflow-y:auto; overflow-x:hidden">
+    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(111))
+    {
+        <div class="row col-lg-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th width="15%">Riferimento</th>
+                        <th width="10%">Etichetta</th>
+                        <th width="10%">Tipologia</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td width="15%">
+                            @Html.TextBox("txtRiferimento", null, new { @class = "form-control input-sm ", @id = "txtRiferimento", @maxlength = "45" })
+                        </td>
+                        <th width="10%">
+                            @Html.TextBox("txtEtichetta", null, new { @class = "form-control input-sm ", @id = "txtEtichetta", @maxlength = "45" })
+                        </th>
+                        <th width="10%">
+                            @Html.TextBox("txtTipologia", null, new { @class = "form-control input-sm ", @id = "txtTipologia", @maxlength = "45" })
+                        </th>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row col-lg-2">
+            <div style="display:inline-block; width:50%">
+                <input type="button" onclick="AggiungiNuovo();" class="btn btn-primary" value="Nuovo riferimento" />
+            </div>
+        </div>
+    }
+    <label class="text-red input-sm" id="lblMessage"></label>
+    <br />
+    <div class="col-md-12" id="divRisultati">
+
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+        caricaDati();
+    });
+
+    function CancellaRiferimento(idRiferimento) {
+     var url = '@Url.Action("RimuoviRiferimento", "Manutenzione")';
+            $.ajax({
+                url: url,
+                data: {
+                    idRiferimento: idRiferimento
+                },
+                cache: false,
+                type: "POST",
+                success: function (data)
+                {
+                    caricaDati();
+                },
+                error: function (response)
+                {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+                }
+            });
+    }
+
+    function caricaDati() {
+         var url = '@Url.Action("CaricaRiferimenti", "Manutenzione")';
+        $.ajax({
+            url: url,
+            data: {
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divRisultati').html(data).show();
+                $('#txtRiferimento').val('');
+                $('#txtEtichetta').val('');
+                $('#txtTipologia').val('');
+
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function AggiungiNuovo()
+    {
+        var Riferimento = $('#txtRiferimento').val();
+        var Etichetta = $('#txtEtichetta').val();
+        var Tipologia = $('#txtTipologia').val();
+
+        var esito = true;
+        var messaggio = '';
+
+        if (Riferimento == '')
+        {
+            esito=false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Riferimento" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        if (Etichetta == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Etichetta" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+        if (Tipologia == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Tipologia" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        $('#lblMessage').html(messaggio);
+        if(!esito) return;
+
+
+        var url = '@Url.Action("CreaRiferimento", "Manutenzione")';
+        $.ajax({
+            url: url,
+            data: {
+                Riferimento: Riferimento,
+                Etichetta: Etichetta,
+                Tipologia: Tipologia
+                
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+
+                if (data == null || data == '') {
+                    caricaDati();
+                }
+                else {
+                    $('#lblMessage').html(data);
+                }
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function ModificaRiferimento(sender, idRiferimento)
+    {
+          var parent = $(sender).closest('tr');
+          var tds = parent.find('td');
+
+        var Riferimento = $(parent).find('#txtRiferimentoS').val();
+        var Etichetta = $(parent).find('#txtEtichettaS').val();
+        var Tipologia = $(parent).find('#txtTipologiaS').val();
+
+        var esito = true;
+        var messaggio = '';
+
+        if (Riferimento == '')
+        {
+            esito=false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Riferimento" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        if (Etichetta == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Etichetta" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+        if (Tipologia == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Tipologia" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+
+        $('#lblMessage').html(messaggio);
+        if(!esito) return;
+
+
+        var url = '@Url.Action("ModificaRiferimento", "Manutenzione")';
+        $.ajax({
+            url: url,
+            data: {
+                IdRiferimento: IdRiferimento,
+                Riferimento: Riferimento,
+                Etichetta: Etichetta,
+                Tipologia: Tipologia
+                
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+
+                if (data == null || data == '') {
+                    caricaDati();
+                }
+                else {
+                    $('#lblMessage').html(data);
+                }
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+</script>
+
+

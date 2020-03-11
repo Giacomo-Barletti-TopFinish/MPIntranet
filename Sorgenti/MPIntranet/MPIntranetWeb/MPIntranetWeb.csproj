@@ -427,6 +427,7 @@
     <Content Include="Views\Galvanica\PROCESSISTANDARD.cshtml" />
     <Content Include="Views\Manutenzione\Ditte.cshtml" />
     <Content Include="Views\Manutenzione\CaricaDittePartial.cshtml" />
+    <Content Include="Views\Manutenzione\Riferimenti.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
