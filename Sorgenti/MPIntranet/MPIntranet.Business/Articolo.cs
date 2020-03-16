@@ -28,7 +28,7 @@ namespace MPIntranet.Business
         {
             BrandModel brand = _anagrafica.EstraiBrandModel(idBrand);
             if (brand == null) return "Brand non valido";
-//            if (codiceColore.Length != 3) return "Codice colore non valido";
+            //            if (codiceColore.Length != 3) return "Codice colore non valido";
 
             ColoreModel colore = _anagrafica.EstraiColoreModelPerCodiceFigurativo(codiceColore);
             if (colore == null) return "Codice colore non valido";
@@ -168,8 +168,10 @@ namespace MPIntranet.Business
 
         private ArticoloModel CreaArticoloModel(ArticoloDS.ARTICOLIRow articolo)
         {
+            ColoreModel coloreModel = new ColoreModel();
+            if (!articolo.IsIDCOLORENull())
+                coloreModel = _anagrafica.EstraiColoreModel(articolo.IDCOLORE);
 
-            ColoreModel coloreModel = _anagrafica.EstraiColoreModel(articolo.IDCOLORE);
             BrandModel brandModel = _anagrafica.EstraiBrandModel(articolo.IDBRAND);
             ArticoloModel articoloModel = new ArticoloModel()
             {
