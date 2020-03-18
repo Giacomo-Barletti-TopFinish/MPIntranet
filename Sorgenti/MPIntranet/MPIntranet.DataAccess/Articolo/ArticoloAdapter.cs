@@ -87,7 +87,7 @@ namespace MPIntranet.DataAccess.Articolo
         {
             ParamSet ps = new ParamSet();
 
-            string query = @"SELECT IDARTICOLO FROM ARTICOLO A INNER JOIN COLORI C ON C.IDCOLORE=A.IDCOLORE";
+            string query = @"SELECT IDARTICOLO FROM ARTICOLI A INNER JOIN COLORI C ON C.IDCOLORE=A.IDCOLORE";
             string where = " WHERE 1=1 ";
 
             if (soloNonCancellati)
