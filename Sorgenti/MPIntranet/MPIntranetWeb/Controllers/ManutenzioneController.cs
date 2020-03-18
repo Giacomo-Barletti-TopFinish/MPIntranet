@@ -77,6 +77,20 @@ namespace MPIntranetWeb.Controllers
             return null;
         }
 
+        public ActionResult CreaManutentore(decimal IdDitta, string Nome_Cognome, string Account_, string Nota)
+        {
+            Manutenzione a = new Manutenzione();
+            string messaggio = a.CreaManutentore(IdDitta, Nome_Cognome, Account_,Nota, ConnectedUser);
+
+            return Content(messaggio);
+        }
+
+        public ActionResult ModificaManutentore()
+        {
+            Manutenzione a = new Manutenzione();
+            a.ModificaDitta(idDitta, ragioneSociale, ConnectedUser);
+            return null;
+        }
 
 
 
