@@ -1,0 +1,98 @@
+﻿@using MPIntranet.Models.Manutenzione
+@model List<ManutentoreModel>
+
+@if (Model != null && Model.Count() == 0)
+{
+    <text><b>Nessun risultato trovato</b></text>
+}
+
+else
+{
+    <table id="grigliaManutentori" class="table table-condensed table-hover">
+        <thead style="background-color:aliceblue">
+            <tr>
+                <th colspan="2">Nome Cognome</th>
+                <th width="10%">Account</th>
+                <th width="10%">Ditta</th>
+                <th width="30%">Nota</th>
+                <th width="2%"></th>
+                <th width="2%"></th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ManutentoreModel td in Model)
+            {
+            <tr>
+                <td colspan="2" height="60">
+                    <input type="hidden" class="hdIdManutentore" value="@td.IdManutentore" />
+                    @td.NomeCognome
+                </td>
+                <td height="60">
+                    @Html.TextBox("txtAccountS", td.Account, new { @class = "form-control input-sm ", @id = "txtAccountS", @maxlength = "45" })
+                </td>
+                <td height="60">
+                    @td.Ditta.RagioneSociale
+                </td>
+                <td height="60">
+                    @Html.TextBox("txtNotaS", td.Nota, new { @class = "form-control input-sm ", @id = "txtNotaS", @maxlength = "100" })
+                </td>
+                <td align="right">
+                    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(123))
+                    {
+                        <a onclick="ModificaManutentore(this,@td.IdManutentore)" title="Modifica"><i class="fa fa-fw fa-pencil"></i></a>
+                    }
+                </td>
+                <td align="right">
+                    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(122))
+                    {
+                        <a onclick="CancellaManutentore(@td.IdManutentore)" title="Cancella"><i class="fa fa-fw fa-remove"></i></a>
+                    }
+                </td>
+                <td></td>
+            </tr>
+                <tr>
+                    <td width="2%"></td>
+                    <td>
+                        @Html.Partial("CaricaRiferimentiPartial", td.Riferimenti, ViewData)
+
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div id="divRiferimenti"></div>
+
+}
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+
+        $('#grigliaDitte tbody tr').click(function () {
+
+            var tds = $(this).find('td');
+
+
+        });
+    });
+
+    function CaricaRiferimenti(idDitta) {
+  var url = '@Url.Action("CaricaRiferimenti", "Manutenzione")';
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+

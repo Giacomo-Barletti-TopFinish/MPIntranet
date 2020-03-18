@@ -30,6 +30,19 @@ namespace MPIntranet.DataAccess.Manutenzione
             }
         }
 
+        public void FillManutentori(ManutenzioneDS ds, bool soloNonCancellati)
+        {
+            string query = @"SELECT * FROM MANUTENTORI ";
+            if (soloNonCancellati)
+                query += "WHERE CANCELLATO = 'N' ";
+
+            query += " order by nomecognome";
+
+            using (DbDataAdapter da = BuildDataAdapter(query))
+            {
+                da.Fill(ds.MANUTENTORI);
+            }
+        }
         public void FillRiferimenti(ManutenzioneDS ds, bool soloNonCancellati)
         {
             string query = @"SELECT * FROM RIFERIMENTI ";

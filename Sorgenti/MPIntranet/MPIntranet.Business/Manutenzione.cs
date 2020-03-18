@@ -38,6 +38,35 @@ namespace MPIntranet.Business
             return string.Empty;
         }
 
+        public string CreaManutentore(string NomeCognome, string Account, decimal IdDitta, string Nota, string account)
+        {
+            string nomeCognome = NomeCognome.ToUpper().Trim();
+            string utente = Account.ToUpper().Trim();
+            string nota = Nota.ToUpper().Trim();
+
+            using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
+            {
+                bManutenzione.FillManutentori(_ds, false);
+
+                if (_ds.MANUTENTORI.Any(x => x.NOMECOGNOME.Trim() == nomeCognome))
+                    return "Manutentore già inserito a sistema";
+
+                ManutenzioneDS.MANUTENTORIRow manutentore = _ds.MANUTENTORI.NewMANUTENTORIRow();
+
+                manutentore.CANCELLATO = SiNo.No;
+                manutentore.DATAMODIFICA = DateTime.Now;
+                manutentore.UTENTEMODIFICA = account;
+                manutentore.NOMECOGNOME = nomeCognome.Length > 45 ? nomeCognome.Substring(0, 45) : nomeCognome;
+                manutentore.ACCOUNT = utente.Length > 45 ? utente.Substring(0, 45) : utente;
+                manutentore.IDDITTA = IdDitta;
+                manutentore.NOTA = nota.Length > 100 ? nota.Substring(0, 100) : nota; ;
+
+                _ds.MANUTENTORI.AddMANUTENTORIRow(manutentore);
+
+                bManutenzione.UpdateTable(_ds.MANUTENTORI.TableName, _ds);
+            }
+            return string.Empty;
+        }
         public List<DittaModel> CreaListaDittaModel()
         {
             List<DittaModel> lista = new List<DittaModel>();
@@ -52,6 +81,47 @@ namespace MPIntranet.Business
             }
 
             return lista;
+        }
+
+        public List<ManutentoreModel> CreaListaManutentoreModel()
+        {
+            List<ManutentoreModel> lista = new List<ManutentoreModel>();
+
+            using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
+            {
+                bManutenzione.FillManutentori(_ds, true);
+                bManutenzione.FillDitte(_ds, true);
+                bManutenzione.FillRiferimenti(_ds, true);
+
+                foreach (ManutenzioneDS.MANUTENTORIRow d in _ds.MANUTENTORI)
+                    lista.Add(CreaManutentoreModel(d, _ds));
+            }
+
+            return lista;
+        }
+
+        private ManutentoreModel CreaManutentoreModel(ManutenzioneDS.MANUTENTORIRow manutentore, ManutenzioneDS ds)
+        {
+            ManutentoreModel dm = new ManutentoreModel();
+            dm.IdManutentore = manutentore.IDMANUTENTORE;
+            dm.NomeCognome = manutentore.NOMECOGNOME;
+            dm.Account = manutentore.IsACCOUNTNull() ? string.Empty : manutentore.ACCOUNT;
+            dm.Nota = manutentore.IsNOTANull() ? string.Empty : manutentore.NOTA;
+
+            ManutenzioneDS.DITTERow ditta = _ds.DITTE.Where(x => x.IDDITTA == manutentore.IDDITTA).FirstOrDefault();
+            dm.Ditta = CreaDittaModel(ditta, _ds);
+
+            RiferimentoModelContainer rmc = new RiferimentoModelContainer();
+            dm.Riferimenti = rmc;
+
+            rmc.TabellaEsterna = TabelleEsterne.Manutentori;
+            rmc.IdEsterna = manutentore.IDMANUTENTORE;
+            rmc.Riferimenti = new List<RiferimentoModel>();
+
+            foreach (ManutenzioneDS.RIFERIMENTIRow riferimento in ds.RIFERIMENTI.Where(x => x.IDESTERNA == manutentore.IDMANUTENTORE && x.TABELLAESTERNA == TabelleEsterne.Manutentori))
+                rmc.Riferimenti.Add(CreaRiferimentoModel(riferimento));
+
+            return dm;
         }
 
         private DittaModel CreaDittaModel(ManutenzioneDS.DITTERow ditta, ManutenzioneDS ds)
@@ -98,11 +168,25 @@ namespace MPIntranet.Business
                 }
             }
         }
+
+        public void CancellaManutentore(decimal IdManutentore, string account)
+        {
+            using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
+            {
+                bManutenzione.FillManutentori(_ds, true);
+                ManutenzioneDS.MANUTENTORIRow manutentore = _ds.MANUTENTORI.Where(x => x.IDMANUTENTORE == IdManutentore).FirstOrDefault();
+                if (manutentore != null)
+                {
+                    manutentore.CANCELLATO = SiNo.Si;
+                    manutentore.DATAMODIFICA = DateTime.Now;
+                    manutentore.UTENTEMODIFICA = account;
+
+                    bManutenzione.UpdateTable(_ds.MANUTENTORI.TableName, _ds);
+                }
+            }
+        }
         public void ModificaDitta(decimal idDitta, string ragioneSociale, string account)
         {
-            ragioneSociale = (ragioneSociale.Length > 45 ? ragioneSociale.Substring(0, 45) : ragioneSociale).ToUpper();
-
-
             using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
             {
                 bManutenzione.FillDitte(_ds, true);
@@ -119,6 +203,28 @@ namespace MPIntranet.Business
             }
         }
 
+        public void ModificaManutentore(decimal IdManutentore, string utente, string nota, string account)
+        {
+            utente = (utente.Length > 45 ? utente.Substring(0, 45) : utente).ToUpper();
+            nota = (nota.Length > 100 ? nota.Substring(0, 100) : nota).ToUpper();
+
+
+            using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
+            {
+                bManutenzione.FillManutentori(_ds, true);
+                ManutenzioneDS.MANUTENTORIRow manutentore = _ds.MANUTENTORI.Where(x => x.IDMANUTENTORE == IdManutentore).FirstOrDefault();
+                if (manutentore != null)
+                {
+                    manutentore.ACCOUNT = utente;
+                    manutentore.NOTA = nota;
+
+                    manutentore.DATAMODIFICA = DateTime.Now;
+                    manutentore.UTENTEMODIFICA = account;
+
+                    bManutenzione.UpdateTable(_ds.MANUTENTORI.TableName, _ds);
+                }
+            }
+        }
         public string CreaRiferimento(decimal IdEsterna, string TabellaEsterna, string Tipologia, string Etichetta, string Riferimento, string account)
         {
             Riferimento = Riferimento.ToUpper().Trim();

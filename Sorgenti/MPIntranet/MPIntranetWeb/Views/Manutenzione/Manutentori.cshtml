@@ -1,6 +1,6 @@
-﻿
+﻿@using MPIntranet.Models.Common
 @{
-    ViewBag.Title = "Ditte";
+    ViewBag.Title = "Manutentori";
     Layout = "~/Views/Shared/_LayoutApplication.cshtml";
 }
 
@@ -9,19 +9,31 @@
 </div>
 <div id="ArticleScrolledContent" class="content-scheda" style="overflow-y:auto; overflow-x:hidden">
 
-    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(111))
+    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(121))
     {
         <div class="row col-lg-12">
             <table class="table">
                 <thead>
                     <tr>
-                        <th width="15%">Ragione Sociale</th>
+                        <th width="10%">Nome Cognome</th>
+                        <th width="10%">Account</th>
+                        <th width="10%">Ditta</th>
+                        <th width="30%">Nota</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td width="15%">
-                            @Html.TextBox("txtRagioneSociale", null, new { @class = "form-control input-sm ", @id = "txtRagioneSociale", @maxlength = "45" })
+                        <td width="10%">
+                            @Html.TextBox("txtNomeCognome", null, new { @class = "form-control input-sm ", @id = "txtNomeCognome", @maxlength = "45" })
+                        </td>
+                        <td width="10%">
+                            @Html.TextBox("txtAccount", null, new { @class = "form-control input-sm ", @id = "txtAccount", @maxlength = "45" })
+                        </td>
+                        <td width="10%">
+                            @Html.DropDownList("ddlDitte", new SelectList(@ViewData["Ditte"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlDitte" })
+                        </td>
+                        <td width="30%">
+                            @Html.TextBox("txtNota", null, new { @class = "form-control input-sm ", @id = "txtNota", @maxlength = "100" })
                         </td>
                     </tr>
                 </tbody>
@@ -29,7 +41,7 @@
         </div>
         <div class="row col-lg-2">
             <div style="display:inline-block; width:50%">
-                <input type="button" onclick="AggiungiNuovo();" class="btn btn-primary" value="Nuova Ditta" />
+                <input type="button" onclick="AggiungiNuovo();" class="btn btn-primary" value="Nuovo manutentore" />
             </div>
         </div>
     }
@@ -38,20 +50,20 @@
     <div class="col-md-12" id="divRisultati" style="overflow-y:auto; overflow-x:hidden; height:750px">
 
     </div>
-    
+
 </div>
 
 <script language="javascript" type="text/javascript">
     $(function () {
         caricaDati();
     });
-    function CancellaDitta(idDitta) {
-        
-     var url = '@Url.Action("CancellaDitta", "Manutenzione")';
+    function CancellaManutentore(idManutentore) {
+
+     var url = '@Url.Action("CancellaManutentore", "Manutenzione")';
             $.ajax({
                 url: url,
                 data: {
-                    idDitta: idDitta
+                    IdManutentore: idManutentore
                 },
                 cache: false,
                 type: "POST",
@@ -69,7 +81,7 @@
     }
 
     function caricaDati() {
-         var url = '@Url.Action("CaricaDitte", "Manutenzione")';
+         var url = '@Url.Action("CaricaManutentori", "Manutenzione")';
         $.ajax({
             url: url,
             data: {
@@ -79,8 +91,10 @@
             success: function (data)
             {
                 $('#divRisultati').html(data).show();
-                $('#txtRagioneSociale').val('');
-                //$('#txtRiferimenti').val('');
+                $('#txtNomeCognome').val('');
+                $('#txtAccount').val('');
+                $('#ddlDitte').val('');
+                $('#txtNota').val('');
             },
             error: function (response)
             {
@@ -93,27 +107,44 @@
 
      function AggiungiNuovo()
     {
-        var RagioneSociale = $('#txtRagioneSociale').val();
+         var NomeCognome = $('#txtNomeCognome').val();
+         var Account = $('#txtAccount').val();
+         var Ditta = $('#ddlDitte').val();
+         var Nota = $('#txtNota').val();
 
         var esito = true;
         var messaggio = '';
 
-        if (RagioneSociale =='' )
+         if (NomeCognome =='' )
         {
             esito=false;
-            messaggio += MESSAGGIO_PUNTINO + " " + "Ragione sociale" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+            messaggio += MESSAGGIO_PUNTINO + " " + "Nome cognome" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
         }
+
+         if (Account == null)
+             Account = '';
+
+         if (Nota == null)
+             Nota = '';
+
+         if (Ditta == '') {
+             esito = false;
+             messaggio += MESSAGGIO_PUNTINO + " " + "Ditta" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+         }
 
         $('#lblMessage').html(messaggio);
         if(!esito) return;
 
 
-        var url = '@Url.Action("CreaDitta", "Manutenzione")';
+        var url = '@Url.Action("CreaManutentore", "Manutenzione")';
         $.ajax({
             url: url,
             data: {
-                RagioneSociale: RagioneSociale,
-                
+                NomeCognome: NomeCognome,
+                Account: Account,
+                IdDitta: Ditta,
+                Nota: Nota
+
             },
             cache: false,
             type: "POST",
@@ -135,40 +166,32 @@
         });
     }
 
-    function ModificaDitta(sender, idDitta)
+    function ModificaManutentore(sender, idManutentore)
     {
           var parent = $(sender).closest('tr');
           var tds = parent.find('td');
 
-        var RagioneSociale = $(parent).find('#txtRagioneSocialeS').val();
-        //var Riferimenti = $(parent).find('#txtRiferimentiS').val();
-       
+        var Account = $(parent).find('#txtAccountS').val();
+        var Nota = $(parent).find('#txtNotaS').val();
 
-        var esito = true;
         var messaggio = '';
 
-        if (RagioneSociale == '')
-        {
-            esito=false;
-            messaggio += MESSAGGIO_PUNTINO + " " + "Ragione Sociale" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
-        }
+        if (Account == null)
+            Account = '';
 
-        //if (Riferimenti == '')
-        //{
-        //    esito = false;
-        //    messaggio += MESSAGGIO_PUNTINO + " " + "Riferimenti" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
-        //}
+        if (Nota == null)
+            Nota = '';
 
         $('#lblMessage').html(messaggio);
-        if(!esito) return;
 
 
-        var url = '@Url.Action("ModificaDitta", "Manutenzione")';
+        var url = '@Url.Action("ModificaManutentore", "Manutenzione")';
         $.ajax({
             url: url,
             data: {
-                idDitta: idDitta,
-                RagioneSociale: RagioneSociale,
+                IdManutentore: idManutentore,
+                Account: Account,
+                Nota: Nota
                 //Riferimenti: Riferimenti,
             },
             cache: false,

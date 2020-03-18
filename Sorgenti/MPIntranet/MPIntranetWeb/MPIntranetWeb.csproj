@@ -429,6 +429,8 @@
     <Content Include="Views\Manutenzione\CaricaDittePartial.cshtml" />
     <Content Include="Views\Manutenzione\Riferimenti.cshtml" />
     <Content Include="Views\Manutenzione\CaricaRiferimentiPartial.cshtml" />
+    <Content Include="Views\Manutenzione\Manutentori.cshtml" />
+    <Content Include="Views\Manutenzione\CaricaManutentoriPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

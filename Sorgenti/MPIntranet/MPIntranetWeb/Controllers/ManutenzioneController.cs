@@ -54,11 +54,11 @@ namespace MPIntranetWeb.Controllers
             a.ModificaDitta(idDitta, ragioneSociale, ConnectedUser);
             return null;
         }
-      
-        public ActionResult CreaRiferimento(decimal IdEsterna, string TabellaEsterna,string Tipologia, string Etichetta, string Riferimento)
+
+        public ActionResult CreaRiferimento(decimal IdEsterna, string TabellaEsterna, string Tipologia, string Etichetta, string Riferimento)
         {
             Manutenzione a = new Manutenzione();
-            string messaggio = a.CreaRiferimento(IdEsterna,TabellaEsterna, Tipologia,Etichetta, Riferimento, ConnectedUser);
+            string messaggio = a.CreaRiferimento(IdEsterna, TabellaEsterna, Tipologia, Etichetta, Riferimento, ConnectedUser);
 
             return Content(messaggio);
         }
@@ -77,21 +77,52 @@ namespace MPIntranetWeb.Controllers
             return null;
         }
 
-        public ActionResult CreaManutentore(decimal IdDitta, string Nome_Cognome, string Account_, string Nota)
+        public ActionResult Manutentori()
+        {
+            Manutenzione m = new Manutenzione();
+            List<DittaModel> ditteModel = m.CreaListaDittaModel();
+
+            List<MPIntranetListItem> ditte = ditteModel.Select(x => new MPIntranetListItem(x.RagioneSociale, x.IdDitta.ToString())).ToList();
+            ViewData.Add("Ditte", ditte);
+
+            return View();
+        }
+        public ActionResult CaricaManutentori()
         {
             Manutenzione a = new Manutenzione();
-            string messaggio = a.CreaManutentore(IdDitta, Nome_Cognome, Account_,Nota, ConnectedUser);
+            List<ManutentoreModel> lista = a.CreaListaManutentoreModel();
+
+            List<MPIntranetListItem> ddlTipologia = new List<MPIntranetListItem>();
+            ddlTipologia.Add(new MPIntranetListItem(TipologiaRiferimento.Email, TipologiaRiferimento.Email));
+            ddlTipologia.Add(new MPIntranetListItem(TipologiaRiferimento.Telefono, TipologiaRiferimento.Telefono));
+
+            ViewData.Add("ddlTipologia", ddlTipologia);
+
+            return PartialView("CaricaManutentoriPartial", lista);
+
+        }
+
+        public ActionResult CreaManutentore(string NomeCognome, string Account, decimal IdDitta, string Nota)
+        {
+            Manutenzione a = new Manutenzione();
+            string messaggio = a.CreaManutentore(NomeCognome, Account, IdDitta, Nota, ConnectedUser);
 
             return Content(messaggio);
         }
 
-        public ActionResult ModificaManutentore()
+        public ActionResult CancellaManutentore(decimal IdManutentore)
         {
             Manutenzione a = new Manutenzione();
-            a.ModificaDitta(idDitta, ragioneSociale, ConnectedUser);
+            a.CancellaManutentore(IdManutentore, ConnectedUser);
             return null;
         }
 
+        public ActionResult ModificaManutentore(decimal IdManutentore, string Account, string Nota)
+        {
+            Manutenzione a = new Manutenzione();
+            a.ModificaManutentore(IdManutentore, Account, Nota, ConnectedUser);
+            return null;
+        }
 
 
     }
