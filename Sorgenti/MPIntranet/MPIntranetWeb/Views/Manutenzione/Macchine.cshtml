@@ -1,11 +1,11 @@
 ﻿@using MPIntranet.Models.Common
 @{
-    ViewBag.Title = "Manutentori";
+    ViewBag.Title = "Macchine";
     Layout = "~/Views/Shared/_LayoutApplication.cshtml";
 }
 
 <div class="content-top">
-    <h2>Gestione Manutentori</h2>
+    <h2>Gestione Macchine</h2>
 </div>
 <div id="ArticleScrolledContent" class="content-scheda" style="overflow-y:auto; overflow-x:hidden">
 
@@ -15,22 +15,34 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th width="10%">Nome Cognome</th>
-                        <th width="10%">Account</th>
+                        <th width="10%">Numero di serie</th>
+                        <th width="10%">Descrizione</th>
                         <th width="10%">Ditta</th>
+                        <th width="10%">Data costruzione</th>
+                        <th width="10%">Luogo</th>
+                        <th width="10%">Componente di</th>
                         <th width="30%">Nota</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td width="10%">
-                            @Html.TextBox("txtNomeCognome", null, new { @class = "form-control input-sm ", @id = "txtNomeCognome", @maxlength = "45" })
+                            @Html.TextBox("txtNumeroSerie", null, new { @class = "form-control input-sm ", @id = "txtNumeroSerie", @maxlength = "20" })
                         </td>
                         <td width="10%">
-                            @Html.TextBox("txtAccount", null, new { @class = "form-control input-sm ", @id = "txtAccount", @maxlength = "45" })
+                            @Html.TextBox("txtDescrizione", null, new { @class = "form-control input-sm ", @id = "txtDescrizione", @maxlength = "45" })
                         </td>
                         <td width="10%">
                             @Html.DropDownList("ddlDitte", new SelectList(@ViewData["Ditte"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlDitte" })
+                        </td>
+                        <td width="10%">
+                            @Html.TextBox("txtData", null, new { @class = "form-control input-sm ", @id = "txtData", @type = "date" })
+                        </td>
+                        <td width="10%">
+                            @Html.TextBox("txtLuogo", null, new { @class = "form-control input-sm ", @id = "txtLuogo", @maxlength = "45" })
+                        </td>
+                        <td width="10%">
+                            @Html.DropDownList("ddlPadre", new SelectList(@ViewData["Padre"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlPadre" })
                         </td>
                         <td width="30%">
                             @Html.TextBox("txtNota", null, new { @class = "form-control input-sm ", @id = "txtNota", @maxlength = "100" })
@@ -41,7 +53,7 @@
         </div>
         <div class="row col-lg-2">
             <div style="display:inline-block; width:50%">
-                <input type="button" onclick="AggiungiNuovo();" class="btn btn-primary" value="Nuovo manutentore" />
+                <input type="button" onclick="AggiungiNuovo();" class="btn btn-primary" value="Nuova macchina" />
             </div>
         </div>
     }
@@ -57,13 +69,13 @@
     $(function () {
         caricaDati();
     });
-    function CancellaManutentore(idManutentore) {
+    function CancellaMacchina(idMacchina) {
 
-     var url = '@Url.Action("CancellaManutentore", "Manutenzione")';
+     var url = '@Url.Action("CancellaMacchina", "Manutenzione")';
             $.ajax({
                 url: url,
                 data: {
-                    IdManutentore: idManutentore
+                    IdMacchina: idMacchina
                 },
                 cache: false,
                 type: "POST",
@@ -81,7 +93,7 @@
     }
 
     function caricaDati() {
-         var url = '@Url.Action("CaricaManutentori", "Manutenzione")';
+         var url = '@Url.Action("CaricaMacchine", "Manutenzione")';
         $.ajax({
             url: url,
             data: {
@@ -91,10 +103,13 @@
             success: function (data)
             {
                 $('#divRisultati').html(data).show();
-                $('#txtNomeCognome').val('');
-                $('#txtAccount').val('');
+                $('#txtNumeroSerie').val('');
+                $('#txtDescrizione').val('');
                 $('#ddlDitte').val('');
+                $('#txtLuogo').val('');
+                $('#ddlPadre').val('');
                 $('#txtNota').val('');
+                $('#txtData').val('');
             },
             error: function (response)
             {
@@ -107,27 +122,41 @@
 
      function AggiungiNuovo()
     {
-         var NomeCognome = $('#txtNomeCognome').val();
-         var Account = $('#txtAccount').val();
-         var Ditta = $('#ddlDitte').val();
-         var Nota = $('#txtNota').val();
+         var numeroSerie = $('#txtNumeroSerie').val();
+         var descrizione = $('#txtDescrizione').val();
+         var ditta = $('#ddlDitte').val();
+         var luogo = $('#txtLuogo').val();
+         var padre = $('#ddlPadre').val();
+         var nota = $('#txtNota').val();
+         var data = $('#txtData').val();
 
         var esito = true;
         var messaggio = '';
 
-         if (NomeCognome =='' )
+         if (numeroSerie =='' )
         {
             esito=false;
-            messaggio += MESSAGGIO_PUNTINO + " " + "Nome cognome" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+            messaggio += MESSAGGIO_PUNTINO + " " + "Numero di serie " + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
         }
 
-         if (Account == null)
-             Account = '';
+         if (descrizione == '') {
+             esito = false;
+             messaggio += MESSAGGIO_PUNTINO + " " + "Descrizione " + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+         }
 
-         if (Nota == null)
-             Nota = '';
+         if (luogo == null)
+             luogo = '';
 
-         if (Ditta == '') {
+         if (padre == null|| padre == '')
+             padre = -1;
+
+         if (nota == null)
+             nota = '';
+
+         if (data == null||data=='')
+             data = '';
+
+         if (ditta == '') {
              esito = false;
              messaggio += MESSAGGIO_PUNTINO + " " + "Ditta" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
          }
@@ -136,14 +165,17 @@
         if(!esito) return;
 
 
-        var url = '@Url.Action("CreaManutentore", "Manutenzione")';
+        var url = '@Url.Action("CreaMacchina", "Manutenzione")';
         $.ajax({
             url: url,
             data: {
-                NomeCognome: NomeCognome,
-                Account: Account,
-                IdDitta: Ditta,
-                Nota: Nota
+                NumeroSerie: numeroSerie,
+                Descrizione: descrizione,
+                IdDitta: ditta,
+                Luogo: luogo,
+                IdPadre: padre,
+                Nota: nota,
+                DataCostruzione:data
 
             },
             cache: false,
@@ -166,33 +198,32 @@
         });
     }
 
-    function ModificaManutentore(sender, idManutentore)
+    function ModificaMacchina(sender, idMacchina)
     {
           var parent = $(sender).closest('tr');
           var tds = parent.find('td');
 
-        var Account = $(parent).find('#txtAccountS').val();
-        var Nota = $(parent).find('#txtNotaS').val();
+        var luogo = $(parent).find('#txtLuogoS').val();
+        var nota = $(parent).find('#txtNotaS').val();
 
         var messaggio = '';
 
-        if (Account == null)
-            Account = '';
+        if (luogo == null)
+            luogo = '';
 
-        if (Nota == null)
-            Nota = '';
+        if (nota == null)
+            nota = '';
 
         $('#lblMessage').html(messaggio);
 
 
-        var url = '@Url.Action("ModificaManutentore", "Manutenzione")';
+        var url = '@Url.Action("ModificaMacchina", "Manutenzione")';
         $.ajax({
             url: url,
             data: {
-                IdManutentore: idManutentore,
-                Account: Account,
-                Nota: Nota
-                //Riferimenti: Riferimenti,
+                IdMacchina: idMacchina,
+                Luogo: luogo,
+                Nota: nota
             },
             cache: false,
             type: "POST",

@@ -431,6 +431,8 @@
     <Content Include="Views\Manutenzione\CaricaRiferimentiPartial.cshtml" />
     <Content Include="Views\Manutenzione\Manutentori.cshtml" />
     <Content Include="Views\Manutenzione\CaricaManutentoriPartial.cshtml" />
+    <Content Include="Views\Manutenzione\Macchine.cshtml" />
+    <Content Include="Views\Manutenzione\CaricaMacchinePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

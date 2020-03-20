@@ -124,6 +124,50 @@ namespace MPIntranetWeb.Controllers
             return null;
         }
 
+        public ActionResult Macchine()
+        {
+            Manutenzione m = new Manutenzione();
 
+            List<DittaModel> ditteModel = m.CreaListaDittaModel();
+            List<MPIntranetListItem> ditte = ditteModel.Select(x => new MPIntranetListItem(x.RagioneSociale, x.IdDitta.ToString())).ToList();
+            ViewData.Add("Ditte", ditte);
+
+            List<MacchinaModel> macchineModel = m.CreaListaMacchinaModel();
+            List<MPIntranetListItem> macchine = macchineModel.Select(x => new MPIntranetListItem(x.ToString(), x.IdMacchina.ToString())).ToList();
+            ViewData.Add("Padre", macchine);
+
+            return View();
+        }
+        public ActionResult CaricaMacchine()
+        {
+            Manutenzione a = new Manutenzione();
+            List<MacchinaModel> macchineModel = a.CreaListaMacchinaModel();
+
+
+            return PartialView("CaricaMacchinePartial", macchineModel);
+
+        }
+
+        public ActionResult CreaMacchina(string NumeroSerie, string Descrizione, decimal IdDitta, string Luogo, string Nota, string DataCostruzione, decimal idPadre)
+        {
+            Manutenzione a = new Manutenzione();
+            string messaggio = a.CreaMacchina(NumeroSerie, Descrizione, IdDitta, Luogo, Nota, DataCostruzione, idPadre, ConnectedUser);
+
+            return Content(messaggio);
+        }
+
+        public ActionResult CancellaMacchina(decimal IdMacchina)
+        {
+            Manutenzione a = new Manutenzione();
+            a.CancellaMacchina(IdMacchina, ConnectedUser);
+            return null;
+        }
+
+        public ActionResult ModificaMacchina(decimal IdMacchina, string Luogo, string Nota)
+        {
+            Manutenzione a = new Manutenzione();
+            a.ModificaMacchina(IdMacchina, Luogo, Nota, ConnectedUser);
+            return null;
+        }
     }
 }

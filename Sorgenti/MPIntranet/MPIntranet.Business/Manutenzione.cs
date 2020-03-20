@@ -67,6 +67,43 @@ namespace MPIntranet.Business
             }
             return string.Empty;
         }
+
+        public string CreaMacchina(string NumeroSerie, string Descrizione, decimal IdDitta, string Luogo, string Nota, string DataCostruzione, decimal IdPadre, string account)
+        {
+            NumeroSerie = NumeroSerie.ToUpper().Trim();
+            Descrizione = Descrizione.ToUpper().Trim();
+            Luogo = Luogo.ToUpper().Trim();
+            Nota = Nota.ToUpper().Trim();
+
+            using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
+            {
+                bManutenzione.FillMacchine(_ds, false);
+
+                if (_ds.MACCHINE.Any(x => x.SERIALE.Trim() == NumeroSerie && x.IDDITTA == IdDitta))
+                    return "Macchina già inserita a sistema per questa ditta con questo numero di serie";
+
+                ManutenzioneDS.MACCHINERow macchina = _ds.MACCHINE.NewMACCHINERow();
+
+                macchina.CANCELLATO = SiNo.No;
+                macchina.DATAMODIFICA = DateTime.Now;
+                macchina.UTENTEMODIFICA = account;
+
+                macchina.IDDITTA = IdDitta;
+                if (IdPadre >= 0)
+                    macchina.IDPADRE = IdPadre;
+                macchina.SERIALE = NumeroSerie.Length > 20 ? NumeroSerie.Substring(0, 20) : NumeroSerie;
+                macchina.DESCRIZIONE = Descrizione.Length > 45 ? Descrizione.Substring(0, 45) : Descrizione;
+                macchina.NOTE = Nota.Length > 100 ? Nota.Substring(0, 100) : Nota;
+                macchina.LUOGO = Luogo.Length > 45 ? Luogo.Substring(0, 45) : Luogo;
+                macchina.DATACOSTRUZIONE = DataCostruzione.Length > 10 ? DataCostruzione.Substring(0, 10) : DataCostruzione;
+
+                _ds.MACCHINE.AddMACCHINERow(macchina);
+
+                bManutenzione.UpdateTable(_ds.MACCHINE.TableName, _ds);
+            }
+            return string.Empty;
+        }
+
         public List<DittaModel> CreaListaDittaModel()
         {
             List<DittaModel> lista = new List<DittaModel>();
@@ -83,6 +120,21 @@ namespace MPIntranet.Business
             return lista;
         }
 
+        public List<MacchinaModel> CreaListaMacchinaModel()
+        {
+            List<MacchinaModel> lista = new List<MacchinaModel>();
+
+            using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
+            {
+                bManutenzione.FillMacchine(_ds, true);
+                bManutenzione.FillDitte(_ds, true);
+
+                foreach (ManutenzioneDS.MACCHINERow d in _ds.MACCHINE)
+                    lista.Add(CreaMacchinaModel(d, _ds));
+            }
+
+            return lista;
+        }
         public List<ManutentoreModel> CreaListaManutentoreModel()
         {
             List<ManutentoreModel> lista = new List<ManutentoreModel>();
@@ -142,6 +194,39 @@ namespace MPIntranet.Business
 
             return dm;
         }
+
+        private DittaModel CreaDittaModel(decimal IdDitta, ManutenzioneDS ds)
+        {
+            ManutenzioneDS.DITTERow ditta = ds.DITTE.Where(x => x.IDDITTA == IdDitta).FirstOrDefault();
+            if (ditta == null) return null;
+
+            return CreaDittaModel(ditta, ds);
+        }
+        private MacchinaModel CreaMacchinaModel(ManutenzioneDS.MACCHINERow macchina, ManutenzioneDS ds)
+        {
+            MacchinaModel dm = new MacchinaModel();
+            dm.Ditta = CreaDittaModel(macchina.IDDITTA, ds);
+            dm.DataCostruzione = macchina.IsDATACOSTRUZIONENull() ? string.Empty : macchina.DATACOSTRUZIONE;
+            dm.Descrizione = macchina.DESCRIZIONE;
+            dm.IdMacchina = macchina.IDMACCHINA;
+            dm.Luogo = macchina.IsLUOGONull() ? string.Empty : macchina.LUOGO;
+            dm.Nota = macchina.IsNOTENull() ? string.Empty : macchina.NOTE;
+            dm.NumeroSerie = macchina.SERIALE;
+            if (!macchina.IsIDPADRENull())
+            {
+                dm.Padre = CreaMacchinaModel(macchina.IDPADRE, ds);
+            }
+
+            return dm;
+        }
+
+        private MacchinaModel CreaMacchinaModel(decimal idMacchina, ManutenzioneDS ds)
+        {
+            ManutenzioneDS.MACCHINERow macchina = ds.MACCHINE.Where(x => x.IDMACCHINA == idMacchina).FirstOrDefault();
+            if (macchina == null) return null;
+
+            return CreaMacchinaModel(macchina, ds);
+        }
         private RiferimentoModel CreaRiferimentoModel(ManutenzioneDS.RIFERIMENTIRow riferimento)
         {
             RiferimentoModel rm = new RiferimentoModel();
@@ -185,6 +270,23 @@ namespace MPIntranet.Business
                 }
             }
         }
+
+        public void CancellaMacchina(decimal IdMacchina, string account)
+        {
+            using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
+            {
+                bManutenzione.FillMacchine(_ds, true);
+                ManutenzioneDS.MACCHINERow macchina = _ds.MACCHINE.Where(x => x.IDMACCHINA == IdMacchina).FirstOrDefault();
+                if (macchina != null)
+                {
+                    macchina.CANCELLATO = SiNo.Si;
+                    macchina.DATAMODIFICA = DateTime.Now;
+                    macchina.UTENTEMODIFICA = account;
+
+                    bManutenzione.UpdateTable(_ds.MACCHINE.TableName, _ds);
+                }
+            }
+        }
         public void ModificaDitta(decimal idDitta, string ragioneSociale, string account)
         {
             using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
@@ -203,6 +305,24 @@ namespace MPIntranet.Business
             }
         }
 
+        public void ModificaMacchina(decimal IdMacchina, string Luogo, string Nota, string account)
+        {
+            using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
+            {
+                bManutenzione.FillMacchine(_ds, true);
+                ManutenzioneDS.MACCHINERow macchina = _ds.MACCHINE.Where(x => x.IDMACCHINA == IdMacchina).FirstOrDefault();
+                if (macchina != null)
+                {
+                    macchina.LUOGO = Luogo.Length > 45 ? Luogo.Substring(0, 45) : Luogo;
+                    macchina.NOTE = Nota.Length > 100 ? Nota.Substring(0, 100) : Nota;
+
+                    macchina.DATAMODIFICA = DateTime.Now;
+                    macchina.UTENTEMODIFICA = account;
+
+                    bManutenzione.UpdateTable(_ds.MACCHINE.TableName, _ds);
+                }
+            }
+        }
         public void ModificaManutentore(decimal IdManutentore, string utente, string nota, string account)
         {
             utente = (utente.Length > 45 ? utente.Substring(0, 45) : utente).ToUpper();

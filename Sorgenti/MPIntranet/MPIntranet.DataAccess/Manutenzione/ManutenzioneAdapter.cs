@@ -30,6 +30,20 @@ namespace MPIntranet.DataAccess.Manutenzione
             }
         }
 
+        public void FillMacchine(ManutenzioneDS ds, bool soloNonCancellati)
+        {
+            string query = @"SELECT * FROM MACCHINE ";
+            if (soloNonCancellati)
+                query += "WHERE CANCELLATO = 'N' ";
+
+            query += " order by descrizione";
+
+            using (DbDataAdapter da = BuildDataAdapter(query))
+            {
+                da.Fill(ds.MACCHINE);
+            }
+        }
+
         public void FillManutentori(ManutenzioneDS ds, bool soloNonCancellati)
         {
             string query = @"SELECT * FROM MANUTENTORI ";
