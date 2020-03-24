@@ -1,5 +1,6 @@
 ﻿using MPIntranet.Business;
 using MPIntranet.Models;
+using MPIntranet.Models.Anagrafica;
 using MPIntranet.Models.Common;
 using MPIntranet.Models.Manutenzione;
 using System;
@@ -140,8 +141,13 @@ namespace MPIntranetWeb.Controllers
         }
         public ActionResult CaricaMacchine()
         {
-            Manutenzione a = new Manutenzione();
-            List<MacchinaModel> macchineModel = a.CreaListaMacchinaModel();
+            Manutenzione m = new Manutenzione();
+            List<MacchinaModel> macchineModel = m.CreaListaMacchinaModel();
+
+            Anagrafica a = new Anagrafica();
+            List<TipoDocumentoModel> tipiDocumentoModel = a.CreaListaTipoDocumento();
+            List<MPIntranetListItem> tipiDocumento = tipiDocumentoModel.Select(x => new MPIntranetListItem(x.Descrizione, x.IdTipoDocumento.ToString())).ToList();
+            ViewData.Add("TipiDocumento", tipiDocumento);
 
 
             return PartialView("CaricaMacchinePartial", macchineModel);

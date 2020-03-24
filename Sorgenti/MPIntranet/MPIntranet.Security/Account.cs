@@ -125,7 +125,10 @@ namespace MPIntranet.Security
             List<int> idMenuAbilitati = ds.ABILITAZIONI.Where(x => x.UTENTE == account).Select(x => (int)x.IDMENU).ToList();
 
             List<MenuModel> menu = new List<MenuModel>();
-            foreach (SecurityDS.MENURow row in ds.MENU.Where(x => x.IsIDMENUPADRENull()))
+            List<SecurityDS.MENURow> menuDaVisualizzare = ds.MENU.Where(x => x.IsIDMENUPADRENull()).ToList();
+            if (!mostratutto)
+                menuDaVisualizzare = ds.MENU.Where(x => x.IsIDMENUPADRENull() && x.IsAZIONENull()).ToList();
+            foreach (SecurityDS.MENURow row in menuDaVisualizzare)
             {
                 MenuModel elementoMenu = CreaMenu(ds, row.IDMENU, idMenuAbilitati, mostratutto);
                 menu.Add(elementoMenu);

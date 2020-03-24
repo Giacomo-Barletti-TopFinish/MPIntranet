@@ -35,10 +35,9 @@
     {
         <tr>
             <td>
-                @Html.DropDownList("ddlTipologia", new SelectList(ViewData["ddlTipologia"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @style = "height: 21px;" })
+                @Html.DropDownList("ddlTipologia", new SelectList(ViewData["TipiDocumento"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @style = "height: 21px;" })
             </td>
-            <td>  @Html.TextBox("txtEtichettaS", string.Empty, new { @class = "form-control input-sm", @id = "txtEtichettaS", @maxlength = "45" })</td>
-            <td>  @Html.TextBox("txtRiferimentoS", string.Empty, new { @class = "form-control input-sm", @id = "txtRiferimentoS", @maxlength = "45" })</td>
+            <td>  @Html.TextBox("txtFileName", string.Empty, new { @class = "form-control input-sm", @id = "txtFileName", @maxlength = "50" })</td>
             <td><a onclick="AggiungiRiferimento(this,@Model.IdEsterna,'@Model.TabellaEsterna' )" title="Aggiungi"><i class="fa fa-fw fa-plus"></i></a></td>
             <td></td>
         </tr>
