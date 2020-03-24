@@ -11,7 +11,7 @@ namespace MPIntranetWeb.Controllers
 {
     public class AnagraficaController : ControllerBase
     {
-        // GET: Anagrafica
+      
         public ActionResult Brand()
         {
             return View();

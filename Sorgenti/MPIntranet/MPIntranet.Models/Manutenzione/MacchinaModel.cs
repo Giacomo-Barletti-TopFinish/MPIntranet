@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MPIntranet.Models.Documenti;
 
 namespace MPIntranet.Models.Manutenzione
 {
@@ -13,13 +14,13 @@ namespace MPIntranet.Models.Manutenzione
         public string Descrizione { get; set; }
         public string Nota { get; set; }
         public string Luogo { get; set; }
-        public DittaModel Ditta{ get; set; }
-        public string DataCostruzione{ get; set; }
-        public MacchinaModel Padre{ get; set; }
-
+        public DittaModel Ditta { get; set; }
+        public string DataCostruzione { get; set; }
+        public MacchinaModel Padre { get; set; }
+        public DocumentoModelContainer Documenti { get; set; }
         public override string ToString()
         {
-            return string.Format("{0} ({1})",Descrizione,NumeroSerie);
+            return string.Format("{0} ({1})", Descrizione, NumeroSerie);
         }
     }
 }

@@ -47,6 +47,30 @@ namespace MPIntranet.Business
             }
             return _ds.BRAND.Where(x => x.IDBRAND == idBrand).FirstOrDefault();
         }
+
+
+        public AnagraficaDS.TIPIDOCUMENTORow EstraiTipoDocumento(decimal idTipoDocumento)
+        {
+            if (_ds.TIPIDOCUMENTO.Count == 0)
+            {
+                using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+                    bAnagrafica.FillTipiDocumento(_ds, true);
+            }
+            return _ds.TIPIDOCUMENTO.Where(x => x.IDTIPODOCUMENTO == idTipoDocumento).FirstOrDefault();
+        }
+
+        public TipoDocumentoModel EstraiTipoDocumentoModel(decimal idTipoDocumento)
+        {
+            if (_ds.TIPIDOCUMENTO.Count == 0)
+            {
+                using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+                    bAnagrafica.FillTipiDocumento(_ds, true);
+            }
+            AnagraficaDS.TIPIDOCUMENTORow td = _ds.TIPIDOCUMENTO.Where(x => x.IDTIPODOCUMENTO == idTipoDocumento).FirstOrDefault();
+            if (td == null) return null;
+
+            return CreaTipoDocumentoModel(idTipoDocumento, _ds);
+        }
         private BrandModel creaBrandModel(AnagraficaDS.BRANDRow brand)
         {
             BrandModel bm = new BrandModel()
@@ -396,20 +420,28 @@ namespace MPIntranet.Business
             {
                 bAnagrafica.FillTipiDocumento(_ds, true);
                 foreach (AnagraficaDS.TIPIDOCUMENTORow tipoDocumento in _ds.TIPIDOCUMENTO)
-                {
-                    TipoDocumentoModel td = new TipoDocumentoModel()
-                    {
-                        IdTipoDocumento = tipoDocumento.IDTIPODOCUMENTO,
-                        Descrizione = tipoDocumento.DESCRIZIONE,
-                        DataModifica = tipoDocumento.DATAMODIFICA,
-                        UtenteModifica = tipoDocumento.UtenteModifica
-                    };
-                    lista.Add(td);
-                }
+                    lista.Add(CreaTipoDocumentoModel(tipoDocumento));
             }
             return lista;
         }
+        private TipoDocumentoModel CreaTipoDocumentoModel(AnagraficaDS.TIPIDOCUMENTORow tipoDocumento)
+        {
+            TipoDocumentoModel td = new TipoDocumentoModel()
+            {
+                IdTipoDocumento = tipoDocumento.IDTIPODOCUMENTO,
+                Descrizione = tipoDocumento.DESCRIZIONE,
+                DataModifica = tipoDocumento.DATAMODIFICA,
+                UtenteModifica = tipoDocumento.UtenteModifica
+            };
+            return td;
+        }
+        public TipoDocumentoModel CreaTipoDocumentoModel(decimal idTipoDocumento, AnagraficaDS ds)
+        {
+            AnagraficaDS.TIPIDOCUMENTORow tipoDocumento = this.EstraiTipoDocumento(idTipoDocumento);
+            if (tipoDocumento == null) return null;
+            return CreaTipoDocumentoModel(tipoDocumento);
 
+        }
         public void CancellaTipoDocumento(decimal idTipoDocumento, string account)
         {
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())

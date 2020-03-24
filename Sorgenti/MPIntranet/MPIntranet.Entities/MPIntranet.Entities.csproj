@@ -52,6 +52,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ArticoloDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DocumentiDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DocumentiDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="ElementiVuoti.cs" />
     <Compile Include="GalvanicaDS.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -103,6 +108,17 @@
     </None>
     <None Include="ArticoloDS.xss">
       <DependentUpon>ArticoloDS.xsd</DependentUpon>
+    </None>
+    <None Include="DocumentiDS.xsc">
+      <DependentUpon>DocumentiDS.xsd</DependentUpon>
+    </None>
+    <None Include="DocumentiDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DocumentiDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DocumentiDS.xss">
+      <DependentUpon>DocumentiDS.xsd</DependentUpon>
     </None>
     <None Include="GalvanicaDS.xsc">
       <DependentUpon>GalvanicaDS.xsd</DependentUpon>

@@ -24,6 +24,7 @@ namespace MPIntranet.Models
     {
         public const string Ditte = "DITTE";
         public const string Manutentori= "MANUTENTORI";
+        public const string Macchine = "MACCHINE";
     }
 
 }

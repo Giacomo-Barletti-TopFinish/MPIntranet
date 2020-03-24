@@ -217,6 +217,8 @@ namespace MPIntranet.Business
                 dm.Padre = CreaMacchinaModel(macchina.IDPADRE, ds);
             }
 
+            Documenti documenti = new Documenti();
+            dm.Documenti = documenti.CreaDocumentoModelContainer(macchina.IDMACCHINA, TabelleEsterne.Macchine);
             return dm;
         }
 
@@ -397,11 +399,11 @@ namespace MPIntranet.Business
                     riferimento.DATAMODIFICA = DateTime.Now;
                     riferimento.UTENTEMODIFICA = account;
 
-                    bManutenzione.UpdateTable(_ds.DITTE.TableName, _ds);
+                    bManutenzione.UpdateTable(_ds.RIFERIMENTI.TableName, _ds);
                 }
             }
         }
-        public void ModificaRiferimenti(decimal idRiferimenti, string Etichetta, string Riferimento, string Tipologia, string account)
+        public void ModificaRiferimento(decimal idRiferimenti, string Etichetta, string Riferimento, string Tipologia, string account)
         {
             Etichetta = (Etichetta.Length > 45 ? Etichetta.Substring(0, 45) : Etichetta).ToUpper();
             Riferimento = (Riferimento.Length > 45 ? Riferimento.Substring(0, 45) : Riferimento).ToUpper();

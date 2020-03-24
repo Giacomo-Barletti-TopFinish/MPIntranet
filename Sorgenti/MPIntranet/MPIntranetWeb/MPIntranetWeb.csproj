@@ -434,11 +434,11 @@
     <Content Include="Views\Manutenzione\CaricaManutentoriPartial.cshtml" />
     <Content Include="Views\Manutenzione\Macchine.cshtml" />
     <Content Include="Views\Manutenzione\CaricaMacchinePartial.cshtml" />
+    <Content Include="Views\Documenti\CaricaDocumentiPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\ControllerBase\" />
-    <Folder Include="Views\Documenti\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

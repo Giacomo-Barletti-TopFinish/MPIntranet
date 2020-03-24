@@ -73,7 +73,7 @@ namespace MPIntranetWeb.Controllers
         public ActionResult ModificaRiferimenti(decimal idRiferimenti, string Etichetta, string Riferimento, string Tipologia)
         {
             Manutenzione a = new Manutenzione();
-            a.ModificaRiferimenti(idRiferimenti, Etichetta, Riferimento, Tipologia, ConnectedUser);
+            a.ModificaRiferimento(idRiferimenti, Etichetta, Riferimento, Tipologia, ConnectedUser);
             return null;
         }
 

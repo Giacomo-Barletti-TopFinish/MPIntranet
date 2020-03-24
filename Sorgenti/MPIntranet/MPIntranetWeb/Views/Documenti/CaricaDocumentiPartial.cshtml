@@ -1,0 +1,175 @@
+﻿
+@using MPIntranet.Models.Documenti
+@using MPIntranet.Models.Common
+
+@model DocumentoModelContainer
+
+<table class="table table-condensed table-hover">
+    <tr style="background-color:aliceblue">
+        <th>Tipo documento</th>
+        <th>Filename</th>
+        <th width="2%"></th>
+        <th width="2%"></th>
+    </tr>
+    @foreach (DocumentoModel documento in Model.Documenti)
+    {
+        <tr>
+            <td>@documento.TipoDocumento.Descrizione</td>
+            <td>@documento.Filename</td>
+
+            <td>
+                @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(92))
+                {
+                    <a onclick="Estraidocumento(this,@documento.IdDocumento)" title="Apri"><i class="fa fa-fw fa-external-link"></i></a>
+                }
+            </td>
+            <td>
+                @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(91))
+                {
+                    <a onclick="CancellaDocumento(@documento.IdDocumento)" title="Cancella"><i class="fa fa-fw fa-remove"></i></a>
+                }
+            </td>
+        </tr>
+    }
+    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(90))
+    {
+        <tr>
+            <td>
+                @Html.DropDownList("ddlTipologia", new SelectList(ViewData["ddlTipologia"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @style = "height: 21px;" })
+            </td>
+            <td>  @Html.TextBox("txtEtichettaS", string.Empty, new { @class = "form-control input-sm", @id = "txtEtichettaS", @maxlength = "45" })</td>
+            <td>  @Html.TextBox("txtRiferimentoS", string.Empty, new { @class = "form-control input-sm", @id = "txtRiferimentoS", @maxlength = "45" })</td>
+            <td><a onclick="AggiungiRiferimento(this,@Model.IdEsterna,'@Model.TabellaEsterna' )" title="Aggiungi"><i class="fa fa-fw fa-plus"></i></a></td>
+            <td></td>
+        </tr>
+    }
+
+</table>
+
+
+
+<script language="javascript" type="text/javascript">
+    function CancellaRiferimento(IdRiferimento) {
+         var url = '@Url.Action("CancellaRiferimento", "Manutenzione")';
+    $.ajax({
+    url: url,
+    data: {
+    idRiferimento: idRiferimento
+    },
+    cache: false,
+    type: "POST",
+    success: function (data)
+    {
+    caricaDati();
+    },
+    error: function (response)
+    {
+    document.open();
+    document.write(response.responseText);
+    document.close();
+    }
+    });
+
+    }
+
+    function ModificaRiferimento(sender, IdRiferimento) {
+          var url = '@Url.Action("ModificaRiferimento", "Manutenzione")';
+    $.ajax({
+    url: url,
+    data: {
+    IdRiferimento: IdRiferimento,
+    Riferimento: Riferimento,
+    Etichetta: Etichetta,
+    Tipologia: Tipologia
+
+    },
+    cache: false,
+    type: "POST",
+    success: function (data)
+    {
+
+    if (data == null || data == '') {
+    caricaDati();
+    }
+    else {
+    $('#lblMessage').html(data);
+    }
+    },
+    error: function (response)
+    {
+    document.open();
+    document.write(response.responseText);
+    document.close();
+    }
+    });
+    }
+
+    function AggiungiRiferimento(sender, IdEsterna, TabellaEsterna) {
+
+        var parent = $(sender).closest('tr');
+        var tds = parent.find('td');
+
+        var tipologia = $(parent).find('#ddlTipologia').val();
+        var etichetta = $(parent).find('#txtEtichettaS').val();
+        var riferimento = $(parent).find('#txtRiferimentoS').val();
+
+        var esito = true;
+        var messaggio = '';
+
+        if (tipologia == null || tipologia == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Tipologia " + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        if (etichetta == null || etichetta == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Etichetta " + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        if (riferimento == null || riferimento == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Riferimento " + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        $('#lblMessage').html(messaggio);
+        if (!esito) return;
+
+    var url = '@Url.Action("CreaRiferimento", "Manutenzione")';
+        $.ajax({
+        url: url,
+            data: {
+                IdEsterna: IdEsterna,
+                TabellaEsterna: TabellaEsterna,
+                Tipologia: tipologia,
+                Etichetta: etichetta,
+                Riferimento: riferimento
+        },
+        cache: false,
+        type: "POST",
+            success: function (data)
+            {
+                if (data == null || data == '') {
+                    $(parent).find('#txtEtichettaS').val('');
+                    $(parent).find('#txtRiferimentoS').val('');
+                    caricaDati();
+                }
+                else {
+                     $('#lblMessage').html(data);
+                }
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+</script>
+
+
+
+
+
+
+

@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Anagrafica.cs" />
     <Compile Include="Articolo.cs" />
+    <Compile Include="Documenti.cs" />
     <Compile Include="Galvanica.cs" />
     <Compile Include="Manutenzione.cs" />
     <Compile Include="ProcessoGalvanico.cs" />

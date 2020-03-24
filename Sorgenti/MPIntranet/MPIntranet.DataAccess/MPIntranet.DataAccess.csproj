@@ -59,6 +59,8 @@
     <Compile Include="Core\DaoExtensor.cs" />
     <Compile Include="Core\DataAccessExceptions.cs" />
     <Compile Include="Core\DataContextAttribute.cs" />
+    <Compile Include="Documenti\DocumentiAdapter.cs" />
+    <Compile Include="Documenti\DocumentiBusiness.cs" />
     <Compile Include="Galvanica\GalvanicaAdapter.cs" />
     <Compile Include="Galvanica\GalvanicaBusiness.cs" />
     <Compile Include="Manutenzione\ManutenzioneAdapter.cs" />

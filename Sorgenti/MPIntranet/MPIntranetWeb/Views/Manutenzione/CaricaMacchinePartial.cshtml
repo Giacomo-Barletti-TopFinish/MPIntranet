@@ -11,6 +11,7 @@ else
     <table id="grigliaMacchine" class="table table-condensed table-hover">
         <thead style="background-color:aliceblue">
             <tr>
+                <th></th>
                 <th width="10%">Numero di serie</th>
                 <th width="10%">Descrizione</th>
                 <th width="10%">Ditta</th>
@@ -27,46 +28,54 @@ else
         <tbody>
             @foreach (MacchinaModel td in Model)
             {
-            <tr>
-                <td height="60">
-                    <input type="hidden" class="hdIdManutentore" value="@td.IdMacchina" />
-                    @td.NumeroSerie
-                </td>
-                <td height="60">
-                    @td.Descrizione
-                </td>
-                <td height="60">
-                    @td.Ditta.RagioneSociale
-                </td>
-                <td height="60">
-                    @td.DataCostruzione
-                </td>
-                <td height="60">
-                    @Html.TextBox("txtLuogoS", td.Luogo, new { @class = "form-control input-sm ", @id = "txtLuogoS", @maxlength = "45" })
-                </td>
-                <td height="60">
-                    @if(td.Padre !=null)
-                    {
-                        @td.Padre.ToString();
-                    }
-                </td>
-                <td height="60">
-                    @Html.TextBox("txtNotaS", td.Nota, new { @class = "form-control input-sm ", @id = "txtNotaS", @maxlength = "100" })
-                </td>
-                <td align="right">
-                    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(123))
-                    {
-                        <a onclick="ModificaMacchina(this,@td.IdMacchina)" title="Modifica"><i class="fa fa-fw fa-pencil"></i></a>
-                    }
-                </td>
-                <td align="right">
-                    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(122))
-                    {
-                        <a onclick="CancellaMacchina(@td.IdMacchina)" title="Cancella"><i class="fa fa-fw fa-remove"></i></a>
-                    }
-                </td>
-                <td></td>
-            </tr>
+                <tr>
+                    <td colspan="2" height="60">
+                        <input type="hidden" class="hdIdManutentore" value="@td.IdMacchina" />
+                        @td.NumeroSerie
+                    </td>
+                    <td height="60">
+                        @td.Descrizione
+                    </td>
+                    <td height="60">
+                        @td.Ditta.RagioneSociale
+                    </td>
+                    <td height="60">
+                        @td.DataCostruzione
+                    </td>
+                    <td height="60">
+                        @Html.TextBox("txtLuogoS", td.Luogo, new { @class = "form-control input-sm ", @id = "txtLuogoS", @maxlength = "45" })
+                    </td>
+                    <td height="60">
+                        @if (td.Padre != null)
+                        {
+                            @td.Padre.ToString();
+                        }
+                    </td>
+                    <td height="60">
+                        @Html.TextBox("txtNotaS", td.Nota, new { @class = "form-control input-sm ", @id = "txtNotaS", @maxlength = "100" })
+                    </td>
+                    <td align="right">
+                        @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(123))
+                        {
+                            <a onclick="ModificaMacchina(this,@td.IdMacchina)" title="Modifica"><i class="fa fa-fw fa-pencil"></i></a>
+                        }
+                    </td>
+                    <td align="right">
+                        @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(122))
+                        {
+                            <a onclick="CancellaMacchina(@td.IdMacchina)" title="Cancella"><i class="fa fa-fw fa-remove"></i></a>
+                        }
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td height="2%"></td>
+                    <td colspan="3">
+                        @Html.Partial("~/Views/Documenti/CaricaDocumentiPartial.cshtml", td.Documenti, ViewData)
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
             }
         </tbody>
     </table>

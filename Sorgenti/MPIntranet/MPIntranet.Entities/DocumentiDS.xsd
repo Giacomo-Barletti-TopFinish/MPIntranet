@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DocumentiDS" targetNamespace="http://tempuri.org/DocumentiDS.xsd" xmlns:mstns="http://tempuri.org/DocumentiDS.xsd" xmlns="http://tempuri.org/DocumentiDS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (Settings)" PropertyReference="ApplicationSettings.MPIntranet.Entities.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="System.Data.OracleClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DocumentiDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DocumentiDS" msprop:Generator_UserDSName="DocumentiDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DOCUMENTI" msprop:Generator_TableClassName="DOCUMENTIDataTable" msprop:Generator_TableVarName="tableDOCUMENTI" msprop:Generator_TablePropName="DOCUMENTI" msprop:Generator_RowDeletingName="DOCUMENTIRowDeleting" msprop:Generator_RowChangingName="DOCUMENTIRowChanging" msprop:Generator_RowEvHandlerName="DOCUMENTIRowChangeEventHandler" msprop:Generator_RowDeletedName="DOCUMENTIRowDeleted" msprop:Generator_UserTableName="DOCUMENTI" msprop:Generator_RowChangedName="DOCUMENTIRowChanged" msprop:Generator_RowEvArgName="DOCUMENTIRowChangeEvent" msprop:Generator_RowClassName="DOCUMENTIRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDDOCUMENTO" msprop:Generator_ColumnVarNameInTable="columnIDDOCUMENTO" msprop:Generator_ColumnPropNameInRow="IDDOCUMENTO" msprop:Generator_ColumnPropNameInTable="IDDOCUMENTOColumn" msprop:Generator_UserColumnName="IDDOCUMENTO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="IDTIPODOCUMENTO" msprop:Generator_ColumnVarNameInTable="columnIDTIPODOCUMENTO" msprop:Generator_ColumnPropNameInRow="IDTIPODOCUMENTO" msprop:Generator_ColumnPropNameInTable="IDTIPODOCUMENTOColumn" msprop:Generator_UserColumnName="IDTIPODOCUMENTO" type="xs:decimal" />
+              <xs:element name="FILENAME" msprop:Generator_ColumnVarNameInTable="columnFILENAME" msprop:Generator_ColumnPropNameInRow="FILENAME" msprop:Generator_ColumnPropNameInTable="FILENAMEColumn" msprop:Generator_UserColumnName="FILENAME">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATI" msprop:Generator_ColumnVarNameInTable="columnDATI" msprop:Generator_ColumnPropNameInRow="DATI" msprop:Generator_ColumnPropNameInTable="DATIColumn" msprop:Generator_UserColumnName="DATI" type="xs:base64Binary" />
+              <xs:element name="IDESTERNA" msprop:Generator_ColumnVarNameInTable="columnIDESTERNA" msprop:Generator_ColumnPropNameInRow="IDESTERNA" msprop:Generator_ColumnPropNameInTable="IDESTERNAColumn" msprop:Generator_UserColumnName="IDESTERNA" type="xs:decimal" />
+              <xs:element name="TABELLAESTERNA" msprop:Generator_ColumnVarNameInTable="columnTABELLAESTERNA" msprop:Generator_ColumnPropNameInRow="TABELLAESTERNA" msprop:Generator_ColumnPropNameInTable="TABELLAESTERNAColumn" msprop:Generator_UserColumnName="TABELLAESTERNA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CANCELLATO" msprop:Generator_ColumnVarNameInTable="columnCANCELLATO" msprop:Generator_ColumnPropNameInRow="CANCELLATO" msprop:Generator_ColumnPropNameInTable="CANCELLATOColumn" msprop:Generator_UserColumnName="CANCELLATO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATAMODIFICA" msprop:Generator_ColumnVarNameInTable="columnDATAMODIFICA" msprop:Generator_ColumnPropNameInRow="DATAMODIFICA" msprop:Generator_ColumnPropNameInTable="DATAMODIFICAColumn" msprop:Generator_UserColumnName="DATAMODIFICA" type="xs:dateTime" />
+              <xs:element name="UTENTEMODIFICA" msprop:Generator_ColumnVarNameInTable="columnUTENTEMODIFICA" msprop:Generator_ColumnPropNameInRow="UTENTEMODIFICA" msprop:Generator_ColumnPropNameInTable="UTENTEMODIFICAColumn" msprop:Generator_UserColumnName="UTENTEMODIFICA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
