@@ -20,7 +20,7 @@
             <td>
                 @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(92))
                 {
-                    <a onclick="Estraidocumento(this,@documento.IdDocumento)" title="Apri"><i class="fa fa-fw fa-external-link"></i></a>
+                    @Html.ActionLink(" ", "EstraiDocumento", "Documenti", new { IdDocumento=documento.IdDocumento}, new { target = "_blank", @class = "fa fa-fw fa-external-link" })
                 }
             </td>
             <td>

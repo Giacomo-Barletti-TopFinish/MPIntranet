@@ -27,6 +27,18 @@ base(connection, transaction)
                 da.Fill(ds.DOCUMENTI);
             }
         }
+
+        public void FillDocumenti(decimal IdDocumento,DocumentiDS ds)
+        {
+            string query = @"SELECT * FROM DOCUMENTI WHERE IDDOCUMENTO = $P<IDDOCUMENTO>";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDDOCUMENTO", DbType.Decimal, IdDocumento);
+            using (DbDataAdapter da = BuildDataAdapter(query,ps))
+            {
+                da.Fill(ds.DOCUMENTI);
+            }
+        }
         public void UpdateTable(string tablename, DocumentiDS ds)
         {
             string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);

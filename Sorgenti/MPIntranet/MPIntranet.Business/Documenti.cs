@@ -14,6 +14,19 @@ namespace MPIntranet.Business
     {
         private DocumentiDS _ds = new DocumentiDS();
 
+        public byte[] EstraiDocumento(decimal IdDocumento, out string Filename)
+        {
+            Filename = string.Empty;
+            using (DocumentiBusiness bDocumenti = new DocumentiBusiness())
+            {
+                bDocumenti.FillDocumenti(IdDocumento, _ds);
+                DocumentiDS.DOCUMENTIRow documento = _ds.DOCUMENTI.Where(x => x.IDDOCUMENTO == IdDocumento).FirstOrDefault();
+
+                if (documento == null) return null;
+                Filename = documento.FILENAME;
+                return documento.DATI;
+            }
+        }
 
         private DocumentoModel CreaDocumentoModel(DocumentiDS.DOCUMENTIRow documento, AnagraficaDS ds)
         {
