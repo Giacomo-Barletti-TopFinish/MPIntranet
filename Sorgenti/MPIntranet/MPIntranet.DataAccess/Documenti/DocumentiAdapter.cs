@@ -18,7 +18,7 @@ base(connection, transaction)
 
         public void FillDocumenti(DocumentiDS ds, bool soloNonCancellati)
         {
-            string query = @"SELECT IDDOCUMENTO,IDTIPODOCUMENTO,FILENAME,IDESTERNA,TABELLAESTERNA FROM DOCUMENTI ";
+            string query = @"SELECT IDDOCUMENTO,IDTIPODOCUMENTO,FILENAME,IDESTERNA,TABELLAESTERNA, CANCELLATO, DATAMODIFICA,UTENTEMODIFICA FROM DOCUMENTI ";
             if (soloNonCancellati)
                 query += "WHERE CANCELLATO = 'N' ";
 

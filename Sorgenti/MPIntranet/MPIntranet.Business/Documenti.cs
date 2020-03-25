@@ -52,7 +52,7 @@ namespace MPIntranet.Business
             if (string.IsNullOrEmpty(TabellaEsterna))
                 return "Tabella esterna assente";
             if (Dati.Length == 0)
-                return "Dai file assenti";
+                return "Dati file assenti";
 
             using (DocumentiBusiness bDocumenti = new DocumentiBusiness())
             {

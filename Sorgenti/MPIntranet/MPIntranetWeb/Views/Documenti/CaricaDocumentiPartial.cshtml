@@ -37,138 +37,66 @@
             <td>
                 @Html.DropDownList("ddlTipologia", new SelectList(ViewData["TipiDocumento"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @style = "height: 21px;" })
             </td>
-            <td>  @Html.TextBox("txtFileName", string.Empty, new { @class = "form-control input-sm", @id = "txtFileName", @maxlength = "50" })</td>
-            <td><a onclick="AggiungiRiferimento(this,@Model.IdEsterna,'@Model.TabellaEsterna' )" title="Aggiungi"><i class="fa fa-fw fa-plus"></i></a></td>
+            <td>
+                <input type="file" id="FileUpload1" />
+            </td>
+            <td><a onclick="AggiungiDocumento(this,@Model.IdEsterna,'@Model.TabellaEsterna' )" title="Aggiungi"><i class="fa fa-fw fa-plus"></i></a></td>
             <td></td>
         </tr>
     }
 
 </table>
 
-
-
-<script language="javascript" type="text/javascript">
-    function CancellaRiferimento(IdRiferimento) {
-         var url = '@Url.Action("CancellaRiferimento", "Manutenzione")';
-    $.ajax({
-    url: url,
-    data: {
-    idRiferimento: idRiferimento
-    },
-    cache: false,
-    type: "POST",
-    success: function (data)
-    {
-    caricaDati();
-    },
-    error: function (response)
-    {
-    document.open();
-    document.write(response.responseText);
-    document.close();
-    }
-    });
-
-    }
-
-    function ModificaRiferimento(sender, IdRiferimento) {
-          var url = '@Url.Action("ModificaRiferimento", "Manutenzione")';
-    $.ajax({
-    url: url,
-    data: {
-    IdRiferimento: IdRiferimento,
-    Riferimento: Riferimento,
-    Etichetta: Etichetta,
-    Tipologia: Tipologia
-
-    },
-    cache: false,
-    type: "POST",
-    success: function (data)
-    {
-
-    if (data == null || data == '') {
-    caricaDati();
-    }
-    else {
-    $('#lblMessage').html(data);
-    }
-    },
-    error: function (response)
-    {
-    document.open();
-    document.write(response.responseText);
-    document.close();
-    }
-    });
-    }
-
-    function AggiungiRiferimento(sender, IdEsterna, TabellaEsterna) {
-
-        var parent = $(sender).closest('tr');
-        var tds = parent.find('td');
-
-        var tipologia = $(parent).find('#ddlTipologia').val();
-        var etichetta = $(parent).find('#txtEtichettaS').val();
-        var riferimento = $(parent).find('#txtRiferimentoS').val();
-
-        var esito = true;
-        var messaggio = '';
-
-        if (tipologia == null || tipologia == '') {
-            esito = false;
-            messaggio += MESSAGGIO_PUNTINO + " " + "Tipologia " + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+<script>
+    function AggiungiDocumento(sender, IdEsterna, TabellaEsterna) {
+       
+        var tipoDocumento = $('#ddlTipologia').val();
+        if (tipoDocumento==null ||tipoDocumento=='')
+        {
+            $('#lblMessage').html(MESSAGGIO_PUNTINO + " " + "Tipo documento " + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO);
+            return;
         }
 
-        if (etichetta == null || etichetta == '') {
-            esito = false;
-            messaggio += MESSAGGIO_PUNTINO + " " + "Etichetta " + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
-        }
+        // Checking whether FormData is available in browser
+        if (window.FormData !== undefined) {
 
-        if (riferimento == null || riferimento == '') {
-            esito = false;
-            messaggio += MESSAGGIO_PUNTINO + " " + "Riferimento " + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
-        }
-
-        $('#lblMessage').html(messaggio);
-        if (!esito) return;
-
-    var url = '@Url.Action("CreaRiferimento", "Manutenzione")';
-        $.ajax({
-        url: url,
-            data: {
-                IdEsterna: IdEsterna,
-                TabellaEsterna: TabellaEsterna,
-                Tipologia: tipologia,
-                Etichetta: etichetta,
-                Riferimento: riferimento
-        },
-        cache: false,
-        type: "POST",
-            success: function (data)
+            var fileUpload = $("#FileUpload1").get(0);
+            var files = fileUpload.files;
+            if (files.length == 0)
             {
-                if (data == null || data == '') {
-                    $(parent).find('#txtEtichettaS').val('');
-                    $(parent).find('#txtRiferimentoS').val('');
-                    caricaDati();
-                }
-                else {
-                     $('#lblMessage').html(data);
-                }
-            },
-            error: function (response)
-            {
-                document.open();
-                document.write(response.responseText);
-                document.close();
+                $('#lblMessage').html(MESSAGGIO_PUNTINO + " " + "filename " + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO);
+                return;
             }
-        });
+            // Create FormData object
+            var fileData = new FormData();
+            // Looping over all files and add it to FormData object
+            for (var i = 0; i < files.length; i++) {
+                fileData.append(files[i].name, files[i]);
+            }
+
+            // Adding one more key to FormData object
+            fileData.append('IdEsterna', IdEsterna);
+            fileData.append('TabellaEsterna', TabellaEsterna);
+            fileData.append('TipoDocumento', tipoDocumento);
+             var url = '@Url.Action("AggiungiDocumento", "Documenti")';
+            $.ajax({
+                url: url,
+                type: "POST",
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data: fileData,
+                success: function (result) {
+                    caricaDati();
+                },
+                error: function (response) {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+                }
+            });
+        } else {
+            alert("FormData is not supported.");
+        }
+
     }
-</script>
-
-
-
-
-
-
-
+</script>  

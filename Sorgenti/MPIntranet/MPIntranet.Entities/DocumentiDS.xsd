@@ -14,7 +14,7 @@
   <xs:element name="DocumentiDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DocumentiDS" msprop:Generator_UserDSName="DocumentiDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="DOCUMENTI" msprop:Generator_TableClassName="DOCUMENTIDataTable" msprop:Generator_TableVarName="tableDOCUMENTI" msprop:Generator_TablePropName="DOCUMENTI" msprop:Generator_RowDeletingName="DOCUMENTIRowDeleting" msprop:Generator_RowChangingName="DOCUMENTIRowChanging" msprop:Generator_RowEvHandlerName="DOCUMENTIRowChangeEventHandler" msprop:Generator_RowDeletedName="DOCUMENTIRowDeleted" msprop:Generator_UserTableName="DOCUMENTI" msprop:Generator_RowChangedName="DOCUMENTIRowChanged" msprop:Generator_RowEvArgName="DOCUMENTIRowChangeEvent" msprop:Generator_RowClassName="DOCUMENTIRow">
+        <xs:element name="DOCUMENTI" msprop:Generator_TableClassName="DOCUMENTIDataTable" msprop:Generator_TableVarName="tableDOCUMENTI" msprop:Generator_RowChangedName="DOCUMENTIRowChanged" msprop:Generator_TablePropName="DOCUMENTI" msprop:Generator_RowDeletingName="DOCUMENTIRowDeleting" msprop:Generator_RowChangingName="DOCUMENTIRowChanging" msprop:Generator_RowEvHandlerName="DOCUMENTIRowChangeEventHandler" msprop:Generator_RowDeletedName="DOCUMENTIRowDeleted" msprop:Generator_RowClassName="DOCUMENTIRow" msprop:Generator_UserTableName="DOCUMENTI" msprop:Generator_RowEvArgName="DOCUMENTIRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDDOCUMENTO" msprop:Generator_ColumnVarNameInTable="columnIDDOCUMENTO" msprop:Generator_ColumnPropNameInRow="IDDOCUMENTO" msprop:Generator_ColumnPropNameInTable="IDDOCUMENTOColumn" msprop:Generator_UserColumnName="IDDOCUMENTO" type="xs:decimal" minOccurs="0" />
@@ -26,7 +26,7 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="DATI" msprop:Generator_ColumnVarNameInTable="columnDATI" msprop:Generator_ColumnPropNameInRow="DATI" msprop:Generator_ColumnPropNameInTable="DATIColumn" msprop:Generator_UserColumnName="DATI" type="xs:base64Binary" />
+              <xs:element name="DATI" msprop:Generator_ColumnVarNameInTable="columnDATI" msprop:Generator_ColumnPropNameInRow="DATI" msprop:Generator_ColumnPropNameInTable="DATIColumn" msprop:Generator_UserColumnName="DATI" type="xs:base64Binary" minOccurs="0" />
               <xs:element name="IDESTERNA" msprop:Generator_ColumnVarNameInTable="columnIDESTERNA" msprop:Generator_ColumnPropNameInRow="IDESTERNA" msprop:Generator_ColumnPropNameInTable="IDESTERNAColumn" msprop:Generator_UserColumnName="IDESTERNA" type="xs:decimal" />
               <xs:element name="TABELLAESTERNA" msprop:Generator_ColumnVarNameInTable="columnTABELLAESTERNA" msprop:Generator_ColumnPropNameInRow="TABELLAESTERNA" msprop:Generator_ColumnPropNameInTable="TABELLAESTERNAColumn" msprop:Generator_UserColumnName="TABELLAESTERNA">
                 <xs:simpleType>
