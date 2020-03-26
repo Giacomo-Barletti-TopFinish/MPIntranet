@@ -119,22 +119,13 @@ namespace MPIntranetWeb.Controllers
             }
             return View();
         }
-        public ActionResult RimuoviDocumento()
+        public ActionResult CancellaDocumento(decimal IdDocumento)
         {
-            return View();
+            Documenti a = new Documenti();
+            a.CancellaDocumento(IdDocumento, ConnectedUser);
+            return null;
         }
 
-        //[HttpGet]
-        //public FileStreamResult GetReport(long id_spasync, long id, string tipoElaborazione, string nomeFile, string SessionId, string nomeReport)
-        //{
-        //    if (nomeReport == null)
-        //        nomeReport = GetInformationService.GetSubOperazione(id_spasync, SpcContext);
-
-        //    ReturnedReportModel rm = GetReportService.GetReport(id_spasync, id, tipoElaborazione, nomeFile, SpcContext, nomeReport);
-        //    byte[] fileArray = rm.data;
-
-        //    Response.AppendHeader("content-disposition", string.Format(CultureInfo.InvariantCulture, "inline; filename={0}.pdf", nomeFile));
-        //    return new FileStreamResult(new MemoryStream(fileArray), "application/pdf");
-        //}
+       
     }
 }

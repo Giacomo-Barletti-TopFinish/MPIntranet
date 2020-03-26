@@ -197,6 +197,68 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="INTERVENTI" msprop:Generator_TableClassName="INTERVENTIDataTable" msprop:Generator_TableVarName="tableINTERVENTI" msprop:Generator_TablePropName="INTERVENTI" msprop:Generator_RowDeletingName="INTERVENTIRowDeleting" msprop:Generator_RowChangingName="INTERVENTIRowChanging" msprop:Generator_RowEvHandlerName="INTERVENTIRowChangeEventHandler" msprop:Generator_RowDeletedName="INTERVENTIRowDeleted" msprop:Generator_UserTableName="INTERVENTI" msprop:Generator_RowChangedName="INTERVENTIRowChanged" msprop:Generator_RowEvArgName="INTERVENTIRowChangeEvent" msprop:Generator_RowClassName="INTERVENTIRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDINTERVENTO" msprop:Generator_ColumnVarNameInTable="columnIDINTERVENTO" msprop:Generator_ColumnPropNameInRow="IDINTERVENTO" msprop:Generator_ColumnPropNameInTable="IDINTERVENTOColumn" msprop:Generator_UserColumnName="IDINTERVENTO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DESCRIZIONE" msprop:Generator_ColumnVarNameInTable="columnDESCRIZIONE" msprop:Generator_ColumnPropNameInRow="DESCRIZIONE" msprop:Generator_ColumnPropNameInTable="DESCRIZIONEColumn" msprop:Generator_UserColumnName="DESCRIZIONE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DURATA" msprop:Generator_ColumnVarNameInTable="columnDURATA" msprop:Generator_ColumnPropNameInRow="DURATA" msprop:Generator_ColumnPropNameInTable="DURATAColumn" msprop:Generator_UserColumnName="DURATA" type="xs:decimal" minOccurs="0" />
+              <xs:element name="IDMACCHINA" msprop:Generator_ColumnVarNameInTable="columnIDMACCHINA" msprop:Generator_ColumnPropNameInRow="IDMACCHINA" msprop:Generator_ColumnPropNameInTable="IDMACCHINAColumn" msprop:Generator_UserColumnName="IDMACCHINA" type="xs:decimal" minOccurs="0" />
+              <xs:element name="IDMANUTENTORE" msprop:Generator_ColumnVarNameInTable="columnIDMANUTENTORE" msprop:Generator_ColumnPropNameInRow="IDMANUTENTORE" msprop:Generator_ColumnPropNameInTable="IDMANUTENTOREColumn" msprop:Generator_UserColumnName="IDMANUTENTORE" type="xs:decimal" minOccurs="0" />
+              <xs:element name="IDSERIE" msprop:Generator_ColumnVarNameInTable="columnIDSERIE" msprop:Generator_ColumnPropNameInRow="IDSERIE" msprop:Generator_ColumnPropNameInTable="IDSERIEColumn" msprop:Generator_UserColumnName="IDSERIE" type="xs:decimal" minOccurs="0" />
+              <xs:element name="FREQUENZA" msprop:Generator_ColumnVarNameInTable="columnFREQUENZA" msprop:Generator_ColumnPropNameInRow="FREQUENZA" msprop:Generator_ColumnPropNameInTable="FREQUENZAColumn" msprop:Generator_UserColumnName="FREQUENZA" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NOTE" msprop:Generator_ColumnVarNameInTable="columnNOTE" msprop:Generator_ColumnPropNameInRow="NOTE" msprop:Generator_ColumnPropNameInTable="NOTEColumn" msprop:Generator_UserColumnName="NOTE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="LUOGO" msprop:Generator_ColumnVarNameInTable="columnLUOGO" msprop:Generator_ColumnPropNameInRow="LUOGO" msprop:Generator_ColumnPropNameInTable="LUOGOColumn" msprop:Generator_UserColumnName="LUOGO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATAINTERVENTO" msprop:Generator_ColumnVarNameInTable="columnDATAINTERVENTO" msprop:Generator_ColumnPropNameInRow="DATAINTERVENTO" msprop:Generator_ColumnPropNameInTable="DATAINTERVENTOColumn" msprop:Generator_UserColumnName="DATAINTERVENTO" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="STATO" msprop:Generator_ColumnVarNameInTable="columnSTATO" msprop:Generator_ColumnPropNameInRow="STATO" msprop:Generator_ColumnPropNameInTable="STATOColumn" msprop:Generator_UserColumnName="STATO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CANCELLATO" msprop:Generator_ColumnVarNameInTable="columnCANCELLATO" msprop:Generator_ColumnPropNameInRow="CANCELLATO" msprop:Generator_ColumnPropNameInTable="CANCELLATOColumn" msprop:Generator_UserColumnName="CANCELLATO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATAMODIFICA" msprop:Generator_ColumnVarNameInTable="columnDATAMODIFICA" msprop:Generator_ColumnPropNameInRow="DATAMODIFICA" msprop:Generator_ColumnPropNameInTable="DATAMODIFICAColumn" msprop:Generator_UserColumnName="DATAMODIFICA" type="xs:dateTime" />
+              <xs:element name="UTENTEMODIFICA" msprop:Generator_ColumnVarNameInTable="columnUTENTEMODIFICA" msprop:Generator_ColumnPropNameInRow="UTENTEMODIFICA" msprop:Generator_ColumnPropNameInTable="UTENTEMODIFICAColumn" msprop:Generator_UserColumnName="UTENTEMODIFICA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>

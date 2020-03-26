@@ -95,7 +95,7 @@ namespace MPIntranet.Business
         {
             using (DocumentiBusiness bDocumenti = new DocumentiBusiness())
             {
-                bDocumenti.FillDocumenti(_ds, true);
+                bDocumenti.FillDocumenti(IdDocumento,_ds);
                 DocumentiDS.DOCUMENTIRow documento = _ds.DOCUMENTI.Where(x => x.IDDOCUMENTO == IdDocumento).FirstOrDefault();
                 if (documento != null)
                 {

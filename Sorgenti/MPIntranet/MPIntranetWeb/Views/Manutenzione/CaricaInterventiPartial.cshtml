@@ -1,0 +1,82 @@
+﻿@using MPIntranet.Models.Manutenzione
+@using MPIntranet.Models.Common
+
+@model List<InterventoModel>
+
+@if (Model != null && Model.Count() == 0)
+{
+    <text><b>Nessun risultato trovato</b></text>
+}
+
+else
+{
+    <table id="grigliaInterventi" class="table table-condensed table-hover">
+        <thead style="background-color:aliceblue">
+            <tr>
+                <th width="15%">Descrizione</th>
+                <th width="10%">Stato</th>
+                <th width="10%">Luogo</th>
+                <th width="10%">Data</th>
+                <th width="10%">Durata</th>
+                <th width="10%">Macchina</th>
+                <th width="10%">Manutentore</th>
+                <th width="10%">Frequenza</th>
+                <th width="20%">Nota</th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (InterventoModel td in Model)
+            {
+            <tr>
+                <td height="60">
+                    <input type="hidden" class="hdIdIntervento" value="@td.IdIntervento" />
+                    @td.Descrizione
+                </td>
+                <td>
+                    @Html.DropDownList("ddlStato", new SelectList(@ViewData["Stato"] as List<MPIntranetListItem>, "Value", "Text"), td.Stato.ToString(), new { @class = "form-control input-sm", @id = "ddlStato" })
+                </td>
+                <td height="60">
+                    @td.Luogo
+                </td>
+                <td height="60">
+                    @Html.TextBox("txtDataS", td.DataIntervento.ToString("yyyy-MM-dd"), new { @class = "form-control input-sm ", @id = "txtDataS", @type = "date", @maxlength = "50" })
+
+                </td>
+                <td height="60">
+                    @Html.TextBox("txtDurataS", td.Durata, new { @class = "form-control input-sm ", @id = "txtDurataS", @type = "number", @maxlength = "50" })
+                </td>
+                <td height="60">
+                    @td.Macchina.ToString()
+                </td>
+                <td>
+                    @Html.DropDownList("ddlManutentori", new SelectList(@ViewData["Manutentori"] as List<MPIntranetListItem>, "Value", "Text"), td.Manutentore.NomeCognome, new { @class = "form-control input-sm", @id = "ddlManutentori" })
+                </td>
+                <td>
+                    @Html.DropDownList("ddlFrequenza", new SelectList(@ViewData["Frequenza"] as List<MPIntranetListItem>, "Value", "Text"), td.Frequenza, new { @class = "form-control input-sm", @id = "ddlFrequenza" })
+                </td>
+                <td>
+                    @Html.TextBox("txtNota", td.Nota, new { @class = "form-control input-sm ", @id = "txtNota", @maxlength = "200" })
+                </td>
+                <td align="right">
+                    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(143))
+                    {
+                        <a onclick="ModificaIntervento(this,@td.IdIntervento)" title="Modifica"><i class="fa fa-fw fa-pencil"></i></a>
+                    }
+                </td>
+                <td align="right">
+                    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(142))
+                    {
+                        <a onclick="CancellaIntervento(@td.IdIntervento)" title="Cancella"><i class="fa fa-fw fa-remove"></i></a>
+                    }
+                </td>
+                <td></td>
+            </tr>
+
+            }
+        </tbody>
+    </table>
+
+}
+

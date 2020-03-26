@@ -51,7 +51,7 @@
     function AggiungiDocumento(sender, IdEsterna, TabellaEsterna) {
        
         var tipoDocumento = $('#ddlTipologia').val();
-        if (tipoDocumento==null ||tipoDocumento=='')
+        if (tipoDocumento == null || tipoDocumento == '' || tipoDocumento=='@MPIntranet.Entities.ElementiVuoti.TipoDocumentoVuoto')
         {
             $('#lblMessage').html(MESSAGGIO_PUNTINO + " " + "Tipo documento " + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO);
             return;
@@ -98,5 +98,28 @@
             alert("FormData is not supported.");
         }
 
+    }
+
+    function CancellaDocumento(IdDocumento) {
+
+     var url = '@Url.Action("CancellaDocumento", "Documenti")';
+            $.ajax({
+                url: url,
+                data: {
+                    IdDocumento: IdDocumento
+                },
+                cache: false,
+                type: "POST",
+                success: function (data)
+                {
+                    caricaDati();
+                },
+                error: function (response)
+                {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+                }
+            });
     }
 </script>  

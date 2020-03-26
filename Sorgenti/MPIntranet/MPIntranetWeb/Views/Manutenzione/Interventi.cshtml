@@ -1,0 +1,281 @@
+﻿@using MPIntranet.Models.Common
+@{
+    ViewBag.Title = "Interventi";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+
+<div class="content-top">
+    <h2>Gestione Interventi</h2>
+</div>
+<div id="ArticleScrolledContent" class="content-scheda" style="overflow-y:auto; overflow-x:hidden">
+
+    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(141))
+    {
+        <div class="row col-lg-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th width="15%">Descrizione</th>
+                        <th width="10%">Luogo</th>
+                        <th width="10%">Data</th>
+                        <th width="10%">Durata</th>
+                        <th width="10%">Macchina</th>
+                        <th width="10%">Manutentore</th>
+                        <th width="10%">Frequenza</th>
+                        <th width="20%">Nota</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            @Html.TextBox("txtDescrizione", null, new { @class = "form-control input-sm ", @id = "txtDescrizione", @maxlength = "100" })
+                        </td>
+                        <td>
+                            @Html.TextBox("txtLuogo", null, new { @class = "form-control input-sm ", @id = "txtLuogo", @maxlength = "50" })
+                        </td>
+                        <td>
+                            @Html.TextBox("txtData", null, new { @class = "form-control input-sm ", @id = "txtData", @type = "date", @maxlength = "50" })
+                        </td>
+                        <td>
+                            @Html.TextBox("txtDurata", null, new { @class = "form-control input-sm ", @id = "txtDurata", @type = "number",@min=0, @maxlength = "50" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("ddlMacchine", new SelectList(@ViewData["Macchine"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlMacchine" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("ddlManutentori", new SelectList(@ViewData["Manutentori"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlManutentori" })
+                        </td>
+                        <td>
+                            @Html.DropDownList("ddlFrequenza", new SelectList(@ViewData["Frequenza"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlFrequenza" })
+                        </td>
+                        <td>
+                            @Html.TextBox("txtNota", null, new { @class = "form-control input-sm ", @id = "txtNota", @maxlength = "200" })
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row col-lg-2">
+            <div style="display:inline-block; width:50%">
+                <input type="button" onclick="AggiungiNuovo();" class="btn btn-primary" value="Nuovo intervento" />
+            </div>
+        </div>
+    }
+    <label class="text-red input-sm" id="lblMessage"></label>
+    <br />
+    <div class="col-md-12" id="divRisultati" style="overflow-y:auto; overflow-x:hidden; height:750px">
+
+    </div>
+
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+        caricaDati();
+    });
+    function CancellaIntervento(idIntervento) {
+
+     var url = '@Url.Action("CancellaIntervento", "Manutenzione")';
+            $.ajax({
+                url: url,
+                data: {
+                    IdIntervento: idIntervento
+                },
+                cache: false,
+                type: "POST",
+                success: function (data)
+                {
+                    caricaDati();
+                },
+                error: function (response)
+                {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+                }
+            });
+    }
+
+    function caricaDati() {
+         var url = '@Url.Action("CaricaInterventi", "Manutenzione")';
+        $.ajax({
+            url: url,
+            data: {
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divRisultati').html(data).show();
+                $('#txtDescrizione').val('');
+                $('#txtLuogo').val('');
+                $('#txtData').val('');
+                $('#txtDurata').val('');
+                $('#ddlMacchine').val('');
+                $('#ddlManutentori').val('');
+                $('#ddlFrequenza').val('');
+                $('#txtNota').val('');
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+     function AggiungiNuovo()
+     {
+        var descrizione = $('#txtDescrizione').val();
+        var luogo= $('#txtLuogo').val();
+        var data= $('#txtData').val();
+        var durata=$('#txtDurata').val();
+        var macchina= $('#ddlMacchine').val();
+        var manutentore= $('#ddlManutentori').val();
+        var frequenza =$('#ddlFrequenza').val();
+        var nota = $('#txtNota').val();
+
+
+        var esito = true;
+        var messaggio = '';
+
+         if (descrizione =='' )
+        {
+            esito=false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Descrizione" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+         if (data == null || data == '') {
+             esito = false;
+             messaggio += MESSAGGIO_PUNTINO + " " + "Data " + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+         }
+
+         if (luogo == null)
+             luogo = '';
+
+         if (durata == null || durata == '')
+             durata = '0';
+
+         if (macchina == null || macchina == '')
+             macchina = -1;
+
+         if (manutentore == null || manutentore == '')
+             manutentore = -1;
+
+         if (frequenza == null || frequenza == '')
+             frequenza = 'NESSUNA';
+
+         if (nota == null)
+             nota = '';
+
+        $('#lblMessage').html(messaggio);
+        if(!esito) return;
+
+
+        var url = '@Url.Action("CreaIntervento", "Manutenzione")';
+        $.ajax({
+            url: url,
+            data: {
+                Descrizione: descrizione,
+                Luogo: luogo,
+                Data: data,
+                Durata: durata,
+                IdMacchina: macchina,
+                IdManutentore: manutentore,
+                Frequenza:frequenza,
+                Nota: nota
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                if (data == null || data == '') {
+                    caricaDati();
+                }
+                else {
+                    $('#lblMessage').html(data);
+                }
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function ModificaIntervento(sender, idIntervento)
+    {
+          var parent = $(sender).closest('tr');
+          var tds = parent.find('td');
+
+        var stato = $(parent).find('#ddlStato').val();
+        var data = $(parent).find('#txtDataS').val();
+        var durata = $(parent).find('#txtDurataS').val();
+        var manutentore = $(parent).find('#ddlManutentori').val();
+        var frequenza = $(parent).find('#ddlFrequenza').val();
+        var nota = $(parent).find('#txtNota').val();
+
+        var messaggio = '';
+        var esito = true;
+
+        if (data == null || data == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Data " + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        if (stato == null) stato = '';
+
+        if (durata == null || durata == '')
+            durata = '0';
+
+        if (manutentore == null || manutentore == '')
+            manutentore = -1;
+
+        if (frequenza == null || frequenza == '')
+            frequenza = "NESSUNA";
+
+        if (nota == null)
+            nota = '';
+
+        $('#lblMessage').html(messaggio);
+        if (!esito) return;
+
+        var url = '@Url.Action("ModificaIntervento", "Manutenzione")';
+        $.ajax({
+            url: url,
+            data: {
+                IdIntervento: idIntervento,
+                Data: data,
+                Stato: stato,
+                Durata: durata,
+                IdManutentore: manutentore,
+                Frequenza:frequenza,
+                Nota: nota
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+
+                if (data == null || data == '') {
+                    caricaDati();
+                }
+                else {
+                    $('#lblMessage').html(data);
+                }
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+</script>
+

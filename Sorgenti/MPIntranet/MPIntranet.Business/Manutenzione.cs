@@ -104,6 +104,72 @@ namespace MPIntranet.Business
             return string.Empty;
         }
 
+        public string CreaIntervento(string Descrizione, string Luogo, DateTime Data, decimal Durata, decimal IdMacchina, decimal IdManutentore, string Frequenza, string Nota, decimal IdSerie, string Stato, string account)
+        {
+            Descrizione = Descrizione.ToUpper().Trim();
+            Luogo = Luogo.ToUpper().Trim();
+            Nota = Nota.ToUpper().Trim();
+            Frequenza = Frequenza.ToUpper().Trim();
+            Stato = Stato.ToUpper().Trim();
+
+            using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
+            {
+
+                ManutenzioneDS.INTERVENTIRow intervento = _ds.INTERVENTI.NewINTERVENTIRow();
+
+                intervento.CANCELLATO = SiNo.No;
+                intervento.DATAMODIFICA = DateTime.Now;
+                intervento.UTENTEMODIFICA = account;
+
+                intervento.DESCRIZIONE = Descrizione;
+                intervento.DURATA = Durata;
+                if (IdMacchina > 0) intervento.IDMACCHINA = IdMacchina;
+                if (IdManutentore > 0) intervento.IDMANUTENTORE = IdManutentore;
+                if (IdSerie > 0) intervento.IDSERIE = IdSerie;
+                intervento.FREQUENZA = Frequenza.Length > 20 ? Frequenza.Substring(0, 20) : Frequenza;
+                intervento.NOTE = Nota.Length > 200 ? Nota.Substring(0, 200) : Nota;
+                intervento.LUOGO = Luogo.Length > 50 ? Luogo.Substring(0, 50) : Luogo;
+                intervento.DATAINTERVENTO = Data;
+                intervento.STATO = Stato.Length > 25 ? Stato.Substring(0, 25) : Stato;
+
+                _ds.INTERVENTI.AddINTERVENTIRow(intervento);
+
+                bManutenzione.UpdateTable(_ds.INTERVENTI.TableName, _ds);
+            }
+            return string.Empty;
+        }
+
+        public void ModificaIntervento(decimal IdIntervento, DateTime Data, string Stato, decimal Durata, decimal IdManutentore, string Frequenza, string Nota, string account)
+        {
+            Nota = Nota.ToUpper().Trim();
+            Frequenza = Frequenza.ToUpper().Trim();
+            Stato = Stato.ToUpper().Trim();
+
+            using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
+            {
+                bManutenzione.FillInterventi(_ds, true);
+
+                ManutenzioneDS.INTERVENTIRow intervento = _ds.INTERVENTI.Where(x => x.IDINTERVENTO == IdIntervento).FirstOrDefault();
+
+                if (intervento == null) return;
+                intervento.DATAMODIFICA = DateTime.Now;
+                intervento.UTENTEMODIFICA = account;
+
+                intervento.DURATA = Durata;
+                if (IdManutentore > 0) intervento.IDMANUTENTORE = IdManutentore;
+                if (IdManutentore == -1) intervento.SetIDMANUTENTORENull();
+                
+                intervento.FREQUENZA = Frequenza.Length > 20 ? Frequenza.Substring(0, 20) : Frequenza;
+                intervento.NOTE = Nota.Length > 200 ? Nota.Substring(0, 200) : Nota;               
+                intervento.DATAINTERVENTO = Data;
+                intervento.STATO = Stato.Length > 25 ? Stato.Substring(0, 25) : Stato;
+
+
+                bManutenzione.UpdateTable(_ds.INTERVENTI.TableName, _ds);
+            }
+           
+        }
+
         public List<DittaModel> CreaListaDittaModel()
         {
             List<DittaModel> lista = new List<DittaModel>();
@@ -131,6 +197,24 @@ namespace MPIntranet.Business
 
                 foreach (ManutenzioneDS.MACCHINERow d in _ds.MACCHINE)
                     lista.Add(CreaMacchinaModel(d, _ds));
+            }
+
+            return lista;
+        }
+
+        public List<InterventoModel> CreaListaInterventoModel()
+        {
+            List<InterventoModel> lista = new List<InterventoModel>();
+
+            using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
+            {
+                bManutenzione.FillMacchine(_ds, true);
+                bManutenzione.FillManutentori(_ds, true);
+                bManutenzione.FillInterventi(_ds, true);
+
+
+                foreach (ManutenzioneDS.INTERVENTIRow d in _ds.INTERVENTI)
+                    lista.Add(CreaInterventoModel(d, _ds));
             }
 
             return lista;
@@ -222,6 +306,30 @@ namespace MPIntranet.Business
             return dm;
         }
 
+        private InterventoModel CreaInterventoModel(ManutenzioneDS.INTERVENTIRow intervento, ManutenzioneDS ds)
+        {
+            InterventoModel dm = new InterventoModel();
+            dm.IdIntervento = intervento.IDINTERVENTO;
+            dm.Descrizione = intervento.DESCRIZIONE;
+            dm.Durata = intervento.IsDURATANull() ? 0 : intervento.DURATA;
+
+            dm.Macchina = new MacchinaModel();
+            if (!intervento.IsIDMACCHINANull())
+                dm.Macchina = CreaMacchinaModel(intervento.IDMACCHINA, ds);
+
+            dm.Manutentore = new ManutentoreModel();
+            if (!intervento.IsIDMANUTENTORENull())
+                dm.Manutentore = CreaManutentoreModel(intervento.IDMANUTENTORE, ds);
+
+            dm.IdSerie = intervento.IsIDSERIENull() ? -1 : intervento.IDSERIE;
+            dm.Frequenza = intervento.IsFREQUENZANull() ? string.Empty : intervento.FREQUENZA;
+            dm.Nota = intervento.IsNOTENull() ? string.Empty : intervento.NOTE;
+            dm.Luogo = intervento.IsLUOGONull() ? string.Empty : intervento.LUOGO;
+            dm.Stato = intervento.IsSTATONull() ? string.Empty : intervento.STATO;
+            dm.DataIntervento = intervento.DATAINTERVENTO;
+
+            return dm;
+        }
         private MacchinaModel CreaMacchinaModel(decimal idMacchina, ManutenzioneDS ds)
         {
             ManutenzioneDS.MACCHINERow macchina = ds.MACCHINE.Where(x => x.IDMACCHINA == idMacchina).FirstOrDefault();
@@ -229,6 +337,14 @@ namespace MPIntranet.Business
 
             return CreaMacchinaModel(macchina, ds);
         }
+        private ManutentoreModel CreaManutentoreModel(decimal idManutentore, ManutenzioneDS ds)
+        {
+            ManutenzioneDS.MANUTENTORIRow manutentore = ds.MANUTENTORI.Where(x => x.IDMANUTENTORE == idManutentore).FirstOrDefault();
+            if (manutentore == null) return null;
+
+            return CreaManutentoreModel(manutentore, ds);
+        }
+
         private RiferimentoModel CreaRiferimentoModel(ManutenzioneDS.RIFERIMENTIRow riferimento)
         {
             RiferimentoModel rm = new RiferimentoModel();
@@ -289,6 +405,23 @@ namespace MPIntranet.Business
                 }
             }
         }
+
+        public void CancellaIntervento(decimal IdIntervento, string account)
+        {
+            using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
+            {
+                bManutenzione.FillInterventi(_ds, true);
+                ManutenzioneDS.INTERVENTIRow intervento = _ds.INTERVENTI.Where(x => x.IDINTERVENTO == IdIntervento).FirstOrDefault();
+                if (intervento != null)
+                {
+                    intervento.CANCELLATO = SiNo.Si;
+                    intervento.DATAMODIFICA = DateTime.Now;
+                    intervento.UTENTEMODIFICA = account;
+
+                    bManutenzione.UpdateTable(_ds.INTERVENTI.TableName, _ds);
+                }
+            }
+        }
         public void ModificaDitta(decimal idDitta, string ragioneSociale, string account)
         {
             using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
@@ -325,6 +458,8 @@ namespace MPIntranet.Business
                 }
             }
         }
+
+
         public void ModificaManutentore(decimal IdManutentore, string utente, string nota, string account)
         {
             utente = (utente.Length > 45 ? utente.Substring(0, 45) : utente).ToUpper();

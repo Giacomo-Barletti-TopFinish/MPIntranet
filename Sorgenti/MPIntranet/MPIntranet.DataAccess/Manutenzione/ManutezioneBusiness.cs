@@ -25,6 +25,12 @@ namespace MPIntranet.DataAccess.Manutenzione
             a.FillMacchine(ds, soloNonCancellati);
         }
         [DataContext]
+        public void FillInterventi(ManutenzioneDS ds, bool soloNonCancellati)
+        {
+            ManutenzioneAdapter a = new ManutenzioneAdapter(DbConnection, DbTransaction);
+            a.FillInterventi(ds, soloNonCancellati);
+        }
+        [DataContext]
         public void FillManutentori(ManutenzioneDS ds, bool soloNonCancellati)
         {
             ManutenzioneAdapter a = new ManutenzioneAdapter(DbConnection, DbTransaction);

@@ -435,6 +435,8 @@
     <Content Include="Views\Manutenzione\Macchine.cshtml" />
     <Content Include="Views\Manutenzione\CaricaMacchinePartial.cshtml" />
     <Content Include="Views\Documenti\CaricaDocumentiPartial.cshtml" />
+    <Content Include="Views\Manutenzione\Interventi.cshtml" />
+    <Content Include="Views\Manutenzione\CaricaInterventiPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

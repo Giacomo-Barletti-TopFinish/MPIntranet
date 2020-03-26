@@ -10,6 +10,8 @@ namespace MPIntranet.Entities
     {
         public const decimal ProcessoGalvanicoVuoto = -1;
         public const decimal ArticoloStandard = -1;
-
+        public const decimal TipoDocumentoVuoto = -1;
+        public const decimal MacchinaVuota = -1;
+        public const decimal ManutentoreVuoto = -1;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MPIntranet.Business;
+using MPIntranet.Entities;
 using MPIntranet.Models;
 using MPIntranet.Models.Anagrafica;
 using MPIntranet.Models.Common;
@@ -147,6 +148,8 @@ namespace MPIntranetWeb.Controllers
             Anagrafica a = new Anagrafica();
             List<TipoDocumentoModel> tipiDocumentoModel = a.CreaListaTipoDocumento();
             List<MPIntranetListItem> tipiDocumento = tipiDocumentoModel.Select(x => new MPIntranetListItem(x.Descrizione, x.IdTipoDocumento.ToString())).ToList();
+            tipiDocumento.Insert(0, new MPIntranetListItem(string.Empty, ElementiVuoti.TipoDocumentoVuoto.ToString()));
+
             ViewData.Add("TipiDocumento", tipiDocumento);
 
 
@@ -173,6 +176,89 @@ namespace MPIntranetWeb.Controllers
         {
             Manutenzione a = new Manutenzione();
             a.ModificaMacchina(IdMacchina, Luogo, Nota, ConnectedUser);
+            return null;
+        }
+
+        public ActionResult Interventi()
+        {
+            Manutenzione m = new Manutenzione();
+            
+            List<MacchinaModel> macchineModel = m.CreaListaMacchinaModel();
+            List<MPIntranetListItem> macchine = macchineModel.Select(x => new MPIntranetListItem(x.ToString(), x.IdMacchina.ToString())).ToList();
+            macchine.Insert(0, new MPIntranetListItem(string.Empty, ElementiVuoti.MacchinaVuota.ToString()));
+            ViewData.Add("Macchine", macchine);
+
+            List<ManutentoreModel> lista = m.CreaListaManutentoreModel();
+            List<MPIntranetListItem> manutentori = lista.Select(x => new MPIntranetListItem(x.NomeCognome.ToString(), x.IdManutentore.ToString())).ToList();
+            manutentori.Insert(0, new MPIntranetListItem(string.Empty, ElementiVuoti.ManutentoreVuoto.ToString()));
+            ViewData.Add("Manutentori", manutentori);
+
+            List<MPIntranetListItem> frequenza = new List<MPIntranetListItem>();
+            frequenza.Add( new MPIntranetListItem(string.Empty, "NESSUNA"));
+            frequenza.Add(new MPIntranetListItem("SETTIMANALE", "SETTIMANALE"));
+            frequenza.Add(new MPIntranetListItem("MENSILE", "MENSILE"));
+            frequenza.Add(new MPIntranetListItem("TRIMESTRALE", "TRIMESTRALE"));
+            frequenza.Add(new MPIntranetListItem("SEMESTRALE", "SEMESTRALE"));
+            frequenza.Add(new MPIntranetListItem("ANNUALE", "ANNUALE"));
+            ViewData.Add("Frequenza", frequenza);
+
+            return View();
+        }
+        public ActionResult CaricaInterventi()
+        {
+
+            Manutenzione m = new Manutenzione();
+            List<ManutentoreModel> lista = m.CreaListaManutentoreModel();
+            List<MPIntranetListItem> manutentori = lista.Select(x => new MPIntranetListItem(x.NomeCognome.ToString(), x.IdManutentore.ToString())).ToList();
+            manutentori.Insert(0, new MPIntranetListItem(string.Empty, ElementiVuoti.ManutentoreVuoto.ToString()));
+            ViewData.Add("Manutentori", manutentori);
+
+            List<MPIntranetListItem> frequenza = new List<MPIntranetListItem>();
+            frequenza.Add(new MPIntranetListItem(string.Empty, "NESSUNA"));
+            frequenza.Add(new MPIntranetListItem("SETTIMANALE", "SETTIMANALE"));
+            frequenza.Add(new MPIntranetListItem("MENSILE", "MENSILE"));
+            frequenza.Add(new MPIntranetListItem("TRIMESTRALE", "TRIMESTRALE"));
+            frequenza.Add(new MPIntranetListItem("SEMESTRALE", "SEMESTRALE"));
+            frequenza.Add(new MPIntranetListItem("ANNUALE", "ANNUALE"));
+            ViewData.Add("Frequenza", frequenza);
+
+            List<MPIntranetListItem> stato = new List<MPIntranetListItem>();
+            stato.Add(new MPIntranetListItem(string.Empty, string.Empty));
+            stato.Add(new MPIntranetListItem("SOSPESO", "SOSPESO"));
+            stato.Add(new MPIntranetListItem("CHIUSO", "CHIUSO"));
+            stato.Add(new MPIntranetListItem("DA CHIUDERE", "DA CHIUDERE"));
+            stato.Add(new MPIntranetListItem("APERTO", "APERTO"));
+            ViewData.Add("Stato", stato);
+            List<InterventoModel> interventiModel = m.CreaListaInterventoModel();
+
+
+            return PartialView("CaricaInterventiPartial", interventiModel);
+
+        }
+
+        public ActionResult CreaIntervento(string Descrizione, string Luogo, string Data, decimal Durata,decimal IdMacchina,decimal IdManutentore,string Frequenza, string Nota)
+        {
+            Manutenzione a = new Manutenzione();
+
+            DateTime data = DateTime.Parse(Data);
+
+            string messaggio = a.CreaIntervento(Descrizione, Luogo, data, Durata,IdMacchina,IdManutentore,Frequenza,Nota,-1,"APERTO", ConnectedUser);
+
+            return Content(messaggio);
+        }
+
+        public ActionResult CancellaIntervento(decimal IdIntervento)
+        {
+            Manutenzione a = new Manutenzione();
+            a.CancellaIntervento(IdIntervento, ConnectedUser);
+            return null;
+        }
+
+        public ActionResult ModificaIntervento(decimal IdIntervento,string Data,string Stato, decimal Durata, decimal IdManutentore,string Frequenza, string Nota)
+        {
+            DateTime data = DateTime.Parse(Data);
+            Manutenzione a = new Manutenzione();
+            a.ModificaIntervento(IdIntervento, data, Stato,Durata,IdManutentore,Frequenza, Nota, ConnectedUser);
             return null;
         }
     }
