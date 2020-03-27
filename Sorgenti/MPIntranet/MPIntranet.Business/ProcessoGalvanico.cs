@@ -1,4 +1,5 @@
 ﻿using MPIntranet.DataAccess.Articolo;
+using MPIntranet.DataAccess.Galvanica;
 using MPIntranet.Entities;
 using MPIntranet.Helpers;
 using MPIntranet.Models;
@@ -27,18 +28,19 @@ namespace MPIntranet.Business
                 bArticolo.FillFasiProcesso(_ds, idArticolo, true);
             }
 
+            List<TelaioModel> telai = _galvanica.CreaListaTelaioModel();
             List<decimal> idprocessi = _ds.PROCESSI.Where(x => x.IDIMPIANTO == idImpianto).Select(x => x.IDPROCESSO).ToList();
 
             List<ProcessoModel> processiModel = new List<ProcessoModel>();
 
             foreach (decimal idProcesso in idprocessi)
             {
-                processiModel.Add(CreaProcessoModel(idProcesso));
+                processiModel.Add(CreaProcessoModel(idProcesso, telai));
             }
             return processiModel;
         }
 
-        public ProcessoModel CreaProcessoModel(decimal idProcesso)
+        public ProcessoModel CreaProcessoModel(decimal idProcesso, List<TelaioModel> telai)
         {
             ArticoloDS.PROCESSIRow processo = _ds.PROCESSI.Where(x => x.IDPROCESSO == idProcesso).FirstOrDefault();
             if (processo == null) return null;
@@ -47,6 +49,11 @@ namespace MPIntranet.Business
             processoModel.Descrizione = processo.DESCRIZIONE;
             processoModel.IdArticolo = processo.IDARTICOLO;
             processoModel.IdProcesso = processo.IDPROCESSO;
+            TelaioModel telaio = telai.Where(x => x.IdTelaio == ElementiVuoti.TelaioVuoto).FirstOrDefault();
+            if (!processo.IsIDTELAIONull())
+                telaio = telai.Where(x => x.IdTelaio == processo.IDTELAIO).FirstOrDefault();
+            processoModel.Telaio = telaio;
+
             List<ImpiantoModel> impianti = _galvanica.CreaListaImpiantoModel();
             processoModel.Impianto = impianti.Where(x => x.IdImpianto == processo.IDIMPIANTO).FirstOrDefault();
 
@@ -90,7 +97,7 @@ namespace MPIntranet.Business
             }
 
         }
-        public string SalvaProcesso(decimal idArticolo, decimal idImpianto, decimal idProcesso, string descrizione, string vascheJSON, string utente)
+        public string SalvaProcesso(decimal idArticolo, decimal idImpianto, decimal idProcesso, decimal idTelaio, string descrizione, string vascheJSON, string utente)
         {
             string messaggio = string.Empty;
             bool esito = true;
@@ -118,6 +125,9 @@ namespace MPIntranet.Business
                 if (processo != null)
                 {
                     processo.DESCRIZIONE = descrizione;
+
+                    processo.IDTELAIO = idTelaio;
+                    if (idTelaio == ElementiVuoti.TelaioVuoto) processo.SetIDTELAIONull();
 
                     List<ArticoloDS.FASIPROCESSORow> fasi = _ds.FASIPROCESSO.Where(x => x.IDPROCESSO == idProcesso).ToList();
                     List<decimal> idFaseProcesso = vasche.Select(x => x.IdFaseProcesso).ToList();

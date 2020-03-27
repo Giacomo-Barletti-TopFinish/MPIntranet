@@ -14,6 +14,7 @@ namespace MPIntranet.Models.Articolo
         public string Descrizione { get; set; }
         public ImpiantoModel Impianto { get; set; }
         public List<FaseProcessoModel> Fasi { get; set; }
+        public TelaioModel Telaio { get; set; }
     }
 
     public class FaseProcessoModel

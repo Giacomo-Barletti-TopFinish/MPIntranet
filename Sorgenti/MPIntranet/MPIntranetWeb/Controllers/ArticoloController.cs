@@ -140,15 +140,22 @@ namespace MPIntranetWeb.Controllers
             ProcessoModel processo = processi.Where(x => x.IdProcesso == idProcesso).FirstOrDefault();
             if (processo == null) return null;
 
+            if(idArticolo!=ElementiVuoti.ArticoloStandard)
+            {
+                Galvanica g = new Galvanica();
+                List<TelaioModel> lista = g.CreaListaTelaioModel();
+                List<MPIntranetListItem> telai = lista.Select(x => new MPIntranetListItem(x.ToString(), x.IdTelaio.ToString())).ToList();
+                ViewData.Add("Telai", telai);
+            }
 
             return PartialView("MostraProcessoPartial", processo);
         }
 
-        public ActionResult SalvaProcesso(decimal idArticolo, decimal idImpianto, decimal idProcesso, string descrizione, string vascheJSON)
+        public ActionResult SalvaProcesso(decimal idArticolo, decimal idImpianto, decimal idProcesso,decimal idTelaio, string descrizione, string vascheJSON)
         {
 
             ProcessoGalvanico p = new ProcessoGalvanico();
-            string messaggio = p.SalvaProcesso(idArticolo, idImpianto, idProcesso, descrizione.ToUpper(), vascheJSON, ConnectedUser);
+            string messaggio = p.SalvaProcesso(idArticolo, idImpianto, idProcesso, idTelaio, descrizione.ToUpper(), vascheJSON, ConnectedUser);
             return Content(messaggio);
         }
 

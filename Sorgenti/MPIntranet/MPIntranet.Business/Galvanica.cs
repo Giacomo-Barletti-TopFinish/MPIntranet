@@ -178,9 +178,11 @@ namespace MPIntranet.Business
             using (GalvanicaBusiness bGalvanica = new GalvanicaBusiness())
             {
                 bGalvanica.FillTelai(_ds, false);
+                if (_ds.TELAI.Any(x => x.CODICE == Codice && x.PEZZI == Pezzi))
+                    return "Esiste già un telaio con questo codice e questo numero di pezzi";
 
                 GalvanicaDS.TELAIRow br = _ds.TELAI.NewTELAIRow();
-                br.CODICE = Codice.Length>10?Codice.Substring(0,10):Codice;
+                br.CODICE = Codice.Length > 10 ? Codice.Substring(0, 10) : Codice;
                 br.TIPOMONTAGGIO = TipoMontaggio.Length > 25 ? TipoMontaggio.Substring(0, 25) : TipoMontaggio;
                 br.PEZZI = Pezzi;
                 br.COSTOSTANDARD = Costo;
