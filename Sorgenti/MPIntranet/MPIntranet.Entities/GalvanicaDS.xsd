@@ -14,7 +14,7 @@
   <xs:element name="GalvanicaDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="GalvanicaDS" msprop:Generator_UserDSName="GalvanicaDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="IMPIANTI" msprop:Generator_TableClassName="IMPIANTIDataTable" msprop:Generator_TableVarName="tableIMPIANTI" msprop:Generator_TablePropName="IMPIANTI" msprop:Generator_RowDeletingName="IMPIANTIRowDeleting" msprop:Generator_RowChangingName="IMPIANTIRowChanging" msprop:Generator_RowEvHandlerName="IMPIANTIRowChangeEventHandler" msprop:Generator_RowDeletedName="IMPIANTIRowDeleted" msprop:Generator_UserTableName="IMPIANTI" msprop:Generator_RowChangedName="IMPIANTIRowChanged" msprop:Generator_RowEvArgName="IMPIANTIRowChangeEvent" msprop:Generator_RowClassName="IMPIANTIRow">
+        <xs:element name="IMPIANTI" msprop:Generator_TableClassName="IMPIANTIDataTable" msprop:Generator_TableVarName="tableIMPIANTI" msprop:Generator_RowChangedName="IMPIANTIRowChanged" msprop:Generator_TablePropName="IMPIANTI" msprop:Generator_RowDeletingName="IMPIANTIRowDeleting" msprop:Generator_RowChangingName="IMPIANTIRowChanging" msprop:Generator_RowEvHandlerName="IMPIANTIRowChangeEventHandler" msprop:Generator_RowDeletedName="IMPIANTIRowDeleted" msprop:Generator_RowClassName="IMPIANTIRow" msprop:Generator_UserTableName="IMPIANTI" msprop:Generator_RowEvArgName="IMPIANTIRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDIMPIANTO" msprop:Generator_ColumnVarNameInTable="columnIDIMPIANTO" msprop:Generator_ColumnPropNameInRow="IDIMPIANTO" msprop:Generator_ColumnPropNameInTable="IDIMPIANTOColumn" msprop:Generator_UserColumnName="IDIMPIANTO" type="xs:decimal" minOccurs="0" />
@@ -43,7 +43,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="VASCHE" msprop:Generator_TableClassName="VASCHEDataTable" msprop:Generator_TableVarName="tableVASCHE" msprop:Generator_RowChangedName="VASCHERowChanged" msprop:Generator_TablePropName="VASCHE" msprop:Generator_RowDeletingName="VASCHERowDeleting" msprop:Generator_RowChangingName="VASCHERowChanging" msprop:Generator_RowEvHandlerName="VASCHERowChangeEventHandler" msprop:Generator_RowDeletedName="VASCHERowDeleted" msprop:Generator_RowClassName="VASCHERow" msprop:Generator_UserTableName="VASCHE" msprop:Generator_RowEvArgName="VASCHERowChangeEvent">
+        <xs:element name="VASCHE" msprop:Generator_TableClassName="VASCHEDataTable" msprop:Generator_TableVarName="tableVASCHE" msprop:Generator_TablePropName="VASCHE" msprop:Generator_RowDeletingName="VASCHERowDeleting" msprop:Generator_RowChangingName="VASCHERowChanging" msprop:Generator_RowEvHandlerName="VASCHERowChangeEventHandler" msprop:Generator_RowDeletedName="VASCHERowDeleted" msprop:Generator_UserTableName="VASCHE" msprop:Generator_RowChangedName="VASCHERowChanged" msprop:Generator_RowEvArgName="VASCHERowChangeEvent" msprop:Generator_RowClassName="VASCHERow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDVASCA" msprop:Generator_ColumnVarNameInTable="columnIDVASCA" msprop:Generator_ColumnPropNameInRow="IDVASCA" msprop:Generator_ColumnPropNameInTable="IDVASCAColumn" msprop:Generator_UserColumnName="IDVASCA" type="xs:decimal" minOccurs="0" />
@@ -70,6 +70,44 @@
               </xs:element>
               <xs:element name="IDIMPIANTO" msprop:Generator_ColumnVarNameInTable="columnIDIMPIANTO" msprop:Generator_ColumnPropNameInRow="IDIMPIANTO" msprop:Generator_ColumnPropNameInTable="IDIMPIANTOColumn" msprop:Generator_UserColumnName="IDIMPIANTO" type="xs:decimal" />
               <xs:element name="IDMATERIALE" msprop:Generator_ColumnVarNameInTable="columnIDMATERIALE" msprop:Generator_ColumnPropNameInRow="IDMATERIALE" msprop:Generator_ColumnPropNameInTable="IDMATERIALEColumn" msprop:Generator_UserColumnName="IDMATERIALE" type="xs:decimal" />
+              <xs:element name="CANCELLATO" msprop:Generator_ColumnVarNameInTable="columnCANCELLATO" msprop:Generator_ColumnPropNameInRow="CANCELLATO" msprop:Generator_ColumnPropNameInTable="CANCELLATOColumn" msprop:Generator_UserColumnName="CANCELLATO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATAMODIFICA" msprop:Generator_ColumnVarNameInTable="columnDATAMODIFICA" msprop:Generator_ColumnPropNameInRow="DATAMODIFICA" msprop:Generator_ColumnPropNameInTable="DATAMODIFICAColumn" msprop:Generator_UserColumnName="DATAMODIFICA" type="xs:dateTime" />
+              <xs:element name="UTENTEMODIFICA" msprop:Generator_ColumnVarNameInTable="columnUTENTEMODIFICA" msprop:Generator_ColumnPropNameInRow="UTENTEMODIFICA" msprop:Generator_ColumnPropNameInTable="UTENTEMODIFICAColumn" msprop:Generator_UserColumnName="UTENTEMODIFICA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TELAI" msprop:Generator_TableClassName="TELAIDataTable" msprop:Generator_TableVarName="tableTELAI" msprop:Generator_TablePropName="TELAI" msprop:Generator_RowDeletingName="TELAIRowDeleting" msprop:Generator_RowChangingName="TELAIRowChanging" msprop:Generator_RowEvHandlerName="TELAIRowChangeEventHandler" msprop:Generator_RowDeletedName="TELAIRowDeleted" msprop:Generator_UserTableName="TELAI" msprop:Generator_RowChangedName="TELAIRowChanged" msprop:Generator_RowEvArgName="TELAIRowChangeEvent" msprop:Generator_RowClassName="TELAIRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDTELAIO" msprop:Generator_ColumnVarNameInTable="columnIDTELAIO" msprop:Generator_ColumnPropNameInRow="IDTELAIO" msprop:Generator_ColumnPropNameInTable="IDTELAIOColumn" msprop:Generator_UserColumnName="IDTELAIO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CODICE" msprop:Generator_ColumnVarNameInTable="columnCODICE" msprop:Generator_ColumnPropNameInRow="CODICE" msprop:Generator_ColumnPropNameInTable="CODICEColumn" msprop:Generator_UserColumnName="CODICE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PEZZI" msprop:Generator_ColumnVarNameInTable="columnPEZZI" msprop:Generator_ColumnPropNameInRow="PEZZI" msprop:Generator_ColumnPropNameInTable="PEZZIColumn" msprop:Generator_UserColumnName="PEZZI" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TIPOMONTAGGIO" msprop:Generator_ColumnVarNameInTable="columnTIPOMONTAGGIO" msprop:Generator_ColumnPropNameInRow="TIPOMONTAGGIO" msprop:Generator_ColumnPropNameInTable="TIPOMONTAGGIOColumn" msprop:Generator_UserColumnName="TIPOMONTAGGIO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COSTOSTANDARD" msprop:Generator_ColumnVarNameInTable="columnCOSTOSTANDARD" msprop:Generator_ColumnPropNameInRow="COSTOSTANDARD" msprop:Generator_ColumnPropNameInTable="COSTOSTANDARDColumn" msprop:Generator_UserColumnName="COSTOSTANDARD" type="xs:decimal" minOccurs="0" />
               <xs:element name="CANCELLATO" msprop:Generator_ColumnVarNameInTable="columnCANCELLATO" msprop:Generator_ColumnPropNameInRow="CANCELLATO" msprop:Generator_ColumnPropNameInTable="CANCELLATOColumn" msprop:Generator_UserColumnName="CANCELLATO">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">

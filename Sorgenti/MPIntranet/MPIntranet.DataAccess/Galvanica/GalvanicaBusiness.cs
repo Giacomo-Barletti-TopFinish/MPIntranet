@@ -18,7 +18,12 @@ namespace MPIntranet.DataAccess.Galvanica
             GalvanicaAdapter a = new GalvanicaAdapter(DbConnection, DbTransaction);
             a.FillImpianti(ds, soloNonCancellati);
         }
-
+        [DataContext]
+        public void FillTelai(GalvanicaDS ds, bool soloNonCancellati)
+        {
+            GalvanicaAdapter a = new GalvanicaAdapter(DbConnection, DbTransaction);
+            a.FillTelai(ds, soloNonCancellati);
+        }
         [DataContext]
         public void FillVasche(GalvanicaDS ds, bool soloNonCancellati)
         {

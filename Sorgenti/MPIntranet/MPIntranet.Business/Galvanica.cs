@@ -46,6 +46,29 @@ namespace MPIntranet.Business
             }
             return lista;
         }
+        public List<TelaioModel> CreaListaTelaioModel()
+        {
+            List<TelaioModel> lista = new List<TelaioModel>();
+
+            using (GalvanicaBusiness bGalvanica = new GalvanicaBusiness())
+            {
+                bGalvanica.FillTelai(_ds, true);
+                foreach (GalvanicaDS.TELAIRow telaio in _ds.TELAI)
+                    lista.Add(CreaTelaioModel(telaio));
+            }
+            return lista;
+        }
+
+        private TelaioModel CreaTelaioModel(GalvanicaDS.TELAIRow telaio)
+        {
+            TelaioModel m = new TelaioModel();
+            m.Codice = telaio.CODICE;
+            m.CostoStandard = telaio.IsCOSTOSTANDARDNull() ? 0 : telaio.COSTOSTANDARD;
+            m.IdTelaio = telaio.IDTELAIO;
+            m.Pezzi = telaio.IsPEZZINull() ? 0 : telaio.PEZZI;
+            m.TipoMontaggio = telaio.IsTIPOMONTAGGIONull() ? string.Empty : telaio.TIPOMONTAGGIO;
+            return m;
+        }
 
         public void CancellaImpianto(decimal idImpianto, string account)
         {
@@ -60,6 +83,23 @@ namespace MPIntranet.Business
                     impianto.UTENTEMODIFICA = account;
 
                     bGalvanica.UpdateTable(_ds, _ds.IMPIANTI.TableName);
+                }
+            }
+        }
+
+        public void CancellaTelaio(decimal idTelaio, string account)
+        {
+            using (GalvanicaBusiness bGalvanica = new GalvanicaBusiness())
+            {
+                bGalvanica.FillTelai(_ds, true);
+                GalvanicaDS.TELAIRow telaio = _ds.TELAI.Where(x => x.IDTELAIO == idTelaio).FirstOrDefault();
+                if (telaio != null)
+                {
+                    telaio.CANCELLATO = SiNo.Si;
+                    telaio.DATAMODIFICA = DateTime.Now;
+                    telaio.UTENTEMODIFICA = account;
+
+                    bGalvanica.UpdateTable(_ds, _ds.TELAI.TableName);
                 }
             }
         }
@@ -78,6 +118,24 @@ namespace MPIntranet.Business
                     br.UTENTEMODIFICA = account;
 
                     bGalvanica.UpdateTable(_ds, _ds.IMPIANTI.TableName);
+                }
+            }
+        }
+
+        public void ModificaTelaio(decimal IdTelaio, decimal Costo, string account)
+        {
+
+            using (GalvanicaBusiness bGalvanica = new GalvanicaBusiness())
+            {
+                bGalvanica.FillTelai(_ds, true);
+                GalvanicaDS.TELAIRow br = _ds.TELAI.Where(x => x.IDTELAIO == IdTelaio).FirstOrDefault();
+                if (br != null)
+                {
+                    br.COSTOSTANDARD = Costo;
+                    br.DATAMODIFICA = DateTime.Now;
+                    br.UTENTEMODIFICA = account;
+
+                    bGalvanica.UpdateTable(_ds, _ds.TELAI.TableName);
                 }
             }
         }
@@ -107,6 +165,32 @@ namespace MPIntranet.Business
 
                 _ds.IMPIANTI.AddIMPIANTIRow(br);
                 bGalvanica.UpdateTable(_ds, _ds.IMPIANTI.TableName);
+
+                return string.Empty;
+            }
+        }
+
+        public string CreaTelaio(string Codice, decimal Pezzi, string TipoMontaggio, decimal Costo, string account)
+        {
+            Codice = Codice.Trim().ToUpper();
+            TipoMontaggio = TipoMontaggio.Trim().ToUpper();
+
+            using (GalvanicaBusiness bGalvanica = new GalvanicaBusiness())
+            {
+                bGalvanica.FillTelai(_ds, false);
+
+                GalvanicaDS.TELAIRow br = _ds.TELAI.NewTELAIRow();
+                br.CODICE = Codice.Length>10?Codice.Substring(0,10):Codice;
+                br.TIPOMONTAGGIO = TipoMontaggio.Length > 25 ? TipoMontaggio.Substring(0, 25) : TipoMontaggio;
+                br.PEZZI = Pezzi;
+                br.COSTOSTANDARD = Costo;
+
+                br.CANCELLATO = SiNo.No;
+                br.DATAMODIFICA = DateTime.Now;
+                br.UTENTEMODIFICA = account;
+
+                _ds.TELAI.AddTELAIRow(br);
+                bGalvanica.UpdateTable(_ds, _ds.TELAI.TableName);
 
                 return string.Empty;
             }
@@ -235,8 +319,8 @@ namespace MPIntranet.Business
                 vasca.DESCRIZIONE = descrizione;
                 vasca.ABILITASTRATO = abilitaStrato ? "S" : "N";
                 vasca.IDIMPIANTO = idImpianto;
-       //         if (idMateriale > 0)
-                    vasca.IDMATERIALE = idMateriale;
+                //         if (idMateriale > 0)
+                vasca.IDMATERIALE = idMateriale;
 
                 vasca.CANCELLATO = SiNo.No;
                 vasca.DATAMODIFICA = DateTime.Now;

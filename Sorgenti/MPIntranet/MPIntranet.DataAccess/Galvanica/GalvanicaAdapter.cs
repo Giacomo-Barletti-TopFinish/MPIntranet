@@ -30,6 +30,17 @@ namespace MPIntranet.DataAccess.Galvanica
             }
         }
 
+        public void FillTelai(GalvanicaDS ds, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM TELAI ";
+            if (soloNonCancellati)
+                select += "WHERE CANCELLATO = 'N'";
+            select += "ORDER BY CODICE,PEZZI ";
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.TELAI);
+            }
+        }
         public void FillVasche(GalvanicaDS ds, bool soloNonCancellati)
         {
             string select = @"SELECT * FROM VASCHE ";

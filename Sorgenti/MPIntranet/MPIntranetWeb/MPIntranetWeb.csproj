@@ -437,6 +437,8 @@
     <Content Include="Views\Documenti\CaricaDocumentiPartial.cshtml" />
     <Content Include="Views\Manutenzione\Interventi.cshtml" />
     <Content Include="Views\Manutenzione\CaricaInterventiPartial.cshtml" />
+    <Content Include="Views\Galvanica\Telai.cshtml" />
+    <Content Include="Views\Galvanica\CaricaTelaiPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

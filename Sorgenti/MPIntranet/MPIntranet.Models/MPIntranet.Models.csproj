@@ -53,6 +53,7 @@
     <Compile Include="Documenti\DocumentoModel.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Galvanica\ImpiantoModel.cs" />
+    <Compile Include="Galvanica\TelaioModel.cs" />
     <Compile Include="Galvanica\VascaModel.cs" />
     <Compile Include="Json\SalvaProcessoJson.cs" />
     <Compile Include="Manutenzione\DittaModel.cs" />

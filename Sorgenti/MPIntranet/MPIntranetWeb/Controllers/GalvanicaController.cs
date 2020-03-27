@@ -111,5 +111,44 @@ namespace MPIntranetWeb.Controllers
 
             return View();
         }
+
+        public ActionResult Telai()
+        {
+            List<MPIntranetListItem> tipiMontaggio = new List<MPIntranetListItem>();
+            tipiMontaggio.Add(new MPIntranetListItem(string.Empty,string.Empty));
+            tipiMontaggio.Add(new MPIntranetListItem("MONTATO", "MONTATO"));
+            tipiMontaggio.Add(new MPIntranetListItem("LEGATO", "LEGATO"));
+            ViewData.Add("TipiMontaggio", tipiMontaggio);
+            return View();
+        }
+
+        public ActionResult CaricaTelai()
+        {
+            Galvanica a = new Galvanica();
+            List<TelaioModel> lista = a.CreaListaTelaioModel();
+
+            return PartialView("CaricaTelaiPartial", lista);
+        }
+
+        public ActionResult RimuoviTelaio(decimal IdTelaio)
+        {
+            Galvanica a = new Galvanica();
+            a.CancellaTelaio(IdTelaio, ConnectedUser);
+            return null;
+        }
+
+        public ActionResult CreaTelaio(string Codice, decimal Pezzi, string TipoMontaggio, decimal Costo)
+        {
+            Galvanica a = new Galvanica();
+            string messaggio = a.CreaTelaio(Codice, Pezzi, TipoMontaggio, Costo, ConnectedUser);
+            return Content(messaggio);
+        }
+
+        public ActionResult ModificaTelaio(decimal IdTelaio, decimal Costo)
+        {
+            Galvanica a = new Galvanica();
+            a.ModificaTelaio(IdTelaio, Costo, ConnectedUser);
+            return null;
+        }
     }
 }
