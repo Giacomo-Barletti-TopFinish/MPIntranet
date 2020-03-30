@@ -44,8 +44,11 @@
             <tr>
                 <th width="15%">Vasca</th>
                 <th width="15%">Materiale</th>
-                <th width="10%">Durata</th>
-                <th width="10%">Corrente</th>
+                <th width="8%">Durata</th>
+                <th width="8%">Corrente</th>
+                <th width="8%">Spessore minimo</th>
+                <th width="8%">Spessore nominale</th>
+                <th width="8%">Spessore massimo</th>
                 <th width="3%"></th>
                 <th width="3%"></th>
                 <th width="3%"></th>
@@ -57,37 +60,45 @@
             {
                 if (fase.Vasca.Materiale.Prezioso == "S")
                 {
-                    <tr style="font-weight:bold; color:limegreen">
-                        <input type="hidden" value="@fase.Vasca.IdVasca" class="hdVasca" />
-                        <input type="hidden" value="@fase.IdFaseProcesso" class="hdFaseProcesso" />
-                        <td width="15%">@fase.Vasca.DescrizioneBreve</td>
-                        <td width="15%">@fase.Vasca.Materiale.Descrizione</td>
-                        <td width="8%">@Html.TextBox("txtDurata", fase.Durata, new { @class = "form-control input-sm durata", @id = "txtDurata", @maxlength = "8" })</td>
-                        <td width="8%">@Html.TextBox("txtCorrente", fase.Corrente.ToString(), new { @class = "form-control input-sm corrente", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,7,3)" })</td>
+            <tr style="font-weight:bold; color:limegreen">
+                <input type="hidden" value="@fase.Vasca.IdVasca" class="hdVasca" />
+                <input type="hidden" value="@fase.IdFaseProcesso" class="hdFaseProcesso" />
+                <td width="15%">@fase.Vasca.DescrizioneBreve</td>
+                <td width="15%">@fase.Vasca.Materiale.Descrizione</td>
+                <td width="8%">@Html.TextBox("txtDurata", fase.Durata, new { @class = "form-control input-sm durata", @id = "txtDurata", @maxlength = "8" })</td>
+                <td width="8%">@Html.TextBox("txtCorrente", fase.Corrente.ToString(), new { @class = "form-control input-sm corrente", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,7,3)" })</td>
 
-                        <td> <a onclick="CambioSequenzaElemento(this,+1, )" title="Sposta in basso"><i class="fa fa-fw fa-arrow-down"></i></a></td>
-                        <td><a onclick="CambioSequenzaElemento(this,-1)" title="Sposta in alto"><i class="fa fa-fw fa-arrow-up"></i></a></td>
-                        <td><a title="Cancella" onClick="CancellaElemento(this)"><i class="fa fa-fw fa-remove"></i></a></td>
-                        <td></td>
+                <td width="8%">@Html.TextBox("txtSpessoreMinimo", fase.SpessoreMinimo.ToString(), new { @class = "form-control input-sm spmin", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,7,3)" })</td>
+                <td width="8%">@Html.TextBox("txtSpessoreNominale", fase.SpessoreNominale.ToString(), new { @class = "form-control input-sm spnom", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,7,3)" })</td>
+                <td width="8%">@Html.TextBox("txtSpessoreMassimo", fase.SpessoreMassimo.ToString(), new { @class = "form-control input-sm spmas", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,7,3)" })</td>
 
-                    </tr>
+                <td> <a onclick="CambioSequenzaElemento(this,+1, )" title="Sposta in basso"><i class="fa fa-fw fa-arrow-down"></i></a></td>
+                <td><a onclick="CambioSequenzaElemento(this,-1)" title="Sposta in alto"><i class="fa fa-fw fa-arrow-up"></i></a></td>
+                <td><a title="Cancella" onClick="CancellaElemento(this)"><i class="fa fa-fw fa-remove"></i></a></td>
+                <td></td>
+
+            </tr>
 
                 }
                 else
                 {
-                    <tr>
-                        <input type="hidden" value="@fase.Vasca.IdVasca" class="hdVasca" />
-                        <input type="hidden" value="@fase.IdFaseProcesso" class="hdFaseProcesso" />
-                        <td width="15%">@fase.Vasca.DescrizioneBreve</td>
-                        <td width="15%">@fase.Vasca.Materiale.Descrizione</td>
-                        <td width="8%">@Html.TextBox("txtDurata", fase.Durata, new { @class = "form-control input-sm durata", @id = "txtDurata", @maxlength = "8" })</td>
-                        <td width="8%">@Html.TextBox("txtCorrente", fase.Corrente.ToString(), new { @class = "form-control input-sm corrente", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,7,3)" })</td>
+            <tr>
+                <input type="hidden" value="@fase.Vasca.IdVasca" class="hdVasca" />
+                <input type="hidden" value="@fase.IdFaseProcesso" class="hdFaseProcesso" />
+                <td width="15%">@fase.Vasca.DescrizioneBreve</td>
+                <td width="15%">@fase.Vasca.Materiale.Descrizione</td>
+                <td width="8%">@Html.TextBox("txtDurata", fase.Durata, new { @class = "form-control input-sm durata", @id = "txtDurata", @maxlength = "8" })</td>
+                <td width="8%">@Html.TextBox("txtCorrente", fase.Corrente.ToString(), new { @class = "form-control input-sm corrente", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,7,3)" })</td>
 
-                        <td> <a onclick="CambioSequenzaElemento(this,+1, )" title="Sposta in basso"><i class="fa fa-fw fa-arrow-down"></i></a></td>
-                        <td><a onclick="CambioSequenzaElemento(this,-1)" title="Sposta in alto"><i class="fa fa-fw fa-arrow-up"></i></a></td>
-                        <td><a title="Cancella" onClick="CancellaElemento(this)"><i class="fa fa-fw fa-remove"></i></a></td>
-                        <th></th>
-                    </tr>
+                <td width="8%">@Html.TextBox("txtSpessoreMinimo", fase.SpessoreMinimo.ToString(), new { @class = "form-control input-sm spmin", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,7,3)" })</td>
+                <td width="8%">@Html.TextBox("txtSpessoreNominale", fase.SpessoreNominale.ToString(), new { @class = "form-control input-sm spnom", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,7,3)" })</td>
+                <td width="8%">@Html.TextBox("txtSpessoreMassimo", fase.SpessoreMassimo.ToString(), new { @class = "form-control input-sm spmas", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,7,3)" })</td>
+
+                <td> <a onclick="CambioSequenzaElemento(this,+1, )" title="Sposta in basso"><i class="fa fa-fw fa-arrow-down"></i></a></td>
+                <td><a onclick="CambioSequenzaElemento(this,-1)" title="Sposta in alto"><i class="fa fa-fw fa-arrow-up"></i></a></td>
+                <td><a title="Cancella" onClick="CancellaElemento(this)"><i class="fa fa-fw fa-remove"></i></a></td>
+                <th></th>
+            </tr>
 
                 }
 
@@ -223,11 +234,23 @@
             var durata = $(".durata", tr).val();
             var corrente = $(".corrente", tr).val();
 
+            var spessoreminimo = $(".spmin", tr).val();
+            var spessorenominale = $(".spnom", tr).val();
+            var spessoremassimo = $(".spmas", tr).val();
+
+            if (corrente == null || corrente == '') corrente = 0;
+            if (spessoreminimo == null || spessoreminimo == '') spessoreminimo = 0;
+            if (spessorenominale == null || spessorenominale == '') spessorenominale = 0;
+            if (spessoremassimo == null || spessoremassimo == '') spessoremassimo = 0;
+
             var vasca = {
                 'idFaseProcesso': idFaseProcesso,
                 'idvasca': idvasca,
                 'durata': durata,
-                'corrente': corrente
+                'corrente': corrente,
+                'spessoreminimo': spessoreminimo,
+                'spessoremassimo': spessoremassimo,
+                'spessorenominale': spessorenominale
             };
             data.push(vasca);
         }
@@ -264,6 +287,10 @@
         nuovariga += '<td>' + materiale + '</td>';
         nuovariga += '<td>@Html.TextBox("txtDurata", "", new { @class = "form-control input-sm durata", @id = "txtDurata", @maxlength = "8" })</td>';
         nuovariga +='<td>@Html.TextBox("txtCorrente", "", new { @class = "form-control input-sm corrente", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,7,3)" })</td>';
+
+        nuovariga +='<td>@Html.TextBox("txtSpessoreMinimo", "", new { @class = "form-control input-sm spmin", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,7,3)" })</td>';
+        nuovariga +='<td>@Html.TextBox("txtSpessoreNominale", "", new { @class = "form-control input-sm spnom", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,7,3)" })</td>';
+        nuovariga +='<td>@Html.TextBox("txtSpessoreMassimo", "", new { @class = "form-control input-sm spmas", @onkeypress = "return FilterDecimal(event,this)", @oninput = "onDecimalInput(this,7,3)" })</td>';
 
         nuovariga += '<td> <a onclick="CambioSequenzaElemento(this,+1, )" title="Sposta in basso"><i class="fa fa-fw fa-arrow-down"></i></a></td>';
         nuovariga += '<td><a onclick="CambioSequenzaElemento(this,-1)" title="Sposta in alto"><i class="fa fa-fw fa-arrow-up"></i></a></td>';

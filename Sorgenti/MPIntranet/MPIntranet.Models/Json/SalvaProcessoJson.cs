@@ -18,5 +18,11 @@ namespace MPIntranet.Models.Json
         public string Durata{ get; set; }
         [DataMember(Name = "corrente")]
         public string Corrente { get; set; }
+        [DataMember(Name = "spessoreminimo")]
+        public string SpessoreMinimo { get; set; }
+        [DataMember(Name = "spessoremassimo")]
+        public string SpessoreMassimo { get; set; }
+        [DataMember(Name = "spessorenominale")]
+        public string SpessoreNominale { get; set; }
     }
 }

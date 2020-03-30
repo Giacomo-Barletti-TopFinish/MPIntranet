@@ -25,5 +25,8 @@ namespace MPIntranet.Models.Articolo
         public string Durata { get; set; }
         public decimal Corrente { get; set; }
         public decimal Sequenza { get; set; }
+        public decimal SpessoreMinimo { get; set; }
+        public decimal SpessoreNominale { get; set; }
+        public decimal SpessoreMassimo { get; set; }
     }
 }

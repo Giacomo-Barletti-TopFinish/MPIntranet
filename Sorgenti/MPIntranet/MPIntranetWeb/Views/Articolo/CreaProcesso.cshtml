@@ -12,47 +12,48 @@
         <input type="button" onclick="EseguiNuovaRicerca();" class="btn btn-primary" value="Nuova ricerca" />
     </div>
 </div>
-<div class="row col-lg-12">
-    @Html.Hidden("hdIdBrand", Model.Brand.IdBrand)
-    @Html.Hidden("hdIdArticolo", Model.IdArticolo)
-    @Html.Hidden("hdIdColore", Model.Colore.IdColore)
+<div id="ArticleScrolledContent" class="content-scheda" >
+    <div class="row col-lg-12">
+        @Html.Hidden("hdIdBrand", Model.Brand.IdBrand)
+        @Html.Hidden("hdIdArticolo", Model.IdArticolo)
+        @Html.Hidden("hdIdColore", Model.Colore.IdColore)
 
-    @Html.Partial("DatiGeneraliPartial", Model)
-</div>
+        @Html.Partial("DatiGeneraliPartial", Model)
+    </div>
+    <div class="row col-lg-12 content-scheda" style="overflow-y:auto; overflow-x:hidden; height:250px">
+        <div class="row">
+            <div class="col-sm-2">
+                @Html.Label("Impianto")
+            </div>
+            <div class="col-sm-2">
+                @Html.Label("Processo")
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
+                @Html.DropDownList("ddlImpianto", new SelectList(@ViewData["Impianti"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlImpianto" })
+            </div>
+            <div class="col-sm-2">
+                @Html.DropDownList("ddlProcesso", Enumerable.Empty<SelectListItem>(), new { @class = "form-control input-sm", @id = "ddlProcesso" })
+            </div>
+            <div class="col-sm-1">
+                <input type="button" onclick="CreaNuovoProcesso();" class="btn btn-primary" value="Nuovo processo" />
+            </div>
+            <div class="col-sm-1">
+                @Html.DropDownList("ddlProcessoStandard", Enumerable.Empty<SelectListItem>(), new { @class = "form-control input-sm", @id = "ddlProcessoStandard" })
+            </div>
+            <div class="col-sm-1">
+                <input type="button" onclick="CopiaProcesso();" class="btn btn-primary" value="Copia processo" />
+            </div>
 
-<div class="row">
-    <div class="col-sm-2">
-        @Html.Label("Impianto")
-    </div>
-    <div class="col-sm-2">
-        @Html.Label("Processo")
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-2">
-        @Html.DropDownList("ddlImpianto", new SelectList(@ViewData["Impianti"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlImpianto" })
-    </div>
-    <div class="col-sm-2">
-        @Html.DropDownList("ddlProcesso", Enumerable.Empty<SelectListItem>(), new { @class = "form-control input-sm", @id = "ddlProcesso" })
-    </div>
-    <div class="col-sm-1">
-        <input type="button" onclick="CreaNuovoProcesso();" class="btn btn-primary" value="Nuovo processo" />
-    </div>
-    <div class="col-sm-1">
-        @Html.DropDownList("ddlProcessoStandard", Enumerable.Empty<SelectListItem>(), new { @class = "form-control input-sm", @id = "ddlProcessoStandard" })
-    </div>
-    <div class="col-sm-1">
-        <input type="button" onclick="CopiaProcesso();" class="btn btn-primary" value="Copia processo" />
-    </div>
+        </div>
+        <label class="text-red input-sm" id="lblMessage"></label>
+        <div class="col-lg-12">
+            <div id="divProcesso"></div>
 
-</div>
-<label class="text-red input-sm" id="lblMessage"></label>
-<div class="col-lg-12">
-    <div id="ArticleScrolledContent" class="content-scheda" style="overflow-y:auto; overflow-x:hidden; height:500px">
 
-        <div id="divProcesso"></div>
+        </div>
     </div>
-
 </div>
 
 

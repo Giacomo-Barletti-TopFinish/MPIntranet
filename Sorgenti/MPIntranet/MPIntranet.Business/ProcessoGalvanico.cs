@@ -69,7 +69,11 @@ namespace MPIntranet.Business
                     IdFaseProcesso = fase.IDFASEPROCESSO,
                     IdProcesso = fase.IDPROCESSO,
                     Sequenza = fase.SEQUENZA,
-                    Vasca = vasche.Where(x => x.IdVasca == fase.IDVASCA).FirstOrDefault()
+                    Vasca = vasche.Where(x => x.IdVasca == fase.IDVASCA).FirstOrDefault(),
+                    SpessoreMassimo=fase.IsSPESSOREMASSIMONull()?0:fase.SPESSOREMASSIMO,
+                    SpessoreMinimo= fase.IsSPESSOREMINIMONull() ? 0 : fase.SPESSOREMINIMO,
+                    SpessoreNominale= fase.IsSPESSORENOMINALENull() ? 0 : fase.SPESSORENOMINALE
+
                 };
                 processoModel.Fasi.Add(faseProcessoModel);
             }
@@ -143,6 +147,9 @@ namespace MPIntranet.Business
                     {
                         SalvaProcessoJson vasca = vasche[i];
                         decimal corrente = decimal.Parse(vasca.Corrente.Replace(".", ","));
+                        decimal spessoreMinimo = decimal.Parse(vasca.SpessoreMinimo.Replace(".", ","));
+                        decimal spessoreMassimo= decimal.Parse(vasca.SpessoreMassimo.Replace(".", ","));
+                        decimal spessoreNominale = decimal.Parse(vasca.SpessoreNominale.Replace(".", ","));
 
                         ArticoloDS.FASIPROCESSORow fase = fasi.Where(x => x.IDFASEPROCESSO == vasca.IdFaseProcesso).FirstOrDefault();
                         if (fase == null)
@@ -150,6 +157,9 @@ namespace MPIntranet.Business
                             fase = _ds.FASIPROCESSO.NewFASIPROCESSORow();
                             fase.CANCELLATO = SiNo.No;
                             fase.CORRENTE = corrente;
+                            fase.SPESSOREMASSIMO = spessoreMassimo;
+                            fase.SPESSORENOMINALE = spessoreNominale;
+                            fase.SPESSOREMINIMO = spessoreMinimo;
                             fase.DURATA = vasca.Durata;
                             fase.DATAMODIFICA = DateTime.Now;
                             fase.IDPROCESSO = idProcesso;
@@ -162,6 +172,9 @@ namespace MPIntranet.Business
                         {
                             fase.CORRENTE = corrente;
                             fase.DURATA = vasca.Durata;
+                            fase.SPESSOREMASSIMO = spessoreMassimo;
+                            fase.SPESSORENOMINALE = spessoreNominale;
+                            fase.SPESSOREMINIMO = spessoreMinimo;
                             fase.DATAMODIFICA = DateTime.Now;
                             fase.SEQUENZA = i;
                             fase.UTENTEMODIFICA = utente;
