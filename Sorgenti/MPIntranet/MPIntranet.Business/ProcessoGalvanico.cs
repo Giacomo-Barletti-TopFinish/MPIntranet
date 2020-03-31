@@ -265,6 +265,9 @@ namespace MPIntranet.Business
                         fase.IDPROCESSO = processo.IDPROCESSO;
                         fase.IDVASCA = faseStandard.IDVASCA;
                         fase.SEQUENZA = faseStandard.SEQUENZA;
+                        fase.SPESSOREMASSIMO = faseStandard.SPESSOREMASSIMO;
+                        fase.SPESSORENOMINALE = faseStandard.SPESSORENOMINALE;
+                        fase.SPESSOREMINIMO = faseStandard.SPESSOREMINIMO;
                         fase.UTENTEMODIFICA = utente;
                         _ds.FASIPROCESSO.AddFASIPROCESSORow(fase);
                     }
