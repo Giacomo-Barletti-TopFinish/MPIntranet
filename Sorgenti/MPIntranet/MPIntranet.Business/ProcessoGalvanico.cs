@@ -268,6 +268,7 @@ namespace MPIntranet.Business
                         fase.SPESSOREMASSIMO = faseStandard.SPESSOREMASSIMO;
                         fase.SPESSORENOMINALE = faseStandard.SPESSORENOMINALE;
                         fase.SPESSOREMINIMO = faseStandard.SPESSOREMINIMO;
+                     
                         fase.UTENTEMODIFICA = utente;
                         _ds.FASIPROCESSO.AddFASIPROCESSORow(fase);
                     }
