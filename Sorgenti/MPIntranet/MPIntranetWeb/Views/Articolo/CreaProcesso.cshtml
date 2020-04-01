@@ -78,6 +78,7 @@
 
             caricaProcesso(selectedValue);
         });
+      
 
     });
     function CreaNuovoProcesso() {
@@ -128,6 +129,13 @@
                         markup += '<option value="' + data[x].Value + '">' + data[x].Text + '</option>';
                     }
                     $('#ddlProcesso').html(markup).show();
+
+                    
+                    var elemento = $("#ddlProcesso").prop("selectedIndex", 0).val();
+                    var length = $('#ddlProcesso').children('option').length;
+                    if (elemento == @MPIntranet.Entities.ElementiVuoti.ProcessoGalvanicoVuoto && length>1)
+                        elemento = $("#ddlProcesso").prop("selectedIndex", 1).val();
+                    $('#ddlProcesso').val(elemento).trigger('change');
 
                 },
                 error: function (response)
