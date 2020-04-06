@@ -1,4 +1,5 @@
-﻿using MPIntranet.DataAccess.Articolo;
+﻿using MPIntranet.Common;
+using MPIntranet.DataAccess.Articolo;
 using MPIntranet.Entities;
 using MPIntranet.Models;
 using MPIntranet.Models.Anagrafica;

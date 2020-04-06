@@ -73,11 +73,11 @@ namespace MPIntranetWeb.Controllers
 
             switch (TipoRicerca)
             {
-                case (int)MPIntranet.Models.TipoRicerca.Scheda:
+                case (int)MPIntranet.Common.TipoRicerca.Scheda:
                     ViewData.Add("ControllerName", "Articolo");
                     ViewData.Add("ActionName", "Scheda");
                     break;
-                case (int)MPIntranet.Models.TipoRicerca.Processo:
+                case (int)MPIntranet.Common.TipoRicerca.Processo:
                     ViewData.Add("ControllerName", "Articolo");
                     ViewData.Add("ActionName", "CreaProcesso");
                     break;

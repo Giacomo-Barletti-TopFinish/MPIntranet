@@ -458,6 +458,10 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MPInranet.Common\MPIntranet.Common.csproj">
+      <Project>{b6a1bf70-b611-4f84-863e-285c05ad833a}</Project>
+      <Name>MPIntranet.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MPIntranet.Business\MPIntranet.Business.csproj">
       <Project>{11EE71D3-C51C-4B99-A5C9-431099326DA7}</Project>
       <Name>MPIntranet.Business</Name>

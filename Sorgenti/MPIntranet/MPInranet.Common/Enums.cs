@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MPIntranet.Models
+namespace MPIntranet.Common
 {
     public enum TipoRicerca { Scheda = 1, Processo }
 

@@ -1,4 +1,5 @@
-﻿using MPIntranet.DataAccess.Galvanica;
+﻿using MPIntranet.Common;
+using MPIntranet.DataAccess.Galvanica;
 using MPIntranet.Entities;
 using MPIntranet.Models;
 using MPIntranet.Models.Anagrafica;

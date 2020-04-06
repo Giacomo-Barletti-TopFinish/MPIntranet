@@ -45,8 +45,10 @@
   <ItemGroup>
     <Compile Include="Account.cs" />
     <Compile Include="Dominio.cs" />
+    <Compile Include="GruppiDominio.cs" />
     <Compile Include="LogMessaggi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utente.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MPIntranet.DataAccess\MPIntranet.DataAccess.csproj">
