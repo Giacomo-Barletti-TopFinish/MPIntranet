@@ -30,6 +30,33 @@ namespace MPIntranet.DataAccess.Anagrafica
             }
         }
 
+        public void FillReparti(AnagraficaDS ds, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM REPARTI ";
+            if (soloNonCancellati)
+                select += "WHERE CANCELLATO = 'N'";
+
+            select += "ORDER BY codice ";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.REPARTI);
+            }
+        }
+
+        public void FillFasi(AnagraficaDS ds, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM FASI ";
+            if (soloNonCancellati)
+                select += "WHERE CANCELLATO = 'N'";
+
+            select += "ORDER BY codice ";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.FASI);
+            }
+        }
         public void FillColori(AnagraficaDS ds, bool soloNonCancellati)
         {
             string select = @"SELECT * FROM COLORI ";

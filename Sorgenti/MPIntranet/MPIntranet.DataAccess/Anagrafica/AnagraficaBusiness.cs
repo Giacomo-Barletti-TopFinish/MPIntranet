@@ -20,6 +20,20 @@ namespace MPIntranet.DataAccess.Anagrafica
         }
 
         [DataContext]
+        public void FillReparti(AnagraficaDS ds, bool soloNonCancellati)
+        {
+            AnagraficaAdapter a = new AnagraficaAdapter(DbConnection, DbTransaction);
+            a.FillReparti(ds, soloNonCancellati);
+        }
+
+        [DataContext]
+        public void FillFasi(AnagraficaDS ds, bool soloNonCancellati)
+        {
+            AnagraficaAdapter a = new AnagraficaAdapter(DbConnection, DbTransaction);
+            a.FillFasi(ds, soloNonCancellati);
+        }
+
+        [DataContext]
         public void FillColori(AnagraficaDS ds, bool soloNonCancellati)
         {
             AnagraficaAdapter a = new AnagraficaAdapter(DbConnection, DbTransaction);

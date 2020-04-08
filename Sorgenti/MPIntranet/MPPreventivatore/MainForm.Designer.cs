@@ -34,6 +34,7 @@
             this.anagraficaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.distintaBaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.costiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.repartiEFasiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MPMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,7 +48,8 @@
             this.costiToolStripMenuItem});
             this.MPMenu.Location = new System.Drawing.Point(0, 0);
             this.MPMenu.Name = "MPMenu";
-            this.MPMenu.Size = new System.Drawing.Size(1558, 25);
+            this.MPMenu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            this.MPMenu.Size = new System.Drawing.Size(1604, 25);
             this.MPMenu.TabIndex = 2;
             this.MPMenu.Text = "cdcMenu";
             // 
@@ -62,12 +64,14 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // anagraficaToolStripMenuItem
             // 
+            this.anagraficaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.repartiEFasiToolStripMenuItem});
             this.anagraficaToolStripMenuItem.Name = "anagraficaToolStripMenuItem";
             this.anagraficaToolStripMenuItem.Size = new System.Drawing.Size(82, 21);
             this.anagraficaToolStripMenuItem.Text = "Anagrafica";
@@ -84,12 +88,20 @@
             this.costiToolStripMenuItem.Size = new System.Drawing.Size(49, 21);
             this.costiToolStripMenuItem.Text = "Costi";
             // 
+            // repartiEFasiToolStripMenuItem
+            // 
+            this.repartiEFasiToolStripMenuItem.Name = "repartiEFasiToolStripMenuItem";
+            this.repartiEFasiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.repartiEFasiToolStripMenuItem.Text = "Reparti e fasi...";
+            this.repartiEFasiToolStripMenuItem.Click += new System.EventHandler(this.repartiEFasiToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1558, 785);
+            this.ClientSize = new System.Drawing.Size(1604, 881);
             this.Controls.Add(this.MPMenu);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "MainForm";
             this.Text = "MPPreventivatore";
             this.Controls.SetChildIndex(this.MPMenu, 0);
@@ -108,6 +120,7 @@
         private System.Windows.Forms.ToolStripMenuItem anagraficaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem distintaBaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem costiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem repartiEFasiToolStripMenuItem;
     }
 }
 

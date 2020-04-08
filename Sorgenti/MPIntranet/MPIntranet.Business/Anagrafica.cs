@@ -102,6 +102,16 @@ namespace MPIntranet.Business
             return _ds.COLORI.Where(x => x.IDCOLORE == idColore).FirstOrDefault();
         }
 
+        public AnagraficaDS.REPARTIRow EstraiReparto(decimal idReparto)
+        {
+            if (_ds.REPARTI.Count == 0)
+            {
+                using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+                    bAnagrafica.FillReparti(_ds, true);
+            }
+            return _ds.REPARTI.Where(x => x.IDREPARTO == idReparto).FirstOrDefault();
+        }
+
         public AnagraficaDS.COLORIRow EstraiColore(string codiceColore)
         {
             if (_ds.COLORI.Count == 0)
@@ -555,7 +565,7 @@ namespace MPIntranet.Business
 
         public string CreaMateriale(string codice, string descrizione, bool prezioso, decimal pesoSpecifico, string account)
         {
-            descrizione = (descrizione.Length > 25 ? descrizione.Substring(0, 20) : descrizione).ToUpper();
+            descrizione = (descrizione.Length > 25 ? descrizione.Substring(0, 25) : descrizione).ToUpper();
             codice = (codice.Length > 8 ? codice.Substring(0, 8) : codice).ToUpper();
 
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
@@ -586,5 +596,296 @@ namespace MPIntranet.Business
                 return string.Empty;
             }
         }
+        public string CreaReparto(string codice, string descrizioneBreve, string descrizione, string account)
+        {
+            if (string.IsNullOrEmpty(codice)) return "Codice deve essere valorizzato";
+            codice = codice.Trim().ToUpper();
+            descrizioneBreve = descrizioneBreve.Trim().ToUpper();
+            descrizione = descrizione.Trim().ToUpper();
+
+            descrizione = (descrizione.Length > 30 ? descrizione.Substring(0, 30) : descrizione).ToUpper();
+            descrizioneBreve = (descrizioneBreve.Length > 15 ? descrizioneBreve.Substring(0, 15) : descrizioneBreve).ToUpper();
+            codice = (codice.Length > 10 ? codice.Substring(0, 10) : codice).ToUpper();
+
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillReparti(_ds, false);
+                AnagraficaDS.REPARTIRow b = _ds.REPARTI.Where(x => x.CODICE == codice).FirstOrDefault();
+                if (b != null)
+                {
+                    if (b.CANCELLATO == SiNo.Si)
+                        return "Un reparto con questo codice era presente ma è stato cancellato";
+                    else
+                        return "Un reparto con questo codice è già presente";
+                }
+
+                AnagraficaDS.REPARTIRow br = _ds.REPARTI.NewREPARTIRow();
+                br.CODICE = codice;
+                br.DESCRIZIONE = descrizione;
+                br.DESCRIZIONEBREVE = descrizioneBreve;
+
+                br.CANCELLATO = SiNo.No;
+                br.DATAMODIFICA = DateTime.Now;
+                br.UTENTEMODIFICA = account;
+
+                _ds.REPARTI.AddREPARTIRow(br);
+                bAnagrafica.UpdateTable(_ds, _ds.REPARTI.TableName);
+
+                return string.Empty;
+            }
+        }
+
+        public string ModificaReparto(decimal idReparto, string codice, string descrizioneBreve, string descrizione, string account)
+        {
+            codice = codice.Trim().ToUpper();
+            descrizioneBreve = descrizioneBreve.Trim().ToUpper();
+            descrizione = descrizione.Trim().ToUpper();
+
+            descrizione = (descrizione.Length > 30 ? descrizione.Substring(0, 30) : descrizione).ToUpper();
+            descrizioneBreve = (descrizioneBreve.Length > 15 ? descrizioneBreve.Substring(0, 15) : descrizioneBreve).ToUpper();
+            codice = (codice.Length > 10 ? codice.Substring(0, 10) : codice).ToUpper();
+
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillReparti(_ds, false);
+                AnagraficaDS.REPARTIRow reparto = _ds.REPARTI.Where(x => x.IDREPARTO == idReparto).FirstOrDefault();
+                if (reparto == null) return "Impossibile odificare il reparto";
+
+                AnagraficaDS.REPARTIRow b = _ds.REPARTI.Where(x => x.CODICE == codice && x.IDREPARTO != idReparto).FirstOrDefault();
+                if (b != null)
+                {
+                    if (b.CANCELLATO == SiNo.Si)
+                        return "Un reparto con questo codice era presente ma è stato cancellato";
+                    else
+                        return "Un reparto con questo codice è già presente";
+                }
+
+                reparto.CODICE = codice;
+                reparto.DESCRIZIONE = descrizione;
+                reparto.DESCRIZIONEBREVE = descrizioneBreve;
+
+                reparto.DATAMODIFICA = DateTime.Now;
+                reparto.UTENTEMODIFICA = account;
+
+                bAnagrafica.UpdateTable(_ds, _ds.REPARTI.TableName);
+
+                return string.Empty;
+            }
+        }
+
+        public void CancellaReparto(decimal idReparto, string account)
+        {
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillReparti(_ds, true);
+                bAnagrafica.FillFasi(_ds, true);
+                AnagraficaDS.REPARTIRow reparto = _ds.REPARTI.Where(x => x.IDREPARTO == idReparto).FirstOrDefault();
+                if (reparto != null)
+                {
+                    reparto.CANCELLATO = SiNo.Si;
+                    reparto.DATAMODIFICA = DateTime.Now;
+                    reparto.UTENTEMODIFICA = account;
+
+                    bAnagrafica.UpdateTable(_ds, _ds.REPARTI.TableName);
+                }
+
+                foreach(AnagraficaDS.FASIRow fase in _ds.FASI.Where(x=>x.IDREPARTO==idReparto))
+                {
+                    fase.CANCELLATO = SiNo.Si;
+                    fase.DATAMODIFICA = DateTime.Now;
+                    fase.UTENTEMODIFICA = account;
+                }
+                bAnagrafica.UpdateTable(_ds, _ds.FASI.TableName);
+            }
+        }
+        public List<RepartoModel> CreaListaRepartoModel()
+        {
+            List<RepartoModel> lista = new List<RepartoModel>();
+
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillReparti(_ds, true);
+                foreach (AnagraficaDS.REPARTIRow reparto in _ds.REPARTI)
+                {
+                    lista.Add(creaRepartoModel(reparto));
+                }
+            }
+            return lista;
+        }
+
+        private RepartoModel creaRepartoModel(AnagraficaDS.REPARTIRow reparto)
+        {
+            if (reparto == null) return null;
+            RepartoModel r = new RepartoModel()
+            {
+                IdReparto = reparto.IDREPARTO,
+                Codice = reparto.CODICE,
+                DescrizioneBreve = reparto.IsDESCRIZIONEBREVENull() ? string.Empty : reparto.DESCRIZIONEBREVE,
+                Descrizione = reparto.IsDESCRIZIONENull() ? string.Empty : reparto.DESCRIZIONE,
+            };
+            return r;
+        }
+
+        private RepartoModel creaRepartoModel(decimal idReparto)
+        {
+            AnagraficaDS.REPARTIRow reparto = EstraiReparto(idReparto);
+            return creaRepartoModel(reparto);
+        }
+        public List<FaseModel> CreaListaFaseModel()
+        {
+            List<FaseModel> lista = new List<FaseModel>();
+
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillFasi(_ds, true);
+                foreach (AnagraficaDS.FASIRow fase in _ds.FASI)
+                {
+                    lista.Add(creaFaseModel(fase));
+                }
+            }
+            return lista;
+        }
+
+        public List<FaseModel> CreaListaFaseModel(decimal idReparto)
+        {
+            List<FaseModel> lista = CreaListaFaseModel();
+            return lista.Where(x => x.Reparto.IdReparto == idReparto).ToList();
+        }
+
+
+        private FaseModel creaFaseModel(AnagraficaDS.FASIRow fase)
+        {
+            if (fase == null) return null;
+            FaseModel r = new FaseModel()
+            {
+                IdFase = fase.IDFASE,
+                Codice = fase.CODICE,
+                Descrizione = fase.DESCRIZIONE,
+                Reparto = creaRepartoModel(fase.IDREPARTO),
+                Ricarico = fase.IsRICARICONull() ? 0 : fase.RICARICO,
+                Costo = fase.IsCOSTONull() ? 0 : fase.COSTO,
+                IncludiPreventivo = fase.INCLUDIPREVENTIVO == SiNo.Si,
+                IdEsterna = fase.IsIDESTERNANull() ? -1 : fase.IDESTERNA,
+                TabellaEsterna = fase.IsTABELLAESTERNANull() ? string.Empty : fase.TABELLAESTERNA
+            };
+            return r;
+        }
+
+        public string CreaFase(string codice, string descrizione, decimal idReparto, decimal ricarico, decimal costo, bool includiPreventivo, decimal idEsterna, string tabellaEsterna, string account)
+        {
+            if (string.IsNullOrEmpty(codice)) return "Codice deve essere valorizzato";
+            if (string.IsNullOrEmpty(descrizione)) return "Descrizione deve essere valorizzata";
+            codice = codice.Trim().ToUpper();
+            descrizione = descrizione.Trim().ToUpper();
+
+            codice = (codice.Length > 10 ? codice.Substring(0, 10) : codice).ToUpper();
+            descrizione = (descrizione.Length > 40 ? descrizione.Substring(0, 40) : descrizione).ToUpper();
+
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillFasi(_ds, false);
+                AnagraficaDS.FASIRow b = _ds.FASI.Where(x => x.CODICE == codice).FirstOrDefault();
+                if (b != null)
+                {
+                    if (b.CANCELLATO == SiNo.Si)
+                        return "Una fase con questo codice era presente ma è stato cancellato";
+                    else
+                        return "Una fase con questo codice è già presente";
+                }
+
+                AnagraficaDS.FASIRow br = _ds.FASI.NewFASIRow();
+                br.CODICE = codice;
+                br.DESCRIZIONE = descrizione;
+                br.IDREPARTO = idReparto;
+                br.RICARICO = ricarico;
+                br.COSTO = costo;
+                br.INCLUDIPREVENTIVO = includiPreventivo ? "S" : "N";
+                if (idEsterna >= 0)
+                    br.IDESTERNA = idEsterna;
+                else
+                    br.SetIDESTERNANull();
+                if (string.IsNullOrEmpty(tabellaEsterna))
+                    br.SetTABELLAESTERNANull();
+                else
+                    br.TABELLAESTERNA = tabellaEsterna;
+
+                br.CANCELLATO = SiNo.No;
+                br.DATAMODIFICA = DateTime.Now;
+                br.UTENTEMODIFICA = account;
+
+                _ds.FASI.AddFASIRow(br);
+                bAnagrafica.UpdateTable(_ds, _ds.FASI.TableName);
+
+                return string.Empty;
+            }
+        }
+
+        public string ModificaFase(decimal idFase, string codice, string descrizione, decimal idReparto, decimal ricarico, decimal costo, bool includiPreventivo, decimal idEsterna, string tabellaEsterna, string account)
+        {
+            if (string.IsNullOrEmpty(codice)) return "Codice deve essere valorizzato";
+            if (string.IsNullOrEmpty(descrizione)) return "Descrizione deve essere valorizzata";
+            codice = codice.Trim().ToUpper();
+            descrizione = descrizione.Trim().ToUpper();
+
+            codice = (codice.Length > 10 ? codice.Substring(0, 10) : codice).ToUpper();
+            descrizione = (descrizione.Length > 40 ? descrizione.Substring(0, 40) : descrizione).ToUpper();
+
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillFasi(_ds, false);
+                AnagraficaDS.FASIRow fase = _ds.FASI.Where(x => x.IDFASE == idFase).FirstOrDefault();
+                if (fase == null) return "Impossibile modificare la fase";
+
+                AnagraficaDS.FASIRow b = _ds.FASI.Where(x => x.CODICE == codice && x.IDFASE != idFase).FirstOrDefault();
+                if (b != null)
+                {
+                    if (b.CANCELLATO == SiNo.Si)
+                        return "Un reparto con questo codice era presente ma è stato cancellato";
+                    else
+                        return "Un reparto con questo codice è già presente";
+                }
+
+                fase.CODICE = codice;
+                fase.DESCRIZIONE = descrizione;
+                fase.IDREPARTO = idReparto;
+                fase.RICARICO = ricarico;
+                fase.COSTO = costo;
+                fase.INCLUDIPREVENTIVO = includiPreventivo ? "S" : "N";
+                if (idEsterna >= 0)
+                    fase.IDESTERNA = idEsterna;
+                else
+                    fase.SetIDESTERNANull();
+                if (string.IsNullOrEmpty(tabellaEsterna))
+                    fase.SetTABELLAESTERNANull();
+                else
+                    fase.TABELLAESTERNA = tabellaEsterna;
+
+
+                fase.DATAMODIFICA = DateTime.Now;
+                fase.UTENTEMODIFICA = account;
+
+                bAnagrafica.UpdateTable(_ds, _ds.FASI.TableName);
+
+                return string.Empty;
+            }
+        }
+
+        public void CancellaFase(decimal idFase, string account)
+        {
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillFasi(_ds, true);
+                AnagraficaDS.FASIRow fase = _ds.FASI.Where(x => x.IDFASE == idFase).FirstOrDefault();
+                if (fase != null)
+                {
+                    fase.CANCELLATO = SiNo.Si;
+                    fase.DATAMODIFICA = DateTime.Now;
+                    fase.UTENTEMODIFICA = account;
+
+                    bAnagrafica.UpdateTable(_ds, _ds.FASI.TableName);
+                }
+            }
+        }
+
     }
 }

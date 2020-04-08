@@ -9,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MPIntranet.Common;
 
 namespace MPPreventivatore
 {
@@ -29,21 +28,48 @@ namespace MPPreventivatore
             exitToolStripMenuItem.Enabled = true;
             fileToolStripMenuItem.Enabled = true;
 
-            anagraficaToolStripMenuItem.Enabled = _contesto.Utente.AbilitaAnagrafica;
-            distintaBaseToolStripMenuItem.Enabled = _contesto.Utente.AbilitaDistintaBase;
-            costiToolStripMenuItem.Enabled = _contesto.Utente.AbilitaCosti;
+            anagraficaToolStripMenuItem.Enabled = Contesto.Utente.AbilitaAnagrafica;
+            distintaBaseToolStripMenuItem.Enabled = Contesto.Utente.AbilitaDistintaBase;
+            costiToolStripMenuItem.Enabled = Contesto.Utente.AbilitaCosti;
 
         }
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            Close();
+            try
+            {
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("Errore in fase di chiusura", ex);
+            }
         }
 
         protected override void MPIBaseForm_Load(object sender, EventArgs e)
         {
-            base.MPIBaseForm_Load(sender, e);
-            AbilitaMenu();
+            try
+            {
+                base.MPIBaseForm_Load(sender, e);
+                AbilitaMenu();
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("Errore in fase di load", ex);
+            }
+        }
+
+        private void repartiEFasiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                RepartiFasiFrm form = new RepartiFasiFrm();
+                form.MdiParent = this;
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("Errore in reparti e fasi", ex);
+            }
         }
     }
 }

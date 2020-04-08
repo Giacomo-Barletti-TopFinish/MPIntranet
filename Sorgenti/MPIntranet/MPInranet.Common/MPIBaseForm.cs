@@ -13,7 +13,7 @@ namespace MPIntranet.Common
 {
     public partial class MPIBaseForm : Form
     {
-        public MPContext _contesto = new MPContext();
+        public MPContext Contesto = new MPContext();
         public MPIBaseForm()
         {
             InitializeComponent();
@@ -30,8 +30,8 @@ namespace MPIntranet.Common
 
         protected virtual void MPIBaseForm_Load(object sender, EventArgs e)
         {
-            _contesto = MPContext.CreaContesto();
-            stUser.Text = _contesto.Utente.DisplayName;            
+            Contesto = MPContext.CreaContesto();
+            stUser.Text = Contesto.Utente.DisplayName;            
         }
 
         protected void DisabilitaElementiMenu(ToolStripItemCollection elementi, bool abilita)

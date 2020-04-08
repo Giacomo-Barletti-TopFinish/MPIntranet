@@ -41,9 +41,10 @@
             this.lblUserLoggato,
             this.lblStatusBar,
             this.stUser});
-            this.MPStatusBar.Location = new System.Drawing.Point(0, 428);
+            this.MPStatusBar.Location = new System.Drawing.Point(0, 497);
             this.MPStatusBar.Name = "MPStatusBar";
-            this.MPStatusBar.Size = new System.Drawing.Size(800, 22);
+            this.MPStatusBar.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
+            this.MPStatusBar.Size = new System.Drawing.Size(933, 22);
             this.MPStatusBar.TabIndex = 4;
             this.MPStatusBar.Text = "cdcStatus";
             // 
@@ -65,10 +66,11 @@
             // 
             // MPIBaseForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(933, 519);
             this.Controls.Add(this.MPStatusBar);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IsMdiContainer = true;
             this.Name = "MPIBaseForm";
             this.Text = "MPIBaseForm";
