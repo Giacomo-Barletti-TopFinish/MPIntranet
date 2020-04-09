@@ -147,7 +147,7 @@ namespace MPIntranetWeb.Controllers
             List<MacchinaModel> macchineModel = m.CreaListaMacchinaModel();
 
             Anagrafica a = new Anagrafica();
-            List<TipoDocumentoModel> tipiDocumentoModel = a.CreaListaTipoDocumento();
+            List<TipoDocumentoModel> tipiDocumentoModel = a.CreaListaTipoDocumentoModel();
             List<MPIntranetListItem> tipiDocumento = tipiDocumentoModel.Select(x => new MPIntranetListItem(x.Descrizione, x.IdTipoDocumento.ToString())).ToList();
             tipiDocumento.Insert(0, new MPIntranetListItem(string.Empty, ElementiVuoti.TipoDocumentoVuoto.ToString()));
 

@@ -99,5 +99,19 @@ namespace MPPreventivatore
                 MostraEccezione("Errore in materie prime", ex);
             }
         }
+
+        private void tipologieDocumentiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TipologiaDocumentiFrm form = new TipologiaDocumentiFrm();
+                form.MdiParent = this;
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("Errore in tipologia documenti", ex);
+            }
+        }
     }
 }

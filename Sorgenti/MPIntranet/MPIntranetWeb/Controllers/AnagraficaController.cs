@@ -93,7 +93,7 @@ namespace MPIntranetWeb.Controllers
         public ActionResult CaricaTipiDocumento()
         {
             Anagrafica a = new Anagrafica();
-            List<TipoDocumentoModel> lista = a.CreaListaTipoDocumento();
+            List<TipoDocumentoModel> lista = a.CreaListaTipoDocumentoModel();
 
             return PartialView("CaricaTipiDocumentoPartial", lista);
         }

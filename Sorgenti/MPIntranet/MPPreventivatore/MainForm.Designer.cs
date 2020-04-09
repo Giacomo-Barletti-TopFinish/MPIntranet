@@ -34,9 +34,10 @@
             this.anagraficaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.repartiEFasiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tipologieProdottoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.materiePrimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.distintaBaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.costiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.materiePrimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tipologieDocumentiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MPMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,7 +76,8 @@
             this.anagraficaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.repartiEFasiToolStripMenuItem,
             this.tipologieProdottoToolStripMenuItem,
-            this.materiePrimeToolStripMenuItem});
+            this.materiePrimeToolStripMenuItem,
+            this.tipologieDocumentiToolStripMenuItem});
             this.anagraficaToolStripMenuItem.Name = "anagraficaToolStripMenuItem";
             this.anagraficaToolStripMenuItem.Size = new System.Drawing.Size(82, 21);
             this.anagraficaToolStripMenuItem.Text = "Anagrafica";
@@ -83,16 +85,23 @@
             // repartiEFasiToolStripMenuItem
             // 
             this.repartiEFasiToolStripMenuItem.Name = "repartiEFasiToolStripMenuItem";
-            this.repartiEFasiToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.repartiEFasiToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.repartiEFasiToolStripMenuItem.Text = "Reparti e fasi...";
             this.repartiEFasiToolStripMenuItem.Click += new System.EventHandler(this.repartiEFasiToolStripMenuItem_Click);
             // 
             // tipologieProdottoToolStripMenuItem
             // 
             this.tipologieProdottoToolStripMenuItem.Name = "tipologieProdottoToolStripMenuItem";
-            this.tipologieProdottoToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.tipologieProdottoToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.tipologieProdottoToolStripMenuItem.Text = "Tipologie prodotto...";
             this.tipologieProdottoToolStripMenuItem.Click += new System.EventHandler(this.tipologieProdottoToolStripMenuItem_Click);
+            // 
+            // materiePrimeToolStripMenuItem
+            // 
+            this.materiePrimeToolStripMenuItem.Name = "materiePrimeToolStripMenuItem";
+            this.materiePrimeToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.materiePrimeToolStripMenuItem.Text = "Materie prime...";
+            this.materiePrimeToolStripMenuItem.Click += new System.EventHandler(this.materiePrimeToolStripMenuItem_Click);
             // 
             // distintaBaseToolStripMenuItem
             // 
@@ -106,12 +115,12 @@
             this.costiToolStripMenuItem.Size = new System.Drawing.Size(49, 21);
             this.costiToolStripMenuItem.Text = "Costi";
             // 
-            // materiePrimeToolStripMenuItem
+            // tipologieDocumentiToolStripMenuItem
             // 
-            this.materiePrimeToolStripMenuItem.Name = "materiePrimeToolStripMenuItem";
-            this.materiePrimeToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.materiePrimeToolStripMenuItem.Text = "Materie prime...";
-            this.materiePrimeToolStripMenuItem.Click += new System.EventHandler(this.materiePrimeToolStripMenuItem_Click);
+            this.tipologieDocumentiToolStripMenuItem.Name = "tipologieDocumentiToolStripMenuItem";
+            this.tipologieDocumentiToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.tipologieDocumentiToolStripMenuItem.Text = "Tipologie documenti...";
+            this.tipologieDocumentiToolStripMenuItem.Click += new System.EventHandler(this.tipologieDocumentiToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -140,6 +149,7 @@
         private System.Windows.Forms.ToolStripMenuItem repartiEFasiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tipologieProdottoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem materiePrimeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tipologieDocumentiToolStripMenuItem;
     }
 }
 

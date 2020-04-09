@@ -433,7 +433,7 @@ namespace MPIntranet.Business
                 return string.Empty;
             }
         }
-        public List<TipoDocumentoModel> CreaListaTipoDocumento()
+        public List<TipoDocumentoModel> CreaListaTipoDocumentoModel()
         {
             List<TipoDocumentoModel> lista = new List<TipoDocumentoModel>();
 
@@ -1009,6 +1009,39 @@ namespace MPIntranet.Business
             }
         }
 
+        public string ModificaTipoDocumento(decimal idTipoDocumento,  string descrizione, string account)
+        {
+            if (string.IsNullOrEmpty(descrizione)) return "Descrizione deve essere valorizzata";
+
+            descrizione = descrizione.Trim().ToUpper();
+
+            descrizione = (descrizione.Length > 25 ? descrizione.Substring(0, 25) : descrizione).ToUpper();
+
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillTipiDocumento(_ds, false);
+                AnagraficaDS.TIPIDOCUMENTORow tipoDocumento = _ds.TIPIDOCUMENTO.Where(x => x.IDTIPODOCUMENTO == idTipoDocumento).FirstOrDefault();
+                if (tipoDocumento == null) return "Impossibile modificare il tipo documento";
+
+                AnagraficaDS.TIPIDOCUMENTORow b = _ds.TIPIDOCUMENTO.Where(x => x.DESCRIZIONE == descrizione && x.IDTIPODOCUMENTO != idTipoDocumento).FirstOrDefault();
+                if (b != null)
+                {
+                    if (b.CANCELLATO == SiNo.Si)
+                        return "Un tipo documento con questo codice era presente ma è stato cancellato";
+                    else
+                        return "Un tipo documento con questo codice è già presente";
+                }
+
+                tipoDocumento.DESCRIZIONE = descrizione;
+
+                tipoDocumento.DATAMODIFICA = DateTime.Now;
+                tipoDocumento.UtenteModifica = account;
+
+                bAnagrafica.UpdateTable(_ds, _ds.TIPIDOCUMENTO.TableName);
+
+                return string.Empty;
+            }
+        }
         public void CancellaTipoProdotto(decimal idTipoProdotto, string account)
         {
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())

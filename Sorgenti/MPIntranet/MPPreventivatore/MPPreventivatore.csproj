@@ -72,6 +72,12 @@
     <Compile Include="TipologiaArticoliFrm.Designer.cs">
       <DependentUpon>TipologiaArticoliFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TipologiaDocumentiFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TipologiaDocumentiFrm.Designer.cs">
+      <DependentUpon>TipologiaDocumentiFrm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -92,6 +98,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TipologiaArticoliFrm.resx">
       <DependentUpon>TipologiaArticoliFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TipologiaDocumentiFrm.resx">
+      <DependentUpon>TipologiaDocumentiFrm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
