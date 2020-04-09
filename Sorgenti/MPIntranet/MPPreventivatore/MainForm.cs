@@ -71,5 +71,33 @@ namespace MPPreventivatore
                 MostraEccezione("Errore in reparti e fasi", ex);
             }
         }
+
+        private void tipologieProdottoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TipologiaArticoliFrm form = new TipologiaArticoliFrm();
+                form.MdiParent = this;
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("Errore in tipologie prodotto", ex);
+            }
+        }
+
+        private void materiePrimeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MateriePrimeFrm form = new MateriePrimeFrm();
+                form.MdiParent = this;
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("Errore in materie prime", ex);
+            }
+        }
     }
 }

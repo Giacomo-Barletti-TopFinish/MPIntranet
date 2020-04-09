@@ -14,5 +14,6 @@ namespace MPIntranet.Entities
         public const decimal MacchinaVuota = -1;
         public const decimal ManutentoreVuoto = -1;
         public const decimal TelaioVuoto = 1;
+        public const decimal NessunMateriale = -1;
     }
 }

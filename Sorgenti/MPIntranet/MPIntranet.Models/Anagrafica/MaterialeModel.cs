@@ -15,5 +15,10 @@ namespace MPIntranet.Models.Anagrafica
         public DateTime DataModifica { get; set; }
         public string UtenteModifica { get; set; }
         public decimal PesoSpecifico{ get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0}({1})",Codice,Descrizione);
+        }
     }
 }

@@ -117,7 +117,7 @@ namespace MPIntranetWeb.Controllers
             {
                 return Json("Nessun file selezionato.");
             }
-            return View();
+           
         }
         public ActionResult CancellaDocumento(decimal IdDocumento)
         {

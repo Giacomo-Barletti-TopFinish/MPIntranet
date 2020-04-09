@@ -32,9 +32,11 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.anagraficaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.repartiEFasiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tipologieProdottoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.distintaBaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.costiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.repartiEFasiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.materiePrimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MPMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,10 +73,26 @@
             // anagraficaToolStripMenuItem
             // 
             this.anagraficaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.repartiEFasiToolStripMenuItem});
+            this.repartiEFasiToolStripMenuItem,
+            this.tipologieProdottoToolStripMenuItem,
+            this.materiePrimeToolStripMenuItem});
             this.anagraficaToolStripMenuItem.Name = "anagraficaToolStripMenuItem";
             this.anagraficaToolStripMenuItem.Size = new System.Drawing.Size(82, 21);
             this.anagraficaToolStripMenuItem.Text = "Anagrafica";
+            // 
+            // repartiEFasiToolStripMenuItem
+            // 
+            this.repartiEFasiToolStripMenuItem.Name = "repartiEFasiToolStripMenuItem";
+            this.repartiEFasiToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.repartiEFasiToolStripMenuItem.Text = "Reparti e fasi...";
+            this.repartiEFasiToolStripMenuItem.Click += new System.EventHandler(this.repartiEFasiToolStripMenuItem_Click);
+            // 
+            // tipologieProdottoToolStripMenuItem
+            // 
+            this.tipologieProdottoToolStripMenuItem.Name = "tipologieProdottoToolStripMenuItem";
+            this.tipologieProdottoToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.tipologieProdottoToolStripMenuItem.Text = "Tipologie prodotto...";
+            this.tipologieProdottoToolStripMenuItem.Click += new System.EventHandler(this.tipologieProdottoToolStripMenuItem_Click);
             // 
             // distintaBaseToolStripMenuItem
             // 
@@ -88,12 +106,12 @@
             this.costiToolStripMenuItem.Size = new System.Drawing.Size(49, 21);
             this.costiToolStripMenuItem.Text = "Costi";
             // 
-            // repartiEFasiToolStripMenuItem
+            // materiePrimeToolStripMenuItem
             // 
-            this.repartiEFasiToolStripMenuItem.Name = "repartiEFasiToolStripMenuItem";
-            this.repartiEFasiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.repartiEFasiToolStripMenuItem.Text = "Reparti e fasi...";
-            this.repartiEFasiToolStripMenuItem.Click += new System.EventHandler(this.repartiEFasiToolStripMenuItem_Click);
+            this.materiePrimeToolStripMenuItem.Name = "materiePrimeToolStripMenuItem";
+            this.materiePrimeToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.materiePrimeToolStripMenuItem.Text = "Materie prime...";
+            this.materiePrimeToolStripMenuItem.Click += new System.EventHandler(this.materiePrimeToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -101,7 +119,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1604, 881);
             this.Controls.Add(this.MPMenu);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "MainForm";
             this.Text = "MPPreventivatore";
             this.Controls.SetChildIndex(this.MPMenu, 0);
@@ -121,6 +138,8 @@
         private System.Windows.Forms.ToolStripMenuItem distintaBaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem costiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem repartiEFasiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tipologieProdottoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem materiePrimeToolStripMenuItem;
     }
 }
 

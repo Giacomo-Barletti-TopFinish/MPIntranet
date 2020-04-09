@@ -278,6 +278,88 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="TIPIPRODOTTO" msprop:Generator_TableClassName="TIPIPRODOTTODataTable" msprop:Generator_TableVarName="tableTIPIPRODOTTO" msprop:Generator_RowChangedName="TIPIPRODOTTORowChanged" msprop:Generator_TablePropName="TIPIPRODOTTO" msprop:Generator_RowDeletingName="TIPIPRODOTTORowDeleting" msprop:Generator_RowChangingName="TIPIPRODOTTORowChanging" msprop:Generator_RowEvHandlerName="TIPIPRODOTTORowChangeEventHandler" msprop:Generator_RowDeletedName="TIPIPRODOTTORowDeleted" msprop:Generator_RowClassName="TIPIPRODOTTORow" msprop:Generator_UserTableName="TIPIPRODOTTO" msprop:Generator_RowEvArgName="TIPIPRODOTTORowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDTIPOPRODOTTO" msprop:Generator_ColumnVarNameInTable="columnIDTIPOPRODOTTO" msprop:Generator_ColumnPropNameInRow="IDTIPOPRODOTTO" msprop:Generator_ColumnPropNameInTable="IDTIPOPRODOTTOColumn" msprop:Generator_UserColumnName="IDTIPOPRODOTTO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CODICE" msprop:Generator_ColumnVarNameInTable="columnCODICE" msprop:Generator_ColumnPropNameInRow="CODICE" msprop:Generator_ColumnPropNameInTable="CODICEColumn" msprop:Generator_UserColumnName="CODICE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DESCRIZIONE" msprop:Generator_ColumnVarNameInTable="columnDESCRIZIONE" msprop:Generator_ColumnPropNameInRow="DESCRIZIONE" msprop:Generator_ColumnPropNameInTable="DESCRIZIONEColumn" msprop:Generator_UserColumnName="DESCRIZIONE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CANCELLATO" msprop:Generator_ColumnVarNameInTable="columnCANCELLATO" msprop:Generator_ColumnPropNameInRow="CANCELLATO" msprop:Generator_ColumnPropNameInTable="CANCELLATOColumn" msprop:Generator_UserColumnName="CANCELLATO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATAMODIFICA" msprop:Generator_ColumnVarNameInTable="columnDATAMODIFICA" msprop:Generator_ColumnPropNameInRow="DATAMODIFICA" msprop:Generator_ColumnPropNameInTable="DATAMODIFICAColumn" msprop:Generator_UserColumnName="DATAMODIFICA" type="xs:dateTime" />
+              <xs:element name="UTENTEMODIFICA" msprop:Generator_ColumnVarNameInTable="columnUTENTEMODIFICA" msprop:Generator_ColumnPropNameInRow="UTENTEMODIFICA" msprop:Generator_ColumnPropNameInTable="UTENTEMODIFICAColumn" msprop:Generator_UserColumnName="UTENTEMODIFICA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="MATERIEPRIME" msprop:Generator_TableClassName="MATERIEPRIMEDataTable" msprop:Generator_TableVarName="tableMATERIEPRIME" msprop:Generator_TablePropName="MATERIEPRIME" msprop:Generator_RowDeletingName="MATERIEPRIMERowDeleting" msprop:Generator_RowChangingName="MATERIEPRIMERowChanging" msprop:Generator_RowEvHandlerName="MATERIEPRIMERowChangeEventHandler" msprop:Generator_RowDeletedName="MATERIEPRIMERowDeleted" msprop:Generator_UserTableName="MATERIEPRIME" msprop:Generator_RowChangedName="MATERIEPRIMERowChanged" msprop:Generator_RowEvArgName="MATERIEPRIMERowChangeEvent" msprop:Generator_RowClassName="MATERIEPRIMERow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDMATERIAPRIMA" msprop:Generator_ColumnVarNameInTable="columnIDMATERIAPRIMA" msprop:Generator_ColumnPropNameInRow="IDMATERIAPRIMA" msprop:Generator_ColumnPropNameInTable="IDMATERIAPRIMAColumn" msprop:Generator_UserColumnName="IDMATERIAPRIMA" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CODICE" msprop:Generator_ColumnVarNameInTable="columnCODICE" msprop:Generator_ColumnPropNameInRow="CODICE" msprop:Generator_ColumnPropNameInTable="CODICEColumn" msprop:Generator_UserColumnName="CODICE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DESCRIZIONE" msprop:Generator_ColumnVarNameInTable="columnDESCRIZIONE" msprop:Generator_ColumnPropNameInRow="DESCRIZIONE" msprop:Generator_ColumnPropNameInTable="DESCRIZIONEColumn" msprop:Generator_UserColumnName="DESCRIZIONE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IDMATERIALE" msprop:Generator_ColumnVarNameInTable="columnIDMATERIALE" msprop:Generator_ColumnPropNameInRow="IDMATERIALE" msprop:Generator_ColumnPropNameInTable="IDMATERIALEColumn" msprop:Generator_UserColumnName="IDMATERIALE" type="xs:decimal" />
+              <xs:element name="RICARICO" msprop:Generator_ColumnVarNameInTable="columnRICARICO" msprop:Generator_ColumnPropNameInRow="RICARICO" msprop:Generator_ColumnPropNameInTable="RICARICOColumn" msprop:Generator_UserColumnName="RICARICO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="COSTO" msprop:Generator_ColumnVarNameInTable="columnCOSTO" msprop:Generator_ColumnPropNameInRow="COSTO" msprop:Generator_ColumnPropNameInTable="COSTOColumn" msprop:Generator_UserColumnName="COSTO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="INCLUDIPREVENTIVO" msprop:Generator_ColumnVarNameInTable="columnINCLUDIPREVENTIVO" msprop:Generator_ColumnPropNameInRow="INCLUDIPREVENTIVO" msprop:Generator_ColumnPropNameInTable="INCLUDIPREVENTIVOColumn" msprop:Generator_UserColumnName="INCLUDIPREVENTIVO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CANCELLATO" msprop:Generator_ColumnVarNameInTable="columnCANCELLATO" msprop:Generator_ColumnPropNameInRow="CANCELLATO" msprop:Generator_ColumnPropNameInTable="CANCELLATOColumn" msprop:Generator_UserColumnName="CANCELLATO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATAMODIFICA" msprop:Generator_ColumnVarNameInTable="columnDATAMODIFICA" msprop:Generator_ColumnPropNameInRow="DATAMODIFICA" msprop:Generator_ColumnPropNameInTable="DATAMODIFICAColumn" msprop:Generator_UserColumnName="DATAMODIFICA" type="xs:dateTime" />
+              <xs:element name="UTENTEMODIFICA" msprop:Generator_ColumnVarNameInTable="columnUTENTEMODIFICA" msprop:Generator_ColumnPropNameInRow="UTENTEMODIFICA" msprop:Generator_ColumnPropNameInTable="UTENTEMODIFICAColumn" msprop:Generator_UserColumnName="UTENTEMODIFICA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>

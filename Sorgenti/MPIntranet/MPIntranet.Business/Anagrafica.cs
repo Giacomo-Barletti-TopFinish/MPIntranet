@@ -112,6 +112,16 @@ namespace MPIntranet.Business
             return _ds.REPARTI.Where(x => x.IDREPARTO == idReparto).FirstOrDefault();
         }
 
+        public AnagraficaDS.MATERIALIRow EstraiMateriale(decimal idMateriale)
+        {
+            if (_ds.MATERIALI.Count == 0)
+            {
+                using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+                    bAnagrafica.FillMateriali(_ds, true);
+            }
+            return _ds.MATERIALI.Where(x => x.IDMATERIALE == idMateriale).FirstOrDefault();
+        }
+
         public AnagraficaDS.COLORIRow EstraiColore(string codiceColore)
         {
             if (_ds.COLORI.Count == 0)
@@ -507,22 +517,32 @@ namespace MPIntranet.Business
                 bAnagrafica.FillMateriali(_ds, true);
                 foreach (AnagraficaDS.MATERIALIRow materiale in _ds.MATERIALI)
                 {
-                    MaterialeModel m = new MaterialeModel()
-                    {
-                        IdMateriale = materiale.IDMATERIALE,
-                        Codice = materiale.CODICE,
-                        Descrizione = materiale.IsDESCRIZIONENull() ? string.Empty : materiale.DESCRIZIONE,
-                        Prezioso = materiale.PREZIOSO,
-                        PesoSpecifico = materiale.IsPESOSPECIFICONull() ? 0 : materiale.PESOSPECIFICO,
-                        DataModifica = materiale.DATAMODIFICA,
-                        UtenteModifica = materiale.UTENTEMODIFICA
-                    };
-                    lista.Add(m);
+                    lista.Add(creaMaterialeModel(materiale));
                 }
             }
             return lista;
         }
 
+        private MaterialeModel creaMaterialeModel(AnagraficaDS.MATERIALIRow materiale)
+        {
+            MaterialeModel m = new MaterialeModel()
+            {
+                IdMateriale = materiale.IDMATERIALE,
+                Codice = materiale.CODICE,
+                Descrizione = materiale.IsDESCRIZIONENull() ? string.Empty : materiale.DESCRIZIONE,
+                Prezioso = materiale.PREZIOSO,
+                PesoSpecifico = materiale.IsPESOSPECIFICONull() ? 0 : materiale.PESOSPECIFICO,
+                DataModifica = materiale.DATAMODIFICA,
+                UtenteModifica = materiale.UTENTEMODIFICA
+            };
+            return m;
+        }
+
+        private MaterialeModel creaMaterialeModel(decimal idMateriale)
+        {
+            AnagraficaDS.MATERIALIRow materiale = EstraiMateriale(idMateriale);
+            return creaMaterialeModel(materiale);
+        }
 
         public void CancellaMateriale(decimal idMateriale, string account)
         {
@@ -689,7 +709,7 @@ namespace MPIntranet.Business
                     bAnagrafica.UpdateTable(_ds, _ds.REPARTI.TableName);
                 }
 
-                foreach(AnagraficaDS.FASIRow fase in _ds.FASI.Where(x=>x.IDREPARTO==idReparto))
+                foreach (AnagraficaDS.FASIRow fase in _ds.FASI.Where(x => x.IDREPARTO == idReparto))
                 {
                     fase.CANCELLATO = SiNo.Si;
                     fase.DATAMODIFICA = DateTime.Now;
@@ -840,9 +860,9 @@ namespace MPIntranet.Business
                 if (b != null)
                 {
                     if (b.CANCELLATO == SiNo.Si)
-                        return "Un reparto con questo codice era presente ma è stato cancellato";
+                        return "Una fase con questo codice era presente ma è stato cancellato";
                     else
-                        return "Un reparto con questo codice è già presente";
+                        return "Una fase con questo codice è già presente";
                 }
 
                 fase.CODICE = codice;
@@ -887,5 +907,255 @@ namespace MPIntranet.Business
             }
         }
 
+        public List<TipoProdottoModel> CreaListaTipoProdottoModel()
+        {
+            List<TipoProdottoModel> lista = new List<TipoProdottoModel>();
+
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillTipiProdotto(_ds, true);
+                foreach (AnagraficaDS.TIPIPRODOTTORow tipoProdotto in _ds.TIPIPRODOTTO)
+                {
+                    lista.Add(creaTipoProdottoModel(tipoProdotto));
+                }
+            }
+            return lista;
+        }
+
+
+        private TipoProdottoModel creaTipoProdottoModel(AnagraficaDS.TIPIPRODOTTORow tipoProdotto)
+        {
+            if (tipoProdotto == null) return null;
+            TipoProdottoModel r = new TipoProdottoModel()
+            {
+                IdTipoProdotto = tipoProdotto.IDTIPOPRODOTTO,
+                Codice = tipoProdotto.CODICE,
+                Descrizione = tipoProdotto.IsDESCRIZIONENull() ? string.Empty : tipoProdotto.DESCRIZIONE,
+            };
+            return r;
+        }
+
+        public string CreaTipoProdotto(string codice, string descrizione, string account)
+        {
+            if (string.IsNullOrEmpty(codice)) return "Codice deve essere valorizzato";
+
+            codice = codice.Trim().ToUpper();
+            descrizione = descrizione.Trim().ToUpper();
+
+            codice = (codice.Length > 10 ? codice.Substring(0, 10) : codice).ToUpper();
+            descrizione = (descrizione.Length > 30 ? descrizione.Substring(0, 30) : descrizione).ToUpper();
+
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillTipiProdotto(_ds, false);
+                AnagraficaDS.TIPIPRODOTTORow b = _ds.TIPIPRODOTTO.Where(x => x.CODICE == codice).FirstOrDefault();
+                if (b != null)
+                {
+                    if (b.CANCELLATO == SiNo.Si)
+                        return "Un tipo prodotto con questo codice era presente ma è stato cancellato";
+                    else
+                        return "Un tipo prodotto con questo codice è già presente";
+                }
+
+                AnagraficaDS.TIPIPRODOTTORow br = _ds.TIPIPRODOTTO.NewTIPIPRODOTTORow();
+                br.CODICE = codice;
+                br.DESCRIZIONE = descrizione;
+
+                br.CANCELLATO = SiNo.No;
+                br.DATAMODIFICA = DateTime.Now;
+                br.UTENTEMODIFICA = account;
+
+                _ds.TIPIPRODOTTO.AddTIPIPRODOTTORow(br);
+                bAnagrafica.UpdateTable(_ds, _ds.TIPIPRODOTTO.TableName);
+
+                return string.Empty;
+            }
+        }
+
+        public string ModificaTipoProdotto(decimal idTipoProdotto, string codice, string descrizione, string account)
+        {
+            if (string.IsNullOrEmpty(codice)) return "Codice deve essere valorizzato";
+
+            codice = codice.Trim().ToUpper();
+            descrizione = descrizione.Trim().ToUpper();
+
+            codice = (codice.Length > 10 ? codice.Substring(0, 10) : codice).ToUpper();
+            descrizione = (descrizione.Length > 30 ? descrizione.Substring(0, 30) : descrizione).ToUpper();
+
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillTipiProdotto(_ds, false);
+                AnagraficaDS.TIPIPRODOTTORow tipoProdotto = _ds.TIPIPRODOTTO.Where(x => x.IDTIPOPRODOTTO == idTipoProdotto).FirstOrDefault();
+                if (tipoProdotto == null) return "Impossibile modificare il tipo prodotto";
+
+                AnagraficaDS.TIPIPRODOTTORow b = _ds.TIPIPRODOTTO.Where(x => x.CODICE == codice && x.IDTIPOPRODOTTO != idTipoProdotto).FirstOrDefault();
+                if (b != null)
+                {
+                    if (b.CANCELLATO == SiNo.Si)
+                        return "Un tipo prodotto con questo codice era presente ma è stato cancellato";
+                    else
+                        return "Un tipo prodotto con questo codice è già presente";
+                }
+
+                tipoProdotto.CODICE = codice;
+                tipoProdotto.DESCRIZIONE = descrizione;
+
+                tipoProdotto.DATAMODIFICA = DateTime.Now;
+                tipoProdotto.UTENTEMODIFICA = account;
+
+                bAnagrafica.UpdateTable(_ds, _ds.TIPIPRODOTTO.TableName);
+
+                return string.Empty;
+            }
+        }
+
+        public void CancellaTipoProdotto(decimal idTipoProdotto, string account)
+        {
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillTipiProdotto(_ds, true);
+                AnagraficaDS.TIPIPRODOTTORow tipoProdotto = _ds.TIPIPRODOTTO.Where(x => x.IDTIPOPRODOTTO == idTipoProdotto).FirstOrDefault();
+                if (tipoProdotto != null)
+                {
+                    tipoProdotto.CANCELLATO = SiNo.Si;
+                    tipoProdotto.DATAMODIFICA = DateTime.Now;
+                    tipoProdotto.UTENTEMODIFICA = account;
+
+                    bAnagrafica.UpdateTable(_ds, _ds.TIPIPRODOTTO.TableName);
+                }
+            }
+        }
+
+        public List<MateriaPrimaModel> CreaListaMateriaPrimaModel()
+        {
+            List<MateriaPrimaModel> lista = new List<MateriaPrimaModel>();
+
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillMateriePrime(_ds, true);
+                foreach (AnagraficaDS.MATERIEPRIMERow materiaPrima in _ds.MATERIEPRIME)
+                {
+                    lista.Add(creaMateriaPrimaModel(materiaPrima));
+                }
+            }
+            return lista;
+        }
+
+
+        private MateriaPrimaModel creaMateriaPrimaModel(AnagraficaDS.MATERIEPRIMERow materiaPrima)
+        {
+            if (materiaPrima == null) return null;
+            MateriaPrimaModel r = new MateriaPrimaModel()
+            {
+                IdMateriaPrima = materiaPrima.IDMATERIAPRIMA,
+                Codice = materiaPrima.CODICE,
+                Descrizione = materiaPrima.DESCRIZIONE,
+                Materiale = creaMaterialeModel(materiaPrima.IDMATERIALE).ToString(),
+                Ricarico = materiaPrima.IsRICARICONull() ? 0 : materiaPrima.RICARICO,
+                Costo = materiaPrima.IsCOSTONull() ? 0 : materiaPrima.COSTO,
+                IncludiPreventivo = materiaPrima.INCLUDIPREVENTIVO == SiNo.Si,
+            };
+            return r;
+        }
+
+        public string CreaMateriaPrima(string codice, string descrizione, decimal idMateriale, decimal ricarico, decimal costo, bool includiPreventivo, string account)
+        {
+            if (string.IsNullOrEmpty(codice)) return "Codice deve essere valorizzato";
+            if (string.IsNullOrEmpty(descrizione)) return "Descrizione deve essere valorizzata";
+            codice = codice.Trim().ToUpper();
+            descrizione = descrizione.Trim().ToUpper();
+
+            codice = (codice.Length > 10 ? codice.Substring(0, 10) : codice).ToUpper();
+            descrizione = (descrizione.Length > 40 ? descrizione.Substring(0, 40) : descrizione).ToUpper();
+
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillMateriePrime(_ds, false);
+                AnagraficaDS.FASIRow b = _ds.FASI.Where(x => x.CODICE == codice).FirstOrDefault();
+                if (b != null)
+                {
+                    if (b.CANCELLATO == SiNo.Si)
+                        return "Una materia prima con questo codice era presente ma è stato cancellato";
+                    else
+                        return "Una materia prima con questo codice è già presente";
+                }
+
+                AnagraficaDS.MATERIEPRIMERow br = _ds.MATERIEPRIME.NewMATERIEPRIMERow();
+                br.CODICE = codice;
+                br.DESCRIZIONE = descrizione;
+                br.IDMATERIALE = idMateriale;
+                br.RICARICO = ricarico;
+                br.COSTO = costo;
+                br.INCLUDIPREVENTIVO = includiPreventivo ? "S" : "N";
+
+                br.CANCELLATO = SiNo.No;
+                br.DATAMODIFICA = DateTime.Now;
+                br.UTENTEMODIFICA = account;
+
+                _ds.MATERIEPRIME.AddMATERIEPRIMERow(br);
+                bAnagrafica.UpdateTable(_ds, _ds.MATERIEPRIME.TableName);
+
+                return string.Empty;
+            }
+        }
+
+        public string ModificaMateriaPrima(decimal idMateriaPrima, string codice, string descrizione, decimal idMateriale, decimal ricarico, decimal costo, bool includiPreventivo, string account)
+        {
+            if (string.IsNullOrEmpty(codice)) return "Codice deve essere valorizzato";
+            if (string.IsNullOrEmpty(descrizione)) return "Descrizione deve essere valorizzata";
+            codice = codice.Trim().ToUpper();
+            descrizione = descrizione.Trim().ToUpper();
+
+            codice = (codice.Length > 10 ? codice.Substring(0, 10) : codice).ToUpper();
+            descrizione = (descrizione.Length > 40 ? descrizione.Substring(0, 40) : descrizione).ToUpper();
+
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillMateriePrime(_ds, false);
+                AnagraficaDS.MATERIEPRIMERow materiaPrima = _ds.MATERIEPRIME.Where(x => x.IDMATERIAPRIMA == idMateriaPrima).FirstOrDefault();
+                if (materiaPrima == null) return "Impossibile modificare la materia prima";
+
+                AnagraficaDS.MATERIEPRIMERow b = _ds.MATERIEPRIME.Where(x => x.CODICE == codice && x.IDMATERIAPRIMA != idMateriaPrima).FirstOrDefault();
+                if (b != null)
+                {
+                    if (b.CANCELLATO == SiNo.Si)
+                        return "Una materia prima con questo codice era presente ma è stato cancellato";
+                    else
+                        return "Una materia prima con questo codice è già presente";
+                }
+
+                materiaPrima.CODICE = codice;
+                materiaPrima.DESCRIZIONE = descrizione;
+                materiaPrima.IDMATERIALE = idMateriale;
+                materiaPrima.RICARICO = ricarico;
+                materiaPrima.COSTO = costo;
+                materiaPrima.INCLUDIPREVENTIVO = includiPreventivo ? "S" : "N";
+
+
+                materiaPrima.DATAMODIFICA = DateTime.Now;
+                materiaPrima.UTENTEMODIFICA = account;
+
+                bAnagrafica.UpdateTable(_ds, _ds.MATERIEPRIME.TableName);
+
+                return string.Empty;
+            }
+        }
+
+        public void CancellaMateriaPrima(decimal idMateriaPrima, string account)
+        {
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillMateriePrime(_ds, true);
+                AnagraficaDS.MATERIEPRIMERow materiaPrima = _ds.MATERIEPRIME.Where(x => x.IDMATERIAPRIMA == idMateriaPrima).FirstOrDefault();
+                if (materiaPrima != null)
+                {
+                    materiaPrima.CANCELLATO = SiNo.Si;
+                    materiaPrima.DATAMODIFICA = DateTime.Now;
+                    materiaPrima.UTENTEMODIFICA = account;
+
+                    bAnagrafica.UpdateTable(_ds, _ds.MATERIEPRIME.TableName);
+                }
+            }
+        }
     }
 }

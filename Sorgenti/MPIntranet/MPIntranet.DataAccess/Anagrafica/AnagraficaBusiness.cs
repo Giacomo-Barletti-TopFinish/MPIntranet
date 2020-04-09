@@ -54,6 +54,19 @@ namespace MPIntranet.DataAccess.Anagrafica
             a.FillMateriali(ds, soloNonCancellati);
         }
 
+        [DataContext]
+        public void FillTipiProdotto(AnagraficaDS ds, bool soloNonCancellati)
+        {
+            AnagraficaAdapter a = new AnagraficaAdapter(DbConnection, DbTransaction);
+            a.FillTipiProdotto(ds, soloNonCancellati);
+        }
+        [DataContext]
+        public void FillMateriePrime(AnagraficaDS ds, bool soloNonCancellati)
+        {
+            AnagraficaAdapter a = new AnagraficaAdapter(DbConnection, DbTransaction);
+            a.FillMateriePrime(ds, soloNonCancellati);
+        }
+
         [DataContext(true)]
         public void UpdateTable(AnagraficaDS ds, string tabella)
         {

@@ -13,11 +13,10 @@ using System.Windows.Forms;
 
 namespace MPPreventivatore
 {
-    public partial class RepartiFasiFrm : Form
+    public partial class RepartiFasiFrm : ChildBaseForm
     {
 
-        private bool _disabilitaEdit = false;
-        private string _utenteConnesso { get { return (MdiParent as MainForm).Contesto.Utente.DisplayName; } }
+      //  private string _utenteConnesso { get { return (MdiParent as MainForm).Contesto.Utente.DisplayName; } }
         public RepartiFasiFrm()
         {
             InitializeComponent();
@@ -74,6 +73,10 @@ namespace MPPreventivatore
                 CaricaGrigliaReparti();
                 e.Cancel = true;
             }
+            catch(Exception ex)
+            {
+                MostraEccezione("Errore cancellando un reparto", ex);
+            }
             finally
             {
                 _disabilitaEdit = false;
@@ -89,6 +92,10 @@ namespace MPPreventivatore
                 lblMessaggio.Text = a.CreaReparto("** NUOVO", string.Empty, string.Empty, _utenteConnesso);
                 CaricaGrigliaReparti();
             }
+            catch (Exception ex)
+            {
+                MostraEccezione("Errore aggiungendo un reparto", ex);
+            }
             finally
             {
                 _disabilitaEdit = false;
@@ -97,52 +104,66 @@ namespace MPPreventivatore
 
         private void dgvReparti_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (_disabilitaEdit) return;
+            try
+            {
+                if (_disabilitaEdit) return;
 
-            decimal idReparto = (decimal)dgvReparti.Rows[e.RowIndex].Cells[0].Value;
-            string codice = (string)dgvReparti.Rows[e.RowIndex].Cells[1].Value;
-            string descrizioneBreve = (string)dgvReparti.Rows[e.RowIndex].Cells[2].Value;
-            string descrizione = (string)dgvReparti.Rows[e.RowIndex].Cells[3].Value;
+                decimal idReparto = (decimal)dgvReparti.Rows[e.RowIndex].Cells[0].Value;
+                string codice = (string)dgvReparti.Rows[e.RowIndex].Cells[1].Value;
+                string descrizioneBreve = (string)dgvReparti.Rows[e.RowIndex].Cells[2].Value;
+                string descrizione = (string)dgvReparti.Rows[e.RowIndex].Cells[3].Value;
 
-            if (string.IsNullOrEmpty(descrizione)) descrizione = string.Empty;
-            if (string.IsNullOrEmpty(descrizioneBreve)) descrizioneBreve = string.Empty;
+                if (string.IsNullOrEmpty(descrizione)) descrizione = string.Empty;
+                if (string.IsNullOrEmpty(descrizioneBreve)) descrizioneBreve = string.Empty;
 
-            Anagrafica a = new Anagrafica();
-            lblMessaggio.Text = a.ModificaReparto(idReparto, codice, descrizioneBreve, descrizione, _utenteConnesso);
-            CaricaGrigliaReparti();
+                Anagrafica a = new Anagrafica();
+                lblMessaggio.Text = a.ModificaReparto(idReparto, codice, descrizioneBreve, descrizione, _utenteConnesso);
+                CaricaGrigliaReparti();
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("Errore modificando un reparto", ex);
+            }
 
         }
 
         private void dgvFasi_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            lblMessaggio.Text = string.Empty;
-            if (_disabilitaEdit) return;
-
-            decimal idFase = (decimal)dgvFasi.Rows[e.RowIndex].Cells[0].Value;
-            string codice = (string)dgvFasi.Rows[e.RowIndex].Cells[1].Value;
-            string descrizione = (string)dgvFasi.Rows[e.RowIndex].Cells[2].Value;
-            decimal idReparto = ((RepartoModel)dgvFasi.Rows[e.RowIndex].Cells[3].Value).IdReparto;
-            decimal margine = (decimal)dgvFasi.Rows[e.RowIndex].Cells[4].Value;
-            decimal costo = (decimal)dgvFasi.Rows[e.RowIndex].Cells[5].Value;
-            bool includiPreventivo = (bool)dgvFasi.Rows[e.RowIndex].Cells[6].Value;
-            decimal idEsterna = (decimal)dgvFasi.Rows[e.RowIndex].Cells[7].Value;
-            string tabellaEsterna = (string)dgvFasi.Rows[e.RowIndex].Cells[8].Value;
-
-            if (string.IsNullOrEmpty(descrizione))
+            try
             {
-                lblMessaggio.Text = "La descrizone non può essere vuota";
-                return;
-            }
+                lblMessaggio.Text = string.Empty;
+                if (_disabilitaEdit) return;
 
-            if (string.IsNullOrEmpty(codice))
+                decimal idFase = (decimal)dgvFasi.Rows[e.RowIndex].Cells[0].Value;
+                string codice = (string)dgvFasi.Rows[e.RowIndex].Cells[1].Value;
+                string descrizione = (string)dgvFasi.Rows[e.RowIndex].Cells[2].Value;
+                decimal idReparto = ((RepartoModel)dgvFasi.Rows[e.RowIndex].Cells[3].Value).IdReparto;
+                decimal margine = (decimal)dgvFasi.Rows[e.RowIndex].Cells[4].Value;
+                decimal costo = (decimal)dgvFasi.Rows[e.RowIndex].Cells[5].Value;
+                bool includiPreventivo = (bool)dgvFasi.Rows[e.RowIndex].Cells[6].Value;
+                decimal idEsterna = (decimal)dgvFasi.Rows[e.RowIndex].Cells[7].Value;
+                string tabellaEsterna = (string)dgvFasi.Rows[e.RowIndex].Cells[8].Value;
+
+                if (string.IsNullOrEmpty(descrizione))
+                {
+                    lblMessaggio.Text = "La descrizone non può essere vuota";
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(codice))
+                {
+                    lblMessaggio.Text = "Il codice non può essere vuoto";
+                    return;
+                }
+
+                Anagrafica a = new Anagrafica();
+                lblMessaggio.Text = a.ModificaFase(idFase, codice, descrizione, idReparto, margine, costo, includiPreventivo, idEsterna, tabellaEsterna, _utenteConnesso);
+                CaricaGrigliaFasi(idReparto);
+            }
+            catch (Exception ex)
             {
-                lblMessaggio.Text = "Il codice non può essere vuoto";
-                return;
+                MostraEccezione("Errore modificando una fase", ex);
             }
-
-            Anagrafica a = new Anagrafica();
-            lblMessaggio.Text = a.ModificaFase(idFase, codice, descrizione, idReparto, margine, costo, includiPreventivo, idEsterna, tabellaEsterna, _utenteConnesso);
-            CaricaGrigliaFasi(idReparto);
 
         }
 
@@ -179,6 +200,10 @@ namespace MPPreventivatore
                 lblMessaggio.Text = a.CreaFase("** NUOVA", "FASE", idReparto, 0, 0, true, -1, string.Empty, _utenteConnesso);
                 CaricaGrigliaFasi(idReparto);
             }
+            catch (Exception ex)
+            {
+                MostraEccezione("Errore aggiungendo una fase", ex);
+            }
             finally
             {
                 _disabilitaEdit = false;
@@ -197,6 +222,10 @@ namespace MPPreventivatore
                 a.CancellaFase(idFase, _utenteConnesso);
                 CaricaGrigliaFasi(idReparto);
                 e.Cancel = true;
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("Errore cancellando una fase", ex);
             }
             finally
             {
@@ -226,20 +255,6 @@ namespace MPPreventivatore
                 {
                     tb.KeyPress += new KeyPressEventHandler(Column1_KeyPress);
                 }
-            }
-        }
-        private void Column1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar)
-                && !char.IsDigit(e.KeyChar)
-                && e.KeyChar != ',')
-            {
-                e.Handled = true;
-            }
-
-            if (e.KeyChar == ',' && (sender as TextBox).Text.IndexOf(',') > -1)
-            {
-                e.Handled = true;
             }
         }
     }
