@@ -56,9 +56,9 @@ namespace MPPreventivatore
         private void ddlBrand_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ddlBrand.SelectedIndex == -1) return;
-            BrandModel brand = (BrandModel)ddlBrand.SelectedItem;
-            if (brand != null)
-                CaricaListaColori(brand.IdBrand);
+            MPIntranetListItem brand = (MPIntranetListItem)ddlBrand.SelectedItem;
+            decimal idBrand = decimal.Parse(brand.Value);
+            CaricaListaColori(idBrand);
         }
 
         private void btnCerca_Click(object sender, EventArgs e)
