@@ -15,5 +15,8 @@ namespace MPIntranet.Entities
         public const decimal ManutentoreVuoto = -1;
         public const decimal TelaioVuoto = 1;
         public const decimal NessunMateriale = -1;
+        public const decimal BrandVuoto = -1;
+        public const decimal ColoreVuoto = -1;
+        public const decimal TipoProdottoVuoto = -1;
     }
 }

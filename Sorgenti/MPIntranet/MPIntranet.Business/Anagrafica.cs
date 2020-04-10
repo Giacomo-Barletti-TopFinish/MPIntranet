@@ -252,6 +252,8 @@ namespace MPIntranet.Business
 
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
             {
+                _ds.COLORI.Clear();
+                _ds.BRAND.Clear();
                 bAnagrafica.FillColori(_ds, true);
                 bAnagrafica.FillBrand(_ds, true);
 
@@ -922,6 +924,22 @@ namespace MPIntranet.Business
             return lista;
         }
 
+        public TipoProdottoModel EstraiTipoProdottoModel(decimal idTipoProdotto)
+        {
+            AnagraficaDS.TIPIPRODOTTORow elemento = EstraiTipoProdotto(idTipoProdotto);
+            if (elemento == null) return null;
+            return creaTipoProdottoModel(elemento);
+        }
+
+        public AnagraficaDS.TIPIPRODOTTORow EstraiTipoProdotto(decimal idTipoProdotto)
+        {
+            if (_ds.TIPIPRODOTTO.Count == 0)
+            {
+                using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+                    bAnagrafica.FillTipiProdotto(_ds, true);
+            }
+            return _ds.TIPIPRODOTTO.Where(x => x.IDTIPOPRODOTTO == idTipoProdotto).FirstOrDefault();
+        }
 
         private TipoProdottoModel creaTipoProdottoModel(AnagraficaDS.TIPIPRODOTTORow tipoProdotto)
         {
@@ -1009,7 +1027,7 @@ namespace MPIntranet.Business
             }
         }
 
-        public string ModificaTipoDocumento(decimal idTipoDocumento,  string descrizione, string account)
+        public string ModificaTipoDocumento(decimal idTipoDocumento, string descrizione, string account)
         {
             if (string.IsNullOrEmpty(descrizione)) return "Descrizione deve essere valorizzata";
 

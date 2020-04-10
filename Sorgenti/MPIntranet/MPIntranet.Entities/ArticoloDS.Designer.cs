@@ -30,6 +30,8 @@ namespace MPIntranet.Entities {
         
         private FASIPROCESSODataTable tableFASIPROCESSO;
         
+        private PRODOTTIFINITIDataTable tablePRODOTTIFINITI;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -66,6 +68,9 @@ namespace MPIntranet.Entities {
                 }
                 if ((ds.Tables["FASIPROCESSO"] != null)) {
                     base.Tables.Add(new FASIPROCESSODataTable(ds.Tables["FASIPROCESSO"]));
+                }
+                if ((ds.Tables["PRODOTTIFINITI"] != null)) {
+                    base.Tables.Add(new PRODOTTIFINITIDataTable(ds.Tables["PRODOTTIFINITI"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -112,6 +117,16 @@ namespace MPIntranet.Entities {
         public FASIPROCESSODataTable FASIPROCESSO {
             get {
                 return this.tableFASIPROCESSO;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public PRODOTTIFINITIDataTable PRODOTTIFINITI {
+            get {
+                return this.tablePRODOTTIFINITI;
             }
         }
         
@@ -191,6 +206,9 @@ namespace MPIntranet.Entities {
                 if ((ds.Tables["FASIPROCESSO"] != null)) {
                     base.Tables.Add(new FASIPROCESSODataTable(ds.Tables["FASIPROCESSO"]));
                 }
+                if ((ds.Tables["PRODOTTIFINITI"] != null)) {
+                    base.Tables.Add(new PRODOTTIFINITIDataTable(ds.Tables["PRODOTTIFINITI"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -242,6 +260,12 @@ namespace MPIntranet.Entities {
                     this.tableFASIPROCESSO.InitVars();
                 }
             }
+            this.tablePRODOTTIFINITI = ((PRODOTTIFINITIDataTable)(base.Tables["PRODOTTIFINITI"]));
+            if ((initTable == true)) {
+                if ((this.tablePRODOTTIFINITI != null)) {
+                    this.tablePRODOTTIFINITI.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -258,6 +282,8 @@ namespace MPIntranet.Entities {
             base.Tables.Add(this.tablePROCESSI);
             this.tableFASIPROCESSO = new FASIPROCESSODataTable();
             base.Tables.Add(this.tableFASIPROCESSO);
+            this.tablePRODOTTIFINITI = new PRODOTTIFINITIDataTable();
+            base.Tables.Add(this.tablePRODOTTIFINITI);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -275,6 +301,12 @@ namespace MPIntranet.Entities {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private bool ShouldSerializeFASIPROCESSO() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        private bool ShouldSerializePRODOTTIFINITI() {
             return false;
         }
         
@@ -341,6 +373,9 @@ namespace MPIntranet.Entities {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public delegate void FASIPROCESSORowChangeEventHandler(object sender, FASIPROCESSORowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public delegate void PRODOTTIFINITIRowChangeEventHandler(object sender, PRODOTTIFINITIRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -1535,6 +1570,468 @@ namespace MPIntranet.Entities {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class PRODOTTIFINITIDataTable : global::System.Data.TypedTableBase<PRODOTTIFINITIRow> {
+            
+            private global::System.Data.DataColumn columnIDPRODOTTOFINITO;
+            
+            private global::System.Data.DataColumn columnIDBRAND;
+            
+            private global::System.Data.DataColumn columnIDCOLORE;
+            
+            private global::System.Data.DataColumn columnIDTIPOPRODOTTO;
+            
+            private global::System.Data.DataColumn columnMODELLO;
+            
+            private global::System.Data.DataColumn columnCODICE;
+            
+            private global::System.Data.DataColumn columnDESCRIZIONE;
+            
+            private global::System.Data.DataColumn columnCODICEDEFINITIVO;
+            
+            private global::System.Data.DataColumn columnCODICEPROVVISORIO;
+            
+            private global::System.Data.DataColumn columnPREVENTIVO;
+            
+            private global::System.Data.DataColumn columnPRESERIE;
+            
+            private global::System.Data.DataColumn columnPRODUZIONE;
+            
+            private global::System.Data.DataColumn columnCANCELLATO;
+            
+            private global::System.Data.DataColumn columnDATAMODIFICA;
+            
+            private global::System.Data.DataColumn columnUTENTEMODIFICA;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public PRODOTTIFINITIDataTable() {
+                this.TableName = "PRODOTTIFINITI";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal PRODOTTIFINITIDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected PRODOTTIFINITIDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDPRODOTTOFINITOColumn {
+                get {
+                    return this.columnIDPRODOTTOFINITO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDBRANDColumn {
+                get {
+                    return this.columnIDBRAND;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDCOLOREColumn {
+                get {
+                    return this.columnIDCOLORE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDTIPOPRODOTTOColumn {
+                get {
+                    return this.columnIDTIPOPRODOTTO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn MODELLOColumn {
+                get {
+                    return this.columnMODELLO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CODICEColumn {
+                get {
+                    return this.columnCODICE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DESCRIZIONEColumn {
+                get {
+                    return this.columnDESCRIZIONE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CODICEDEFINITIVOColumn {
+                get {
+                    return this.columnCODICEDEFINITIVO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CODICEPROVVISORIOColumn {
+                get {
+                    return this.columnCODICEPROVVISORIO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn PREVENTIVOColumn {
+                get {
+                    return this.columnPREVENTIVO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn PRESERIEColumn {
+                get {
+                    return this.columnPRESERIE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn PRODUZIONEColumn {
+                get {
+                    return this.columnPRODUZIONE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CANCELLATOColumn {
+                get {
+                    return this.columnCANCELLATO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DATAMODIFICAColumn {
+                get {
+                    return this.columnDATAMODIFICA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn UTENTEMODIFICAColumn {
+                get {
+                    return this.columnUTENTEMODIFICA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public PRODOTTIFINITIRow this[int index] {
+                get {
+                    return ((PRODOTTIFINITIRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event PRODOTTIFINITIRowChangeEventHandler PRODOTTIFINITIRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event PRODOTTIFINITIRowChangeEventHandler PRODOTTIFINITIRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event PRODOTTIFINITIRowChangeEventHandler PRODOTTIFINITIRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event PRODOTTIFINITIRowChangeEventHandler PRODOTTIFINITIRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void AddPRODOTTIFINITIRow(PRODOTTIFINITIRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public PRODOTTIFINITIRow AddPRODOTTIFINITIRow(decimal IDPRODOTTOFINITO, decimal IDBRAND, decimal IDCOLORE, decimal IDTIPOPRODOTTO, string MODELLO, string CODICE, string DESCRIZIONE, string CODICEDEFINITIVO, string CODICEPROVVISORIO, string PREVENTIVO, string PRESERIE, string PRODUZIONE, string CANCELLATO, System.DateTime DATAMODIFICA, string UTENTEMODIFICA) {
+                PRODOTTIFINITIRow rowPRODOTTIFINITIRow = ((PRODOTTIFINITIRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        IDPRODOTTOFINITO,
+                        IDBRAND,
+                        IDCOLORE,
+                        IDTIPOPRODOTTO,
+                        MODELLO,
+                        CODICE,
+                        DESCRIZIONE,
+                        CODICEDEFINITIVO,
+                        CODICEPROVVISORIO,
+                        PREVENTIVO,
+                        PRESERIE,
+                        PRODUZIONE,
+                        CANCELLATO,
+                        DATAMODIFICA,
+                        UTENTEMODIFICA};
+                rowPRODOTTIFINITIRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowPRODOTTIFINITIRow);
+                return rowPRODOTTIFINITIRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                PRODOTTIFINITIDataTable cln = ((PRODOTTIFINITIDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new PRODOTTIFINITIDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal void InitVars() {
+                this.columnIDPRODOTTOFINITO = base.Columns["IDPRODOTTOFINITO"];
+                this.columnIDBRAND = base.Columns["IDBRAND"];
+                this.columnIDCOLORE = base.Columns["IDCOLORE"];
+                this.columnIDTIPOPRODOTTO = base.Columns["IDTIPOPRODOTTO"];
+                this.columnMODELLO = base.Columns["MODELLO"];
+                this.columnCODICE = base.Columns["CODICE"];
+                this.columnDESCRIZIONE = base.Columns["DESCRIZIONE"];
+                this.columnCODICEDEFINITIVO = base.Columns["CODICEDEFINITIVO"];
+                this.columnCODICEPROVVISORIO = base.Columns["CODICEPROVVISORIO"];
+                this.columnPREVENTIVO = base.Columns["PREVENTIVO"];
+                this.columnPRESERIE = base.Columns["PRESERIE"];
+                this.columnPRODUZIONE = base.Columns["PRODUZIONE"];
+                this.columnCANCELLATO = base.Columns["CANCELLATO"];
+                this.columnDATAMODIFICA = base.Columns["DATAMODIFICA"];
+                this.columnUTENTEMODIFICA = base.Columns["UTENTEMODIFICA"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            private void InitClass() {
+                this.columnIDPRODOTTOFINITO = new global::System.Data.DataColumn("IDPRODOTTOFINITO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDPRODOTTOFINITO);
+                this.columnIDBRAND = new global::System.Data.DataColumn("IDBRAND", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDBRAND);
+                this.columnIDCOLORE = new global::System.Data.DataColumn("IDCOLORE", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDCOLORE);
+                this.columnIDTIPOPRODOTTO = new global::System.Data.DataColumn("IDTIPOPRODOTTO", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDTIPOPRODOTTO);
+                this.columnMODELLO = new global::System.Data.DataColumn("MODELLO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMODELLO);
+                this.columnCODICE = new global::System.Data.DataColumn("CODICE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCODICE);
+                this.columnDESCRIZIONE = new global::System.Data.DataColumn("DESCRIZIONE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDESCRIZIONE);
+                this.columnCODICEDEFINITIVO = new global::System.Data.DataColumn("CODICEDEFINITIVO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCODICEDEFINITIVO);
+                this.columnCODICEPROVVISORIO = new global::System.Data.DataColumn("CODICEPROVVISORIO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCODICEPROVVISORIO);
+                this.columnPREVENTIVO = new global::System.Data.DataColumn("PREVENTIVO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPREVENTIVO);
+                this.columnPRESERIE = new global::System.Data.DataColumn("PRESERIE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPRESERIE);
+                this.columnPRODUZIONE = new global::System.Data.DataColumn("PRODUZIONE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPRODUZIONE);
+                this.columnCANCELLATO = new global::System.Data.DataColumn("CANCELLATO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCANCELLATO);
+                this.columnDATAMODIFICA = new global::System.Data.DataColumn("DATAMODIFICA", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDATAMODIFICA);
+                this.columnUTENTEMODIFICA = new global::System.Data.DataColumn("UTENTEMODIFICA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUTENTEMODIFICA);
+                this.columnIDTIPOPRODOTTO.AllowDBNull = false;
+                this.columnMODELLO.AllowDBNull = false;
+                this.columnMODELLO.MaxLength = 30;
+                this.columnCODICE.AllowDBNull = false;
+                this.columnCODICE.MaxLength = 10;
+                this.columnDESCRIZIONE.MaxLength = 80;
+                this.columnCODICEDEFINITIVO.MaxLength = 15;
+                this.columnCODICEPROVVISORIO.MaxLength = 15;
+                this.columnPREVENTIVO.AllowDBNull = false;
+                this.columnPREVENTIVO.MaxLength = 1;
+                this.columnPRESERIE.AllowDBNull = false;
+                this.columnPRESERIE.MaxLength = 1;
+                this.columnPRODUZIONE.AllowDBNull = false;
+                this.columnPRODUZIONE.MaxLength = 1;
+                this.columnCANCELLATO.AllowDBNull = false;
+                this.columnCANCELLATO.MaxLength = 1;
+                this.columnDATAMODIFICA.AllowDBNull = false;
+                this.columnUTENTEMODIFICA.AllowDBNull = false;
+                this.columnUTENTEMODIFICA.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public PRODOTTIFINITIRow NewPRODOTTIFINITIRow() {
+                return ((PRODOTTIFINITIRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new PRODOTTIFINITIRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(PRODOTTIFINITIRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.PRODOTTIFINITIRowChanged != null)) {
+                    this.PRODOTTIFINITIRowChanged(this, new PRODOTTIFINITIRowChangeEvent(((PRODOTTIFINITIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.PRODOTTIFINITIRowChanging != null)) {
+                    this.PRODOTTIFINITIRowChanging(this, new PRODOTTIFINITIRowChangeEvent(((PRODOTTIFINITIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.PRODOTTIFINITIRowDeleted != null)) {
+                    this.PRODOTTIFINITIRowDeleted(this, new PRODOTTIFINITIRowChangeEvent(((PRODOTTIFINITIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.PRODOTTIFINITIRowDeleting != null)) {
+                    this.PRODOTTIFINITIRowDeleting(this, new PRODOTTIFINITIRowChangeEvent(((PRODOTTIFINITIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void RemovePRODOTTIFINITIRow(PRODOTTIFINITIRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                ArticoloDS ds = new ArticoloDS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "PRODOTTIFINITIDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class ARTICOLIRow : global::System.Data.DataRow {
@@ -2215,6 +2712,288 @@ namespace MPIntranet.Entities {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class PRODOTTIFINITIRow : global::System.Data.DataRow {
+            
+            private PRODOTTIFINITIDataTable tablePRODOTTIFINITI;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal PRODOTTIFINITIRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tablePRODOTTIFINITI = ((PRODOTTIFINITIDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal IDPRODOTTOFINITO {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePRODOTTIFINITI.IDPRODOTTOFINITOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDPRODOTTOFINITO\' in table \'PRODOTTIFINITI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePRODOTTIFINITI.IDPRODOTTOFINITOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal IDBRAND {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePRODOTTIFINITI.IDBRANDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDBRAND\' in table \'PRODOTTIFINITI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePRODOTTIFINITI.IDBRANDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal IDCOLORE {
+                get {
+                    try {
+                        return ((decimal)(this[this.tablePRODOTTIFINITI.IDCOLOREColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDCOLORE\' in table \'PRODOTTIFINITI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePRODOTTIFINITI.IDCOLOREColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal IDTIPOPRODOTTO {
+                get {
+                    return ((decimal)(this[this.tablePRODOTTIFINITI.IDTIPOPRODOTTOColumn]));
+                }
+                set {
+                    this[this.tablePRODOTTIFINITI.IDTIPOPRODOTTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string MODELLO {
+                get {
+                    return ((string)(this[this.tablePRODOTTIFINITI.MODELLOColumn]));
+                }
+                set {
+                    this[this.tablePRODOTTIFINITI.MODELLOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string CODICE {
+                get {
+                    return ((string)(this[this.tablePRODOTTIFINITI.CODICEColumn]));
+                }
+                set {
+                    this[this.tablePRODOTTIFINITI.CODICEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string DESCRIZIONE {
+                get {
+                    try {
+                        return ((string)(this[this.tablePRODOTTIFINITI.DESCRIZIONEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DESCRIZIONE\' in table \'PRODOTTIFINITI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePRODOTTIFINITI.DESCRIZIONEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string CODICEDEFINITIVO {
+                get {
+                    try {
+                        return ((string)(this[this.tablePRODOTTIFINITI.CODICEDEFINITIVOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CODICEDEFINITIVO\' in table \'PRODOTTIFINITI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePRODOTTIFINITI.CODICEDEFINITIVOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string CODICEPROVVISORIO {
+                get {
+                    try {
+                        return ((string)(this[this.tablePRODOTTIFINITI.CODICEPROVVISORIOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CODICEPROVVISORIO\' in table \'PRODOTTIFINITI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePRODOTTIFINITI.CODICEPROVVISORIOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string PREVENTIVO {
+                get {
+                    return ((string)(this[this.tablePRODOTTIFINITI.PREVENTIVOColumn]));
+                }
+                set {
+                    this[this.tablePRODOTTIFINITI.PREVENTIVOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string PRESERIE {
+                get {
+                    return ((string)(this[this.tablePRODOTTIFINITI.PRESERIEColumn]));
+                }
+                set {
+                    this[this.tablePRODOTTIFINITI.PRESERIEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string PRODUZIONE {
+                get {
+                    return ((string)(this[this.tablePRODOTTIFINITI.PRODUZIONEColumn]));
+                }
+                set {
+                    this[this.tablePRODOTTIFINITI.PRODUZIONEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string CANCELLATO {
+                get {
+                    return ((string)(this[this.tablePRODOTTIFINITI.CANCELLATOColumn]));
+                }
+                set {
+                    this[this.tablePRODOTTIFINITI.CANCELLATOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime DATAMODIFICA {
+                get {
+                    return ((global::System.DateTime)(this[this.tablePRODOTTIFINITI.DATAMODIFICAColumn]));
+                }
+                set {
+                    this[this.tablePRODOTTIFINITI.DATAMODIFICAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string UTENTEMODIFICA {
+                get {
+                    return ((string)(this[this.tablePRODOTTIFINITI.UTENTEMODIFICAColumn]));
+                }
+                set {
+                    this[this.tablePRODOTTIFINITI.UTENTEMODIFICAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsIDPRODOTTOFINITONull() {
+                return this.IsNull(this.tablePRODOTTIFINITI.IDPRODOTTOFINITOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetIDPRODOTTOFINITONull() {
+                this[this.tablePRODOTTIFINITI.IDPRODOTTOFINITOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsIDBRANDNull() {
+                return this.IsNull(this.tablePRODOTTIFINITI.IDBRANDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetIDBRANDNull() {
+                this[this.tablePRODOTTIFINITI.IDBRANDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsIDCOLORENull() {
+                return this.IsNull(this.tablePRODOTTIFINITI.IDCOLOREColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetIDCOLORENull() {
+                this[this.tablePRODOTTIFINITI.IDCOLOREColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsDESCRIZIONENull() {
+                return this.IsNull(this.tablePRODOTTIFINITI.DESCRIZIONEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetDESCRIZIONENull() {
+                this[this.tablePRODOTTIFINITI.DESCRIZIONEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsCODICEDEFINITIVONull() {
+                return this.IsNull(this.tablePRODOTTIFINITI.CODICEDEFINITIVOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetCODICEDEFINITIVONull() {
+                this[this.tablePRODOTTIFINITI.CODICEDEFINITIVOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsCODICEPROVVISORIONull() {
+                return this.IsNull(this.tablePRODOTTIFINITI.CODICEPROVVISORIOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetCODICEPROVVISORIONull() {
+                this[this.tablePRODOTTIFINITI.CODICEPROVVISORIOColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -2302,6 +3081,40 @@ namespace MPIntranet.Entities {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public FASIPROCESSORow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public class PRODOTTIFINITIRowChangeEvent : global::System.EventArgs {
+            
+            private PRODOTTIFINITIRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public PRODOTTIFINITIRowChangeEvent(PRODOTTIFINITIRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public PRODOTTIFINITIRow Row {
                 get {
                     return this.eventRow;
                 }

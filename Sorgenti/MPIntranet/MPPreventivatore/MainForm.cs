@@ -1,5 +1,6 @@
 ﻿
 using MPIntranet.Common;
+using MPPreventivatore.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,13 +15,17 @@ namespace MPPreventivatore
 {
     public partial class MainForm : MPIBaseForm
     {
-
+        public string RvlImageSite
+        {
+            get
+            {
+                return Settings.Default.RvlImageSite;
+            }
+        }
         public MainForm() : base()
         {
             InitializeComponent();
         }
-
-
 
         private void AbilitaMenu()
         {
@@ -111,6 +116,20 @@ namespace MPPreventivatore
             catch (Exception ex)
             {
                 MostraEccezione("Errore in tipologia documenti", ex);
+            }
+        }
+
+        private void gestisciProdottoFinitoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                GestisciProdottoFinitoFrm form = new GestisciProdottoFinitoFrm();
+                form.MdiParent = this;
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("Errore in crea prodotti finiti", ex);
             }
         }
     }

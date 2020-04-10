@@ -35,9 +35,10 @@
             this.repartiEFasiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tipologieProdottoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.materiePrimeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.distintaBaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.costiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tipologieDocumentiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.distintaBaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.creaProdottoFinitoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.costiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MPMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -103,24 +104,33 @@
             this.materiePrimeToolStripMenuItem.Text = "Materie prime...";
             this.materiePrimeToolStripMenuItem.Click += new System.EventHandler(this.materiePrimeToolStripMenuItem_Click);
             // 
-            // distintaBaseToolStripMenuItem
-            // 
-            this.distintaBaseToolStripMenuItem.Name = "distintaBaseToolStripMenuItem";
-            this.distintaBaseToolStripMenuItem.Size = new System.Drawing.Size(95, 21);
-            this.distintaBaseToolStripMenuItem.Text = "Distinta base";
-            // 
-            // costiToolStripMenuItem
-            // 
-            this.costiToolStripMenuItem.Name = "costiToolStripMenuItem";
-            this.costiToolStripMenuItem.Size = new System.Drawing.Size(49, 21);
-            this.costiToolStripMenuItem.Text = "Costi";
-            // 
             // tipologieDocumentiToolStripMenuItem
             // 
             this.tipologieDocumentiToolStripMenuItem.Name = "tipologieDocumentiToolStripMenuItem";
             this.tipologieDocumentiToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.tipologieDocumentiToolStripMenuItem.Text = "Tipologie documenti...";
             this.tipologieDocumentiToolStripMenuItem.Click += new System.EventHandler(this.tipologieDocumentiToolStripMenuItem_Click);
+            // 
+            // distintaBaseToolStripMenuItem
+            // 
+            this.distintaBaseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.creaProdottoFinitoToolStripMenuItem});
+            this.distintaBaseToolStripMenuItem.Name = "distintaBaseToolStripMenuItem";
+            this.distintaBaseToolStripMenuItem.Size = new System.Drawing.Size(75, 21);
+            this.distintaBaseToolStripMenuItem.Text = "Preventivi";
+            // 
+            // creaProdottoFinitoToolStripMenuItem
+            // 
+            this.creaProdottoFinitoToolStripMenuItem.Name = "creaProdottoFinitoToolStripMenuItem";
+            this.creaProdottoFinitoToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.creaProdottoFinitoToolStripMenuItem.Text = "Gestisci prodotto finito...";
+            this.creaProdottoFinitoToolStripMenuItem.Click += new System.EventHandler(this.gestisciProdottoFinitoToolStripMenuItem_Click);
+            // 
+            // costiToolStripMenuItem
+            // 
+            this.costiToolStripMenuItem.Name = "costiToolStripMenuItem";
+            this.costiToolStripMenuItem.Size = new System.Drawing.Size(49, 21);
+            this.costiToolStripMenuItem.Text = "Costi";
             // 
             // MainForm
             // 
@@ -150,6 +160,7 @@
         private System.Windows.Forms.ToolStripMenuItem tipologieProdottoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem materiePrimeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tipologieDocumentiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem creaProdottoFinitoToolStripMenuItem;
     }
 }
 

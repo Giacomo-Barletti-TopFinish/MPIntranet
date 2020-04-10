@@ -27,7 +27,7 @@ namespace MPIntranet.Common
                     f.Close();
             }
         }
-
+     
         protected virtual void MPIBaseForm_Load(object sender, EventArgs e)
         {
             Contesto = MPContext.CreaContesto();

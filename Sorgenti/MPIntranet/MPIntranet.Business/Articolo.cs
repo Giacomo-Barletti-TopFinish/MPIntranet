@@ -105,6 +105,115 @@ namespace MPIntranet.Business
             }
         }
 
+
+        public List<ProdottoFinitoModel> TrovaProdottiFiniti(decimal idBrand, decimal idColore, decimal idTipoProdotto, string codice, string modello, string descrizione, string codiceProvvisorio, string codiceDefinitivo, bool preventivo, bool preserie, bool produzione)
+        {
+            codice = codice.Trim().ToUpper();
+            modello = modello.Trim().ToUpper();
+            descrizione = descrizione.Trim().ToUpper();
+            codiceProvvisorio = codiceProvvisorio.Trim().ToUpper();
+            codiceDefinitivo = codiceDefinitivo.Trim().ToUpper();
+            codice = codice.Length > 10 ? codice.Substring(0, 10) : codice;
+            codiceDefinitivo = codiceDefinitivo.Length > 15 ? codiceDefinitivo.Substring(0, 15) : codiceDefinitivo;
+            codiceProvvisorio = codiceProvvisorio.Length > 15 ? codiceProvvisorio.Substring(0, 15) : codiceProvvisorio;
+            descrizione = descrizione.Length > 80 ? descrizione.Substring(0, 80) : descrizione;
+            modello = modello.Length > 30 ? modello.Substring(0, 30) : modello;
+            string preventivoStr = preventivo ? SiNo.Si : SiNo.No;
+            string preserieStr = preserie ? SiNo.Si : SiNo.No;
+            string produzioneStr = produzione ? SiNo.Si : SiNo.No;
+
+
+            List<ProdottoFinitoModel> lista = new List<ProdottoFinitoModel>();
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                bArticolo.FillProdottiFiniti(_ds, true);
+
+                List<ArticoloDS.PRODOTTIFINITIRow> elementi = _ds.PRODOTTIFINITI.ToList();
+                if (elementi.Count > 0 && idBrand != ElementiVuoti.BrandVuoto)
+                    elementi = elementi.Where(X => !X.IsIDBRANDNull() && X.IDBRAND == idBrand).ToList();
+
+                if (elementi.Count > 0 && idColore != ElementiVuoti.ColoreVuoto)
+                    elementi = elementi.Where(X => !X.IsIDCOLORENull() && X.IDCOLORE == idColore).ToList();
+
+                if (elementi.Count > 0 && idTipoProdotto != ElementiVuoti.TipoProdottoVuoto)
+                    elementi = elementi.Where(X => X.IDTIPOPRODOTTO == idTipoProdotto).ToList();
+
+                if (elementi.Count > 0 && !string.IsNullOrEmpty(codice))
+                    elementi = elementi.Where(X => X.CODICE.Contains(codice)).ToList();
+
+                if (elementi.Count > 0 && !string.IsNullOrEmpty(modello))
+                    elementi = elementi.Where(X => X.MODELLO.Contains(modello)).ToList();
+
+                if (elementi.Count > 0 && !string.IsNullOrEmpty(descrizione))
+                    elementi = elementi.Where(X => !X.IsDESCRIZIONENull() && X.DESCRIZIONE.Contains(descrizione)).ToList();
+
+                if (elementi.Count > 0 && !string.IsNullOrEmpty(codiceProvvisorio))
+                    elementi = elementi.Where(X => !X.IsCODICEPROVVISORIONull() && X.CODICEPROVVISORIO.Contains(codiceProvvisorio)).ToList();
+
+                if (elementi.Count > 0 && !string.IsNullOrEmpty(codiceDefinitivo))
+                    elementi = elementi.Where(X => !X.IsCODICEDEFINITIVONull() && X.CODICEDEFINITIVO.Contains(codiceDefinitivo)).ToList();
+
+                if (elementi.Count > 0)
+                    elementi = elementi.Where(X => X.PREVENTIVO == preventivoStr && X.PRESERIE == preserieStr && X.PRODUZIONE == produzioneStr).ToList();
+
+                foreach (ArticoloDS.PRODOTTIFINITIRow prodottoFinito in elementi)
+                    lista.Add(CreaProdottoFinitoModel(prodottoFinito));
+
+            }
+            return lista;
+        }
+
+        private ProdottoFinitoModel CreaProdottoFinitoModel(ArticoloDS.PRODOTTIFINITIRow prodottoFinito)
+        {
+            Anagrafica a = new Anagrafica();
+            ProdottoFinitoModel p = new ProdottoFinitoModel();
+            p.IdProdottoFinito = prodottoFinito.IDPRODOTTOFINITO;
+            p.Brand = a.EstraiBrandModel(prodottoFinito.IDBRAND);
+            p.Colore = a.EstraiColoreModel(prodottoFinito.IDCOLORE);
+            p.TipoProdotto = a.EstraiTipoProdottoModel(prodottoFinito.IDTIPOPRODOTTO);
+            p.Modello = prodottoFinito.MODELLO;
+            p.Codice = prodottoFinito.CODICE;
+            p.Descrizione = prodottoFinito.IsDESCRIZIONENull() ? string.Empty : prodottoFinito.DESCRIZIONE;
+            p.CodiceDefinitivo = prodottoFinito.IsCODICEDEFINITIVONull() ? string.Empty : prodottoFinito.CODICEDEFINITIVO;
+            p.CodiceProvvisorio = prodottoFinito.IsCODICEPROVVISORIONull() ? string.Empty : prodottoFinito.CODICEPROVVISORIO;
+            p.Prevenivo = prodottoFinito.PREVENTIVO == SiNo.Si;
+            p.Preserie = prodottoFinito.PRESERIE == SiNo.Si;
+            p.Produzione = prodottoFinito.PRODUZIONE == SiNo.Si;
+
+            return p;
+        }
+        public bool EsistonoProdottiFinitiDuplicati(string codice, string modello, decimal idColore, decimal idBrand, out string messaggio)
+        {
+            messaggio = string.Empty;
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                bArticolo.FillProdottiFiniti(_ds, false);
+
+                if (_ds.PRODOTTIFINITI.Any(x => x.CODICE == codice.Trim().ToUpper() && x.IDCOLORE == idColore && x.CANCELLATO == SiNo.Si))
+                {
+                    messaggio = "Un prodotto finito con questo codice e questo colore è presente ma è stato cancellato";
+                    return true;
+                }
+                if (_ds.PRODOTTIFINITI.Any(x => x.CODICE == codice.Trim().ToUpper() && x.IDCOLORE == idColore && x.CANCELLATO == SiNo.No))
+                {
+                    messaggio = "Un prodotto finito con questo codice e questo colore è già presente";
+                    return true;
+                }
+                if (_ds.PRODOTTIFINITI.Any(x => x.MODELLO == modello.Trim().ToUpper() && x.IDCOLORE == idColore && x.CANCELLATO == SiNo.Si))
+                {
+                    messaggio = "Un prodotto finito con questo modello e questo colore è presente ma è stato cancellato";
+                    return true;
+                }
+                if (_ds.PRODOTTIFINITI.Any(x => x.MODELLO == modello.Trim().ToUpper() && x.IDCOLORE == idColore && x.CANCELLATO == SiNo.No))
+                {
+                    messaggio = "Un prodotto finito con questo modello e questo colore è già presente";
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
         public List<ArticoloModel> CreaListArticoloModel(List<decimal> idArticoli)
         {
             List<ArticoloModel> articoli = new List<ArticoloModel>();
@@ -209,6 +318,44 @@ namespace MPIntranet.Business
 
         }
 
+        public string CreaProdottoFinito(decimal idBrand, decimal idColore, decimal idTipoProdotto, string codice, string modello, string descrizione, string codiceProvvisorio, string codiceDefinitivo, bool preventivo, bool preserie, bool produzione, string account)
+        {
+            codice = codice.Trim().ToUpper();
+            modello = modello.Trim().ToUpper();
+            descrizione = descrizione.Trim().ToUpper();
+            codiceProvvisorio = codiceProvvisorio.Trim().ToUpper();
+            codiceDefinitivo = codiceDefinitivo.Trim().ToUpper();
+            codice = codice.Length > 10 ? codice.Substring(0, 10) : codice;
+            codiceDefinitivo = codiceDefinitivo.Length > 15 ? codiceDefinitivo.Substring(0, 15) : codiceDefinitivo;
+            codiceProvvisorio = codiceProvvisorio.Length > 15 ? codiceProvvisorio.Substring(0, 15) : codiceProvvisorio;
+            descrizione = descrizione.Length > 80 ? descrizione.Substring(0, 80) : descrizione;
+            modello = modello.Length > 30 ? modello.Substring(0, 30) : modello;
+
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                ArticoloDS.PRODOTTIFINITIRow prodottoFinito = _ds.PRODOTTIFINITI.NewPRODOTTIFINITIRow();
+                prodottoFinito.CODICE = codice;
+                prodottoFinito.MODELLO = modello;
+                prodottoFinito.IDBRAND = idBrand;
+                prodottoFinito.IDCOLORE = idColore;
+                prodottoFinito.IDTIPOPRODOTTO = idTipoProdotto;
+                prodottoFinito.DESCRIZIONE = descrizione;
+                prodottoFinito.CODICEDEFINITIVO = codiceDefinitivo;
+                prodottoFinito.CODICEPROVVISORIO = codiceProvvisorio;
+                prodottoFinito.PREVENTIVO = preventivo ? SiNo.Si : SiNo.No;
+                prodottoFinito.PRESERIE = preserie ? SiNo.Si : SiNo.No;
+                prodottoFinito.PRODUZIONE = produzione ? SiNo.Si : SiNo.No;
+
+                prodottoFinito.CANCELLATO = SiNo.No;
+                prodottoFinito.DATAMODIFICA = DateTime.Now;
+                prodottoFinito.UTENTEMODIFICA = account;
+
+
+                _ds.PRODOTTIFINITI.AddPRODOTTIFINITIRow(prodottoFinito);
+                bArticolo.UpdateTable(_ds.PRODOTTIFINITI.TableName, _ds);
+            }
+            return "Prodotto finito creato correttamente";
+        }
 
     }
 

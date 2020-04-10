@@ -29,6 +29,19 @@ namespace MPIntranet.DataAccess.Articolo
             }
         }
 
+        public void FillProdottiFiniti(ArticoloDS ds, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM PRODOTTIFINITI WHERE 1=1 ";
+            if (soloNonCancellati)
+                select += "AND CANCELLATO = 'N' ";
+
+            select += "ORDER BY MODELLO";
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.PRODOTTIFINITI);
+            }
+        }
+
         public string GetImageNameFile(string idMagazz)
         {
             string select = @"select nomefile from gruppo.USR_PDM_FILES fi

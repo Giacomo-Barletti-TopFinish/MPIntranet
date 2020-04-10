@@ -29,6 +29,13 @@ namespace MPIntranet.DataAccess.Articolo
         }
 
         [DataContext]
+        public void FillProdottiFiniti(ArticoloDS ds, bool soloNonCancellati)
+        {
+            ArticoloAdapter a = new ArticoloAdapter(DbConnection, DbTransaction);
+            a.FillProdottiFiniti(ds, soloNonCancellati);
+        }
+
+        [DataContext]
         public void FillArticoli(ArticoloDS ds, List<decimal> idArticoli, bool soloNonCancellati)
         {
             List<decimal> articoliPresenti = ds.ARTICOLI.Select(x => x.IDARTICOLO).Distinct().ToList();

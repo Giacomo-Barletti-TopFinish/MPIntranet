@@ -46,6 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreaProdottoFinitoFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreaProdottoFinitoFrm.Designer.cs">
+      <DependentUpon>CreaProdottoFinitoFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GestisciProdottoFinitoFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GestisciProdottoFinitoFrm.Designer.cs">
+      <DependentUpon>GestisciProdottoFinitoFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +90,12 @@
     <Compile Include="TipologiaDocumentiFrm.Designer.cs">
       <DependentUpon>TipologiaDocumentiFrm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CreaProdottoFinitoFrm.resx">
+      <DependentUpon>CreaProdottoFinitoFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GestisciProdottoFinitoFrm.resx">
+      <DependentUpon>GestisciProdottoFinitoFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -123,6 +141,10 @@
     <ProjectReference Include="..\MPIntranet.Business\MPIntranet.Business.csproj">
       <Project>{11EE71D3-C51C-4B99-A5C9-431099326DA7}</Project>
       <Name>MPIntranet.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MPIntranet.DataAccess\MPIntranet.DataAccess.csproj">
+      <Project>{538b2ae1-3d24-442f-81fb-0729ee581cc1}</Project>
+      <Name>MPIntranet.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\MPIntranet.Entities\MPIntranet.Entities.csproj">
       <Project>{055D9B2D-98FD-417E-AB6A-970203561B5C}</Project>
