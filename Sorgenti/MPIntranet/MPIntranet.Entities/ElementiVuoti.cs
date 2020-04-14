@@ -18,5 +18,6 @@ namespace MPIntranet.Entities
         public const decimal BrandVuoto = -1;
         public const decimal ColoreVuoto = -1;
         public const decimal TipoProdottoVuoto = -1;
+        public const decimal ProdottoFinitoVuoto = -1;
     }
 }

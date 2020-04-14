@@ -182,6 +182,27 @@ namespace MPIntranet.Business
 
             return p;
         }
+
+
+        public ProdottoFinitoModel CreaProdottoFinitoModel(decimal idProdottoFinito)
+        {
+            ArticoloDS.PRODOTTIFINITIRow prodottoFinito = EstraiProdottoFinito(idProdottoFinito);
+            return CreaProdottoFinitoModel(prodottoFinito);
+        }
+
+        private ArticoloDS.PRODOTTIFINITIRow EstraiProdottoFinito(decimal idProdottoFinito)
+        {
+            ArticoloDS.PRODOTTIFINITIRow prodottoFinito = _ds.PRODOTTIFINITI.Where(x => x.IDPRODOTTOFINITO == idProdottoFinito).FirstOrDefault();
+            if (prodottoFinito == null)
+            {
+                using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+                {
+                    bArticolo.FillProdottiFiniti(_ds, idProdottoFinito, true);
+                }
+            }
+            return _ds.PRODOTTIFINITI.Where(x => x.IDPRODOTTOFINITO == idProdottoFinito).FirstOrDefault();
+        }
+
         public bool EsistonoProdottiFinitiDuplicati(string codice, string modello, decimal idColore, decimal idBrand, out string messaggio)
         {
             messaggio = string.Empty;
@@ -355,6 +376,40 @@ namespace MPIntranet.Business
                 bArticolo.UpdateTable(_ds.PRODOTTIFINITI.TableName, _ds);
             }
             return "Prodotto finito creato correttamente";
+        }
+
+
+        public string ModificaProdottoFinito(decimal idProdottoFinito,string descrizione, string codiceProvvisorio, string codiceDefinitivo, bool preventivo, bool preserie, bool produzione, string account)
+        {
+            descrizione = descrizione.Trim().ToUpper();
+            codiceProvvisorio = codiceProvvisorio.Trim().ToUpper();
+            codiceDefinitivo = codiceDefinitivo.Trim().ToUpper();
+            codiceDefinitivo = codiceDefinitivo.Length > 15 ? codiceDefinitivo.Substring(0, 15) : codiceDefinitivo;
+            codiceProvvisorio = codiceProvvisorio.Length > 15 ? codiceProvvisorio.Substring(0, 15) : codiceProvvisorio;
+            descrizione = descrizione.Length > 80 ? descrizione.Substring(0, 80) : descrizione;
+
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                bArticolo.FillProdottiFiniti(_ds, idProdottoFinito, true);
+                ArticoloDS.PRODOTTIFINITIRow prodottoFinito = _ds.PRODOTTIFINITI.Where(x => x.IDPRODOTTOFINITO == idProdottoFinito).FirstOrDefault();
+                if (prodottoFinito == null)
+                    return "Impossibile trovare il prodotto finito";
+
+                prodottoFinito.DESCRIZIONE = descrizione;
+                prodottoFinito.CODICEDEFINITIVO = codiceDefinitivo;
+                prodottoFinito.CODICEPROVVISORIO = codiceProvvisorio;
+                prodottoFinito.PREVENTIVO = preventivo ? SiNo.Si : SiNo.No;
+                prodottoFinito.PRESERIE = preserie ? SiNo.Si : SiNo.No;
+                prodottoFinito.PRODUZIONE = produzione ? SiNo.Si : SiNo.No;
+
+                prodottoFinito.CANCELLATO = SiNo.No;
+                prodottoFinito.DATAMODIFICA = DateTime.Now;
+                prodottoFinito.UTENTEMODIFICA = account;
+
+
+                bArticolo.UpdateTable(_ds.PRODOTTIFINITI.TableName, _ds);
+            }
+            return "Prodotto finito modificato correttamente";
         }
 
     }

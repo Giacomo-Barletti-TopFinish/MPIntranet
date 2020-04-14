@@ -91,26 +91,9 @@ namespace MPPreventivatore
                 bool produzione = chkProduzione.Checked;
 
                 Articolo a = new Articolo(string.Empty);
-                List<ProdottoFinitoModel> risultati = a.TrovaProdottiFiniti(idBrand, idColore, idTipoProdotto, codice, modello, descrizione, codiceProvvisorio, codiceDefinitivo, preventivo, preserie, produzione);
+                List<ProdottoFinitoModel> risultati = a.TrovaProdottiFiniti(idBrand, idColore, idTipoProdotto, codice, modello, descrizione, codiceProvvisorio, codiceDefinitivo, preventivo, preserie, produzione);             
 
-                BindingSource source = new BindingSource();
-                source.DataSource = risultati;
-                dgvRisultati.DataSource = source;
-                dgvRisultati.Columns[0].Visible = false;
-                dgvRisultati.Columns[2].Width = 200;
-                dgvRisultati.Columns[3].Width = 150;
-                dgvRisultati.Columns[4].Width = 150;
-                dgvRisultati.Columns[5].Width = 200;
-                dgvRisultati.Columns[5].HeaderText = "Tipo prodotto";
-                dgvRisultati.Columns[6].Width = 200;
-                dgvRisultati.Columns[7].Width = 100;
-                dgvRisultati.Columns[7].HeaderText = "Cod. definitivo";
-                dgvRisultati.Columns[8].Width = 100;
-                dgvRisultati.Columns[8].HeaderText = "Cod. provvisorio";
-                dgvRisultati.Columns[9].Width = 80;
-                dgvRisultati.Columns[10].Width = 80;
-                dgvRisultati.Columns[11].Width = 80;
-
+                caricaPannello(risultati);
             }
             catch (Exception ex)
             {
@@ -119,6 +102,41 @@ namespace MPPreventivatore
             finally
             {
                 Cursor.Current = Cursors.Default;
+            }
+
+        }
+        private void caricaPannello(List<ProdottoFinitoModel> risultati)
+        {
+            Documenti documenti = new Documenti();
+            string filename;
+            tableLayoutPanel1.RowCount = 5;
+            foreach (ProdottoFinitoModel prodottoFinito in risultati)
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    byte[] immagine = documenti.EstraiImmagineStandard(prodottoFinito.IdProdottoFinito, TabelleEsterne.ProdottiFiniti, out filename);
+                    ProdottoFinitoUC uc = new ProdottoFinitoUC();
+                    uc.ProdottoFinitoModel = prodottoFinito;
+                    uc.Immagine = immagine;
+                    uc.Click += Uc_Click;
+                    tableLayoutPanel1.Controls.Add(uc);
+
+                }
+            }
+        }
+
+        private void Uc_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ProdottoFinitoUC uc = (ProdottoFinitoUC)sender;
+                decimal idProdottoFinito = (decimal)uc.ProdottoFinitoModel.IdProdottoFinito;
+                (MdiParent as MainForm).ApriFinestraProdottoFinito(idProdottoFinito);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("Errore in vai a prodotto finito", ex);
             }
 
         }
@@ -135,6 +153,12 @@ namespace MPPreventivatore
                 MostraEccezione("Errore in crea prodottofinito", ex);
             }
 
+        }
+
+  
+        private void tableLayoutPanel1_DoubleClick(object sender, EventArgs e)
+        {
+            
         }
     }
 

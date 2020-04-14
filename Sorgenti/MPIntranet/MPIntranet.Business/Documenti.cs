@@ -8,13 +8,14 @@ using MPIntranet.Models.Documenti;
 using MPIntranet.DataAccess.Documenti;
 using MPIntranet.Models;
 using MPIntranet.Common;
+using System.IO;
 
 namespace MPIntranet.Business
 {
     public class Documenti
     {
         private DocumentiDS _ds = new DocumentiDS();
-
+        private const decimal IdImmagineStandard = 23;
         public byte[] EstraiDocumento(decimal IdDocumento, out string Filename)
         {
             Filename = string.Empty;
@@ -29,6 +30,21 @@ namespace MPIntranet.Business
             }
         }
 
+        public byte[] EstraiImmagineStandard(decimal IdEsterna, string TabellaEsterna, out string Filename)
+        {
+            Filename = string.Empty;
+
+            using (DocumentiBusiness bDocumenti = new DocumentiBusiness())
+            {
+                if (!_ds.DOCUMENTI.Any(x => x.IDESTERNA == IdEsterna && x.TABELLAESTERNA == TabellaEsterna && x.IDTIPODOCUMENTO == IdImmagineStandard))
+                    bDocumenti.FillDocumenti(IdEsterna, TabellaEsterna, _ds);
+                DocumentiDS.DOCUMENTIRow documento = _ds.DOCUMENTI.Where(x => x.IDESTERNA == IdEsterna && x.TABELLAESTERNA == TabellaEsterna && x.IDTIPODOCUMENTO == IdImmagineStandard).FirstOrDefault();
+
+                if (documento == null) return null;
+                Filename = documento.FILENAME;
+                return documento.DATI;
+            }
+        }
         private DocumentoModel CreaDocumentoModel(DocumentiDS.DOCUMENTIRow documento, AnagraficaDS ds)
         {
             Anagrafica a = new Anagrafica();
@@ -49,7 +65,7 @@ namespace MPIntranet.Business
             dc.Documenti = new List<DocumentoModel>();
             using (DocumentiBusiness bDocumenti = new DocumentiBusiness())
             {
-                bDocumenti.FillDocumenti(_ds, true);
+                bDocumenti.FillDocumentiNoData(_ds, true);
                 foreach (DocumentiDS.DOCUMENTIRow documento in _ds.DOCUMENTI.Where(x => x.IDESTERNA == IdEsterna && x.TABELLAESTERNA == TabellaEstera))
                     dc.Documenti.Add(CreaDocumentoModel(documento, ds));
             }
@@ -58,6 +74,15 @@ namespace MPIntranet.Business
 
         public string CreaDocumento(decimal IdEsterna, string TabellaEsterna, decimal IdTipoDocumento, string Filename, byte[] Dati, string account)
         {
+            string estensione = Path.GetExtension(Filename);
+            string filename = Path.GetFileNameWithoutExtension(Filename);
+            Filename = string.Format("{0}{1}", filename, estensione);
+            if (Filename.Length > 50)
+            {
+                filename = filename.Substring(0, 50 - estensione.Length);
+                Filename = string.Format("{0}{1}", filename, estensione);
+            }
+
             Filename = Filename.ToUpper().Trim();
             TabellaEsterna = TabellaEsterna.ToUpper().Trim();
 
@@ -70,7 +95,7 @@ namespace MPIntranet.Business
 
             using (DocumentiBusiness bDocumenti = new DocumentiBusiness())
             {
-                bDocumenti.FillDocumenti(_ds, false);
+                bDocumenti.FillDocumentiNoData(_ds, false);
 
                 if (_ds.DOCUMENTI.Any(x => x.FILENAME.Trim() == Filename && x.IDESTERNA == IdEsterna && x.TABELLAESTERNA == TabellaEsterna))
                     return "Documento già inserito a sistema";
@@ -96,7 +121,7 @@ namespace MPIntranet.Business
         {
             using (DocumentiBusiness bDocumenti = new DocumentiBusiness())
             {
-                bDocumenti.FillDocumenti(IdDocumento,_ds);
+                bDocumenti.FillDocumenti(IdDocumento, _ds);
                 DocumentiDS.DOCUMENTIRow documento = _ds.DOCUMENTI.Where(x => x.IDDOCUMENTO == IdDocumento).FirstOrDefault();
                 if (documento != null)
                 {

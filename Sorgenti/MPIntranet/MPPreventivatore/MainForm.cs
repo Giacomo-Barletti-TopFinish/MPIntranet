@@ -132,5 +132,35 @@ namespace MPPreventivatore
                 MostraEccezione("Errore in crea prodotti finiti", ex);
             }
         }
+
+        public void ApriFinestraProdottoFinito(decimal idProdottoFinito)
+        {
+            try
+            {
+                ProdottoFinitoFrm form = new ProdottoFinitoFrm();
+                form.IdProdottoFinito = idProdottoFinito;
+                form.MdiParent = this;
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("Errore in apri prodotti finiti", ex);
+            }
+        }
+
+        public void ApriFinestraCopiaProdotto(decimal idProdottoFinito)
+        {
+            try
+            {
+                CreaProdottoFinitoFrm form = new CreaProdottoFinitoFrm();
+                form.IdProdottoFinito = idProdottoFinito;
+                form.MdiParent = this;
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("Errore in apri prodotti finiti", ex);
+            }
+        }
     }
 }

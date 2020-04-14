@@ -50,8 +50,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnNuovoProdottoFinito = new System.Windows.Forms.Button();
-            this.dgvRisultati = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRisultati)).BeginInit();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.SuspendLayout();
             // 
             // lblMessaggio
@@ -260,19 +259,25 @@
             this.btnNuovoProdottoFinito.UseVisualStyleBackColor = true;
             this.btnNuovoProdottoFinito.Click += new System.EventHandler(this.btnNuovoProdottoFinito_Click);
             // 
-            // dgvRisultati
+            // tableLayoutPanel1
             // 
-            this.dgvRisultati.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRisultati.Location = new System.Drawing.Point(15, 172);
-            this.dgvRisultati.Name = "dgvRisultati";
-            this.dgvRisultati.Size = new System.Drawing.Size(1144, 477);
-            this.dgvRisultati.TabIndex = 68;
+            this.tableLayoutPanel1.AutoScroll = true;
+            this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(15, 159);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1144, 490);
+            this.tableLayoutPanel1.TabIndex = 69;
+            this.tableLayoutPanel1.DoubleClick += new System.EventHandler(this.tableLayoutPanel1_DoubleClick);
             // 
             // GestisciProdottoFinitoFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(1184, 661);
-            this.Controls.Add(this.dgvRisultati);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.chkProduzione);
             this.Controls.Add(this.chkPreserie);
             this.Controls.Add(this.chkPreventivo);
@@ -297,7 +302,6 @@
             this.Controls.Add(this.btnCerca);
             this.Name = "GestisciProdottoFinitoFrm";
             this.Load += new System.EventHandler(this.GestisciProdottoFinitoFrm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRisultati)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -327,6 +331,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnNuovoProdottoFinito;
-        private System.Windows.Forms.DataGridView dgvRisultati;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

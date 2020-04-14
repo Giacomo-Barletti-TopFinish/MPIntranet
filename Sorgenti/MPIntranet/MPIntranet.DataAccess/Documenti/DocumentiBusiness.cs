@@ -13,10 +13,10 @@ namespace MPIntranet.DataAccess.Documenti
         public DocumentiBusiness() : base() { }
 
         [DataContext]
-        public void FillDocumenti(DocumentiDS ds, bool soloNonCancellati)
+        public void FillDocumentiNoData(DocumentiDS ds, bool soloNonCancellati)
         {
             DocumentiAdapter a = new DocumentiAdapter(DbConnection, DbTransaction);
-            a.FillDocumenti(ds, soloNonCancellati);
+            a.FillDocumentiNoData(ds, soloNonCancellati);
         }
 
         [DataContext]
@@ -24,6 +24,13 @@ namespace MPIntranet.DataAccess.Documenti
         {
             DocumentiAdapter a = new DocumentiAdapter(DbConnection, DbTransaction);
             a.FillDocumenti(IdDocumento,ds);
+        }
+
+        [DataContext]
+        public void FillDocumenti(decimal IdEsterna,string TabellaEsterna, DocumentiDS ds)
+        {
+            DocumentiAdapter a = new DocumentiAdapter(DbConnection, DbTransaction);
+            a.FillDocumenti(IdEsterna,TabellaEsterna, ds);
         }
 
         [DataContext(true)]

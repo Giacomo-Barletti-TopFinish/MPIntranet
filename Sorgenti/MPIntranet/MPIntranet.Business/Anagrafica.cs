@@ -471,7 +471,7 @@ namespace MPIntranet.Business
             {
                 bAnagrafica.FillTipiDocumento(_ds, true);
                 AnagraficaDS.TIPIDOCUMENTORow tipoDocumento = _ds.TIPIDOCUMENTO.Where(x => x.IDTIPODOCUMENTO == idTipoDocumento).FirstOrDefault();
-                if (tipoDocumento != null)
+                if (tipoDocumento != null && tipoDocumento.DESCRIZIONE!= "IMMAGINE STANDARD")
                 {
                     tipoDocumento.CANCELLATO = SiNo.Si;
                     tipoDocumento.DATAMODIFICA = DateTime.Now;
@@ -1040,6 +1040,7 @@ namespace MPIntranet.Business
                 bAnagrafica.FillTipiDocumento(_ds, false);
                 AnagraficaDS.TIPIDOCUMENTORow tipoDocumento = _ds.TIPIDOCUMENTO.Where(x => x.IDTIPODOCUMENTO == idTipoDocumento).FirstOrDefault();
                 if (tipoDocumento == null) return "Impossibile modificare il tipo documento";
+                if(tipoDocumento.DESCRIZIONE != "IMMAGINE STANDARD") return "IMMAGINE STANDARD non può essere modificata perchè di sistema";
 
                 AnagraficaDS.TIPIDOCUMENTORow b = _ds.TIPIDOCUMENTO.Where(x => x.DESCRIZIONE == descrizione && x.IDTIPODOCUMENTO != idTipoDocumento).FirstOrDefault();
                 if (b != null)

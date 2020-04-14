@@ -95,13 +95,7 @@ namespace MPIntranetWeb.Controllers
                         {
                             fileData = binaryReader.ReadBytes(file.ContentLength);
                         }
-                        if (fname.Length > 50)
-                        {
-                            string estensione = Path.GetExtension(fname);
-                            string filename = Path.GetFileNameWithoutExtension(fname);
-                            filename = filename.Substring(0, 50 - estensione.Length);
-                            fname = string.Format("{0}{1}", filename, estensione);
-                        }
+                     
                         Documenti d = new Documenti();
                         d.CreaDocumento(IdEsterna, TabellaEsterna, IdTipoDocumento, fname, fileData, ConnectedUser);
                     }

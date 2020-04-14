@@ -60,11 +60,40 @@ namespace MPIntranet.DataAccess.Articolo
         }
 
         [DataContext]
-        public void FillArticolo(ArticoloDS ds, decimal idArticolo, bool soloNonCancellati)
+        public void FillProdottiFiniti(ArticoloDS ds, decimal idProdottoFinito, bool soloNonCancellati)
         {
-            FillArticoli(ds, new List<decimal>(new decimal[] { idArticolo }), soloNonCancellati);         
+            FillProdottiFiniti(ds, new List<decimal>(new decimal[] { idProdottoFinito }), soloNonCancellati);         
         }
 
+        [DataContext]
+        public void FillProdottiFiniti(ArticoloDS ds, List<decimal> idProdottiFinito, bool soloNonCancellati)
+        {
+            List<decimal> prodottiPresenti = ds.PRODOTTIFINITI.Select(x => x.IDPRODOTTOFINITO).Distinct().ToList();
+            List<decimal> prodottiMancanti = idProdottiFinito.Except(prodottiPresenti).ToList();
+
+            ArticoloAdapter a = new ArticoloAdapter(DbConnection, DbTransaction);
+            while (prodottiMancanti.Count > 0)
+            {
+                List<decimal> prodottiDaCaricare;
+                if (prodottiMancanti.Count > 999)
+                {
+                    prodottiDaCaricare = prodottiMancanti.GetRange(0, 999);
+                    prodottiMancanti.RemoveRange(0, 999);
+                }
+                else
+                {
+                    prodottiDaCaricare = prodottiMancanti.GetRange(0, prodottiMancanti.Count);
+                    prodottiMancanti.RemoveRange(0, prodottiMancanti.Count);
+                }
+                a.FillProdottiFiniti(ds, prodottiDaCaricare, soloNonCancellati);
+            }
+        }
+
+        [DataContext]
+        public void FillArticolo(ArticoloDS ds, decimal idArticolo, bool soloNonCancellati)
+        {
+            FillArticoli(ds, new List<decimal>(new decimal[] { idArticolo }), soloNonCancellati);
+        }
         [DataContext]
         public List<decimal> TrovaArticoli(bool soloNonCancellati, decimal idBrand, string codiceSam, string modello, string codiceCliente, string codiceProvvisorio)
         {

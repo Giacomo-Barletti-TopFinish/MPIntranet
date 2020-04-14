@@ -12,5 +12,9 @@ namespace MPIntranet.Models.Anagrafica
         public string Descrizione { get; set; }
         public DateTime DataModifica { get; set; }
         public string UtenteModifica { get; set; }
+        public override string ToString()
+        {
+            return Descrizione;
+        }
     }
 }

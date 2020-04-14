@@ -1,6 +1,8 @@
 ﻿using MPIntranet.Business;
 using MPIntranet.Common;
+using MPIntranet.Entities;
 using MPIntranet.Models.Anagrafica;
+using MPIntranet.Models.Articolo;
 using MPPreventivatore.Properties;
 using System;
 using System.Collections.Generic;
@@ -17,6 +19,7 @@ namespace MPPreventivatore
     public partial class CreaProdottoFinitoFrm : ChildBaseForm
     {
         private Anagrafica _anagrafica = new Anagrafica();
+        public decimal IdProdottoFinito = ElementiVuoti.ProdottoFinitoVuoto;
 
         public string RvlImageSite
         {
@@ -44,6 +47,30 @@ namespace MPPreventivatore
 
             List<TipoProdottoModel> tipoProdotto = _anagrafica.CreaListaTipoProdottoModel();
             ddlTipoProdotto.Items.AddRange(tipoProdotto.ToArray());
+
+
+            if (IdProdottoFinito >= 0)
+            {
+                Articolo articolo = new Articolo(string.Empty);
+                ProdottoFinitoModel prodottoFinitoModel = articolo.CreaProdottoFinitoModel(IdProdottoFinito);
+                if (prodottoFinitoModel == null)
+                    throw new ArgumentNullException("Prodotto finito non trovato: " + IdProdottoFinito.ToString());
+
+                ddlBrand.SelectedItem = brand.Where(x => x.IdBrand == prodottoFinitoModel.Brand.IdBrand).FirstOrDefault();
+                txtCodice.Text = prodottoFinitoModel.Codice;
+                txtCodiceDefinitivo.Text = prodottoFinitoModel.CodiceDefinitivo;
+                txtCodiceProvvisorio.Text = prodottoFinitoModel.CodiceProvvisorio;
+                txtDescrizione.Text = prodottoFinitoModel.Descrizione;
+                txtModello.Text = prodottoFinitoModel.Modello;
+                ddlTipoProdotto.SelectedItem = tipoProdotto.Where(x => x.IdTipoProdotto == prodottoFinitoModel.TipoProdotto.IdTipoProdotto).FirstOrDefault();
+                chkPreserie.Checked = prodottoFinitoModel.Preserie;
+                chkPreventivo.Checked = prodottoFinitoModel.Prevenivo;
+                chkProduzione.Checked = prodottoFinitoModel.Produzione;
+                CaricaListaColori(prodottoFinitoModel.Brand.IdBrand);
+                ddlColore.SelectedItem = ddlColore.Items.Cast<ColoreModel>().Where(x => x.IdColore == prodottoFinitoModel.Colore.IdColore).FirstOrDefault();
+
+            }
+
         }
 
         private void CaricaListaColori(decimal idBrand)
@@ -128,6 +155,6 @@ namespace MPPreventivatore
             }
         }
 
-      
+
     }
 }

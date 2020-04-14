@@ -25,6 +25,7 @@ namespace MPIntranet.Common
         public const string Ditte = "DITTE";
         public const string Manutentori= "MANUTENTORI";
         public const string Macchine = "MACCHINE";
+        public const string ProdottiFiniti = "PRODOTTI FINITI";
     }
 
 }

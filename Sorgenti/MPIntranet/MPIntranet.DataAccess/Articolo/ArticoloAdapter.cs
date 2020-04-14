@@ -138,6 +138,23 @@ namespace MPIntranet.DataAccess.Articolo
                 da.Fill(ds.ARTICOLI);
             }
         }
+
+        public void FillProdottiFiniti(ArticoloDS ds, List<decimal> idProdottiFiniti, bool soloNonCancellati)
+        {
+            string inCOndition = ConvertToStringForInCondition(idProdottiFiniti);
+
+            string select = @"SELECT DISTINCT * FROM PRODOTTIFINITI WHERE idprodottofinito in ( {0} )";
+            if (soloNonCancellati)
+            {
+                select += " AND CANCELLATO = 'N' ";
+            }
+            select = string.Format(select, inCOndition);
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.PRODOTTIFINITI);
+            }
+        }
         public void UpdateTable(string tablename, ArticoloDS ds)
         {
             string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);

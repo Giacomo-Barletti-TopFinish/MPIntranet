@@ -16,7 +16,7 @@ namespace MPIntranet.DataAccess.Documenti
 base(connection, transaction)
         { }
 
-        public void FillDocumenti(DocumentiDS ds, bool soloNonCancellati)
+        public void FillDocumentiNoData(DocumentiDS ds, bool soloNonCancellati)
         {
             string query = @"SELECT IDDOCUMENTO,IDTIPODOCUMENTO,FILENAME,IDESTERNA,TABELLAESTERNA, CANCELLATO, DATAMODIFICA,UTENTEMODIFICA FROM DOCUMENTI ";
             if (soloNonCancellati)
@@ -39,6 +39,20 @@ base(connection, transaction)
                 da.Fill(ds.DOCUMENTI);
             }
         }
+
+        public void FillDocumenti(decimal IdEsterna, string TabellaEsterna, DocumentiDS ds)
+        {
+            string query = @"SELECT * FROM DOCUMENTI WHERE IDESTERNA = $P<IDESTERNA> AND TABELLAESTERNA=$P<TABELLAESTERNA>";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDESTERNA", DbType.Decimal, IdEsterna);
+            ps.AddParam("TABELLAESTERNA", DbType.String, TabellaEsterna);
+            using (DbDataAdapter da = BuildDataAdapter(query, ps))
+            {
+                da.Fill(ds.DOCUMENTI);
+            }
+        }
+
         public void UpdateTable(string tablename, DocumentiDS ds)
         {
             string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);
