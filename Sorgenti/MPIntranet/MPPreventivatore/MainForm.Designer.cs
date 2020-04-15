@@ -38,7 +38,12 @@
             this.tipologieDocumentiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.distintaBaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.creaProdottoFinitoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.preventiviToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.costiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.finestreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.disponiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cascataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.orizzontaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MPMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,7 +54,8 @@
             this.fileToolStripMenuItem,
             this.anagraficaToolStripMenuItem,
             this.distintaBaseToolStripMenuItem,
-            this.costiToolStripMenuItem});
+            this.costiToolStripMenuItem,
+            this.finestreToolStripMenuItem});
             this.MPMenu.Location = new System.Drawing.Point(0, 0);
             this.MPMenu.Name = "MPMenu";
             this.MPMenu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
@@ -114,7 +120,8 @@
             // distintaBaseToolStripMenuItem
             // 
             this.distintaBaseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.creaProdottoFinitoToolStripMenuItem});
+            this.creaProdottoFinitoToolStripMenuItem,
+            this.preventiviToolStripMenuItem});
             this.distintaBaseToolStripMenuItem.Name = "distintaBaseToolStripMenuItem";
             this.distintaBaseToolStripMenuItem.Size = new System.Drawing.Size(75, 21);
             this.distintaBaseToolStripMenuItem.Text = "Preventivi";
@@ -126,11 +133,49 @@
             this.creaProdottoFinitoToolStripMenuItem.Text = "Gestisci prodotto finito...";
             this.creaProdottoFinitoToolStripMenuItem.Click += new System.EventHandler(this.gestisciProdottoFinitoToolStripMenuItem_Click);
             // 
+            // preventiviToolStripMenuItem
+            // 
+            this.preventiviToolStripMenuItem.Name = "preventiviToolStripMenuItem";
+            this.preventiviToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.preventiviToolStripMenuItem.Text = "Preventivi...";
+            this.preventiviToolStripMenuItem.Click += new System.EventHandler(this.preventiviToolStripMenuItem_Click);
+            // 
             // costiToolStripMenuItem
             // 
             this.costiToolStripMenuItem.Name = "costiToolStripMenuItem";
             this.costiToolStripMenuItem.Size = new System.Drawing.Size(49, 21);
             this.costiToolStripMenuItem.Text = "Costi";
+            // 
+            // finestreToolStripMenuItem
+            // 
+            this.finestreToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.disponiToolStripMenuItem});
+            this.finestreToolStripMenuItem.Name = "finestreToolStripMenuItem";
+            this.finestreToolStripMenuItem.Size = new System.Drawing.Size(65, 21);
+            this.finestreToolStripMenuItem.Text = "Finestre";
+            // 
+            // disponiToolStripMenuItem
+            // 
+            this.disponiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cascataToolStripMenuItem,
+            this.orizzontaleToolStripMenuItem});
+            this.disponiToolStripMenuItem.Name = "disponiToolStripMenuItem";
+            this.disponiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.disponiToolStripMenuItem.Text = "Disponi";
+            // 
+            // cascataToolStripMenuItem
+            // 
+            this.cascataToolStripMenuItem.Name = "cascataToolStripMenuItem";
+            this.cascataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cascataToolStripMenuItem.Text = "Cascata";
+            this.cascataToolStripMenuItem.Click += new System.EventHandler(this.cascataToolStripMenuItem_Click);
+            // 
+            // orizzontaleToolStripMenuItem
+            // 
+            this.orizzontaleToolStripMenuItem.Name = "orizzontaleToolStripMenuItem";
+            this.orizzontaleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.orizzontaleToolStripMenuItem.Text = "Orizzontale";
+            this.orizzontaleToolStripMenuItem.Click += new System.EventHandler(this.orizzontaleToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -161,6 +206,11 @@
         private System.Windows.Forms.ToolStripMenuItem materiePrimeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tipologieDocumentiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem creaProdottoFinitoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem preventiviToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem finestreToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem disponiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cascataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem orizzontaleToolStripMenuItem;
     }
 }
 

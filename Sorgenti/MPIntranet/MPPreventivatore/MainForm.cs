@@ -123,7 +123,7 @@ namespace MPPreventivatore
         {
             try
             {
-                GestisciProdottoFinitoFrm form = new GestisciProdottoFinitoFrm();
+                GestisciProdottoFinitoFrm form = new GestisciProdottoFinitoFrm(TipoRicerca.ProdottoFinito);
                 form.MdiParent = this;
                 form.Show();
             }
@@ -148,6 +148,20 @@ namespace MPPreventivatore
             }
         }
 
+        public void ApriFinestraPreventivo(decimal idProdottoFinito)
+        {
+            try
+            {
+                PreventivoFrm form = new PreventivoFrm();
+                form.IdProdottoFinito = idProdottoFinito;
+                form.MdiParent = this;
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("Errore in apri prodotti finiti", ex);
+            }
+        }
         public void ApriFinestraCopiaProdotto(decimal idProdottoFinito)
         {
             try
@@ -162,5 +176,30 @@ namespace MPPreventivatore
                 MostraEccezione("Errore in apri prodotti finiti", ex);
             }
         }
+
+        private void preventiviToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                GestisciProdottoFinitoFrm form = new GestisciProdottoFinitoFrm(TipoRicerca.Preventivo);
+                form.MdiParent = this;
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("Errore in crea prodotti finiti", ex);
+            }
+        }
+
+        private void cascataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.Cascade);
+        }
+
+        private void orizzontaleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.TileHorizontal);
+        }
+      
     }
 }

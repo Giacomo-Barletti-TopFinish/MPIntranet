@@ -17,5 +17,10 @@ namespace MPIntranet.Models.Anagrafica
         public bool IncludiPreventivo { get; set; }
         public decimal IdEsterna { get; set; }
         public string TabellaEsterna { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0}-{1}", Codice, Descrizione);
+        }
     }
 }

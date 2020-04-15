@@ -52,6 +52,7 @@
     <Compile Include="Anagrafica\TipoDocumento.cs" />
     <Compile Include="Anagrafica\TipoProdottoModel.cs" />
     <Compile Include="Articolo\ArticoloModel.cs" />
+    <Compile Include="Articolo\PreventivoModel.cs" />
     <Compile Include="Articolo\ProcessoModel.cs" />
     <Compile Include="Articolo\ProdottoFinitoModel.cs" />
     <Compile Include="Common\MPIntranetListItem.cs" />

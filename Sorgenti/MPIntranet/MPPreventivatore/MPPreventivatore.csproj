@@ -70,6 +70,18 @@
     <Compile Include="MateriePrimeFrm.Designer.cs">
       <DependentUpon>MateriePrimeFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NuovoPreventivoFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NuovoPreventivoFrm.Designer.cs">
+      <DependentUpon>NuovoPreventivoFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PreventivoFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreventivoFrm.Designer.cs">
+      <DependentUpon>PreventivoFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProdottoFinitoFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +125,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MateriePrimeFrm.resx">
       <DependentUpon>MateriePrimeFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NuovoPreventivoFrm.resx">
+      <DependentUpon>NuovoPreventivoFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PreventivoFrm.resx">
+      <DependentUpon>PreventivoFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProdottoFinitoFrm.resx">
       <DependentUpon>ProdottoFinitoFrm.cs</DependentUpon>

@@ -23,14 +23,21 @@ namespace MPPreventivatore
     {
         Anagrafica _anagrafica = new Anagrafica();
         Articolo _articolo = new Articolo(string.Empty);
-
-        public GestisciProdottoFinitoFrm()
+        private TipoRicerca _tipoRicerca;
+        public GestisciProdottoFinitoFrm(TipoRicerca TipoRicerca)
         {
+            _tipoRicerca = TipoRicerca;
             InitializeComponent();
         }
 
         private void GestisciProdottoFinitoFrm_Load(object sender, EventArgs e)
         {
+            if (_tipoRicerca == TipoRicerca.Preventivo)
+            {
+                btnNuovoProdottoFinito.Visible = false;
+                chkPreventivo.Checked = true;
+                chkPreventivo.Enabled = false;
+            }
             lblMessaggio.Text = string.Empty;
 
             List<BrandModel> brand = _anagrafica.CreaListaBrandModel();
@@ -91,7 +98,7 @@ namespace MPPreventivatore
                 bool produzione = chkProduzione.Checked;
 
                 Articolo a = new Articolo(string.Empty);
-                List<ProdottoFinitoModel> risultati = a.TrovaProdottiFiniti(idBrand, idColore, idTipoProdotto, codice, modello, descrizione, codiceProvvisorio, codiceDefinitivo, preventivo, preserie, produzione);             
+                List<ProdottoFinitoModel> risultati = a.TrovaProdottiFiniti(idBrand, idColore, idTipoProdotto, codice, modello, descrizione, codiceProvvisorio, codiceDefinitivo, preventivo, preserie, produzione);
 
                 caricaPannello(risultati);
             }
@@ -112,16 +119,12 @@ namespace MPPreventivatore
             tableLayoutPanel1.RowCount = 5;
             foreach (ProdottoFinitoModel prodottoFinito in risultati)
             {
-                for (int i = 0; i < 5; i++)
-                {
-                    byte[] immagine = documenti.EstraiImmagineStandard(prodottoFinito.IdProdottoFinito, TabelleEsterne.ProdottiFiniti, out filename);
-                    ProdottoFinitoUC uc = new ProdottoFinitoUC();
-                    uc.ProdottoFinitoModel = prodottoFinito;
-                    uc.Immagine = immagine;
-                    uc.Click += Uc_Click;
-                    tableLayoutPanel1.Controls.Add(uc);
-
-                }
+                byte[] immagine = documenti.EstraiImmagineStandard(prodottoFinito.IdProdottoFinito, TabelleEsterne.ProdottiFiniti, out filename);
+                ProdottoFinitoUC uc = new ProdottoFinitoUC();
+                uc.ProdottoFinitoModel = prodottoFinito;
+                uc.Immagine = immagine;
+                uc.Click += Uc_Click;
+                tableLayoutPanel1.Controls.Add(uc);
             }
         }
 
@@ -131,7 +134,15 @@ namespace MPPreventivatore
             {
                 ProdottoFinitoUC uc = (ProdottoFinitoUC)sender;
                 decimal idProdottoFinito = (decimal)uc.ProdottoFinitoModel.IdProdottoFinito;
-                (MdiParent as MainForm).ApriFinestraProdottoFinito(idProdottoFinito);
+                switch (_tipoRicerca)
+                {
+                    case TipoRicerca.ProdottoFinito:
+                        (MdiParent as MainForm).ApriFinestraProdottoFinito(idProdottoFinito);
+                        break;
+                    case TipoRicerca.Preventivo:
+                        (MdiParent as MainForm).ApriFinestraPreventivo(idProdottoFinito);
+                        break;
+                }
                 this.Close();
             }
             catch (Exception ex)
@@ -155,10 +166,10 @@ namespace MPPreventivatore
 
         }
 
-  
+
         private void tableLayoutPanel1_DoubleClick(object sender, EventArgs e)
         {
-            
+
         }
     }
 

@@ -130,5 +130,25 @@ namespace MPIntranet.DataAccess.Articolo
             a.FillFasiProcesso(ds, idArticolo, soloNonCancellati);
         }
 
+        [DataContext]
+        public void FillPreventivi(ArticoloDS ds, decimal idProdottoFinito, bool soloNonCancellati)
+        {
+            ArticoloAdapter a = new ArticoloAdapter(DbConnection, DbTransaction);
+            a.FillPreventivi(ds, idProdottoFinito, soloNonCancellati);
+        }
+        [DataContext]
+        public void FillElementiPreventivo(ArticoloDS ds, decimal idProdottoFinito, bool soloNonCancellati)
+        {
+            ArticoloAdapter a = new ArticoloAdapter(DbConnection, DbTransaction);
+            a.FillElementiPreventivo(ds, idProdottoFinito, soloNonCancellati);
+        }
+
+        [DataContext]
+        public void EstraiPreventivo(ArticoloDS ds, decimal idPreventivo)
+        {
+            ArticoloAdapter a = new ArticoloAdapter(DbConnection, DbTransaction);
+            a.EstraiPreventivo(ds, idPreventivo);
+        }
+
     }
 }

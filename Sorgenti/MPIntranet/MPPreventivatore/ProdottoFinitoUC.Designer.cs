@@ -62,6 +62,7 @@
             this.txtCodiceProvvisorio.Location = new System.Drawing.Point(254, 107);
             this.txtCodiceProvvisorio.MaxLength = 15;
             this.txtCodiceProvvisorio.Name = "txtCodiceProvvisorio";
+            this.txtCodiceProvvisorio.ReadOnly = true;
             this.txtCodiceProvvisorio.Size = new System.Drawing.Size(139, 20);
             this.txtCodiceProvvisorio.TabIndex = 25;
             // 
@@ -79,6 +80,7 @@
             this.txtCodiceDefinitivo.Location = new System.Drawing.Point(501, 107);
             this.txtCodiceDefinitivo.MaxLength = 15;
             this.txtCodiceDefinitivo.Name = "txtCodiceDefinitivo";
+            this.txtCodiceDefinitivo.ReadOnly = true;
             this.txtCodiceDefinitivo.Size = new System.Drawing.Size(139, 20);
             this.txtCodiceDefinitivo.TabIndex = 26;
             // 
@@ -96,6 +98,7 @@
             this.txtDescrizione.Location = new System.Drawing.Point(234, 81);
             this.txtDescrizione.MaxLength = 80;
             this.txtDescrizione.Name = "txtDescrizione";
+            this.txtDescrizione.ReadOnly = true;
             this.txtDescrizione.Size = new System.Drawing.Size(406, 20);
             this.txtDescrizione.TabIndex = 23;
             // 
@@ -113,6 +116,7 @@
             this.txtModello.Location = new System.Drawing.Point(438, 5);
             this.txtModello.MaxLength = 30;
             this.txtModello.Name = "txtModello";
+            this.txtModello.ReadOnly = true;
             this.txtModello.Size = new System.Drawing.Size(202, 20);
             this.txtModello.TabIndex = 22;
             // 
@@ -130,6 +134,7 @@
             this.txtCodice.Location = new System.Drawing.Point(205, 5);
             this.txtCodice.MaxLength = 10;
             this.txtCodice.Name = "txtCodice";
+            this.txtCodice.ReadOnly = true;
             this.txtCodice.Size = new System.Drawing.Size(169, 20);
             this.txtCodice.TabIndex = 15;
             this.txtCodice.Click += new System.EventHandler(this.txtCodice_Click);
@@ -166,6 +171,7 @@
             this.txtBrand.Location = new System.Drawing.Point(205, 29);
             this.txtBrand.MaxLength = 10;
             this.txtBrand.Name = "txtBrand";
+            this.txtBrand.ReadOnly = true;
             this.txtBrand.Size = new System.Drawing.Size(169, 20);
             this.txtBrand.TabIndex = 15;
             // 
@@ -174,6 +180,7 @@
             this.txtColore.Location = new System.Drawing.Point(438, 29);
             this.txtColore.MaxLength = 30;
             this.txtColore.Name = "txtColore";
+            this.txtColore.ReadOnly = true;
             this.txtColore.Size = new System.Drawing.Size(202, 20);
             this.txtColore.TabIndex = 22;
             // 
@@ -191,6 +198,7 @@
             this.txtTipoProdotto.Location = new System.Drawing.Point(234, 55);
             this.txtTipoProdotto.MaxLength = 10;
             this.txtTipoProdotto.Name = "txtTipoProdotto";
+            this.txtTipoProdotto.ReadOnly = true;
             this.txtTipoProdotto.Size = new System.Drawing.Size(406, 20);
             this.txtTipoProdotto.TabIndex = 15;
             // 

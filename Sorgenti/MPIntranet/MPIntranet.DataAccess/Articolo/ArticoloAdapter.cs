@@ -204,5 +204,49 @@ namespace MPIntranet.DataAccess.Articolo
                 da.Fill(ds.FASIPROCESSO);
             }
         }
+
+        public void FillPreventivi(ArticoloDS ds, decimal idProdottoFinito, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM PREVENTIVI WHERE IDPRODOTTOFINITO = $P<IDPRODOTTOFINITO> ";
+            if (soloNonCancellati)
+                select += "AND CANCELLATO = 'N' ";
+
+            select += "ORDER BY VERSIONE DESC";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDPRODOTTOFINITO", DbType.Decimal, idProdottoFinito);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.PREVENTIVI);
+            }
+        }
+
+        public void EstraiPreventivo(ArticoloDS ds, decimal idPreventivo)
+        {
+            string select = @"SELECT * FROM PREVENTIVI WHERE IDPREVENTIVO = $P<IDPREVENTIVO> ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDPREVENTIVO", DbType.Decimal, idPreventivo);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.PREVENTIVI);
+            }
+        }
+        public void FillElementiPreventivo(ArticoloDS ds, decimal idProdottoFinito, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM ELEMENTIPREVENTIVO FP 
+                                    INNER JOIN PREVENTIVI PR ON PR.IDPREVENTIVO = FP.IDPREVENTIVO
+                                    WHERE IDPRODOTTOFINITO = $P<IDPRODOTTOFINITO> ";
+            if (soloNonCancellati)
+                select += "AND FP.CANCELLATO = 'N' ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDPRODOTTOFINITO", DbType.Decimal, idProdottoFinito);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.ELEMENTIPREVENTIVO);
+            }
+        }
+
     }
 }

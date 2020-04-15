@@ -21,6 +21,10 @@ namespace MPIntranet.Models.Articolo
         public bool Prevenivo { get; set; }
         public bool Preserie { get; set; }
         public bool Produzione { get; set; }
+        public override string ToString()
+        {
+            return string.Format("{0}-{1}({2})",Codice,Modello,Colore.CodiceFigurativo);
+        }
 
     }
 }

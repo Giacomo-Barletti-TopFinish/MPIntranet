@@ -105,7 +105,6 @@ namespace MPIntranet.Business
             }
         }
 
-
         public List<ProdottoFinitoModel> TrovaProdottiFiniti(decimal idBrand, decimal idColore, decimal idTipoProdotto, string codice, string modello, string descrizione, string codiceProvvisorio, string codiceDefinitivo, bool preventivo, bool preserie, bool produzione)
         {
             codice = codice.Trim().ToUpper();
@@ -201,6 +200,19 @@ namespace MPIntranet.Business
                 }
             }
             return _ds.PRODOTTIFINITI.Where(x => x.IDPRODOTTOFINITO == idProdottoFinito).FirstOrDefault();
+        }
+
+        private ArticoloDS.PREVENTIVIRow EstraiPreventivo(decimal idPreventivo)
+        {
+            ArticoloDS.PREVENTIVIRow preventivo = _ds.PREVENTIVI.Where(x => x.IDPREVENTIVO == idPreventivo).FirstOrDefault();
+            if (preventivo == null)
+            {
+                using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+                {
+                    bArticolo.EstraiPreventivo(_ds, idPreventivo);
+                }
+            }
+            return _ds.PREVENTIVI.Where(x => x.IDPREVENTIVO == idPreventivo).FirstOrDefault();
         }
 
         public bool EsistonoProdottiFinitiDuplicati(string codice, string modello, decimal idColore, decimal idBrand, out string messaggio)
@@ -379,7 +391,7 @@ namespace MPIntranet.Business
         }
 
 
-        public string ModificaProdottoFinito(decimal idProdottoFinito,string descrizione, string codiceProvvisorio, string codiceDefinitivo, bool preventivo, bool preserie, bool produzione, string account)
+        public string ModificaProdottoFinito(decimal idProdottoFinito, string descrizione, string codiceProvvisorio, string codiceDefinitivo, bool preventivo, bool preserie, bool produzione, string account)
         {
             descrizione = descrizione.Trim().ToUpper();
             codiceProvvisorio = codiceProvvisorio.Trim().ToUpper();
@@ -412,6 +424,91 @@ namespace MPIntranet.Business
             return "Prodotto finito modificato correttamente";
         }
 
-    }
+        public List<PreventivoModel> CreaListaPreventivoModel(decimal idProdottoFinito)
+        {
+            _ds.PREVENTIVI.Clear();
+            _ds.ELEMENTIPREVENTIVO.Clear();
+            List<PreventivoModel> prevetivi = new List<PreventivoModel>();
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                bArticolo.FillPreventivi(_ds, idProdottoFinito, true);
+                bArticolo.FillElementiPreventivo(_ds, idProdottoFinito, true);
 
+                foreach (ArticoloDS.PREVENTIVIRow preventivo in _ds.PREVENTIVI)
+                    prevetivi.Add(creaPreventivoModel(preventivo));
+
+                return prevetivi;
+
+            }
+        }
+
+        private PreventivoModel creaPreventivoModel(ArticoloDS.PREVENTIVIRow preventivo)
+        {
+            if (preventivo == null) return null;
+            PreventivoModel prevenivoModel = new PreventivoModel();
+            prevenivoModel.Descrizione = preventivo.IsDESCRIZIONENull() ? string.Empty : preventivo.DESCRIZIONE;
+            prevenivoModel.Nota = preventivo.IsNOTANull() ? string.Empty : preventivo.NOTA;
+            prevenivoModel.Versione = preventivo.VERSIONE;
+            prevenivoModel.IdPrevenivo = preventivo.IDPREVENTIVO;
+            prevenivoModel.ProdottoFinito = CreaProdottoFinitoModel(preventivo.IDPRODOTTOFINITO);
+            return prevenivoModel;
+        }
+
+
+        public string CreaPreventivo(decimal versione, string descrizione, decimal idProdottoFinito, string nota, string account)
+        {
+            descrizione = descrizione.Trim().ToUpper();
+            descrizione = descrizione.Length > 30 ? descrizione.Substring(0, 30) : descrizione;
+
+            nota = nota.Trim().ToUpper();
+            nota = nota.Length > 100 ? nota.Substring(0, 100) : nota;
+
+            ProdottoFinitoModel prodotto = CreaProdottoFinitoModel(idProdottoFinito);
+            if (prodotto == null) return "Prodotto finito inesistente";
+
+            if (versione <= 0) return "Codice versione errato";
+
+            if (string.IsNullOrEmpty(descrizione))
+                return "La descrizione è obbligatoria";
+
+            if (CreaListaPreventivoModel(idProdottoFinito).Any(x => x.Versione == versione))
+                return "Questa versione esiste già";
+
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                ArticoloDS.PREVENTIVIRow preventivo = _ds.PREVENTIVI.NewPREVENTIVIRow();
+                preventivo.DESCRIZIONE = descrizione;
+                preventivo.NOTA = nota;
+                preventivo.VERSIONE = versione;
+                preventivo.IDPRODOTTOFINITO = idProdottoFinito;
+
+                preventivo.CANCELLATO = SiNo.No;
+                preventivo.DATAMODIFICA = DateTime.Now;
+                preventivo.UTENTEMODIFICA = account;
+
+                _ds.PREVENTIVI.AddPREVENTIVIRow(preventivo);
+                bArticolo.UpdateTable(_ds.PREVENTIVI.TableName, _ds);
+            }
+            return "Preventivo creato correttamente";
+        }
+
+        public string ModificaPreventivo(decimal idPreventivo, string nota, string account)
+        {
+            nota = nota.Trim().ToUpper();
+            nota = nota.Length > 100 ? nota.Substring(0, 100) : nota;
+
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                ArticoloDS.PREVENTIVIRow preventivo = EstraiPreventivo(idPreventivo);
+                preventivo.NOTA = nota;
+
+                preventivo.CANCELLATO = SiNo.No;
+                preventivo.DATAMODIFICA = DateTime.Now;
+                preventivo.UTENTEMODIFICA = account;
+
+                bArticolo.UpdateTable(_ds.PREVENTIVI.TableName, _ds);
+            }
+            return "Preventivo modificato correttamente";
+        }
+    }
 }

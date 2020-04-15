@@ -27,6 +27,11 @@ namespace MPPreventivatore
 
         private void ProdottoFinitoUC_Load(object sender, EventArgs e)
         {
+            caricaDati();
+        }
+
+        private void caricaDati()
+        {
             if (ProdottoFinitoModel != null)
             {
                 txtBrand.Text = ProdottoFinitoModel.Brand.ToString();
@@ -50,6 +55,10 @@ namespace MPPreventivatore
             }
         }
 
+        public void Refresh()
+        {
+            caricaDati();
+        }
         private void txtCodice_Click(object sender, EventArgs e)
         {
             this.OnClick(e);
