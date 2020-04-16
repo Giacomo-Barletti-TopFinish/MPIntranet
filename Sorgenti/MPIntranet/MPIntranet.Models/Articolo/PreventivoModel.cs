@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MPIntranet.Models.Anagrafica;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,29 @@ namespace MPIntranet.Models.Articolo
         public override string ToString()
         {
             return string.Format("{0}-{1}", Versione.ToString(), Descrizione);
+        }
+    }
+
+    public class ElementoPreventivoModel
+    {
+        public decimal IdElementoPrevenivo { get; set; }
+        public decimal IdPadre { get; set; }
+        public string Codice { get; set; }
+        public RepartoModel Reparto{ get; set; }
+        public decimal Ricarico { get; set; }
+        public decimal Costo { get; set; }
+        public bool IncludiPreventivo { get; set; }
+        public decimal IdEsterna { get; set; }
+        public string TabellaEsterna { get; set; }
+        public decimal PezziOrari { get; set; }
+        public decimal Peso { get; set; }
+        public decimal Superficie { get; set; }
+        public decimal Quantita { get; set; }
+        public string Descrizione { get; set; }
+        public string Articolo{ get; set; }
+        public override string ToString()
+        {
+            return string.Format("{0}({2})-{1}",Codice,Articolo,Reparto.Codice);
         }
     }
 }

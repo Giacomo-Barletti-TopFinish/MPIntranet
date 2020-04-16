@@ -671,7 +671,7 @@ namespace MPIntranet.Business
             {
                 bAnagrafica.FillReparti(_ds, false);
                 AnagraficaDS.REPARTIRow reparto = _ds.REPARTI.Where(x => x.IDREPARTO == idReparto).FirstOrDefault();
-                if (reparto == null) return "Impossibile odificare il reparto";
+                if (reparto == null) return "Impossibile modificare il reparto";
 
                 AnagraficaDS.REPARTIRow b = _ds.REPARTI.Where(x => x.CODICE == codice && x.IDREPARTO != idReparto).FirstOrDefault();
                 if (b != null)

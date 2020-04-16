@@ -67,10 +67,10 @@
             this.dgvFasi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvFasi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFasi.Location = new System.Drawing.Point(14, 320);
+            this.dgvFasi.Location = new System.Drawing.Point(14, 313);
             this.dgvFasi.MultiSelect = false;
             this.dgvFasi.Name = "dgvFasi";
-            this.dgvFasi.Size = new System.Drawing.Size(726, 253);
+            this.dgvFasi.Size = new System.Drawing.Size(726, 285);
             this.dgvFasi.TabIndex = 0;
             this.dgvFasi.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFasi_CellEndEdit);
             this.dgvFasi.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvFasi_EditingControlShowing);
@@ -88,7 +88,7 @@
             // 
             // btnChiudi
             // 
-            this.btnChiudi.Location = new System.Drawing.Point(340, 584);
+            this.btnChiudi.Location = new System.Drawing.Point(335, 606);
             this.btnChiudi.Name = "btnChiudi";
             this.btnChiudi.Size = new System.Drawing.Size(75, 32);
             this.btnChiudi.TabIndex = 2;
@@ -111,7 +111,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(754, 628);
+            this.ClientSize = new System.Drawing.Size(754, 641);
             this.Controls.Add(this.lblMessaggio);
             this.Controls.Add(this.btnChiudi);
             this.Controls.Add(this.label2);

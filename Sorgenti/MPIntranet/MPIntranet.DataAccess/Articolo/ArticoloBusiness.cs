@@ -150,5 +150,11 @@ namespace MPIntranet.DataAccess.Articolo
             a.EstraiPreventivo(ds, idPreventivo);
         }
 
+        [DataContext]
+        public decimal EstraiId()
+        {
+            return GetID();
+        }
+
     }
 }

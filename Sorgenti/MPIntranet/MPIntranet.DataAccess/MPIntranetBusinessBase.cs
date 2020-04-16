@@ -47,11 +47,11 @@ namespace MPIntranet.DataAccess
             SetAbort();
         }
 
-        //[DataContext]
-        //public long GetID()
-        //{
-        //    MPIntranetAdapterBase a = new MPIntranetAdapterBase(DbConnection, DbTransaction);
-        //    return a.GetID();
-        //}
+        [DataContext]
+        public long GetID()
+        {
+            MPIntranetAdapterBase a = new MPIntranetAdapterBase(DbConnection, DbTransaction);
+            return a.GetID();
+        }
     }
 }

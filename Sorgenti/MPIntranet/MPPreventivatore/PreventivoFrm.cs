@@ -20,6 +20,7 @@ namespace MPPreventivatore
         private Articolo _articolo = new Articolo(string.Empty);
         private Documenti _documenti = new Documenti();
         private Anagrafica _anagrafica = new Anagrafica();
+        private List<ElementoPreventivoModel> _elementiPreventivo = new List<ElementoPreventivoModel>();
 
         private PreventivoModel _preventivoSelezionato
         {
@@ -110,7 +111,9 @@ namespace MPPreventivatore
             if (ddlPreventivi.SelectedIndex == -1) return;
             txtNota.Text = _preventivoSelezionato.Nota;
 
-            treeView1.Nodes.Add(prodottoFinitoUC1.ProdottoFinitoModel.ToString());
+            TreeNode nodo = treeView1.Nodes.Add("-1", prodottoFinitoUC1.ProdottoFinitoModel.ToString());
+            nodo.Tag = prodottoFinitoUC1.ProdottoFinitoModel;
+            _elementiPreventivo = new List<ElementoPreventivoModel>();
         }
 
         private void btnSalva_Click(object sender, EventArgs e)
@@ -213,16 +216,44 @@ namespace MPPreventivatore
                 TreeNode nodeToDropIn = this.treeView1.GetNodeAt(this.treeView1.PointToClient(new Point(e.X, e.Y)));
                 if (nodeToDropIn == null) { return; }
 
-                object data = e.Data.GetData(typeof(DateTime));
+                //                object data = e.Data.GetData(typeof(DateTime));
+                FaseModel data = (FaseModel)e.Data.GetData(typeof(FaseModel));
                 if (data == null) { return; }
+                decimal idElementoPreventivo = _articolo.EstraId();
+                object padre = nodeToDropIn.Tag;
+                decimal idPadre = -1;
+                if (padre is ProdottoFinitoModel) idPadre = -1;
+                if (padre is ElementoPreventivoModel) idPadre = (padre as ElementoPreventivoModel).IdElementoPrevenivo;
+                ElementoPreventivoModel elemento = convertiFaseInElementoPreventivo(data, idElementoPreventivo, idPadre);
 
+                TreeNode nodoAggiunto = nodeToDropIn.Nodes.Add(idElementoPreventivo.ToString(), elemento.ToString());
 
-                nodeToDropIn.Nodes.Add(data.ToString());
+                nodoAggiunto.Tag = elemento;
+                _elementiPreventivo.Add(elemento);
                 nodeToDropIn.ExpandAll();
-
             }
         }
 
+        private ElementoPreventivoModel convertiFaseInElementoPreventivo(FaseModel fase, decimal idElementoPreventivo, decimal idPadre)
+        {
+            ElementoPreventivoModel elemento = new ElementoPreventivoModel();
+            elemento.IdElementoPrevenivo = idElementoPreventivo;
+            elemento.IdPadre = idPadre;
+            elemento.Codice = fase.Codice;
+            elemento.Reparto = fase.Reparto;
+            elemento.Ricarico = fase.Ricarico;
+            elemento.Costo = fase.Costo;
+            elemento.IncludiPreventivo = fase.IncludiPreventivo;
+            elemento.IdEsterna = -1;
+            elemento.TabellaEsterna = string.Empty;
+            elemento.PezziOrari = 0;
+            elemento.Peso = 0;
+            elemento.Superficie = 0;
+            elemento.Quantita = 0;
+            elemento.Descrizione = fase.Descrizione;
+            elemento.Articolo = string.Empty;
+            return elemento;
+        }
         private void treeView1_ItemDrag(object sender, ItemDragEventArgs e)
         {
             DoDragDrop(e.Item, DragDropEffects.Move);

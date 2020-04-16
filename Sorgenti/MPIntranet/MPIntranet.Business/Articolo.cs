@@ -105,6 +105,11 @@ namespace MPIntranet.Business
             }
         }
 
+        public decimal EstraId()
+        {
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+                return bArticolo.EstraiId();
+        }
         public List<ProdottoFinitoModel> TrovaProdottiFiniti(decimal idBrand, decimal idColore, decimal idTipoProdotto, string codice, string modello, string descrizione, string codiceProvvisorio, string codiceDefinitivo, bool preventivo, bool preserie, bool produzione)
         {
             codice = codice.Trim().ToUpper();

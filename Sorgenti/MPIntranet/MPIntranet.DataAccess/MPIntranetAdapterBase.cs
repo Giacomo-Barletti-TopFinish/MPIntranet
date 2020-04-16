@@ -188,14 +188,14 @@ namespace MPIntranet.DataAccess
             return sb.ToString();
         }
 
-        //public long GetID()
-        //{
-        //    string select = @" SELECT RW_SEQUENCE.NEXTVAL FROM DUAL";
-        //    using (IDbCommand da = BuildCommand(select))
-        //    {
-        //        long lnNextVal = Convert.ToInt64(da.ExecuteScalar());
-        //        return lnNextVal;
-        //    }
-        //}
+        public long GetID()
+        {
+            string select = @" SELECT MPI_SEQUENCE.NEXTVAL FROM DUAL";
+            using (IDbCommand da = BuildCommand(select))
+            {
+                long lnNextVal = Convert.ToInt64(da.ExecuteScalar());
+                return lnNextVal;
+            }
+        }
     }
 }

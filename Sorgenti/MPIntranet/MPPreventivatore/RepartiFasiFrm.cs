@@ -16,7 +16,7 @@ namespace MPPreventivatore
     public partial class RepartiFasiFrm : ChildBaseForm
     {
 
-      //  private string _utenteConnesso { get { return (MdiParent as MainForm).Contesto.Utente.DisplayName; } }
+        //  private string _utenteConnesso { get { return (MdiParent as MainForm).Contesto.Utente.DisplayName; } }
         public RepartiFasiFrm()
         {
             InitializeComponent();
@@ -70,10 +70,10 @@ namespace MPPreventivatore
 
                 Anagrafica a = new Anagrafica();
                 a.CancellaReparto(idReparto, _utenteConnesso);
-                CaricaGrigliaReparti();
+                BeginInvoke(new MethodInvoker(CaricaGrigliaReparti));
                 e.Cancel = true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MostraEccezione("Errore cancellando un reparto", ex);
             }
@@ -90,7 +90,7 @@ namespace MPPreventivatore
                 _disabilitaEdit = true;
                 Anagrafica a = new Anagrafica();
                 lblMessaggio.Text = a.CreaReparto("** NUOVO", string.Empty, string.Empty, _utenteConnesso);
-                CaricaGrigliaReparti();
+                BeginInvoke(new MethodInvoker(CaricaGrigliaReparti));
             }
             catch (Exception ex)
             {
@@ -118,7 +118,7 @@ namespace MPPreventivatore
 
                 Anagrafica a = new Anagrafica();
                 lblMessaggio.Text = a.ModificaReparto(idReparto, codice, descrizioneBreve, descrizione, _utenteConnesso);
-                CaricaGrigliaReparti();
+                BeginInvoke(new MethodInvoker(CaricaGrigliaReparti));
             }
             catch (Exception ex)
             {
@@ -131,8 +131,9 @@ namespace MPPreventivatore
         {
             try
             {
-                lblMessaggio.Text = string.Empty;
+             
                 if (_disabilitaEdit) return;
+                lblMessaggio.Text = string.Empty;
 
                 decimal idFase = (decimal)dgvFasi.Rows[e.RowIndex].Cells[0].Value;
                 string codice = (string)dgvFasi.Rows[e.RowIndex].Cells[1].Value;
@@ -158,7 +159,8 @@ namespace MPPreventivatore
 
                 Anagrafica a = new Anagrafica();
                 lblMessaggio.Text = a.ModificaFase(idFase, codice, descrizione, idReparto, margine, costo, includiPreventivo, idEsterna, tabellaEsterna, _utenteConnesso);
-                CaricaGrigliaFasi(idReparto);
+                // CaricaGrigliaFasi(idReparto);
+                BeginInvoke(new MethodInvoker(() => CaricaGrigliaFasi(idReparto)));
             }
             catch (Exception ex)
             {
@@ -199,6 +201,7 @@ namespace MPPreventivatore
                 Anagrafica a = new Anagrafica();
                 lblMessaggio.Text = a.CreaFase("** NUOVA", "FASE", idReparto, 0, 0, true, -1, string.Empty, _utenteConnesso);
                 CaricaGrigliaFasi(idReparto);
+                //    BeginInvoke(new MethodInvoker(() => CaricaGrigliaFasi(idReparto)));
             }
             catch (Exception ex)
             {
@@ -220,7 +223,8 @@ namespace MPPreventivatore
 
                 Anagrafica a = new Anagrafica();
                 a.CancellaFase(idFase, _utenteConnesso);
-                CaricaGrigliaFasi(idReparto);
+                BeginInvoke(new MethodInvoker(() => CaricaGrigliaFasi(idReparto)));
+                //      CaricaGrigliaFasi(idReparto);
                 e.Cancel = true;
             }
             catch (Exception ex)
@@ -235,9 +239,15 @@ namespace MPPreventivatore
 
         private void dgvReparti_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
+            if (dgvReparti.Rows[e.RowIndex].Cells[0].Value == null)
+            {
+                dgvFasi.DataSource = null;
+                return;
+            }
             decimal idReparto = (decimal)dgvReparti.Rows[e.RowIndex].Cells[0].Value;
 
             CaricaGrigliaFasi(idReparto);
+
         }
 
         private void btnChiudi_Click(object sender, EventArgs e)
