@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace MPIntranet.Business
 {
-    public class Articolo
+    public class Articolo : BusinessBase
     {
         private ArticoloDS _ds = new ArticoloDS();
         private RVLDS _dsRVL = new RVLDS();
@@ -112,16 +112,13 @@ namespace MPIntranet.Business
         }
         public List<ProdottoFinitoModel> TrovaProdottiFiniti(decimal idBrand, decimal idColore, decimal idTipoProdotto, string codice, string modello, string descrizione, string codiceProvvisorio, string codiceDefinitivo, bool preventivo, bool preserie, bool produzione)
         {
-            codice = codice.Trim().ToUpper();
-            modello = modello.Trim().ToUpper();
-            descrizione = descrizione.Trim().ToUpper();
-            codiceProvvisorio = codiceProvvisorio.Trim().ToUpper();
-            codiceDefinitivo = codiceDefinitivo.Trim().ToUpper();
-            codice = codice.Length > 10 ? codice.Substring(0, 10) : codice;
-            codiceDefinitivo = codiceDefinitivo.Length > 15 ? codiceDefinitivo.Substring(0, 15) : codiceDefinitivo;
-            codiceProvvisorio = codiceProvvisorio.Length > 15 ? codiceProvvisorio.Substring(0, 15) : codiceProvvisorio;
-            descrizione = descrizione.Length > 80 ? descrizione.Substring(0, 80) : descrizione;
-            modello = modello.Length > 30 ? modello.Substring(0, 30) : modello;
+
+            codice = correggiString(codice, 10);
+            modello = correggiString(modello, 30);
+            descrizione = correggiString(descrizione, 80);
+            codiceProvvisorio = correggiString(codiceProvvisorio, 15);
+            codiceDefinitivo = correggiString(codiceDefinitivo, 15);
+
             string preventivoStr = preventivo ? SiNo.Si : SiNo.No;
             string preserieStr = preserie ? SiNo.Si : SiNo.No;
             string produzioneStr = produzione ? SiNo.Si : SiNo.No;
@@ -353,21 +350,16 @@ namespace MPIntranet.Business
 
                 bArticolo.UpdateTable(_ds.ARTICOLI.TableName, _ds);
             }
-
         }
 
         public string CreaProdottoFinito(decimal idBrand, decimal idColore, decimal idTipoProdotto, string codice, string modello, string descrizione, string codiceProvvisorio, string codiceDefinitivo, bool preventivo, bool preserie, bool produzione, string account)
         {
-            codice = codice.Trim().ToUpper();
-            modello = modello.Trim().ToUpper();
-            descrizione = descrizione.Trim().ToUpper();
-            codiceProvvisorio = codiceProvvisorio.Trim().ToUpper();
-            codiceDefinitivo = codiceDefinitivo.Trim().ToUpper();
-            codice = codice.Length > 10 ? codice.Substring(0, 10) : codice;
-            codiceDefinitivo = codiceDefinitivo.Length > 15 ? codiceDefinitivo.Substring(0, 15) : codiceDefinitivo;
-            codiceProvvisorio = codiceProvvisorio.Length > 15 ? codiceProvvisorio.Substring(0, 15) : codiceProvvisorio;
-            descrizione = descrizione.Length > 80 ? descrizione.Substring(0, 80) : descrizione;
-            modello = modello.Length > 30 ? modello.Substring(0, 30) : modello;
+
+            codice = correggiString(codice, 10);
+            modello = correggiString(modello, 30);
+            descrizione = correggiString(descrizione, 80);
+            codiceProvvisorio = correggiString(codiceProvvisorio, 15);
+            codiceDefinitivo = correggiString(codiceDefinitivo, 15);
 
             using (ArticoloBusiness bArticolo = new ArticoloBusiness())
             {
@@ -398,12 +390,9 @@ namespace MPIntranet.Business
 
         public string ModificaProdottoFinito(decimal idProdottoFinito, string descrizione, string codiceProvvisorio, string codiceDefinitivo, bool preventivo, bool preserie, bool produzione, string account)
         {
-            descrizione = descrizione.Trim().ToUpper();
-            codiceProvvisorio = codiceProvvisorio.Trim().ToUpper();
-            codiceDefinitivo = codiceDefinitivo.Trim().ToUpper();
-            codiceDefinitivo = codiceDefinitivo.Length > 15 ? codiceDefinitivo.Substring(0, 15) : codiceDefinitivo;
-            codiceProvvisorio = codiceProvvisorio.Length > 15 ? codiceProvvisorio.Substring(0, 15) : codiceProvvisorio;
-            descrizione = descrizione.Length > 80 ? descrizione.Substring(0, 80) : descrizione;
+            descrizione = correggiString(descrizione, 80);
+            codiceProvvisorio = correggiString(codiceProvvisorio, 15);
+            codiceDefinitivo = correggiString(codiceDefinitivo, 15);
 
             using (ArticoloBusiness bArticolo = new ArticoloBusiness())
             {
@@ -462,11 +451,8 @@ namespace MPIntranet.Business
 
         public string CreaPreventivo(decimal versione, string descrizione, decimal idProdottoFinito, string nota, string account)
         {
-            descrizione = descrizione.Trim().ToUpper();
-            descrizione = descrizione.Length > 30 ? descrizione.Substring(0, 30) : descrizione;
-
-            nota = nota.Trim().ToUpper();
-            nota = nota.Length > 100 ? nota.Substring(0, 100) : nota;
+            descrizione = correggiString(descrizione, 30);
+            nota = correggiString(nota, 100);
 
             ProdottoFinitoModel prodotto = CreaProdottoFinitoModel(idProdottoFinito);
             if (prodotto == null) return "Prodotto finito inesistente";
@@ -499,8 +485,8 @@ namespace MPIntranet.Business
 
         public string ModificaPreventivo(decimal idPreventivo, string nota, string account)
         {
-            nota = nota.Trim().ToUpper();
-            nota = nota.Length > 100 ? nota.Substring(0, 100) : nota;
+            nota = correggiString(nota, 100);
+
 
             using (ArticoloBusiness bArticolo = new ArticoloBusiness())
             {
@@ -557,6 +543,8 @@ namespace MPIntranet.Business
 
             return elementoModel;
         }
+
+
         public void SalvaElementiPreventivo(List<ElementoPreventivoModel> elementiPreventivoModel, decimal idPreventivo, string account)
         {
 
@@ -577,10 +565,11 @@ namespace MPIntranet.Business
                 }
                 else
                 {
-                    elementoDatabase.ARTICOLO = elementoPreventivoModel.Articolo;
-                    elementoDatabase.CODICE = elementoPreventivoModel.Codice;
+                    string articolo = elementoPreventivoModel.Articolo.Trim().ToUpper();
+                    elementoDatabase.ARTICOLO = correggiString(elementoPreventivoModel.Articolo, 30);
+                    elementoDatabase.CODICE = correggiString(elementoPreventivoModel.Codice, 10);
                     elementoDatabase.COSTO = elementoPreventivoModel.Costo;
-                    elementoDatabase.DESCRIZIONE = elementoPreventivoModel.Descrizione;
+                    elementoDatabase.DESCRIZIONE = correggiString(elementoPreventivoModel.Descrizione, 40);
 
                     if (elementoPreventivoModel.IdEsterna == -1) elementoDatabase.SetIDESTERNANull();
                     else elementoDatabase.IDESTERNA = elementoPreventivoModel.IdEsterna;
@@ -598,7 +587,7 @@ namespace MPIntranet.Business
                     elementoDatabase.RICARICO = elementoPreventivoModel.Ricarico;
                     elementoDatabase.SUPERFICIE = elementoPreventivoModel.Superficie;
 
-                    elementoDatabase.TABELLAESTERNA = elementoPreventivoModel.TabellaEsterna;
+                    elementoDatabase.TABELLAESTERNA = correggiString(elementoPreventivoModel.TabellaEsterna, 25);
                     elementoDatabase.INCLUDIPREVENTIVO = elementoPreventivoModel.IncludiPreventivo ? SiNo.Si : SiNo.No;
                 }
 
@@ -614,10 +603,11 @@ namespace MPIntranet.Business
                     elementoNuovo.IDELEMENTOPREVENTIVO = elementoPreventivoModel.IdElementoPreventivo;
                     elementoNuovo.IDPREVENTIVO = idPreventivo;
 
-                    elementoNuovo.ARTICOLO = elementoPreventivoModel.Articolo;
-                    elementoNuovo.CODICE = elementoPreventivoModel.Codice;
+                    elementoNuovo.ARTICOLO = correggiString(elementoPreventivoModel.Articolo, 30);
+                    elementoNuovo.CODICE = correggiString(elementoPreventivoModel.Codice, 10);
                     elementoNuovo.COSTO = elementoPreventivoModel.Costo;
-                    elementoNuovo.DESCRIZIONE = elementoPreventivoModel.Descrizione;
+                    elementoNuovo.DESCRIZIONE = correggiString(elementoPreventivoModel.Descrizione, 40);
+
 
                     if (elementoPreventivoModel.IdEsterna == -1) elementoNuovo.SetIDESTERNANull();
                     else elementoNuovo.IDESTERNA = elementoPreventivoModel.IdEsterna;
@@ -635,7 +625,7 @@ namespace MPIntranet.Business
                     elementoNuovo.RICARICO = elementoPreventivoModel.Ricarico;
                     elementoNuovo.SUPERFICIE = elementoPreventivoModel.Superficie;
 
-                    elementoNuovo.TABELLAESTERNA = elementoPreventivoModel.TabellaEsterna;
+                    elementoNuovo.TABELLAESTERNA = correggiString(elementoPreventivoModel.TabellaEsterna, 25);
                     elementoNuovo.INCLUDIPREVENTIVO = elementoPreventivoModel.IncludiPreventivo ? SiNo.Si : SiNo.No;
 
                     elementoNuovo.CANCELLATO = SiNo.No;

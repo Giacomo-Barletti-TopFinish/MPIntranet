@@ -42,7 +42,7 @@ namespace MPIntranet.Models.Articolo
         public override string ToString()
         {
             string str = Codice;
-            if (string.IsNullOrEmpty(Articolo))
+            if (!string.IsNullOrEmpty(Articolo))
                 str = string.Format("{0}-{1}", Articolo, str);
 
             if (Reparto != null)

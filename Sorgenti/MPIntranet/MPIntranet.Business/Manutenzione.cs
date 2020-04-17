@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace MPIntranet.Business
 {
-    public class Manutenzione
+    public class Manutenzione: BusinessBase
     {
         private ManutenzioneDS _ds = new ManutenzioneDS();
 
         public string CreaDitta(string ragioneSociale, string account)
         {
-            string dittaStr = ragioneSociale.ToUpper().Trim();
+            string dittaStr = correggiString(ragioneSociale, 45);
 
             using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
             {
@@ -31,7 +31,7 @@ namespace MPIntranet.Business
                 ditta.CANCELLATO = SiNo.No;
                 ditta.DATAMODIFICA = DateTime.Now;
                 ditta.UTENTEMODIFICA = account;
-                ditta.RAGIONESOCIALE = dittaStr.Length > 45 ? dittaStr.Substring(0, 45) : dittaStr;
+                ditta.RAGIONESOCIALE = dittaStr;
                 _ds.DITTE.AddDITTERow(ditta);
 
                 bManutenzione.UpdateTable(_ds.DITTE.TableName, _ds);
@@ -41,9 +41,9 @@ namespace MPIntranet.Business
 
         public string CreaManutentore(string NomeCognome, string Account, decimal IdDitta, string Nota, string account)
         {
-            string nomeCognome = NomeCognome.ToUpper().Trim();
-            string utente = Account.ToUpper().Trim();
-            string nota = Nota.ToUpper().Trim();
+            string nomeCognome = correggiString(NomeCognome, 45);
+            string utente = correggiString(Account, 45);
+            string nota = correggiString(Nota, 100);
 
             using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
             {
@@ -57,10 +57,10 @@ namespace MPIntranet.Business
                 manutentore.CANCELLATO = SiNo.No;
                 manutentore.DATAMODIFICA = DateTime.Now;
                 manutentore.UTENTEMODIFICA = account;
-                manutentore.NOMECOGNOME = nomeCognome.Length > 45 ? nomeCognome.Substring(0, 45) : nomeCognome;
-                manutentore.ACCOUNT = utente.Length > 45 ? utente.Substring(0, 45) : utente;
+                manutentore.NOMECOGNOME = nomeCognome;
+                manutentore.ACCOUNT = utente;
                 manutentore.IDDITTA = IdDitta;
-                manutentore.NOTA = nota.Length > 100 ? nota.Substring(0, 100) : nota; ;
+                manutentore.NOTA = nota;
 
                 _ds.MANUTENTORI.AddMANUTENTORIRow(manutentore);
 
@@ -71,10 +71,10 @@ namespace MPIntranet.Business
 
         public string CreaMacchina(string NumeroSerie, string Descrizione, decimal IdDitta, string Luogo, string Nota, string DataCostruzione, decimal IdPadre, string account)
         {
-            NumeroSerie = NumeroSerie.ToUpper().Trim();
-            Descrizione = Descrizione.ToUpper().Trim();
-            Luogo = Luogo.ToUpper().Trim();
-            Nota = Nota.ToUpper().Trim();
+            NumeroSerie = correggiString(NumeroSerie, 20);
+            Descrizione = correggiString(Descrizione, 45);
+            Luogo = correggiString(Luogo, 45);
+            Nota = correggiString(Nota, 100);
 
             using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
             {
@@ -92,10 +92,10 @@ namespace MPIntranet.Business
                 macchina.IDDITTA = IdDitta;
                 if (IdPadre >= 0)
                     macchina.IDPADRE = IdPadre;
-                macchina.SERIALE = NumeroSerie.Length > 20 ? NumeroSerie.Substring(0, 20) : NumeroSerie;
-                macchina.DESCRIZIONE = Descrizione.Length > 45 ? Descrizione.Substring(0, 45) : Descrizione;
-                macchina.NOTE = Nota.Length > 100 ? Nota.Substring(0, 100) : Nota;
-                macchina.LUOGO = Luogo.Length > 45 ? Luogo.Substring(0, 45) : Luogo;
+                macchina.SERIALE = NumeroSerie;
+                macchina.DESCRIZIONE = Descrizione;
+                macchina.NOTE = Nota;
+                macchina.LUOGO = Luogo;
                 macchina.DATACOSTRUZIONE = DataCostruzione.Length > 10 ? DataCostruzione.Substring(0, 10) : DataCostruzione;
 
                 _ds.MACCHINE.AddMACCHINERow(macchina);
@@ -107,12 +107,6 @@ namespace MPIntranet.Business
 
         public string CreaIntervento(string Descrizione, string Luogo, DateTime Data, decimal Durata, decimal IdMacchina, decimal IdManutentore, string Frequenza, string Nota, decimal IdSerie, string Stato, string account)
         {
-            Descrizione = Descrizione.ToUpper().Trim();
-            Luogo = Luogo.ToUpper().Trim();
-            Nota = Nota.ToUpper().Trim();
-            Frequenza = Frequenza.ToUpper().Trim();
-            Stato = Stato.ToUpper().Trim();
-
             using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
             {
 
@@ -127,11 +121,11 @@ namespace MPIntranet.Business
                 if (IdMacchina > 0) intervento.IDMACCHINA = IdMacchina;
                 if (IdManutentore > 0) intervento.IDMANUTENTORE = IdManutentore;
                 if (IdSerie > 0) intervento.IDSERIE = IdSerie;
-                intervento.FREQUENZA = Frequenza.Length > 20 ? Frequenza.Substring(0, 20) : Frequenza;
-                intervento.NOTE = Nota.Length > 200 ? Nota.Substring(0, 200) : Nota;
-                intervento.LUOGO = Luogo.Length > 50 ? Luogo.Substring(0, 50) : Luogo;
+                intervento.FREQUENZA = correggiString(Frequenza, 20);
+                intervento.NOTE = correggiString(Nota, 200);
+                intervento.LUOGO = correggiString(Luogo, 50);
                 intervento.DATAINTERVENTO = Data;
-                intervento.STATO = Stato.Length > 25 ? Stato.Substring(0, 25) : Stato;
+                intervento.STATO = correggiString(Stato, 25);
 
                 _ds.INTERVENTI.AddINTERVENTIRow(intervento);
 
@@ -142,9 +136,7 @@ namespace MPIntranet.Business
 
         public void ModificaIntervento(decimal IdIntervento, DateTime Data, string Stato, decimal Durata, decimal IdManutentore, string Frequenza, string Nota, string account)
         {
-            Nota = Nota.ToUpper().Trim();
-            Frequenza = Frequenza.ToUpper().Trim();
-            Stato = Stato.ToUpper().Trim();
+
 
             using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
             {
@@ -159,11 +151,11 @@ namespace MPIntranet.Business
                 intervento.DURATA = Durata;
                 if (IdManutentore > 0) intervento.IDMANUTENTORE = IdManutentore;
                 if (IdManutentore == -1) intervento.SetIDMANUTENTORENull();
-                
-                intervento.FREQUENZA = Frequenza.Length > 20 ? Frequenza.Substring(0, 20) : Frequenza;
-                intervento.NOTE = Nota.Length > 200 ? Nota.Substring(0, 200) : Nota;               
+
+                intervento.FREQUENZA = correggiString(Frequenza, 20);
+                intervento.NOTE = correggiString(Nota, 200);
                 intervento.DATAINTERVENTO = Data;
-                intervento.STATO = Stato.Length > 25 ? Stato.Substring(0, 25) : Stato;
+                intervento.STATO = correggiString(Stato, 25);
 
 
                 bManutenzione.UpdateTable(_ds.INTERVENTI.TableName, _ds);
@@ -431,7 +423,7 @@ namespace MPIntranet.Business
                 ManutenzioneDS.DITTERow ditta = _ds.DITTE.Where(x => x.IDDITTA == idDitta).FirstOrDefault();
                 if (ditta != null)
                 {
-                    ditta.RAGIONESOCIALE = ragioneSociale.Length > 45 ? ragioneSociale.Substring(0, 45) : ragioneSociale;
+                    ditta.RAGIONESOCIALE = correggiString(ragioneSociale, 45);
 
                     ditta.DATAMODIFICA = DateTime.Now;
                     ditta.UTENTEMODIFICA = account;
@@ -449,8 +441,8 @@ namespace MPIntranet.Business
                 ManutenzioneDS.MACCHINERow macchina = _ds.MACCHINE.Where(x => x.IDMACCHINA == IdMacchina).FirstOrDefault();
                 if (macchina != null)
                 {
-                    macchina.LUOGO = Luogo.Length > 45 ? Luogo.Substring(0, 45) : Luogo;
-                    macchina.NOTE = Nota.Length > 100 ? Nota.Substring(0, 100) : Nota;
+                    macchina.LUOGO = correggiString(Luogo, 45);
+                    macchina.NOTE = correggiString(Nota, 100);
 
                     macchina.DATAMODIFICA = DateTime.Now;
                     macchina.UTENTEMODIFICA = account;
@@ -463,18 +455,14 @@ namespace MPIntranet.Business
 
         public void ModificaManutentore(decimal IdManutentore, string utente, string nota, string account)
         {
-            utente = (utente.Length > 45 ? utente.Substring(0, 45) : utente).ToUpper();
-            nota = (nota.Length > 100 ? nota.Substring(0, 100) : nota).ToUpper();
-
-
             using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
             {
                 bManutenzione.FillManutentori(_ds, true);
                 ManutenzioneDS.MANUTENTORIRow manutentore = _ds.MANUTENTORI.Where(x => x.IDMANUTENTORE == IdManutentore).FirstOrDefault();
                 if (manutentore != null)
                 {
-                    manutentore.ACCOUNT = utente;
-                    manutentore.NOTA = nota;
+                    manutentore.ACCOUNT = correggiString(utente, 45); ;
+                    manutentore.NOTA =correggiString( nota,100);
 
                     manutentore.DATAMODIFICA = DateTime.Now;
                     manutentore.UTENTEMODIFICA = account;
@@ -485,10 +473,10 @@ namespace MPIntranet.Business
         }
         public string CreaRiferimento(decimal IdEsterna, string TabellaEsterna, string Tipologia, string Etichetta, string Riferimento, string account)
         {
-            Riferimento = Riferimento.ToUpper().Trim();
-            Etichetta = Etichetta.ToUpper().Trim();
-            Tipologia = Tipologia.ToUpper().Trim();
-            TabellaEsterna = TabellaEsterna.ToUpper().Trim();
+            Riferimento =correggiString( Riferimento,45);
+            Etichetta =correggiString( Etichetta,45);
+            Tipologia =correggiString( Tipologia,45);
+            TabellaEsterna = correggiString(TabellaEsterna,45);
 
             if (string.IsNullOrEmpty(Riferimento))
                 return "Riferimento assente";
@@ -507,14 +495,14 @@ namespace MPIntranet.Business
                     return "Riferimento già inserito a sistema";
 
                 ManutenzioneDS.RIFERIMENTIRow riferimento = _ds.RIFERIMENTI.NewRIFERIMENTIRow();
-                riferimento.ETICHETTA = Etichetta.Length > 45 ? Etichetta.Substring(0, 45) : Etichetta;
+                riferimento.ETICHETTA = Etichetta;
                 riferimento.CANCELLATO = SiNo.No;
                 riferimento.DATAMODIFICA = DateTime.Now;
                 riferimento.UTENTEMODIFICA = account;
-                riferimento.RIFERIMENTO = Riferimento.Length > 45 ? Riferimento.Substring(0, 45) : Riferimento;
+                riferimento.RIFERIMENTO = Riferimento;
                 riferimento.IDESTERNA = IdEsterna;
-                riferimento.TABELLAESTERNA = TabellaEsterna.Length > 45 ? TabellaEsterna.Substring(0, 45) : TabellaEsterna;
-                riferimento.TIPOLOGIA = Tipologia.Length > 45 ? Tipologia.Substring(0, 45) : Tipologia;
+                riferimento.TABELLAESTERNA = TabellaEsterna;
+                riferimento.TIPOLOGIA = Tipologia;
                 _ds.RIFERIMENTI.AddRIFERIMENTIRow(riferimento);
 
                 bManutenzione.UpdateTable(_ds.RIFERIMENTI.TableName, _ds);
@@ -541,9 +529,6 @@ namespace MPIntranet.Business
         }
         public void ModificaRiferimento(decimal idRiferimenti, string Etichetta, string Riferimento, string Tipologia, string account)
         {
-            Etichetta = (Etichetta.Length > 45 ? Etichetta.Substring(0, 45) : Etichetta).ToUpper();
-            Riferimento = (Riferimento.Length > 45 ? Riferimento.Substring(0, 45) : Riferimento).ToUpper();
-            Tipologia = (Tipologia.Length > 45 ? Tipologia.Substring(0, 45) : Tipologia).ToUpper();
             ManutenzioneDS.RIFERIMENTIRow riferimento = _ds.RIFERIMENTI.Where(x => x.IDRIFERIMENTO == idRiferimenti).FirstOrDefault();
             using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
             {
@@ -551,9 +536,9 @@ namespace MPIntranet.Business
 
                 if (riferimento != null)
                 {
-                    riferimento.ETICHETTA = Etichetta;
-                    riferimento.RIFERIMENTO = Riferimento;
-                    riferimento.TIPOLOGIA = Tipologia;
+                    riferimento.ETICHETTA =correggiString( Etichetta,45);
+                    riferimento.RIFERIMENTO =correggiString( Riferimento,45);
+                    riferimento.TIPOLOGIA =correggiString( Tipologia,45);
 
                     riferimento.DATAMODIFICA = DateTime.Now;
                     riferimento.UTENTEMODIFICA = account;

@@ -12,7 +12,7 @@ using System.IO;
 
 namespace MPIntranet.Business
 {
-    public class Documenti
+    public class Documenti : BusinessBase
     {
         private DocumentiDS _ds = new DocumentiDS();
         private const decimal IdImmagineStandard = 23;
@@ -101,14 +101,14 @@ namespace MPIntranet.Business
                     return "Documento già inserito a sistema";
 
                 DocumentiDS.DOCUMENTIRow documento = _ds.DOCUMENTI.NewDOCUMENTIRow();
-                documento.FILENAME = Filename.Length > 50 ? Filename.Substring(0, 50) : Filename;
+                documento.FILENAME = Filename;
                 documento.CANCELLATO = SiNo.No;
                 documento.DATAMODIFICA = DateTime.Now;
                 documento.UTENTEMODIFICA = account;
                 documento.IDTIPODOCUMENTO = IdTipoDocumento;
                 documento.IDESTERNA = IdEsterna;
                 documento.DATI = Dati;
-                documento.TABELLAESTERNA = TabellaEsterna.Length > 45 ? TabellaEsterna.Substring(0, 45) : TabellaEsterna;
+                documento.TABELLAESTERNA = correggiString(TabellaEsterna, 45);
                 _ds.DOCUMENTI.AddDOCUMENTIRow(documento);
 
                 bDocumenti.UpdateTable(_ds.DOCUMENTI.TableName, _ds);

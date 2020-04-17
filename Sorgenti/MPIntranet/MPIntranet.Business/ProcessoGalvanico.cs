@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace MPIntranet.Business
 {
-    public class ProcessoGalvanico
+    public class ProcessoGalvanico: BusinessBase
     {
         private ArticoloDS _ds = new ArticoloDS();
         private RVLDS _dsRVL = new RVLDS();
@@ -98,9 +98,7 @@ namespace MPIntranet.Business
                 _ds.PROCESSI.AddPROCESSIRow(processo);
 
                 bArticolo.UpdateTable(_ds.PROCESSI.TableName, _ds);
-
             }
-
         }
         public string SalvaProcesso(decimal idArticolo, decimal idImpianto, decimal idProcesso, decimal idTelaio, string descrizione, string vascheJSON, string utente)
         {

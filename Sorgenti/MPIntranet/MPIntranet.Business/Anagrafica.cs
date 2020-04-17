@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MPIntranet.Business
 {
-    public class Anagrafica
+    public class Anagrafica : BusinessBase
     {
         private AnagraficaDS _ds = new AnagraficaDS();
 
@@ -180,9 +180,9 @@ namespace MPIntranet.Business
         }
         public void ModificaBrand(decimal idBrand, string brand, string codiceGestionale, string prefissoColore, string account)
         {
-            brand = (brand.Length > 20 ? brand.Substring(0, 20) : brand).ToUpper();
-            codiceGestionale = (codiceGestionale.Length > 8 ? codiceGestionale.Substring(0, 8) : codiceGestionale).ToUpper();
-            prefissoColore = (prefissoColore.Length > 2 ? prefissoColore.Substring(0, 2) : prefissoColore).ToUpper();
+            brand = correggiString(brand, 20);
+            codiceGestionale = correggiString(codiceGestionale, 8);
+            prefissoColore = correggiString(prefissoColore, 2);
 
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
             {
@@ -203,9 +203,9 @@ namespace MPIntranet.Business
 
         public string CreaBrand(string brand, string codiceGestionale, string prefissoColore, string account)
         {
-            brand = (brand.Length > 20 ? brand.Substring(0, 20) : brand).ToUpper();
-            codiceGestionale = (codiceGestionale.Length > 8 ? codiceGestionale.Substring(0, 8) : codiceGestionale).ToUpper();
-            prefissoColore = (prefissoColore.Length > 2 ? prefissoColore.Substring(0, 2) : prefissoColore).ToUpper();
+            brand = correggiString(brand, 20);
+            codiceGestionale = correggiString(codiceGestionale, 8);
+            prefissoColore = correggiString(prefissoColore, 2);
 
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
             {
@@ -322,8 +322,9 @@ namespace MPIntranet.Business
 
         public string CreaColore(string descrizione, string codiceCliente, decimal idBrand, string account)
         {
-            descrizione = (descrizione.Length > 40 ? descrizione.Substring(0, 40) : descrizione).ToUpper();
-            codiceCliente = (codiceCliente.Length > 8 ? codiceCliente.Substring(0, 8) : codiceCliente).ToUpper();
+            descrizione = correggiString(descrizione, 40);
+            codiceCliente = correggiString(codiceCliente, 8);
+
 
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
             {
@@ -339,7 +340,7 @@ namespace MPIntranet.Business
                     return "Il brand con questo codice id è stao cancellato";
 
                 string codiceFigurativo = string.Format("{0}{1}", brandRow.PREFISSOCOLORE, codiceCliente);
-                codiceFigurativo = (codiceFigurativo.Length > 10 ? codiceFigurativo.Substring(0, 10) : codiceFigurativo).ToUpper();
+                codiceFigurativo = correggiString(codiceFigurativo, 10);
 
                 AnagraficaDS.COLORIRow col = _ds.COLORI.Where(x => x.CODICEFIGURATIVO == codiceFigurativo).FirstOrDefault();
                 if (col != null)
@@ -417,7 +418,7 @@ namespace MPIntranet.Business
         }
         public string ModificaColore(decimal idColore, string descrizione, string account)
         {
-            descrizione = (descrizione.Length > 40 ? descrizione.Substring(0, 40) : descrizione).ToUpper();
+            descrizione = correggiString(descrizione, 40);
 
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
             {
@@ -484,7 +485,8 @@ namespace MPIntranet.Business
 
         public string CreaTipoDocumento(string descrizione, string account)
         {
-            descrizione = (descrizione.Length > 25 ? descrizione.Substring(0, 25) : descrizione).ToUpper();
+
+            descrizione = correggiString(descrizione, 25);
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
             {
                 bAnagrafica.FillTipiDocumento(_ds, false);
@@ -564,8 +566,8 @@ namespace MPIntranet.Business
         }
         public void ModificaMateriale(decimal idMateriale, string codice, string descrizione, bool prezioso, decimal pesoSpecifico, string account)
         {
-            descrizione = (descrizione.Length > 25 ? descrizione.Substring(0, 20) : descrizione).ToUpper();
-            codice = (codice.Length > 8 ? codice.Substring(0, 8) : codice).ToUpper();
+            descrizione = correggiString(descrizione, 25);
+            codice = correggiString(codice, 8);
 
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
             {
@@ -575,7 +577,7 @@ namespace MPIntranet.Business
                 {
                     br.CODICE = codice;
                     br.DESCRIZIONE = descrizione;
-                    br.PREZIOSO = prezioso ? "S" : "N";
+                    br.PREZIOSO = prezioso ? SiNo.Si : SiNo.No;
                     br.DATAMODIFICA = DateTime.Now;
                     br.UTENTEMODIFICA = account;
                     br.PESOSPECIFICO = pesoSpecifico;
@@ -587,8 +589,8 @@ namespace MPIntranet.Business
 
         public string CreaMateriale(string codice, string descrizione, bool prezioso, decimal pesoSpecifico, string account)
         {
-            descrizione = (descrizione.Length > 25 ? descrizione.Substring(0, 25) : descrizione).ToUpper();
-            codice = (codice.Length > 8 ? codice.Substring(0, 8) : codice).ToUpper();
+            descrizione = correggiString(descrizione, 25);
+            codice = correggiString(codice, 8);
 
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
             {
@@ -605,7 +607,7 @@ namespace MPIntranet.Business
                 AnagraficaDS.MATERIALIRow br = _ds.MATERIALI.NewMATERIALIRow();
                 br.CODICE = codice;
                 br.DESCRIZIONE = descrizione;
-                br.PREZIOSO = prezioso ? "S" : "N";
+                br.PREZIOSO = prezioso ? SiNo.Si : SiNo.No;
                 br.PESOSPECIFICO = pesoSpecifico;
 
                 br.CANCELLATO = SiNo.No;
@@ -621,13 +623,10 @@ namespace MPIntranet.Business
         public string CreaReparto(string codice, string descrizioneBreve, string descrizione, string account)
         {
             if (string.IsNullOrEmpty(codice)) return "Codice deve essere valorizzato";
-            codice = codice.Trim().ToUpper();
-            descrizioneBreve = descrizioneBreve.Trim().ToUpper();
-            descrizione = descrizione.Trim().ToUpper();
 
-            descrizione = (descrizione.Length > 30 ? descrizione.Substring(0, 30) : descrizione).ToUpper();
-            descrizioneBreve = (descrizioneBreve.Length > 15 ? descrizioneBreve.Substring(0, 15) : descrizioneBreve).ToUpper();
-            codice = (codice.Length > 10 ? codice.Substring(0, 10) : codice).ToUpper();
+            descrizione = correggiString(descrizione, 30);
+            descrizioneBreve = correggiString(descrizioneBreve, 15);
+            codice = correggiString(codice, 10);
 
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
             {
@@ -659,13 +658,9 @@ namespace MPIntranet.Business
 
         public string ModificaReparto(decimal idReparto, string codice, string descrizioneBreve, string descrizione, string account)
         {
-            codice = codice.Trim().ToUpper();
-            descrizioneBreve = descrizioneBreve.Trim().ToUpper();
-            descrizione = descrizione.Trim().ToUpper();
-
-            descrizione = (descrizione.Length > 30 ? descrizione.Substring(0, 30) : descrizione).ToUpper();
-            descrizioneBreve = (descrizioneBreve.Length > 15 ? descrizioneBreve.Substring(0, 15) : descrizioneBreve).ToUpper();
-            codice = (codice.Length > 10 ? codice.Substring(0, 10) : codice).ToUpper();
+            descrizione = correggiString(descrizione, 30);
+            descrizioneBreve = correggiString(descrizioneBreve, 15);
+            codice = correggiString(codice, 10);
 
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
             {
@@ -798,11 +793,9 @@ namespace MPIntranet.Business
         {
             if (string.IsNullOrEmpty(codice)) return "Codice deve essere valorizzato";
             if (string.IsNullOrEmpty(descrizione)) return "Descrizione deve essere valorizzata";
-            codice = codice.Trim().ToUpper();
-            descrizione = descrizione.Trim().ToUpper();
 
-            codice = (codice.Length > 10 ? codice.Substring(0, 10) : codice).ToUpper();
-            descrizione = (descrizione.Length > 40 ? descrizione.Substring(0, 40) : descrizione).ToUpper();
+            descrizione = correggiString(descrizione, 40);
+            codice = correggiString(codice, 10);
 
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
             {
@@ -822,7 +815,7 @@ namespace MPIntranet.Business
                 br.IDREPARTO = idReparto;
                 br.RICARICO = ricarico;
                 br.COSTO = costo;
-                br.INCLUDIPREVENTIVO = includiPreventivo ? "S" : "N";
+                br.INCLUDIPREVENTIVO = includiPreventivo ? SiNo.Si : SiNo.No;
                 if (idEsterna >= 0)
                     br.IDESTERNA = idEsterna;
                 else
@@ -847,11 +840,9 @@ namespace MPIntranet.Business
         {
             if (string.IsNullOrEmpty(codice)) return "Codice deve essere valorizzato";
             if (string.IsNullOrEmpty(descrizione)) return "Descrizione deve essere valorizzata";
-            codice = codice.Trim().ToUpper();
-            descrizione = descrizione.Trim().ToUpper();
 
-            codice = (codice.Length > 10 ? codice.Substring(0, 10) : codice).ToUpper();
-            descrizione = (descrizione.Length > 40 ? descrizione.Substring(0, 40) : descrizione).ToUpper();
+            descrizione = correggiString(descrizione, 40);
+            codice = correggiString(codice, 10);
 
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
             {
@@ -873,7 +864,7 @@ namespace MPIntranet.Business
                 fase.IDREPARTO = idReparto;
                 fase.RICARICO = ricarico;
                 fase.COSTO = costo;
-                fase.INCLUDIPREVENTIVO = includiPreventivo ? "S" : "N";
+                fase.INCLUDIPREVENTIVO = includiPreventivo ? SiNo.Si : SiNo.No;
                 if (idEsterna >= 0)
                     fase.IDESTERNA = idEsterna;
                 else
@@ -958,11 +949,8 @@ namespace MPIntranet.Business
         {
             if (string.IsNullOrEmpty(codice)) return "Codice deve essere valorizzato";
 
-            codice = codice.Trim().ToUpper();
-            descrizione = descrizione.Trim().ToUpper();
-
-            codice = (codice.Length > 10 ? codice.Substring(0, 10) : codice).ToUpper();
-            descrizione = (descrizione.Length > 30 ? descrizione.Substring(0, 30) : descrizione).ToUpper();
+            descrizione = correggiString(descrizione, 30);
+            codice = correggiString(codice, 10);
 
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
             {
@@ -995,11 +983,8 @@ namespace MPIntranet.Business
         {
             if (string.IsNullOrEmpty(codice)) return "Codice deve essere valorizzato";
 
-            codice = codice.Trim().ToUpper();
-            descrizione = descrizione.Trim().ToUpper();
-
-            codice = (codice.Length > 10 ? codice.Substring(0, 10) : codice).ToUpper();
-            descrizione = (descrizione.Length > 30 ? descrizione.Substring(0, 30) : descrizione).ToUpper();
+            descrizione = correggiString(descrizione, 30);
+            codice = correggiString(codice, 10);
 
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
             {
@@ -1032,9 +1017,7 @@ namespace MPIntranet.Business
         {
             if (string.IsNullOrEmpty(descrizione)) return "Descrizione deve essere valorizzata";
 
-            descrizione = descrizione.Trim().ToUpper();
-
-            descrizione = (descrizione.Length > 25 ? descrizione.Substring(0, 25) : descrizione).ToUpper();
+            descrizione = correggiString(descrizione, 25);
 
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
             {
@@ -1115,11 +1098,9 @@ namespace MPIntranet.Business
         {
             if (string.IsNullOrEmpty(codice)) return "Codice deve essere valorizzato";
             if (string.IsNullOrEmpty(descrizione)) return "Descrizione deve essere valorizzata";
-            codice = codice.Trim().ToUpper();
-            descrizione = descrizione.Trim().ToUpper();
 
-            codice = (codice.Length > 10 ? codice.Substring(0, 10) : codice).ToUpper();
-            descrizione = (descrizione.Length > 40 ? descrizione.Substring(0, 40) : descrizione).ToUpper();
+            descrizione = correggiString(descrizione, 40);
+            codice = correggiString(codice, 10);
 
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
             {
@@ -1139,7 +1120,7 @@ namespace MPIntranet.Business
                 br.IDMATERIALE = idMateriale;
                 br.RICARICO = ricarico;
                 br.COSTO = costo;
-                br.INCLUDIPREVENTIVO = includiPreventivo ? "S" : "N";
+                br.INCLUDIPREVENTIVO = includiPreventivo ? SiNo.Si : SiNo.No;
 
                 br.CANCELLATO = SiNo.No;
                 br.DATAMODIFICA = DateTime.Now;
@@ -1156,11 +1137,9 @@ namespace MPIntranet.Business
         {
             if (string.IsNullOrEmpty(codice)) return "Codice deve essere valorizzato";
             if (string.IsNullOrEmpty(descrizione)) return "Descrizione deve essere valorizzata";
-            codice = codice.Trim().ToUpper();
-            descrizione = descrizione.Trim().ToUpper();
 
-            codice = (codice.Length > 10 ? codice.Substring(0, 10) : codice).ToUpper();
-            descrizione = (descrizione.Length > 40 ? descrizione.Substring(0, 40) : descrizione).ToUpper();
+            descrizione = correggiString(descrizione, 40);
+            codice = correggiString(codice, 10);
 
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
             {
@@ -1182,7 +1161,7 @@ namespace MPIntranet.Business
                 materiaPrima.IDMATERIALE = idMateriale;
                 materiaPrima.RICARICO = ricarico;
                 materiaPrima.COSTO = costo;
-                materiaPrima.INCLUDIPREVENTIVO = includiPreventivo ? "S" : "N";
+                materiaPrima.INCLUDIPREVENTIVO = includiPreventivo ? SiNo.Si : SiNo.No;
 
 
                 materiaPrima.DATAMODIFICA = DateTime.Now;

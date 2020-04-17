@@ -385,5 +385,63 @@ namespace MPPreventivatore
                 }
             }
         }
+
+
+
+        private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (_disabilitaEdit) return;
+            try
+            {
+                if (e.Node.Tag is ProdottoFinitoModel) return;
+                ElementoPreventivoModel elemento = (ElementoPreventivoModel)e.Node.Tag;
+                decimal idElemento = elemento.IdElementoPreventivo;
+
+                foreach (DataGridViewRow riga in dgvElementi.Rows)
+                {
+                    decimal idCella = (decimal)riga.Cells[0].Value;
+                    if (idCella == idElemento)
+                    {
+                        riga.Selected = true;
+                        return;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("", ex);
+            }
+            finally
+            {
+                _disabilitaEdit = false;
+            }
+
+        }
+
+        private void dgvElementi_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            if (_disabilitaEdit) return;
+            try
+            {
+                _disabilitaEdit = true;
+                decimal idElemento = (decimal)dgvElementi.Rows[e.RowIndex].Cells[0].Value;
+                TreeNode[] nodi = treeView1.Nodes.Find(idElemento.ToString(), true);
+                if (nodi.Length == 1)
+                {
+                    TreeNode nodo = nodi[0];
+                    treeView1.SelectedNode = nodo;
+                    treeView1.Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("", ex);
+            }
+            finally
+            {
+                _disabilitaEdit = false;
+            }
+        }
     }
 }

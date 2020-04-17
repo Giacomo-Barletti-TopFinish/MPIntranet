@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace MPIntranet.Business
 {
-    public class Galvanica
+    public class Galvanica : BusinessBase
     {
         private GalvanicaDS _ds = new GalvanicaDS();
         private Anagrafica _anagrafica = new Anagrafica();
@@ -106,15 +106,13 @@ namespace MPIntranet.Business
         }
         public void ModificaImpianto(decimal idImpianto, string descrizione, string account)
         {
-            descrizione = (descrizione.Length > 50 ? descrizione.Substring(0, 50) : descrizione).ToUpper();
-
             using (GalvanicaBusiness bGalvanica = new GalvanicaBusiness())
             {
                 bGalvanica.FillImpianti(_ds, true);
                 GalvanicaDS.IMPIANTIRow br = _ds.IMPIANTI.Where(x => x.IDIMPIANTO == idImpianto).FirstOrDefault();
                 if (br != null)
                 {
-                    br.DESCRIZIONE = descrizione;
+                    br.DESCRIZIONE = correggiString(descrizione, 50);
                     br.DATAMODIFICA = DateTime.Now;
                     br.UTENTEMODIFICA = account;
 
@@ -143,7 +141,7 @@ namespace MPIntranet.Business
 
         public string CreaImpianto(string descrizione, string account)
         {
-            descrizione = (descrizione.Length > 50 ? descrizione.Substring(0, 50) : descrizione).ToUpper();
+            descrizione = correggiString(descrizione, 50);
 
             using (GalvanicaBusiness bGalvanica = new GalvanicaBusiness())
             {
@@ -173,8 +171,8 @@ namespace MPIntranet.Business
 
         public string CreaTelaio(string Codice, decimal Pezzi, string TipoMontaggio, decimal Costo, string account)
         {
-            Codice = Codice.Trim().ToUpper();
-            TipoMontaggio = TipoMontaggio.Trim().ToUpper();
+            Codice = correggiString(Codice, 10);
+            TipoMontaggio = correggiString(TipoMontaggio, 25);
 
             using (GalvanicaBusiness bGalvanica = new GalvanicaBusiness())
             {
@@ -183,8 +181,8 @@ namespace MPIntranet.Business
                     return "Esiste già un telaio con questo codice e questo numero di pezzi";
 
                 GalvanicaDS.TELAIRow br = _ds.TELAI.NewTELAIRow();
-                br.CODICE = Codice.Length > 10 ? Codice.Substring(0, 10) : Codice;
-                br.TIPOMONTAGGIO = TipoMontaggio.Length > 25 ? TipoMontaggio.Substring(0, 25) : TipoMontaggio;
+                br.CODICE = Codice;
+                br.TIPOMONTAGGIO = TipoMontaggio;
                 br.PEZZI = Pezzi;
                 br.COSTOSTANDARD = Costo;
 
@@ -217,7 +215,7 @@ namespace MPIntranet.Business
                     VascaModel m = new VascaModel()
                     {
                         IdVasca = vasca.IDVASCA,
-                        AbilitaStato = vasca.ABILITASTRATO == "S",
+                        AbilitaStato = vasca.ABILITASTRATO == SiNo.Si,
                         DescrizioneBreve = vasca.DESCRIZIONEBREVE,
                         IdImpianto = vasca.IDIMPIANTO,
                         Descrizione = vasca.DESCRIZIONE,
@@ -250,7 +248,7 @@ namespace MPIntranet.Business
                     VascaModel m = new VascaModel()
                     {
                         IdVasca = vasca.IDVASCA,
-                        AbilitaStato = vasca.ABILITASTRATO == "S",
+                        AbilitaStato = vasca.ABILITASTRATO == SiNo.Si,
                         DescrizioneBreve = vasca.DESCRIZIONEBREVE,
                         IdImpianto = vasca.IDIMPIANTO,
                         Descrizione = vasca.DESCRIZIONE,
@@ -293,7 +291,7 @@ namespace MPIntranet.Business
                 {
                     br.DESCRIZIONEBREVE = descrizioneBreve;
                     br.DESCRIZIONE = descrizione;
-                    br.ABILITASTRATO = abilitaStrato ? "S" : "N";
+                    br.ABILITASTRATO = abilitaStrato ? SiNo.Si : SiNo.No;
                     br.DATAMODIFICA = DateTime.Now;
                     br.UTENTEMODIFICA = account;
 
@@ -304,8 +302,8 @@ namespace MPIntranet.Business
 
         public string CreaVasca(string descrizioneBreve, string descrizione, bool abilitaStrato, decimal idImpianto, decimal idMateriale, string account)
         {
-            descrizione = (descrizione.Length > 50 ? descrizione.Substring(0, 50) : descrizione).ToUpper();
-            descrizioneBreve = (descrizioneBreve.Length > 30 ? descrizioneBreve.Substring(0, 30) : descrizioneBreve).ToUpper();
+            descrizione = correggiString(descrizione, 50);
+            descrizioneBreve = correggiString(descrizioneBreve, 30);
 
             if (!ImpiantoEsiste(idImpianto))
                 return "Impianto non presente in archivio";
@@ -320,7 +318,7 @@ namespace MPIntranet.Business
                 GalvanicaDS.VASCHERow vasca = _ds.VASCHE.NewVASCHERow();
                 vasca.DESCRIZIONEBREVE = descrizioneBreve;
                 vasca.DESCRIZIONE = descrizione;
-                vasca.ABILITASTRATO = abilitaStrato ? "S" : "N";
+                vasca.ABILITASTRATO = abilitaStrato ? SiNo.Si : SiNo.No;
                 vasca.IDIMPIANTO = idImpianto;
                 //         if (idMateriale > 0)
                 vasca.IDMATERIALE = idMateriale;
