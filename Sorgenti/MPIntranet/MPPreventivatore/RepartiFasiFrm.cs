@@ -257,13 +257,13 @@ namespace MPPreventivatore
 
         private void dgvFasi_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            e.Control.KeyPress -= new KeyPressEventHandler(Column1_KeyPress);
+            e.Control.KeyPress -= new KeyPressEventHandler(Numeric_KeyPress);
             if (dgvFasi.CurrentCell.ColumnIndex == 4 || dgvFasi.CurrentCell.ColumnIndex == 5)
             {
                 TextBox tb = e.Control as TextBox;
                 if (tb != null)
                 {
-                    tb.KeyPress += new KeyPressEventHandler(Column1_KeyPress);
+                    tb.KeyPress += new KeyPressEventHandler(Numeric_KeyPress);
                 }
             }
         }

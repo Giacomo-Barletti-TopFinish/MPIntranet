@@ -53,11 +53,8 @@ namespace MPPreventivatore
         private void caricaGrigliaElementiPreventivo()
         {
             dgvElementi.AutoGenerateColumns = false;
-            Anagrafica a = new Anagrafica();
 
             _source.DataSource = _elementiPreventivo;
-
-
             dgvElementi.DataSource = _source;
         }
         private void RimuoviRamoClick(object sender, EventArgs e)
@@ -148,9 +145,26 @@ namespace MPPreventivatore
             if (ddlPreventivi.SelectedIndex == -1) return;
             txtNota.Text = _preventivoSelezionato.Nota;
 
-            TreeNode nodo = treeView1.Nodes.Add("-1", prodottoFinitoUC1.ProdottoFinitoModel.ToString());
-            nodo.Tag = prodottoFinitoUC1.ProdottoFinitoModel;
-            _elementiPreventivo = new List<ElementoPreventivoModel>();
+            treeView1.Nodes.Clear();
+            TreeNode radice = treeView1.Nodes.Add("-1", prodottoFinitoUC1.ProdottoFinitoModel.ToString());
+            radice.Tag = prodottoFinitoUC1.ProdottoFinitoModel;
+            _elementiPreventivo = _articolo.CreaListaElementoPreventivoModel(_preventivoSelezionato.IdPrevenivo);
+            creaAlberoDistinta(radice);
+            treeView1.ExpandAll();
+        }
+
+        private void creaAlberoDistinta(TreeNode radice)
+        {
+            List<ElementoPreventivoModel> nodibase = _elementiPreventivo.Where(x => x.IdPadre == -1).ToList();
+            foreach (ElementoPreventivoModel nodobase in nodibase)
+                aggiungiFiglio(radice, nodobase);
+        }
+
+        private void aggiungiFiglio(TreeNode nodoPadre, ElementoPreventivoModel elementoDaAggiungere)
+        {
+            TreeNode nodoAggiunto = aggungiNodo(nodoPadre, elementoDaAggiungere);
+            foreach (ElementoPreventivoModel figlio in _elementiPreventivo.Where(x => x.IdPadre == elementoDaAggiungere.IdElementoPreventivo))
+                aggiungiFiglio(nodoAggiunto, figlio);
         }
 
         private void btnSalva_Click(object sender, EventArgs e)
@@ -159,8 +173,7 @@ namespace MPPreventivatore
             try
             {
                 _articolo.ModificaPreventivo(_preventivoSelezionato.IdPrevenivo, txtNota.Text, _utenteConnesso);
-                caricaDdlPreventivi();
-
+                _articolo.SalvaElementiPreventivo(_elementiPreventivo, _preventivoSelezionato.IdPrevenivo, _utenteConnesso);
             }
             catch (Exception ex)
             {
@@ -277,10 +290,9 @@ namespace MPPreventivatore
                 {
                     elemento = convertiFaseInElementoPreventivo(fase, idElementoPreventivo, idPadre);
                 }
-
-                TreeNode nodoAggiunto = nodeToDropIn.Nodes.Add(idElementoPreventivo.ToString(), elemento.ToString());
-
-                nodoAggiunto.Tag = elemento;
+                aggungiNodo(nodeToDropIn, elemento);
+                //TreeNode nodoAggiunto = nodeToDropIn.Nodes.Add(idElementoPreventivo.ToString(), elemento.ToString());
+                //nodoAggiunto.Tag = elemento;
 
                 if (idPadre == -1)
                     _elementiPreventivo.Add(elemento);
@@ -295,6 +307,12 @@ namespace MPPreventivatore
             }
         }
 
+        private TreeNode aggungiNodo(TreeNode nodoRadice, ElementoPreventivoModel elemento)
+        {
+            TreeNode nodoAggiunto = nodoRadice.Nodes.Add(elemento.IdElementoPreventivo.ToString(), elemento.ToString());
+            nodoAggiunto.Tag = elemento;
+            return nodoAggiunto;
+        }
         private void RefreshGridView()
         {
             _source.ResetBindings(false);
@@ -306,6 +324,7 @@ namespace MPPreventivatore
             ElementoPreventivoModel elemento = new ElementoPreventivoModel();
             elemento.IdElementoPreventivo = idElementoPreventivo;
             elemento.IdPadre = idPadre;
+            elemento.IdPreventivo = _preventivoSelezionato.IdPrevenivo;
             elemento.Codice = fase.Codice;
             elemento.Reparto = fase.Reparto;
             elemento.Ricarico = fase.Ricarico;
@@ -327,6 +346,7 @@ namespace MPPreventivatore
             ElementoPreventivoModel elemento = new ElementoPreventivoModel();
             elemento.IdElementoPreventivo = idElementoPreventivo;
             elemento.IdPadre = idPadre;
+            elemento.IdPreventivo = _preventivoSelezionato.IdPrevenivo;
             elemento.Codice = materiaPrima.Codice;
             elemento.Reparto = null;
             elemento.Ricarico = materiaPrima.Ricarico;
@@ -338,7 +358,7 @@ namespace MPPreventivatore
             elemento.Peso = 0;
             elemento.Superficie = 0;
             elemento.Quantita = 1;
-            elemento.Descrizione = "Materia prima";
+            elemento.Descrizione = "MATERIA PRIMA";
             elemento.Articolo = materiaPrima.Descrizione;
             return elemento;
         }
@@ -351,6 +371,19 @@ namespace MPPreventivatore
         {
             if (lstMateriePrime.SelectedIndex == -1) return;
             lstMateriePrime.DoDragDrop(lstMateriePrime.SelectedItem, DragDropEffects.Move);
+        }
+
+        private void dgvElementi_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            e.Control.KeyPress -= new KeyPressEventHandler(Numeric_KeyPress);
+            if (dgvElementi.CurrentCell.ColumnIndex >= 4)
+            {
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress += new KeyPressEventHandler(Numeric_KeyPress);
+                }
+            }
         }
     }
 }

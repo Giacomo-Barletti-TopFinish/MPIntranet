@@ -25,7 +25,7 @@ namespace MPIntranet.Common
             InitializeComponent();
         }
 
-        protected void Column1_KeyPress(object sender, KeyPressEventArgs e)
+        protected void Numeric_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar)
                 && !char.IsDigit(e.KeyChar)

@@ -25,6 +25,7 @@ namespace MPIntranet.Models.Articolo
     {
         public decimal IdElementoPreventivo { get; set; }
         public decimal IdPadre { get; set; }
+        public decimal IdPreventivo { get; set; }
         public string Codice { get; set; }
         public RepartoModel Reparto { get; set; }
         public decimal Ricarico { get; set; }

@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.prodottoFinitoUC1 = new MPPreventivatore.ProdottoFinitoUC();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtNota = new System.Windows.Forms.TextBox();
@@ -40,8 +41,6 @@
             this.lstFasi = new System.Windows.Forms.ListBox();
             this.ddlReparti = new System.Windows.Forms.ComboBox();
             this.dgvElementi = new System.Windows.Forms.DataGridView();
-            this.lstMateriePrime = new System.Windows.Forms.ListBox();
-            this.prodottoFinitoUC1 = new MPPreventivatore.ProdottoFinitoUC();
             this.Articolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Codice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descrizione = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,6 +49,7 @@
             this.Superficie = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Quantita = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PezziOrari = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lstMateriePrime = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvElementi)).BeginInit();
@@ -66,6 +66,15 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Prodotto finito";
+            // 
+            // prodottoFinitoUC1
+            // 
+            this.prodottoFinitoUC1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.prodottoFinitoUC1.Location = new System.Drawing.Point(6, 17);
+            this.prodottoFinitoUC1.Name = "prodottoFinitoUC1";
+            this.prodottoFinitoUC1.Size = new System.Drawing.Size(767, 157);
+            this.prodottoFinitoUC1.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -192,29 +201,7 @@
             this.dgvElementi.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvElementi.Size = new System.Drawing.Size(614, 439);
             this.dgvElementi.TabIndex = 9;
-            // 
-            // lstMateriePrime
-            // 
-            this.lstMateriePrime.AllowDrop = true;
-            this.lstMateriePrime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lstMateriePrime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lstMateriePrime.FormattingEnabled = true;
-            this.lstMateriePrime.ItemHeight = 15;
-            this.lstMateriePrime.Location = new System.Drawing.Point(464, 455);
-            this.lstMateriePrime.Name = "lstMateriePrime";
-            this.lstMateriePrime.Size = new System.Drawing.Size(292, 184);
-            this.lstMateriePrime.TabIndex = 4;
-            this.lstMateriePrime.DragOver += new System.Windows.Forms.DragEventHandler(this.lstFasi_DragOver);
-            this.lstMateriePrime.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lstMateriePrime_MouseDown);
-            // 
-            // prodottoFinitoUC1
-            // 
-            this.prodottoFinitoUC1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.prodottoFinitoUC1.Location = new System.Drawing.Point(6, 17);
-            this.prodottoFinitoUC1.Name = "prodottoFinitoUC1";
-            this.prodottoFinitoUC1.Size = new System.Drawing.Size(767, 157);
-            this.prodottoFinitoUC1.TabIndex = 0;
+            this.dgvElementi.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvElementi_EditingControlShowing);
             // 
             // Articolo
             // 
@@ -267,6 +254,20 @@
             this.PezziOrari.DataPropertyName = "PezziOrari";
             this.PezziOrari.HeaderText = "Pezzi orari";
             this.PezziOrari.Name = "PezziOrari";
+            // 
+            // lstMateriePrime
+            // 
+            this.lstMateriePrime.AllowDrop = true;
+            this.lstMateriePrime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lstMateriePrime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstMateriePrime.FormattingEnabled = true;
+            this.lstMateriePrime.ItemHeight = 15;
+            this.lstMateriePrime.Location = new System.Drawing.Point(464, 455);
+            this.lstMateriePrime.Name = "lstMateriePrime";
+            this.lstMateriePrime.Size = new System.Drawing.Size(292, 184);
+            this.lstMateriePrime.TabIndex = 4;
+            this.lstMateriePrime.DragOver += new System.Windows.Forms.DragEventHandler(this.lstFasi_DragOver);
+            this.lstMateriePrime.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lstMateriePrime_MouseDown);
             // 
             // PreventivoFrm
             // 

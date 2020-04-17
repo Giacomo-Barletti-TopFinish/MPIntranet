@@ -748,7 +748,7 @@ namespace MPIntranet.Business
             return r;
         }
 
-        private RepartoModel creaRepartoModel(decimal idReparto)
+        public RepartoModel CreaRepartoModel(decimal idReparto)
         {
             AnagraficaDS.REPARTIRow reparto = EstraiReparto(idReparto);
             return creaRepartoModel(reparto);
@@ -784,7 +784,7 @@ namespace MPIntranet.Business
                 IdFase = fase.IDFASE,
                 Codice = fase.CODICE,
                 Descrizione = fase.DESCRIZIONE,
-                Reparto = creaRepartoModel(fase.IDREPARTO),
+                Reparto = CreaRepartoModel(fase.IDREPARTO),
                 Ricarico = fase.IsRICARICONull() ? 0 : fase.RICARICO,
                 Costo = fase.IsCOSTONull() ? 0 : fase.COSTO,
                 IncludiPreventivo = fase.INCLUDIPREVENTIVO == SiNo.Si,

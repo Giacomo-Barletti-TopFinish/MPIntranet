@@ -234,7 +234,7 @@ namespace MPIntranet.DataAccess.Articolo
         }
         public void FillElementiPreventivo(ArticoloDS ds, decimal idProdottoFinito, bool soloNonCancellati)
         {
-            string select = @"SELECT * FROM ELEMENTIPREVENTIVO FP 
+            string select = @"SELECT FP.* FROM ELEMENTIPREVENTIVO FP 
                                     INNER JOIN PREVENTIVI PR ON PR.IDPREVENTIVO = FP.IDPREVENTIVO
                                     WHERE IDPRODOTTOFINITO = $P<IDPRODOTTOFINITO> ";
             if (soloNonCancellati)
@@ -248,5 +248,16 @@ namespace MPIntranet.DataAccess.Articolo
             }
         }
 
+        public void FillElementiPreventivo(ArticoloDS ds, decimal idPreventivo)
+        {
+            string select = @"SELECT * FROM ELEMENTIPREVENTIVO WHERE IDPREVENTIVO = $P<IDPREVENTIVO> ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDPREVENTIVO", DbType.Decimal, idPreventivo);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.ELEMENTIPREVENTIVO);
+            }
+        }
     }
 }

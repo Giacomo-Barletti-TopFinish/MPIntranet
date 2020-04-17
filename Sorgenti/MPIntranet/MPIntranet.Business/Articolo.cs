@@ -515,5 +515,139 @@ namespace MPIntranet.Business
             }
             return "Preventivo modificato correttamente";
         }
+        public List<ElementoPreventivoModel> CreaListaElementoPreventivoModel(decimal idPreventivo)
+        {
+            List<ElementoPreventivoModel> elementi = new List<ElementoPreventivoModel>();
+
+            if (!_ds.ELEMENTIPREVENTIVO.Any(x => x.IDPREVENTIVO == idPreventivo))
+            {
+                using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+                {
+                    bArticolo.FillElementiPreventivo(_ds, idPreventivo);
+                }
+            }
+
+            foreach (ArticoloDS.ELEMENTIPREVENTIVORow elementoDatabase in _ds.ELEMENTIPREVENTIVO.Where(x => x.IDPREVENTIVO == idPreventivo))
+                elementi.Add(creaElementoPreventivoModel(elementoDatabase));
+
+            return elementi;
+        }
+
+        private ElementoPreventivoModel creaElementoPreventivoModel(ArticoloDS.ELEMENTIPREVENTIVORow elementoPreventivo)
+        {
+            Anagrafica a = new Anagrafica();
+            ElementoPreventivoModel elementoModel = new ElementoPreventivoModel();
+            elementoModel.Articolo = elementoPreventivo.IsARTICOLONull() ? string.Empty : elementoPreventivo.ARTICOLO;
+            elementoModel.Codice = elementoPreventivo.CODICE;
+            elementoModel.Costo = elementoPreventivo.IsCOSTONull() ? 0 : elementoPreventivo.COSTO;
+            elementoModel.Descrizione = elementoPreventivo.DESCRIZIONE;
+            elementoModel.IdElementoPreventivo = elementoPreventivo.IDELEMENTOPREVENTIVO;
+            elementoModel.IdEsterna = elementoPreventivo.IsIDESTERNANull() ? -1 : elementoPreventivo.IDESTERNA;
+            elementoModel.IdPadre = elementoPreventivo.IsIDPADRENull() ? -1 : elementoPreventivo.IDPADRE;
+            elementoModel.IdPreventivo = elementoPreventivo.IDPREVENTIVO;
+            elementoModel.IncludiPreventivo = elementoPreventivo.INCLUDIPREVENTIVO == SiNo.Si;
+            elementoModel.Peso = elementoPreventivo.IsPESONull() ? 0 : elementoPreventivo.PESO;
+            elementoModel.PezziOrari = elementoPreventivo.IsPEZZIORARINull() ? 0 : elementoPreventivo.PEZZIORARI;
+            elementoModel.Quantita = elementoPreventivo.QUANTITA;
+            if (!elementoPreventivo.IsIDREPARTONull())
+                elementoModel.Reparto = a.CreaRepartoModel(elementoPreventivo.IDREPARTO);
+            elementoModel.Ricarico = elementoPreventivo.IsRICARICONull() ? 0 : elementoPreventivo.RICARICO;
+            elementoModel.Superficie = elementoPreventivo.IsSUPERFICIENull() ? 0 : elementoPreventivo.SUPERFICIE;
+            elementoModel.TabellaEsterna = elementoPreventivo.IsTABELLAESTERNANull() ? string.Empty : elementoPreventivo.TABELLAESTERNA;
+
+            return elementoModel;
+        }
+        public void SalvaElementiPreventivo(List<ElementoPreventivoModel> elementiPreventivoModel, decimal idPreventivo, string account)
+        {
+
+            if (!_ds.ELEMENTIPREVENTIVO.Any(x => x.IDPREVENTIVO == idPreventivo))
+            {
+                using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+                {
+                    bArticolo.FillElementiPreventivo(_ds, idPreventivo);
+                }
+            }
+
+            foreach (ArticoloDS.ELEMENTIPREVENTIVORow elementoDatabase in _ds.ELEMENTIPREVENTIVO.Where(x => x.IDPREVENTIVO == idPreventivo))
+            {
+                ElementoPreventivoModel elementoPreventivoModel = elementiPreventivoModel.Where(x => x.IdElementoPreventivo == elementoDatabase.IDELEMENTOPREVENTIVO).FirstOrDefault();
+                if (elementoPreventivoModel == null)
+                {
+                    elementoDatabase.CANCELLATO = SiNo.Si;
+                }
+                else
+                {
+                    elementoDatabase.ARTICOLO = elementoPreventivoModel.Articolo;
+                    elementoDatabase.CODICE = elementoPreventivoModel.Codice;
+                    elementoDatabase.COSTO = elementoPreventivoModel.Costo;
+                    elementoDatabase.DESCRIZIONE = elementoPreventivoModel.Descrizione;
+
+                    if (elementoPreventivoModel.IdEsterna == -1) elementoDatabase.SetIDESTERNANull();
+                    else elementoDatabase.IDESTERNA = elementoPreventivoModel.IdEsterna;
+
+                    if (elementoPreventivoModel.IdPadre == -1) elementoDatabase.SetIDPADRENull();
+                    else elementoDatabase.IDPADRE = elementoPreventivoModel.IdPadre;
+
+                    elementoDatabase.PESO = elementoPreventivoModel.Peso;
+                    elementoDatabase.PEZZIORARI = elementoPreventivoModel.PezziOrari;
+                    elementoDatabase.QUANTITA = elementoPreventivoModel.Quantita;
+
+                    if (elementoPreventivoModel.Reparto == null) elementoDatabase.SetIDREPARTONull();
+                    else elementoDatabase.IDREPARTO = elementoPreventivoModel.Reparto.IdReparto;
+
+                    elementoDatabase.RICARICO = elementoPreventivoModel.Ricarico;
+                    elementoDatabase.SUPERFICIE = elementoPreventivoModel.Superficie;
+
+                    elementoDatabase.TABELLAESTERNA = elementoPreventivoModel.TabellaEsterna;
+                    elementoDatabase.INCLUDIPREVENTIVO = elementoPreventivoModel.IncludiPreventivo ? SiNo.Si : SiNo.No;
+                }
+
+                elementoDatabase.DATAMODIFICA = DateTime.Now;
+                elementoDatabase.UTENTEMODIFICA = account;
+            }
+
+            foreach (ElementoPreventivoModel elementoPreventivoModel in elementiPreventivoModel)
+            {
+                if (!_ds.ELEMENTIPREVENTIVO.Any(x => x.IDELEMENTOPREVENTIVO == elementoPreventivoModel.IdElementoPreventivo))
+                {
+                    ArticoloDS.ELEMENTIPREVENTIVORow elementoNuovo = _ds.ELEMENTIPREVENTIVO.NewELEMENTIPREVENTIVORow();
+                    elementoNuovo.IDELEMENTOPREVENTIVO = elementoPreventivoModel.IdElementoPreventivo;
+                    elementoNuovo.IDPREVENTIVO = idPreventivo;
+
+                    elementoNuovo.ARTICOLO = elementoPreventivoModel.Articolo;
+                    elementoNuovo.CODICE = elementoPreventivoModel.Codice;
+                    elementoNuovo.COSTO = elementoPreventivoModel.Costo;
+                    elementoNuovo.DESCRIZIONE = elementoPreventivoModel.Descrizione;
+
+                    if (elementoPreventivoModel.IdEsterna == -1) elementoNuovo.SetIDESTERNANull();
+                    else elementoNuovo.IDESTERNA = elementoPreventivoModel.IdEsterna;
+
+                    if (elementoPreventivoModel.IdPadre == -1) elementoNuovo.SetIDPADRENull();
+                    else elementoNuovo.IDPADRE = elementoPreventivoModel.IdPadre;
+
+                    elementoNuovo.PESO = elementoPreventivoModel.Peso;
+                    elementoNuovo.PEZZIORARI = elementoPreventivoModel.PezziOrari;
+                    elementoNuovo.QUANTITA = elementoPreventivoModel.Quantita;
+
+                    if (elementoPreventivoModel.Reparto == null) elementoNuovo.SetIDREPARTONull();
+                    else elementoNuovo.IDREPARTO = elementoPreventivoModel.Reparto.IdReparto;
+
+                    elementoNuovo.RICARICO = elementoPreventivoModel.Ricarico;
+                    elementoNuovo.SUPERFICIE = elementoPreventivoModel.Superficie;
+
+                    elementoNuovo.TABELLAESTERNA = elementoPreventivoModel.TabellaEsterna;
+                    elementoNuovo.INCLUDIPREVENTIVO = elementoPreventivoModel.IncludiPreventivo ? SiNo.Si : SiNo.No;
+
+                    elementoNuovo.CANCELLATO = SiNo.No;
+                    elementoNuovo.DATAMODIFICA = DateTime.Now;
+                    elementoNuovo.UTENTEMODIFICA = account;
+
+                    _ds.ELEMENTIPREVENTIVO.AddELEMENTIPREVENTIVORow(elementoNuovo);
+                }
+            }
+
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+                bArticolo.UpdateTable(_ds.ELEMENTIPREVENTIVO.TableName, _ds);
+        }
     }
 }

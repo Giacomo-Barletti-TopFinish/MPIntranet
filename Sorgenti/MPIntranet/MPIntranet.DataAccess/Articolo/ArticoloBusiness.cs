@@ -144,6 +144,12 @@ namespace MPIntranet.DataAccess.Articolo
         }
 
         [DataContext]
+        public void FillElementiPreventivo(ArticoloDS ds, decimal idPreventivo)
+        {
+            ArticoloAdapter a = new ArticoloAdapter(DbConnection, DbTransaction);
+            a.FillElementiPreventivo(ds, idPreventivo);
+        }
+        [DataContext]
         public void EstraiPreventivo(ArticoloDS ds, decimal idPreventivo)
         {
             ArticoloAdapter a = new ArticoloAdapter(DbConnection, DbTransaction);
