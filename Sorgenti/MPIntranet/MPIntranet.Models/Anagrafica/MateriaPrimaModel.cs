@@ -15,5 +15,10 @@ namespace MPIntranet.Models.Anagrafica
         public decimal Ricarico { get; set; }
         public decimal Costo { get; set; }
         public bool IncludiPreventivo { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0}-{1}", Codice, Descrizione);
+        }
     }
 }

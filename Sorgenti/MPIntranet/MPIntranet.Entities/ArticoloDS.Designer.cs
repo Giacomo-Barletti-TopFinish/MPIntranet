@@ -2852,7 +2852,6 @@ namespace MPIntranet.Entities {
                 this.columnCODICE.MaxLength = 10;
                 this.columnDESCRIZIONE.AllowDBNull = false;
                 this.columnDESCRIZIONE.MaxLength = 40;
-                this.columnIDREPARTO.AllowDBNull = false;
                 this.columnINCLUDIPREVENTIVO.AllowDBNull = false;
                 this.columnINCLUDIPREVENTIVO.MaxLength = 1;
                 this.columnTABELLAESTERNA.MaxLength = 25;
@@ -4189,7 +4188,12 @@ namespace MPIntranet.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public decimal IDREPARTO {
                 get {
-                    return ((decimal)(this[this.tableELEMENTIPREVENTIVO.IDREPARTOColumn]));
+                    try {
+                        return ((decimal)(this[this.tableELEMENTIPREVENTIVO.IDREPARTOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDREPARTO\' in table \'ELEMENTIPREVENTIVO\' is DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableELEMENTIPREVENTIVO.IDREPARTOColumn] = value;
@@ -4401,6 +4405,18 @@ namespace MPIntranet.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetIDPADRENull() {
                 this[this.tableELEMENTIPREVENTIVO.IDPADREColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsIDREPARTONull() {
+                return this.IsNull(this.tableELEMENTIPREVENTIVO.IDREPARTOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetIDREPARTONull() {
+                this[this.tableELEMENTIPREVENTIVO.IDREPARTOColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

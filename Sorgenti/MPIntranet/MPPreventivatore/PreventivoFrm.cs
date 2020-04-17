@@ -21,6 +21,7 @@ namespace MPPreventivatore
         private Documenti _documenti = new Documenti();
         private Anagrafica _anagrafica = new Anagrafica();
         private List<ElementoPreventivoModel> _elementiPreventivo = new List<ElementoPreventivoModel>();
+        private BindingSource _source = new BindingSource();
 
         private PreventivoModel _preventivoSelezionato
         {
@@ -45,12 +46,42 @@ namespace MPPreventivatore
             caricaDdlPreventivi();
             caricaDdlReparti();
             CreaMenuContestualeTreeView();
+            caricaMateriePrime();
+            caricaGrigliaElementiPreventivo();
+        }
+
+        private void caricaGrigliaElementiPreventivo()
+        {
+            dgvElementi.AutoGenerateColumns = false;
+            Anagrafica a = new Anagrafica();
+
+            _source.DataSource = _elementiPreventivo;
+
+
+            dgvElementi.DataSource = _source;
         }
         private void RimuoviRamoClick(object sender, EventArgs e)
         {
             TreeNode tn = treeView1.SelectedNode;
+
+            eliminaElementiFigli(tn);
+            ElementoPreventivoModel elemento = (ElementoPreventivoModel)tn.Tag;
+            _elementiPreventivo.Remove(elemento);
+
             tn.Remove();
+            RefreshGridView();
         }
+
+        private void eliminaElementiFigli(TreeNode tn)
+        {
+            foreach (TreeNode t in tn.Nodes)
+            {
+                ElementoPreventivoModel elementoFiglio = (ElementoPreventivoModel)t.Tag;
+                _elementiPreventivo.Remove(elementoFiglio);
+                eliminaElementiFigli(t);
+            }
+        }
+
         private void RimuoviElementoSingoloClick(object sender, EventArgs e)
         {
             TreeNode tn = treeView1.SelectedNode;
@@ -58,15 +89,21 @@ namespace MPPreventivatore
             TreeNode padre = tn.Parent;
             if (padre == null) return;
 
+            ElementoPreventivoModel elemento = (ElementoPreventivoModel)tn.Tag;
+            _elementiPreventivo.Remove(elemento);
+
             if (tn.Nodes.Count > 0)
             {
                 TreeNode[] figli = new TreeNode[tn.Nodes.Count];
                 tn.Nodes.CopyTo(figli, 0);
                 tn.Remove();
                 padre.Nodes.AddRange(figli);
+
             }
             else
                 tn.Remove();
+
+            RefreshGridView();
         }
         private void CreaMenuContestualeTreeView()
         {
@@ -138,6 +175,13 @@ namespace MPPreventivatore
             List<FaseModel> fasiRepartoSelezionato = _anagrafica.CreaListaFaseModel(repartoSelezionato.IdReparto);
             lstFasi.Items.Clear();
             lstFasi.Items.AddRange(fasiRepartoSelezionato.ToArray());
+        }
+
+        private void caricaMateriePrime()
+        {
+            List<MateriaPrimaModel> materiaPrimaModel = _anagrafica.CreaListaMateriaPrimaModel();
+            lstMateriePrime.Items.Clear();
+            lstMateriePrime.Items.AddRange(materiaPrimaModel.ToArray());
         }
 
         private void lstFasi_MouseDown(object sender, MouseEventArgs e)
@@ -215,29 +259,52 @@ namespace MPPreventivatore
             {
                 TreeNode nodeToDropIn = this.treeView1.GetNodeAt(this.treeView1.PointToClient(new Point(e.X, e.Y)));
                 if (nodeToDropIn == null) { return; }
-
-                //                object data = e.Data.GetData(typeof(DateTime));
-                FaseModel data = (FaseModel)e.Data.GetData(typeof(FaseModel));
-                if (data == null) { return; }
-                decimal idElementoPreventivo = _articolo.EstraId();
                 object padre = nodeToDropIn.Tag;
                 decimal idPadre = -1;
                 if (padre is ProdottoFinitoModel) idPadre = -1;
-                if (padre is ElementoPreventivoModel) idPadre = (padre as ElementoPreventivoModel).IdElementoPrevenivo;
-                ElementoPreventivoModel elemento = convertiFaseInElementoPreventivo(data, idElementoPreventivo, idPadre);
+                if (padre is ElementoPreventivoModel) idPadre = (padre as ElementoPreventivoModel).IdElementoPreventivo;
+                decimal idElementoPreventivo = _articolo.EstraId();
+                //                object data = e.Data.GetData(typeof(DateTime));
+                FaseModel fase = (FaseModel)e.Data.GetData(typeof(FaseModel));
+                ElementoPreventivoModel elemento;
+                if (fase == null)
+                {
+                    MateriaPrimaModel materiaPrima = (MateriaPrimaModel)e.Data.GetData(typeof(MateriaPrimaModel));
+                    if (materiaPrima == null) return;
+                    elemento = convertiMateriaPrimaInElementoPreventivo(materiaPrima, idElementoPreventivo, idPadre);
+                }
+                else
+                {
+                    elemento = convertiFaseInElementoPreventivo(fase, idElementoPreventivo, idPadre);
+                }
 
                 TreeNode nodoAggiunto = nodeToDropIn.Nodes.Add(idElementoPreventivo.ToString(), elemento.ToString());
 
                 nodoAggiunto.Tag = elemento;
-                _elementiPreventivo.Add(elemento);
+
+                if (idPadre == -1)
+                    _elementiPreventivo.Add(elemento);
+                else
+                {
+                    int indice = _elementiPreventivo.IndexOf(padre as ElementoPreventivoModel);
+                    _elementiPreventivo.Insert(indice + 1, elemento);
+                }
+
+                RefreshGridView();
                 nodeToDropIn.ExpandAll();
             }
         }
 
+        private void RefreshGridView()
+        {
+            _source.ResetBindings(false);
+            dgvElementi.Update();
+            dgvElementi.Refresh();
+        }
         private ElementoPreventivoModel convertiFaseInElementoPreventivo(FaseModel fase, decimal idElementoPreventivo, decimal idPadre)
         {
             ElementoPreventivoModel elemento = new ElementoPreventivoModel();
-            elemento.IdElementoPrevenivo = idElementoPreventivo;
+            elemento.IdElementoPreventivo = idElementoPreventivo;
             elemento.IdPadre = idPadre;
             elemento.Codice = fase.Codice;
             elemento.Reparto = fase.Reparto;
@@ -249,14 +316,41 @@ namespace MPPreventivatore
             elemento.PezziOrari = 0;
             elemento.Peso = 0;
             elemento.Superficie = 0;
-            elemento.Quantita = 0;
+            elemento.Quantita = 1;
             elemento.Descrizione = fase.Descrizione;
             elemento.Articolo = string.Empty;
+            return elemento;
+        }
+
+        private ElementoPreventivoModel convertiMateriaPrimaInElementoPreventivo(MateriaPrimaModel materiaPrima, decimal idElementoPreventivo, decimal idPadre)
+        {
+            ElementoPreventivoModel elemento = new ElementoPreventivoModel();
+            elemento.IdElementoPreventivo = idElementoPreventivo;
+            elemento.IdPadre = idPadre;
+            elemento.Codice = materiaPrima.Codice;
+            elemento.Reparto = null;
+            elemento.Ricarico = materiaPrima.Ricarico;
+            elemento.Costo = materiaPrima.Costo;
+            elemento.IncludiPreventivo = materiaPrima.IncludiPreventivo;
+            elemento.IdEsterna = -1;
+            elemento.TabellaEsterna = string.Empty;
+            elemento.PezziOrari = 0;
+            elemento.Peso = 0;
+            elemento.Superficie = 0;
+            elemento.Quantita = 1;
+            elemento.Descrizione = "Materia prima";
+            elemento.Articolo = materiaPrima.Descrizione;
             return elemento;
         }
         private void treeView1_ItemDrag(object sender, ItemDragEventArgs e)
         {
             DoDragDrop(e.Item, DragDropEffects.Move);
+        }
+
+        private void lstMateriePrime_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (lstMateriePrime.SelectedIndex == -1) return;
+            lstMateriePrime.DoDragDrop(lstMateriePrime.SelectedItem, DragDropEffects.Move);
         }
     }
 }

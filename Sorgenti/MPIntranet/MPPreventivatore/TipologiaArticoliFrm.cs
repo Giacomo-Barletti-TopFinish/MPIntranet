@@ -95,8 +95,6 @@ namespace MPPreventivatore
         }
         private void CaricaGrigliaTipoProdotto()
         {
-
-
             Anagrafica a = new Anagrafica();
             List<TipoProdottoModel> tipoProdotto = a.CreaListaTipoProdottoModel();
             BindingSource source = new BindingSource();

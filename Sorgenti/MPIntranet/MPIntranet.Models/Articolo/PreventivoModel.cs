@@ -23,10 +23,10 @@ namespace MPIntranet.Models.Articolo
 
     public class ElementoPreventivoModel
     {
-        public decimal IdElementoPrevenivo { get; set; }
+        public decimal IdElementoPreventivo { get; set; }
         public decimal IdPadre { get; set; }
         public string Codice { get; set; }
-        public RepartoModel Reparto{ get; set; }
+        public RepartoModel Reparto { get; set; }
         public decimal Ricarico { get; set; }
         public decimal Costo { get; set; }
         public bool IncludiPreventivo { get; set; }
@@ -37,10 +37,17 @@ namespace MPIntranet.Models.Articolo
         public decimal Superficie { get; set; }
         public decimal Quantita { get; set; }
         public string Descrizione { get; set; }
-        public string Articolo{ get; set; }
+        public string Articolo { get; set; }
         public override string ToString()
         {
-            return string.Format("{0}({2})-{1}",Codice,Articolo,Reparto.Codice);
+            string str = Codice;
+            if (string.IsNullOrEmpty(Articolo))
+                str = string.Format("{0}-{1}", Articolo, str);
+
+            if (Reparto != null)
+                str += string.Format("({0})", Reparto.Codice);
+
+            return str;
         }
     }
 }
