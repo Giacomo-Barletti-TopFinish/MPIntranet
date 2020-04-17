@@ -26,7 +26,7 @@ namespace MPPreventivatore
         {
             InitializeComponent();
         }
-
+        public TreeNode NodoDaCopiare;
         private void AbilitaMenu()
         {
             DisabilitaElementiMenu(MPMenu.Items, true);

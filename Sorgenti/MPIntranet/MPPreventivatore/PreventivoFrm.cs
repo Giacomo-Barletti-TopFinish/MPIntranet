@@ -23,6 +23,11 @@ namespace MPPreventivatore
         private List<ElementoPreventivoModel> _elementiPreventivo = new List<ElementoPreventivoModel>();
         private BindingSource _source = new BindingSource();
 
+        public TreeNode _nodoDaCopiare
+        {
+            get { return (MdiParent as MainForm).NodoDaCopiare; }
+            set { (MdiParent as MainForm).NodoDaCopiare = value; }
+        }
         private PreventivoModel _preventivoSelezionato
         {
             get
@@ -61,7 +66,7 @@ namespace MPPreventivatore
         {
             TreeNode tn = treeView1.SelectedNode;
 
-            eliminaElementiFigli(tn);
+            eliminaElementiFigliDallaLista(tn);
             ElementoPreventivoModel elemento = (ElementoPreventivoModel)tn.Tag;
             _elementiPreventivo.Remove(elemento);
 
@@ -69,13 +74,13 @@ namespace MPPreventivatore
             RefreshGridView();
         }
 
-        private void eliminaElementiFigli(TreeNode tn)
+        private void eliminaElementiFigliDallaLista(TreeNode tn)
         {
             foreach (TreeNode t in tn.Nodes)
             {
                 ElementoPreventivoModel elementoFiglio = (ElementoPreventivoModel)t.Tag;
                 _elementiPreventivo.Remove(elementoFiglio);
-                eliminaElementiFigli(t);
+                eliminaElementiFigliDallaLista(t);
             }
         }
 
@@ -102,11 +107,69 @@ namespace MPPreventivatore
 
             RefreshGridView();
         }
+        private void copiaRamoClick(object sender, EventArgs e)
+        {
+            TreeNode tn = treeView1.SelectedNode;
+            _nodoDaCopiare = (TreeNode)tn.Clone();
+        }
+        private void incollaRamoClick(object sender, EventArgs e)
+        {
+            if (_nodoDaCopiare == null)
+            {
+                MessageBox.Show("Nessun nodo da copiare", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            TreeNode selectedNode = treeView1.SelectedNode;
+            object padre = selectedNode.Tag;
+
+            clonaRamoDaCopiare(_nodoDaCopiare, selectedNode);
+
+              _nodoDaCopiare = null;
+        }
+
+        private void clonaRamoDaCopiare(TreeNode nodoDaCopiare, TreeNode nodoPadre)
+        {
+            ElementoPreventivoModel elementoDaClonare = (ElementoPreventivoModel)nodoDaCopiare.Tag;
+            decimal idPadre = estraiIdPadre(nodoPadre);
+            ElementoPreventivoModel nuovoElemento = creaNuovoElementoModel(elementoDaClonare, idPadre);
+            TreeNode nuovoNodo = aggungiNodo(nodoPadre, nuovoElemento);
+            inserisciElementoNellaLista(nuovoElemento, nodoPadre, idPadre);
+
+            foreach (TreeNode figlio in nodoDaCopiare.Nodes)
+                clonaRamoDaCopiare(figlio, nuovoNodo);
+
+        }
+
+        private ElementoPreventivoModel creaNuovoElementoModel(ElementoPreventivoModel elementoModelDaClonare, decimal idPadre)
+        {
+            ElementoPreventivoModel elemento = new ElementoPreventivoModel();
+            elemento.IdElementoPreventivo = _articolo.EstraId();
+            elemento.IdPadre = idPadre;
+            elemento.IdPreventivo = _preventivoSelezionato.IdPrevenivo;
+            elemento.Codice = elementoModelDaClonare.Codice;
+            elemento.Reparto = elementoModelDaClonare.Reparto;
+            elemento.Ricarico = elementoModelDaClonare.Ricarico;
+            elemento.Costo = elementoModelDaClonare.Costo;
+            elemento.IncludiPreventivo = elementoModelDaClonare.IncludiPreventivo;
+            elemento.IdEsterna = -1;
+            elemento.TabellaEsterna = string.Empty;
+            elemento.PezziOrari = elementoModelDaClonare.PezziOrari;
+            elemento.Peso = elementoModelDaClonare.Peso;
+            elemento.Superficie = elementoModelDaClonare.Superficie;
+            elemento.Quantita = elementoModelDaClonare.Quantita;
+            elemento.Descrizione = elementoModelDaClonare.Descrizione;
+            elemento.Articolo = string.Empty;
+            return elemento;
+        }
+
         private void CreaMenuContestualeTreeView()
         {
             ContextMenu cm = new ContextMenu();
             cm.MenuItems.Add("Rimuovi ramo", new EventHandler(RimuoviRamoClick));
             cm.MenuItems.Add("Rimuovi elemento singolo", new EventHandler(RimuoviElementoSingoloClick));
+            cm.MenuItems.Add("Copia ramo", new EventHandler(copiaRamoClick));
+            cm.MenuItems.Add("Incolla ramo", new EventHandler(incollaRamoClick));
+
             treeView1.ContextMenu = cm;
 
         }
@@ -272,12 +335,10 @@ namespace MPPreventivatore
             {
                 TreeNode nodeToDropIn = this.treeView1.GetNodeAt(this.treeView1.PointToClient(new Point(e.X, e.Y)));
                 if (nodeToDropIn == null) { return; }
-                object padre = nodeToDropIn.Tag;
-                decimal idPadre = -1;
-                if (padre is ProdottoFinitoModel) idPadre = -1;
-                if (padre is ElementoPreventivoModel) idPadre = (padre as ElementoPreventivoModel).IdElementoPreventivo;
+
+                decimal idPadre = estraiIdPadre(nodeToDropIn);
                 decimal idElementoPreventivo = _articolo.EstraId();
-                //                object data = e.Data.GetData(typeof(DateTime));
+
                 FaseModel fase = (FaseModel)e.Data.GetData(typeof(FaseModel));
                 ElementoPreventivoModel elemento;
                 if (fase == null)
@@ -291,22 +352,36 @@ namespace MPPreventivatore
                     elemento = convertiFaseInElementoPreventivo(fase, idElementoPreventivo, idPadre);
                 }
                 aggungiNodo(nodeToDropIn, elemento);
-                //TreeNode nodoAggiunto = nodeToDropIn.Nodes.Add(idElementoPreventivo.ToString(), elemento.ToString());
-                //nodoAggiunto.Tag = elemento;
 
-                if (idPadre == -1)
-                    _elementiPreventivo.Add(elemento);
-                else
-                {
-                    int indice = _elementiPreventivo.IndexOf(padre as ElementoPreventivoModel);
-                    _elementiPreventivo.Insert(indice + 1, elemento);
-                }
+                inserisciElementoNellaLista(elemento, nodeToDropIn, idPadre);
+
 
                 RefreshGridView();
                 nodeToDropIn.ExpandAll();
             }
         }
+        private void inserisciElementoNellaLista(ElementoPreventivoModel elemento, TreeNode nodoPadre, decimal idPadre)
+        {
+            object padre = nodoPadre.Tag;
+            if (idPadre == -1)
+                _elementiPreventivo.Add(elemento);
+            else
+            {
+                int indice = _elementiPreventivo.IndexOf(padre as ElementoPreventivoModel);
+                _elementiPreventivo.Insert(indice + 1, elemento);
+            }
+        }
 
+        private decimal estraiIdPadre(TreeNode nodeToDropIn)
+        {
+            decimal idPadre = -1;
+            if (nodeToDropIn == null) { return idPadre; }
+            object padre = nodeToDropIn.Tag;
+
+            if (padre is ProdottoFinitoModel) idPadre = -1;
+            if (padre is ElementoPreventivoModel) idPadre = (padre as ElementoPreventivoModel).IdElementoPreventivo;
+            return idPadre;
+        }
         private TreeNode aggungiNodo(TreeNode nodoRadice, ElementoPreventivoModel elemento)
         {
             TreeNode nodoAggiunto = nodoRadice.Nodes.Add(elemento.IdElementoPreventivo.ToString(), elemento.ToString());
@@ -385,8 +460,6 @@ namespace MPPreventivatore
                 }
             }
         }
-
-
 
         private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
