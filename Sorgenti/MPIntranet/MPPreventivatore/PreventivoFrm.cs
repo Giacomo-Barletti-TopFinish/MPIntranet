@@ -53,6 +53,7 @@ namespace MPPreventivatore
             CreaMenuContestualeTreeView();
             caricaMateriePrime();
             caricaGrigliaElementiPreventivo();
+            this.Text = prodottoFinitoUC1.ProdottoFinitoModel.ToString();
         }
 
         private void caricaGrigliaElementiPreventivo()
@@ -124,7 +125,8 @@ namespace MPPreventivatore
 
             clonaRamoDaCopiare(_nodoDaCopiare, selectedNode);
 
-              _nodoDaCopiare = null;
+            _nodoDaCopiare = null;
+            RefreshGridView();
         }
 
         private void clonaRamoDaCopiare(TreeNode nodoDaCopiare, TreeNode nodoPadre)
@@ -158,7 +160,7 @@ namespace MPPreventivatore
             elemento.Superficie = elementoModelDaClonare.Superficie;
             elemento.Quantita = elementoModelDaClonare.Quantita;
             elemento.Descrizione = elementoModelDaClonare.Descrizione;
-            elemento.Articolo = string.Empty;
+            elemento.Articolo = elementoModelDaClonare.Articolo;
             return elemento;
         }
 
@@ -214,6 +216,7 @@ namespace MPPreventivatore
             _elementiPreventivo = _articolo.CreaListaElementoPreventivoModel(_preventivoSelezionato.IdPrevenivo);
             creaAlberoDistinta(radice);
             treeView1.ExpandAll();
+            caricaGrigliaElementiPreventivo();
         }
 
         private void creaAlberoDistinta(TreeNode radice)
@@ -470,6 +473,8 @@ namespace MPPreventivatore
                 ElementoPreventivoModel elemento = (ElementoPreventivoModel)e.Node.Tag;
                 decimal idElemento = elemento.IdElementoPreventivo;
 
+                dgvElementi.ClearSelection();
+
                 foreach (DataGridViewRow riga in dgvElementi.Rows)
                 {
                     decimal idCella = (decimal)riga.Cells[0].Value;
@@ -505,6 +510,34 @@ namespace MPPreventivatore
                     TreeNode nodo = nodi[0];
                     treeView1.SelectedNode = nodo;
                     treeView1.Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("", ex);
+            }
+            finally
+            {
+                _disabilitaEdit = false;
+            }
+        }
+
+        private void dgvElementi_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (_disabilitaEdit) return;
+            try
+            {
+                _disabilitaEdit = true;
+
+                if (e.ColumnIndex == 1)
+                {
+                    decimal idElemento = (decimal)dgvElementi.Rows[e.RowIndex].Cells[0].Value;
+                    TreeNode[] nodi = treeView1.Nodes.Find(idElemento.ToString(), true);
+                    if (nodi.Length == 1)
+                    {
+                        TreeNode nodo = nodi[0];
+                        nodo.Text = ((ElementoPreventivoModel)(nodo.Tag)).ToString();
+                    }
                 }
             }
             catch (Exception ex)

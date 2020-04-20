@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.prodottoFinitoUC1 = new MPPreventivatore.ProdottoFinitoUC();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtNota = new System.Windows.Forms.TextBox();
@@ -40,12 +41,6 @@
             this.lstFasi = new System.Windows.Forms.ListBox();
             this.ddlReparti = new System.Windows.Forms.ComboBox();
             this.dgvElementi = new System.Windows.Forms.DataGridView();
-            this.lstMateriePrime = new System.Windows.Forms.ListBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.IdEelementoPreventivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Articolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Codice = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,7 +50,12 @@
             this.Superficie = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Quantita = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PezziOrari = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prodottoFinitoUC1 = new MPPreventivatore.ProdottoFinitoUC();
+            this.lstMateriePrime = new System.Windows.Forms.ListBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvElementi)).BeginInit();
@@ -75,6 +75,15 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Prodotto finito";
+            // 
+            // prodottoFinitoUC1
+            // 
+            this.prodottoFinitoUC1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.prodottoFinitoUC1.Location = new System.Drawing.Point(6, 17);
+            this.prodottoFinitoUC1.Name = "prodottoFinitoUC1";
+            this.prodottoFinitoUC1.Size = new System.Drawing.Size(767, 157);
+            this.prodottoFinitoUC1.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -204,76 +213,8 @@
             this.dgvElementi.Size = new System.Drawing.Size(589, 439);
             this.dgvElementi.TabIndex = 9;
             this.dgvElementi.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvElementi_CellClick);
+            this.dgvElementi.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvElementi_CellEndEdit);
             this.dgvElementi.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvElementi_EditingControlShowing);
-            // 
-            // lstMateriePrime
-            // 
-            this.lstMateriePrime.AllowDrop = true;
-            this.lstMateriePrime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lstMateriePrime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lstMateriePrime.FormattingEnabled = true;
-            this.lstMateriePrime.ItemHeight = 15;
-            this.lstMateriePrime.Location = new System.Drawing.Point(6, 67);
-            this.lstMateriePrime.Name = "lstMateriePrime";
-            this.lstMateriePrime.Size = new System.Drawing.Size(292, 334);
-            this.lstMateriePrime.TabIndex = 4;
-            this.lstMateriePrime.DragOver += new System.Windows.Forms.DragEventHandler(this.lstFasi_DragOver);
-            this.lstMateriePrime.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lstMateriePrime_MouseDown);
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(464, 200);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(317, 439);
-            this.tabControl1.TabIndex = 10;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.lstFasi);
-            this.tabPage1.Controls.Add(this.ddlReparti);
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(309, 411);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Fasi";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.lstMateriePrime);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(309, 411);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Materie prime";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 6);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 15);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Reparto";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 53);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(30, 15);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Fasi";
             // 
             // IdEelementoPreventivo
             // 
@@ -342,14 +283,74 @@
             this.PezziOrari.Name = "PezziOrari";
             this.PezziOrari.Width = 80;
             // 
-            // prodottoFinitoUC1
+            // lstMateriePrime
             // 
-            this.prodottoFinitoUC1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.prodottoFinitoUC1.Location = new System.Drawing.Point(6, 17);
-            this.prodottoFinitoUC1.Name = "prodottoFinitoUC1";
-            this.prodottoFinitoUC1.Size = new System.Drawing.Size(767, 157);
-            this.prodottoFinitoUC1.TabIndex = 0;
+            this.lstMateriePrime.AllowDrop = true;
+            this.lstMateriePrime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lstMateriePrime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstMateriePrime.FormattingEnabled = true;
+            this.lstMateriePrime.ItemHeight = 15;
+            this.lstMateriePrime.Location = new System.Drawing.Point(6, 67);
+            this.lstMateriePrime.Name = "lstMateriePrime";
+            this.lstMateriePrime.Size = new System.Drawing.Size(292, 334);
+            this.lstMateriePrime.TabIndex = 4;
+            this.lstMateriePrime.DragOver += new System.Windows.Forms.DragEventHandler(this.lstFasi_DragOver);
+            this.lstMateriePrime.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lstMateriePrime_MouseDown);
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(464, 200);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(317, 439);
+            this.tabControl1.TabIndex = 10;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.label3);
+            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.lstFasi);
+            this.tabPage1.Controls.Add(this.ddlReparti);
+            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(309, 411);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Fasi";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(9, 53);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(30, 15);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Fasi";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 6);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(51, 15);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Reparto";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.lstMateriePrime);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(309, 411);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Materie prime";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // PreventivoFrm
             // 

@@ -479,7 +479,9 @@ namespace MPIntranet.Business
 
                 _ds.PREVENTIVI.AddPREVENTIVIRow(preventivo);
                 bArticolo.UpdateTable(_ds.PREVENTIVI.TableName, _ds);
+
             }
+           
             return "Preventivo creato correttamente";
         }
 
