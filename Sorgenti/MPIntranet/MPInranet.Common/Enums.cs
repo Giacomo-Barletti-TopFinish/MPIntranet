@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MPIntranet.Common
 {
-    public enum TipoRicerca { Scheda = 1, Processo,ProdottoFinito,Preventivo}
+    public enum TipoRicerca { Scheda = 1, Processo,ProdottoFinito,Preventivo,Costo}
 
     public class SiNo
     {

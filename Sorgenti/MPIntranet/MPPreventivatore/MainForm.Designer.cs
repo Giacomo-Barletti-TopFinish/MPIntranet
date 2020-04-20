@@ -44,6 +44,7 @@
             this.disponiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cascataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orizzontaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.calcolaCostoPreventvoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MPMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -142,6 +143,8 @@
             // 
             // costiToolStripMenuItem
             // 
+            this.costiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.calcolaCostoPreventvoToolStripMenuItem});
             this.costiToolStripMenuItem.Name = "costiToolStripMenuItem";
             this.costiToolStripMenuItem.Size = new System.Drawing.Size(49, 21);
             this.costiToolStripMenuItem.Text = "Costi";
@@ -160,22 +163,29 @@
             this.cascataToolStripMenuItem,
             this.orizzontaleToolStripMenuItem});
             this.disponiToolStripMenuItem.Name = "disponiToolStripMenuItem";
-            this.disponiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.disponiToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.disponiToolStripMenuItem.Text = "Disponi";
             // 
             // cascataToolStripMenuItem
             // 
             this.cascataToolStripMenuItem.Name = "cascataToolStripMenuItem";
-            this.cascataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cascataToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.cascataToolStripMenuItem.Text = "Cascata";
             this.cascataToolStripMenuItem.Click += new System.EventHandler(this.cascataToolStripMenuItem_Click);
             // 
             // orizzontaleToolStripMenuItem
             // 
             this.orizzontaleToolStripMenuItem.Name = "orizzontaleToolStripMenuItem";
-            this.orizzontaleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.orizzontaleToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.orizzontaleToolStripMenuItem.Text = "Orizzontale";
             this.orizzontaleToolStripMenuItem.Click += new System.EventHandler(this.orizzontaleToolStripMenuItem_Click);
+            // 
+            // calcolaCostoPreventvoToolStripMenuItem
+            // 
+            this.calcolaCostoPreventvoToolStripMenuItem.Name = "calcolaCostoPreventvoToolStripMenuItem";
+            this.calcolaCostoPreventvoToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.calcolaCostoPreventvoToolStripMenuItem.Text = "Calcola costo preventvo...";
+            this.calcolaCostoPreventvoToolStripMenuItem.Click += new System.EventHandler(this.calcolaCostoPreventvoToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -211,6 +221,7 @@
         private System.Windows.Forms.ToolStripMenuItem disponiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cascataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem orizzontaleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem calcolaCostoPreventvoToolStripMenuItem;
     }
 }
 

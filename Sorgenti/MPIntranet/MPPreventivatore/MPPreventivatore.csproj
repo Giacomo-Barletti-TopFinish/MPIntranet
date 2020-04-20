@@ -76,6 +76,12 @@
     <Compile Include="NuovoPreventivoFrm.Designer.cs">
       <DependentUpon>NuovoPreventivoFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CostoFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CostoFrm.Designer.cs">
+      <DependentUpon>CostoFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PreventivoFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NuovoPreventivoFrm.resx">
       <DependentUpon>NuovoPreventivoFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CostoFrm.resx">
+      <DependentUpon>CostoFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PreventivoFrm.resx">
       <DependentUpon>PreventivoFrm.cs</DependentUpon>

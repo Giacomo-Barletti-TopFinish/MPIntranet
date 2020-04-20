@@ -159,7 +159,22 @@ namespace MPPreventivatore
             }
             catch (Exception ex)
             {
-                MostraEccezione("Errore in apri prodotti finiti", ex);
+                MostraEccezione("Errore in apri preventivo", ex);
+            }
+        }
+
+        public void ApriFinestraCosto(decimal idProdottoFinito)
+        {
+            try
+            {
+                CostoFrm form = new CostoFrm();
+                form.IdProdottoFinito = idProdottoFinito;
+                form.MdiParent = this;
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("Errore in apri costo", ex);
             }
         }
         public void ApriFinestraCopiaProdotto(decimal idProdottoFinito)
@@ -200,6 +215,19 @@ namespace MPPreventivatore
         {
             LayoutMdi(MdiLayout.TileHorizontal);
         }
-      
+
+        private void calcolaCostoPreventvoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                GestisciProdottoFinitoFrm form = new GestisciProdottoFinitoFrm(TipoRicerca.Costo);
+                form.MdiParent = this;
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("Errore in crea prodotti finiti", ex);
+            }
+        }
     }
 }

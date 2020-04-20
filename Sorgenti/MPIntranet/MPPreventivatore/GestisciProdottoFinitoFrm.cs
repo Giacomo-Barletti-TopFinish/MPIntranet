@@ -142,12 +142,15 @@ namespace MPPreventivatore
                     case TipoRicerca.Preventivo:
                         (MdiParent as MainForm).ApriFinestraPreventivo(idProdottoFinito);
                         break;
+                    case TipoRicerca.Costo:
+                        (MdiParent as MainForm).ApriFinestraCosto(idProdottoFinito);
+                        break;
                 }
                 this.Close();
             }
             catch (Exception ex)
             {
-                MostraEccezione("Errore in vai a prodotto finito", ex);
+                MostraEccezione("Errore in vai a finestra successiva", ex);
             }
 
         }
