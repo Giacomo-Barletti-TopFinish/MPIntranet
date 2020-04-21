@@ -89,7 +89,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvTipologiaDocumenti);
             this.Name = "TipologiaDocumentiFrm";
-            this.Text = "TipologiaDocumentiFrm";
+            this.Text = "Tipologia documenti";
             this.Load += new System.EventHandler(this.TipologiaDocumentiFrm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTipologiaDocumenti)).EndInit();
             this.ResumeLayout(false);

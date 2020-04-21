@@ -93,7 +93,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MateriePrimeFrm";
-            this.Text = "MateriePrimeFrm";
+            this.Text = "Materie prime";
             this.Load += new System.EventHandler(this.MateriePrimeFrm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMateriePrime)).EndInit();
             this.ResumeLayout(false);

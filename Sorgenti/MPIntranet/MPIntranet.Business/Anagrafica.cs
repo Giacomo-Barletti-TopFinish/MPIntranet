@@ -715,6 +715,7 @@ namespace MPIntranet.Business
                 bAnagrafica.UpdateTable(_ds, _ds.FASI.TableName);
             }
         }
+
         public List<RepartoModel> CreaListaRepartoModel()
         {
             List<RepartoModel> lista = new List<RepartoModel>();

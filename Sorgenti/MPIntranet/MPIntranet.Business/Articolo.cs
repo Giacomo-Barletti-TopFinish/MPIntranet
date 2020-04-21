@@ -7,6 +7,7 @@ using MPIntranet.Models.Articolo;
 using MPIntranet.Models.Galvanica;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,10 @@ namespace MPIntranet.Business
         private Galvanica _galvanica = new Galvanica();
         private string _rvlImageSite;
 
+        public Articolo()
+        {
+            this._rvlImageSite = string.Empty;
+        }
         public Articolo(string RvlImageSite)
         {
             this._rvlImageSite = RvlImageSite;
@@ -164,6 +169,64 @@ namespace MPIntranet.Business
             return lista;
         }
 
+        public List<GruppoModel> CreaListaGruppoModel()
+        {
+            List<GruppoModel> lista = new List<GruppoModel>();
+
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                _ds.GRUPPI.Clear();
+                bArticolo.FillGruppi(_ds, true);
+                foreach (ArticoloDS.GRUPPIRow gruppo in _ds.GRUPPI)
+                    lista.Add(creaGruppoModel(gruppo));
+            }
+            return lista;
+        }
+
+        public List<GruppoRepartoModel> CreaListaGruppoRepartoModel(decimal idBrand)
+        {
+            List<GruppoRepartoModel> lista = new List<GruppoRepartoModel>();
+
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                _ds.GRUPPIREPARTI.Clear();
+                bArticolo.FillGruppiReparti(_ds, true);
+                List<decimal> idGruppi = CreaListaGruppoModel().Where(x => x.Brand.IdBrand == idBrand).Select(x => x.IdGruppo).ToList();
+                foreach (ArticoloDS.GRUPPIREPARTIRow gruppoReparto in _ds.GRUPPIREPARTI.Where(x => idGruppi.Contains(x.IDGRUPPO)))
+                    lista.Add(creaGruppoRepartoModel(gruppoReparto));
+            }
+            return lista;
+        }
+        private GruppoModel creaGruppoModel(ArticoloDS.GRUPPIRow gruppo)
+        {
+            Anagrafica a = new Anagrafica();
+
+            GruppoModel gruppoModel = new GruppoModel();
+            gruppoModel.Brand = a.EstraiBrandModel(gruppo.IDBRAND);
+            gruppoModel.Codice = gruppo.CODICE;
+            gruppoModel.Colore = gruppo.IsCOLOREGRUPPONull() ? Color.White.Name : gruppo.COLOREGRUPPO;
+            gruppoModel.Descrizione = gruppo.IsDESCRIZIONENull() ? string.Empty : gruppo.DESCRIZIONE;
+            gruppoModel.IdGruppo = gruppo.IDGRUPPO;
+
+            return gruppoModel;
+        }
+
+        private GruppoModel creaGruppoModel(decimal idGruppo)
+        {
+            ArticoloDS.GRUPPIRow gruppo = EstraiGruppo(idGruppo);
+            return creaGruppoModel(gruppo);
+        }
+        private GruppoRepartoModel creaGruppoRepartoModel(ArticoloDS.GRUPPIREPARTIRow gruppoReparto)
+        {
+            Anagrafica a = new Anagrafica();
+
+            GruppoRepartoModel gruppoRepartoModel = new GruppoRepartoModel();
+            gruppoRepartoModel.Reparto = a.CreaRepartoModel(gruppoReparto.IDREPARTO);
+            gruppoRepartoModel.Gruppo = creaGruppoModel(gruppoReparto.IDGRUPPO);
+            gruppoRepartoModel.IdGruppoReparto = gruppoReparto.IDGRUPPOREPARTO;
+            return gruppoRepartoModel;
+        }
+
         private ProdottoFinitoModel CreaProdottoFinitoModel(ArticoloDS.PRODOTTIFINITIRow prodottoFinito)
         {
             Anagrafica a = new Anagrafica();
@@ -217,6 +280,31 @@ namespace MPIntranet.Business
             return _ds.PREVENTIVI.Where(x => x.IDPREVENTIVO == idPreventivo).FirstOrDefault();
         }
 
+        private ArticoloDS.GRUPPIRow EstraiGruppo(decimal idGruppo)
+        {
+            ArticoloDS.GRUPPIRow gruppo = _ds.GRUPPI.Where(x => x.IDGRUPPO == idGruppo).FirstOrDefault();
+            if (gruppo == null)
+            {
+                using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+                {
+                    bArticolo.FillGruppi(_ds, true);
+                }
+            }
+            return _ds.GRUPPI.Where(x => x.IDGRUPPO == idGruppo).FirstOrDefault();
+        }
+
+        private ArticoloDS.GRUPPIREPARTIRow EstraiGruppoReparto(decimal idGruppoReparto)
+        {
+            ArticoloDS.GRUPPIREPARTIRow gruppo = _ds.GRUPPIREPARTI.Where(x => x.IDGRUPPOREPARTO == idGruppoReparto).FirstOrDefault();
+            if (gruppo == null)
+            {
+                using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+                {
+                    bArticolo.FillGruppiReparti(_ds, true);
+                }
+            }
+            return _ds.GRUPPIREPARTI.Where(x => x.IDGRUPPOREPARTO == idGruppoReparto).FirstOrDefault();
+        }
         public bool EsistonoProdottiFinitiDuplicati(string codice, string modello, decimal idColore, decimal idBrand, out string messaggio)
         {
             messaggio = string.Empty;
@@ -352,6 +440,34 @@ namespace MPIntranet.Business
             }
         }
 
+        public void CancellaGruppo(decimal idGruppo, string account)
+        {
+            ArticoloDS.GRUPPIRow gruppo = EstraiGruppo(idGruppo);
+            if (gruppo == null) return;
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                gruppo.CANCELLATO = SiNo.Si;
+                gruppo.DATAMODIFICA = DateTime.Now;
+                gruppo.UTENTEMODIFICA = account;
+
+                bArticolo.UpdateTable(_ds.GRUPPI.TableName, _ds);
+            }
+        }
+
+        public void CancellaGruppoReparto(decimal idGruppoReparto, string account)
+        {
+            ArticoloDS.GRUPPIREPARTIRow gruppoReparto = EstraiGruppoReparto(idGruppoReparto);
+            if (gruppoReparto == null) return;
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                gruppoReparto.CANCELLATO = SiNo.Si;
+                gruppoReparto.DATAMODIFICA = DateTime.Now;
+                gruppoReparto.UTENTEMODIFICA = account;
+
+                bArticolo.UpdateTable(_ds.GRUPPIREPARTI.TableName, _ds);
+            }
+        }
+
         public string CreaProdottoFinito(decimal idBrand, decimal idColore, decimal idTipoProdotto, string codice, string modello, string descrizione, string codiceProvvisorio, string codiceDefinitivo, bool preventivo, bool preserie, bool produzione, string account)
         {
 
@@ -481,7 +597,7 @@ namespace MPIntranet.Business
                 bArticolo.UpdateTable(_ds.PREVENTIVI.TableName, _ds);
 
             }
-           
+
             return "Preventivo creato correttamente";
         }
 
@@ -503,6 +619,66 @@ namespace MPIntranet.Business
             }
             return "Preventivo modificato correttamente";
         }
+
+        public string ModificaGruppo(decimal idGruppo, string codice, string descizione, string colore, string account)
+        {
+            codice = correggiString(codice, 10);
+            descizione = correggiString(descizione, 30);
+
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                ArticoloDS.GRUPPIRow gruppo = EstraiGruppo(idGruppo);
+                gruppo.CODICE = codice;
+                gruppo.DESCRIZIONE = descizione;
+                gruppo.COLOREGRUPPO = colore;
+
+                gruppo.CANCELLATO = SiNo.No;
+                gruppo.DATAMODIFICA = DateTime.Now;
+                gruppo.UTENTEMODIFICA = account;
+
+                bArticolo.UpdateTable(_ds.GRUPPI.TableName, _ds);
+            }
+            return "Gruppo modificato correttamente";
+        }
+        public string ModificaGruppoReparto(decimal idGruppoReparto, decimal idGruppo, string account)
+        {
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                ArticoloDS.GRUPPIREPARTIRow gruppoReparto = EstraiGruppoReparto(idGruppoReparto);
+                if (gruppoReparto == null) return "Gruppo reparto non trovato";
+
+                gruppoReparto.IDGRUPPO= idGruppo;
+
+                gruppoReparto.CANCELLATO = SiNo.No;
+                gruppoReparto.DATAMODIFICA = DateTime.Now;
+                gruppoReparto.UTENTEMODIFICA = account;
+
+                bArticolo.UpdateTable(_ds.GRUPPI.TableName, _ds);
+            }
+            return "Gruppo modificato correttamente";
+        }
+
+        public string CreaGruppoReparto(decimal idReparto, decimal idGruppo, string account)
+        {
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+
+                ArticoloDS.GRUPPIREPARTIRow gruppoReparto = _ds.GRUPPIREPARTI.NewGRUPPIREPARTIRow();
+
+                gruppoReparto.IDGRUPPO = idGruppo;
+                gruppoReparto.IDREPARTO = idReparto;
+
+                gruppoReparto.CANCELLATO = SiNo.No;
+                gruppoReparto.DATAMODIFICA = DateTime.Now;
+                gruppoReparto.UTENTEMODIFICA = account;
+                _ds.GRUPPIREPARTI.AddGRUPPIREPARTIRow(gruppoReparto);
+
+                bArticolo.UpdateTable(_ds.GRUPPIREPARTI.TableName, _ds);
+            }
+            return "Gruppo reparto modificato correttamente";
+        }
+
+
         public List<ElementoPreventivoModel> CreaListaElementoPreventivoModel(decimal idPreventivo)
         {
             List<ElementoPreventivoModel> elementi = new List<ElementoPreventivoModel>();
@@ -640,6 +816,38 @@ namespace MPIntranet.Business
 
             using (ArticoloBusiness bArticolo = new ArticoloBusiness())
                 bArticolo.UpdateTable(_ds.ELEMENTIPREVENTIVO.TableName, _ds);
+        }
+
+        public string CreaGruppo(string codice, string descrizione, decimal idbrand, string colore, string account)
+        {
+            descrizione = correggiString(descrizione, 30);
+            codice = correggiString(codice, 10);
+
+
+            if (string.IsNullOrEmpty(codice))
+                return "Il codice è obbligatorio";
+
+            if (CreaListaGruppoModel().Any(x => x.Codice == codice && x.Brand.IdBrand == idbrand))
+                return "Questo codice esiste già per questo brand";
+
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                ArticoloDS.GRUPPIRow gruppo = _ds.GRUPPI.NewGRUPPIRow();
+                gruppo.DESCRIZIONE = descrizione;
+                gruppo.CODICE = codice;
+                gruppo.IDBRAND = idbrand;
+                gruppo.COLOREGRUPPO = colore;
+
+                gruppo.CANCELLATO = SiNo.No;
+                gruppo.DATAMODIFICA = DateTime.Now;
+                gruppo.UTENTEMODIFICA = account;
+
+                _ds.GRUPPI.AddGRUPPIRow(gruppo);
+                bArticolo.UpdateTable(_ds.GRUPPI.TableName, _ds);
+
+            }
+
+            return "Gruppo creato correttamente";
         }
     }
 }

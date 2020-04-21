@@ -62,7 +62,7 @@ namespace MPIntranet.DataAccess.Articolo
         [DataContext]
         public void FillProdottiFiniti(ArticoloDS ds, decimal idProdottoFinito, bool soloNonCancellati)
         {
-            FillProdottiFiniti(ds, new List<decimal>(new decimal[] { idProdottoFinito }), soloNonCancellati);         
+            FillProdottiFiniti(ds, new List<decimal>(new decimal[] { idProdottoFinito }), soloNonCancellati);
         }
 
         [DataContext]
@@ -161,6 +161,21 @@ namespace MPIntranet.DataAccess.Articolo
         {
             return GetID();
         }
+
+        [DataContext]
+        public void FillGruppi(ArticoloDS ds, bool soloNonCancellati)
+        {
+            ArticoloAdapter a = new ArticoloAdapter(DbConnection, DbTransaction);
+            a.FillGruppi(ds, soloNonCancellati);
+        }
+
+        [DataContext]
+        public void FillGruppiReparti(ArticoloDS ds, bool soloNonCancellati)
+        {
+            ArticoloAdapter a = new ArticoloAdapter(DbConnection, DbTransaction);
+            a.FillGruppiReparti(ds, soloNonCancellati);
+        }
+
 
     }
 }

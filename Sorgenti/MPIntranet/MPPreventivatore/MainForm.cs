@@ -229,5 +229,19 @@ namespace MPPreventivatore
                 MostraEccezione("Errore in crea prodotti finiti", ex);
             }
         }
+
+        private void gruppiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                GruppiFrm form = new GruppiFrm();
+                form.MdiParent = this;
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("Errore in crea gruppi", ex);
+            }
+        }
     }
 }

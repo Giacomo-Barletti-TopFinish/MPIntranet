@@ -259,5 +259,30 @@ namespace MPIntranet.DataAccess.Articolo
                 da.Fill(ds.ELEMENTIPREVENTIVO);
             }
         }
+
+        public void FillGruppi(ArticoloDS ds, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM GRUPPI ";
+            if (soloNonCancellati)
+                select += "WHERE CANCELLATO = 'N' ";
+
+            select += "ORDER BY IDBRAND,CODICE";
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.GRUPPI);
+            }
+        }
+
+        public void FillGruppiReparti(ArticoloDS ds, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM GRUPPIREPARTI ";
+            if (soloNonCancellati)
+                select += "WHERE CANCELLATO = 'N' ";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.GRUPPIREPARTI);
+            }
+        }
     }
 }

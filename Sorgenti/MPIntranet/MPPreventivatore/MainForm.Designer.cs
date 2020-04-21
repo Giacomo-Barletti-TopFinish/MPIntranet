@@ -40,11 +40,12 @@
             this.creaProdottoFinitoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preventiviToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.costiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.calcolaCostoPreventvoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gruppiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.finestreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.disponiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cascataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.orizzontaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.calcolaCostoPreventvoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MPMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,6 +59,7 @@
             this.costiToolStripMenuItem,
             this.finestreToolStripMenuItem});
             this.MPMenu.Location = new System.Drawing.Point(0, 0);
+            this.MPMenu.MdiWindowListItem = this.finestreToolStripMenuItem;
             this.MPMenu.Name = "MPMenu";
             this.MPMenu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
             this.MPMenu.Size = new System.Drawing.Size(1604, 25);
@@ -144,10 +146,25 @@
             // costiToolStripMenuItem
             // 
             this.costiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.calcolaCostoPreventvoToolStripMenuItem});
+            this.calcolaCostoPreventvoToolStripMenuItem,
+            this.gruppiToolStripMenuItem});
             this.costiToolStripMenuItem.Name = "costiToolStripMenuItem";
             this.costiToolStripMenuItem.Size = new System.Drawing.Size(49, 21);
             this.costiToolStripMenuItem.Text = "Costi";
+            // 
+            // calcolaCostoPreventvoToolStripMenuItem
+            // 
+            this.calcolaCostoPreventvoToolStripMenuItem.Name = "calcolaCostoPreventvoToolStripMenuItem";
+            this.calcolaCostoPreventvoToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.calcolaCostoPreventvoToolStripMenuItem.Text = "Calcola costo preventvo...";
+            this.calcolaCostoPreventvoToolStripMenuItem.Click += new System.EventHandler(this.calcolaCostoPreventvoToolStripMenuItem_Click);
+            // 
+            // gruppiToolStripMenuItem
+            // 
+            this.gruppiToolStripMenuItem.Name = "gruppiToolStripMenuItem";
+            this.gruppiToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.gruppiToolStripMenuItem.Text = "Gruppi...";
+            this.gruppiToolStripMenuItem.Click += new System.EventHandler(this.gruppiToolStripMenuItem_Click);
             // 
             // finestreToolStripMenuItem
             // 
@@ -179,13 +196,6 @@
             this.orizzontaleToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.orizzontaleToolStripMenuItem.Text = "Orizzontale";
             this.orizzontaleToolStripMenuItem.Click += new System.EventHandler(this.orizzontaleToolStripMenuItem_Click);
-            // 
-            // calcolaCostoPreventvoToolStripMenuItem
-            // 
-            this.calcolaCostoPreventvoToolStripMenuItem.Name = "calcolaCostoPreventvoToolStripMenuItem";
-            this.calcolaCostoPreventvoToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-            this.calcolaCostoPreventvoToolStripMenuItem.Text = "Calcola costo preventvo...";
-            this.calcolaCostoPreventvoToolStripMenuItem.Click += new System.EventHandler(this.calcolaCostoPreventvoToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -222,6 +232,7 @@
         private System.Windows.Forms.ToolStripMenuItem cascataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem orizzontaleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem calcolaCostoPreventvoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gruppiToolStripMenuItem;
     }
 }
 

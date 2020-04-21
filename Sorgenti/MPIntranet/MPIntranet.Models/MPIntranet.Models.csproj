@@ -52,6 +52,7 @@
     <Compile Include="Anagrafica\TipoDocumento.cs" />
     <Compile Include="Anagrafica\TipoProdottoModel.cs" />
     <Compile Include="Articolo\ArticoloModel.cs" />
+    <Compile Include="Articolo\GruppoModel.cs" />
     <Compile Include="Articolo\PreventivoModel.cs" />
     <Compile Include="Articolo\ProcessoModel.cs" />
     <Compile Include="Articolo\ProdottoFinitoModel.cs" />
@@ -71,6 +72,11 @@
     <Compile Include="Security\MenuModel.cs" />
     <Compile Include="Security\TokenModel.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\MPIntranet.Entities\MPIntranet.Entities.csproj">
+      <Project>{055D9B2D-98FD-417E-AB6A-970203561B5C}</Project>
+      <Name>MPIntranet.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
