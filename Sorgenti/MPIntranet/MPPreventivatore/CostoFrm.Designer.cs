@@ -45,11 +45,13 @@
             this.Codice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descrizione = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Reparto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Gruppo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Peso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Superficie = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Quantita = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PezziOrari = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Costo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CostoArticolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ricarico = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -166,11 +168,13 @@
             this.Codice,
             this.Descrizione,
             this.Reparto,
+            this.Gruppo,
             this.Peso,
             this.Superficie,
             this.Quantita,
             this.PezziOrari,
             this.Costo,
+            this.CostoArticolo,
             this.Ricarico});
             this.dgvElementi.Location = new System.Drawing.Point(464, 252);
             this.dgvElementi.MultiSelect = false;
@@ -181,7 +185,9 @@
             this.dgvElementi.TabIndex = 9;
             this.dgvElementi.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvElementi_CellClick);
             this.dgvElementi.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvElementi_CellEndEdit);
+            this.dgvElementi.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvElementi_CellValueChanged);
             this.dgvElementi.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvElementi_EditingControlShowing);
+            this.dgvElementi.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvElementi_RowPrePaint);
             // 
             // IdEelementoPreventivo
             // 
@@ -223,6 +229,11 @@
             this.Reparto.Name = "Reparto";
             this.Reparto.ReadOnly = true;
             // 
+            // Gruppo
+            // 
+            this.Gruppo.HeaderText = "Gruppo";
+            this.Gruppo.Name = "Gruppo";
+            // 
             // Peso
             // 
             this.Peso.DataPropertyName = "Peso";
@@ -257,8 +268,15 @@
             // 
             // Costo
             // 
+            this.Costo.DataPropertyName = "Costo";
             this.Costo.HeaderText = "Costo orario";
             this.Costo.Name = "Costo";
+            // 
+            // CostoArticolo
+            // 
+            this.CostoArticolo.DataPropertyName = "CostoArticolo";
+            this.CostoArticolo.HeaderText = "Costo articolo";
+            this.CostoArticolo.Name = "CostoArticolo";
             // 
             // Ricarico
             // 
@@ -304,11 +322,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Codice;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descrizione;
         private System.Windows.Forms.DataGridViewTextBoxColumn Reparto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Gruppo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Peso;
         private System.Windows.Forms.DataGridViewTextBoxColumn Superficie;
         private System.Windows.Forms.DataGridViewTextBoxColumn Quantita;
         private System.Windows.Forms.DataGridViewTextBoxColumn PezziOrari;
         private System.Windows.Forms.DataGridViewTextBoxColumn Costo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CostoArticolo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ricarico;
     }
 }

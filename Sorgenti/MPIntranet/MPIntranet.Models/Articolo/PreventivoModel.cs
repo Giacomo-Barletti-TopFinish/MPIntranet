@@ -52,4 +52,5 @@ namespace MPIntranet.Models.Articolo
             return str;
         }
     }
+
 }

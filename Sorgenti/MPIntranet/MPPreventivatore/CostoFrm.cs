@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -132,19 +133,19 @@ namespace MPPreventivatore
             }
         }
 
-      
-    
+
+
         private void RefreshGridView()
         {
             _source.ResetBindings(false);
             dgvElementi.Update();
             dgvElementi.Refresh();
         }
-    
+
         private void dgvElementi_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             e.Control.KeyPress -= new KeyPressEventHandler(Numeric_KeyPress);
-            if (dgvElementi.CurrentCell.ColumnIndex >= 4)
+            if (dgvElementi.CurrentCell.ColumnIndex >= 7)
             {
                 TextBox tb = e.Control as TextBox;
                 if (tb != null)
@@ -237,6 +238,39 @@ namespace MPPreventivatore
             finally
             {
                 _disabilitaEdit = false;
+            }
+        }
+
+        private void dgvElementi_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            if (dgvElementi.Rows[e.RowIndex].Cells[5].Value == null) return;
+
+            RepartoModel reparto = (RepartoModel)dgvElementi.Rows[e.RowIndex].Cells[5].Value;
+            if (reparto == null) return;
+            GruppoRepartoModel grm = _gruppiRepartiModel.Where(x => x.Reparto.IdReparto == reparto.IdReparto).FirstOrDefault();
+            if (grm == null) return;
+            dgvElementi.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromName(grm.Gruppo.Colore);
+            dgvElementi.Rows[e.RowIndex].Cells[6].Value = grm.Gruppo.Codice;
+        }
+
+        private void dgvElementi_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            DataGridViewRow riga = dgvElementi.Rows[e.RowIndex];
+            switch(dgvElementi.Columns[e.ColumnIndex].Name)
+            {
+                case "PezziOrari":
+                case "Costo":
+                    decimal costoArticolo = 0;
+                    decimal pezziOrari = decimal.Parse(riga.Cells[dgvElementi.Columns.IndexOf(dgvElementi.Columns["PezziOrari"])].Value.ToString(), CultureInfo.InvariantCulture);
+                    if(pezziOrari>0&& riga.Cells[dgvElementi.Columns.IndexOf(dgvElementi.Columns["Costo"])].Value!=null)
+                    {
+                        decimal costo = decimal.Parse(riga.Cells[dgvElementi.Columns.IndexOf(dgvElementi.Columns["Costo"])].Value.ToString(), CultureInfo.InvariantCulture);
+                        costoArticolo = Math.Round( costo / pezziOrari,3);
+                        riga.Cells[dgvElementi.Columns.IndexOf(dgvElementi.Columns["CostoArticolo"])].Value = costoArticolo;
+                    }
+                    break;
+
             }
         }
     }

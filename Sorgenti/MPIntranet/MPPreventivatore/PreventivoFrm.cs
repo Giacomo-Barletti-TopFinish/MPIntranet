@@ -164,6 +164,7 @@ namespace MPPreventivatore
             elemento.Quantita = elementoModelDaClonare.Quantita;
             elemento.Descrizione = elementoModelDaClonare.Descrizione;
             elemento.Articolo = elementoModelDaClonare.Articolo;
+            elemento.CostoArticolo = elementoModelDaClonare.CostoArticolo;
             return elemento;
         }
 
@@ -430,6 +431,7 @@ namespace MPPreventivatore
             elemento.Quantita = 1;
             elemento.Descrizione = fase.Descrizione;
             elemento.Articolo = string.Empty;
+            elemento.CostoArticolo = 0;
             return elemento;
         }
 
@@ -452,6 +454,7 @@ namespace MPPreventivatore
             elemento.Quantita = 1;
             elemento.Descrizione = "MATERIA PRIMA";
             elemento.Articolo = materiaPrima.Descrizione;
+            elemento.CostoArticolo = 0;
             return elemento;
         }
         private void treeView1_ItemDrag(object sender, ItemDragEventArgs e)
