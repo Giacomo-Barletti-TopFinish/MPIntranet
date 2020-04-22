@@ -29,6 +29,7 @@ namespace MPIntranet.DataAccess.Anagrafica
         [DataContext]
         public void FillFasi(AnagraficaDS ds, bool soloNonCancellati)
         {
+            ds.FASI.Clear();
             AnagraficaAdapter a = new AnagraficaAdapter(DbConnection, DbTransaction);
             a.FillFasi(ds, soloNonCancellati);
         }

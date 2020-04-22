@@ -23,6 +23,8 @@ namespace MPPreventivatore
         private List<ElementoPreventivoModel> _elementiPreventivo = new List<ElementoPreventivoModel>();
         private BindingSource _source = new BindingSource();
 
+        private List<GruppoRepartoModel> _gruppiRepartiModel;
+
         public TreeNode _nodoDaCopiare
         {
             get { return (MdiParent as MainForm).NodoDaCopiare; }
@@ -47,7 +49,7 @@ namespace MPPreventivatore
             prodottoFinitoUC1.ProdottoFinitoModel = _articolo.CreaProdottoFinitoModel(IdProdottoFinito);
             prodottoFinitoUC1.Immagine = _documenti.EstraiImmagineStandard(IdProdottoFinito, TabelleEsterne.ProdottiFiniti, out filename);
             prodottoFinitoUC1.Refresh();
-
+            _gruppiRepartiModel = _articolo.CreaListaGruppoRepartoModel(prodottoFinitoUC1.ProdottoFinitoModel.Brand.IdBrand);
             caricaDdlPreventivi();
             caricaGrigliaElementiPreventivo();
             this.Text = prodottoFinitoUC1.ProdottoFinitoModel.ToString();

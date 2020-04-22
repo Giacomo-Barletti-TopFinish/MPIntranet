@@ -37,6 +37,7 @@
             // 
             // btnChiudi
             // 
+            this.btnChiudi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnChiudi.Location = new System.Drawing.Point(184, 303);
             this.btnChiudi.Name = "btnChiudi";
             this.btnChiudi.Size = new System.Drawing.Size(75, 32);

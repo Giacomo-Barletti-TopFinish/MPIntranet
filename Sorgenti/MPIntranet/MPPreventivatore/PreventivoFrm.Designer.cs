@@ -30,7 +30,6 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.prodottoFinitoUC1 = new MPPreventivatore.ProdottoFinitoUC();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtNota = new System.Windows.Forms.TextBox();
@@ -56,6 +55,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnAggiorna = new System.Windows.Forms.Button();
+            this.btnAggiorna2 = new System.Windows.Forms.Button();
+            this.prodottoFinitoUC1 = new MPPreventivatore.ProdottoFinitoUC();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvElementi)).BeginInit();
@@ -75,15 +77,6 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Prodotto finito";
-            // 
-            // prodottoFinitoUC1
-            // 
-            this.prodottoFinitoUC1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.prodottoFinitoUC1.Location = new System.Drawing.Point(6, 17);
-            this.prodottoFinitoUC1.Name = "prodottoFinitoUC1";
-            this.prodottoFinitoUC1.Size = new System.Drawing.Size(767, 157);
-            this.prodottoFinitoUC1.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -172,7 +165,7 @@
             this.lstFasi.ItemHeight = 15;
             this.lstFasi.Location = new System.Drawing.Point(9, 70);
             this.lstFasi.Name = "lstFasi";
-            this.lstFasi.Size = new System.Drawing.Size(292, 199);
+            this.lstFasi.Size = new System.Drawing.Size(292, 259);
             this.lstFasi.TabIndex = 4;
             this.lstFasi.DragOver += new System.Windows.Forms.DragEventHandler(this.lstFasi_DragOver);
             this.lstFasi.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lstFasi_MouseDown);
@@ -290,7 +283,7 @@
             this.lstMateriePrime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstMateriePrime.FormattingEnabled = true;
             this.lstMateriePrime.ItemHeight = 15;
-            this.lstMateriePrime.Location = new System.Drawing.Point(6, 67);
+            this.lstMateriePrime.Location = new System.Drawing.Point(6, 4);
             this.lstMateriePrime.Name = "lstMateriePrime";
             this.lstMateriePrime.Size = new System.Drawing.Size(292, 334);
             this.lstMateriePrime.TabIndex = 4;
@@ -311,6 +304,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btnAggiorna2);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.lstFasi);
@@ -343,6 +337,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.btnAggiorna);
             this.tabPage2.Controls.Add(this.lstMateriePrime);
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
@@ -351,6 +346,37 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Materie prime";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btnAggiorna
+            // 
+            this.btnAggiorna.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAggiorna.Location = new System.Drawing.Point(90, 360);
+            this.btnAggiorna.Name = "btnAggiorna";
+            this.btnAggiorna.Size = new System.Drawing.Size(129, 27);
+            this.btnAggiorna.TabIndex = 8;
+            this.btnAggiorna.Text = "Aggiorna";
+            this.btnAggiorna.UseVisualStyleBackColor = true;
+            this.btnAggiorna.Click += new System.EventHandler(this.btnAggiorna_Click);
+            // 
+            // btnAggiorna2
+            // 
+            this.btnAggiorna2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAggiorna2.Location = new System.Drawing.Point(90, 372);
+            this.btnAggiorna2.Name = "btnAggiorna2";
+            this.btnAggiorna2.Size = new System.Drawing.Size(129, 27);
+            this.btnAggiorna2.TabIndex = 9;
+            this.btnAggiorna2.Text = "Aggiorna";
+            this.btnAggiorna2.UseVisualStyleBackColor = true;
+            this.btnAggiorna2.Click += new System.EventHandler(this.btnAggiorna_Click);
+            // 
+            // prodottoFinitoUC1
+            // 
+            this.prodottoFinitoUC1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.prodottoFinitoUC1.Location = new System.Drawing.Point(6, 17);
+            this.prodottoFinitoUC1.Name = "prodottoFinitoUC1";
+            this.prodottoFinitoUC1.Size = new System.Drawing.Size(767, 157);
+            this.prodottoFinitoUC1.TabIndex = 0;
             // 
             // PreventivoFrm
             // 
@@ -407,5 +433,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Superficie;
         private System.Windows.Forms.DataGridViewTextBoxColumn Quantita;
         private System.Windows.Forms.DataGridViewTextBoxColumn PezziOrari;
+        private System.Windows.Forms.Button btnAggiorna;
+        private System.Windows.Forms.Button btnAggiorna2;
     }
 }

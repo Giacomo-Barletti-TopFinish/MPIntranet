@@ -755,8 +755,7 @@ namespace MPIntranet.Business
 
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
             {
-                if (_ds.FASI.Count == 0)
-                    bAnagrafica.FillFasi(_ds, true);
+                bAnagrafica.FillFasi(_ds, true);
                 foreach (AnagraficaDS.FASIRow fase in _ds.FASI)
                 {
                     lista.Add(creaFaseModel(fase));

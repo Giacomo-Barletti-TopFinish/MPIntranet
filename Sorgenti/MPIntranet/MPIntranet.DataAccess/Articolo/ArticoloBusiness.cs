@@ -114,6 +114,7 @@ namespace MPIntranet.DataAccess.Articolo
         {
             ArticoloAdapter a = new ArticoloAdapter(DbConnection, DbTransaction);
             a.UpdateTable(tablename, ds);
+            ds.Tables[tablename].AcceptChanges();
         }
 
         [DataContext]

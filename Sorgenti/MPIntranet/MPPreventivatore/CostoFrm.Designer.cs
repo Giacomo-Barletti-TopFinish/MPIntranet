@@ -40,6 +40,7 @@
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.dgvElementi = new System.Windows.Forms.DataGridView();
             this.IdEelementoPreventivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IncludiPreventivo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Articolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Codice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descrizione = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,6 +49,8 @@
             this.Superficie = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Quantita = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PezziOrari = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Costo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ricarico = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvElementi)).BeginInit();
@@ -158,6 +161,7 @@
             this.dgvElementi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvElementi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdEelementoPreventivo,
+            this.IncludiPreventivo,
             this.Articolo,
             this.Codice,
             this.Descrizione,
@@ -165,7 +169,9 @@
             this.Peso,
             this.Superficie,
             this.Quantita,
-            this.PezziOrari});
+            this.PezziOrari,
+            this.Costo,
+            this.Ricarico});
             this.dgvElementi.Location = new System.Drawing.Point(464, 252);
             this.dgvElementi.MultiSelect = false;
             this.dgvElementi.Name = "dgvElementi";
@@ -183,6 +189,11 @@
             this.IdEelementoPreventivo.HeaderText = "IdEelementoPreventivo";
             this.IdEelementoPreventivo.Name = "IdEelementoPreventivo";
             this.IdEelementoPreventivo.Visible = false;
+            // 
+            // IncludiPreventivo
+            // 
+            this.IncludiPreventivo.HeaderText = "Includi";
+            this.IncludiPreventivo.Name = "IncludiPreventivo";
             // 
             // Articolo
             // 
@@ -244,6 +255,16 @@
             this.PezziOrari.Name = "PezziOrari";
             this.PezziOrari.Width = 80;
             // 
+            // Costo
+            // 
+            this.Costo.HeaderText = "Costo orario";
+            this.Costo.Name = "Costo";
+            // 
+            // Ricarico
+            // 
+            this.Ricarico.HeaderText = "Ricarico";
+            this.Ricarico.Name = "Ricarico";
+            // 
             // CostoFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -278,6 +299,7 @@
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.DataGridView dgvElementi;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdEelementoPreventivo;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn IncludiPreventivo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Articolo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codice;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descrizione;
@@ -286,5 +308,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Superficie;
         private System.Windows.Forms.DataGridViewTextBoxColumn Quantita;
         private System.Windows.Forms.DataGridViewTextBoxColumn PezziOrari;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Costo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ricarico;
     }
 }

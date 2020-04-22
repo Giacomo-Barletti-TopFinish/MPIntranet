@@ -29,7 +29,7 @@ namespace MPIntranet.Models.Articolo
         public string Codice { get; set; }
         public RepartoModel Reparto { get; set; }
         public decimal Ricarico { get; set; }
-        public decimal Costo { get; set; }
+        public decimal CostoOrario { get; set; }
         public bool IncludiPreventivo { get; set; }
         public decimal IdEsterna { get; set; }
         public string TabellaEsterna { get; set; }
@@ -39,6 +39,7 @@ namespace MPIntranet.Models.Articolo
         public decimal Quantita { get; set; }
         public string Descrizione { get; set; }
         public string Articolo { get; set; }
+        public decimal CostoArticolo{ get; set; }
         public override string ToString()
         {
             string str = Codice;

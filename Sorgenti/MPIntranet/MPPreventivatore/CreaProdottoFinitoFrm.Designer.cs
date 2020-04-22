@@ -229,6 +229,7 @@
             // 
             // btnEsci
             // 
+            this.btnEsci.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEsci.Location = new System.Drawing.Point(210, 207);
             this.btnEsci.Name = "btnEsci";
             this.btnEsci.Size = new System.Drawing.Size(106, 36);
@@ -239,6 +240,7 @@
             // 
             // lblMessaggio
             // 
+            this.lblMessaggio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblMessaggio.AutoSize = true;
             this.lblMessaggio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMessaggio.ForeColor = System.Drawing.Color.Red;
@@ -250,6 +252,7 @@
             // 
             // btnCreaNuovo
             // 
+            this.btnCreaNuovo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCreaNuovo.Location = new System.Drawing.Point(12, 207);
             this.btnCreaNuovo.Name = "btnCreaNuovo";
             this.btnCreaNuovo.Size = new System.Drawing.Size(106, 36);

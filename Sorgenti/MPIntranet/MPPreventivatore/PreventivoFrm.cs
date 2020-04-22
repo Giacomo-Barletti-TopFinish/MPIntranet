@@ -74,7 +74,10 @@ namespace MPPreventivatore
             tn.Remove();
             RefreshGridView();
         }
-
+        private void EspandiRamoClick(object sender, EventArgs e)
+        {
+            treeView1.SelectedNode.ExpandAll();
+        }
         private void eliminaElementiFigliDallaLista(TreeNode tn)
         {
             foreach (TreeNode t in tn.Nodes)
@@ -151,7 +154,7 @@ namespace MPPreventivatore
             elemento.Codice = elementoModelDaClonare.Codice;
             elemento.Reparto = elementoModelDaClonare.Reparto;
             elemento.Ricarico = elementoModelDaClonare.Ricarico;
-            elemento.Costo = elementoModelDaClonare.Costo;
+            elemento.CostoOrario = elementoModelDaClonare.CostoOrario;
             elemento.IncludiPreventivo = elementoModelDaClonare.IncludiPreventivo;
             elemento.IdEsterna = -1;
             elemento.TabellaEsterna = string.Empty;
@@ -171,6 +174,7 @@ namespace MPPreventivatore
             cm.MenuItems.Add("Rimuovi elemento singolo", new EventHandler(RimuoviElementoSingoloClick));
             cm.MenuItems.Add("Copia ramo", new EventHandler(copiaRamoClick));
             cm.MenuItems.Add("Incolla ramo", new EventHandler(incollaRamoClick));
+            cm.MenuItems.Add("Espandi ramo", new EventHandler(EspandiRamoClick));
 
             treeView1.ContextMenu = cm;
 
@@ -184,10 +188,14 @@ namespace MPPreventivatore
 
         private void caricaDdlPreventivi()
         {
+            int indice = ddlPreventivi.SelectedIndex;
             ddlPreventivi.Items.Clear();
             ddlPreventivi.Items.AddRange(_articolo.CreaListaPreventivoModel(IdProdottoFinito).ToArray());
-            if (ddlPreventivi.Items.Count > 0)
+            if (ddlPreventivi.Items.Count > 0 && indice==-1)
                 ddlPreventivi.SelectedIndex = 0;
+
+            if (ddlPreventivi.Items.Count > 0 && indice > -1)
+                ddlPreventivi.SelectedIndex = indice;
         }
 
 
@@ -240,6 +248,13 @@ namespace MPPreventivatore
             {
                 _articolo.ModificaPreventivo(_preventivoSelezionato.IdPrevenivo, txtNota.Text, _utenteConnesso);
                 _articolo.SalvaElementiPreventivo(_elementiPreventivo, _preventivoSelezionato.IdPrevenivo, _utenteConnesso);
+                caricaDdlPreventivi();
+                ddlPreventivi_SelectedIndexChanged(null, null);
+
+            }
+            catch (DBConcurrencyException ex)
+            {
+                MostraEccezione("Errore in modifica prodotto finito", ex);
             }
             catch (Exception ex)
             {
@@ -266,7 +281,7 @@ namespace MPPreventivatore
         private void lstFasi_MouseDown(object sender, MouseEventArgs e)
         {
             if (lstFasi.Items.Count == 0) return;
-
+            if(this.lstFasi.SelectedItem==null)return;
             lstFasi.DoDragDrop(this.lstFasi.SelectedItem, DragDropEffects.Move);
 
         }
@@ -317,18 +332,14 @@ namespace MPPreventivatore
                         if (canDrop)
                         {
                             draggedNode.Remove();
+                            targetNode.Nodes.Add(draggedNode);
 
-                            if (e.KeyState == 4)
-                            {
-                                if (targetNode.Parent == null)
-                                    treeView1.Nodes.Insert(targetNode.Index + 1, draggedNode);
-                                else
-                                    targetNode.Parent.Nodes.Insert(targetNode.Index + 1, draggedNode);
-                            }
-                            else
-                            {
-                                targetNode.Nodes.Add(draggedNode);
-                            }
+                            ElementoPreventivoModel elementoSpostato = (ElementoPreventivoModel)draggedNode.Tag;
+                            decimal idPadre = estraiIdPadre(targetNode);
+                            elementoSpostato.IdPadre = idPadre;
+                            eliminaElementoDallaLista(elementoSpostato);
+                            inserisciElementoNellaLista(elementoSpostato, draggedNode, idPadre);
+                            RefreshGridView();
                             targetNode.Expand();
                         }
                     }
@@ -374,7 +385,10 @@ namespace MPPreventivatore
                 _elementiPreventivo.Insert(indice + 1, elemento);
             }
         }
-
+        private void eliminaElementoDallaLista(ElementoPreventivoModel elemento)
+        {
+            _elementiPreventivo.Remove(elemento);
+        }
         private decimal estraiIdPadre(TreeNode nodeToDropIn)
         {
             decimal idPadre = -1;
@@ -406,7 +420,7 @@ namespace MPPreventivatore
             elemento.Codice = fase.Codice;
             elemento.Reparto = fase.Reparto;
             elemento.Ricarico = fase.Ricarico;
-            elemento.Costo = fase.Costo;
+            elemento.CostoOrario = fase.Costo;
             elemento.IncludiPreventivo = fase.IncludiPreventivo;
             elemento.IdEsterna = -1;
             elemento.TabellaEsterna = string.Empty;
@@ -428,7 +442,7 @@ namespace MPPreventivatore
             elemento.Codice = materiaPrima.Codice;
             elemento.Reparto = null;
             elemento.Ricarico = materiaPrima.Ricarico;
-            elemento.Costo = materiaPrima.Costo;
+            elemento.CostoOrario = materiaPrima.Costo;
             elemento.IncludiPreventivo = materiaPrima.IncludiPreventivo;
             elemento.IdEsterna = -1;
             elemento.TabellaEsterna = string.Empty;
@@ -548,6 +562,15 @@ namespace MPPreventivatore
             {
                 _disabilitaEdit = false;
             }
+        }
+
+    
+        private void btnAggiorna_Click(object sender, EventArgs e)
+        {
+            caricaMateriePrime();
+            int indice = ddlReparti.SelectedIndex;
+            caricaDdlReparti();
+            ddlReparti.SelectedIndex = indice;
         }
     }
 }

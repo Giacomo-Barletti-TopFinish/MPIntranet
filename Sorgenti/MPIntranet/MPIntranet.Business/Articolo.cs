@@ -647,7 +647,7 @@ namespace MPIntranet.Business
                 ArticoloDS.GRUPPIREPARTIRow gruppoReparto = EstraiGruppoReparto(idGruppoReparto);
                 if (gruppoReparto == null) return "Gruppo reparto non trovato";
 
-                gruppoReparto.IDGRUPPO= idGruppo;
+                gruppoReparto.IDGRUPPO = idGruppo;
 
                 gruppoReparto.CANCELLATO = SiNo.No;
                 gruppoReparto.DATAMODIFICA = DateTime.Now;
@@ -691,7 +691,7 @@ namespace MPIntranet.Business
                 }
             }
 
-            foreach (ArticoloDS.ELEMENTIPREVENTIVORow elementoDatabase in _ds.ELEMENTIPREVENTIVO.Where(x => x.IDPREVENTIVO == idPreventivo))
+            foreach (ArticoloDS.ELEMENTIPREVENTIVORow elementoDatabase in _ds.ELEMENTIPREVENTIVO.Where(x => x.IDPREVENTIVO == idPreventivo && x.CANCELLATO==SiNo.No))
                 elementi.Add(creaElementoPreventivoModel(elementoDatabase));
 
             return elementi;
@@ -703,7 +703,7 @@ namespace MPIntranet.Business
             ElementoPreventivoModel elementoModel = new ElementoPreventivoModel();
             elementoModel.Articolo = elementoPreventivo.IsARTICOLONull() ? string.Empty : elementoPreventivo.ARTICOLO;
             elementoModel.Codice = elementoPreventivo.CODICE;
-            elementoModel.Costo = elementoPreventivo.IsCOSTONull() ? 0 : elementoPreventivo.COSTO;
+            elementoModel.CostoOrario = elementoPreventivo.IsCOSTONull() ? 0 : elementoPreventivo.COSTO;
             elementoModel.Descrizione = elementoPreventivo.DESCRIZIONE;
             elementoModel.IdElementoPreventivo = elementoPreventivo.IDELEMENTOPREVENTIVO;
             elementoModel.IdEsterna = elementoPreventivo.IsIDESTERNANull() ? -1 : elementoPreventivo.IDESTERNA;
@@ -713,6 +713,7 @@ namespace MPIntranet.Business
             elementoModel.Peso = elementoPreventivo.IsPESONull() ? 0 : elementoPreventivo.PESO;
             elementoModel.PezziOrari = elementoPreventivo.IsPEZZIORARINull() ? 0 : elementoPreventivo.PEZZIORARI;
             elementoModel.Quantita = elementoPreventivo.QUANTITA;
+            elementoModel.CostoArticolo = elementoPreventivo.IsCOSTOARTICOLONull() ? 0 : elementoPreventivo.COSTOARTICOLO;
             if (!elementoPreventivo.IsIDREPARTONull())
                 elementoModel.Reparto = a.CreaRepartoModel(elementoPreventivo.IDREPARTO);
             elementoModel.Ricarico = elementoPreventivo.IsRICARICONull() ? 0 : elementoPreventivo.RICARICO;
@@ -725,13 +726,10 @@ namespace MPIntranet.Business
 
         public void SalvaElementiPreventivo(List<ElementoPreventivoModel> elementiPreventivoModel, decimal idPreventivo, string account)
         {
-
-            if (!_ds.ELEMENTIPREVENTIVO.Any(x => x.IDPREVENTIVO == idPreventivo))
+            _ds.ELEMENTIPREVENTIVO.Clear();
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
             {
-                using (ArticoloBusiness bArticolo = new ArticoloBusiness())
-                {
-                    bArticolo.FillElementiPreventivo(_ds, idPreventivo);
-                }
+                bArticolo.FillElementiPreventivo(_ds, idPreventivo);
             }
 
             foreach (ArticoloDS.ELEMENTIPREVENTIVORow elementoDatabase in _ds.ELEMENTIPREVENTIVO.Where(x => x.IDPREVENTIVO == idPreventivo))
@@ -746,8 +744,9 @@ namespace MPIntranet.Business
                     string articolo = elementoPreventivoModel.Articolo.Trim().ToUpper();
                     elementoDatabase.ARTICOLO = correggiString(elementoPreventivoModel.Articolo, 30);
                     elementoDatabase.CODICE = correggiString(elementoPreventivoModel.Codice, 10);
-                    elementoDatabase.COSTO = elementoPreventivoModel.Costo;
+                    elementoDatabase.COSTO = elementoPreventivoModel.CostoOrario;
                     elementoDatabase.DESCRIZIONE = correggiString(elementoPreventivoModel.Descrizione, 40);
+                    elementoDatabase.COSTOARTICOLO = elementoPreventivoModel.CostoArticolo;
 
                     if (elementoPreventivoModel.IdEsterna == -1) elementoDatabase.SetIDESTERNANull();
                     else elementoDatabase.IDESTERNA = elementoPreventivoModel.IdEsterna;
@@ -783,9 +782,9 @@ namespace MPIntranet.Business
 
                     elementoNuovo.ARTICOLO = correggiString(elementoPreventivoModel.Articolo, 30);
                     elementoNuovo.CODICE = correggiString(elementoPreventivoModel.Codice, 10);
-                    elementoNuovo.COSTO = elementoPreventivoModel.Costo;
+                    elementoNuovo.COSTO = elementoPreventivoModel.CostoOrario;
                     elementoNuovo.DESCRIZIONE = correggiString(elementoPreventivoModel.Descrizione, 40);
-
+                    elementoNuovo.COSTOARTICOLO = elementoPreventivoModel.CostoArticolo;
 
                     if (elementoPreventivoModel.IdEsterna == -1) elementoNuovo.SetIDESTERNANull();
                     else elementoNuovo.IDESTERNA = elementoPreventivoModel.IdEsterna;
