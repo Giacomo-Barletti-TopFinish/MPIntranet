@@ -26,11 +26,6 @@ namespace MPPreventivatore
 
         private List<GruppoRepartoModel> _gruppiRepartiModel;
 
-        public TreeNode _nodoDaCopiare
-        {
-            get { return (MdiParent as MainForm).NodoDaCopiare; }
-            set { (MdiParent as MainForm).NodoDaCopiare = value; }
-        }
         private PreventivoModel _preventivoSelezionato
         {
             get
@@ -129,19 +124,10 @@ namespace MPPreventivatore
             }
             catch (Exception ex)
             {
-                MostraEccezione("Errore in modifica prodotto finito", ex);
+                MostraEccezione("Errore in modifica preventivo", ex);
             }
         }
-
-
-
-        private void RefreshGridView()
-        {
-            _source.ResetBindings(false);
-            dgvElementi.Update();
-            dgvElementi.Refresh();
-        }
-
+        
         private void dgvElementi_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             e.Control.KeyPress -= new KeyPressEventHandler(Numeric_KeyPress);

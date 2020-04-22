@@ -54,6 +54,9 @@ namespace MPPreventivatore
             caricaMateriePrime();
             caricaGrigliaElementiPreventivo();
             this.Text = prodottoFinitoUC1.ProdottoFinitoModel.ToString();
+
+            if (ddlPreventivi.Items.Count == 0) btnCreaNuovaVersione_Click(null, null);
+
         }
 
         private void caricaGrigliaElementiPreventivo()
@@ -192,7 +195,7 @@ namespace MPPreventivatore
             int indice = ddlPreventivi.SelectedIndex;
             ddlPreventivi.Items.Clear();
             ddlPreventivi.Items.AddRange(_articolo.CreaListaPreventivoModel(IdProdottoFinito).ToArray());
-            if (ddlPreventivi.Items.Count > 0 && indice==-1)
+            if (ddlPreventivi.Items.Count > 0 && indice == -1)
                 ddlPreventivi.SelectedIndex = 0;
 
             if (ddlPreventivi.Items.Count > 0 && indice > -1)
@@ -282,7 +285,7 @@ namespace MPPreventivatore
         private void lstFasi_MouseDown(object sender, MouseEventArgs e)
         {
             if (lstFasi.Items.Count == 0) return;
-            if(this.lstFasi.SelectedItem==null)return;
+            if (this.lstFasi.SelectedItem == null) return;
             lstFasi.DoDragDrop(this.lstFasi.SelectedItem, DragDropEffects.Move);
 
         }
@@ -567,7 +570,7 @@ namespace MPPreventivatore
             }
         }
 
-    
+
         private void btnAggiorna_Click(object sender, EventArgs e)
         {
             caricaMateriePrime();

@@ -53,9 +53,14 @@
             this.Costo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CostoArticolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ricarico = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvElementi)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -157,9 +162,6 @@
             // 
             this.dgvElementi.AllowUserToAddRows = false;
             this.dgvElementi.AllowUserToDeleteRows = false;
-            this.dgvElementi.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvElementi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvElementi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdEelementoPreventivo,
@@ -176,12 +178,13 @@
             this.Costo,
             this.CostoArticolo,
             this.Ricarico});
-            this.dgvElementi.Location = new System.Drawing.Point(464, 252);
+            this.dgvElementi.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvElementi.Location = new System.Drawing.Point(3, 3);
             this.dgvElementi.MultiSelect = false;
             this.dgvElementi.Name = "dgvElementi";
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvElementi.RowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvElementi.Size = new System.Drawing.Size(912, 387);
+            this.dgvElementi.Size = new System.Drawing.Size(894, 411);
             this.dgvElementi.TabIndex = 9;
             this.dgvElementi.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvElementi_CellClick);
             this.dgvElementi.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvElementi_CellEndEdit);
@@ -283,12 +286,43 @@
             this.Ricarico.HeaderText = "Ricarico";
             this.Ricarico.Name = "Ricarico";
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(464, 200);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(908, 445);
+            this.tabControl1.TabIndex = 10;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.dgvElementi);
+            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(900, 417);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Dettaglio elementi";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(900, 417);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Gruppi";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
             // CostoFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1384, 661);
-            this.Controls.Add(this.dgvElementi);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -300,6 +334,8 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvElementi)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -330,5 +366,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Costo;
         private System.Windows.Forms.DataGridViewTextBoxColumn CostoArticolo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ricarico;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }
