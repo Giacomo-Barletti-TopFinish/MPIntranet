@@ -243,5 +243,19 @@ namespace MPPreventivatore
                 MostraEccezione("Errore in crea gruppi", ex);
             }
         }
+
+        private void costiFissiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CostiFissiFrm form = new CostiFissiFrm();
+                form.MdiParent = this;
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("Errore in crea costi fissi", ex);
+            }
+        }
     }
 }

@@ -120,6 +120,12 @@
     <Compile Include="TipologiaArticoliFrm.Designer.cs">
       <DependentUpon>TipologiaArticoliFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CostiFissiFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CostiFissiFrm.Designer.cs">
+      <DependentUpon>CostiFissiFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TipologiaDocumentiFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,6 +176,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TipologiaArticoliFrm.resx">
       <DependentUpon>TipologiaArticoliFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CostiFissiFrm.resx">
+      <DependentUpon>CostiFissiFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TipologiaDocumentiFrm.resx">
       <DependentUpon>TipologiaDocumentiFrm.cs</DependentUpon>

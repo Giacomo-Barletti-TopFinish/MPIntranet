@@ -1,6 +1,6 @@
 ﻿namespace MPPreventivatore
 {
-    partial class TipologiaDocumentiFrm
+    partial class CostiFissiFrm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,8 +31,8 @@
             this.btnChiudi = new System.Windows.Forms.Button();
             this.lblMessaggio = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.dgvTipologiaDocumenti = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTipologiaDocumenti)).BeginInit();
+            this.dgvCostiFissi = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCostiFissi)).BeginInit();
             this.SuspendLayout();
             // 
             // btnChiudi
@@ -60,27 +60,29 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 4);
+            this.label1.Location = new System.Drawing.Point(12, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 13);
+            this.label1.Size = new System.Drawing.Size(50, 13);
             this.label1.TabIndex = 9;
-            this.label1.Text = "Tipologia prodotto";
+            this.label1.Text = "Costi fissi";
             // 
-            // dgvTipologiaDocumenti
+            // dgvCostiFissi
             // 
-            this.dgvTipologiaDocumenti.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dgvCostiFissi.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvTipologiaDocumenti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTipologiaDocumenti.Location = new System.Drawing.Point(12, 29);
-            this.dgvTipologiaDocumenti.MultiSelect = false;
-            this.dgvTipologiaDocumenti.Name = "dgvTipologiaDocumenti";
-            this.dgvTipologiaDocumenti.Size = new System.Drawing.Size(418, 253);
-            this.dgvTipologiaDocumenti.TabIndex = 8;
-            this.dgvTipologiaDocumenti.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTipologiaDocumenti_CellEndEdit);
-            this.dgvTipologiaDocumenti.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvTipologiaDocumenti_UserAddedRow);
-            this.dgvTipologiaDocumenti.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgvTipologiaDocumenti_UserDeletingRow);
+            this.dgvCostiFissi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCostiFissi.Location = new System.Drawing.Point(12, 29);
+            this.dgvCostiFissi.MultiSelect = false;
+            this.dgvCostiFissi.Name = "dgvCostiFissi";
+            this.dgvCostiFissi.Size = new System.Drawing.Size(418, 253);
+            this.dgvCostiFissi.TabIndex = 8;
+            this.dgvCostiFissi.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCostiFissi_CellEndEdit);
+            this.dgvCostiFissi.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvCostiFissi_EditingControlShowing);
+            this.dgvCostiFissi.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvCostiFissi_UserAddedRow);
+            this.dgvCostiFissi.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgvCostiFissi_UserDeletingRow);
             // 
-            // TipologiaDocumentiFrm
+            // CostiFissiFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -88,13 +90,13 @@
             this.Controls.Add(this.btnChiudi);
             this.Controls.Add(this.lblMessaggio);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dgvTipologiaDocumenti);
+            this.Controls.Add(this.dgvCostiFissi);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "TipologiaDocumentiFrm";
-            this.Text = "Tipologia documenti";
+            this.Name = "CostiFissiFrm";
+            this.Text = "Costi fissi";
             this.Load += new System.EventHandler(this.TipologiaDocumentiFrm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTipologiaDocumenti)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCostiFissi)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -105,6 +107,6 @@
         private System.Windows.Forms.Button btnChiudi;
         private System.Windows.Forms.Label lblMessaggio;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dgvTipologiaDocumenti;
+        private System.Windows.Forms.DataGridView dgvCostiFissi;
     }
 }

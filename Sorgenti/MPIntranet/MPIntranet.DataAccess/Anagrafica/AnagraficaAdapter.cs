@@ -81,6 +81,17 @@ namespace MPIntranet.DataAccess.Anagrafica
             }
         }
 
+        public void FillCostiFissi(AnagraficaDS ds, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM COSTIFISSI ";
+            if (soloNonCancellati)
+                select += "WHERE CANCELLATO = 'N'";
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.COSTIFISSI);
+            }
+        }
+
         public void FillMateriali(AnagraficaDS ds, bool soloNonCancellati)
         {
             string select = @"SELECT * FROM MATERIALI ";

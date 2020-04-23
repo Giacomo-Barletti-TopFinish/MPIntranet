@@ -436,6 +436,30 @@ namespace MPIntranet.Business
                 return string.Empty;
             }
         }
+        public List<CostoFissoModel> CreaListaCostoFissoModel()
+        {
+            List<CostoFissoModel> lista = new List<CostoFissoModel>();
+
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillCostiFissi(_ds, true);
+                foreach (AnagraficaDS.COSTIFISSIRow costoFisso in _ds.COSTIFISSI)
+                    lista.Add(creaCostoFissoModel(costoFisso));
+            }
+            return lista;
+        }
+        private CostoFissoModel creaCostoFissoModel(AnagraficaDS.COSTIFISSIRow costoFisso)
+        {
+            CostoFissoModel td = new CostoFissoModel()
+            {
+                IdCostoFisso = costoFisso.IDCOSTOFISSO,
+                Codice = costoFisso.CODICE,
+                Descrizione = costoFisso.IsDESCRIZIONENull() ? string.Empty : costoFisso.DESCRIZIONE,
+                Costo = costoFisso.COSTO,
+                Ricarico = costoFisso.RICARICO,
+            };
+            return td;
+        }
         public List<TipoDocumentoModel> CreaListaTipoDocumentoModel()
         {
             List<TipoDocumentoModel> lista = new List<TipoDocumentoModel>();
@@ -444,11 +468,11 @@ namespace MPIntranet.Business
             {
                 bAnagrafica.FillTipiDocumento(_ds, true);
                 foreach (AnagraficaDS.TIPIDOCUMENTORow tipoDocumento in _ds.TIPIDOCUMENTO)
-                    lista.Add(CreaTipoDocumentoModel(tipoDocumento));
+                    lista.Add(creaTipoDocumentoModel(tipoDocumento));
             }
             return lista;
         }
-        private TipoDocumentoModel CreaTipoDocumentoModel(AnagraficaDS.TIPIDOCUMENTORow tipoDocumento)
+        private TipoDocumentoModel creaTipoDocumentoModel(AnagraficaDS.TIPIDOCUMENTORow tipoDocumento)
         {
             TipoDocumentoModel td = new TipoDocumentoModel()
             {
@@ -463,7 +487,7 @@ namespace MPIntranet.Business
         {
             AnagraficaDS.TIPIDOCUMENTORow tipoDocumento = this.EstraiTipoDocumento(idTipoDocumento);
             if (tipoDocumento == null) return null;
-            return CreaTipoDocumentoModel(tipoDocumento);
+            return creaTipoDocumentoModel(tipoDocumento);
 
         }
         public void CancellaTipoDocumento(decimal idTipoDocumento, string account)
@@ -480,6 +504,20 @@ namespace MPIntranet.Business
 
                     bAnagrafica.UpdateTable(_ds, _ds.TIPIDOCUMENTO.TableName);
                 }
+            }
+        }
+
+        public void CancellaCostoFisso(decimal idCostoFisso, string account)
+        {
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillCostiFissi(_ds, true);
+                AnagraficaDS.COSTIFISSIRow costoFisso = _ds.COSTIFISSI.Where(x => x.IDCOSTOFISSO == idCostoFisso).FirstOrDefault();
+                costoFisso.CANCELLATO = SiNo.Si;
+                costoFisso.DATAMODIFICA = DateTime.Now;
+                costoFisso.UTENTEMODIFICA = account;
+
+                bAnagrafica.UpdateTable(_ds, _ds.COSTIFISSI.TableName);
             }
         }
 
@@ -512,6 +550,37 @@ namespace MPIntranet.Business
             }
         }
 
+        public string CreaCostoFisso(string codice, string account)
+        {
+            codice = correggiString(codice, 10);
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillCostiFissi(_ds, false);
+                AnagraficaDS.COSTIFISSIRow costoFisso = _ds.COSTIFISSI.Where(x => x.CODICE == codice).FirstOrDefault();
+                if (costoFisso != null)
+                {
+                    if (costoFisso.CANCELLATO == SiNo.Si)
+                        return "Un costo fisso con questa descrizione era presente ma è stato cancellato";
+                    else
+                        return "Un costo fisso con questa descrizione è già presente";
+                }
+
+                AnagraficaDS.COSTIFISSIRow td = _ds.COSTIFISSI.NewCOSTIFISSIRow();
+                td.CANCELLATO = SiNo.No;
+                td.CODICE = codice;
+                td.DESCRIZIONE = string.Empty;
+                td.COSTO = 0;
+                td.RICARICO = 0;
+                td.DATAMODIFICA = DateTime.Now;
+                td.UTENTEMODIFICA = account;
+
+                _ds.COSTIFISSI.AddCOSTIFISSIRow(td);
+                bAnagrafica.UpdateTable(_ds, _ds.COSTIFISSI.TableName);
+
+                return string.Empty;
+            }
+
+        }
         public List<MaterialeModel> CreaListaMaterialeModel()
         {
             List<MaterialeModel> lista = new List<MaterialeModel>();
@@ -1045,6 +1114,43 @@ namespace MPIntranet.Business
                 return string.Empty;
             }
         }
+
+        public string ModificaCostoFisso(decimal idCostoFisso, string codice, string descrizione, decimal costo, decimal ricarico, string account)
+        {
+            if (string.IsNullOrEmpty(codice)) return "Codice deve essere valorizzato";
+
+            descrizione = correggiString(descrizione, 30);
+            codice = correggiString(codice, 10);
+
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillCostiFissi(_ds, false);
+                AnagraficaDS.COSTIFISSIRow costoFisso = _ds.COSTIFISSI.Where(x => x.IDCOSTOFISSO == idCostoFisso).FirstOrDefault();
+                if (costoFisso == null) return "Impossibile modificare il costo fisso";
+
+                AnagraficaDS.COSTIFISSIRow b = _ds.COSTIFISSI.Where(x => x.CODICE == codice && x.IDCOSTOFISSO != idCostoFisso).FirstOrDefault();
+                if (b != null)
+                {
+                    if (b.CANCELLATO == SiNo.Si)
+                        return "Un costo fisso con questo codice era presente ma è stato cancellato";
+                    else
+                        return "Un costo fisso con questo codice è già presente";
+                }
+
+                costoFisso.CODICE = codice;
+                costoFisso.DESCRIZIONE = descrizione;
+                costoFisso.COSTO = costo;
+                costoFisso.RICARICO = ricarico;
+
+                costoFisso.DATAMODIFICA = DateTime.Now;
+                costoFisso.UTENTEMODIFICA = account;
+
+                bAnagrafica.UpdateTable(_ds, _ds.COSTIFISSI.TableName);
+
+                return string.Empty;
+            }
+        }
+
         public void CancellaTipoProdotto(decimal idTipoProdotto, string account)
         {
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())

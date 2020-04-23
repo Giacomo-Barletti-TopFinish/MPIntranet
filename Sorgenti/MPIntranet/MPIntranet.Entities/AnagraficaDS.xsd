@@ -360,6 +360,44 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="COSTIFISSI" msprop:Generator_TableClassName="COSTIFISSIDataTable" msprop:Generator_TableVarName="tableCOSTIFISSI" msprop:Generator_RowChangedName="COSTIFISSIRowChanged" msprop:Generator_TablePropName="COSTIFISSI" msprop:Generator_RowDeletingName="COSTIFISSIRowDeleting" msprop:Generator_RowChangingName="COSTIFISSIRowChanging" msprop:Generator_RowEvHandlerName="COSTIFISSIRowChangeEventHandler" msprop:Generator_RowDeletedName="COSTIFISSIRowDeleted" msprop:Generator_RowClassName="COSTIFISSIRow" msprop:Generator_UserTableName="COSTIFISSI" msprop:Generator_RowEvArgName="COSTIFISSIRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDCOSTOFISSO" msprop:Generator_ColumnVarNameInTable="columnIDCOSTOFISSO" msprop:Generator_ColumnPropNameInRow="IDCOSTOFISSO" msprop:Generator_ColumnPropNameInTable="IDCOSTOFISSOColumn" msprop:Generator_UserColumnName="IDCOSTOFISSO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CODICE" msprop:Generator_ColumnVarNameInTable="columnCODICE" msprop:Generator_ColumnPropNameInRow="CODICE" msprop:Generator_ColumnPropNameInTable="CODICEColumn" msprop:Generator_UserColumnName="CODICE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DESCRIZIONE" msprop:Generator_ColumnVarNameInTable="columnDESCRIZIONE" msprop:Generator_ColumnPropNameInRow="DESCRIZIONE" msprop:Generator_ColumnPropNameInTable="DESCRIZIONEColumn" msprop:Generator_UserColumnName="DESCRIZIONE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COSTO" msprop:Generator_ColumnVarNameInTable="columnCOSTO" msprop:Generator_ColumnPropNameInRow="COSTO" msprop:Generator_ColumnPropNameInTable="COSTOColumn" msprop:Generator_UserColumnName="COSTO" type="xs:decimal" />
+              <xs:element name="RICARICO" msprop:Generator_ColumnVarNameInTable="columnRICARICO" msprop:Generator_ColumnPropNameInRow="RICARICO" msprop:Generator_ColumnPropNameInTable="RICARICOColumn" msprop:Generator_UserColumnName="RICARICO" type="xs:decimal" />
+              <xs:element name="CANCELLATO" msprop:Generator_ColumnVarNameInTable="columnCANCELLATO" msprop:Generator_ColumnPropNameInRow="CANCELLATO" msprop:Generator_ColumnPropNameInTable="CANCELLATOColumn" msprop:Generator_UserColumnName="CANCELLATO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATAMODIFICA" msprop:Generator_ColumnVarNameInTable="columnDATAMODIFICA" msprop:Generator_ColumnPropNameInRow="DATAMODIFICA" msprop:Generator_ColumnPropNameInTable="DATAMODIFICAColumn" msprop:Generator_UserColumnName="DATAMODIFICA" type="xs:dateTime" />
+              <xs:element name="UTENTEMODIFICA" msprop:Generator_ColumnVarNameInTable="columnUTENTEMODIFICA" msprop:Generator_ColumnPropNameInRow="UTENTEMODIFICA" msprop:Generator_ColumnPropNameInTable="UTENTEMODIFICAColumn" msprop:Generator_UserColumnName="UTENTEMODIFICA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>
