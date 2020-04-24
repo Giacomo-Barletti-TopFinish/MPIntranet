@@ -159,11 +159,10 @@ namespace MPIntranetWeb.Controllers
             return Content(messaggio);
         }
 
-        public ActionResult CreaNuovoProcesso(decimal idArticolo, decimal idImpianto)
+        public ActionResult CreaNuovoProcesso(decimal idArticolo, decimal idImpianto, decimal idColore)
         {
-
             ProcessoGalvanico p = new ProcessoGalvanico();
-            p.CreaNuovoProcesso(idArticolo, idImpianto, "** NUOVO PROCESSO **", ConnectedUser);
+            p.CreaNuovoProcesso(idArticolo, idImpianto,idColore,"** NUOVO PROCESSO **", ConnectedUser);
             return Content("ok");
         }
 

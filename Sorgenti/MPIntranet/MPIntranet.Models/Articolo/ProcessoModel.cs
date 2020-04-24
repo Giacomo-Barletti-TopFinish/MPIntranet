@@ -1,4 +1,5 @@
-﻿using MPIntranet.Models.Galvanica;
+﻿using MPIntranet.Models.Anagrafica;
+using MPIntranet.Models.Galvanica;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace MPIntranet.Models.Articolo
         public ImpiantoModel Impianto { get; set; }
         public List<FaseProcessoModel> Fasi { get; set; }
         public TelaioModel Telaio { get; set; }
+        public bool Standard { get; set; }
+        public ColoreModel Colore{ get; set; }
     }
 
     public class FaseProcessoModel

@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.prodottoFinitoUC1 = new MPPreventivatore.ProdottoFinitoUC();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtNota = new System.Windows.Forms.TextBox();
@@ -40,6 +41,16 @@
             this.lstFasi = new System.Windows.Forms.ListBox();
             this.ddlReparti = new System.Windows.Forms.ComboBox();
             this.dgvElementi = new System.Windows.Forms.DataGridView();
+            this.lstMateriePrime = new System.Windows.Forms.ListBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnAggiorna2 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnAggiorna = new System.Windows.Forms.Button();
+            this.ddlProcessiGalvanici = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.IdEelementoPreventivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Articolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Codice = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,15 +60,7 @@
             this.Superficie = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Quantita = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PezziOrari = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lstMateriePrime = new System.Windows.Forms.ListBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btnAggiorna = new System.Windows.Forms.Button();
-            this.btnAggiorna2 = new System.Windows.Forms.Button();
-            this.prodottoFinitoUC1 = new MPPreventivatore.ProdottoFinitoUC();
+            this.Nota = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvElementi)).BeginInit();
@@ -78,6 +81,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Prodotto finito";
             // 
+            // prodottoFinitoUC1
+            // 
+            this.prodottoFinitoUC1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.prodottoFinitoUC1.Location = new System.Drawing.Point(6, 17);
+            this.prodottoFinitoUC1.Name = "prodottoFinitoUC1";
+            this.prodottoFinitoUC1.Size = new System.Drawing.Size(767, 157);
+            this.prodottoFinitoUC1.TabIndex = 0;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.label1);
@@ -87,7 +99,7 @@
             this.groupBox2.Controls.Add(this.ddlPreventivi);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(575, 182);
+            this.groupBox2.Size = new System.Drawing.Size(575, 134);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Preventivo";
@@ -107,12 +119,12 @@
             this.txtNota.MaxLength = 100;
             this.txtNota.Multiline = true;
             this.txtNota.Name = "txtNota";
-            this.txtNota.Size = new System.Drawing.Size(376, 111);
+            this.txtNota.Size = new System.Drawing.Size(376, 56);
             this.txtNota.TabIndex = 2;
             // 
             // btnSalva
             // 
-            this.btnSalva.Location = new System.Drawing.Point(399, 143);
+            this.btnSalva.Location = new System.Drawing.Point(399, 88);
             this.btnSalva.Name = "btnSalva";
             this.btnSalva.Size = new System.Drawing.Size(141, 33);
             this.btnSalva.TabIndex = 1;
@@ -197,7 +209,8 @@
             this.Peso,
             this.Superficie,
             this.Quantita,
-            this.PezziOrari});
+            this.PezziOrari,
+            this.Nota});
             this.dgvElementi.Location = new System.Drawing.Point(787, 200);
             this.dgvElementi.MultiSelect = false;
             this.dgvElementi.Name = "dgvElementi";
@@ -208,6 +221,118 @@
             this.dgvElementi.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvElementi_CellClick);
             this.dgvElementi.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvElementi_CellEndEdit);
             this.dgvElementi.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvElementi_EditingControlShowing);
+            // 
+            // lstMateriePrime
+            // 
+            this.lstMateriePrime.AllowDrop = true;
+            this.lstMateriePrime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lstMateriePrime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstMateriePrime.FormattingEnabled = true;
+            this.lstMateriePrime.ItemHeight = 15;
+            this.lstMateriePrime.Location = new System.Drawing.Point(6, 4);
+            this.lstMateriePrime.Name = "lstMateriePrime";
+            this.lstMateriePrime.Size = new System.Drawing.Size(292, 334);
+            this.lstMateriePrime.TabIndex = 4;
+            this.lstMateriePrime.DragOver += new System.Windows.Forms.DragEventHandler(this.lstFasi_DragOver);
+            this.lstMateriePrime.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lstMateriePrime_MouseDown);
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(464, 200);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(317, 439);
+            this.tabControl1.TabIndex = 10;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.btnAggiorna2);
+            this.tabPage1.Controls.Add(this.label3);
+            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.lstFasi);
+            this.tabPage1.Controls.Add(this.ddlReparti);
+            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(309, 411);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Fasi";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // btnAggiorna2
+            // 
+            this.btnAggiorna2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAggiorna2.Location = new System.Drawing.Point(90, 372);
+            this.btnAggiorna2.Name = "btnAggiorna2";
+            this.btnAggiorna2.Size = new System.Drawing.Size(129, 27);
+            this.btnAggiorna2.TabIndex = 9;
+            this.btnAggiorna2.Text = "Aggiorna";
+            this.btnAggiorna2.UseVisualStyleBackColor = true;
+            this.btnAggiorna2.Click += new System.EventHandler(this.btnAggiorna_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(9, 53);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(30, 15);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Fasi";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 6);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(51, 15);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Reparto";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.btnAggiorna);
+            this.tabPage2.Controls.Add(this.lstMateriePrime);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(309, 411);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Materie prime";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btnAggiorna
+            // 
+            this.btnAggiorna.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAggiorna.Location = new System.Drawing.Point(90, 360);
+            this.btnAggiorna.Name = "btnAggiorna";
+            this.btnAggiorna.Size = new System.Drawing.Size(129, 27);
+            this.btnAggiorna.TabIndex = 8;
+            this.btnAggiorna.Text = "Aggiorna";
+            this.btnAggiorna.UseVisualStyleBackColor = true;
+            this.btnAggiorna.Click += new System.EventHandler(this.btnAggiorna_Click);
+            // 
+            // ddlProcessiGalvanici
+            // 
+            this.ddlProcessiGalvanici.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlProcessiGalvanici.FormattingEnabled = true;
+            this.ddlProcessiGalvanici.Location = new System.Drawing.Point(140, 161);
+            this.ddlProcessiGalvanici.Name = "ddlProcessiGalvanici";
+            this.ddlProcessiGalvanici.Size = new System.Drawing.Size(318, 23);
+            this.ddlProcessiGalvanici.TabIndex = 11;
+            this.ddlProcessiGalvanici.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(18, 165);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(113, 15);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Processo galvanico";
             // 
             // IdEelementoPreventivo
             // 
@@ -276,113 +401,20 @@
             this.PezziOrari.Name = "PezziOrari";
             this.PezziOrari.Width = 80;
             // 
-            // lstMateriePrime
+            // Nota
             // 
-            this.lstMateriePrime.AllowDrop = true;
-            this.lstMateriePrime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lstMateriePrime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lstMateriePrime.FormattingEnabled = true;
-            this.lstMateriePrime.ItemHeight = 15;
-            this.lstMateriePrime.Location = new System.Drawing.Point(6, 4);
-            this.lstMateriePrime.Name = "lstMateriePrime";
-            this.lstMateriePrime.Size = new System.Drawing.Size(292, 334);
-            this.lstMateriePrime.TabIndex = 4;
-            this.lstMateriePrime.DragOver += new System.Windows.Forms.DragEventHandler(this.lstFasi_DragOver);
-            this.lstMateriePrime.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lstMateriePrime_MouseDown);
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(464, 200);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(317, 439);
-            this.tabControl1.TabIndex = 10;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.btnAggiorna2);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.lstFasi);
-            this.tabPage1.Controls.Add(this.ddlReparti);
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(309, 411);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Fasi";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 53);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(30, 15);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Fasi";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 6);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 15);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Reparto";
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.btnAggiorna);
-            this.tabPage2.Controls.Add(this.lstMateriePrime);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(309, 411);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Materie prime";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // btnAggiorna
-            // 
-            this.btnAggiorna.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAggiorna.Location = new System.Drawing.Point(90, 360);
-            this.btnAggiorna.Name = "btnAggiorna";
-            this.btnAggiorna.Size = new System.Drawing.Size(129, 27);
-            this.btnAggiorna.TabIndex = 8;
-            this.btnAggiorna.Text = "Aggiorna";
-            this.btnAggiorna.UseVisualStyleBackColor = true;
-            this.btnAggiorna.Click += new System.EventHandler(this.btnAggiorna_Click);
-            // 
-            // btnAggiorna2
-            // 
-            this.btnAggiorna2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAggiorna2.Location = new System.Drawing.Point(90, 372);
-            this.btnAggiorna2.Name = "btnAggiorna2";
-            this.btnAggiorna2.Size = new System.Drawing.Size(129, 27);
-            this.btnAggiorna2.TabIndex = 9;
-            this.btnAggiorna2.Text = "Aggiorna";
-            this.btnAggiorna2.UseVisualStyleBackColor = true;
-            this.btnAggiorna2.Click += new System.EventHandler(this.btnAggiorna_Click);
-            // 
-            // prodottoFinitoUC1
-            // 
-            this.prodottoFinitoUC1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.prodottoFinitoUC1.Location = new System.Drawing.Point(6, 17);
-            this.prodottoFinitoUC1.Name = "prodottoFinitoUC1";
-            this.prodottoFinitoUC1.Size = new System.Drawing.Size(767, 157);
-            this.prodottoFinitoUC1.TabIndex = 0;
+            this.Nota.DataPropertyName = "Nota";
+            this.Nota.HeaderText = "Nota";
+            this.Nota.MaxInputLength = 200;
+            this.Nota.Name = "Nota";
             // 
             // PreventivoFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1384, 661);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.ddlProcessiGalvanici);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.dgvElementi);
             this.Controls.Add(this.treeView1);
@@ -401,6 +433,7 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -424,6 +457,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button btnAggiorna;
+        private System.Windows.Forms.Button btnAggiorna2;
+        private System.Windows.Forms.ComboBox ddlProcessiGalvanici;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdEelementoPreventivo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Articolo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codice;
@@ -433,7 +470,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Superficie;
         private System.Windows.Forms.DataGridViewTextBoxColumn Quantita;
         private System.Windows.Forms.DataGridViewTextBoxColumn PezziOrari;
-        private System.Windows.Forms.Button btnAggiorna;
-        private System.Windows.Forms.Button btnAggiorna2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nota;
     }
 }

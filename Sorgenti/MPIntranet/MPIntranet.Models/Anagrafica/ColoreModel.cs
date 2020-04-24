@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MPIntranet.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,12 +16,17 @@ namespace MPIntranet.Models.Anagrafica
         public string Brand { get; set; }
         public string CodiceFigurativo { get; set; }
         public string CodiceCliente { get; set; }
-        public DateTime DataModifica { get; set; }
-        public string UtenteModifica { get; set; }
 
         public override string ToString()
         {
             return string.Format("{0}-{1}", CodiceFigurativo, Descrizione);
+        }
+        public static ColoreModel ColoreNullo()
+        {
+            ColoreModel colore = new ColoreModel();
+            colore.IdColore = ElementiVuoti.ColoreVuoto;
+            colore.IdBrand = ElementiVuoti.BrandVuoto;
+            return colore;
         }
     }
 }

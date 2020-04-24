@@ -48,6 +48,7 @@ namespace MPIntranetWeb.Controllers
         public ActionResult Colore()
         {
             Anagrafica a = new Anagrafica();
+       //     a. AllineaCodiciColori();
             List<BrandModel> listaBrand = a.CreaListaBrandModel();
             List<MPIntranetListItem> ddlBrand = listaBrand.Select(x => new MPIntranetListItem(string.Format("{0} ({1})", x.Brand, x.PrefissoColore), x.IdBrand.ToString())).ToList();
             ddlBrand.Insert(0, new MPIntranetListItem(string.Empty, "-1"));

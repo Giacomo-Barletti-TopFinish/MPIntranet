@@ -713,7 +713,7 @@ namespace MPIntranet.Business
             elementoModel.Peso = elementoPreventivo.IsPESONull() ? 0 : elementoPreventivo.PESO;
             elementoModel.PezziOrari = elementoPreventivo.IsPEZZIORARINull() ? 0 : elementoPreventivo.PEZZIORARI;
             elementoModel.Quantita = elementoPreventivo.QUANTITA;
-            elementoModel.CostoArticolo = elementoPreventivo.IsCOSTOARTICOLONull() ? 0 : elementoPreventivo.COSTOARTICOLO;
+            elementoModel.Nota = elementoPreventivo.IsNOTANull() ? string.Empty : elementoPreventivo.NOTA;
             if (!elementoPreventivo.IsIDREPARTONull())
                 elementoModel.Reparto = a.CreaRepartoModel(elementoPreventivo.IDREPARTO);
             elementoModel.Ricarico = elementoPreventivo.IsRICARICONull() ? 0 : elementoPreventivo.RICARICO;
@@ -746,7 +746,7 @@ namespace MPIntranet.Business
                     elementoDatabase.CODICE = correggiString(elementoPreventivoModel.Codice, 10);
                     elementoDatabase.COSTO = elementoPreventivoModel.CostoOrario;
                     elementoDatabase.DESCRIZIONE = correggiString(elementoPreventivoModel.Descrizione, 40);
-                    elementoDatabase.COSTOARTICOLO = elementoPreventivoModel.CostoArticolo;
+                    elementoDatabase.NOTA = elementoPreventivoModel.Nota;
 
                     if (elementoPreventivoModel.IdEsterna == -1) elementoDatabase.SetIDESTERNANull();
                     else elementoDatabase.IDESTERNA = elementoPreventivoModel.IdEsterna;
@@ -784,7 +784,7 @@ namespace MPIntranet.Business
                     elementoNuovo.CODICE = correggiString(elementoPreventivoModel.Codice, 10);
                     elementoNuovo.COSTO = elementoPreventivoModel.CostoOrario;
                     elementoNuovo.DESCRIZIONE = correggiString(elementoPreventivoModel.Descrizione, 40);
-                    elementoNuovo.COSTOARTICOLO = elementoPreventivoModel.CostoArticolo;
+                    elementoNuovo.NOTA = elementoPreventivoModel.Nota;
 
                     if (elementoPreventivoModel.IdEsterna == -1) elementoNuovo.SetIDESTERNANull();
                     else elementoNuovo.IDESTERNA = elementoPreventivoModel.IdEsterna;

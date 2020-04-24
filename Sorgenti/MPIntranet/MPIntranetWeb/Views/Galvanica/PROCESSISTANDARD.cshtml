@@ -7,10 +7,13 @@
 <div class="content-top">
     <h2>Processi standard</h2>
 </div>
-@Html.Hidden("hdIdArticolo",MPIntranet.Entities.ElementiVuoti.ArticoloStandard)
+@Html.Hidden("hdIdArticolo", MPIntranet.Entities.ElementiVuoti.ArticoloStandard)
 <div class="row">
     <div class="col-sm-2">
         @Html.Label("Impianto")
+    </div>
+    <div class="col-sm-2">
+        @Html.Label("Colore")
     </div>
     <div class="col-sm-2">
         @Html.Label("Processo")
@@ -19,6 +22,9 @@
 <div class="row">
     <div class="col-sm-2">
         @Html.DropDownList("ddlImpianto", new SelectList(@ViewData["Impianti"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlImpianto" })
+    </div>
+    <div class="col-sm-2">
+        @Html.DropDownList("ddlColore", new SelectList(@ViewData["Colori"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlColore" })
     </div>
     <div class="col-sm-2">
         @Html.DropDownList("ddlProcesso", Enumerable.Empty<SelectListItem>(), new { @class = "form-control input-sm", @id = "ddlProcesso" })
@@ -62,8 +68,14 @@
     function CreaNuovoProcesso() {
                   var idArticolo = $('#hdIdArticolo').val();
         var idImpianto = $('#ddlImpianto').val();
+        var idColore = $('#ddlColore').val();
+
         if (idImpianto == null || idImpianto == '') {
             $('#lblMessage').html("Selezionare un impianto");
+        }
+
+        if (idColore == null || idColore == ''|| idColore == '-1' || idColore == '1') {
+            $('#lblMessage').html("Selezionare un colore");
         }
 
            var url = '@Url.Action("CreaNuovoProcesso", "Articolo")';
@@ -71,7 +83,8 @@
                 url: url,
              data: {
                  idArticolo, idArticolo,
-                 idImpianto: idImpianto
+                 idImpianto: idImpianto,
+                 idColore: idColore
                 },
                 cache: false,
                 type: "POST",

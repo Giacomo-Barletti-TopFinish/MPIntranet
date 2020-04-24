@@ -13,6 +13,7 @@ namespace MPIntranet.Models.Articolo
         public decimal Versione { get; set; }
         public string Descrizione { get; set; }
         public string Nota { get; set; }
+        public ProcessoModel Processo{ get; set; }
         public ProdottoFinitoModel ProdottoFinito { get; set; }
 
         public override string ToString()
@@ -39,7 +40,7 @@ namespace MPIntranet.Models.Articolo
         public decimal Quantita { get; set; }
         public string Descrizione { get; set; }
         public string Articolo { get; set; }
-        public decimal CostoArticolo{ get; set; }
+        public string Nota{ get; set; }
         public override string ToString()
         {
             string str = Codice;

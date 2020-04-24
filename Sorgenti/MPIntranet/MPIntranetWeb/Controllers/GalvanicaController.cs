@@ -102,12 +102,15 @@ namespace MPIntranetWeb.Controllers
 
         public ActionResult PROCESSISTANDARD()
         {
-
+            Anagrafica a = new Anagrafica();
             Galvanica g = new Galvanica();
             List<ImpiantoModel> impiantiModel = g.CreaListaImpiantoModel();
             List<MPIntranetListItem> impianti = impiantiModel.Select(x => new MPIntranetListItem(x.Descrizione, x.IdImpianto.ToString())).ToList();
+            List<ColoreModel> coloriModel = a.CreaListaColoreModel();
+            List<MPIntranetListItem> colori = coloriModel.OrderBy(x=>x.CodiceFigurativo).Select(x => new MPIntranetListItem(x.ToString(), x.IdColore.ToString())).ToList();
 
             ViewData.Add("Impianti", impianti);
+            ViewData.Add("Colori", colori);
 
             return View();
         }

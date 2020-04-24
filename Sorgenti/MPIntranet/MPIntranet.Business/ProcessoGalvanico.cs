@@ -4,6 +4,7 @@ using MPIntranet.DataAccess.Galvanica;
 using MPIntranet.Entities;
 using MPIntranet.Helpers;
 using MPIntranet.Models;
+using MPIntranet.Models.Anagrafica;
 using MPIntranet.Models.Articolo;
 using MPIntranet.Models.Galvanica;
 using MPIntranet.Models.Json;
@@ -15,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace MPIntranet.Business
 {
-    public class ProcessoGalvanico: BusinessBase
+    public class ProcessoGalvanico : BusinessBase
     {
         private ArticoloDS _ds = new ArticoloDS();
         private RVLDS _dsRVL = new RVLDS();
@@ -41,6 +42,27 @@ namespace MPIntranet.Business
             return processiModel;
         }
 
+        public List<ProcessoModel> CaricaProcessi(decimal idArticolo)
+        {
+
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                bArticolo.FillProcessi(_ds, idArticolo, true);
+                bArticolo.FillFasiProcesso(_ds, idArticolo, true);
+            }
+
+            List<TelaioModel> telai = _galvanica.CreaListaTelaioModel();
+            List<decimal> idprocessi = _ds.PROCESSI.Select(x => x.IDPROCESSO).ToList();
+
+            List<ProcessoModel> processiModel = new List<ProcessoModel>();
+
+            foreach (decimal idProcesso in idprocessi)
+            {
+                processiModel.Add(CreaProcessoModel(idProcesso, telai));
+            }
+            return processiModel;
+        }
+
         public ProcessoModel CreaProcessoModel(decimal idProcesso, List<TelaioModel> telai)
         {
             ArticoloDS.PROCESSIRow processo = _ds.PROCESSI.Where(x => x.IDPROCESSO == idProcesso).FirstOrDefault();
@@ -54,6 +76,16 @@ namespace MPIntranet.Business
             if (!processo.IsIDTELAIONull())
                 telaio = telai.Where(x => x.IdTelaio == processo.IDTELAIO).FirstOrDefault();
             processoModel.Telaio = telaio;
+
+            processoModel.Standard = processo.IsSTANDARDNull() ? false: processo.STANDARD==SiNo.Si;
+
+            if (!processo.IsIDCOLORENull())
+            {
+                Anagrafica a = new Anagrafica();
+                processoModel.Colore = a.EstraiColoreModel(processo.IDCOLORE);
+            }
+            else
+                processoModel.Colore = new ColoreModel();
 
             List<ImpiantoModel> impianti = _galvanica.CreaListaImpiantoModel();
             processoModel.Impianto = impianti.Where(x => x.IdImpianto == processo.IDIMPIANTO).FirstOrDefault();
@@ -71,9 +103,9 @@ namespace MPIntranet.Business
                     IdProcesso = fase.IDPROCESSO,
                     Sequenza = fase.SEQUENZA,
                     Vasca = vasche.Where(x => x.IdVasca == fase.IDVASCA).FirstOrDefault(),
-                    SpessoreMassimo=fase.IsSPESSOREMASSIMONull()?0:fase.SPESSOREMASSIMO,
-                    SpessoreMinimo= fase.IsSPESSOREMINIMONull() ? 0 : fase.SPESSOREMINIMO,
-                    SpessoreNominale= fase.IsSPESSORENOMINALENull() ? 0 : fase.SPESSORENOMINALE
+                    SpessoreMassimo = fase.IsSPESSOREMASSIMONull() ? 0 : fase.SPESSOREMASSIMO,
+                    SpessoreMinimo = fase.IsSPESSOREMINIMONull() ? 0 : fase.SPESSOREMINIMO,
+                    SpessoreNominale = fase.IsSPESSORENOMINALENull() ? 0 : fase.SPESSORENOMINALE
 
                 };
                 processoModel.Fasi.Add(faseProcessoModel);
@@ -82,7 +114,7 @@ namespace MPIntranet.Business
             return processoModel;
         }
 
-        public void CreaNuovoProcesso(decimal idArticolo, decimal idImpianto, string descrizione, string utente)
+        public void CreaNuovoProcesso(decimal idArticolo, decimal idImpianto, decimal idColore, string descrizione, string utente)
         {
             ArticoloDS.PROCESSIRow processo;
 
@@ -94,6 +126,8 @@ namespace MPIntranet.Business
                 processo.DESCRIZIONE = descrizione;
                 processo.IDARTICOLO = idArticolo;
                 processo.IDIMPIANTO = idImpianto;
+                processo.IDCOLORE = idColore;
+                processo.STANDARD = idArticolo == -1 ? SiNo.Si : SiNo.No;
                 processo.UTENTEMODIFICA = utente;
                 _ds.PROCESSI.AddPROCESSIRow(processo);
 
@@ -147,7 +181,7 @@ namespace MPIntranet.Business
                         SalvaProcessoJson vasca = vasche[i];
                         decimal corrente = decimal.Parse(vasca.Corrente.Replace(".", ","));
                         decimal spessoreMinimo = decimal.Parse(vasca.SpessoreMinimo.Replace(".", ","));
-                        decimal spessoreMassimo= decimal.Parse(vasca.SpessoreMassimo.Replace(".", ","));
+                        decimal spessoreMassimo = decimal.Parse(vasca.SpessoreMassimo.Replace(".", ","));
                         decimal spessoreNominale = decimal.Parse(vasca.SpessoreNominale.Replace(".", ","));
 
                         ArticoloDS.FASIPROCESSORow fase = fasi.Where(x => x.IDFASEPROCESSO == vasca.IdFaseProcesso).FirstOrDefault();
@@ -235,13 +269,17 @@ namespace MPIntranet.Business
                 bArticolo.FillProcessi(_ds, -1, true);
                 bArticolo.FillFasiProcesso(_ds, -1, true);
                 ArticoloDS.PROCESSIRow processoStandard = _ds.PROCESSI.Where(x => x.IDPROCESSO == idProcessoStandard).FirstOrDefault();
+                decimal idcolore = ElementiVuoti.ColoreVuoto;
+
+                if (!processoStandard.IsIDCOLORENull()) idcolore = processoStandard.IDCOLORE;
+
                 if (processoStandard == null)
                 {
                     return "Errore durante la copia. Processo standard non trovato.";
                 }
                 string nuovaDescrizione = processoStandard.DESCRIZIONE;
 
-                CreaNuovoProcesso(idArticolo, idImpianto, descrizione, utente);
+                CreaNuovoProcesso(idArticolo, idImpianto, idcolore, descrizione, utente);
                 _ds.PROCESSI.Clear();
 
                 bArticolo.FillProcessi(_ds, idArticolo, true);
@@ -267,7 +305,7 @@ namespace MPIntranet.Business
                         fase.SPESSOREMASSIMO = faseStandard.SPESSOREMASSIMO;
                         fase.SPESSORENOMINALE = faseStandard.SPESSORENOMINALE;
                         fase.SPESSOREMINIMO = faseStandard.SPESSOREMINIMO;
-                     
+
                         fase.UTENTEMODIFICA = utente;
                         _ds.FASIPROCESSO.AddFASIPROCESSORow(fase);
                     }

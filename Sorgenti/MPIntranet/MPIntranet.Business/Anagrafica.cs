@@ -281,6 +281,26 @@ namespace MPIntranet.Business
             return lista;
         }
 
+        public List<ColoreModel> CreaListaColoreModel()
+        {
+            List<ColoreModel> lista = new List<ColoreModel>();
+
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                _ds.COLORI.Clear();
+                _ds.BRAND.Clear();
+                bAnagrafica.FillColori(_ds, true);
+                bAnagrafica.FillBrand(_ds, true);
+
+                List<AnagraficaDS.COLORIRow> colori = _ds.COLORI.ToList();
+
+                foreach (AnagraficaDS.COLORIRow colore in colori)
+                {
+                    lista.Add(creaColoreModel(colore));
+                }
+            }
+            return lista;
+        }
         private ColoreModel creaColoreModel(AnagraficaDS.COLORIRow colore)
         {
             string brand = string.Empty;
@@ -296,10 +316,8 @@ namespace MPIntranet.Business
                 CodiceCliente = colore.CODICECLIENTE,
                 CodiceFigurativo = colore.CODICEFIGURATIVO,
                 Descrizione = colore.DESCRIZIONE,
-                IdBrand = colore.IsIDBRANDNull() ? -1 : colore.IDBRAND,
-                IdColore = colore.IDCOLORE,
-                DataModifica = colore.DATAMODIFICA,
-                UtenteModifica = colore.UTENTEMODIFICA
+                IdBrand = colore.IsIDBRANDNull() ? ElementiVuoti.BrandVuoto : colore.IDBRAND,
+                IdColore = colore.IDCOLORE
             };
             return c;
         }
@@ -365,7 +383,7 @@ namespace MPIntranet.Business
                     return "Il prefisso del codice figurativo non è coerente con il prefisso del brand";
 
                 string codice = (string)_ds.COLORI.Rows[_ds.COLORI.Rows.Count - 1]["CODICE"];
-                codice = CreaCodiceColore(codice);
+                codice = CreaCodiceColoreSuccessivo(codice);
 
                 AnagraficaDS.COLORIRow colore = _ds.COLORI.NewCOLORIRow();
                 colore.CODICE = codice;
@@ -385,36 +403,51 @@ namespace MPIntranet.Business
             }
         }
 
-        private string CreaCodiceColore(string ultimoCodice)
+        private string CreaCodiceColoreSuccessivo(string ultimoCodice)
         {
+            if (ultimoCodice == string.Empty) return "000";
             // 48 - 57 numeri
             // 65 - 90 lettere    
-            // sequenza corretta 65 - 90  48 - 57
+            // sequenza corretta 48 - 57 e poi  65 - 90 primai numri poi le lettere
             byte[] bytes = Encoding.ASCII.GetBytes(ultimoCodice);
 
             bytes[2]++;
-            if (bytes[2] == 91)
+            if (bytes[2] == 58)//finiti i numeri
             {
-                bytes[2] = 48;
+                bytes[2] = 65;//si va alla A
             }
-            if (bytes[2] == 58)
+            if (bytes[2] == 91) // se sono dopo la Z
             {
-                bytes[2] = 65;
-                bytes[1]++;
-                if (bytes[1] == 91)
-                    bytes[1] = 48;
+                bytes[2] = 48; // torno a zero 
+                bytes[1]++;  // incremento posizione 
                 if (bytes[1] == 58)
-                {
                     bytes[1] = 65;
+                if (bytes[1] == 91)
+                {
+                    bytes[1] = 48;
                     bytes[0]++;
-                    if (bytes[0] == 91)
-                        bytes[0] = 48;
-                    if (bytes[0] == 58) throw new ArgumentOutOfRangeException("Codice colore oltre il valore 'ZZZ'");
+                    if (bytes[0] == 58)
+                        bytes[0] = 65;
+                    if (bytes[0] == 91) throw new ArgumentOutOfRangeException("Codice colore oltre il valore 'ZZZ'");
                 }
             }
             return Encoding.ASCII.GetString(bytes);
+        }
 
+        public void AllineaCodiciColori()
+        {
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillColori(_ds, false);
+                string codice="";
+                foreach(AnagraficaDS.COLORIRow coloreRow in _ds.COLORI.OrderBy(x=>x.IDCOLORE))
+                {
+                    codice = CreaCodiceColoreSuccessivo(codice);
+                    coloreRow.CODICE = codice;
+                }
+                bAnagrafica.UpdateTable(_ds, _ds.COLORI.TableName);
 
+            }
         }
         public string ModificaColore(decimal idColore, string descrizione, string account)
         {

@@ -1,5 +1,6 @@
 ﻿using MPIntranet.Business;
 using MPIntranet.Common;
+using MPIntranet.Entities;
 using MPIntranet.Models.Anagrafica;
 using MPIntranet.Models.Articolo;
 using System;
@@ -21,6 +22,7 @@ namespace MPPreventivatore
         private Documenti _documenti = new Documenti();
         private Anagrafica _anagrafica = new Anagrafica();
         private List<ElementoPreventivoModel> _elementiPreventivo = new List<ElementoPreventivoModel>();
+        private List<ProcessoModel> _processiGalvanici = new List<ProcessoModel>();
         private BindingSource _source = new BindingSource();
 
         public TreeNode _nodoDaCopiare
@@ -48,6 +50,7 @@ namespace MPPreventivatore
             prodottoFinitoUC1.Immagine = _documenti.EstraiImmagineStandard(IdProdottoFinito, TabelleEsterne.ProdottiFiniti, out filename);
             prodottoFinitoUC1.Refresh();
 
+            caricaDdlProcessiGalvanici();
             caricaDdlPreventivi();
             caricaDdlReparti();
             CreaMenuContestualeTreeView();
@@ -167,7 +170,7 @@ namespace MPPreventivatore
             elemento.Quantita = elementoModelDaClonare.Quantita;
             elemento.Descrizione = elementoModelDaClonare.Descrizione;
             elemento.Articolo = elementoModelDaClonare.Articolo;
-            elemento.CostoArticolo = elementoModelDaClonare.CostoArticolo;
+            elemento.Nota = elementoModelDaClonare.Nota;
             return elemento;
         }
 
@@ -202,6 +205,15 @@ namespace MPPreventivatore
                 ddlPreventivi.SelectedIndex = indice;
         }
 
+        private void caricaDdlProcessiGalvanici()
+        {
+            ProcessoGalvanico pg = new ProcessoGalvanico();
+
+            ddlProcessiGalvanici.Items.Clear();
+            _processiGalvanici = pg.CaricaProcessi(ElementiVuoti.ArticoloStandard);
+            ddlProcessiGalvanici.Items.AddRange(_processiGalvanici.ToArray());
+        }
+
 
         private void btnCreaNuovaVersione_Click(object sender, EventArgs e)
         {
@@ -222,6 +234,12 @@ namespace MPPreventivatore
             if (ddlPreventivi.SelectedIndex == -1) return;
             txtNota.Text = _preventivoSelezionato.Nota;
 
+            if (_preventivoSelezionato.Processo != null)
+            {
+                ProcessoModel processoSelezionato = _processiGalvanici.Where(x => x.IdProcesso == _preventivoSelezionato.Processo.IdProcesso).FirstOrDefault();
+                if (processoSelezionato != null)
+                    ddlProcessiGalvanici.SelectedItem = processoSelezionato;
+            }
             treeView1.Nodes.Clear();
             TreeNode radice = treeView1.Nodes.Add("-1", prodottoFinitoUC1.ProdottoFinitoModel.ToString());
             radice.Tag = prodottoFinitoUC1.ProdottoFinitoModel;
@@ -434,7 +452,7 @@ namespace MPPreventivatore
             elemento.Quantita = 1;
             elemento.Descrizione = fase.Descrizione;
             elemento.Articolo = string.Empty;
-            elemento.CostoArticolo = 0;
+            elemento.Nota = string.Empty;
             return elemento;
         }
 
@@ -457,7 +475,7 @@ namespace MPPreventivatore
             elemento.Quantita = 1;
             elemento.Descrizione = "MATERIA PRIMA";
             elemento.Articolo = materiaPrima.Descrizione;
-            elemento.CostoArticolo = 0;
+            elemento.Nota = string.Empty;
             return elemento;
         }
         private void treeView1_ItemDrag(object sender, ItemDragEventArgs e)
@@ -577,6 +595,11 @@ namespace MPPreventivatore
             int indice = ddlReparti.SelectedIndex;
             caricaDdlReparti();
             ddlReparti.SelectedIndex = indice;
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
