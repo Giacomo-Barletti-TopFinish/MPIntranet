@@ -20,5 +20,6 @@ namespace MPIntranet.Entities
         public const decimal TipoProdottoVuoto = -1;
         public const decimal ProdottoFinitoVuoto = -1;
         public const decimal GruppoVuoto = -1;
+        public const decimal ImpiantoVuoto = -1;
     }
 }

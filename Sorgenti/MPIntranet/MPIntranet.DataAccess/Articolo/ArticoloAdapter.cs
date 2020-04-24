@@ -187,6 +187,48 @@ namespace MPIntranet.DataAccess.Articolo
             }
         }
 
+        public void GetProcesso(ArticoloDS ds, decimal idProcesso, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM PROCESSI WHERE IDPROCESSO = $P<IDPROCESSO> ";
+            if (soloNonCancellati)
+                select += "AND CANCELLATO = 'N' ";
+
+            select += "ORDER BY DESCRIZIONE";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDPROCESSO", DbType.Decimal, idProcesso);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.PROCESSI);
+            }
+        }
+        public void FillProcessiStandard(ArticoloDS ds, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM PROCESSI WHERE STANDARD = 'S' ";
+            if (soloNonCancellati)
+                select += "AND CANCELLATO = 'N' ";
+
+            select += "ORDER BY DESCRIZIONE";
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.PROCESSI);
+            }
+        }
+        public void FillFasiProcessoStandard(ArticoloDS ds,  bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM FASIPROCESSO FP 
+                                    INNER JOIN PROCESSI PR ON PR.IDPROCESSO = FP.IDPROCESSO
+                                    WHERE STANDARD = 'S' ";
+            if (soloNonCancellati)
+                select += "AND FP.CANCELLATO = 'N' ";
+
+            select += "ORDER BY FP.IDPROCESSO,SEQUENZA";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.FASIPROCESSO);
+            }
+        }
         public void FillFasiProcesso(ArticoloDS ds, decimal idArticolo, bool soloNonCancellati)
         {
             string select = @"SELECT * FROM FASIPROCESSO FP 
@@ -199,6 +241,23 @@ namespace MPIntranet.DataAccess.Articolo
 
             ParamSet ps = new ParamSet();
             ps.AddParam("IDARTICOLO", DbType.Decimal, idArticolo);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.FASIPROCESSO);
+            }
+        }
+
+        public void GetFasiProcesso(ArticoloDS ds, decimal idProcesso, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM FASIPROCESSO                                   
+                                    WHERE IDPROCESSO = $P<IDPROCESSO> ";
+            if (soloNonCancellati)
+                select += "AND CANCELLATO = 'N' ";
+
+            select += "ORDER BY IDPROCESSO,SEQUENZA";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDPROCESSO", DbType.Decimal, idProcesso);
             using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
                 da.Fill(ds.FASIPROCESSO);

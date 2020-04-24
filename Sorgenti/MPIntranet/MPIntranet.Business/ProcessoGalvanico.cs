@@ -42,13 +42,26 @@ namespace MPIntranet.Business
             return processiModel;
         }
 
-        public List<ProcessoModel> CaricaProcessi(decimal idArticolo)
+        public ProcessoModel EstraiProcesso(decimal idProcesso)
+        {
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                bArticolo.GetProcesso(_ds, idProcesso, true);
+                bArticolo.GetFasiProcesso(_ds, idProcesso, true);
+            }
+
+            List<TelaioModel> telai = _galvanica.CreaListaTelaioModel();
+
+            return CreaProcessoModel(idProcesso, telai);
+        }
+
+        public List<ProcessoModel> CaricaProcessiStandard()
         {
 
             using (ArticoloBusiness bArticolo = new ArticoloBusiness())
             {
-                bArticolo.FillProcessi(_ds, idArticolo, true);
-                bArticolo.FillFasiProcesso(_ds, idArticolo, true);
+                bArticolo.FillProcessiStandard(_ds, true);
+                bArticolo.FillFasiProcessoStandard(_ds, true);
             }
 
             List<TelaioModel> telai = _galvanica.CreaListaTelaioModel();
@@ -65,8 +78,18 @@ namespace MPIntranet.Business
 
         public ProcessoModel CreaProcessoModel(decimal idProcesso, List<TelaioModel> telai)
         {
+
             ArticoloDS.PROCESSIRow processo = _ds.PROCESSI.Where(x => x.IDPROCESSO == idProcesso).FirstOrDefault();
-            if (processo == null) return null;
+            if (processo == null)
+            {
+                using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+                {
+                    bArticolo.GetProcesso(_ds, idProcesso,true);
+                    bArticolo.GetFasiProcesso(_ds, idProcesso, true);
+                }
+                processo = _ds.PROCESSI.Where(x => x.IDPROCESSO == idProcesso).FirstOrDefault();
+                if (processo == null) return null;
+            }
 
             ProcessoModel processoModel = new ProcessoModel();
             processoModel.Descrizione = processo.DESCRIZIONE;
@@ -77,7 +100,7 @@ namespace MPIntranet.Business
                 telaio = telai.Where(x => x.IdTelaio == processo.IDTELAIO).FirstOrDefault();
             processoModel.Telaio = telaio;
 
-            processoModel.Standard = processo.IsSTANDARDNull() ? false: processo.STANDARD==SiNo.Si;
+            processoModel.Standard = processo.IsSTANDARDNull() ? false : processo.STANDARD == SiNo.Si;
 
             if (!processo.IsIDCOLORENull())
             {

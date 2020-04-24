@@ -41,16 +41,6 @@
             this.lstFasi = new System.Windows.Forms.ListBox();
             this.ddlReparti = new System.Windows.Forms.ComboBox();
             this.dgvElementi = new System.Windows.Forms.DataGridView();
-            this.lstMateriePrime = new System.Windows.Forms.ListBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.btnAggiorna2 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btnAggiorna = new System.Windows.Forms.Button();
-            this.ddlProcessiGalvanici = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.IdEelementoPreventivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Articolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Codice = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,6 +51,17 @@
             this.Quantita = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PezziOrari = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nota = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lstMateriePrime = new System.Windows.Forms.ListBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnAggiorna2 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnAggiorna = new System.Windows.Forms.Button();
+            this.ddlProcessiGalvanici = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvElementi)).BeginInit();
@@ -158,9 +159,9 @@
             this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.treeView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.treeView1.Location = new System.Drawing.Point(12, 200);
+            this.treeView1.Location = new System.Drawing.Point(12, 224);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(446, 439);
+            this.treeView1.Size = new System.Drawing.Size(446, 415);
             this.treeView1.TabIndex = 3;
             this.treeView1.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView1_ItemDrag);
             this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
@@ -221,6 +222,80 @@
             this.dgvElementi.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvElementi_CellClick);
             this.dgvElementi.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvElementi_CellEndEdit);
             this.dgvElementi.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvElementi_EditingControlShowing);
+            // 
+            // IdEelementoPreventivo
+            // 
+            this.IdEelementoPreventivo.DataPropertyName = "IdElementoPreventivo";
+            this.IdEelementoPreventivo.HeaderText = "IdEelementoPreventivo";
+            this.IdEelementoPreventivo.Name = "IdEelementoPreventivo";
+            this.IdEelementoPreventivo.Visible = false;
+            // 
+            // Articolo
+            // 
+            this.Articolo.DataPropertyName = "Articolo";
+            this.Articolo.HeaderText = "Articolo";
+            this.Articolo.MaxInputLength = 30;
+            this.Articolo.Name = "Articolo";
+            // 
+            // Codice
+            // 
+            this.Codice.DataPropertyName = "Codice";
+            this.Codice.HeaderText = "Codice";
+            this.Codice.Name = "Codice";
+            this.Codice.ReadOnly = true;
+            // 
+            // Descrizione
+            // 
+            this.Descrizione.DataPropertyName = "Descrizione";
+            this.Descrizione.HeaderText = "Descrizione";
+            this.Descrizione.Name = "Descrizione";
+            this.Descrizione.ReadOnly = true;
+            // 
+            // Reparto
+            // 
+            this.Reparto.DataPropertyName = "Reparto";
+            this.Reparto.HeaderText = "Reparto";
+            this.Reparto.Name = "Reparto";
+            this.Reparto.ReadOnly = true;
+            // 
+            // Peso
+            // 
+            this.Peso.DataPropertyName = "Peso";
+            this.Peso.FillWeight = 80F;
+            this.Peso.HeaderText = "Peso";
+            this.Peso.Name = "Peso";
+            this.Peso.Width = 80;
+            // 
+            // Superficie
+            // 
+            this.Superficie.DataPropertyName = "Superficie";
+            this.Superficie.FillWeight = 80F;
+            this.Superficie.HeaderText = "Superficie";
+            this.Superficie.Name = "Superficie";
+            this.Superficie.Width = 80;
+            // 
+            // Quantita
+            // 
+            this.Quantita.DataPropertyName = "Quantita";
+            this.Quantita.FillWeight = 80F;
+            this.Quantita.HeaderText = "Quantità";
+            this.Quantita.Name = "Quantita";
+            this.Quantita.Width = 80;
+            // 
+            // PezziOrari
+            // 
+            this.PezziOrari.DataPropertyName = "PezziOrari";
+            this.PezziOrari.FillWeight = 80F;
+            this.PezziOrari.HeaderText = "Pezzi orari";
+            this.PezziOrari.Name = "PezziOrari";
+            this.PezziOrari.Width = 80;
+            // 
+            // Nota
+            // 
+            this.Nota.DataPropertyName = "Nota";
+            this.Nota.HeaderText = "Nota";
+            this.Nota.MaxInputLength = 200;
+            this.Nota.Name = "Nota";
             // 
             // lstMateriePrime
             // 
@@ -334,85 +409,21 @@
             this.label4.TabIndex = 4;
             this.label4.Text = "Processo galvanico";
             // 
-            // IdEelementoPreventivo
+            // label5
             // 
-            this.IdEelementoPreventivo.DataPropertyName = "IdElementoPreventivo";
-            this.IdEelementoPreventivo.HeaderText = "IdEelementoPreventivo";
-            this.IdEelementoPreventivo.Name = "IdEelementoPreventivo";
-            this.IdEelementoPreventivo.Visible = false;
-            // 
-            // Articolo
-            // 
-            this.Articolo.DataPropertyName = "Articolo";
-            this.Articolo.HeaderText = "Articolo";
-            this.Articolo.MaxInputLength = 30;
-            this.Articolo.Name = "Articolo";
-            // 
-            // Codice
-            // 
-            this.Codice.DataPropertyName = "Codice";
-            this.Codice.HeaderText = "Codice";
-            this.Codice.Name = "Codice";
-            this.Codice.ReadOnly = true;
-            // 
-            // Descrizione
-            // 
-            this.Descrizione.DataPropertyName = "Descrizione";
-            this.Descrizione.HeaderText = "Descrizione";
-            this.Descrizione.Name = "Descrizione";
-            this.Descrizione.ReadOnly = true;
-            // 
-            // Reparto
-            // 
-            this.Reparto.DataPropertyName = "Reparto";
-            this.Reparto.HeaderText = "Reparto";
-            this.Reparto.Name = "Reparto";
-            this.Reparto.ReadOnly = true;
-            // 
-            // Peso
-            // 
-            this.Peso.DataPropertyName = "Peso";
-            this.Peso.FillWeight = 80F;
-            this.Peso.HeaderText = "Peso";
-            this.Peso.Name = "Peso";
-            this.Peso.Width = 80;
-            // 
-            // Superficie
-            // 
-            this.Superficie.DataPropertyName = "Superficie";
-            this.Superficie.FillWeight = 80F;
-            this.Superficie.HeaderText = "Superficie";
-            this.Superficie.Name = "Superficie";
-            this.Superficie.Width = 80;
-            // 
-            // Quantita
-            // 
-            this.Quantita.DataPropertyName = "Quantita";
-            this.Quantita.FillWeight = 80F;
-            this.Quantita.HeaderText = "Quantità";
-            this.Quantita.Name = "Quantita";
-            this.Quantita.Width = 80;
-            // 
-            // PezziOrari
-            // 
-            this.PezziOrari.DataPropertyName = "PezziOrari";
-            this.PezziOrari.FillWeight = 80F;
-            this.PezziOrari.HeaderText = "Pezzi orari";
-            this.PezziOrari.Name = "PezziOrari";
-            this.PezziOrari.Width = 80;
-            // 
-            // Nota
-            // 
-            this.Nota.DataPropertyName = "Nota";
-            this.Nota.HeaderText = "Nota";
-            this.Nota.MaxInputLength = 200;
-            this.Nota.Name = "Nota";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(88, 204);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(247, 15);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Premere shift per aggiungere senza inserire";
             // 
             // PreventivoFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1384, 661);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.ddlProcessiGalvanici);
             this.Controls.Add(this.tabControl1);
@@ -471,5 +482,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Quantita;
         private System.Windows.Forms.DataGridViewTextBoxColumn PezziOrari;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nota;
+        private System.Windows.Forms.Label label5;
     }
 }

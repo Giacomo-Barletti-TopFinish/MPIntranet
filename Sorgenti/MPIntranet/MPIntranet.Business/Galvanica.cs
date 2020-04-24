@@ -39,8 +39,6 @@ namespace MPIntranet.Business
                     {
                         IdImpianto = impianto.IDIMPIANTO,
                         Descrizione = impianto.DESCRIZIONE,
-                        DataModifica = impianto.DATAMODIFICA,
-                        UtenteModifica = impianto.UTENTEMODIFICA
                     };
                     lista.Add(m);
                 }

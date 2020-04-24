@@ -210,7 +210,8 @@ namespace MPPreventivatore
             ProcessoGalvanico pg = new ProcessoGalvanico();
 
             ddlProcessiGalvanici.Items.Clear();
-            _processiGalvanici = pg.CaricaProcessi(ElementiVuoti.ArticoloStandard);
+            _processiGalvanici = pg.CaricaProcessiStandard();
+            _processiGalvanici = _processiGalvanici.Where(x => x.Colore.IdColore == prodottoFinitoUC1.ProdottoFinitoModel.Colore.IdColore).ToList();
             ddlProcessiGalvanici.Items.AddRange(_processiGalvanici.ToArray());
         }
 
@@ -268,7 +269,10 @@ namespace MPPreventivatore
             if (ddlPreventivi.SelectedIndex == -1) return;
             try
             {
-                _articolo.ModificaPreventivo(_preventivoSelezionato.IdPrevenivo, txtNota.Text, _utenteConnesso);
+                decimal idProcessoGalvanico = ElementiVuoti.ProcessoGalvanicoVuoto;
+                if (ddlProcessiGalvanici.SelectedIndex != -1)
+                    idProcessoGalvanico = ((ProcessoModel)ddlProcessiGalvanici.SelectedItem).IdProcesso;
+                _articolo.ModificaPreventivo(_preventivoSelezionato.IdPrevenivo, idProcessoGalvanico, txtNota.Text, _utenteConnesso);
                 _articolo.SalvaElementiPreventivo(_elementiPreventivo, _preventivoSelezionato.IdPrevenivo, _utenteConnesso);
                 caricaDdlPreventivi();
                 ddlPreventivi_SelectedIndexChanged(null, null);
@@ -372,28 +376,60 @@ namespace MPPreventivatore
                 TreeNode nodeToDropIn = this.treeView1.GetNodeAt(this.treeView1.PointToClient(new Point(e.X, e.Y)));
                 if (nodeToDropIn == null) { return; }
 
-                decimal idPadre = estraiIdPadre(nodeToDropIn);
-                decimal idElementoPreventivo = _articolo.EstraId();
+                // il nodo viene inserito sopra al node to drop in, in cascata, almeno che non siala radice
 
-                FaseModel fase = (FaseModel)e.Data.GetData(typeof(FaseModel));
-                ElementoPreventivoModel elemento;
-                if (fase == null)
+                if(nodeToDropIn.Parent==null ||  e.KeyState == 4)
                 {
-                    MateriaPrimaModel materiaPrima = (MateriaPrimaModel)e.Data.GetData(typeof(MateriaPrimaModel));
-                    if (materiaPrima == null) return;
-                    elemento = convertiMateriaPrimaInElementoPreventivo(materiaPrima, idElementoPreventivo, idPadre);
+                    decimal idPadre = estraiIdPadre(nodeToDropIn);
+                    decimal idElementoPreventivo = _articolo.EstraId();
+
+                    FaseModel fase = (FaseModel)e.Data.GetData(typeof(FaseModel));
+                    ElementoPreventivoModel elemento;
+                    if (fase == null)
+                    {
+                        MateriaPrimaModel materiaPrima = (MateriaPrimaModel)e.Data.GetData(typeof(MateriaPrimaModel));
+                        if (materiaPrima == null) return;
+                        elemento = convertiMateriaPrimaInElementoPreventivo(materiaPrima, idElementoPreventivo, idPadre);
+                    }
+                    else
+                    {
+                        elemento = convertiFaseInElementoPreventivo(fase, idElementoPreventivo, idPadre);
+                    }
+                    aggungiNodo(nodeToDropIn, elemento);
+
+                    inserisciElementoNellaLista(elemento, nodeToDropIn, idPadre);
+                    nodeToDropIn.ExpandAll();
                 }
                 else
                 {
-                    elemento = convertiFaseInElementoPreventivo(fase, idElementoPreventivo, idPadre);
+                    TreeNode padre = nodeToDropIn.Parent;
+                    treeView1.Nodes.Remove(nodeToDropIn);
+
+                    decimal idPadre = estraiIdPadre(padre);
+                    decimal idElementoPreventivo = _articolo.EstraId();
+
+                    FaseModel fase = (FaseModel)e.Data.GetData(typeof(FaseModel));
+                    ElementoPreventivoModel elemento;
+                    if (fase == null)
+                    {
+                        MateriaPrimaModel materiaPrima = (MateriaPrimaModel)e.Data.GetData(typeof(MateriaPrimaModel));
+                        if (materiaPrima == null) return;
+                        elemento = convertiMateriaPrimaInElementoPreventivo(materiaPrima, idElementoPreventivo, idPadre);
+                    }
+                    else
+                    {
+                        elemento = convertiFaseInElementoPreventivo(fase, idElementoPreventivo, idPadre);
+                    }
+                    TreeNode nodoAggiunto = aggungiNodo(padre, elemento);
+                    inserisciElementoNellaLista(elemento, padre, idPadre);
+                    ElementoPreventivoModel elementoNodeToDropIn = (ElementoPreventivoModel)nodeToDropIn.Tag;
+                    elementoNodeToDropIn.IdPadre = idElementoPreventivo;
+                    nodoAggiunto.Nodes.Add(nodeToDropIn);
+                    padre.ExpandAll();
                 }
-                aggungiNodo(nodeToDropIn, elemento);
-
-                inserisciElementoNellaLista(elemento, nodeToDropIn, idPadre);
-
 
                 RefreshGridView();
-                nodeToDropIn.ExpandAll();
+            
             }
         }
         private void inserisciElementoNellaLista(ElementoPreventivoModel elemento, TreeNode nodoPadre, decimal idPadre)

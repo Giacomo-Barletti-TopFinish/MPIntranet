@@ -554,6 +554,10 @@ namespace MPIntranet.Business
 
         private PreventivoModel creaPreventivoModel(ArticoloDS.PREVENTIVIRow preventivo)
         {
+            ProcessoGalvanico pg = new ProcessoGalvanico();
+            Galvanica g = new Galvanica();
+            List<TelaioModel> telai = g.CreaListaTelaioModel();
+
             if (preventivo == null) return null;
             PreventivoModel prevenivoModel = new PreventivoModel();
             prevenivoModel.Descrizione = preventivo.IsDESCRIZIONENull() ? string.Empty : preventivo.DESCRIZIONE;
@@ -561,6 +565,11 @@ namespace MPIntranet.Business
             prevenivoModel.Versione = preventivo.VERSIONE;
             prevenivoModel.IdPrevenivo = preventivo.IDPREVENTIVO;
             prevenivoModel.ProdottoFinito = CreaProdottoFinitoModel(preventivo.IDPRODOTTOFINITO);
+            if (preventivo.IsIDPROCESSONull())
+                prevenivoModel.Processo = ProcessoModel.ProcessoVuoto();
+            else
+                prevenivoModel.Processo = pg.CreaProcessoModel(preventivo.IDPROCESSO, telai);
+
             return prevenivoModel;
         }
 
@@ -601,15 +610,17 @@ namespace MPIntranet.Business
             return "Preventivo creato correttamente";
         }
 
-        public string ModificaPreventivo(decimal idPreventivo, string nota, string account)
+        public string ModificaPreventivo(decimal idPreventivo, decimal idProcesso, string nota, string account)
         {
             nota = correggiString(nota, 100);
-
 
             using (ArticoloBusiness bArticolo = new ArticoloBusiness())
             {
                 ArticoloDS.PREVENTIVIRow preventivo = EstraiPreventivo(idPreventivo);
                 preventivo.NOTA = nota;
+
+                if (idProcesso != ElementiVuoti.ProcessoGalvanicoVuoto)
+                    preventivo.IDPROCESSO = idProcesso;
 
                 preventivo.CANCELLATO = SiNo.No;
                 preventivo.DATAMODIFICA = DateTime.Now;
@@ -691,7 +702,7 @@ namespace MPIntranet.Business
                 }
             }
 
-            foreach (ArticoloDS.ELEMENTIPREVENTIVORow elementoDatabase in _ds.ELEMENTIPREVENTIVO.Where(x => x.IDPREVENTIVO == idPreventivo && x.CANCELLATO==SiNo.No))
+            foreach (ArticoloDS.ELEMENTIPREVENTIVORow elementoDatabase in _ds.ELEMENTIPREVENTIVO.Where(x => x.IDPREVENTIVO == idPreventivo && x.CANCELLATO == SiNo.No))
                 elementi.Add(creaElementoPreventivoModel(elementoDatabase));
 
             return elementi;

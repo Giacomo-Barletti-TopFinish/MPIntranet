@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MPIntranet.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,12 @@ namespace MPIntranet.Models.Galvanica
     {
         public decimal IdImpianto { get; set; }
         public string Descrizione{ get; set; }
-        public DateTime DataModifica { get; set; }
-        public string UtenteModifica { get; set; }
+        public static ImpiantoModel ImpiantoVuoto()
+        {
+            ImpiantoModel impianto = new ImpiantoModel();
+            impianto.IdImpianto = ElementiVuoti.ImpiantoVuoto;
+            return impianto;
+        }
     }
 }
+  

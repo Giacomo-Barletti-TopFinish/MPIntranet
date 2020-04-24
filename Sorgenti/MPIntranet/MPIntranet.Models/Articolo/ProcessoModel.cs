@@ -1,4 +1,5 @@
-﻿using MPIntranet.Models.Anagrafica;
+﻿using MPIntranet.Entities;
+using MPIntranet.Models.Anagrafica;
 using MPIntranet.Models.Galvanica;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,24 @@ namespace MPIntranet.Models.Articolo
         public TelaioModel Telaio { get; set; }
         public bool Standard { get; set; }
         public ColoreModel Colore{ get; set; }
+
+        public override string ToString()
+        {
+            return Descrizione;
+        }
+
+        public static ProcessoModel ProcessoVuoto()
+        {
+            ProcessoModel processo = new ProcessoModel();
+            processo.IdProcesso = ElementiVuoti.ProcessoGalvanicoVuoto;
+            processo.IdArticolo = ElementiVuoti.ArticoloStandard;
+            processo.Impianto = ImpiantoModel.ImpiantoVuoto();
+            processo.Fasi = new List<FaseProcessoModel>();
+            processo.Telaio = new TelaioModel();
+            processo.Standard = false;
+            processo.Colore = ColoreModel.ColoreNullo();
+            return processo;
+        }
     }
 
     public class FaseProcessoModel

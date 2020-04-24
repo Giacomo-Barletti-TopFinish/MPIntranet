@@ -1,5 +1,6 @@
 ﻿using MPIntranet.Business;
 using MPIntranet.Common;
+using MPIntranet.Entities;
 using MPIntranet.Models.Anagrafica;
 using MPIntranet.Models.Articolo;
 using System;
@@ -119,8 +120,10 @@ namespace MPPreventivatore
             if (ddlPreventivi.SelectedIndex == -1) return;
             try
             {
-                _articolo.ModificaPreventivo(_preventivoSelezionato.IdPrevenivo, txtNota.Text, _utenteConnesso);
-                _articolo.SalvaElementiPreventivo(_elementiPreventivo, _preventivoSelezionato.IdPrevenivo, _utenteConnesso);
+                //decimal idProcesso = ElementiVuoti.ProcessoGalvanicoVuoto;
+
+                //_articolo.ModificaPreventivo(_preventivoSelezionato.IdPrevenivo, _preventivoSelezionato., txtNota.Text, _utenteConnesso);
+                //_articolo.SalvaElementiPreventivo(_elementiPreventivo, _preventivoSelezionato.IdPrevenivo, _utenteConnesso);
             }
             catch (Exception ex)
             {

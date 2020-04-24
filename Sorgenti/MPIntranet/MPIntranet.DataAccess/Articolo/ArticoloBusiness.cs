@@ -130,7 +130,32 @@ namespace MPIntranet.DataAccess.Articolo
             ArticoloAdapter a = new ArticoloAdapter(DbConnection, DbTransaction);
             a.FillFasiProcesso(ds, idArticolo, soloNonCancellati);
         }
+        [DataContext]
+        public void GetProcesso(ArticoloDS ds, decimal idProcesso, bool soloNonCancellati)
+        {
+            ArticoloAdapter a = new ArticoloAdapter(DbConnection, DbTransaction);
+            a.GetProcesso(ds, idProcesso, soloNonCancellati);
+        }
 
+        [DataContext]
+        public void GetFasiProcesso(ArticoloDS ds, decimal idProcesso, bool soloNonCancellati)
+        {
+            ArticoloAdapter a = new ArticoloAdapter(DbConnection, DbTransaction);
+            a.GetFasiProcesso(ds, idProcesso, soloNonCancellati);
+        }
+        [DataContext]
+        public void FillProcessiStandard(ArticoloDS ds, bool soloNonCancellati)
+        {
+            ArticoloAdapter a = new ArticoloAdapter(DbConnection, DbTransaction);
+            a.FillProcessiStandard(ds, soloNonCancellati);
+        }
+
+        [DataContext]
+        public void FillFasiProcessoStandard(ArticoloDS ds, bool soloNonCancellati)
+        {
+            ArticoloAdapter a = new ArticoloAdapter(DbConnection, DbTransaction);
+            a.FillFasiProcessoStandard(ds, soloNonCancellati);
+        }
         [DataContext]
         public void FillPreventivi(ArticoloDS ds, decimal idProdottoFinito, bool soloNonCancellati)
         {
