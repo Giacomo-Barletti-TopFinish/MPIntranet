@@ -35,9 +35,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtDescrizione = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtNota = new System.Windows.Forms.TextBox();
+            this.chkCopiaPrecedente = new System.Windows.Forms.CheckBox();
+            this.ddlVersionePrecedente = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // lblArticolo
@@ -55,7 +56,7 @@
             this.lblMessaggio.AutoSize = true;
             this.lblMessaggio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMessaggio.ForeColor = System.Drawing.Color.Red;
-            this.lblMessaggio.Location = new System.Drawing.Point(7, 181);
+            this.lblMessaggio.Location = new System.Drawing.Point(12, 213);
             this.lblMessaggio.Name = "lblMessaggio";
             this.lblMessaggio.Size = new System.Drawing.Size(51, 16);
             this.lblMessaggio.TabIndex = 7;
@@ -92,30 +93,19 @@
             this.txtDescrizione.Location = new System.Drawing.Point(93, 69);
             this.txtDescrizione.MaxLength = 30;
             this.txtDescrizione.Name = "txtDescrizione";
-            this.txtDescrizione.Size = new System.Drawing.Size(333, 21);
+            this.txtDescrizione.Size = new System.Drawing.Size(420, 21);
             this.txtDescrizione.TabIndex = 0;
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.Location = new System.Drawing.Point(93, 203);
+            this.button1.Location = new System.Drawing.Point(153, 237);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(176, 23);
             this.button1.TabIndex = 2;
-            this.button1.Text = "Salva";
+            this.button1.Text = "Crea nuova versione";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Location = new System.Drawing.Point(249, 203);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Esci";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label3
             // 
@@ -132,17 +122,39 @@
             this.txtNota.MaxLength = 100;
             this.txtNota.Multiline = true;
             this.txtNota.Name = "txtNota";
-            this.txtNota.Size = new System.Drawing.Size(333, 73);
+            this.txtNota.Size = new System.Drawing.Size(420, 73);
             this.txtNota.TabIndex = 1;
+            // 
+            // chkCopiaPrecedente
+            // 
+            this.chkCopiaPrecedente.AutoSize = true;
+            this.chkCopiaPrecedente.Location = new System.Drawing.Point(93, 188);
+            this.chkCopiaPrecedente.Name = "chkCopiaPrecedente";
+            this.chkCopiaPrecedente.Size = new System.Drawing.Size(189, 19);
+            this.chkCopiaPrecedente.TabIndex = 13;
+            this.chkCopiaPrecedente.Text = "Copia da versione precedente";
+            this.chkCopiaPrecedente.UseVisualStyleBackColor = true;
+            this.chkCopiaPrecedente.CheckedChanged += new System.EventHandler(this.chkCopiaPrecedente_CheckedChanged);
+            // 
+            // ddlVersionePrecedente
+            // 
+            this.ddlVersionePrecedente.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlVersionePrecedente.Enabled = false;
+            this.ddlVersionePrecedente.FormattingEnabled = true;
+            this.ddlVersionePrecedente.Location = new System.Drawing.Point(288, 186);
+            this.ddlVersionePrecedente.Name = "ddlVersionePrecedente";
+            this.ddlVersionePrecedente.Size = new System.Drawing.Size(225, 23);
+            this.ddlVersionePrecedente.TabIndex = 14;
             // 
             // NuovoPreventivoFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(461, 241);
+            this.ClientSize = new System.Drawing.Size(541, 272);
+            this.Controls.Add(this.ddlVersionePrecedente);
+            this.Controls.Add(this.chkCopiaPrecedente);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtNota);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtDescrizione);
             this.Controls.Add(this.label2);
@@ -170,8 +182,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtDescrizione;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtNota;
+        private System.Windows.Forms.CheckBox chkCopiaPrecedente;
+        private System.Windows.Forms.ComboBox ddlVersionePrecedente;
     }
 }

@@ -186,7 +186,7 @@ namespace MPIntranet.Business
             using (ManutezioneBusiness bManutenzione = new ManutezioneBusiness())
             {
                 bManutenzione.FillMacchine(_ds, true);
-                bManutenzione.FillDitte(_ds, true);
+                bManutenzione.FillDitte(_ds, false);
 
                 foreach (ManutenzioneDS.MACCHINERow d in _ds.MACCHINE)
                     lista.Add(CreaMacchinaModel(d, _ds));
@@ -275,7 +275,10 @@ namespace MPIntranet.Business
         private DittaModel CreaDittaModel(decimal IdDitta, ManutenzioneDS ds)
         {
             ManutenzioneDS.DITTERow ditta = ds.DITTE.Where(x => x.IDDITTA == IdDitta).FirstOrDefault();
-            if (ditta == null) return null;
+            if (ditta == null)
+            {
+                return null;
+            }
 
             return CreaDittaModel(ditta, ds);
         }

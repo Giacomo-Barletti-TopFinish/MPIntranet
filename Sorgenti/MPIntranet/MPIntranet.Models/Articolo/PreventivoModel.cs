@@ -9,7 +9,7 @@ namespace MPIntranet.Models.Articolo
 {
     public class PreventivoModel
     {
-        public decimal IdPrevenivo { get; set; }
+        public decimal IdPreventivo { get; set; }
         public decimal Versione { get; set; }
         public string Descrizione { get; set; }
         public string Nota { get; set; }

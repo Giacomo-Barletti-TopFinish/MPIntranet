@@ -110,7 +110,7 @@ namespace MPIntranet.Business
             }
         }
 
-        public decimal EstraId()
+        public static decimal EstraId()
         {
             using (ArticoloBusiness bArticolo = new ArticoloBusiness())
                 return bArticolo.EstraiId();
@@ -552,6 +552,39 @@ namespace MPIntranet.Business
             }
         }
 
+        public List<PreventivoCostoModel> CreaListaPreventivoCostiModel(decimal idPreventivo)
+        {
+            _ds.PREVENTIVICOSTI.Clear();
+            _ds.ELEMENTICOSTIPREVENTIVI.Clear();
+            List<PreventivoCostoModel> prevetivi = new List<PreventivoCostoModel>();
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                bArticolo.FillPreventiviCosti(_ds, idPreventivo, true);
+
+                foreach (ArticoloDS.PREVENTIVICOSTIRow preventivo in _ds.PREVENTIVICOSTI)
+                    prevetivi.Add(creaPreventivoCostoModel(preventivo));
+
+                return prevetivi;
+            }
+        }
+        private PreventivoCostoModel creaPreventivoCostoModel(ArticoloDS.PREVENTIVICOSTIRow preventivo)
+        {
+
+            if (preventivo == null) return null;
+
+            PreventivoCostoModel prevenivoCostoModel = new PreventivoCostoModel();
+            prevenivoCostoModel.Descrizione = preventivo.IsDESCRIZIONENull() ? string.Empty : preventivo.DESCRIZIONE;
+            prevenivoCostoModel.Nota = preventivo.IsNOTANull() ? string.Empty : preventivo.NOTA;
+            prevenivoCostoModel.Versione = preventivo.VERSIONE;
+            prevenivoCostoModel.Margine = preventivo.MARGINE;
+            prevenivoCostoModel.Prezzo = preventivo.PREZZO;
+            prevenivoCostoModel.Costo = preventivo.COSTO;
+
+            prevenivoCostoModel.IdPreventivoCosto = preventivo.IDPREVENTIVOCOSTO;
+            prevenivoCostoModel.Preventvo = creaPreventivoModel(EstraiPreventivo(preventivo.IDPREVENTIVO));
+
+            return prevenivoCostoModel;
+        }
         private PreventivoModel creaPreventivoModel(ArticoloDS.PREVENTIVIRow preventivo)
         {
             ProcessoGalvanico pg = new ProcessoGalvanico();
@@ -563,7 +596,7 @@ namespace MPIntranet.Business
             prevenivoModel.Descrizione = preventivo.IsDESCRIZIONENull() ? string.Empty : preventivo.DESCRIZIONE;
             prevenivoModel.Nota = preventivo.IsNOTANull() ? string.Empty : preventivo.NOTA;
             prevenivoModel.Versione = preventivo.VERSIONE;
-            prevenivoModel.IdPrevenivo = preventivo.IDPREVENTIVO;
+            prevenivoModel.IdPreventivo = preventivo.IDPREVENTIVO;
             prevenivoModel.ProdottoFinito = CreaProdottoFinitoModel(preventivo.IDPRODOTTOFINITO);
             if (preventivo.IsIDPROCESSONull())
                 prevenivoModel.Processo = ProcessoModel.ProcessoVuoto();
@@ -708,6 +741,57 @@ namespace MPIntranet.Business
             return elementi;
         }
 
+        public List<ElementoCostoPreventivoModel> CreaListaElementoCostoPreventivoModel(decimal idPreventivoCosto)
+        {
+            List<ElementoCostoPreventivoModel> elementi = new List<ElementoCostoPreventivoModel>();
+
+            if (!_ds.ELEMENTICOSTIPREVENTIVI.Any(x => x.IDPREVENTIVOCOSTO == idPreventivoCosto))
+            {
+                using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+                {
+                    bArticolo.FillElementiCostiPreventivo(_ds, idPreventivoCosto, true);
+                }
+            }
+
+            foreach (ArticoloDS.ELEMENTICOSTIPREVENTIVIRow elementoCosto in _ds.ELEMENTICOSTIPREVENTIVI.Where(x => x.IDPREVENTIVOCOSTO == idPreventivoCosto && x.CANCELLATO == SiNo.No))
+                elementi.Add(creaElementoCostoPreventivoModel(elementoCosto));
+
+            return elementi;
+        }
+        private ElementoCostoPreventivoModel creaElementoCostoPreventivoModel(ArticoloDS.ELEMENTICOSTIPREVENTIVIRow elementoCostoPreventivo)
+        {
+            Anagrafica a = new Anagrafica();
+            ElementoCostoPreventivoModel elementoModel = new ElementoCostoPreventivoModel();
+            elementoModel.IdElementoCosto = elementoCostoPreventivo.IDELEMENTOCOSTO;
+            elementoModel.IdPreventivoCosto = elementoCostoPreventivo.IDPREVENTIVOCOSTO;
+            elementoModel.ElementoPreventivo = creaElementoPreventivoModel(elementoCostoPreventivo.IDELEMENTOPREVENTIVO);
+            elementoModel.Ricarico = elementoCostoPreventivo.RICARICO;
+            elementoModel.CostoOrario = elementoCostoPreventivo.COSTO;
+            elementoModel.IncludiPreventivo = elementoCostoPreventivo.INCLUDIPREVENTIVO == SiNo.Si;
+            elementoModel.IdEsterna = elementoCostoPreventivo.IsIDESTERNANull() ? -1 : elementoCostoPreventivo.IDESTERNA;
+            elementoModel.TabellaEsterna = elementoCostoPreventivo.IsTABELLAESTERNANull() ? string.Empty : elementoCostoPreventivo.TABELLAESTERNA;
+            elementoModel.PezziOrari = elementoCostoPreventivo.PEZZIORARI;
+            elementoModel.Quantita = elementoCostoPreventivo.QUANTITA;
+            elementoModel.CostoArticolo = elementoCostoPreventivo.COSTOARTICOLO;
+            elementoModel.Prezzo = elementoCostoPreventivo.PREZZO;
+
+            return elementoModel;
+        }
+        private ElementoPreventivoModel creaElementoPreventivoModel(decimal idElementoreventivo)
+        {
+            ArticoloDS.ELEMENTIPREVENTIVORow elementoPreventivo = _ds.ELEMENTIPREVENTIVO.Where(x => x.IDELEMENTOPREVENTIVO == idElementoreventivo).FirstOrDefault();
+            if (elementoPreventivo == null)
+            {
+                using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+                {
+                    bArticolo.EstraiElementoPreventivo(_ds, idElementoreventivo);
+                    elementoPreventivo = _ds.ELEMENTIPREVENTIVO.Where(x => x.IDELEMENTOPREVENTIVO == idElementoreventivo).FirstOrDefault();
+                    if (elementoPreventivo == null) return null;
+                }
+            }
+            return creaElementoPreventivoModel(elementoPreventivo);
+
+        }
         private ElementoPreventivoModel creaElementoPreventivoModel(ArticoloDS.ELEMENTIPREVENTIVORow elementoPreventivo)
         {
             Anagrafica a = new Anagrafica();

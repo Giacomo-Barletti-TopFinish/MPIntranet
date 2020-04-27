@@ -157,9 +157,9 @@ namespace MPPreventivatore
         private ElementoPreventivoModel creaNuovoElementoModel(ElementoPreventivoModel elementoModelDaClonare, decimal idPadre)
         {
             ElementoPreventivoModel elemento = new ElementoPreventivoModel();
-            elemento.IdElementoPreventivo = _articolo.EstraId();
+            elemento.IdElementoPreventivo = MPIntranet.Business.Articolo.EstraId();
             elemento.IdPadre = idPadre;
-            elemento.IdPreventivo = _preventivoSelezionato.IdPrevenivo;
+            elemento.IdPreventivo = _preventivoSelezionato.IdPreventivo;
             elemento.Codice = elementoModelDaClonare.Codice;
             elemento.Reparto = elementoModelDaClonare.Reparto;
             elemento.Ricarico = elementoModelDaClonare.Ricarico;
@@ -238,6 +238,7 @@ namespace MPPreventivatore
             if (ddlPreventivi.SelectedIndex == -1) return;
             txtNota.Text = _preventivoSelezionato.Nota;
 
+            ddlProcessiGalvanici.SelectedIndex = -1;
             if (_preventivoSelezionato.Processo != null)
             {
                 ProcessoModel processoSelezionato = _processiGalvanici.Where(x => x.IdProcesso == _preventivoSelezionato.Processo.IdProcesso).FirstOrDefault();
@@ -247,7 +248,7 @@ namespace MPPreventivatore
             treeView1.Nodes.Clear();
             TreeNode radice = treeView1.Nodes.Add("-1", prodottoFinitoUC1.ProdottoFinitoModel.ToString());
             radice.Tag = prodottoFinitoUC1.ProdottoFinitoModel;
-            _elementiPreventivo = _articolo.CreaListaElementoPreventivoModel(_preventivoSelezionato.IdPrevenivo);
+            _elementiPreventivo = _articolo.CreaListaElementoPreventivoModel(_preventivoSelezionato.IdPreventivo);
             creaAlberoDistinta(radice);
             treeView1.ExpandAll();
             caricaGrigliaElementiPreventivo();
@@ -275,8 +276,8 @@ namespace MPPreventivatore
                 decimal idProcessoGalvanico = ElementiVuoti.ProcessoGalvanicoVuoto;
                 if (ddlProcessiGalvanici.SelectedIndex != -1)
                     idProcessoGalvanico = ((ProcessoModel)ddlProcessiGalvanici.SelectedItem).IdProcesso;
-                _articolo.ModificaPreventivo(_preventivoSelezionato.IdPrevenivo, idProcessoGalvanico, txtNota.Text, _utenteConnesso);
-                _articolo.SalvaElementiPreventivo(_elementiPreventivo, _preventivoSelezionato.IdPrevenivo, _utenteConnesso);
+                _articolo.ModificaPreventivo(_preventivoSelezionato.IdPreventivo, idProcessoGalvanico, txtNota.Text, _utenteConnesso);
+                _articolo.SalvaElementiPreventivo(_elementiPreventivo, _preventivoSelezionato.IdPreventivo, _utenteConnesso);
                 caricaDdlPreventivi();
                 ddlPreventivi_SelectedIndexChanged(null, null);
 
@@ -384,7 +385,7 @@ namespace MPPreventivatore
                 if (nodeToDropIn.Parent == null || e.KeyState == 4)
                 {
                     decimal idPadre = estraiIdPadre(nodeToDropIn);
-                    decimal idElementoPreventivo = _articolo.EstraId();
+                    decimal idElementoPreventivo = MPIntranet.Business.Articolo.EstraId();
 
                     FaseModel fase = (FaseModel)e.Data.GetData(typeof(FaseModel));
                     ElementoPreventivoModel elemento;
@@ -409,7 +410,7 @@ namespace MPPreventivatore
                     treeView1.Nodes.Remove(nodeToDropIn);
 
                     decimal idPadre = estraiIdPadre(padre);
-                    decimal idElementoPreventivo = _articolo.EstraId();
+                    decimal idElementoPreventivo = MPIntranet.Business.Articolo.EstraId();
 
                     FaseModel fase = (FaseModel)e.Data.GetData(typeof(FaseModel));
                     ElementoPreventivoModel elemento;
@@ -477,7 +478,7 @@ namespace MPPreventivatore
             ElementoPreventivoModel elemento = new ElementoPreventivoModel();
             elemento.IdElementoPreventivo = idElementoPreventivo;
             elemento.IdPadre = idPadre;
-            elemento.IdPreventivo = _preventivoSelezionato.IdPrevenivo;
+            elemento.IdPreventivo = _preventivoSelezionato.IdPreventivo;
             elemento.Codice = fase.Codice;
             elemento.Reparto = fase.Reparto;
             elemento.Ricarico = fase.Ricarico;
@@ -500,7 +501,7 @@ namespace MPPreventivatore
             ElementoPreventivoModel elemento = new ElementoPreventivoModel();
             elemento.IdElementoPreventivo = idElementoPreventivo;
             elemento.IdPadre = idPadre;
-            elemento.IdPreventivo = _preventivoSelezionato.IdPrevenivo;
+            elemento.IdPreventivo = _preventivoSelezionato.IdPreventivo;
             elemento.Codice = materiaPrima.Codice;
             elemento.Reparto = null;
             elemento.Ricarico = materiaPrima.Ricarico;
@@ -638,6 +639,7 @@ namespace MPPreventivatore
 
         private void ddlProcessiGalvanici_SelectedIndexChanged(object sender, EventArgs e)
         {
+            dgvProcessoGalvanico.Rows.Clear();
             if (ddlProcessiGalvanici.SelectedIndex == -1) return;
 
             ProcessoModel processoSelezionato = (ProcessoModel)ddlProcessiGalvanici.SelectedItem;

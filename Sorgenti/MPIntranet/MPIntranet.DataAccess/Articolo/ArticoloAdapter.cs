@@ -214,7 +214,7 @@ namespace MPIntranet.DataAccess.Articolo
                 da.Fill(ds.PROCESSI);
             }
         }
-        public void FillFasiProcessoStandard(ArticoloDS ds,  bool soloNonCancellati)
+        public void FillFasiProcessoStandard(ArticoloDS ds, bool soloNonCancellati)
         {
             string select = @"SELECT * FROM FASIPROCESSO FP 
                                     INNER JOIN PROCESSI PR ON PR.IDPROCESSO = FP.IDPROCESSO
@@ -280,6 +280,38 @@ namespace MPIntranet.DataAccess.Articolo
             }
         }
 
+        public void FillPreventiviCosti(ArticoloDS ds, decimal idPreventivo, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM PREVENTIVICOSTI WHERE IDPREVENTIVO = $P<IDPREVENTIVO> ";
+            if (soloNonCancellati)
+                select += "AND CANCELLATO = 'N' ";
+
+            select += "ORDER BY VERSIONE DESC";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDPREVENTIVO", DbType.Decimal, idPreventivo);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.PREVENTIVICOSTI);
+            }
+        }
+
+        public void FillElementiCostiPreventivo(ArticoloDS ds, decimal idPreventivo, bool soloNonCancellati)
+        {
+            string select = @"SELECT FP.* FROM ELEMENTICOSTIPREVENTIVI FP 
+                                    INNER JOIN PREVENTIVICOSTI PR ON PR.IDCOSTOPREVENTIVO = FP.IDCOSTOPREVENTIVO
+                                    WHERE IDPREVENTIVO = $P<IDPREVENTIVO> ";
+            if (soloNonCancellati)
+                select += "AND FP.CANCELLATO = 'N' ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDPREVENTIVO", DbType.Decimal, idPreventivo);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.ELEMENTICOSTIPREVENTIVI);
+            }
+        }
+
         public void EstraiPreventivo(ArticoloDS ds, decimal idPreventivo)
         {
             string select = @"SELECT * FROM PREVENTIVI WHERE IDPREVENTIVO = $P<IDPREVENTIVO> ";
@@ -289,6 +321,18 @@ namespace MPIntranet.DataAccess.Articolo
             using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
                 da.Fill(ds.PREVENTIVI);
+            }
+        }
+
+        public void EstraiElementoPreventivo(ArticoloDS ds, decimal idElementoPreventivo)
+        {
+            string select = @"SELECT * FROM ELEMENTIPREVENTIVO WHERE IDELEMENTIPREVENTIVO = $P<IDELEMENTIPREVENTIVO> ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDELEMENTIPREVENTIVO", DbType.Decimal, idElementoPreventivo);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.ELEMENTIPREVENTIVO);
             }
         }
         public void FillElementiPreventivo(ArticoloDS ds, decimal idProdottoFinito, bool soloNonCancellati)

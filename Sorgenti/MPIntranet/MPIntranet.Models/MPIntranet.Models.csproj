@@ -54,6 +54,7 @@
     <Compile Include="Anagrafica\TipoProdottoModel.cs" />
     <Compile Include="Articolo\ArticoloModel.cs" />
     <Compile Include="Articolo\GruppoModel.cs" />
+    <Compile Include="Articolo\PreventivoCostiModel.cs" />
     <Compile Include="Articolo\PreventivoModel.cs" />
     <Compile Include="Articolo\ProcessoModel.cs" />
     <Compile Include="Articolo\ProdottoFinitoModel.cs" />

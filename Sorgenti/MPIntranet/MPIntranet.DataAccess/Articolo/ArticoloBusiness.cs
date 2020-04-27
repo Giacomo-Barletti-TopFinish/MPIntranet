@@ -183,6 +183,25 @@ namespace MPIntranet.DataAccess.Articolo
         }
 
         [DataContext]
+        public void EstraiElementoPreventivo(ArticoloDS ds, decimal idElementoPreventivo)
+        {
+            ArticoloAdapter a = new ArticoloAdapter(DbConnection, DbTransaction);
+            a.EstraiElementoPreventivo(ds, idElementoPreventivo);
+        }
+        [DataContext]
+        public void FillPreventiviCosti(ArticoloDS ds, decimal idPreventivo, bool soloNonCancellati)
+        {
+            ArticoloAdapter a = new ArticoloAdapter(DbConnection, DbTransaction);
+            a.FillPreventiviCosti(ds, idPreventivo, soloNonCancellati);
+        }
+        [DataContext]
+        public void FillElementiCostiPreventivo(ArticoloDS ds, decimal idPreventivo, bool soloNonCancellati)
+        {
+            ArticoloAdapter a = new ArticoloAdapter(DbConnection, DbTransaction);
+            a.FillElementiCostiPreventivo(ds, idPreventivo, soloNonCancellati);
+        }
+
+        [DataContext]
         public decimal EstraiId()
         {
             return GetID();
