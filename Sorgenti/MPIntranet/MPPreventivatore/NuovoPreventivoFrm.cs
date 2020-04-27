@@ -18,6 +18,7 @@ namespace MPPreventivatore
         private ProdottoFinitoModel _prodottoFinito;
         private int _versioni;
         private string _account;
+        
         public NuovoPreventivoFrm(ProdottoFinitoModel prodottoFinitoModel, int versioni, string account)
         {
             _prodottoFinito = prodottoFinitoModel;

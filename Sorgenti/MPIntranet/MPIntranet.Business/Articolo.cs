@@ -606,6 +606,44 @@ namespace MPIntranet.Business
             return prevenivoModel;
         }
 
+        public string CreaPreventivoCosto(decimal versione, string descrizione, decimal idPreventivo, string nota, string account)
+        {
+            descrizione = correggiString(descrizione, 30);
+            nota = correggiString(nota, 200);
+
+            PreventivoModel preventivo = creaPreventivoModel(EstraiPreventivo(idPreventivo));
+            if (preventivo == null) return "Preventivo inesistente";
+
+            if (versione <= 0) return "Codice versione errato";
+
+            if (string.IsNullOrEmpty(descrizione))
+                return "La descrizione è obbligatoria";
+
+            if (CreaListaPreventivoCostiModel(idPreventivo).Any(x => x.Versione == versione))
+                return "Questa versione esiste già";
+
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                ArticoloDS.PREVENTIVICOSTIRow preventivoCosto = _ds.PREVENTIVICOSTI.NewPREVENTIVICOSTIRow();
+                preventivoCosto.DESCRIZIONE = descrizione;
+                preventivoCosto.NOTA = nota;
+                preventivoCosto.VERSIONE = versione;
+                preventivoCosto.IDPREVENTIVO = idPreventivo;
+                preventivoCosto.COSTO = 0;
+                preventivoCosto.MARGINE = 0;
+                preventivoCosto.PREZZO = 0;
+
+                preventivoCosto.CANCELLATO = SiNo.No;
+                preventivoCosto.DATAMODIFICA = DateTime.Now;
+                preventivoCosto.UTENTEMODIFICA = account;
+
+                _ds.PREVENTIVICOSTI.AddPREVENTIVICOSTIRow(preventivoCosto);
+                bArticolo.UpdateTable(_ds.PREVENTIVICOSTI.TableName, _ds);
+
+            }
+
+            return "Preventivo creato correttamente";
+        }
 
         public string CreaPreventivo(decimal versione, string descrizione, decimal idProdottoFinito, string nota, string account)
         {
@@ -910,6 +948,99 @@ namespace MPIntranet.Business
 
             using (ArticoloBusiness bArticolo = new ArticoloBusiness())
                 bArticolo.UpdateTable(_ds.ELEMENTIPREVENTIVO.TableName, _ds);
+        }
+
+        public void SalvaElementiCostoPreventivo(List<ElementoCostoPreventivoModel> elementiPreventivoModel, decimal idPreventivoCosto, string account)
+        {
+            //_ds.ELEMENTIPREVENTIVO.Clear();
+            //using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            //{
+            //    bArticolo.FillElementiPreventivo(_ds, idPreventivo);
+            //}
+
+            //foreach (ArticoloDS.ELEMENTIPREVENTIVORow elementoDatabase in _ds.ELEMENTIPREVENTIVO.Where(x => x.IDPREVENTIVO == idPreventivo))
+            //{
+            //    ElementoPreventivoModel elementoPreventivoModel = elementiPreventivoModel.Where(x => x.IdElementoPreventivo == elementoDatabase.IDELEMENTOPREVENTIVO).FirstOrDefault();
+            //    if (elementoPreventivoModel == null)
+            //    {
+            //        elementoDatabase.CANCELLATO = SiNo.Si;
+            //    }
+            //    else
+            //    {
+            //        string articolo = elementoPreventivoModel.Articolo.Trim().ToUpper();
+            //        elementoDatabase.ARTICOLO = correggiString(elementoPreventivoModel.Articolo, 30);
+            //        elementoDatabase.CODICE = correggiString(elementoPreventivoModel.Codice, 10);
+            //        elementoDatabase.COSTO = elementoPreventivoModel.CostoOrario;
+            //        elementoDatabase.DESCRIZIONE = correggiString(elementoPreventivoModel.Descrizione, 40);
+            //        elementoDatabase.NOTA = elementoPreventivoModel.Nota;
+
+            //        if (elementoPreventivoModel.IdEsterna == -1) elementoDatabase.SetIDESTERNANull();
+            //        else elementoDatabase.IDESTERNA = elementoPreventivoModel.IdEsterna;
+
+            //        if (elementoPreventivoModel.IdPadre == -1) elementoDatabase.SetIDPADRENull();
+            //        else elementoDatabase.IDPADRE = elementoPreventivoModel.IdPadre;
+
+            //        elementoDatabase.PESO = elementoPreventivoModel.Peso;
+            //        elementoDatabase.PEZZIORARI = elementoPreventivoModel.PezziOrari;
+            //        elementoDatabase.QUANTITA = elementoPreventivoModel.Quantita;
+
+            //        if (elementoPreventivoModel.Reparto == null) elementoDatabase.SetIDREPARTONull();
+            //        else elementoDatabase.IDREPARTO = elementoPreventivoModel.Reparto.IdReparto;
+
+            //        elementoDatabase.RICARICO = elementoPreventivoModel.Ricarico;
+            //        elementoDatabase.SUPERFICIE = elementoPreventivoModel.Superficie;
+
+            //        elementoDatabase.TABELLAESTERNA = correggiString(elementoPreventivoModel.TabellaEsterna, 25);
+            //        elementoDatabase.INCLUDIPREVENTIVO = elementoPreventivoModel.IncludiPreventivo ? SiNo.Si : SiNo.No;
+            //    }
+
+            //    elementoDatabase.DATAMODIFICA = DateTime.Now;
+            //    elementoDatabase.UTENTEMODIFICA = account;
+            //}
+
+            //foreach (ElementoPreventivoModel elementoPreventivoModel in elementiPreventivoModel)
+            //{
+            //    if (!_ds.ELEMENTIPREVENTIVO.Any(x => x.IDELEMENTOPREVENTIVO == elementoPreventivoModel.IdElementoPreventivo))
+            //    {
+            //        ArticoloDS.ELEMENTIPREVENTIVORow elementoNuovo = _ds.ELEMENTIPREVENTIVO.NewELEMENTIPREVENTIVORow();
+            //        elementoNuovo.IDELEMENTOPREVENTIVO = elementoPreventivoModel.IdElementoPreventivo;
+            //        elementoNuovo.IDPREVENTIVO = idPreventivo;
+
+            //        elementoNuovo.ARTICOLO = correggiString(elementoPreventivoModel.Articolo, 30);
+            //        elementoNuovo.CODICE = correggiString(elementoPreventivoModel.Codice, 10);
+            //        elementoNuovo.COSTO = elementoPreventivoModel.CostoOrario;
+            //        elementoNuovo.DESCRIZIONE = correggiString(elementoPreventivoModel.Descrizione, 40);
+            //        elementoNuovo.NOTA = elementoPreventivoModel.Nota;
+
+            //        if (elementoPreventivoModel.IdEsterna == -1) elementoNuovo.SetIDESTERNANull();
+            //        else elementoNuovo.IDESTERNA = elementoPreventivoModel.IdEsterna;
+
+            //        if (elementoPreventivoModel.IdPadre == -1) elementoNuovo.SetIDPADRENull();
+            //        else elementoNuovo.IDPADRE = elementoPreventivoModel.IdPadre;
+
+            //        elementoNuovo.PESO = elementoPreventivoModel.Peso;
+            //        elementoNuovo.PEZZIORARI = elementoPreventivoModel.PezziOrari;
+            //        elementoNuovo.QUANTITA = elementoPreventivoModel.Quantita;
+
+            //        if (elementoPreventivoModel.Reparto == null) elementoNuovo.SetIDREPARTONull();
+            //        else elementoNuovo.IDREPARTO = elementoPreventivoModel.Reparto.IdReparto;
+
+            //        elementoNuovo.RICARICO = elementoPreventivoModel.Ricarico;
+            //        elementoNuovo.SUPERFICIE = elementoPreventivoModel.Superficie;
+
+            //        elementoNuovo.TABELLAESTERNA = correggiString(elementoPreventivoModel.TabellaEsterna, 25);
+            //        elementoNuovo.INCLUDIPREVENTIVO = elementoPreventivoModel.IncludiPreventivo ? SiNo.Si : SiNo.No;
+
+            //        elementoNuovo.CANCELLATO = SiNo.No;
+            //        elementoNuovo.DATAMODIFICA = DateTime.Now;
+            //        elementoNuovo.UTENTEMODIFICA = account;
+
+            //        _ds.ELEMENTIPREVENTIVO.AddELEMENTIPREVENTIVORow(elementoNuovo);
+            //    }
+            //}
+
+            //using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            //    bArticolo.UpdateTable(_ds.ELEMENTIPREVENTIVO.TableName, _ds);
         }
 
         public string CreaGruppo(string codice, string descrizione, decimal idbrand, string colore, string account)

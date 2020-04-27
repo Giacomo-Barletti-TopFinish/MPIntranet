@@ -81,9 +81,9 @@ namespace MPPreventivatore
         {
             try
             {
-                NuovoPreventivoFrm form = new NuovoPreventivoFrm(prodottoFinitoUC1.ProdottoFinitoModel, ddlPreventivi.Items.Count, _utenteConnesso);
+                NuovoPreventivoCostoFrm form = new NuovoPreventivoCostoFrm(_preventivoSelezionato, ddlPreventivoCosto.Items.Count, _utenteConnesso);
                 form.ShowDialog();
-                caricaDdlPreventivi();
+                caricaPreventiviCosti(_preventivoSelezionato.IdPreventivo);
             }
             catch (Exception ex)
             {

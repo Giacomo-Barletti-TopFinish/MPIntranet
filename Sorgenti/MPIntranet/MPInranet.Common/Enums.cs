@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MPIntranet.Common
 {
-    public enum TipoRicerca { Scheda = 1, Processo,ProdottoFinito,Preventivo,Costo}
+    public enum TipoRicerca { Scheda = 1, Processo, ProdottoFinito, Preventivo, Costo }
 
     public class SiNo
     {
@@ -23,7 +23,7 @@ namespace MPIntranet.Common
     public class TabelleEsterne
     {
         public const string Ditte = "DITTE";
-        public const string Manutentori= "MANUTENTORI";
+        public const string Manutentori = "MANUTENTORI";
         public const string Macchine = "MACCHINE";
         public const string ProdottiFiniti = "PRODOTTI FINITI";
     }
