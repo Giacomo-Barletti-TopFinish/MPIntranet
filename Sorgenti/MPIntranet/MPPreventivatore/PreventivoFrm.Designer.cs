@@ -53,12 +53,20 @@
             this.Nota = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lstMateriePrime = new System.Windows.Forms.ListBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btnAggiorna2 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btnAggiorna = new System.Windows.Forms.Button();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.dgvProcessoGalvanico = new System.Windows.Forms.DataGridView();
+            this.Vasca = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Materiale = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SpessoreMinimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SpessoreNominale = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SpessoreMassimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ddlProcessiGalvanici = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -66,8 +74,11 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvElementi)).BeginInit();
             this.tabControl1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProcessoGalvanico)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -100,7 +111,7 @@
             this.groupBox2.Controls.Add(this.ddlPreventivi);
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(575, 134);
+            this.groupBox2.Size = new System.Drawing.Size(575, 182);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Preventivo";
@@ -120,12 +131,12 @@
             this.txtNota.MaxLength = 100;
             this.txtNota.Multiline = true;
             this.txtNota.Name = "txtNota";
-            this.txtNota.Size = new System.Drawing.Size(376, 56);
+            this.txtNota.Size = new System.Drawing.Size(376, 104);
             this.txtNota.TabIndex = 2;
             // 
             // btnSalva
             // 
-            this.btnSalva.Location = new System.Drawing.Point(399, 88);
+            this.btnSalva.Location = new System.Drawing.Point(399, 136);
             this.btnSalva.Name = "btnSalva";
             this.btnSalva.Size = new System.Drawing.Size(141, 33);
             this.btnSalva.TabIndex = 1;
@@ -171,8 +182,9 @@
             // lstFasi
             // 
             this.lstFasi.AllowDrop = true;
-            this.lstFasi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.lstFasi.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lstFasi.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstFasi.FormattingEnabled = true;
             this.lstFasi.ItemHeight = 15;
@@ -197,9 +209,6 @@
             // 
             this.dgvElementi.AllowUserToAddRows = false;
             this.dgvElementi.AllowUserToDeleteRows = false;
-            this.dgvElementi.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvElementi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvElementi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdEelementoPreventivo,
@@ -212,12 +221,13 @@
             this.Quantita,
             this.PezziOrari,
             this.Nota});
-            this.dgvElementi.Location = new System.Drawing.Point(787, 200);
+            this.dgvElementi.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvElementi.Location = new System.Drawing.Point(3, 3);
             this.dgvElementi.MultiSelect = false;
             this.dgvElementi.Name = "dgvElementi";
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvElementi.RowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvElementi.Size = new System.Drawing.Size(589, 439);
+            this.dgvElementi.Size = new System.Drawing.Size(888, 405);
             this.dgvElementi.TabIndex = 9;
             this.dgvElementi.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvElementi_CellClick);
             this.dgvElementi.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvElementi_CellEndEdit);
@@ -300,7 +310,9 @@
             // lstMateriePrime
             // 
             this.lstMateriePrime.AllowDrop = true;
-            this.lstMateriePrime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lstMateriePrime.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lstMateriePrime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstMateriePrime.FormattingEnabled = true;
             this.lstMateriePrime.ItemHeight = 15;
@@ -313,15 +325,29 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Location = new System.Drawing.Point(464, 200);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(317, 439);
+            this.tabControl1.Size = new System.Drawing.Size(902, 439);
             this.tabControl1.TabIndex = 10;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.dgvElementi);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(894, 411);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Elementi";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // tabPage1
             // 
@@ -333,7 +359,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(309, 411);
+            this.tabPage1.Size = new System.Drawing.Size(894, 411);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Fasi";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -374,7 +400,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(309, 411);
+            this.tabPage2.Size = new System.Drawing.Size(894, 411);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Materie prime";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -390,20 +416,83 @@
             this.btnAggiorna.UseVisualStyleBackColor = true;
             this.btnAggiorna.Click += new System.EventHandler(this.btnAggiorna_Click);
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.dgvProcessoGalvanico);
+            this.tabPage4.Controls.Add(this.ddlProcessiGalvanici);
+            this.tabPage4.Controls.Add(this.label4);
+            this.tabPage4.Location = new System.Drawing.Point(4, 24);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(894, 411);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Processo galvanico";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // dgvProcessoGalvanico
+            // 
+            this.dgvProcessoGalvanico.AllowUserToAddRows = false;
+            this.dgvProcessoGalvanico.AllowUserToDeleteRows = false;
+            this.dgvProcessoGalvanico.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvProcessoGalvanico.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProcessoGalvanico.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Vasca,
+            this.Materiale,
+            this.SpessoreMinimo,
+            this.SpessoreNominale,
+            this.SpessoreMassimo});
+            this.dgvProcessoGalvanico.Location = new System.Drawing.Point(293, 22);
+            this.dgvProcessoGalvanico.Name = "dgvProcessoGalvanico";
+            this.dgvProcessoGalvanico.ReadOnly = true;
+            this.dgvProcessoGalvanico.Size = new System.Drawing.Size(595, 383);
+            this.dgvProcessoGalvanico.TabIndex = 12;
+            // 
+            // Vasca
+            // 
+            this.Vasca.HeaderText = "Vasca";
+            this.Vasca.Name = "Vasca";
+            this.Vasca.ReadOnly = true;
+            // 
+            // Materiale
+            // 
+            this.Materiale.HeaderText = "Materiale";
+            this.Materiale.Name = "Materiale";
+            this.Materiale.ReadOnly = true;
+            // 
+            // SpessoreMinimo
+            // 
+            this.SpessoreMinimo.HeaderText = "Spessore minimo";
+            this.SpessoreMinimo.Name = "SpessoreMinimo";
+            this.SpessoreMinimo.ReadOnly = true;
+            // 
+            // SpessoreNominale
+            // 
+            this.SpessoreNominale.HeaderText = "Spessore nominale";
+            this.SpessoreNominale.Name = "SpessoreNominale";
+            this.SpessoreNominale.ReadOnly = true;
+            // 
+            // SpessoreMassimo
+            // 
+            this.SpessoreMassimo.HeaderText = "Spessore massimo";
+            this.SpessoreMassimo.Name = "SpessoreMassimo";
+            this.SpessoreMassimo.ReadOnly = true;
+            // 
             // ddlProcessiGalvanici
             // 
             this.ddlProcessiGalvanici.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlProcessiGalvanici.FormattingEnabled = true;
-            this.ddlProcessiGalvanici.Location = new System.Drawing.Point(140, 161);
+            this.ddlProcessiGalvanici.Location = new System.Drawing.Point(12, 40);
             this.ddlProcessiGalvanici.Name = "ddlProcessiGalvanici";
-            this.ddlProcessiGalvanici.Size = new System.Drawing.Size(318, 23);
+            this.ddlProcessiGalvanici.Size = new System.Drawing.Size(265, 23);
             this.ddlProcessiGalvanici.TabIndex = 11;
-            this.ddlProcessiGalvanici.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.ddlProcessiGalvanici.SelectedIndexChanged += new System.EventHandler(this.ddlProcessiGalvanici_SelectedIndexChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(18, 165);
+            this.label4.Location = new System.Drawing.Point(9, 22);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(113, 15);
             this.label4.TabIndex = 4;
@@ -414,9 +503,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(88, 204);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(247, 15);
+            this.label5.Size = new System.Drawing.Size(282, 15);
             this.label5.TabIndex = 12;
-            this.label5.Text = "Premere shift per aggiungere senza inserire";
+            this.label5.Text = "Premere shift per inserire dopo il nodo selezionato";
             // 
             // PreventivoFrm
             // 
@@ -424,10 +513,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1384, 661);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.ddlProcessiGalvanici);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.dgvElementi);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -440,9 +526,13 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvElementi)).EndInit();
             this.tabControl1.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProcessoGalvanico)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -483,5 +573,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn PezziOrari;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nota;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.DataGridView dgvProcessoGalvanico;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Vasca;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Materiale;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SpessoreMinimo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SpessoreNominale;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SpessoreMassimo;
     }
 }

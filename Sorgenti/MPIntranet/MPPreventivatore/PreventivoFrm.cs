@@ -3,6 +3,7 @@ using MPIntranet.Common;
 using MPIntranet.Entities;
 using MPIntranet.Models.Anagrafica;
 using MPIntranet.Models.Articolo;
+using MPIntranet.Models.Galvanica;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -49,6 +50,8 @@ namespace MPPreventivatore
             prodottoFinitoUC1.ProdottoFinitoModel = _articolo.CreaProdottoFinitoModel(IdProdottoFinito);
             prodottoFinitoUC1.Immagine = _documenti.EstraiImmagineStandard(IdProdottoFinito, TabelleEsterne.ProdottiFiniti, out filename);
             prodottoFinitoUC1.Refresh();
+
+            dgvProcessoGalvanico.AutoGenerateColumns = false;
 
             caricaDdlProcessiGalvanici();
             caricaDdlPreventivi();
@@ -378,7 +381,7 @@ namespace MPPreventivatore
 
                 // il nodo viene inserito sopra al node to drop in, in cascata, almeno che non siala radice
 
-                if(nodeToDropIn.Parent==null ||  e.KeyState == 4)
+                if (nodeToDropIn.Parent == null || e.KeyState == 4)
                 {
                     decimal idPadre = estraiIdPadre(nodeToDropIn);
                     decimal idElementoPreventivo = _articolo.EstraId();
@@ -429,7 +432,7 @@ namespace MPPreventivatore
                 }
 
                 RefreshGridView();
-            
+
             }
         }
         private void inserisciElementoNellaLista(ElementoPreventivoModel elemento, TreeNode nodoPadre, decimal idPadre)
@@ -528,7 +531,7 @@ namespace MPPreventivatore
         private void dgvElementi_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             e.Control.KeyPress -= new KeyPressEventHandler(Numeric_KeyPress);
-            if (dgvElementi.CurrentCell.ColumnIndex >= 4)
+            if (dgvElementi.CurrentCell.ColumnIndex >= 4 && dgvElementi.CurrentCell.ColumnIndex < 9)
             {
                 TextBox tb = e.Control as TextBox;
                 if (tb != null)
@@ -633,8 +636,19 @@ namespace MPPreventivatore
             ddlReparti.SelectedIndex = indice;
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void ddlProcessiGalvanici_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (ddlProcessiGalvanici.SelectedIndex == -1) return;
+
+            ProcessoModel processoSelezionato = (ProcessoModel)ddlProcessiGalvanici.SelectedItem;
+
+            dgvProcessoGalvanico.Rows.Clear();
+            foreach(FaseProcessoModel fase in processoSelezionato.Fasi)
+            {
+                int indiceRiga = dgvProcessoGalvanico.Rows.Add(new object[] { fase.Vasca.DescrizioneBreve, fase.Vasca.Materiale.Descrizione, fase.SpessoreMinimo, fase.SpessoreNominale, fase.SpessoreMassimo });
+                if (fase.Vasca.Materiale.Prezioso == SiNo.Si)
+                    dgvProcessoGalvanico.Rows[indiceRiga].DefaultCellStyle.ForeColor = Color.Green;
+            }
 
         }
     }

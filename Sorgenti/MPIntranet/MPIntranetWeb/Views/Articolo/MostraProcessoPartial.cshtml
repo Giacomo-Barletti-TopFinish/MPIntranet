@@ -70,7 +70,7 @@
         <tbody>
             @foreach (FaseProcessoModel fase in Model.Fasi)
             {
-                if (fase.Vasca.Materiale.Prezioso == "S")
+                if (fase.Vasca.Materiale.Prezioso == MPIntranet.Common.SiNo.Si)
                 {
                     <tr style="font-weight:bold; color:limegreen">
                         <input type="hidden" value="@fase.Vasca.IdVasca" class="hdVasca" />
