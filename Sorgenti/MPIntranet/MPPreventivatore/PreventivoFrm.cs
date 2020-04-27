@@ -229,7 +229,7 @@ namespace MPPreventivatore
             }
             catch (Exception ex)
             {
-                MostraEccezione("Errore in modifica prodotto finito", ex);
+                MostraEccezione("Errore in crea nuov preventivo", ex);
             }
         }
 

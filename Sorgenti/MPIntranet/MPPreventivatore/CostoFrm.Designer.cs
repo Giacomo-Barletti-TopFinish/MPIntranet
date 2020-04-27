@@ -30,7 +30,6 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.prodottoFinitoUC1 = new MPPreventivatore.ProdottoFinitoUC();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -63,6 +62,7 @@
             this.btnAggiorna_costiFissi = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.lstCostiFissi = new System.Windows.Forms.ListBox();
+            this.prodottoFinitoUC1 = new MPPreventivatore.ProdottoFinitoUC();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvElementi)).BeginInit();
@@ -83,15 +83,6 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Prodotto finito";
-            // 
-            // prodottoFinitoUC1
-            // 
-            this.prodottoFinitoUC1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.prodottoFinitoUC1.Location = new System.Drawing.Point(6, 17);
-            this.prodottoFinitoUC1.Name = "prodottoFinitoUC1";
-            this.prodottoFinitoUC1.Size = new System.Drawing.Size(767, 157);
-            this.prodottoFinitoUC1.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -203,6 +194,9 @@
             // 
             this.dgvElementi.AllowUserToAddRows = false;
             this.dgvElementi.AllowUserToDeleteRows = false;
+            this.dgvElementi.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvElementi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvElementi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdEelementoPreventivo,
@@ -219,13 +213,12 @@
             this.Costo,
             this.CostoArticolo,
             this.Ricarico});
-            this.dgvElementi.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvElementi.Location = new System.Drawing.Point(3, 3);
             this.dgvElementi.MultiSelect = false;
             this.dgvElementi.Name = "dgvElementi";
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvElementi.RowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvElementi.Size = new System.Drawing.Size(894, 387);
+            this.dgvElementi.Size = new System.Drawing.Size(894, 385);
             this.dgvElementi.TabIndex = 9;
             this.dgvElementi.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvElementi_CellClick);
             this.dgvElementi.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvElementi_CellEndEdit);
@@ -329,6 +322,9 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
@@ -402,6 +398,15 @@
             this.lstCostiFissi.Size = new System.Drawing.Size(292, 334);
             this.lstCostiFissi.TabIndex = 0;
             // 
+            // prodottoFinitoUC1
+            // 
+            this.prodottoFinitoUC1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.prodottoFinitoUC1.Location = new System.Drawing.Point(6, 17);
+            this.prodottoFinitoUC1.Name = "prodottoFinitoUC1";
+            this.prodottoFinitoUC1.Size = new System.Drawing.Size(767, 157);
+            this.prodottoFinitoUC1.TabIndex = 0;
+            // 
             // CostoFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -414,7 +419,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "CostoFrm";
             this.Text = "Preventivo";
-            this.Load += new System.EventHandler(this.PreventivoFrm_Load);
+            this.Load += new System.EventHandler(this.CostoFrm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

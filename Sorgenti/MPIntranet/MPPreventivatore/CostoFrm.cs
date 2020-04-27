@@ -48,7 +48,7 @@ namespace MPPreventivatore
             InitializeComponent();
         }
 
-        private void PreventivoFrm_Load(object sender, EventArgs e)
+        private void CostoFrm_Load(object sender, EventArgs e)
         {
             string filename;
             prodottoFinitoUC1.ProdottoFinitoModel = _articolo.CreaProdottoFinitoModel(IdProdottoFinito);
@@ -56,6 +56,8 @@ namespace MPPreventivatore
             prodottoFinitoUC1.Refresh();
             _gruppiRepartiModel = _articolo.CreaListaGruppoRepartoModel(prodottoFinitoUC1.ProdottoFinitoModel.Brand.IdBrand);
             caricaDdlPreventivi();
+
+
             caricaGrigliaElementiPreventivo();
             this.Text = prodottoFinitoUC1.ProdottoFinitoModel.ToString();
         }
@@ -87,7 +89,7 @@ namespace MPPreventivatore
             }
             catch (Exception ex)
             {
-                MostraEccezione("Errore in modifica prodotto finito", ex);
+                MostraEccezione("Errore in crea nuovo preventivo costo", ex);
             }
         }
 
@@ -96,9 +98,13 @@ namespace MPPreventivatore
             if (ddlPreventivi.SelectedIndex == -1) return;
             txtNotaPreventivo.Text = _preventivoSelezionato.Nota;
 
+            treeView1.Nodes.Clear();
+
             caricaPreventiviCosti(_preventivoSelezionato.IdPreventivo);
 
-            treeView1.Nodes.Clear();
+            if (ddlPreventivoCosto.Items.Count == 0)
+                btnCreaNuovaVersione_Click(null, null);
+
         }
 
         private void caricaPreventiviCosti(decimal idPreventivo)

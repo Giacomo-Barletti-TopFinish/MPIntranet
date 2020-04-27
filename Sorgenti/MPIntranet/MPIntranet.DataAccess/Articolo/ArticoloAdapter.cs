@@ -299,7 +299,7 @@ namespace MPIntranet.DataAccess.Articolo
         public void FillElementiCostiPreventivo(ArticoloDS ds, decimal idPreventivo, bool soloNonCancellati)
         {
             string select = @"SELECT FP.* FROM ELEMENTICOSTIPREVENTIVI FP 
-                                    INNER JOIN PREVENTIVICOSTI PR ON PR.IDCOSTOPREVENTIVO = FP.IDCOSTOPREVENTIVO
+                                    INNER JOIN PREVENTIVICOSTI PR ON PR.IDPREVENTIVOCOSTO = FP.IDPREVENTIVOCOSTO
                                     WHERE IDPREVENTIVO = $P<IDPREVENTIVO> ";
             if (soloNonCancellati)
                 select += "AND FP.CANCELLATO = 'N' ";
