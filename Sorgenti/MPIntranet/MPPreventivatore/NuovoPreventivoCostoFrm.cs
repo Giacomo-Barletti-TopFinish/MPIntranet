@@ -60,34 +60,61 @@ namespace MPPreventivatore
             Articolo articolo = new Articolo(string.Empty);
             lblMessaggio.Text = articolo.CreaPreventivoCosto(_versioni, txtDescrizione.Text, _preventivoModel.IdPreventivo, txtNota.Text, _account);
 
-            if (!chkCopiaPrecedente.Checked) return;
-            Articolo a = new Articolo();
-            List<PreventivoCostoModel> lista = a.CreaListaPreventivoCostiModel(_preventivoModel.IdPreventivo);
+            List<PreventivoCostoModel> lista = articolo.CreaListaPreventivoCostiModel(_preventivoModel.IdPreventivo);
             PreventivoCostoModel preventivoCreato = lista.Where(x => x.Preventvo.IdPreventivo == _preventivoModel.IdPreventivo && x.Versione == _versioni).FirstOrDefault();
+            List<ElementoCostoPreventivoModel> elementiNuovi = creaElementiCostoPreventivo(preventivoCreato.IdPreventivoCosto);
 
-            PreventivoCostoModel preventivoDaCopiare = (PreventivoCostoModel)ddlVersionePrecedente.SelectedItem;
-            List<ElementoCostoPreventivoModel> elementiDaCopiare = a.CreaListaElementoCostoPreventivoModel(preventivoDaCopiare.IdPreventivoCosto);
-            List<ElementoCostoPreventivoModel> elementiNuovi = new List<ElementoCostoPreventivoModel>();
-            foreach (ElementoCostoPreventivoModel elemento in elementiDaCopiare)
+            if (chkCopiaPrecedente.Checked)
             {
-                ElementoCostoPreventivoModel elementoNuovo = new ElementoCostoPreventivoModel();
-                elementoNuovo.IdElementoCosto = Articolo.EstraId();
-                elementoNuovo.ElementoPreventivo = elemento.ElementoPreventivo;
-                elementoNuovo.IdPreventivoCosto = preventivoCreato.IdPreventivoCosto;
-                elementoNuovo.Ricarico = elemento.Ricarico;
-                elementoNuovo.CostoOrario = elemento.CostoOrario;
-                elementoNuovo.IncludiPreventivo = elemento.IncludiPreventivo;
-                elementoNuovo.IdEsterna = elemento.IdEsterna;
-                elementoNuovo.TabellaEsterna = elemento.TabellaEsterna;
-                elementoNuovo.PezziOrari = elemento.PezziOrari;
-                elementoNuovo.Quantita = elemento.Quantita;
-                elementoNuovo.CostoArticolo = elemento.CostoArticolo;
-                elementoNuovo.Prezzo = elemento.Prezzo;
-                elementiNuovi.Add(elementoNuovo);
+                PreventivoCostoModel preventivoDaCopiare = (PreventivoCostoModel)ddlVersionePrecedente.SelectedItem;
+                List<ElementoCostoPreventivoModel> elementiDaCopiare = articolo.CreaListaElementoCostoPreventivoModel(preventivoDaCopiare.IdPreventivoCosto);
+                foreach (ElementoCostoPreventivoModel elemento in elementiDaCopiare)
+                {
+                    ElementoCostoPreventivoModel elementoNuovo = new ElementoCostoPreventivoModel();
+                    elementoNuovo.IdElementoCosto = Articolo.EstraId();
+                    elementoNuovo.ElementoPreventivo = elemento.ElementoPreventivo;
+                    elementoNuovo.IdPreventivoCosto = preventivoCreato.IdPreventivoCosto;
+                    elementoNuovo.Ricarico = elemento.Ricarico;
+                    elementoNuovo.CostoOrario = elemento.CostoOrario;
+                    elementoNuovo.IncludiPreventivo = elemento.IncludiPreventivo;
+                    elementoNuovo.IdEsterna = elemento.IdEsterna;
+                    elementoNuovo.TabellaEsterna = elemento.TabellaEsterna;
+                    elementoNuovo.PezziOrari = elemento.PezziOrari;
+                    elementoNuovo.Quantita = elemento.Quantita;
+                    elementoNuovo.CostoArticolo = elemento.CostoArticolo;
+                    elementoNuovo.Prezzo = elemento.Prezzo;
+                    elementiNuovi.Add(elementoNuovo);
+                }
             }
-            a.SalvaElementiCostoPreventivo(elementiNuovi, preventivoCreato.IdPreventivoCosto, _account);
+            articolo.SalvaElementiCostoPreventivo(elementiNuovi, preventivoCreato.IdPreventivoCosto, _account);
         }
 
+        private List<ElementoCostoPreventivoModel> creaElementiCostoPreventivo(decimal idPreventivoCosto)
+        {
+            Articolo a = new Articolo();
+            List<ElementoCostoPreventivoModel> lista = new List<ElementoCostoPreventivoModel>();
+
+            List<ElementoPreventivoModel> elementiPreventivo = a.CreaListaElementoPreventivoModel(_preventivoModel.IdPreventivo);
+            foreach (ElementoPreventivoModel elemento in elementiPreventivo)
+            {
+                ElementoCostoPreventivoModel elementoCosto = new ElementoCostoPreventivoModel();
+                elementoCosto.IdElementoCosto = Articolo.EstraId();
+                elementoCosto.ElementoPreventivo = elemento;
+                elementoCosto.IdPreventivoCosto = idPreventivoCosto;
+                elementoCosto.Ricarico = elemento.Ricarico;
+                elementoCosto.CostoOrario = elemento.CostoOrario;
+                elementoCosto.IncludiPreventivo = elemento.IncludiPreventivo;
+                elementoCosto.IdEsterna = elemento.IdEsterna;
+                elementoCosto.TabellaEsterna = elemento.TabellaEsterna;
+                elementoCosto.PezziOrari = elemento.PezziOrari;
+                elementoCosto.Quantita = elemento.Quantita;
+                elementoCosto.CostoArticolo = 0;
+                elementoCosto.Prezzo = 0;
+                lista.Add(elementoCosto);
+            }
+
+            return lista;
+        }
 
         private void chkCopiaPrecedente_CheckedChanged(object sender, EventArgs e)
         {

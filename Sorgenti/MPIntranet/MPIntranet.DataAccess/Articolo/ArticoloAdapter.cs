@@ -300,7 +300,7 @@ namespace MPIntranet.DataAccess.Articolo
         {
             string select = @"SELECT FP.* FROM ELEMENTICOSTIPREVENTIVI FP 
                                     INNER JOIN PREVENTIVICOSTI PR ON PR.IDPREVENTIVOCOSTO = FP.IDPREVENTIVOCOSTO
-                                    WHERE IDPREVENTIVO = $P<IDPREVENTIVO> ";
+                                    WHERE PR.IDPREVENTIVOCOSTO = $P<IDPREVENTIVO> ";
             if (soloNonCancellati)
                 select += "AND FP.CANCELLATO = 'N' ";
 
@@ -326,10 +326,10 @@ namespace MPIntranet.DataAccess.Articolo
 
         public void EstraiElementoPreventivo(ArticoloDS ds, decimal idElementoPreventivo)
         {
-            string select = @"SELECT * FROM ELEMENTIPREVENTIVO WHERE IDELEMENTIPREVENTIVO = $P<IDELEMENTIPREVENTIVO> ";
+            string select = @"SELECT * FROM ELEMENTIPREVENTIVO WHERE IDELEMENTOPREVENTIVO = $P<IDELEMENTOPREVENTIVO> ";
 
             ParamSet ps = new ParamSet();
-            ps.AddParam("IDELEMENTIPREVENTIVO", DbType.Decimal, idElementoPreventivo);
+            ps.AddParam("IDELEMENTOPREVENTIVO", DbType.Decimal, idElementoPreventivo);
             using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
                 da.Fill(ds.ELEMENTIPREVENTIVO);

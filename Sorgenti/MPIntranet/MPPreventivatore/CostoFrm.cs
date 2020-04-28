@@ -19,7 +19,7 @@ namespace MPPreventivatore
     public partial class CostoFrm : ChildBaseForm
     {
         public decimal IdProdottoFinito;
-        private Articolo _articolo = new Articolo(string.Empty);
+    //    private Articolo _articolo = new Articolo(string.Empty);
         private Documenti _documenti = new Documenti();
         private Anagrafica _anagrafica = new Anagrafica();
         private List<ElementoCostoPreventivoModel> _elementiCostoPreventivo = new List<ElementoCostoPreventivoModel>();
@@ -50,11 +50,12 @@ namespace MPPreventivatore
 
         private void CostoFrm_Load(object sender, EventArgs e)
         {
+            Articolo articolo = new Articolo();
             string filename;
-            prodottoFinitoUC1.ProdottoFinitoModel = _articolo.CreaProdottoFinitoModel(IdProdottoFinito);
+            prodottoFinitoUC1.ProdottoFinitoModel = articolo.CreaProdottoFinitoModel(IdProdottoFinito);
             prodottoFinitoUC1.Immagine = _documenti.EstraiImmagineStandard(IdProdottoFinito, TabelleEsterne.ProdottiFiniti, out filename);
             prodottoFinitoUC1.Refresh();
-            _gruppiRepartiModel = _articolo.CreaListaGruppoRepartoModel(prodottoFinitoUC1.ProdottoFinitoModel.Brand.IdBrand);
+            _gruppiRepartiModel = articolo.CreaListaGruppoRepartoModel(prodottoFinitoUC1.ProdottoFinitoModel.Brand.IdBrand);
             caricaDdlPreventivi();
 
 
@@ -72,8 +73,9 @@ namespace MPPreventivatore
 
         private void caricaDdlPreventivi()
         {
+            Articolo articolo = new Articolo();
             ddlPreventivi.Items.Clear();
-            ddlPreventivi.Items.AddRange(_articolo.CreaListaPreventivoModel(IdProdottoFinito).ToArray());
+            ddlPreventivi.Items.AddRange(articolo.CreaListaPreventivoModel(IdProdottoFinito).ToArray());
             if (ddlPreventivi.Items.Count > 0)
                 ddlPreventivi.SelectedIndex = 0;
         }
@@ -120,14 +122,14 @@ namespace MPPreventivatore
         }
 
         private void creaAlberoDistinta(TreeNode radice)
-        {
+        {          
             List<ElementoCostoPreventivoModel> nodibase = _elementiCostoPreventivo.Where(x => x.ElementoPreventivo.IdPadre == -1).ToList();
             foreach (ElementoCostoPreventivoModel nodobase in nodibase)
                 aggiungiFiglio(radice, nodobase);
         }
         private TreeNode aggungiNodo(TreeNode nodoRadice, ElementoCostoPreventivoModel elemento)
         {
-            TreeNode nodoAggiunto = nodoRadice.Nodes.Add(elemento.ElementoPreventivo.IdElementoPreventivo.ToString(), elemento.ToString());
+            TreeNode nodoAggiunto = nodoRadice.Nodes.Add(elemento.IdElementoCosto.ToString(), elemento.ToString());
             nodoAggiunto.Tag = elemento;
             return nodoAggiunto;
         }
@@ -156,7 +158,7 @@ namespace MPPreventivatore
         private void dgvElementi_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             e.Control.KeyPress -= new KeyPressEventHandler(Numeric_KeyPress);
-            if (dgvElementi.CurrentCell.ColumnIndex >= 7)
+            if (dgvElementi.CurrentCell.ColumnIndex >= 10 && dgvElementi.CurrentCell.ColumnIndex <= 13)
             {
                 TextBox tb = e.Control as TextBox;
                 if (tb != null)
@@ -172,15 +174,15 @@ namespace MPPreventivatore
             try
             {
                 if (e.Node.Tag is ProdottoFinitoModel) return;
-                ElementoPreventivoModel elemento = (ElementoPreventivoModel)e.Node.Tag;
-                decimal idElemento = elemento.IdElementoPreventivo;
+                ElementoCostoPreventivoModel elemento = (ElementoCostoPreventivoModel)e.Node.Tag;
+                decimal idElementoCosto = elemento.IdElementoCosto;
 
                 dgvElementi.ClearSelection();
 
                 foreach (DataGridViewRow riga in dgvElementi.Rows)
                 {
                     decimal idCella = (decimal)riga.Cells[0].Value;
-                    if (idCella == idElemento)
+                    if (idCella == idElementoCosto)
                     {
                         riga.Selected = true;
                         return;
@@ -233,8 +235,8 @@ namespace MPPreventivatore
 
                 if (e.ColumnIndex == 1)
                 {
-                    decimal idElemento = (decimal)dgvElementi.Rows[e.RowIndex].Cells[0].Value;
-                    TreeNode[] nodi = treeView1.Nodes.Find(idElemento.ToString(), true);
+                    decimal idElementoCosto = (decimal)dgvElementi.Rows[e.RowIndex].Cells[0].Value;
+                    TreeNode[] nodi = treeView1.Nodes.Find(idElementoCosto.ToString(), true);
                     if (nodi.Length == 1)
                     {
                         TreeNode nodo = nodi[0];
@@ -254,9 +256,27 @@ namespace MPPreventivatore
 
         private void dgvElementi_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
-            if (dgvElementi.Rows[e.RowIndex].Cells[5].Value == null) return;
+            if (dgvElementi.Rows[e.RowIndex].Cells[0].Value == null) return;
 
-            RepartoModel reparto = (RepartoModel)dgvElementi.Rows[e.RowIndex].Cells[5].Value;
+            decimal idElementoCosto = (decimal)dgvElementi.Rows[e.RowIndex].Cells[0].Value;
+            ElementoCostoPreventivoModel elementoCosto = _elementiCostoPreventivo.Where(x => x.IdElementoCosto == idElementoCosto).FirstOrDefault();
+            if (elementoCosto == null) return;
+
+            dgvElementi.Rows[e.RowIndex].Cells[2].Value = elementoCosto.ElementoPreventivo.Articolo;
+            dgvElementi.Rows[e.RowIndex].Cells[3].Value = elementoCosto.ElementoPreventivo.Codice;
+            dgvElementi.Rows[e.RowIndex].Cells[4].Value = elementoCosto.ElementoPreventivo.Descrizione;
+
+            dgvElementi.Rows[e.RowIndex].Cells[7].Value = elementoCosto.ElementoPreventivo.Peso;
+            dgvElementi.Rows[e.RowIndex].Cells[8].Value = elementoCosto.ElementoPreventivo.Superficie;
+            dgvElementi.Rows[e.RowIndex].Cells[9].Value = elementoCosto.ElementoPreventivo.Quantita;
+
+            dgvElementi.Rows[e.RowIndex].Cells[14].Value = elementoCosto.ElementoPreventivo.PezziOrari;
+            dgvElementi.Rows[e.RowIndex].Cells[15].Value = elementoCosto.ElementoPreventivo.CostoOrario;
+            dgvElementi.Rows[e.RowIndex].Cells[16].Value = elementoCosto.ElementoPreventivo.Ricarico;
+
+            RepartoModel reparto = elementoCosto.ElementoPreventivo.Reparto;
+            dgvElementi.Rows[e.RowIndex].Cells[5].Value = elementoCosto.ElementoPreventivo.Reparto;
+
             if (reparto == null) return;
             GruppoRepartoModel grm = _gruppiRepartiModel.Where(x => x.Reparto.IdReparto == reparto.IdReparto).FirstOrDefault();
             if (grm == null) return;
@@ -264,27 +284,7 @@ namespace MPPreventivatore
             dgvElementi.Rows[e.RowIndex].Cells[6].Value = grm.Gruppo.Codice;
         }
 
-        private void dgvElementi_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-            DataGridViewRow riga = dgvElementi.Rows[e.RowIndex];
-            switch (dgvElementi.Columns[e.ColumnIndex].Name)
-            {
-                case "PezziOrari":
-                case "Costo":
-                    decimal costoArticolo = 0;
-                    decimal pezziOrari = decimal.Parse(riga.Cells[dgvElementi.Columns.IndexOf(dgvElementi.Columns["PezziOrari"])].Value.ToString(), CultureInfo.InvariantCulture);
-                    if (pezziOrari > 0 && riga.Cells[dgvElementi.Columns.IndexOf(dgvElementi.Columns["Costo"])].Value != null)
-                    {
-                        decimal costo = decimal.Parse(riga.Cells[dgvElementi.Columns.IndexOf(dgvElementi.Columns["Costo"])].Value.ToString(), CultureInfo.InvariantCulture);
-                        costoArticolo = Math.Round(costo / pezziOrari, 3);
-                        riga.Cells[dgvElementi.Columns.IndexOf(dgvElementi.Columns["CostoArticolo"])].Value = costoArticolo;
-                    }
-                    break;
-
-            }
-        }
-
+   
         private void btnAggiorna_Click(object sender, EventArgs e)
         {
 
@@ -292,16 +292,18 @@ namespace MPPreventivatore
 
         private void ddlPreventivoCosto_SelectedIndexChanged(object sender, EventArgs e)
         {
+            treeView1.Nodes.Clear();
             if (ddlPreventivoCosto.SelectedIndex == -1) return;
 
+            Articolo articolo = new Articolo();
             TreeNode radice = treeView1.Nodes.Add("-1", prodottoFinitoUC1.ProdottoFinitoModel.ToString());
             radice.Tag = prodottoFinitoUC1.ProdottoFinitoModel;
+            txtNotaPrevetivoCosto.Text = _preventivoCostoSelezionato.Nota;
 
-            _elementiCostoPreventivo = _articolo.CreaListaElementoCostoPreventivoModel(_preventivoSelezionato.IdPreventivo);
+            _elementiCostoPreventivo = articolo.CreaListaElementoCostoPreventivoModel(_preventivoCostoSelezionato.IdPreventivoCosto);
             creaAlberoDistinta(radice);
             treeView1.ExpandAll();
             caricaGrigliaElementiPreventivo();
-
         }
     }
 }

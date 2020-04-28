@@ -195,10 +195,10 @@ namespace MPIntranet.DataAccess.Articolo
             a.FillPreventiviCosti(ds, idPreventivo, soloNonCancellati);
         }
         [DataContext]
-        public void FillElementiCostiPreventivo(ArticoloDS ds, decimal idPreventivo, bool soloNonCancellati)
+        public void FillElementiCostiPreventivo(ArticoloDS ds, decimal idPreventivoCosto, bool soloNonCancellati)
         {
             ArticoloAdapter a = new ArticoloAdapter(DbConnection, DbTransaction);
-            a.FillElementiCostiPreventivo(ds, idPreventivo, soloNonCancellati);
+            a.FillElementiCostiPreventivo(ds, idPreventivoCosto, soloNonCancellati);
         }
 
         [DataContext]
