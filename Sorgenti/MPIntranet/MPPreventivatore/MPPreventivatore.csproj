@@ -52,6 +52,12 @@
     <Compile Include="CreaProdottoFinitoFrm.Designer.cs">
       <DependentUpon>CreaProdottoFinitoFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DraggableListbox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DraggableListbox.Designer.cs">
+      <DependentUpon>DraggableListbox.cs</DependentUpon>
+    </Compile>
     <Compile Include="GestisciProdottoFinitoFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,6 +146,9 @@
     </Compile>
     <EmbeddedResource Include="CreaProdottoFinitoFrm.resx">
       <DependentUpon>CreaProdottoFinitoFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DraggableListbox.resx">
+      <DependentUpon>DraggableListbox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GestisciProdottoFinitoFrm.resx">
       <DependentUpon>GestisciProdottoFinitoFrm.cs</DependentUpon>

@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.prodottoFinitoUC1 = new MPPreventivatore.ProdottoFinitoUC();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -41,14 +42,6 @@
             this.ddlPreventivi = new System.Windows.Forms.ComboBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.dgvElementi = new System.Windows.Forms.DataGridView();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabTotali = new System.Windows.Forms.TabPage();
-            this.tabDettaglio = new System.Windows.Forms.TabPage();
-            this.tabGriglie = new System.Windows.Forms.TabPage();
-            this.tabCostiFissi = new System.Windows.Forms.TabPage();
-            this.btnAggiorna_costiFissi = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.lstCostiFissi = new System.Windows.Forms.ListBox();
             this.IdElementoCosto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IncludiPreventivo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Articolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -66,14 +59,42 @@
             this.pezziorari_std = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.costostd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ricarico_std = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prodottoFinitoUC1 = new MPPreventivatore.ProdottoFinitoUC();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabTotali = new System.Windows.Forms.TabPage();
+            this.tabDettaglio = new System.Windows.Forms.TabPage();
+            this.tabGriglie = new System.Windows.Forms.TabPage();
+            this.tabCostiFissi = new System.Windows.Forms.TabPage();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtCostiFissiPrezzo = new System.Windows.Forms.TextBox();
+            this.txtCostiFissiRicarico = new System.Windows.Forms.TextBox();
+            this.txtCostiFissiCosto = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lstCostiFissi = new MPPreventivatore.DraggableListbox();
+            this.btnAggiorna_costiFissi = new System.Windows.Forms.Button();
+            this.dgvCostiFissi = new System.Windows.Forms.DataGridView();
+            this.IdCostoFissoPreventivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CodiceCostoFisso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescrizioneCostoFisso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RicaricoCostoFisso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CostoCostoFisso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PressoCostoFisso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtTotaliCostiFissiPrezo = new System.Windows.Forms.TextBox();
+            this.txtTotaliCostiFissiMargine = new System.Windows.Forms.TextBox();
+            this.txtTotaliCostiFissiCosto = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvElementi)).BeginInit();
             this.tabControl1.SuspendLayout();
+            this.tabTotali.SuspendLayout();
             this.tabDettaglio.SuspendLayout();
             this.tabCostiFissi.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCostiFissi)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -87,6 +108,15 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Prodotto finito";
+            // 
+            // prodottoFinitoUC1
+            // 
+            this.prodottoFinitoUC1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.prodottoFinitoUC1.Location = new System.Drawing.Point(6, 17);
+            this.prodottoFinitoUC1.Name = "prodottoFinitoUC1";
+            this.prodottoFinitoUC1.Size = new System.Drawing.Size(767, 157);
+            this.prodottoFinitoUC1.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -232,95 +262,6 @@
             this.dgvElementi.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvElementi_EditingControlShowing);
             this.dgvElementi.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvElementi_RowPrePaint);
             // 
-            // tabControl1
-            // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabTotali);
-            this.tabControl1.Controls.Add(this.tabDettaglio);
-            this.tabControl1.Controls.Add(this.tabGriglie);
-            this.tabControl1.Controls.Add(this.tabCostiFissi);
-            this.tabControl1.Location = new System.Drawing.Point(464, 224);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(908, 421);
-            this.tabControl1.TabIndex = 10;
-            // 
-            // tabTotali
-            // 
-            this.tabTotali.Location = new System.Drawing.Point(4, 24);
-            this.tabTotali.Name = "tabTotali";
-            this.tabTotali.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTotali.Size = new System.Drawing.Size(900, 393);
-            this.tabTotali.TabIndex = 3;
-            this.tabTotali.Text = "Totali";
-            this.tabTotali.UseVisualStyleBackColor = true;
-            // 
-            // tabDettaglio
-            // 
-            this.tabDettaglio.Controls.Add(this.dgvElementi);
-            this.tabDettaglio.Location = new System.Drawing.Point(4, 24);
-            this.tabDettaglio.Name = "tabDettaglio";
-            this.tabDettaglio.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDettaglio.Size = new System.Drawing.Size(900, 393);
-            this.tabDettaglio.TabIndex = 0;
-            this.tabDettaglio.Text = "Dettaglio elementi";
-            this.tabDettaglio.UseVisualStyleBackColor = true;
-            // 
-            // tabGriglie
-            // 
-            this.tabGriglie.Location = new System.Drawing.Point(4, 24);
-            this.tabGriglie.Name = "tabGriglie";
-            this.tabGriglie.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGriglie.Size = new System.Drawing.Size(900, 393);
-            this.tabGriglie.TabIndex = 1;
-            this.tabGriglie.Text = "Gruppi";
-            this.tabGriglie.UseVisualStyleBackColor = true;
-            // 
-            // tabCostiFissi
-            // 
-            this.tabCostiFissi.Controls.Add(this.btnAggiorna_costiFissi);
-            this.tabCostiFissi.Controls.Add(this.dataGridView1);
-            this.tabCostiFissi.Controls.Add(this.lstCostiFissi);
-            this.tabCostiFissi.Location = new System.Drawing.Point(4, 24);
-            this.tabCostiFissi.Name = "tabCostiFissi";
-            this.tabCostiFissi.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCostiFissi.Size = new System.Drawing.Size(900, 393);
-            this.tabCostiFissi.TabIndex = 2;
-            this.tabCostiFissi.Text = "Costi fissi";
-            this.tabCostiFissi.UseVisualStyleBackColor = true;
-            // 
-            // btnAggiorna_costiFissi
-            // 
-            this.btnAggiorna_costiFissi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAggiorna_costiFissi.Location = new System.Drawing.Point(6, 358);
-            this.btnAggiorna_costiFissi.Name = "btnAggiorna_costiFissi";
-            this.btnAggiorna_costiFissi.Size = new System.Drawing.Size(292, 33);
-            this.btnAggiorna_costiFissi.TabIndex = 2;
-            this.btnAggiorna_costiFissi.Text = "Crea nuova versione";
-            this.btnAggiorna_costiFissi.UseVisualStyleBackColor = true;
-            this.btnAggiorna_costiFissi.Click += new System.EventHandler(this.btnAggiorna_Click);
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(347, 39);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(547, 346);
-            this.dataGridView1.TabIndex = 1;
-            // 
-            // lstCostiFissi
-            // 
-            this.lstCostiFissi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.lstCostiFissi.FormattingEnabled = true;
-            this.lstCostiFissi.ItemHeight = 15;
-            this.lstCostiFissi.Location = new System.Drawing.Point(6, 21);
-            this.lstCostiFissi.Name = "lstCostiFissi";
-            this.lstCostiFissi.Size = new System.Drawing.Size(292, 334);
-            this.lstCostiFissi.TabIndex = 0;
-            // 
             // IdElementoCosto
             // 
             this.IdElementoCosto.DataPropertyName = "IdElementoCosto";
@@ -439,14 +380,293 @@
             this.ricarico_std.Name = "ricarico_std";
             this.ricarico_std.ReadOnly = true;
             // 
-            // prodottoFinitoUC1
+            // tabControl1
             // 
-            this.prodottoFinitoUC1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.prodottoFinitoUC1.Location = new System.Drawing.Point(6, 17);
-            this.prodottoFinitoUC1.Name = "prodottoFinitoUC1";
-            this.prodottoFinitoUC1.Size = new System.Drawing.Size(767, 157);
-            this.prodottoFinitoUC1.TabIndex = 0;
+            this.tabControl1.Controls.Add(this.tabTotali);
+            this.tabControl1.Controls.Add(this.tabDettaglio);
+            this.tabControl1.Controls.Add(this.tabGriglie);
+            this.tabControl1.Controls.Add(this.tabCostiFissi);
+            this.tabControl1.Location = new System.Drawing.Point(464, 224);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(908, 421);
+            this.tabControl1.TabIndex = 10;
+            // 
+            // tabTotali
+            // 
+            this.tabTotali.Controls.Add(this.label7);
+            this.tabTotali.Controls.Add(this.label8);
+            this.tabTotali.Controls.Add(this.label9);
+            this.tabTotali.Controls.Add(this.txtTotaliCostiFissiPrezo);
+            this.tabTotali.Controls.Add(this.txtTotaliCostiFissiMargine);
+            this.tabTotali.Controls.Add(this.txtTotaliCostiFissiCosto);
+            this.tabTotali.Controls.Add(this.label10);
+            this.tabTotali.Location = new System.Drawing.Point(4, 24);
+            this.tabTotali.Name = "tabTotali";
+            this.tabTotali.Padding = new System.Windows.Forms.Padding(3);
+            this.tabTotali.Size = new System.Drawing.Size(900, 393);
+            this.tabTotali.TabIndex = 3;
+            this.tabTotali.Text = "Totali";
+            this.tabTotali.UseVisualStyleBackColor = true;
+            // 
+            // tabDettaglio
+            // 
+            this.tabDettaglio.Controls.Add(this.dgvElementi);
+            this.tabDettaglio.Location = new System.Drawing.Point(4, 24);
+            this.tabDettaglio.Name = "tabDettaglio";
+            this.tabDettaglio.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDettaglio.Size = new System.Drawing.Size(900, 393);
+            this.tabDettaglio.TabIndex = 0;
+            this.tabDettaglio.Text = "Dettaglio elementi";
+            this.tabDettaglio.UseVisualStyleBackColor = true;
+            // 
+            // tabGriglie
+            // 
+            this.tabGriglie.Location = new System.Drawing.Point(4, 24);
+            this.tabGriglie.Name = "tabGriglie";
+            this.tabGriglie.Padding = new System.Windows.Forms.Padding(3);
+            this.tabGriglie.Size = new System.Drawing.Size(900, 393);
+            this.tabGriglie.TabIndex = 1;
+            this.tabGriglie.Text = "Gruppi";
+            this.tabGriglie.UseVisualStyleBackColor = true;
+            // 
+            // tabCostiFissi
+            // 
+            this.tabCostiFissi.Controls.Add(this.label6);
+            this.tabCostiFissi.Controls.Add(this.label5);
+            this.tabCostiFissi.Controls.Add(this.label4);
+            this.tabCostiFissi.Controls.Add(this.txtCostiFissiPrezzo);
+            this.tabCostiFissi.Controls.Add(this.txtCostiFissiRicarico);
+            this.tabCostiFissi.Controls.Add(this.txtCostiFissiCosto);
+            this.tabCostiFissi.Controls.Add(this.label3);
+            this.tabCostiFissi.Controls.Add(this.lstCostiFissi);
+            this.tabCostiFissi.Controls.Add(this.btnAggiorna_costiFissi);
+            this.tabCostiFissi.Controls.Add(this.dgvCostiFissi);
+            this.tabCostiFissi.Location = new System.Drawing.Point(4, 24);
+            this.tabCostiFissi.Name = "tabCostiFissi";
+            this.tabCostiFissi.Padding = new System.Windows.Forms.Padding(3);
+            this.tabCostiFissi.Size = new System.Drawing.Size(900, 393);
+            this.tabCostiFissi.TabIndex = 2;
+            this.tabCostiFissi.Text = "Costi fissi";
+            this.tabCostiFissi.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(696, 3);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(60, 15);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Margine";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(590, 3);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(51, 15);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Prezzo";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(481, 3);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(43, 15);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Costo";
+            // 
+            // txtCostiFissiPrezzo
+            // 
+            this.txtCostiFissiPrezzo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCostiFissiPrezzo.Location = new System.Drawing.Point(589, 20);
+            this.txtCostiFissiPrezzo.Name = "txtCostiFissiPrezzo";
+            this.txtCostiFissiPrezzo.ReadOnly = true;
+            this.txtCostiFissiPrezzo.Size = new System.Drawing.Size(100, 21);
+            this.txtCostiFissiPrezzo.TabIndex = 5;
+            // 
+            // txtCostiFissiRicarico
+            // 
+            this.txtCostiFissiRicarico.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCostiFissiRicarico.Location = new System.Drawing.Point(695, 20);
+            this.txtCostiFissiRicarico.Name = "txtCostiFissiRicarico";
+            this.txtCostiFissiRicarico.ReadOnly = true;
+            this.txtCostiFissiRicarico.Size = new System.Drawing.Size(100, 21);
+            this.txtCostiFissiRicarico.TabIndex = 5;
+            // 
+            // txtCostiFissiCosto
+            // 
+            this.txtCostiFissiCosto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCostiFissiCosto.Location = new System.Drawing.Point(480, 20);
+            this.txtCostiFissiCosto.Name = "txtCostiFissiCosto";
+            this.txtCostiFissiCosto.ReadOnly = true;
+            this.txtCostiFissiCosto.Size = new System.Drawing.Size(100, 21);
+            this.txtCostiFissiCosto.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(344, 23);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(43, 15);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Totali";
+            // 
+            // lstCostiFissi
+            // 
+            this.lstCostiFissi.Location = new System.Drawing.Point(6, 6);
+            this.lstCostiFissi.Name = "lstCostiFissi";
+            this.lstCostiFissi.Size = new System.Drawing.Size(292, 329);
+            this.lstCostiFissi.TabIndex = 3;
+            // 
+            // btnAggiorna_costiFissi
+            // 
+            this.btnAggiorna_costiFissi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAggiorna_costiFissi.Location = new System.Drawing.Point(6, 358);
+            this.btnAggiorna_costiFissi.Name = "btnAggiorna_costiFissi";
+            this.btnAggiorna_costiFissi.Size = new System.Drawing.Size(292, 33);
+            this.btnAggiorna_costiFissi.TabIndex = 2;
+            this.btnAggiorna_costiFissi.Text = "Aggiorna lista costi fissi";
+            this.btnAggiorna_costiFissi.UseVisualStyleBackColor = true;
+            this.btnAggiorna_costiFissi.Click += new System.EventHandler(this.btnAggiorna_Click);
+            // 
+            // dgvCostiFissi
+            // 
+            this.dgvCostiFissi.AllowDrop = true;
+            this.dgvCostiFissi.AllowUserToAddRows = false;
+            this.dgvCostiFissi.AllowUserToDeleteRows = false;
+            this.dgvCostiFissi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCostiFissi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IdCostoFissoPreventivo,
+            this.CodiceCostoFisso,
+            this.DescrizioneCostoFisso,
+            this.RicaricoCostoFisso,
+            this.CostoCostoFisso,
+            this.PressoCostoFisso});
+            this.dgvCostiFissi.Location = new System.Drawing.Point(347, 45);
+            this.dgvCostiFissi.Name = "dgvCostiFissi";
+            this.dgvCostiFissi.Size = new System.Drawing.Size(547, 340);
+            this.dgvCostiFissi.TabIndex = 1;
+            this.dgvCostiFissi.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCostiFissi_CellEndEdit);
+            this.dgvCostiFissi.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCostiFissi_CellValidated);
+            this.dgvCostiFissi.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvCostiFissi_EditingControlShowing);
+            this.dgvCostiFissi.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvCostiFissi_DragDrop);
+            this.dgvCostiFissi.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgvCostiFissi_DragEnter);
+            // 
+            // IdCostoFissoPreventivo
+            // 
+            this.IdCostoFissoPreventivo.DataPropertyName = "IdCostoFissoPreventivo";
+            this.IdCostoFissoPreventivo.HeaderText = "IdCostoFissoPreventivo";
+            this.IdCostoFissoPreventivo.Name = "IdCostoFissoPreventivo";
+            this.IdCostoFissoPreventivo.Visible = false;
+            // 
+            // CodiceCostoFisso
+            // 
+            this.CodiceCostoFisso.DataPropertyName = "Codice";
+            this.CodiceCostoFisso.HeaderText = "Codice";
+            this.CodiceCostoFisso.Name = "CodiceCostoFisso";
+            this.CodiceCostoFisso.ReadOnly = true;
+            // 
+            // DescrizioneCostoFisso
+            // 
+            this.DescrizioneCostoFisso.DataPropertyName = "Descrizione";
+            this.DescrizioneCostoFisso.HeaderText = "Descrizione";
+            this.DescrizioneCostoFisso.MaxInputLength = 30;
+            this.DescrizioneCostoFisso.Name = "DescrizioneCostoFisso";
+            // 
+            // RicaricoCostoFisso
+            // 
+            this.RicaricoCostoFisso.DataPropertyName = "Ricarico";
+            this.RicaricoCostoFisso.HeaderText = "Ricarico";
+            this.RicaricoCostoFisso.Name = "RicaricoCostoFisso";
+            // 
+            // CostoCostoFisso
+            // 
+            this.CostoCostoFisso.DataPropertyName = "Costo";
+            this.CostoCostoFisso.HeaderText = "Costo";
+            this.CostoCostoFisso.Name = "CostoCostoFisso";
+            // 
+            // PressoCostoFisso
+            // 
+            this.PressoCostoFisso.DataPropertyName = "Prezzo";
+            this.PressoCostoFisso.HeaderText = "Prezzo";
+            this.PressoCostoFisso.Name = "PressoCostoFisso";
+            this.PressoCostoFisso.ReadOnly = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(380, 118);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(60, 15);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Margine";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(274, 118);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(51, 15);
+            this.label8.TabIndex = 14;
+            this.label8.Text = "Prezzo";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(165, 118);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(43, 15);
+            this.label9.TabIndex = 13;
+            this.label9.Text = "Costo";
+            // 
+            // txtTotaliCostiFissiPrezo
+            // 
+            this.txtTotaliCostiFissiPrezo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotaliCostiFissiPrezo.Location = new System.Drawing.Point(273, 135);
+            this.txtTotaliCostiFissiPrezo.Name = "txtTotaliCostiFissiPrezo";
+            this.txtTotaliCostiFissiPrezo.ReadOnly = true;
+            this.txtTotaliCostiFissiPrezo.Size = new System.Drawing.Size(100, 21);
+            this.txtTotaliCostiFissiPrezo.TabIndex = 10;
+            // 
+            // txtTotaliCostiFissiMargine
+            // 
+            this.txtTotaliCostiFissiMargine.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotaliCostiFissiMargine.Location = new System.Drawing.Point(379, 135);
+            this.txtTotaliCostiFissiMargine.Name = "txtTotaliCostiFissiMargine";
+            this.txtTotaliCostiFissiMargine.ReadOnly = true;
+            this.txtTotaliCostiFissiMargine.Size = new System.Drawing.Size(100, 21);
+            this.txtTotaliCostiFissiMargine.TabIndex = 11;
+            // 
+            // txtTotaliCostiFissiCosto
+            // 
+            this.txtTotaliCostiFissiCosto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotaliCostiFissiCosto.Location = new System.Drawing.Point(164, 135);
+            this.txtTotaliCostiFissiCosto.Name = "txtTotaliCostiFissiCosto";
+            this.txtTotaliCostiFissiCosto.ReadOnly = true;
+            this.txtTotaliCostiFissiCosto.Size = new System.Drawing.Size(100, 21);
+            this.txtTotaliCostiFissiCosto.TabIndex = 12;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(28, 138);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(107, 15);
+            this.label10.TabIndex = 9;
+            this.label10.Text = "Totali costi fissi";
             // 
             // CostoFrm
             // 
@@ -466,9 +686,12 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvElementi)).EndInit();
             this.tabControl1.ResumeLayout(false);
+            this.tabTotali.ResumeLayout(false);
+            this.tabTotali.PerformLayout();
             this.tabDettaglio.ResumeLayout(false);
             this.tabCostiFissi.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tabCostiFissi.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCostiFissi)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -493,8 +716,7 @@
         private System.Windows.Forms.TextBox txtNotaPrevetivoCosto;
         private System.Windows.Forms.ComboBox ddlPreventivoCosto;
         private System.Windows.Forms.Button btnAggiorna_costiFissi;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.ListBox lstCostiFissi;
+        private System.Windows.Forms.DataGridView dgvCostiFissi;
         private System.Windows.Forms.TabPage tabTotali;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdEelementoPreventivo;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdElementoCosto;
@@ -514,5 +736,26 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn pezziorari_std;
         private System.Windows.Forms.DataGridViewTextBoxColumn costostd;
         private System.Windows.Forms.DataGridViewTextBoxColumn ricarico_std;
+        private DraggableListbox lstCostiFissi;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdCostoFissoPreventivo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CodiceCostoFisso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DescrizioneCostoFisso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RicaricoCostoFisso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CostoCostoFisso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PressoCostoFisso;
+        private System.Windows.Forms.TextBox txtCostiFissiPrezzo;
+        private System.Windows.Forms.TextBox txtCostiFissiRicarico;
+        private System.Windows.Forms.TextBox txtCostiFissiCosto;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtTotaliCostiFissiPrezo;
+        private System.Windows.Forms.TextBox txtTotaliCostiFissiMargine;
+        private System.Windows.Forms.TextBox txtTotaliCostiFissiCosto;
+        private System.Windows.Forms.Label label10;
     }
 }

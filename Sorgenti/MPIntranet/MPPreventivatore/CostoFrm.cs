@@ -19,11 +19,13 @@ namespace MPPreventivatore
     public partial class CostoFrm : ChildBaseForm
     {
         public decimal IdProdottoFinito;
-    //    private Articolo _articolo = new Articolo(string.Empty);
+        //    private Articolo _articolo = new Articolo(string.Empty);
         private Documenti _documenti = new Documenti();
         private Anagrafica _anagrafica = new Anagrafica();
         private List<ElementoCostoPreventivoModel> _elementiCostoPreventivo = new List<ElementoCostoPreventivoModel>();
+        private BindingSource _sourceCostiFissi = new BindingSource();
         private BindingSource _source = new BindingSource();
+        private List<CostoFissoPreventivoModel> _costiFissiPreventivoModel = new List<CostoFissoPreventivoModel>();
 
         private List<GruppoRepartoModel> _gruppiRepartiModel;
 
@@ -58,11 +60,19 @@ namespace MPPreventivatore
             _gruppiRepartiModel = articolo.CreaListaGruppoRepartoModel(prodottoFinitoUC1.ProdottoFinitoModel.Brand.IdBrand);
             caricaDdlPreventivi();
 
-
+            caricaListaCostiFissi();
             caricaGrigliaElementiPreventivo();
+            caricaGrigliaCostiFissi();
             this.Text = prodottoFinitoUC1.ProdottoFinitoModel.ToString();
         }
 
+        private void caricaListaCostiFissi()
+        {
+            Anagrafica anagrafica = new Anagrafica();
+            List<CostoFissoModel> costiFissiModel = anagrafica.CreaListaCostoFissoModel();
+            lstCostiFissi.Items.Clear();
+            lstCostiFissi.Items.AddRange(costiFissiModel.ToArray());
+        }
         private void caricaGrigliaElementiPreventivo()
         {
             dgvElementi.AutoGenerateColumns = false;
@@ -70,7 +80,19 @@ namespace MPPreventivatore
             _source.DataSource = _elementiCostoPreventivo;
             dgvElementi.DataSource = _source;
         }
+        private void RefreshGridViewCostiFissi()
+        {
+            _sourceCostiFissi.ResetBindings(false);
+            dgvCostiFissi.Update();
+            dgvCostiFissi.Refresh();
+        }
+        private void caricaGrigliaCostiFissi()
+        {
+            dgvCostiFissi.AutoGenerateColumns = false;
 
+            _sourceCostiFissi.DataSource = _costiFissiPreventivoModel;
+            dgvCostiFissi.DataSource = _sourceCostiFissi;
+        }
         private void caricaDdlPreventivi()
         {
             Articolo articolo = new Articolo();
@@ -122,7 +144,7 @@ namespace MPPreventivatore
         }
 
         private void creaAlberoDistinta(TreeNode radice)
-        {          
+        {
             List<ElementoCostoPreventivoModel> nodibase = _elementiCostoPreventivo.Where(x => x.ElementoPreventivo.IdPadre == -1).ToList();
             foreach (ElementoCostoPreventivoModel nodobase in nodibase)
                 aggiungiFiglio(radice, nodobase);
@@ -284,10 +306,10 @@ namespace MPPreventivatore
             dgvElementi.Rows[e.RowIndex].Cells[6].Value = grm.Gruppo.Codice;
         }
 
-   
+
         private void btnAggiorna_Click(object sender, EventArgs e)
         {
-
+            caricaListaCostiFissi();
         }
 
         private void ddlPreventivoCosto_SelectedIndexChanged(object sender, EventArgs e)
@@ -304,6 +326,90 @@ namespace MPPreventivatore
             creaAlberoDistinta(radice);
             treeView1.ExpandAll();
             caricaGrigliaElementiPreventivo();
+        }
+
+        private void dgvCostiFissi_DragDrop(object sender, DragEventArgs e)
+        {
+            CostoFissoModel costoFisso = (CostoFissoModel)e.Data.GetData(typeof(CostoFissoModel));
+            if (costoFisso == null) return;
+
+            CostoFissoPreventivoModel costoFissoPreventivoModel = new CostoFissoPreventivoModel();
+            costoFissoPreventivoModel.IdCostoFissoPreventivo = MPIntranet.Business.Articolo.EstraId();
+            costoFissoPreventivoModel.IdPreventivoCosto = costoFisso.IdCostoFisso;
+            costoFissoPreventivoModel.Codice = costoFisso.Codice;
+            costoFissoPreventivoModel.Descrizione = costoFisso.Descrizione;
+            costoFissoPreventivoModel.Ricarico = costoFisso.Ricarico;
+            costoFissoPreventivoModel.Costo = costoFisso.Costo;
+            costoFissoPreventivoModel.Prezzo = (1 + costoFisso.Ricarico / 100) * costoFisso.Costo;
+
+            _costiFissiPreventivoModel.Add(costoFissoPreventivoModel);
+            RefreshGridViewCostiFissi();
+            calcolaTotaliCostiFissi();
+        }
+
+        private void dgvCostiFissi_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        private void dgvCostiFissi_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            e.Control.KeyPress -= new KeyPressEventHandler(Numeric_KeyPress);
+            if (dgvCostiFissi.CurrentCell.ColumnIndex >= 3 && dgvCostiFissi.CurrentCell.ColumnIndex <= 4)
+            {
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress += new KeyPressEventHandler(Numeric_KeyPress);
+                }
+            }
+        }
+
+        private void calcolaTotaliCostiFissi()
+        {
+            decimal costi = 0;
+            decimal prezzi = 0;
+
+            foreach (DataGridViewRow riga in dgvCostiFissi.Rows)
+            {
+                decimal costo = (decimal)riga.Cells[CostoCostoFisso.Index].Value;
+                decimal prezzo = (decimal)riga.Cells[PressoCostoFisso.Index].Value;
+                costi += costo;
+                prezzi += prezzo;
+            }
+            txtTotaliCostiFissiCosto.Text = txtCostiFissiCosto.Text = costi.ToString();
+            txtTotaliCostiFissiPrezo.Text = txtCostiFissiPrezzo.Text = prezzi.ToString();
+            txtTotaliCostiFissiMargine.Text = txtCostiFissiRicarico.Text = (prezzi - costi).ToString();
+        }
+
+        private void dgvCostiFissi_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            //if (e.ColumnIndex >= 3 && e.ColumnIndex <= 4)
+            //{
+            //    decimal margine = (decimal)dgvCostiFissi.Rows[e.RowIndex].Cells[3].Value;
+            //    decimal costo = (decimal)dgvCostiFissi.Rows[e.RowIndex].Cells[4].Value;
+
+            //    decimal prezzo = (1 + margine / 100) * costo;
+            //    dgvCostiFissi.Rows[e.RowIndex].Cells[5].Value = prezzo;
+            //}
+
+        }
+
+        private void dgvCostiFissi_CellValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+            {
+                if (e.ColumnIndex >= 3 && e.ColumnIndex <= 4)
+                {
+
+                    decimal margine = (decimal)dgvCostiFissi.Rows[e.RowIndex].Cells[RicaricoCostoFisso.Index].Value;
+                    decimal costo = (decimal)dgvCostiFissi.Rows[e.RowIndex].Cells[CostoCostoFisso.Index].Value;
+
+                    decimal prezzo = (1 + margine / 100) * costo;
+                    dgvCostiFissi.Rows[e.RowIndex].Cells[PressoCostoFisso.Index].Value = prezzo;
+                    calcolaTotaliCostiFissi();
+                }
+            }
         }
     }
 }
