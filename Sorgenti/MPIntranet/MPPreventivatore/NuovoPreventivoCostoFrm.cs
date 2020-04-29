@@ -82,7 +82,8 @@ namespace MPPreventivatore
                     elementoNuovo.PezziOrari = elemento.PezziOrari;
                     elementoNuovo.Quantita = elemento.Quantita;
                     elementoNuovo.CostoArticolo = elemento.CostoArticolo;
-                    elementoNuovo.Prezzo = elemento.Prezzo;
+                    elementoNuovo.CostoCompleto = elemento.CostoCompleto;
+                    elementoNuovo.CostoFigli = elemento.CostoFigli;
                     elementiNuovi.Add(elementoNuovo);
                 }
             }
@@ -109,10 +110,13 @@ namespace MPPreventivatore
                 elementoCosto.PezziOrari = elemento.PezziOrari;
                 elementoCosto.Quantita = elemento.Quantita;
                 elementoCosto.CostoArticolo = 0;
-                elementoCosto.Prezzo = 0;
+                decimal costoPezzo = elemento.PezziOrari == 0 ? 0 : elemento.CostoOrario / elemento.PezziOrari;
+                elementoCosto.CostoArticolo = (1 + elemento.Ricarico / 100) * costoPezzo;
+                elementoCosto.CostoFigli = 0;
+                elementoCosto.CostoCompleto = 0;
                 lista.Add(elementoCosto);
             }
-
+            Articolo.RicalcolaCostoFigliListaElementiCostoPreventiviModel(lista);
             return lista;
         }
 

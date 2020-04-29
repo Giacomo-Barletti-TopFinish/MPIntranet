@@ -37,7 +37,8 @@ namespace MPIntranet.Models.Articolo
         public decimal PezziOrari { get; set; }
         public decimal Quantita { get; set; }
         public decimal CostoArticolo { get; set; }
-        public decimal Prezzo { get; set; }
+        public decimal CostoFigli{ get; set; }
+        public decimal CostoCompleto { get; set; }
         public override string ToString()
         {
             return ElementoPreventivo.ToString();

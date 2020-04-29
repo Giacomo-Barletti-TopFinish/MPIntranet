@@ -811,7 +811,8 @@ namespace MPIntranet.Business
             elementoModel.PezziOrari = elementoCostoPreventivo.PEZZIORARI;
             elementoModel.Quantita = elementoCostoPreventivo.QUANTITA;
             elementoModel.CostoArticolo = elementoCostoPreventivo.COSTOARTICOLO;
-            elementoModel.Prezzo = elementoCostoPreventivo.PREZZO;
+            elementoModel.CostoCompleto = elementoCostoPreventivo.COSTOCOMPLETO;
+            elementoModel.CostoFigli = elementoCostoPreventivo.COSTOFIGLI;
 
             return elementoModel;
         }
@@ -955,7 +956,7 @@ namespace MPIntranet.Business
             _ds.ELEMENTICOSTIPREVENTIVI.Clear();
             using (ArticoloBusiness bArticolo = new ArticoloBusiness())
             {
-                bArticolo.FillElementiCostiPreventivo(_ds, idPreventivoCosto,true);
+                bArticolo.FillElementiCostiPreventivo(_ds, idPreventivoCosto, true);
             }
 
             foreach (ArticoloDS.ELEMENTICOSTIPREVENTIVIRow elementoDatabase in _ds.ELEMENTICOSTIPREVENTIVI.Where(x => x.IDPREVENTIVOCOSTO == idPreventivoCosto))
@@ -976,9 +977,10 @@ namespace MPIntranet.Business
                     elementoDatabase.TABELLAESTERNA = correggiString(elementoCostoPreventivoModel.TabellaEsterna, 25);
 
                     elementoDatabase.PEZZIORARI = elementoCostoPreventivoModel.PezziOrari;
-                    elementoDatabase.QUANTITA= elementoCostoPreventivoModel.Quantita;
+                    elementoDatabase.QUANTITA = elementoCostoPreventivoModel.Quantita;
                     elementoDatabase.COSTOARTICOLO = elementoCostoPreventivoModel.CostoArticolo;
-                    elementoDatabase.PREZZO = elementoCostoPreventivoModel.Prezzo;
+                    elementoDatabase.COSTOCOMPLETO = elementoCostoPreventivoModel.CostoCompleto;
+                    elementoDatabase.COSTOFIGLI = elementoCostoPreventivoModel.CostoFigli;
                 }
 
                 elementoDatabase.DATAMODIFICA = DateTime.Now;
@@ -987,7 +989,7 @@ namespace MPIntranet.Business
 
             foreach (ElementoCostoPreventivoModel elementCostoPreventivo in elementiCostoPreventivoModel)
             {
-                if (!_ds.ELEMENTICOSTIPREVENTIVI.Any(x => x.IDELEMENTOCOSTO== elementCostoPreventivo.IdElementoCosto))
+                if (!_ds.ELEMENTICOSTIPREVENTIVI.Any(x => x.IDELEMENTOCOSTO == elementCostoPreventivo.IdElementoCosto))
                 {
                     ArticoloDS.ELEMENTICOSTIPREVENTIVIRow elementoNuovo = _ds.ELEMENTICOSTIPREVENTIVI.NewELEMENTICOSTIPREVENTIVIRow();
                     elementoNuovo.IDELEMENTOCOSTO = elementCostoPreventivo.IdElementoCosto;
@@ -1005,7 +1007,8 @@ namespace MPIntranet.Business
                     elementoNuovo.PEZZIORARI = elementCostoPreventivo.PezziOrari;
                     elementoNuovo.QUANTITA = elementCostoPreventivo.Quantita;
                     elementoNuovo.COSTOARTICOLO = elementCostoPreventivo.CostoArticolo;
-                    elementoNuovo.PREZZO = elementCostoPreventivo.Prezzo;
+                    elementoNuovo.COSTOCOMPLETO = elementCostoPreventivo.CostoCompleto;
+                    elementoNuovo.COSTOFIGLI = elementCostoPreventivo.CostoFigli;
 
                     elementoNuovo.CANCELLATO = SiNo.No;
                     elementoNuovo.DATAMODIFICA = DateTime.Now;
@@ -1018,6 +1021,27 @@ namespace MPIntranet.Business
             using (ArticoloBusiness bArticolo = new ArticoloBusiness())
                 bArticolo.UpdateTable(_ds.ELEMENTICOSTIPREVENTIVI.TableName, _ds);
         }
+
+        public static void RicalcolaCostoFigliListaElementiCostoPreventiviModel(List<ElementoCostoPreventivoModel> lista)
+        {
+            List<ElementoCostoPreventivoModel> radici = lista.Where(x => x.ElementoPreventivo.IdPadre == -1).ToList();
+            foreach (ElementoCostoPreventivoModel radice in radici)
+            {
+                calcolaCostoCompleto(lista, radice);
+            }
+        }
+
+        private static decimal calcolaCostoCompleto(List<ElementoCostoPreventivoModel> lista, ElementoCostoPreventivoModel elementoPadre)
+        {
+            decimal costoFigli = 0;
+            foreach (ElementoCostoPreventivoModel figlio in lista.Where(x => x.ElementoPreventivo.IdPadre == elementoPadre.ElementoPreventivo.IdElementoPreventivo))
+                costoFigli += calcolaCostoCompleto(lista,figlio) * figlio.ElementoPreventivo.Quantita;
+
+            elementoPadre.CostoFigli = costoFigli;
+            elementoPadre.CostoCompleto = elementoPadre.CostoArticolo + costoFigli;
+            return elementoPadre.CostoCompleto;
+        }
+       
 
         public string CreaGruppo(string codice, string descrizione, decimal idbrand, string colore, string account)
         {

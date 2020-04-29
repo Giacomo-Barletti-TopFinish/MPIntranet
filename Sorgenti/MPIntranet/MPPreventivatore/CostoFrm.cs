@@ -250,30 +250,20 @@ namespace MPPreventivatore
 
         private void dgvElementi_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (_disabilitaEdit) return;
-            try
-            {
-                _disabilitaEdit = true;
+            //if (_disabilitaEdit) return;
+            //try
+            //{
+            //    _disabilitaEdit = true;
 
-                if (e.ColumnIndex == 1)
-                {
-                    decimal idElementoCosto = (decimal)dgvElementi.Rows[e.RowIndex].Cells[0].Value;
-                    TreeNode[] nodi = treeView1.Nodes.Find(idElementoCosto.ToString(), true);
-                    if (nodi.Length == 1)
-                    {
-                        TreeNode nodo = nodi[0];
-                        nodo.Text = ((ElementoPreventivoModel)(nodo.Tag)).ToString();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MostraEccezione("", ex);
-            }
-            finally
-            {
-                _disabilitaEdit = false;
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MostraEccezione("", ex);
+            //}
+            //finally
+            //{
+            //    _disabilitaEdit = false;
+            //}
         }
 
         private void dgvElementi_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -291,10 +281,6 @@ namespace MPPreventivatore
             dgvElementi.Rows[e.RowIndex].Cells[7].Value = elementoCosto.ElementoPreventivo.Peso;
             dgvElementi.Rows[e.RowIndex].Cells[8].Value = elementoCosto.ElementoPreventivo.Superficie;
             dgvElementi.Rows[e.RowIndex].Cells[9].Value = elementoCosto.ElementoPreventivo.Quantita;
-
-            dgvElementi.Rows[e.RowIndex].Cells[14].Value = elementoCosto.ElementoPreventivo.PezziOrari;
-            dgvElementi.Rows[e.RowIndex].Cells[15].Value = elementoCosto.ElementoPreventivo.CostoOrario;
-            dgvElementi.Rows[e.RowIndex].Cells[16].Value = elementoCosto.ElementoPreventivo.Ricarico;
 
             RepartoModel reparto = elementoCosto.ElementoPreventivo.Reparto;
             dgvElementi.Rows[e.RowIndex].Cells[5].Value = elementoCosto.ElementoPreventivo.Reparto;
@@ -382,19 +368,6 @@ namespace MPPreventivatore
             txtTotaliCostiFissiMargine.Text = txtCostiFissiRicarico.Text = (prezzi - costi).ToString();
         }
 
-        private void dgvCostiFissi_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            //if (e.ColumnIndex >= 3 && e.ColumnIndex <= 4)
-            //{
-            //    decimal margine = (decimal)dgvCostiFissi.Rows[e.RowIndex].Cells[3].Value;
-            //    decimal costo = (decimal)dgvCostiFissi.Rows[e.RowIndex].Cells[4].Value;
-
-            //    decimal prezzo = (1 + margine / 100) * costo;
-            //    dgvCostiFissi.Rows[e.RowIndex].Cells[5].Value = prezzo;
-            //}
-
-        }
-
         private void dgvCostiFissi_CellValidated(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex > -1)
@@ -409,6 +382,29 @@ namespace MPPreventivatore
                     dgvCostiFissi.Rows[e.RowIndex].Cells[PressoCostoFisso.Index].Value = prezzo;
                     calcolaTotaliCostiFissi();
                 }
+            }
+        }
+
+        private void dgvCostiFissi_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            calcolaTotaliCostiFissi();
+        }
+
+        private void dgvElementi_CellValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+            {
+                //if (e.ColumnIndex == colElementoRicarico.Index || e.ColumnIndex == colElementoCosto.Index)
+                //{
+
+                //    decimal margine = (decimal)dgvElementi.Rows[e.RowIndex].Cells[colElementoRicarico.Index].Value;
+                //    decimal costo = (decimal)dgvElementi.Rows[e.RowIndex].Cells[colElementoCosto.Index].Value;
+                //    decimal pezziOrari = (decimal)dgvElementi.Rows[e.RowIndex].Cells[colElementoPezziOrari.Index].Value;
+                //    decimal costoPezzo = pezziOrari == 0 ? 0 : costo / pezziOrari;
+                //    decimal prezzo = (1 + margine / 100) * costoPezzo;
+                //    dgvElementi.Rows[e.RowIndex].Cells[colElementoPrezzo.Index].Value = prezzo;
+
+                //}
             }
         }
     }

@@ -14,9 +14,9 @@
     <Shape ID="DesignTable:PREVENTIVI" ZOrder="6" X="897" Y="490" Height="200" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="196" />
     <Shape ID="DesignTable:ELEMENTIPREVENTIVO" ZOrder="5" X="1104" Y="473" Height="304" Width="200" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
     <Shape ID="DesignTable:PROCESSI" ZOrder="4" X="1063" Y="200" Height="219" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="263" />
-    <Shape ID="DesignTable:COSTIFISSIPREVENTIVO" ZOrder="1" X="1584" Y="219" Height="219" Width="204" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="215" />
-    <Shape ID="DesignTable:ELEMENTICOSTIPREVENTIVI" ZOrder="3" X="1867" Y="239" Height="304" Width="230" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
-    <Shape ID="DesignTable:PREVENTIVICOSTI" ZOrder="2" X="1591" Y="500" Height="238" Width="171" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="234" />
+    <Shape ID="DesignTable:COSTIFISSIPREVENTIVO" ZOrder="2" X="1584" Y="219" Height="219" Width="204" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="215" />
+    <Shape ID="DesignTable:PREVENTIVICOSTI" ZOrder="3" X="1591" Y="500" Height="238" Width="171" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="234" />
+    <Shape ID="DesignTable:ELEMENTICOSTIPREVENTIVI" ZOrder="1" X="1897" Y="326" Height="304" Width="230" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="301" />
   </Shapes>
   <Connectors />
 </DiagramLayout>
