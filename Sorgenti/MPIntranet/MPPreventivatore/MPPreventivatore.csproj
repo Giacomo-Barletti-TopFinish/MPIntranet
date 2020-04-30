@@ -144,6 +144,7 @@
     <Compile Include="TipologiaDocumentiFrm.Designer.cs">
       <DependentUpon>TipologiaDocumentiFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TreeviewExtention.cs" />
     <EmbeddedResource Include="CreaProdottoFinitoFrm.resx">
       <DependentUpon>CreaProdottoFinitoFrm.cs</DependentUpon>
     </EmbeddedResource>

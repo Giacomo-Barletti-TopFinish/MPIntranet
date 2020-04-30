@@ -109,7 +109,7 @@ namespace MPPreventivatore
                 elementoCosto.TabellaEsterna = elemento.TabellaEsterna;
                 elementoCosto.PezziOrari = elemento.PezziOrari;
                 elementoCosto.Quantita = elemento.Quantita;
-                elementoCosto.CostoArticolo = 0;
+               
                 decimal costoPezzo = elemento.PezziOrari == 0 ? 0 : elemento.CostoOrario / elemento.PezziOrari;
                 elementoCosto.CostoArticolo = (1 + elemento.Ricarico / 100) * costoPezzo;
                 elementoCosto.CostoFigli = 0;

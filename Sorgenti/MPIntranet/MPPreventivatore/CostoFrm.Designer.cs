@@ -72,17 +72,17 @@
             this.lstCostiFissi = new MPPreventivatore.DraggableListbox();
             this.IdElementoCosto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IncludiPreventivo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Articolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Codice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descrizione = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reparto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Gruppo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Peso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Superficie = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Quantita = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PezziOrari = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Costo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ricarico = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colElementoArticolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colElementoCodice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colElementoDescrizione = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colElementoReparto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colElementoGruppo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colElementoPeso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colElementoSuperficie = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colElementoQuantita = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colElementoPezziOrari = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colElementoCostoOrario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colElementoRicarico = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCostoArticolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCostoFigli = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCostoCompleto = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -231,17 +231,17 @@
             this.dgvElementi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdElementoCosto,
             this.IncludiPreventivo,
-            this.Articolo,
-            this.Codice,
-            this.Descrizione,
-            this.Reparto,
-            this.Gruppo,
-            this.Peso,
-            this.Superficie,
-            this.Quantita,
-            this.PezziOrari,
-            this.Costo,
-            this.Ricarico,
+            this.colElementoArticolo,
+            this.colElementoCodice,
+            this.colElementoDescrizione,
+            this.colElementoReparto,
+            this.colElementoGruppo,
+            this.colElementoPeso,
+            this.colElementoSuperficie,
+            this.colElementoQuantita,
+            this.colElementoPezziOrari,
+            this.colElementoCostoOrario,
+            this.colElementoRicarico,
             this.colCostoArticolo,
             this.colCostoFigli,
             this.colCostoCompleto});
@@ -254,7 +254,6 @@
             this.dgvElementi.Size = new System.Drawing.Size(894, 387);
             this.dgvElementi.TabIndex = 9;
             this.dgvElementi.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvElementi_CellClick);
-            this.dgvElementi.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvElementi_CellEndEdit);
             this.dgvElementi.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvElementi_CellValidated);
             this.dgvElementi.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvElementi_EditingControlShowing);
             this.dgvElementi.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvElementi_RowPrePaint);
@@ -563,89 +562,89 @@
             // 
             // Articolo
             // 
-            this.Articolo.DataPropertyName = "ElementoPreventivo.Articolo";
-            this.Articolo.Frozen = true;
-            this.Articolo.HeaderText = "Articolo";
-            this.Articolo.MaxInputLength = 30;
-            this.Articolo.Name = "Articolo";
-            this.Articolo.ReadOnly = true;
+            this.colElementoArticolo.DataPropertyName = "ElementoPreventivo.Articolo";
+            this.colElementoArticolo.Frozen = true;
+            this.colElementoArticolo.HeaderText = "Articolo";
+            this.colElementoArticolo.MaxInputLength = 30;
+            this.colElementoArticolo.Name = "Articolo";
+            this.colElementoArticolo.ReadOnly = true;
             // 
             // Codice
             // 
-            this.Codice.DataPropertyName = "ElementoPreventivo.Codice";
-            this.Codice.Frozen = true;
-            this.Codice.HeaderText = "Codice";
-            this.Codice.Name = "Codice";
-            this.Codice.ReadOnly = true;
+            this.colElementoCodice.DataPropertyName = "ElementoPreventivo.Codice";
+            this.colElementoCodice.Frozen = true;
+            this.colElementoCodice.HeaderText = "Codice";
+            this.colElementoCodice.Name = "Codice";
+            this.colElementoCodice.ReadOnly = true;
             // 
             // Descrizione
             // 
-            this.Descrizione.DataPropertyName = "ElementoPreventivo.Descrizione";
-            this.Descrizione.Frozen = true;
-            this.Descrizione.HeaderText = "Descrizione";
-            this.Descrizione.Name = "Descrizione";
-            this.Descrizione.ReadOnly = true;
+            this.colElementoDescrizione.DataPropertyName = "ElementoPreventivo.Descrizione";
+            this.colElementoDescrizione.Frozen = true;
+            this.colElementoDescrizione.HeaderText = "Descrizione";
+            this.colElementoDescrizione.Name = "Descrizione";
+            this.colElementoDescrizione.ReadOnly = true;
             // 
             // Reparto
             // 
-            this.Reparto.DataPropertyName = "ElementoPreventivo.Reparto";
-            this.Reparto.Frozen = true;
-            this.Reparto.HeaderText = "Reparto";
-            this.Reparto.Name = "Reparto";
-            this.Reparto.ReadOnly = true;
+            this.colElementoReparto.DataPropertyName = "ElementoPreventivo.Reparto";
+            this.colElementoReparto.Frozen = true;
+            this.colElementoReparto.HeaderText = "Reparto";
+            this.colElementoReparto.Name = "Reparto";
+            this.colElementoReparto.ReadOnly = true;
             // 
             // Gruppo
             // 
-            this.Gruppo.HeaderText = "ElementoPreventivo.Gruppo";
-            this.Gruppo.Name = "Gruppo";
-            this.Gruppo.ReadOnly = true;
+            this.colElementoGruppo.HeaderText = "ElementoPreventivo.Gruppo";
+            this.colElementoGruppo.Name = "Gruppo";
+            this.colElementoGruppo.ReadOnly = true;
             // 
             // Peso
             // 
-            this.Peso.DataPropertyName = "ElementoPreventivo.Peso";
-            this.Peso.FillWeight = 80F;
-            this.Peso.HeaderText = "Peso";
-            this.Peso.Name = "Peso";
-            this.Peso.ReadOnly = true;
-            this.Peso.Width = 80;
+            this.colElementoPeso.DataPropertyName = "ElementoPreventivo.Peso";
+            this.colElementoPeso.FillWeight = 80F;
+            this.colElementoPeso.HeaderText = "Peso";
+            this.colElementoPeso.Name = "Peso";
+            this.colElementoPeso.ReadOnly = true;
+            this.colElementoPeso.Width = 80;
             // 
             // Superficie
             // 
-            this.Superficie.DataPropertyName = "ElementoPreventivo.Superficie";
-            this.Superficie.FillWeight = 80F;
-            this.Superficie.HeaderText = "Superficie";
-            this.Superficie.Name = "Superficie";
-            this.Superficie.ReadOnly = true;
-            this.Superficie.Width = 80;
+            this.colElementoSuperficie.DataPropertyName = "ElementoPreventivo.Superficie";
+            this.colElementoSuperficie.FillWeight = 80F;
+            this.colElementoSuperficie.HeaderText = "Superficie";
+            this.colElementoSuperficie.Name = "Superficie";
+            this.colElementoSuperficie.ReadOnly = true;
+            this.colElementoSuperficie.Width = 80;
             // 
             // Quantita
             // 
-            this.Quantita.DataPropertyName = "ElementoPreventivo.Quantita";
-            this.Quantita.FillWeight = 80F;
-            this.Quantita.HeaderText = "Quantità";
-            this.Quantita.Name = "Quantita";
-            this.Quantita.ReadOnly = true;
-            this.Quantita.Width = 80;
+            this.colElementoQuantita.DataPropertyName = "ElementoPreventivo.Quantita";
+            this.colElementoQuantita.FillWeight = 80F;
+            this.colElementoQuantita.HeaderText = "Quantità";
+            this.colElementoQuantita.Name = "Quantita";
+            this.colElementoQuantita.ReadOnly = true;
+            this.colElementoQuantita.Width = 80;
             // 
             // PezziOrari
             // 
-            this.PezziOrari.DataPropertyName = "PezziOrari";
-            this.PezziOrari.FillWeight = 80F;
-            this.PezziOrari.HeaderText = "Pezzi orari";
-            this.PezziOrari.Name = "PezziOrari";
-            this.PezziOrari.Width = 80;
+            this.colElementoPezziOrari.DataPropertyName = "PezziOrari";
+            this.colElementoPezziOrari.FillWeight = 80F;
+            this.colElementoPezziOrari.HeaderText = "Pezzi orari";
+            this.colElementoPezziOrari.Name = "PezziOrari";
+            this.colElementoPezziOrari.Width = 80;
             // 
             // Costo
             // 
-            this.Costo.DataPropertyName = "CostoOrario";
-            this.Costo.HeaderText = "CostoHH";
-            this.Costo.Name = "Costo";
+            this.colElementoCostoOrario.DataPropertyName = "CostoOrario";
+            this.colElementoCostoOrario.HeaderText = "CostoHH";
+            this.colElementoCostoOrario.Name = "Costo";
             // 
             // Ricarico
             // 
-            this.Ricarico.DataPropertyName = "Ricarico";
-            this.Ricarico.HeaderText = "Ricarico";
-            this.Ricarico.Name = "Ricarico";
+            this.colElementoRicarico.DataPropertyName = "Ricarico";
+            this.colElementoRicarico.HeaderText = "Ricarico";
+            this.colElementoRicarico.Name = "Ricarico";
             // 
             // colCostoArticolo
             // 
@@ -737,27 +736,19 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn RicaricoCostoFisso;
         private System.Windows.Forms.DataGridViewTextBoxColumn CostoCostoFisso;
         private System.Windows.Forms.DataGridViewTextBoxColumn PressoCostoFisso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colElementoArticolo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colElementoPezziOrari;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colElementoCosto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colElementoRicarico;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colElementoPrezzo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colpezziorari_std;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colcostostd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colricarico_std;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdElementoCosto;
         private System.Windows.Forms.DataGridViewCheckBoxColumn IncludiPreventivo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Articolo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Codice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descrizione;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Reparto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Gruppo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Peso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Superficie;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Quantita;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PezziOrari;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Costo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ricarico;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colElementoArticolo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colElementoCodice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colElementoDescrizione;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colElementoReparto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colElementoGruppo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colElementoPeso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colElementoSuperficie;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colElementoQuantita;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colElementoPezziOrari;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colElementoCostoOrario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colElementoRicarico;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCostoArticolo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCostoFigli;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCostoCompleto;

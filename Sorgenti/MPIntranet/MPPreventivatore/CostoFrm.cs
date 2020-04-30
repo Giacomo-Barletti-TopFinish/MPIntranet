@@ -234,8 +234,7 @@ namespace MPPreventivatore
                 if (nodi.Length == 1)
                 {
                     TreeNode nodo = nodi[0];
-                    treeView1.SelectedNode = nodo;
-                    treeView1.Focus();
+                    treeView1.HighlightNode(nodo);
                 }
             }
             catch (Exception ex)
@@ -248,23 +247,6 @@ namespace MPPreventivatore
             }
         }
 
-        private void dgvElementi_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            //if (_disabilitaEdit) return;
-            //try
-            //{
-            //    _disabilitaEdit = true;
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    MostraEccezione("", ex);
-            //}
-            //finally
-            //{
-            //    _disabilitaEdit = false;
-            //}
-        }
 
         private void dgvElementi_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
@@ -392,19 +374,29 @@ namespace MPPreventivatore
 
         private void dgvElementi_CellValidated(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex > -1)
+            try
             {
-                //if (e.ColumnIndex == colElementoRicarico.Index || e.ColumnIndex == colElementoCosto.Index)
-                //{
+                _disabilitaEdit = true;
+                if (e.RowIndex > -1)
+                {
+                    if (e.ColumnIndex == colElementoPezziOrari.Index || e.ColumnIndex == colElementoCostoOrario.Index)
+                    {
 
-                //    decimal margine = (decimal)dgvElementi.Rows[e.RowIndex].Cells[colElementoRicarico.Index].Value;
-                //    decimal costo = (decimal)dgvElementi.Rows[e.RowIndex].Cells[colElementoCosto.Index].Value;
-                //    decimal pezziOrari = (decimal)dgvElementi.Rows[e.RowIndex].Cells[colElementoPezziOrari.Index].Value;
-                //    decimal costoPezzo = pezziOrari == 0 ? 0 : costo / pezziOrari;
-                //    decimal prezzo = (1 + margine / 100) * costoPezzo;
-                //    dgvElementi.Rows[e.RowIndex].Cells[colElementoPrezzo.Index].Value = prezzo;
+                        decimal margine = (decimal)dgvElementi.Rows[e.RowIndex].Cells[colElementoRicarico.Index].Value;
+                        decimal costoOrario = (decimal)dgvElementi.Rows[e.RowIndex].Cells[colElementoCostoOrario.Index].Value;
+                        decimal pezziOrari = (decimal)dgvElementi.Rows[e.RowIndex].Cells[colElementoPezziOrari.Index].Value;
+                        decimal costoPezzo = pezziOrari == 0 ? 0 : costoOrario / pezziOrari;
+                        decimal costoArticolo = (1 + margine / 100) * costoPezzo;
+                        dgvElementi.Rows[e.RowIndex].Cells[colCostoArticolo.Index].Value = costoArticolo;
 
-                //}
+                    }
+                    MPIntranet.Business.Articolo.RicalcolaCostoFigliListaElementiCostoPreventiviModel(_elementiCostoPreventivo);
+                }
+
+            }
+            finally
+            {
+                _disabilitaEdit = false;
             }
         }
     }
