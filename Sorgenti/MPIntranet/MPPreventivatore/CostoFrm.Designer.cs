@@ -30,7 +30,6 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.prodottoFinitoUC1 = new MPPreventivatore.ProdottoFinitoUC();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -42,6 +41,22 @@
             this.ddlPreventivi = new System.Windows.Forms.ComboBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.dgvElementi = new System.Windows.Forms.DataGridView();
+            this.IdElementoCosto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IncludiPreventivo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Articolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Codice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descrizione = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reparto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Gruppo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Peso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Superficie = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantita = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PezziOrari = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Costo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ricarico = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCostoArticolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCostoFigli = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCostoCompleto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabTotali = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
@@ -52,7 +67,15 @@
             this.txtTotaliCostiFissiCosto = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.tabDettaglio = new System.Windows.Forms.TabPage();
-            this.tabGriglie = new System.Windows.Forms.TabPage();
+            this.tabGalvanica = new System.Windows.Forms.TabPage();
+            this.txtProcessoGalvanico = new System.Windows.Forms.TextBox();
+            this.dgvProcessoGalvanico = new System.Windows.Forms.DataGridView();
+            this.Vasca = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Materiale = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SpessoreMinimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SpessoreNominale = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SpessoreMassimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label11 = new System.Windows.Forms.Label();
             this.tabCostiFissi = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -70,30 +93,21 @@
             this.CostoCostoFisso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PressoCostoFisso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lstCostiFissi = new MPPreventivatore.DraggableListbox();
-            this.IdElementoCosto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IncludiPreventivo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colElementoArticolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colElementoCodice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colElementoDescrizione = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colElementoReparto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colElementoGruppo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colElementoPeso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colElementoSuperficie = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colElementoQuantita = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colElementoPezziOrari = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colElementoCostoOrario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colElementoRicarico = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCostoArticolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCostoFigli = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCostoCompleto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prodottoFinitoUC1 = new MPPreventivatore.ProdottoFinitoUC();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dgvCostiGalvanica = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvElementi)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabTotali.SuspendLayout();
             this.tabDettaglio.SuspendLayout();
+            this.tabGalvanica.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProcessoGalvanico)).BeginInit();
             this.tabCostiFissi.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCostiFissi)).BeginInit();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCostiGalvanica)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -107,15 +121,6 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Prodotto finito";
-            // 
-            // prodottoFinitoUC1
-            // 
-            this.prodottoFinitoUC1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.prodottoFinitoUC1.Location = new System.Drawing.Point(6, 17);
-            this.prodottoFinitoUC1.Name = "prodottoFinitoUC1";
-            this.prodottoFinitoUC1.Size = new System.Drawing.Size(767, 157);
-            this.prodottoFinitoUC1.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -231,17 +236,17 @@
             this.dgvElementi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdElementoCosto,
             this.IncludiPreventivo,
-            this.colElementoArticolo,
-            this.colElementoCodice,
-            this.colElementoDescrizione,
-            this.colElementoReparto,
-            this.colElementoGruppo,
-            this.colElementoPeso,
-            this.colElementoSuperficie,
-            this.colElementoQuantita,
-            this.colElementoPezziOrari,
-            this.colElementoCostoOrario,
-            this.colElementoRicarico,
+            this.Articolo,
+            this.Codice,
+            this.Descrizione,
+            this.Reparto,
+            this.Gruppo,
+            this.Peso,
+            this.Superficie,
+            this.Quantita,
+            this.PezziOrari,
+            this.Costo,
+            this.Ricarico,
             this.colCostoArticolo,
             this.colCostoFigli,
             this.colCostoCompleto});
@@ -258,6 +263,125 @@
             this.dgvElementi.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvElementi_EditingControlShowing);
             this.dgvElementi.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvElementi_RowPrePaint);
             // 
+            // IdElementoCosto
+            // 
+            this.IdElementoCosto.DataPropertyName = "IdElementoCosto";
+            this.IdElementoCosto.Frozen = true;
+            this.IdElementoCosto.HeaderText = "IdElementoCosto";
+            this.IdElementoCosto.Name = "IdElementoCosto";
+            this.IdElementoCosto.Visible = false;
+            // 
+            // IncludiPreventivo
+            // 
+            this.IncludiPreventivo.DataPropertyName = "IncludiPreventivo";
+            this.IncludiPreventivo.Frozen = true;
+            this.IncludiPreventivo.HeaderText = "Includi";
+            this.IncludiPreventivo.Name = "IncludiPreventivo";
+            // 
+            // Articolo
+            // 
+            this.Articolo.DataPropertyName = "ElementoPreventivo.Articolo";
+            this.Articolo.Frozen = true;
+            this.Articolo.HeaderText = "Articolo";
+            this.Articolo.MaxInputLength = 30;
+            this.Articolo.Name = "Articolo";
+            this.Articolo.ReadOnly = true;
+            // 
+            // Codice
+            // 
+            this.Codice.DataPropertyName = "ElementoPreventivo.Codice";
+            this.Codice.Frozen = true;
+            this.Codice.HeaderText = "Codice";
+            this.Codice.Name = "Codice";
+            this.Codice.ReadOnly = true;
+            // 
+            // Descrizione
+            // 
+            this.Descrizione.DataPropertyName = "ElementoPreventivo.Descrizione";
+            this.Descrizione.Frozen = true;
+            this.Descrizione.HeaderText = "Descrizione";
+            this.Descrizione.Name = "Descrizione";
+            this.Descrizione.ReadOnly = true;
+            // 
+            // Reparto
+            // 
+            this.Reparto.DataPropertyName = "ElementoPreventivo.Reparto";
+            this.Reparto.Frozen = true;
+            this.Reparto.HeaderText = "Reparto";
+            this.Reparto.Name = "Reparto";
+            this.Reparto.ReadOnly = true;
+            // 
+            // Gruppo
+            // 
+            this.Gruppo.HeaderText = "ElementoPreventivo.Gruppo";
+            this.Gruppo.Name = "Gruppo";
+            this.Gruppo.ReadOnly = true;
+            // 
+            // Peso
+            // 
+            this.Peso.DataPropertyName = "ElementoPreventivo.Peso";
+            this.Peso.FillWeight = 80F;
+            this.Peso.HeaderText = "Peso";
+            this.Peso.Name = "Peso";
+            this.Peso.ReadOnly = true;
+            this.Peso.Width = 80;
+            // 
+            // Superficie
+            // 
+            this.Superficie.DataPropertyName = "ElementoPreventivo.Superficie";
+            this.Superficie.FillWeight = 80F;
+            this.Superficie.HeaderText = "Superficie";
+            this.Superficie.Name = "Superficie";
+            this.Superficie.ReadOnly = true;
+            this.Superficie.Width = 80;
+            // 
+            // Quantita
+            // 
+            this.Quantita.DataPropertyName = "ElementoPreventivo.Quantita";
+            this.Quantita.FillWeight = 80F;
+            this.Quantita.HeaderText = "Quantità";
+            this.Quantita.Name = "Quantita";
+            this.Quantita.ReadOnly = true;
+            this.Quantita.Width = 80;
+            // 
+            // PezziOrari
+            // 
+            this.PezziOrari.DataPropertyName = "PezziOrari";
+            this.PezziOrari.FillWeight = 80F;
+            this.PezziOrari.HeaderText = "Pezzi orari";
+            this.PezziOrari.Name = "PezziOrari";
+            this.PezziOrari.Width = 80;
+            // 
+            // Costo
+            // 
+            this.Costo.DataPropertyName = "CostoOrario";
+            this.Costo.HeaderText = "CostoHH";
+            this.Costo.Name = "Costo";
+            // 
+            // Ricarico
+            // 
+            this.Ricarico.DataPropertyName = "Ricarico";
+            this.Ricarico.HeaderText = "Ricarico";
+            this.Ricarico.Name = "Ricarico";
+            // 
+            // colCostoArticolo
+            // 
+            this.colCostoArticolo.DataPropertyName = "CostoArticolo";
+            this.colCostoArticolo.HeaderText = "Costo articolo";
+            this.colCostoArticolo.Name = "colCostoArticolo";
+            // 
+            // colCostoFigli
+            // 
+            this.colCostoFigli.DataPropertyName = "CostoFigli";
+            this.colCostoFigli.HeaderText = "Costo figli";
+            this.colCostoFigli.Name = "colCostoFigli";
+            // 
+            // colCostoCompleto
+            // 
+            this.colCostoCompleto.DataPropertyName = "CostoCompleto";
+            this.colCostoCompleto.HeaderText = "Costo completo";
+            this.colCostoCompleto.Name = "colCostoCompleto";
+            // 
             // tabControl1
             // 
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -265,8 +389,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabTotali);
             this.tabControl1.Controls.Add(this.tabDettaglio);
-            this.tabControl1.Controls.Add(this.tabGriglie);
+            this.tabControl1.Controls.Add(this.tabGalvanica);
             this.tabControl1.Controls.Add(this.tabCostiFissi);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Location = new System.Drawing.Point(464, 224);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -368,15 +493,85 @@
             this.tabDettaglio.Text = "Dettaglio elementi";
             this.tabDettaglio.UseVisualStyleBackColor = true;
             // 
-            // tabGriglie
+            // tabGalvanica
             // 
-            this.tabGriglie.Location = new System.Drawing.Point(4, 24);
-            this.tabGriglie.Name = "tabGriglie";
-            this.tabGriglie.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGriglie.Size = new System.Drawing.Size(900, 393);
-            this.tabGriglie.TabIndex = 1;
-            this.tabGriglie.Text = "Gruppi";
-            this.tabGriglie.UseVisualStyleBackColor = true;
+            this.tabGalvanica.Controls.Add(this.txtProcessoGalvanico);
+            this.tabGalvanica.Controls.Add(this.dgvProcessoGalvanico);
+            this.tabGalvanica.Controls.Add(this.label11);
+            this.tabGalvanica.Location = new System.Drawing.Point(4, 24);
+            this.tabGalvanica.Name = "tabGalvanica";
+            this.tabGalvanica.Padding = new System.Windows.Forms.Padding(3);
+            this.tabGalvanica.Size = new System.Drawing.Size(900, 393);
+            this.tabGalvanica.TabIndex = 1;
+            this.tabGalvanica.Text = "Dettaglio processo galvanico";
+            this.tabGalvanica.UseVisualStyleBackColor = true;
+            // 
+            // txtProcessoGalvanico
+            // 
+            this.txtProcessoGalvanico.Location = new System.Drawing.Point(6, 23);
+            this.txtProcessoGalvanico.Name = "txtProcessoGalvanico";
+            this.txtProcessoGalvanico.ReadOnly = true;
+            this.txtProcessoGalvanico.Size = new System.Drawing.Size(247, 21);
+            this.txtProcessoGalvanico.TabIndex = 16;
+            // 
+            // dgvProcessoGalvanico
+            // 
+            this.dgvProcessoGalvanico.AllowUserToAddRows = false;
+            this.dgvProcessoGalvanico.AllowUserToDeleteRows = false;
+            this.dgvProcessoGalvanico.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvProcessoGalvanico.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProcessoGalvanico.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Vasca,
+            this.Materiale,
+            this.SpessoreMinimo,
+            this.SpessoreNominale,
+            this.SpessoreMassimo});
+            this.dgvProcessoGalvanico.Location = new System.Drawing.Point(295, 5);
+            this.dgvProcessoGalvanico.Name = "dgvProcessoGalvanico";
+            this.dgvProcessoGalvanico.ReadOnly = true;
+            this.dgvProcessoGalvanico.Size = new System.Drawing.Size(595, 383);
+            this.dgvProcessoGalvanico.TabIndex = 15;
+            // 
+            // Vasca
+            // 
+            this.Vasca.HeaderText = "Vasca";
+            this.Vasca.Name = "Vasca";
+            this.Vasca.ReadOnly = true;
+            // 
+            // Materiale
+            // 
+            this.Materiale.HeaderText = "Materiale";
+            this.Materiale.Name = "Materiale";
+            this.Materiale.ReadOnly = true;
+            // 
+            // SpessoreMinimo
+            // 
+            this.SpessoreMinimo.HeaderText = "Spessore minimo";
+            this.SpessoreMinimo.Name = "SpessoreMinimo";
+            this.SpessoreMinimo.ReadOnly = true;
+            // 
+            // SpessoreNominale
+            // 
+            this.SpessoreNominale.HeaderText = "Spessore nominale";
+            this.SpessoreNominale.Name = "SpessoreNominale";
+            this.SpessoreNominale.ReadOnly = true;
+            // 
+            // SpessoreMassimo
+            // 
+            this.SpessoreMassimo.HeaderText = "Spessore massimo";
+            this.SpessoreMassimo.Name = "SpessoreMassimo";
+            this.SpessoreMassimo.ReadOnly = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(11, 5);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(113, 15);
+            this.label11.TabIndex = 13;
+            this.label11.Text = "Processo galvanico";
             // 
             // tabCostiFissi
             // 
@@ -545,124 +740,34 @@
             this.lstCostiFissi.Size = new System.Drawing.Size(292, 329);
             this.lstCostiFissi.TabIndex = 3;
             // 
-            // IdElementoCosto
+            // prodottoFinitoUC1
             // 
-            this.IdElementoCosto.DataPropertyName = "IdElementoCosto";
-            this.IdElementoCosto.Frozen = true;
-            this.IdElementoCosto.HeaderText = "IdElementoCosto";
-            this.IdElementoCosto.Name = "IdElementoCosto";
-            this.IdElementoCosto.Visible = false;
+            this.prodottoFinitoUC1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.prodottoFinitoUC1.Location = new System.Drawing.Point(6, 17);
+            this.prodottoFinitoUC1.Name = "prodottoFinitoUC1";
+            this.prodottoFinitoUC1.Size = new System.Drawing.Size(767, 157);
+            this.prodottoFinitoUC1.TabIndex = 0;
             // 
-            // IncludiPreventivo
+            // tabPage1
             // 
-            this.IncludiPreventivo.DataPropertyName = "IncludiPreventivo";
-            this.IncludiPreventivo.Frozen = true;
-            this.IncludiPreventivo.HeaderText = "Includi";
-            this.IncludiPreventivo.Name = "IncludiPreventivo";
+            this.tabPage1.Controls.Add(this.dgvCostiGalvanica);
+            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(900, 393);
+            this.tabPage1.TabIndex = 4;
+            this.tabPage1.Text = "Costi galvanica";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // Articolo
+            // dgvCostiGalvanica
             // 
-            this.colElementoArticolo.DataPropertyName = "ElementoPreventivo.Articolo";
-            this.colElementoArticolo.Frozen = true;
-            this.colElementoArticolo.HeaderText = "Articolo";
-            this.colElementoArticolo.MaxInputLength = 30;
-            this.colElementoArticolo.Name = "Articolo";
-            this.colElementoArticolo.ReadOnly = true;
-            // 
-            // Codice
-            // 
-            this.colElementoCodice.DataPropertyName = "ElementoPreventivo.Codice";
-            this.colElementoCodice.Frozen = true;
-            this.colElementoCodice.HeaderText = "Codice";
-            this.colElementoCodice.Name = "Codice";
-            this.colElementoCodice.ReadOnly = true;
-            // 
-            // Descrizione
-            // 
-            this.colElementoDescrizione.DataPropertyName = "ElementoPreventivo.Descrizione";
-            this.colElementoDescrizione.Frozen = true;
-            this.colElementoDescrizione.HeaderText = "Descrizione";
-            this.colElementoDescrizione.Name = "Descrizione";
-            this.colElementoDescrizione.ReadOnly = true;
-            // 
-            // Reparto
-            // 
-            this.colElementoReparto.DataPropertyName = "ElementoPreventivo.Reparto";
-            this.colElementoReparto.Frozen = true;
-            this.colElementoReparto.HeaderText = "Reparto";
-            this.colElementoReparto.Name = "Reparto";
-            this.colElementoReparto.ReadOnly = true;
-            // 
-            // Gruppo
-            // 
-            this.colElementoGruppo.HeaderText = "ElementoPreventivo.Gruppo";
-            this.colElementoGruppo.Name = "Gruppo";
-            this.colElementoGruppo.ReadOnly = true;
-            // 
-            // Peso
-            // 
-            this.colElementoPeso.DataPropertyName = "ElementoPreventivo.Peso";
-            this.colElementoPeso.FillWeight = 80F;
-            this.colElementoPeso.HeaderText = "Peso";
-            this.colElementoPeso.Name = "Peso";
-            this.colElementoPeso.ReadOnly = true;
-            this.colElementoPeso.Width = 80;
-            // 
-            // Superficie
-            // 
-            this.colElementoSuperficie.DataPropertyName = "ElementoPreventivo.Superficie";
-            this.colElementoSuperficie.FillWeight = 80F;
-            this.colElementoSuperficie.HeaderText = "Superficie";
-            this.colElementoSuperficie.Name = "Superficie";
-            this.colElementoSuperficie.ReadOnly = true;
-            this.colElementoSuperficie.Width = 80;
-            // 
-            // Quantita
-            // 
-            this.colElementoQuantita.DataPropertyName = "ElementoPreventivo.Quantita";
-            this.colElementoQuantita.FillWeight = 80F;
-            this.colElementoQuantita.HeaderText = "Quantità";
-            this.colElementoQuantita.Name = "Quantita";
-            this.colElementoQuantita.ReadOnly = true;
-            this.colElementoQuantita.Width = 80;
-            // 
-            // PezziOrari
-            // 
-            this.colElementoPezziOrari.DataPropertyName = "PezziOrari";
-            this.colElementoPezziOrari.FillWeight = 80F;
-            this.colElementoPezziOrari.HeaderText = "Pezzi orari";
-            this.colElementoPezziOrari.Name = "PezziOrari";
-            this.colElementoPezziOrari.Width = 80;
-            // 
-            // Costo
-            // 
-            this.colElementoCostoOrario.DataPropertyName = "CostoOrario";
-            this.colElementoCostoOrario.HeaderText = "CostoHH";
-            this.colElementoCostoOrario.Name = "Costo";
-            // 
-            // Ricarico
-            // 
-            this.colElementoRicarico.DataPropertyName = "Ricarico";
-            this.colElementoRicarico.HeaderText = "Ricarico";
-            this.colElementoRicarico.Name = "Ricarico";
-            // 
-            // colCostoArticolo
-            // 
-            this.colCostoArticolo.DataPropertyName = "CostoArticolo";
-            this.colCostoArticolo.HeaderText = "Costo articolo";
-            this.colCostoArticolo.Name = "colCostoArticolo";
-            // 
-            // colCostoFigli
-            // 
-            this.colCostoFigli.DataPropertyName = "CostoFigli";
-            this.colCostoFigli.HeaderText = "Costo figli";
-            this.colCostoFigli.Name = "colCostoFigli";
-            // 
-            // colCostoCompleto
-            // 
-            this.colCostoCompleto.DataPropertyName = "CostoCompleto";
-            this.colCostoCompleto.HeaderText = "Costo completo";
-            this.colCostoCompleto.Name = "colCostoCompleto";
+            this.dgvCostiGalvanica.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCostiGalvanica.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCostiGalvanica.Location = new System.Drawing.Point(3, 3);
+            this.dgvCostiGalvanica.Name = "dgvCostiGalvanica";
+            this.dgvCostiGalvanica.Size = new System.Drawing.Size(894, 387);
+            this.dgvCostiGalvanica.TabIndex = 0;
             // 
             // CostoFrm
             // 
@@ -685,9 +790,14 @@
             this.tabTotali.ResumeLayout(false);
             this.tabTotali.PerformLayout();
             this.tabDettaglio.ResumeLayout(false);
+            this.tabGalvanica.ResumeLayout(false);
+            this.tabGalvanica.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProcessoGalvanico)).EndInit();
             this.tabCostiFissi.ResumeLayout(false);
             this.tabCostiFissi.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCostiFissi)).EndInit();
+            this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCostiGalvanica)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -705,7 +815,7 @@
         private System.Windows.Forms.DataGridView dgvElementi;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabDettaglio;
-        private System.Windows.Forms.TabPage tabGriglie;
+        private System.Windows.Forms.TabPage tabGalvanica;
         private System.Windows.Forms.TabPage tabCostiFissi;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -752,5 +862,26 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCostoArticolo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCostoFigli;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCostoCompleto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Articolo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Codice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Descrizione;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Reparto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Gruppo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Peso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Superficie;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Quantita;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PezziOrari;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Costo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ricarico;
+        private System.Windows.Forms.TextBox txtProcessoGalvanico;
+        private System.Windows.Forms.DataGridView dgvProcessoGalvanico;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Vasca;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Materiale;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SpessoreMinimo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SpessoreNominale;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SpessoreMassimo;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.DataGridView dgvCostiGalvanica;
     }
 }

@@ -439,8 +439,8 @@ namespace MPIntranet.Business
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
             {
                 bAnagrafica.FillColori(_ds, false);
-                string codice="";
-                foreach(AnagraficaDS.COLORIRow coloreRow in _ds.COLORI.OrderBy(x=>x.IDCOLORE))
+                string codice = "";
+                foreach (AnagraficaDS.COLORIRow coloreRow in _ds.COLORI.OrderBy(x => x.IDCOLORE))
                 {
                     codice = CreaCodiceColoreSuccessivo(codice);
                     coloreRow.CODICE = codice;
@@ -1200,6 +1200,111 @@ namespace MPIntranet.Business
                 }
             }
         }
+
+        public List<PrezzoMaterialeModel> CreaListaPrezzoMaterialeModel()
+        {
+            List<PrezzoMaterialeModel> lista = new List<PrezzoMaterialeModel>();
+
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillPrezziMateriali(_ds, true);
+                foreach (AnagraficaDS.PREZZIMATERIALERow prezzoMateriale in _ds.PREZZIMATERIALE)
+                {
+                    lista.Add(creaPrezzoMaterialeModel(prezzoMateriale));
+                }
+            }
+            return lista;
+        }
+
+
+        private PrezzoMaterialeModel creaPrezzoMaterialeModel(AnagraficaDS.PREZZIMATERIALERow prezzoMateriale)
+        {
+            if (prezzoMateriale == null) return null;
+            PrezzoMaterialeModel r = new PrezzoMaterialeModel()
+            {
+                IdPrezzoMateriale = prezzoMateriale.IDMATERIALE,
+                DataInizioValidita = prezzoMateriale.DATAINIZIOVALIDITA,
+                Nota = prezzoMateriale.IsNOTANull() ? string.Empty : prezzoMateriale.NOTA,
+                Prezzo = prezzoMateriale.PREZZO,
+                Materiale = creaMaterialeModel(prezzoMateriale.IDMATERIALE),
+            };
+            return r;
+        }
+
+        public string CreaPrezzoMateriale(decimal prezzo, string nota, decimal idMateriale, DateTime dataInizioValidita, string account)
+        {
+            nota = correggiString(nota, 100);
+            dataInizioValidita = new DateTime(dataInizioValidita.Year, dataInizioValidita.Month, dataInizioValidita.Day);
+
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillPrezziMateriali(_ds, true);
+                AnagraficaDS.PREZZIMATERIALERow b = _ds.PREZZIMATERIALE.Where(x => x.IDMATERIALE == idMateriale && x.DATAINIZIOVALIDITA == dataInizioValidita).FirstOrDefault();
+                if (b != null)
+                    return "Un prezzo per questo materiale con questa data inizio validità esiste già";
+
+                AnagraficaDS.PREZZIMATERIALERow br = _ds.PREZZIMATERIALE.NewPREZZIMATERIALERow();
+                br.DATAINIZIOVALIDITA = dataInizioValidita;
+                br.IDMATERIALE = idMateriale;
+                br.NOTA = nota;
+                br.PREZZO = prezzo;
+
+                br.CANCELLATO = SiNo.No;
+                br.DATAMODIFICA = DateTime.Now;
+                br.UTENTEMODIFICA = account;
+
+                _ds.PREZZIMATERIALE.AddPREZZIMATERIALERow(br);
+                bAnagrafica.UpdateTable(_ds, _ds.PREZZIMATERIALE.TableName);
+
+                return string.Empty;
+            }
+        }
+
+        public string ModificaPrezzoMateriale(decimal idPrezzoMateriale, string nota, decimal prezzo, DateTime dataInizioValidita, string account)
+        {
+            nota = correggiString(nota, 100);
+            dataInizioValidita = new DateTime(dataInizioValidita.Year, dataInizioValidita.Month, dataInizioValidita.Day);
+
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillPrezziMateriali(_ds, true);
+                AnagraficaDS.PREZZIMATERIALERow prezzoMateriale = _ds.PREZZIMATERIALE.Where(x => x.IDPREZZOMATERIALE== idPrezzoMateriale).FirstOrDefault();
+                if (prezzoMateriale == null) return "Impossibile modificare il prezzo materiale";
+
+                AnagraficaDS.PREZZIMATERIALERow b = _ds.PREZZIMATERIALE.Where(x => x.IDMATERIALE == prezzoMateriale.IDMATERIALE && x.DATAINIZIOVALIDITA == dataInizioValidita && x.IDPREZZOMATERIALE != idPrezzoMateriale).FirstOrDefault();
+                if (b != null)
+                    return "Un prezzo per questo materiale con questa data inizio validità esiste già";
+
+                prezzoMateriale.PREZZO = prezzo;
+                prezzoMateriale.NOTA = nota;
+                prezzoMateriale.DATAINIZIOVALIDITA = dataInizioValidita;
+
+                prezzoMateriale.DATAMODIFICA = DateTime.Now;
+                prezzoMateriale.UTENTEMODIFICA = account;
+
+                bAnagrafica.UpdateTable(_ds, _ds.PREZZIMATERIALE.TableName);
+
+                return string.Empty;
+            }
+        }
+
+        public void CancellaPrezzoMateriale(decimal idPrezzoMateriale, string account)
+        {
+            using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
+            {
+                bAnagrafica.FillPrezziMateriali(_ds, true);
+                AnagraficaDS.PREZZIMATERIALERow prezziMateriale = _ds.PREZZIMATERIALE.Where(x => x.IDPREZZOMATERIALE== idPrezzoMateriale).FirstOrDefault();
+                if (prezziMateriale != null)
+                {
+                    prezziMateriale.CANCELLATO = SiNo.Si;
+                    prezziMateriale.DATAMODIFICA = DateTime.Now;
+                    prezziMateriale.UTENTEMODIFICA = account;
+
+                    bAnagrafica.UpdateTable(_ds, _ds.PREZZIMATERIALE.TableName);
+                }
+            }
+        }
+
 
         public List<MateriaPrimaModel> CreaListaMateriaPrimaModel()
         {

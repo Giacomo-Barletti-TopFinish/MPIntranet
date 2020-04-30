@@ -398,6 +398,38 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="PREZZIMATERIALE" msprop:Generator_TableClassName="PREZZIMATERIALEDataTable" msprop:Generator_TableVarName="tablePREZZIMATERIALE" msprop:Generator_RowChangedName="PREZZIMATERIALERowChanged" msprop:Generator_TablePropName="PREZZIMATERIALE" msprop:Generator_RowDeletingName="PREZZIMATERIALERowDeleting" msprop:Generator_RowChangingName="PREZZIMATERIALERowChanging" msprop:Generator_RowEvHandlerName="PREZZIMATERIALERowChangeEventHandler" msprop:Generator_RowDeletedName="PREZZIMATERIALERowDeleted" msprop:Generator_RowClassName="PREZZIMATERIALERow" msprop:Generator_UserTableName="PREZZIMATERIALE" msprop:Generator_RowEvArgName="PREZZIMATERIALERowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDPREZZOMATERIALE" msprop:Generator_ColumnVarNameInTable="columnIDPREZZOMATERIALE" msprop:Generator_ColumnPropNameInRow="IDPREZZOMATERIALE" msprop:Generator_ColumnPropNameInTable="IDPREZZOMATERIALEColumn" msprop:Generator_UserColumnName="IDPREZZOMATERIALE" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DATAINIZIOVALIDITA" msprop:Generator_ColumnVarNameInTable="columnDATAINIZIOVALIDITA" msprop:Generator_ColumnPropNameInRow="DATAINIZIOVALIDITA" msprop:Generator_ColumnPropNameInTable="DATAINIZIOVALIDITAColumn" msprop:Generator_UserColumnName="DATAINIZIOVALIDITA" type="xs:dateTime" />
+              <xs:element name="PREZZO" msprop:Generator_ColumnVarNameInTable="columnPREZZO" msprop:Generator_ColumnPropNameInRow="PREZZO" msprop:Generator_ColumnPropNameInTable="PREZZOColumn" msprop:Generator_UserColumnName="PREZZO" type="xs:decimal" />
+              <xs:element name="NOTA" msprop:Generator_ColumnVarNameInTable="columnNOTA" msprop:Generator_ColumnPropNameInRow="NOTA" msprop:Generator_ColumnPropNameInTable="NOTAColumn" msprop:Generator_UserColumnName="NOTA" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IDMATERIALE" msprop:Generator_ColumnVarNameInTable="columnIDMATERIALE" msprop:Generator_ColumnPropNameInRow="IDMATERIALE" msprop:Generator_ColumnPropNameInTable="IDMATERIALEColumn" msprop:Generator_UserColumnName="IDMATERIALE" type="xs:decimal" />
+              <xs:element name="CANCELLATO" msprop:Generator_ColumnVarNameInTable="columnCANCELLATO" msprop:Generator_ColumnPropNameInRow="CANCELLATO" msprop:Generator_ColumnPropNameInTable="CANCELLATOColumn" msprop:Generator_UserColumnName="CANCELLATO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATAMODIFICA" msprop:Generator_ColumnVarNameInTable="columnDATAMODIFICA" msprop:Generator_ColumnPropNameInRow="DATAMODIFICA" msprop:Generator_ColumnPropNameInTable="DATAMODIFICAColumn" msprop:Generator_UserColumnName="DATAMODIFICA" type="xs:dateTime" />
+              <xs:element name="UTENTEMODIFICA" msprop:Generator_ColumnVarNameInTable="columnUTENTEMODIFICA" msprop:Generator_ColumnPropNameInRow="UTENTEMODIFICA" msprop:Generator_ColumnPropNameInTable="UTENTEMODIFICAColumn" msprop:Generator_UserColumnName="UTENTEMODIFICA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>

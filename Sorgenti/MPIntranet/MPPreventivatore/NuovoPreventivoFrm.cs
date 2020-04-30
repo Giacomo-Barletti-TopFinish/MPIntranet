@@ -67,6 +67,9 @@ namespace MPPreventivatore
             PreventivoModel preventivoCreato = lista.Where(x => x.ProdottoFinito.IdProdottoFinito == _prodottoFinito.IdProdottoFinito && x.Versione == _versioni).FirstOrDefault();
 
             PreventivoModel preventivoDaCopiare = (PreventivoModel)ddlVersionePrecedente.SelectedItem;
+
+            a.ModificaPreventivo(preventivoCreato.IdPreventivo, preventivoCreato.Processo.IdProcesso, preventivoCreato.Nota, _account);
+
             List<ElementoPreventivoModel> elementiDaCopiare = a.CreaListaElementoPreventivoModel(preventivoDaCopiare.IdPreventivo);
             List<ElementoPreventivoModel> elementiNuovi = new List<ElementoPreventivoModel>();
             foreach (ElementoPreventivoModel elemento in elementiDaCopiare.Where(x => x.IdPadre == -1))

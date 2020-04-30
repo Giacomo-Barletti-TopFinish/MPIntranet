@@ -29,6 +29,19 @@ namespace MPIntranet.DataAccess.Anagrafica
                 da.Fill(ds.BRAND);
             }
         }
+        public void FillPrezziMateriali(AnagraficaDS ds, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM PREZZIMATERIALE ";
+            if (soloNonCancellati)
+                select += "WHERE CANCELLATO = 'N'";
+
+            select += "ORDER BY DATAINIZIOVALIDITA DESC";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.PREZZIMATERIALE);
+            }
+        }
 
         public void FillReparti(AnagraficaDS ds, bool soloNonCancellati)
         {

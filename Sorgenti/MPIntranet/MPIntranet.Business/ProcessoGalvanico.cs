@@ -84,8 +84,8 @@ namespace MPIntranet.Business
             {
                 using (ArticoloBusiness bArticolo = new ArticoloBusiness())
                 {
-                    bArticolo.GetProcesso(_ds, idProcesso,true);
-                    bArticolo.GetFasiProcesso(_ds, idProcesso, true);
+                    bArticolo.GetProcesso(_ds, idProcesso,false);
+                    bArticolo.GetFasiProcesso(_ds, idProcesso, false);
                 }
                 processo = _ds.PROCESSI.Where(x => x.IDPROCESSO == idProcesso).FirstOrDefault();
                 if (processo == null) return null;

@@ -257,5 +257,19 @@ namespace MPPreventivatore
                 MostraEccezione("Errore in crea costi fissi", ex);
             }
         }
+
+        private void prezziMaterialiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                PrezziMaterialiFrm form = new PrezziMaterialiFrm();
+                form.MdiParent = this;
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione("Errore in crea prezzi maeriali", ex);
+            }
+        }
     }
 }

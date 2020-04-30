@@ -100,6 +100,12 @@
     <Compile Include="PreventivoFrm.Designer.cs">
       <DependentUpon>PreventivoFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PrezziMaterialiFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrezziMaterialiFrm.Designer.cs">
+      <DependentUpon>PrezziMaterialiFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProdottoFinitoFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,6 +177,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PreventivoFrm.resx">
       <DependentUpon>PreventivoFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrezziMaterialiFrm.resx">
+      <DependentUpon>PrezziMaterialiFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProdottoFinitoFrm.resx">
       <DependentUpon>ProdottoFinitoFrm.cs</DependentUpon>

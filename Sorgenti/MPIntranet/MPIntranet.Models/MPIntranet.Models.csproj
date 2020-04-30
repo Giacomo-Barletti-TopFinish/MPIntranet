@@ -48,6 +48,7 @@
     <Compile Include="Anagrafica\BrandModel.cs" />
     <Compile Include="Anagrafica\ColoreModel.cs" />
     <Compile Include="Anagrafica\MateriaPrimaModel.cs" />
+    <Compile Include="Anagrafica\PrezzoMaterialeModel.cs" />
     <Compile Include="Anagrafica\RepartoModel.cs" />
     <Compile Include="Anagrafica\CostoFissoModel.cs" />
     <Compile Include="Anagrafica\TipoDocumento.cs" />

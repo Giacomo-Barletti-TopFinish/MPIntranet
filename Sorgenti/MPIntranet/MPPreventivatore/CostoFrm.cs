@@ -64,6 +64,40 @@ namespace MPPreventivatore
             caricaGrigliaElementiPreventivo();
             caricaGrigliaCostiFissi();
             this.Text = prodottoFinitoUC1.ProdottoFinitoModel.ToString();
+            caricaProcessoGalvanico();
+        }
+
+        private void calcolaCostiGalvanica()
+        {
+            List<ElementoCostoPreventivoModel> elementiGalvanici = _elementiCostoPreventivo.Where(x => x.ElementoPreventivo.Reparto.Codice == "GALVA").ToList();
+            if(elementiGalvanici.Count==0)
+            {
+                MessageBox.Show("Non sono presenti elementi associati al reparto galvanica GALVA", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+
+        }
+
+        private void caricaProcessoGalvanico()
+        {
+            dgvProcessoGalvanico.Rows.Clear();
+            if (_preventivoSelezionato.Processo == null)
+            {
+                MessageBox.Show("In questo preventivo non è stato definito il processo galvanico", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            txtProcessoGalvanico.Text = _preventivoSelezionato.Processo.ToString();
+
+            dgvProcessoGalvanico.Rows.Clear();
+            foreach (FaseProcessoModel fase in _preventivoSelezionato.Processo.Fasi)
+            {
+                int indiceRiga = dgvProcessoGalvanico.Rows.Add(new object[] { fase.Vasca.DescrizioneBreve, fase.Vasca.Materiale.Descrizione, fase.SpessoreMinimo, fase.SpessoreNominale, fase.SpessoreMassimo });
+                if (fase.Vasca.Materiale.Prezioso == SiNo.Si)
+                    dgvProcessoGalvanico.Rows[indiceRiga].DefaultCellStyle.ForeColor = Color.Green;
+            }
+            calcolaCostiGalvanica();
         }
 
         private void caricaListaCostiFissi()
@@ -85,6 +119,12 @@ namespace MPPreventivatore
             _sourceCostiFissi.ResetBindings(false);
             dgvCostiFissi.Update();
             dgvCostiFissi.Refresh();
+        }
+        private void RefreshGridViewElementi()
+        {
+            _source.ResetBindings(false);
+            dgvElementi.Update();
+            dgvElementi.Refresh();
         }
         private void caricaGrigliaCostiFissi()
         {
@@ -267,6 +307,15 @@ namespace MPPreventivatore
             RepartoModel reparto = elementoCosto.ElementoPreventivo.Reparto;
             dgvElementi.Rows[e.RowIndex].Cells[5].Value = elementoCosto.ElementoPreventivo.Reparto;
 
+         
+            if(reparto.Codice=="GALVA")
+            {
+                dgvElementi.Rows[e.RowIndex].Cells[10].ReadOnly = true;
+                dgvElementi.Rows[e.RowIndex].Cells[11].ReadOnly = true;
+                dgvElementi.Rows[e.RowIndex].Cells[12].ReadOnly = true;
+
+            }
+
             if (reparto == null) return;
             GruppoRepartoModel grm = _gruppiRepartiModel.Where(x => x.Reparto.IdReparto == reparto.IdReparto).FirstOrDefault();
             if (grm == null) return;
@@ -379,18 +428,31 @@ namespace MPPreventivatore
                 _disabilitaEdit = true;
                 if (e.RowIndex > -1)
                 {
-                    if (e.ColumnIndex == colElementoPezziOrari.Index || e.ColumnIndex == colElementoCostoOrario.Index)
+
+
+                    decimal idElementoCosto = (decimal)dgvElementi.Rows[e.RowIndex].Cells[0].Value;
+                    ElementoCostoPreventivoModel elementoCosto = _elementiCostoPreventivo.Where(x => x.IdElementoCosto == idElementoCosto).FirstOrDefault();
+                    if (elementoCosto == null) return;
+
+                    RepartoModel reparto = elementoCosto.ElementoPreventivo.Reparto;
+                    if(reparto.Codice=="GALVA")
+                    {
+                        return;
+                    }
+                    if (e.ColumnIndex == 10 || e.ColumnIndex == 11 || e.ColumnIndex == 12)
                     {
 
-                        decimal margine = (decimal)dgvElementi.Rows[e.RowIndex].Cells[colElementoRicarico.Index].Value;
-                        decimal costoOrario = (decimal)dgvElementi.Rows[e.RowIndex].Cells[colElementoCostoOrario.Index].Value;
-                        decimal pezziOrari = (decimal)dgvElementi.Rows[e.RowIndex].Cells[colElementoPezziOrari.Index].Value;
+                        decimal margine = (decimal)dgvElementi.Rows[e.RowIndex].Cells[12].Value;
+                        decimal costoOrario = (decimal)dgvElementi.Rows[e.RowIndex].Cells[11].Value;
+                        decimal pezziOrari = (decimal)dgvElementi.Rows[e.RowIndex].Cells[10].Value;
                         decimal costoPezzo = pezziOrari == 0 ? 0 : costoOrario / pezziOrari;
                         decimal costoArticolo = (1 + margine / 100) * costoPezzo;
                         dgvElementi.Rows[e.RowIndex].Cells[colCostoArticolo.Index].Value = costoArticolo;
 
+                        MPIntranet.Business.Articolo.RicalcolaCostoFigliListaElementiCostoPreventiviModel(_elementiCostoPreventivo);
+
+                        RefreshGridViewElementi();
                     }
-                    MPIntranet.Business.Articolo.RicalcolaCostoFigliListaElementiCostoPreventiviModel(_elementiCostoPreventivo);
                 }
 
             }

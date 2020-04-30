@@ -20,6 +20,12 @@ namespace MPIntranet.DataAccess.Anagrafica
         }
 
         [DataContext]
+        public void FillPrezziMateriali(AnagraficaDS ds, bool soloNonCancellati)
+        {
+            AnagraficaAdapter a = new AnagraficaAdapter(DbConnection, DbTransaction);
+            a.FillPrezziMateriali(ds, soloNonCancellati);
+        }
+        [DataContext]
         public void FillReparti(AnagraficaDS ds, bool soloNonCancellati)
         {
             AnagraficaAdapter a = new AnagraficaAdapter(DbConnection, DbTransaction);
