@@ -280,6 +280,19 @@ namespace MPIntranet.Business
             return _ds.PREVENTIVI.Where(x => x.IDPREVENTIVO == idPreventivo).FirstOrDefault();
         }
 
+        private ArticoloDS.PREVENTIVICOSTIRow EstraiPreventivoCosto(decimal idPreventivoCosto)
+        {
+            ArticoloDS.PREVENTIVICOSTIRow preventivoCosto = _ds.PREVENTIVICOSTI.Where(x => x.IDPREVENTIVOCOSTO == idPreventivoCosto).FirstOrDefault();
+            if (preventivoCosto == null)
+            {
+                using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+                {
+                    bArticolo.EstraiPreventivoCosto(_ds, idPreventivoCosto);
+                }
+            }
+            return _ds.PREVENTIVICOSTI.Where(x => x.IDPREVENTIVOCOSTO == idPreventivoCosto).FirstOrDefault();
+        }
+
         private ArticoloDS.GRUPPIRow EstraiGruppo(decimal idGruppo)
         {
             ArticoloDS.GRUPPIRow gruppo = _ds.GRUPPI.Where(x => x.IDGRUPPO == idGruppo).FirstOrDefault();
@@ -551,7 +564,36 @@ namespace MPIntranet.Business
 
             }
         }
+        public List<CostoFissoPreventivoModel> CreaListaCostoFissoPreventivoModel(decimal idPreventivoCosti)
+        {
+            _ds.COSTIFISSIPREVENTIVO.Clear();
+            List<CostoFissoPreventivoModel> costiFissiPreventivo = new List<CostoFissoPreventivoModel>();
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                bArticolo.FillCostiFissiPreventivo(_ds, idPreventivoCosti, true);
 
+                foreach (ArticoloDS.COSTIFISSIPREVENTIVORow costoFissoPreventivo in _ds.COSTIFISSIPREVENTIVO)
+                    costiFissiPreventivo.Add(creaCostoFissoPreventivoModel(costoFissoPreventivo));
+
+                return costiFissiPreventivo;
+            }
+        }
+
+        private CostoFissoPreventivoModel creaCostoFissoPreventivoModel(ArticoloDS.COSTIFISSIPREVENTIVORow costiFissiPreventivo)
+        {
+
+            if (costiFissiPreventivo == null) return null;
+
+            CostoFissoPreventivoModel costoFissoPreventivoModel = new CostoFissoPreventivoModel();
+            costoFissoPreventivoModel.IdCostoFissoPreventivo = costiFissiPreventivo.IDCOSTIFISSIPREVENTIVO;
+            costoFissoPreventivoModel.IdPreventivoCosto = costiFissiPreventivo.IDPREVENTIVOCOSTO;
+            costoFissoPreventivoModel.Codice = costiFissiPreventivo.CODICE;
+            costoFissoPreventivoModel.Descrizione = costiFissiPreventivo.IsDESCRIZIONENull() ? string.Empty : costiFissiPreventivo.DESCRIZIONE;
+            costoFissoPreventivoModel.Ricarico = costiFissiPreventivo.RICARICO;
+            costoFissoPreventivoModel.Costo = costiFissiPreventivo.COSTO;
+            costoFissoPreventivoModel.Prezzo= costiFissiPreventivo.PREZZO;
+            return costoFissoPreventivoModel;
+        }
         public List<PreventivoCostoModel> CreaListaPreventivoCostiModel(decimal idPreventivo)
         {
             _ds.PREVENTIVICOSTI.Clear();
@@ -702,6 +744,27 @@ namespace MPIntranet.Business
             return "Preventivo modificato correttamente";
         }
 
+        public string ModificaPreventivoCosto(decimal idPreventivoCosti, string nota, decimal prezzo, decimal margine, decimal costo, string account)
+        {
+
+            nota = correggiString(nota, 200);
+
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                ArticoloDS.PREVENTIVICOSTIRow preventivoCosto = EstraiPreventivoCosto(idPreventivoCosti);
+                preventivoCosto.NOTA = nota;
+                preventivoCosto.PREZZO = prezzo;
+                preventivoCosto.MARGINE= margine;
+                preventivoCosto.COSTO= costo;
+
+                preventivoCosto.CANCELLATO = SiNo.No;
+                preventivoCosto.DATAMODIFICA = DateTime.Now;
+                preventivoCosto.UTENTEMODIFICA = account;
+
+                bArticolo.UpdateTable(_ds.PREVENTIVICOSTI.TableName, _ds);
+            }
+            return "Preventivo costo modificato correttamente";
+        }
         public string ModificaGruppo(decimal idGruppo, string codice, string descizione, string colore, string account)
         {
             codice = correggiString(codice, 10);
@@ -1022,6 +1085,61 @@ namespace MPIntranet.Business
                 bArticolo.UpdateTable(_ds.ELEMENTICOSTIPREVENTIVI.TableName, _ds);
         }
 
+        public void SalvaElementiCostoFisso(List<CostoFissoPreventivoModel> elementiCostiFissiPreventivo, decimal idPreventivoCosto, string account)
+        {
+            _ds.COSTIFISSIPREVENTIVO.Clear();
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+            {
+                bArticolo.FillCostiFissiPreventivo(_ds, idPreventivoCosto,true);
+            }
+
+            foreach (ArticoloDS.COSTIFISSIPREVENTIVORow elementoDatabase in _ds.COSTIFISSIPREVENTIVO.Where(x => x.IDPREVENTIVOCOSTO == idPreventivoCosto))
+            {
+                CostoFissoPreventivoModel elementoCostoFissoPreventivoModel = elementiCostiFissiPreventivo.Where(x => x.IdCostoFissoPreventivo == elementoDatabase.IDCOSTIFISSIPREVENTIVO).FirstOrDefault();
+                if (elementoCostoFissoPreventivoModel == null)
+                {
+                    elementoDatabase.CANCELLATO = SiNo.Si;
+                }
+                else
+                {
+                    elementoDatabase.CODICE = elementoCostoFissoPreventivoModel.Codice;
+                    elementoDatabase.DESCRIZIONE = elementoCostoFissoPreventivoModel.Descrizione;
+
+                    elementoDatabase.RICARICO = elementoCostoFissoPreventivoModel.Ricarico;
+                    elementoDatabase.COSTO = elementoCostoFissoPreventivoModel.Costo;
+                    elementoDatabase.PREZZO = elementoCostoFissoPreventivoModel.Prezzo;
+                }
+
+                elementoDatabase.DATAMODIFICA = DateTime.Now;
+                elementoDatabase.UTENTEMODIFICA = account;
+            }
+
+            foreach (CostoFissoPreventivoModel elementCostoPreventivo in elementiCostiFissiPreventivo)
+            {
+                if (!_ds.COSTIFISSIPREVENTIVO.Any(x => x.IDCOSTIFISSIPREVENTIVO == elementCostoPreventivo.IdCostoFissoPreventivo))
+                {
+                    ArticoloDS.COSTIFISSIPREVENTIVORow elementoNuovo = _ds.COSTIFISSIPREVENTIVO.NewCOSTIFISSIPREVENTIVORow();
+                    elementoNuovo.IDCOSTIFISSIPREVENTIVO= elementCostoPreventivo.IdCostoFissoPreventivo;
+                    elementoNuovo.IDPREVENTIVOCOSTO = idPreventivoCosto;
+                    elementoNuovo.CODICE = elementCostoPreventivo.Codice;
+                    elementoNuovo.DESCRIZIONE = elementCostoPreventivo.Descrizione;
+
+                    elementoNuovo.RICARICO = elementCostoPreventivo.Ricarico;
+                    elementoNuovo.COSTO = elementCostoPreventivo.Costo;
+                    elementoNuovo.PREZZO = elementCostoPreventivo.Prezzo;
+
+                    elementoNuovo.CANCELLATO = SiNo.No;
+                    elementoNuovo.DATAMODIFICA = DateTime.Now;
+                    elementoNuovo.UTENTEMODIFICA = account;
+
+                    _ds.COSTIFISSIPREVENTIVO.AddCOSTIFISSIPREVENTIVORow(elementoNuovo);
+                }
+            }
+
+            using (ArticoloBusiness bArticolo = new ArticoloBusiness())
+                bArticolo.UpdateTable(_ds.COSTIFISSIPREVENTIVO.TableName, _ds);
+        }
+
         public static void RicalcolaCostoFigliListaElementiCostoPreventiviModel(List<ElementoCostoPreventivoModel> lista)
         {
             List<ElementoCostoPreventivoModel> radici = lista.Where(x => x.ElementoPreventivo.IdPadre == -1).ToList();
@@ -1035,13 +1153,13 @@ namespace MPIntranet.Business
         {
             decimal costoFigli = 0;
             foreach (ElementoCostoPreventivoModel figlio in lista.Where(x => x.ElementoPreventivo.IdPadre == elementoPadre.ElementoPreventivo.IdElementoPreventivo))
-                costoFigli += calcolaCostoCompleto(lista,figlio) * figlio.ElementoPreventivo.Quantita;
+                costoFigli += calcolaCostoCompleto(lista, figlio) * figlio.ElementoPreventivo.Quantita;
 
             elementoPadre.CostoFigli = costoFigli;
             elementoPadre.CostoCompleto = elementoPadre.CostoArticolo + costoFigli;
             return elementoPadre.CostoCompleto;
         }
-       
+
 
         public string CreaGruppo(string codice, string descrizione, decimal idbrand, string colore, string account)
         {

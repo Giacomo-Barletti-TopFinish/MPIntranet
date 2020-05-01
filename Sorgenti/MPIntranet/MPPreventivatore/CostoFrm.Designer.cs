@@ -60,10 +60,20 @@
             this.colCostoCompleto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabTotali = new System.Windows.Forms.TabPage();
+            this.nuPrezzoProdottoFinito = new System.Windows.Forms.NumericUpDown();
+            this.nuCostoProdottoFinito = new System.Windows.Forms.NumericUpDown();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtCostoProdottoFinito = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.txtTotaliCostiFissiPrezo = new System.Windows.Forms.TextBox();
+            this.txtMargineProdottoFinito = new System.Windows.Forms.TextBox();
             this.txtTotaliCostiFissiMargine = new System.Windows.Forms.TextBox();
             this.txtTotaliCostiFissiCosto = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -101,6 +111,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvElementi)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabTotali.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nuPrezzoProdottoFinito)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nuCostoProdottoFinito)).BeginInit();
             this.tabDettaglio.SuspendLayout();
             this.tabGalvanica.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProcessoGalvanico)).BeginInit();
@@ -409,10 +421,20 @@
             // 
             // tabTotali
             // 
+            this.tabTotali.Controls.Add(this.nuPrezzoProdottoFinito);
+            this.tabTotali.Controls.Add(this.nuCostoProdottoFinito);
+            this.tabTotali.Controls.Add(this.label14);
+            this.tabTotali.Controls.Add(this.label15);
+            this.tabTotali.Controls.Add(this.label16);
+            this.tabTotali.Controls.Add(this.label17);
+            this.tabTotali.Controls.Add(this.label12);
+            this.tabTotali.Controls.Add(this.txtCostoProdottoFinito);
+            this.tabTotali.Controls.Add(this.label13);
             this.tabTotali.Controls.Add(this.label7);
             this.tabTotali.Controls.Add(this.label8);
             this.tabTotali.Controls.Add(this.label9);
             this.tabTotali.Controls.Add(this.txtTotaliCostiFissiPrezo);
+            this.tabTotali.Controls.Add(this.txtMargineProdottoFinito);
             this.tabTotali.Controls.Add(this.txtTotaliCostiFissiMargine);
             this.tabTotali.Controls.Add(this.txtTotaliCostiFissiCosto);
             this.tabTotali.Controls.Add(this.label10);
@@ -424,11 +446,96 @@
             this.tabTotali.Text = "Totali";
             this.tabTotali.UseVisualStyleBackColor = true;
             // 
+            // nuPrezzoProdottoFinito
+            // 
+            this.nuPrezzoProdottoFinito.Location = new System.Drawing.Point(276, 163);
+            this.nuPrezzoProdottoFinito.Name = "nuPrezzoProdottoFinito";
+            this.nuPrezzoProdottoFinito.Size = new System.Drawing.Size(100, 21);
+            this.nuPrezzoProdottoFinito.TabIndex = 27;
+            this.nuPrezzoProdottoFinito.ValueChanged += new System.EventHandler(this.nuCostoProdottoFinito_ValueChanged);
+            // 
+            // nuCostoProdottoFinito
+            // 
+            this.nuCostoProdottoFinito.Location = new System.Drawing.Point(167, 163);
+            this.nuCostoProdottoFinito.Name = "nuCostoProdottoFinito";
+            this.nuCostoProdottoFinito.Size = new System.Drawing.Size(100, 21);
+            this.nuCostoProdottoFinito.TabIndex = 26;
+            this.nuCostoProdottoFinito.ValueChanged += new System.EventHandler(this.nuCostoProdottoFinito_ValueChanged);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(383, 141);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(60, 15);
+            this.label14.TabIndex = 25;
+            this.label14.Text = "Margine";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(277, 141);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(51, 15);
+            this.label15.TabIndex = 24;
+            this.label15.Text = "Prezzo";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(168, 141);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(43, 15);
+            this.label16.TabIndex = 23;
+            this.label16.Text = "Costo";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(31, 166);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(107, 15);
+            this.label17.TabIndex = 19;
+            this.label17.Text = "Totali costi fissi";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(168, 82);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(43, 15);
+            this.label12.TabIndex = 18;
+            this.label12.Text = "Costo";
+            // 
+            // txtCostoProdottoFinito
+            // 
+            this.txtCostoProdottoFinito.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCostoProdottoFinito.Location = new System.Drawing.Point(167, 99);
+            this.txtCostoProdottoFinito.Name = "txtCostoProdottoFinito";
+            this.txtCostoProdottoFinito.ReadOnly = true;
+            this.txtCostoProdottoFinito.Size = new System.Drawing.Size(100, 21);
+            this.txtCostoProdottoFinito.TabIndex = 17;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(31, 102);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(97, 15);
+            this.label13.TabIndex = 16;
+            this.label13.Text = "Prodotto finito";
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(380, 118);
+            this.label7.Location = new System.Drawing.Point(383, 27);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(60, 15);
             this.label7.TabIndex = 15;
@@ -438,7 +545,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(274, 118);
+            this.label8.Location = new System.Drawing.Point(277, 27);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(51, 15);
             this.label8.TabIndex = 14;
@@ -448,7 +555,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(165, 118);
+            this.label9.Location = new System.Drawing.Point(168, 27);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(43, 15);
             this.label9.TabIndex = 13;
@@ -457,16 +564,25 @@
             // txtTotaliCostiFissiPrezo
             // 
             this.txtTotaliCostiFissiPrezo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotaliCostiFissiPrezo.Location = new System.Drawing.Point(273, 135);
+            this.txtTotaliCostiFissiPrezo.Location = new System.Drawing.Point(276, 44);
             this.txtTotaliCostiFissiPrezo.Name = "txtTotaliCostiFissiPrezo";
             this.txtTotaliCostiFissiPrezo.ReadOnly = true;
             this.txtTotaliCostiFissiPrezo.Size = new System.Drawing.Size(100, 21);
             this.txtTotaliCostiFissiPrezo.TabIndex = 10;
             // 
+            // txtMargineProdottoFinito
+            // 
+            this.txtMargineProdottoFinito.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMargineProdottoFinito.Location = new System.Drawing.Point(386, 162);
+            this.txtMargineProdottoFinito.Name = "txtMargineProdottoFinito";
+            this.txtMargineProdottoFinito.ReadOnly = true;
+            this.txtMargineProdottoFinito.Size = new System.Drawing.Size(100, 21);
+            this.txtMargineProdottoFinito.TabIndex = 11;
+            // 
             // txtTotaliCostiFissiMargine
             // 
             this.txtTotaliCostiFissiMargine.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotaliCostiFissiMargine.Location = new System.Drawing.Point(379, 135);
+            this.txtTotaliCostiFissiMargine.Location = new System.Drawing.Point(382, 44);
             this.txtTotaliCostiFissiMargine.Name = "txtTotaliCostiFissiMargine";
             this.txtTotaliCostiFissiMargine.ReadOnly = true;
             this.txtTotaliCostiFissiMargine.Size = new System.Drawing.Size(100, 21);
@@ -475,7 +591,7 @@
             // txtTotaliCostiFissiCosto
             // 
             this.txtTotaliCostiFissiCosto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotaliCostiFissiCosto.Location = new System.Drawing.Point(164, 135);
+            this.txtTotaliCostiFissiCosto.Location = new System.Drawing.Point(167, 44);
             this.txtTotaliCostiFissiCosto.Name = "txtTotaliCostiFissiCosto";
             this.txtTotaliCostiFissiCosto.ReadOnly = true;
             this.txtTotaliCostiFissiCosto.Size = new System.Drawing.Size(100, 21);
@@ -485,7 +601,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(28, 138);
+            this.label10.Location = new System.Drawing.Point(31, 47);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(107, 15);
             this.label10.TabIndex = 9;
@@ -792,6 +908,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabTotali.ResumeLayout(false);
             this.tabTotali.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nuPrezzoProdottoFinito)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nuCostoProdottoFinito)).EndInit();
             this.tabDettaglio.ResumeLayout(false);
             this.tabGalvanica.ResumeLayout(false);
             this.tabGalvanica.PerformLayout();
@@ -886,5 +1004,15 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.DataGridView dgvCostiGalvanica;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txtCostoProdottoFinito;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.NumericUpDown nuPrezzoProdottoFinito;
+        private System.Windows.Forms.NumericUpDown nuCostoProdottoFinito;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox txtMargineProdottoFinito;
     }
 }

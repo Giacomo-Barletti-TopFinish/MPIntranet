@@ -64,7 +64,7 @@ namespace MPPreventivatore
             caricaGrigliaElementiPreventivo();
             caricaGrigliaCostiFissi();
             this.Text = prodottoFinitoUC1.ProdottoFinitoModel.ToString();
-       
+
         }
 
         private void calcolaCostiGalvanica()
@@ -82,19 +82,19 @@ namespace MPPreventivatore
             List<PrezzoMaterialeModel> prezzi = a.CreaListaPrezzoMaterialeModel();
             foreach (ElementoCostoPreventivoModel elementoGalvanico in elementiGalvanici)
             {
-                
-         
-          
+
+
+
                 decimal dm2 = 0.1M * 0.1M;
                 decimal micron = (1M / 1000) * (1M / 1000);
                 ElementoPreventivoModel elementoPreventivo = elementoGalvanico.ElementoPreventivo;
-               
+
                 ProcessoModel processoGalvanico = _preventivoCostoSelezionato.Preventvo.Processo;
                 decimal costo = 0;
                 foreach (FaseProcessoModel fase in processoGalvanico.Fasi)
                 {
 
-                    if (fase.Vasca.AbilitaStrato )
+                    if (fase.Vasca.AbilitaStrato)
                     {
                         if (fase.Vasca.Materiale.IdMateriale == ElementiVuoti.NessunMateriale) continue;
                         ElementoGrigliaCostoGalvanica elementoCostoGalvanica = new ElementoGrigliaCostoGalvanica();
@@ -106,8 +106,8 @@ namespace MPPreventivatore
                         elementoCostoGalvanica.Spessore = fase.SpessoreNominale;
                         elementoCostoGalvanica.PesoSpecifico = fase.Vasca.Materiale.PesoSpecifico;
 
-                        decimal volumeMetriCubi = (elementoPreventivo.Superficie* dm2) * (fase.SpessoreNominale*micron);
-                        decimal volumeDecimetriCubi = volumeMetriCubi*1000;
+                        decimal volumeMetriCubi = (elementoPreventivo.Superficie * dm2) * (fase.SpessoreNominale * micron);
+                        decimal volumeDecimetriCubi = volumeMetriCubi * 1000;
                         elementoCostoGalvanica.Volume = volumeDecimetriCubi;
                         decimal pesoInKg = volumeDecimetriCubi * fase.Vasca.Materiale.PesoSpecifico;// peso speficifico espresso in kg/dm3
                         decimal pesoInGr = pesoInKg * 1000;
@@ -128,7 +128,7 @@ namespace MPPreventivatore
                     }
                 }
                 elementoGalvanico.CostoOrario = costo;
-                elementoGalvanico.CostoArticolo = costo*(1+elementoGalvanico.Ricarico/100);
+                elementoGalvanico.CostoArticolo = costo * (1 + elementoGalvanico.Ricarico / 100);
 
             }
 
@@ -154,7 +154,7 @@ namespace MPPreventivatore
                 if (fase.Vasca.Materiale.Prezioso == SiNo.Si)
                     dgvProcessoGalvanico.Rows[indiceRiga].DefaultCellStyle.ForeColor = Color.Green;
             }
-            
+
         }
 
         private void caricaListaCostiFissi()
@@ -261,12 +261,15 @@ namespace MPPreventivatore
         private void btnSalva_Click(object sender, EventArgs e)
         {
             if (ddlPreventivi.SelectedIndex == -1) return;
+            MPIntranet.Business.Articolo articolo = new Articolo();
             try
             {
-                //decimal idProcesso = ElementiVuoti.ProcessoGalvanicoVuoto;
-
-                //_articolo.ModificaPreventivo(_preventivoSelezionato.IdPrevenivo, _preventivoSelezionato., txtNota.Text, _utenteConnesso);
-                //_articolo.SalvaElementiPreventivo(_elementiPreventivo, _preventivoSelezionato.IdPrevenivo, _utenteConnesso);
+                decimal costo = nuCostoProdottoFinito.Value;
+                decimal prezzo = nuPrezzoProdottoFinito.Value;
+                decimal margine = prezzo - costo;
+                articolo.ModificaPreventivoCosto(_preventivoCostoSelezionato.IdPreventivoCosto, txtNotaPrevetivoCosto.Text, prezzo, margine, costo, _utenteConnesso);
+                articolo.SalvaElementiCostoPreventivo(_elementiCostoPreventivo, _preventivoCostoSelezionato.IdPreventivoCosto, _utenteConnesso);
+                articolo.SalvaElementiCostoFisso(_costiFissiPreventivoModel, _preventivoCostoSelezionato.IdPreventivoCosto, _utenteConnesso);
             }
             catch (Exception ex)
             {
@@ -403,6 +406,16 @@ namespace MPPreventivatore
             calcolaCostiGalvanica();
             MPIntranet.Business.Articolo.RicalcolaCostoFigliListaElementiCostoPreventiviModel(_elementiCostoPreventivo);
             caricaGrigliaElementiPreventivo();
+            nuCostoProdottoFinito.Value = _preventivoCostoSelezionato.Costo;
+            nuPrezzoProdottoFinito.Value = _preventivoCostoSelezionato.Prezzo;
+            caricaListaCostiFissiPreventivo();
+            RefreshGridViewCostiFissi();
+        }
+
+        private void caricaListaCostiFissiPreventivo()
+        {
+            MPIntranet.Business.Articolo articolo = new Articolo();
+            _costiFissiPreventivoModel = articolo.CreaListaCostoFissoPreventivoModel(_preventivoCostoSelezionato.IdPreventivoCosto);
         }
 
         private void dgvCostiFissi_DragDrop(object sender, DragEventArgs e)
@@ -488,8 +501,6 @@ namespace MPPreventivatore
                 _disabilitaEdit = true;
                 if (e.RowIndex > -1)
                 {
-
-
                     decimal idElementoCosto = (decimal)dgvElementi.Rows[e.RowIndex].Cells[0].Value;
                     ElementoCostoPreventivoModel elementoCosto = _elementiCostoPreventivo.Where(x => x.IdElementoCosto == idElementoCosto).FirstOrDefault();
                     if (elementoCosto == null) return;
@@ -513,6 +524,13 @@ namespace MPPreventivatore
 
                         RefreshGridViewElementi();
                     }
+
+                    List<ElementoCostoPreventivoModel> radici = _elementiCostoPreventivo.Where(x => x.ElementoPreventivo.IdPadre == -1).ToList();
+                    if (radici.Count == 1)
+                    {
+                        ElementoCostoPreventivoModel prodottofinito = radici[0];
+                        txtCostoProdottoFinito.Text = prodottofinito.CostoCompleto.ToString();
+                    }
                 }
 
             }
@@ -520,6 +538,14 @@ namespace MPPreventivatore
             {
                 _disabilitaEdit = false;
             }
+        }
+
+        private void nuCostoProdottoFinito_ValueChanged(object sender, EventArgs e)
+        {
+            decimal costo = nuCostoProdottoFinito.Value;
+            decimal prezzo = nuPrezzoProdottoFinito.Value;
+            decimal margine = prezzo - costo;
+            txtMargineProdottoFinito.Text = margine.ToString();
         }
     }
 

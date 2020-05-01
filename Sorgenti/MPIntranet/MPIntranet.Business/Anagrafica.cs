@@ -1207,7 +1207,6 @@ namespace MPIntranet.Business
 
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
             {
-                _ds.PREZZIMATERIALE.Clear();
                 bAnagrafica.FillPrezziMateriali(_ds, true);
                 foreach (AnagraficaDS.PREZZIMATERIALERow prezzoMateriale in _ds.PREZZIMATERIALE)
                 {
@@ -1223,7 +1222,7 @@ namespace MPIntranet.Business
             if (prezzoMateriale == null) return null;
             PrezzoMaterialeModel r = new PrezzoMaterialeModel()
             {
-                IdPrezzoMateriale = prezzoMateriale.IDPREZZOMATERIALE,
+                IdPrezzoMateriale = prezzoMateriale.IDMATERIALE,
                 DataInizioValidita = prezzoMateriale.DATAINIZIOVALIDITA,
                 Nota = prezzoMateriale.IsNOTANull() ? string.Empty : prezzoMateriale.NOTA,
                 Prezzo = prezzoMateriale.PREZZO,
@@ -1294,12 +1293,12 @@ namespace MPIntranet.Business
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
             {
                 bAnagrafica.FillPrezziMateriali(_ds, true);
-                AnagraficaDS.PREZZIMATERIALERow prezziMateriale = _ds.PREZZIMATERIALE.Where(x => x.IDPREZZOMATERIALE== idPrezzoMateriale).FirstOrDefault();
-                if (prezziMateriale != null)
+                AnagraficaDS.PREZZIMATERIALERow pm = _ds.PREZZIMATERIALE.Where(x => x.IDPREZZOMATERIALE== idPrezzoMateriale).FirstOrDefault();
+                if (pm != null)
                 {
-                    prezziMateriale.CANCELLATO = SiNo.Si;
-                    prezziMateriale.DATAMODIFICA = DateTime.Now;
-                    prezziMateriale.UTENTEMODIFICA = account;
+                    pm.CANCELLATO = SiNo.Si;
+                    pm.DATAMODIFICA = DateTime.Now;
+                    pm.UTENTEMODIFICA = account;
 
                     bAnagrafica.UpdateTable(_ds, _ds.PREZZIMATERIALE.TableName);
                 }

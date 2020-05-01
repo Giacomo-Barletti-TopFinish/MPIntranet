@@ -324,6 +324,17 @@ namespace MPIntranet.DataAccess.Articolo
             }
         }
 
+        public void EstraiPreventivoCosto(ArticoloDS ds, decimal idPreventivoCosto)
+        {
+            string select = @"SELECT * FROM PREVENTIVICOSTI WHERE IDPREVENTIVOCOSTO = $P<IDPREVENTIVOCOSTO> ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDPREVENTIVOCOSTO", DbType.Decimal, idPreventivoCosto);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.PREVENTIVICOSTI);
+            }
+        }
         public void EstraiElementoPreventivo(ArticoloDS ds, decimal idElementoPreventivo)
         {
             string select = @"SELECT * FROM ELEMENTIPREVENTIVO WHERE IDELEMENTOPREVENTIVO = $P<IDELEMENTOPREVENTIVO> ";
@@ -363,6 +374,18 @@ namespace MPIntranet.DataAccess.Articolo
             }
         }
 
+        public void FillCostiFissiPreventivo(ArticoloDS ds, decimal idPreventivoCosti, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM COSTIFISSIPREVENTIVO WHERE IDPREVENTIVOCOSTO = $P<IDPREVENTIVOCOSTO> ";
+            if (soloNonCancellati)
+                select += "AND CANCELLATO = 'N' ";
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDPREVENTIVOCOSTO", DbType.Decimal, idPreventivoCosti);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.COSTIFISSIPREVENTIVO);
+            }
+        }
         public void FillGruppi(ArticoloDS ds, bool soloNonCancellati)
         {
             string select = @"SELECT * FROM GRUPPI ";
