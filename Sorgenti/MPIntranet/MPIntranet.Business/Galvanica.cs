@@ -213,7 +213,7 @@ namespace MPIntranet.Business
                     VascaModel m = new VascaModel()
                     {
                         IdVasca = vasca.IDVASCA,
-                        AbilitaStato = vasca.ABILITASTRATO == SiNo.Si,
+                        AbilitaStrato = vasca.ABILITASTRATO == SiNo.Si,
                         DescrizioneBreve = vasca.DESCRIZIONEBREVE,
                         IdImpianto = vasca.IDIMPIANTO,
                         Descrizione = vasca.DESCRIZIONE,
@@ -246,7 +246,7 @@ namespace MPIntranet.Business
                     VascaModel m = new VascaModel()
                     {
                         IdVasca = vasca.IDVASCA,
-                        AbilitaStato = vasca.ABILITASTRATO == SiNo.Si,
+                        AbilitaStrato = vasca.ABILITASTRATO == SiNo.Si,
                         DescrizioneBreve = vasca.DESCRIZIONEBREVE,
                         IdImpianto = vasca.IDIMPIANTO,
                         Descrizione = vasca.DESCRIZIONE,

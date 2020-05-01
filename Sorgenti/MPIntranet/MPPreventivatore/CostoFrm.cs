@@ -64,19 +64,76 @@ namespace MPPreventivatore
             caricaGrigliaElementiPreventivo();
             caricaGrigliaCostiFissi();
             this.Text = prodottoFinitoUC1.ProdottoFinitoModel.ToString();
-            caricaProcessoGalvanico();
+       
         }
 
         private void calcolaCostiGalvanica()
         {
+            List<ElementoGrigliaCostoGalvanica> elementiCostiGalvanica = new List<ElementoGrigliaCostoGalvanica>();
+
             List<ElementoCostoPreventivoModel> elementiGalvanici = _elementiCostoPreventivo.Where(x => x.ElementoPreventivo.Reparto.Codice == "GALVA").ToList();
-            if(elementiGalvanici.Count==0)
+            if (elementiGalvanici.Count == 0)
             {
                 MessageBox.Show("Non sono presenti elementi associati al reparto galvanica GALVA", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
+            Anagrafica a = new Anagrafica();
+            List<PrezzoMaterialeModel> prezzi = a.CreaListaPrezzoMaterialeModel();
+            foreach (ElementoCostoPreventivoModel elementoGalvanico in elementiGalvanici)
+            {
+                
+         
+          
+                decimal dm2 = 0.1M * 0.1M;
+                decimal micron = (1M / 1000) * (1M / 1000);
+                ElementoPreventivoModel elementoPreventivo = elementoGalvanico.ElementoPreventivo;
+               
+                ProcessoModel processoGalvanico = _preventivoCostoSelezionato.Preventvo.Processo;
+                decimal costo = 0;
+                foreach (FaseProcessoModel fase in processoGalvanico.Fasi)
+                {
 
+                    if (fase.Vasca.AbilitaStrato )
+                    {
+                        if (fase.Vasca.Materiale.IdMateriale == ElementiVuoti.NessunMateriale) continue;
+                        ElementoGrigliaCostoGalvanica elementoCostoGalvanica = new ElementoGrigliaCostoGalvanica();
+                        elementiCostiGalvanica.Add(elementoCostoGalvanica);
+                        elementoCostoGalvanica.Articolo = elementoPreventivo.Articolo;
+                        elementoCostoGalvanica.Elemento = elementoPreventivo.Codice;
+                        elementoCostoGalvanica.Superficie = elementoPreventivo.Superficie;
+                        elementoCostoGalvanica.Materiale = fase.Vasca.Materiale.Descrizione;
+                        elementoCostoGalvanica.Spessore = fase.SpessoreNominale;
+                        elementoCostoGalvanica.PesoSpecifico = fase.Vasca.Materiale.PesoSpecifico;
+
+                        decimal volumeMetriCubi = (elementoPreventivo.Superficie* dm2) * (fase.SpessoreNominale*micron);
+                        decimal volumeDecimetriCubi = volumeMetriCubi*1000;
+                        elementoCostoGalvanica.Volume = volumeDecimetriCubi;
+                        decimal pesoInKg = volumeDecimetriCubi * fase.Vasca.Materiale.PesoSpecifico;// peso speficifico espresso in kg/dm3
+                        decimal pesoInGr = pesoInKg * 1000;
+                        elementoCostoGalvanica.Peso = pesoInGr;
+                        decimal prezzoGrammo = 0;
+                        PrezzoMaterialeModel prezzo = prezzi.Where(x => x.Materiale.IdMateriale == fase.Vasca.Materiale.IdMateriale).FirstOrDefault();
+                        if (prezzo == null)
+                        {
+                            string messaggio = string.Format("Prezzo materiale {0} non presente. Il prezzo sarà pre-impostato a zero", fase.Vasca.Materiale);
+                            MessageBox.Show(messaggio, "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                        else
+                            prezzoGrammo = prezzo.Prezzo;
+                        elementoCostoGalvanica.PrezzoGrammo = prezzoGrammo;
+                        decimal costoFase = Math.Round(prezzoGrammo * pesoInGr, 4);
+                        costo += costoFase;
+                        elementoCostoGalvanica.Costo = costoFase;
+                    }
+                }
+                elementoGalvanico.CostoOrario = costo;
+                elementoGalvanico.CostoArticolo = costo*(1+elementoGalvanico.Ricarico/100);
+
+            }
+
+            dgvCostiGalvanica.DataSource = elementiCostiGalvanica;
+            RefreshGridViewElementi();
         }
 
         private void caricaProcessoGalvanico()
@@ -97,7 +154,7 @@ namespace MPPreventivatore
                 if (fase.Vasca.Materiale.Prezioso == SiNo.Si)
                     dgvProcessoGalvanico.Rows[indiceRiga].DefaultCellStyle.ForeColor = Color.Green;
             }
-            calcolaCostiGalvanica();
+            
         }
 
         private void caricaListaCostiFissi()
@@ -161,7 +218,7 @@ namespace MPPreventivatore
         {
             if (ddlPreventivi.SelectedIndex == -1) return;
             txtNotaPreventivo.Text = _preventivoSelezionato.Nota;
-
+            caricaProcessoGalvanico();
             treeView1.Nodes.Clear();
 
             caricaPreventiviCosti(_preventivoSelezionato.IdPreventivo);
@@ -307,8 +364,8 @@ namespace MPPreventivatore
             RepartoModel reparto = elementoCosto.ElementoPreventivo.Reparto;
             dgvElementi.Rows[e.RowIndex].Cells[5].Value = elementoCosto.ElementoPreventivo.Reparto;
 
-         
-            if(reparto.Codice=="GALVA")
+
+            if (reparto.Codice == "GALVA")
             {
                 dgvElementi.Rows[e.RowIndex].Cells[10].ReadOnly = true;
                 dgvElementi.Rows[e.RowIndex].Cells[11].ReadOnly = true;
@@ -342,6 +399,9 @@ namespace MPPreventivatore
             _elementiCostoPreventivo = articolo.CreaListaElementoCostoPreventivoModel(_preventivoCostoSelezionato.IdPreventivoCosto);
             creaAlberoDistinta(radice);
             treeView1.ExpandAll();
+            caricaProcessoGalvanico();
+            calcolaCostiGalvanica();
+            MPIntranet.Business.Articolo.RicalcolaCostoFigliListaElementiCostoPreventiviModel(_elementiCostoPreventivo);
             caricaGrigliaElementiPreventivo();
         }
 
@@ -435,7 +495,7 @@ namespace MPPreventivatore
                     if (elementoCosto == null) return;
 
                     RepartoModel reparto = elementoCosto.ElementoPreventivo.Reparto;
-                    if(reparto.Codice=="GALVA")
+                    if (reparto.Codice == "GALVA")
                     {
                         return;
                     }
@@ -461,5 +521,20 @@ namespace MPPreventivatore
                 _disabilitaEdit = false;
             }
         }
+    }
+
+    public class ElementoGrigliaCostoGalvanica
+    {
+        public string Articolo { get; set; }
+        public string Elemento { get; set; }
+        public string Materiale { get; set; }
+        public decimal Superficie { get; set; }
+        public decimal Spessore { get; set; }
+        public decimal Volume { get; set; }
+        public decimal PesoSpecifico { get; set; }
+        public decimal Peso { get; set; }
+        public decimal PrezzoGrammo { get; set; }
+        public decimal Costo { get; set; }
+
     }
 }

@@ -1207,6 +1207,7 @@ namespace MPIntranet.Business
 
             using (AnagraficaBusiness bAnagrafica = new AnagraficaBusiness())
             {
+                _ds.PREZZIMATERIALE.Clear();
                 bAnagrafica.FillPrezziMateriali(_ds, true);
                 foreach (AnagraficaDS.PREZZIMATERIALERow prezzoMateriale in _ds.PREZZIMATERIALE)
                 {
@@ -1222,7 +1223,7 @@ namespace MPIntranet.Business
             if (prezzoMateriale == null) return null;
             PrezzoMaterialeModel r = new PrezzoMaterialeModel()
             {
-                IdPrezzoMateriale = prezzoMateriale.IDMATERIALE,
+                IdPrezzoMateriale = prezzoMateriale.IDPREZZOMATERIALE,
                 DataInizioValidita = prezzoMateriale.DATAINIZIOVALIDITA,
                 Nota = prezzoMateriale.IsNOTANull() ? string.Empty : prezzoMateriale.NOTA,
                 Prezzo = prezzoMateriale.PREZZO,

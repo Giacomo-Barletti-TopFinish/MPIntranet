@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.prodottoFinitoUC1 = new MPPreventivatore.ProdottoFinitoUC();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -93,7 +94,6 @@
             this.CostoCostoFisso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PressoCostoFisso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lstCostiFissi = new MPPreventivatore.DraggableListbox();
-            this.prodottoFinitoUC1 = new MPPreventivatore.ProdottoFinitoUC();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvCostiGalvanica = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
@@ -121,6 +121,15 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Prodotto finito";
+            // 
+            // prodottoFinitoUC1
+            // 
+            this.prodottoFinitoUC1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.prodottoFinitoUC1.Location = new System.Drawing.Point(6, 17);
+            this.prodottoFinitoUC1.Name = "prodottoFinitoUC1";
+            this.prodottoFinitoUC1.Size = new System.Drawing.Size(767, 157);
+            this.prodottoFinitoUC1.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -740,15 +749,6 @@
             this.lstCostiFissi.Size = new System.Drawing.Size(292, 329);
             this.lstCostiFissi.TabIndex = 3;
             // 
-            // prodottoFinitoUC1
-            // 
-            this.prodottoFinitoUC1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.prodottoFinitoUC1.Location = new System.Drawing.Point(6, 17);
-            this.prodottoFinitoUC1.Name = "prodottoFinitoUC1";
-            this.prodottoFinitoUC1.Size = new System.Drawing.Size(767, 157);
-            this.prodottoFinitoUC1.TabIndex = 0;
-            // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.dgvCostiGalvanica);
@@ -762,10 +762,13 @@
             // 
             // dgvCostiGalvanica
             // 
+            this.dgvCostiGalvanica.AllowUserToAddRows = false;
+            this.dgvCostiGalvanica.AllowUserToDeleteRows = false;
             this.dgvCostiGalvanica.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCostiGalvanica.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCostiGalvanica.Location = new System.Drawing.Point(3, 3);
             this.dgvCostiGalvanica.Name = "dgvCostiGalvanica";
+            this.dgvCostiGalvanica.ReadOnly = true;
             this.dgvCostiGalvanica.Size = new System.Drawing.Size(894, 387);
             this.dgvCostiGalvanica.TabIndex = 0;
             // 
