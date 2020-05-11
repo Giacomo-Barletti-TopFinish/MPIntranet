@@ -39,7 +39,6 @@
             this.ddlPreventivi = new System.Windows.Forms.ComboBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.lstFasi = new System.Windows.Forms.ListBox();
-            this.ddlReparti = new System.Windows.Forms.ComboBox();
             this.dgvElementi = new System.Windows.Forms.DataGridView();
             this.IdEelementoPreventivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Articolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,6 +54,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lstReparti = new System.Windows.Forms.ListBox();
             this.btnAggiorna2 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -188,22 +188,12 @@
             this.lstFasi.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstFasi.FormattingEnabled = true;
             this.lstFasi.ItemHeight = 15;
-            this.lstFasi.Location = new System.Drawing.Point(9, 70);
+            this.lstFasi.Location = new System.Drawing.Point(405, 32);
             this.lstFasi.Name = "lstFasi";
-            this.lstFasi.Size = new System.Drawing.Size(292, 259);
+            this.lstFasi.Size = new System.Drawing.Size(292, 364);
             this.lstFasi.TabIndex = 4;
             this.lstFasi.DragOver += new System.Windows.Forms.DragEventHandler(this.lstFasi_DragOver);
             this.lstFasi.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lstFasi_MouseDown);
-            // 
-            // ddlReparti
-            // 
-            this.ddlReparti.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlReparti.FormattingEnabled = true;
-            this.ddlReparti.Location = new System.Drawing.Point(9, 24);
-            this.ddlReparti.Name = "ddlReparti";
-            this.ddlReparti.Size = new System.Drawing.Size(292, 23);
-            this.ddlReparti.TabIndex = 5;
-            this.ddlReparti.SelectedIndexChanged += new System.EventHandler(this.ddlReparti_SelectedIndexChanged);
             // 
             // dgvElementi
             // 
@@ -351,11 +341,11 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.lstReparti);
             this.tabPage1.Controls.Add(this.btnAggiorna2);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.lstFasi);
-            this.tabPage1.Controls.Add(this.ddlReparti);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -364,10 +354,25 @@
             this.tabPage1.Text = "Fasi";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // lstReparti
+            // 
+            this.lstReparti.AllowDrop = true;
+            this.lstReparti.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstReparti.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstReparti.FormattingEnabled = true;
+            this.lstReparti.ItemHeight = 15;
+            this.lstReparti.Location = new System.Drawing.Point(12, 32);
+            this.lstReparti.Name = "lstReparti";
+            this.lstReparti.Size = new System.Drawing.Size(292, 364);
+            this.lstReparti.TabIndex = 10;
+            this.lstReparti.SelectedIndexChanged += new System.EventHandler(this.lstReparti_SelectedIndexChanged);
+            // 
             // btnAggiorna2
             // 
             this.btnAggiorna2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAggiorna2.Location = new System.Drawing.Point(90, 372);
+            this.btnAggiorna2.Location = new System.Drawing.Point(731, 32);
             this.btnAggiorna2.Name = "btnAggiorna2";
             this.btnAggiorna2.Size = new System.Drawing.Size(129, 27);
             this.btnAggiorna2.TabIndex = 9;
@@ -378,7 +383,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 53);
+            this.label3.Location = new System.Drawing.Point(402, 10);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(30, 15);
             this.label3.TabIndex = 6;
@@ -387,7 +392,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 6);
+            this.label2.Location = new System.Drawing.Point(9, 10);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(51, 15);
             this.label2.TabIndex = 6;
@@ -550,7 +555,6 @@
         private System.Windows.Forms.ComboBox ddlPreventivi;
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.ListBox lstFasi;
-        private System.Windows.Forms.ComboBox ddlReparti;
         private System.Windows.Forms.DataGridView dgvElementi;
         private System.Windows.Forms.ListBox lstMateriePrime;
         private System.Windows.Forms.TabControl tabControl1;
@@ -581,5 +585,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SpessoreMinimo;
         private System.Windows.Forms.DataGridViewTextBoxColumn SpessoreNominale;
         private System.Windows.Forms.DataGridViewTextBoxColumn SpessoreMassimo;
+        private System.Windows.Forms.ListBox lstReparti;
     }
 }

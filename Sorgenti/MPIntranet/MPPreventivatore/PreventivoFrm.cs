@@ -55,7 +55,7 @@ namespace MPPreventivatore
 
             caricaDdlProcessiGalvanici();
             caricaDdlPreventivi();
-            caricaDdlReparti();
+            caricaLstReparti();
             CreaMenuContestualeTreeView();
             caricaMateriePrime();
             caricaGrigliaElementiPreventivo();
@@ -189,11 +189,12 @@ namespace MPPreventivatore
             treeView1.ContextMenu = cm;
 
         }
-        private void caricaDdlReparti()
+
+        private void caricaLstReparti()
         {
-            ddlReparti.Items.AddRange(_anagrafica.CreaListaRepartoModel().ToArray());
-            if (ddlReparti.Items.Count > 0)
-                ddlReparti.SelectedIndex = 0;
+            lstReparti.Items.AddRange(_anagrafica.CreaListaRepartoModel().ToArray());
+            if (lstReparti.Items.Count > 0)
+                lstReparti.SelectedIndex = 0;
         }
 
         private void caricaDdlPreventivi()
@@ -235,6 +236,8 @@ namespace MPPreventivatore
 
         private void ddlPreventivi_SelectedIndexChanged(object sender, EventArgs e)
         {
+            abilitaControlli(true);
+
             if (ddlPreventivi.SelectedIndex == -1) return;
             txtNota.Text = _preventivoSelezionato.Nota;
 
@@ -252,6 +255,19 @@ namespace MPPreventivatore
             creaAlberoDistinta(radice);
             treeView1.ExpandAll();
             caricaGrigliaElementiPreventivo();
+
+            if(_preventivoSelezionato!=null)
+            {
+                if (_articolo.CreaListaPreventivoCostiModel(_preventivoSelezionato.IdPreventivo).Count() > 0)
+                    abilitaControlli(false);
+            }
+        }
+
+        private void abilitaControlli(bool abilita)
+        {
+            treeView1.Enabled = abilita;
+            dgvElementi.Enabled = abilita;
+            ddlProcessiGalvanici.Enabled = abilita;
         }
 
         private void creaAlberoDistinta(TreeNode radice)
@@ -290,15 +306,6 @@ namespace MPPreventivatore
             {
                 MostraEccezione("Errore in modifica prodotto finito", ex);
             }
-        }
-
-        private void ddlReparti_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (ddlReparti.SelectedIndex == -1) return;
-            RepartoModel repartoSelezionato = (RepartoModel)ddlReparti.SelectedItem;
-            List<FaseModel> fasiRepartoSelezionato = _anagrafica.CreaListaFaseModel(repartoSelezionato.IdReparto);
-            lstFasi.Items.Clear();
-            lstFasi.Items.AddRange(fasiRepartoSelezionato.ToArray());
         }
 
         private void caricaMateriePrime()
@@ -632,9 +639,9 @@ namespace MPPreventivatore
         private void btnAggiorna_Click(object sender, EventArgs e)
         {
             caricaMateriePrime();
-            int indice = ddlReparti.SelectedIndex;
-            caricaDdlReparti();
-            ddlReparti.SelectedIndex = indice;
+            int indice = lstReparti.SelectedIndex;
+            caricaLstReparti();
+            lstReparti.SelectedIndex = indice;
         }
 
         private void ddlProcessiGalvanici_SelectedIndexChanged(object sender, EventArgs e)
@@ -652,6 +659,15 @@ namespace MPPreventivatore
                     dgvProcessoGalvanico.Rows[indiceRiga].DefaultCellStyle.ForeColor = Color.Green;
             }
 
+        }
+
+        private void lstReparti_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstReparti.SelectedIndex == -1) return;
+            RepartoModel repartoSelezionato = (RepartoModel)lstReparti.SelectedItem;
+            List<FaseModel> fasiRepartoSelezionato = _anagrafica.CreaListaFaseModel(repartoSelezionato.IdReparto);
+            lstFasi.Items.Clear();
+            lstFasi.Items.AddRange(fasiRepartoSelezionato.ToArray());
         }
     }
 }

@@ -591,7 +591,7 @@ namespace MPIntranet.Business
             costoFissoPreventivoModel.Descrizione = costiFissiPreventivo.IsDESCRIZIONENull() ? string.Empty : costiFissiPreventivo.DESCRIZIONE;
             costoFissoPreventivoModel.Ricarico = costiFissiPreventivo.RICARICO;
             costoFissoPreventivoModel.Costo = costiFissiPreventivo.COSTO;
-            costoFissoPreventivoModel.Prezzo= costiFissiPreventivo.PREZZO;
+            costoFissoPreventivoModel.Prezzo = costiFissiPreventivo.PREZZO;
             return costoFissoPreventivoModel;
         }
         public List<PreventivoCostoModel> CreaListaPreventivoCostiModel(decimal idPreventivo)
@@ -754,8 +754,8 @@ namespace MPIntranet.Business
                 ArticoloDS.PREVENTIVICOSTIRow preventivoCosto = EstraiPreventivoCosto(idPreventivoCosti);
                 preventivoCosto.NOTA = nota;
                 preventivoCosto.PREZZO = prezzo;
-                preventivoCosto.MARGINE= margine;
-                preventivoCosto.COSTO= costo;
+                preventivoCosto.MARGINE = margine;
+                preventivoCosto.COSTO = costo;
 
                 preventivoCosto.CANCELLATO = SiNo.No;
                 preventivoCosto.DATAMODIFICA = DateTime.Now;
@@ -1090,7 +1090,7 @@ namespace MPIntranet.Business
             _ds.COSTIFISSIPREVENTIVO.Clear();
             using (ArticoloBusiness bArticolo = new ArticoloBusiness())
             {
-                bArticolo.FillCostiFissiPreventivo(_ds, idPreventivoCosto,true);
+                bArticolo.FillCostiFissiPreventivo(_ds, idPreventivoCosto, true);
             }
 
             foreach (ArticoloDS.COSTIFISSIPREVENTIVORow elementoDatabase in _ds.COSTIFISSIPREVENTIVO.Where(x => x.IDPREVENTIVOCOSTO == idPreventivoCosto))
@@ -1119,7 +1119,7 @@ namespace MPIntranet.Business
                 if (!_ds.COSTIFISSIPREVENTIVO.Any(x => x.IDCOSTIFISSIPREVENTIVO == elementCostoPreventivo.IdCostoFissoPreventivo))
                 {
                     ArticoloDS.COSTIFISSIPREVENTIVORow elementoNuovo = _ds.COSTIFISSIPREVENTIVO.NewCOSTIFISSIPREVENTIVORow();
-                    elementoNuovo.IDCOSTIFISSIPREVENTIVO= elementCostoPreventivo.IdCostoFissoPreventivo;
+                    elementoNuovo.IDCOSTIFISSIPREVENTIVO = elementCostoPreventivo.IdCostoFissoPreventivo;
                     elementoNuovo.IDPREVENTIVOCOSTO = idPreventivoCosto;
                     elementoNuovo.CODICE = elementCostoPreventivo.Codice;
                     elementoNuovo.DESCRIZIONE = elementCostoPreventivo.Descrizione;
@@ -1156,7 +1156,11 @@ namespace MPIntranet.Business
                 costoFigli += calcolaCostoCompleto(lista, figlio) * figlio.ElementoPreventivo.Quantita;
 
             elementoPadre.CostoFigli = costoFigli;
-            elementoPadre.CostoCompleto = elementoPadre.CostoArticolo + costoFigli;
+            if (elementoPadre.IncludiPreventivo)
+                elementoPadre.CostoCompleto = elementoPadre.CostoArticolo + costoFigli;
+            else
+                elementoPadre.CostoCompleto = costoFigli;
+
             return elementoPadre.CostoCompleto;
         }
 
