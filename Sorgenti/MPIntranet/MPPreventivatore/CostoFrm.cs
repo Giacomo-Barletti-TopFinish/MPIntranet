@@ -71,7 +71,7 @@ namespace MPPreventivatore
         {
             List<ElementoGrigliaCostoGalvanica> elementiCostiGalvanica = new List<ElementoGrigliaCostoGalvanica>();
 
-            List<ElementoCostoPreventivoModel> elementiGalvanici = _elementiCostoPreventivo.Where(x => x.ElementoPreventivo.Reparto.Codice == "GALVA").ToList();
+            List<ElementoCostoPreventivoModel> elementiGalvanici = _elementiCostoPreventivo.Where(x =>x.ElementoPreventivo.Reparto!=null && x.ElementoPreventivo.Reparto.Codice == "GALVA").ToList();
             if (elementiGalvanici.Count == 0)
             {
                 MessageBox.Show("Non sono presenti elementi associati al reparto galvanica GALVA", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);

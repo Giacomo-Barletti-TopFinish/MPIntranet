@@ -160,7 +160,8 @@ namespace MPPreventivatore
             try
             {
                 CreaProdottoFinitoFrm form = new CreaProdottoFinitoFrm();
-                form.ShowDialog();
+                form.MdiParent = this.MdiParent;
+                form.Show();
             }
             catch (Exception ex)
             {
