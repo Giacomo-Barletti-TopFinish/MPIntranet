@@ -945,7 +945,7 @@
         private System.Windows.Forms.Button btnAggiorna_costiFissi;
         private System.Windows.Forms.DataGridView dgvCostiFissi;
         private System.Windows.Forms.TabPage tabTotali;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdEelementoPreventivo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdElementoPreventivo;
         private DraggableListbox lstCostiFissi;
         private System.Windows.Forms.TextBox txtCostiFissiPrezzo;
         private System.Windows.Forms.TextBox txtCostiFissiRicarico;

@@ -50,6 +50,7 @@
     <Compile Include="Manutenzione.cs" />
     <Compile Include="ProcessoGalvanico.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MPInranet.Common\MPIntranet.Common.csproj">
