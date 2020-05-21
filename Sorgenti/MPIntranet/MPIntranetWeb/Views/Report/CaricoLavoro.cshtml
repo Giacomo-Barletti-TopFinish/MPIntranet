@@ -22,7 +22,7 @@
 
 <label class="text-red input-sm" id="lblMessage"></label>
 <br />
-<div class="col-md-12" id="divCaricoLavoro">
+<div class="col-md-12" id="divCaricoLavoro"></div>
 
     <script language="javascript" type="text/javascript">
     $(function ()
@@ -38,5 +38,28 @@
 
         function caricaDati()
         {
+            var idreparto = $('#ddlReparti').val();
+            if (idreparto == null || idreparto == '')
+                idreparto = '@MPIntranet.Entities.ElementiVuoti.TuttiReparti.ToString()';
+
+         var url = '@Url.Action("CaricaCaricoReparto", "Report")';
+        $.ajax({
+            url: url,
+            data: {
+                idReparto: idreparto
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divCaricoLavoro').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
         }
     </script>

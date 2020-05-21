@@ -16,16 +16,14 @@ namespace MPIntranet.DataAccess.Report
          base(connection, transaction)
         { }
 
-        public void FillReport(ReportDS ds, bool soloNonCancellati)
+        public void FillODL_APERTI(ReportDS ds)
         {
             string select = @"select * from odl_aperti where datamovfase > to_date('31/12/2019','dd/mm/yyyy') ";
-            if (soloNonCancellati)
-                select += "WHERE CANCELLATO = 'N' ";
 
-            select += "ORDER BY RIFERIMENTI";
+            select += "ORDER BY datamovfase";
             using (DbDataAdapter da = BuildDataAdapter(select))
             {
-              //  da.Fill(ds.REPORT);
+                da.Fill(ds.ODL_APERTI);
             }
         }
     }

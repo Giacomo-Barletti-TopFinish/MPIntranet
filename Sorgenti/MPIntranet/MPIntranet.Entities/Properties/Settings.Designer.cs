@@ -42,5 +42,15 @@ namespace MPIntranet.Entities.Properties {
                 return ((string)(this["ConnectionString1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=RVL;User ID=ITUSER;Password=ituserpwd;Unicode=True")]
+        public string ConnectionString2 {
+            get {
+                return ((string)(this["ConnectionString2"]));
+            }
+        }
     }
 }

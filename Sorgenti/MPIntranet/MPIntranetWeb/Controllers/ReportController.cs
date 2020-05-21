@@ -25,5 +25,10 @@ namespace MPIntranetWeb.Controllers
 
             return View();
         }
+
+        public ActionResult CaricaCaricoReparto (decimal idReparto)
+        {
+
+        }
     }
 }
