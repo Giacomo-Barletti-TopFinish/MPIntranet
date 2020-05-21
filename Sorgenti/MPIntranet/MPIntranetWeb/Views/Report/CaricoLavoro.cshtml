@@ -1,0 +1,42 @@
+﻿@using MPIntranet.Models.Common
+@{
+    ViewBag.Title = "Carico lavoro";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+
+
+<div class="content-top">
+    <h2>Carico lavoro</h2>
+</div>
+<div class="row col-lg-6">
+    @Html.Label("Reparti")
+    @Html.DropDownList("ddlReparti", new SelectList(@ViewData["Reparti"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlReparti" })
+</div>
+<div style="display:inline-block; width:50%">
+    <input type="button" onclick="AggiungiNuovo();" class="btn btn-primary" value="Ricerca" />
+</div>
+<div style="display:inline-block; width:50%">
+    <input type="button" onclick="AggiungiNuovo();" class="btn btn-primary" value="Export" />
+</div>
+
+
+<label class="text-red input-sm" id="lblMessage"></label>
+<br />
+<div class="col-md-12" id="divCaricoLavoro">
+
+    <script language="javascript" type="text/javascript">
+    $(function ()
+    {
+        $("#ddlReparti").change(function () {
+            var selectedText = $(this).find("option:selected").text();
+            var selectedValue = $(this).val();
+            caricaDati();
+        });
+
+        $('#ddlReparti').val('@MPIntranet.Entities.ElementiVuoti.TuttiReparti.ToString()').trigger("change");
+    });
+
+        function caricaDati()
+        {
+        }
+    </script>
