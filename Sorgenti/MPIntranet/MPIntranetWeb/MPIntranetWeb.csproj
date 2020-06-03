@@ -133,6 +133,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnagraficaController.cs" />
     <Compile Include="Controllers\ArticoloController.cs" />
+    <Compile Include="Controllers\CaricoLavoroModel.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\DocumentiController.cs" />
     <Compile Include="Controllers\ErrorPageController.cs" />
@@ -450,6 +451,7 @@
     <Content Include="Views\Galvanica\Telai.cshtml" />
     <Content Include="Views\Galvanica\CaricaTelaiPartial.cshtml" />
     <Content Include="Views\Report\CaricoLavoro.cshtml" />
+    <Content Include="Views\Report\CaricaCaricoLavoroPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

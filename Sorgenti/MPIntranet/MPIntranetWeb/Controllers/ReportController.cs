@@ -2,6 +2,7 @@
 using MPIntranet.Entities;
 using MPIntranet.Models.Anagrafica;
 using MPIntranet.Models.Common;
+using MPIntranet.Models.Report;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,9 +27,12 @@ namespace MPIntranetWeb.Controllers
             return View();
         }
 
-        public ActionResult CaricaCaricoReparto (decimal idReparto)
+        public ActionResult CaricaCaricoReparto (int idReparto)
         {
+            Report r = new Report();
+            List<CaricoRepartoModel> lista = r.CreaListaCaricoReparto(idReparto);
 
+            return PartialView("CaricaCaricoLavoroPartial", lista);
         }
     }
 }

@@ -130,7 +130,7 @@ namespace MPIntranet.Models.Report
                 ConstructCell("Apertodaduegiorni", CellValues.String, 2);
                 ConstructCell("Nota", CellValues.String, 2);
                 ConstructCell("Appoggio", CellValues.String, 2);
-                
+
                 // Insert the header row to the Sheet Data
                 sheetData.AppendChild(row);
 
@@ -153,7 +153,7 @@ namespace MPIntranet.Models.Report
                     ConstructCell(odl_aperto.DATAMOVFASE.ToShortDateString(), CellValues.String, 1),
                     ConstructCell(odl_aperto.QTA.ToString(), CellValues.String, 1),
                     ConstructCell(odl_aperto.QTADATER.ToString(), CellValues.Number, 1),
-                   
+
 
                     sheetData.AppendChild(row));
                 }

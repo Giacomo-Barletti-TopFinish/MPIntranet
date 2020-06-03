@@ -45,5 +45,6 @@ namespace MPIntranet.Business
             caricoRepartoModel.Qtadater = odl_aperto.IsQTADATERNull() ? 0: odl_aperto.QTADATER;
             return caricoRepartoModel;
         }
+
     }
 }
