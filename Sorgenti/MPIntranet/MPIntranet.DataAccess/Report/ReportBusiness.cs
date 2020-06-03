@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.DebuggerVisualizers;
+﻿//using Microsoft.VisualStudio.DebuggerVisualizers;
 using MPIntranet.DataAccess.Core;
 using MPIntranet.Entities;
 using System;

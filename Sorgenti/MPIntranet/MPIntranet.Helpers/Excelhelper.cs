@@ -134,7 +134,7 @@ namespace MPIntranet.Models.Report
                 // Insert the header row to the Sheet Data
                 sheetData.AppendChild(row);
 
-                foreach (ReportDS.ODL_APERTIRow odl_aperto in _ds.ODL_APERTI)
+                foreach (ReportDS.ODL_APERTIRow odl_aperto in ds.ODL_APERTI)
                 {
                     row = new Row();
 
