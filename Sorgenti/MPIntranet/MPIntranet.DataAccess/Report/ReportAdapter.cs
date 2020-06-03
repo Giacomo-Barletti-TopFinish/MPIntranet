@@ -18,7 +18,7 @@ namespace MPIntranet.DataAccess.Report
 
         public void FillODL_APERTI(ReportDS ds)
         {
-            string select = @"select * from odl_aperti where datamovfase > to_date('31/12/2019','dd/mm/yyyy') ";
+            string select = @"select * from ituser.odl_aperti where datamovfase > to_date('31/12/2019','dd/mm/yyyy') ";
 
             select += "ORDER BY datamovfase";
             using (DbDataAdapter da = BuildDataAdapter(select))

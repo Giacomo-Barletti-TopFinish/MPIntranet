@@ -450,6 +450,7 @@
     <Content Include="Views\Galvanica\Telai.cshtml" />
     <Content Include="Views\Galvanica\CaricaTelaiPartial.cshtml" />
     <Content Include="Views\Report\CaricoLavoro.cshtml" />
+    <Content Include="Views\Report\CaricoLavoroPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

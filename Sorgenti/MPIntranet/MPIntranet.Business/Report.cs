@@ -12,7 +12,7 @@ namespace MPIntranet.Business
     public class Report
     {
         private ReportDS _ds = new ReportDS();
-        public List<CaricoRepartoModel> CreaListaCaricoReparto(int idReparto)
+        public List<CaricoRepartoModel> CreaListaCaricoReparto(decimal idReparto)
         {
             List<CaricoRepartoModel> caricoLavoro = new List<CaricoRepartoModel>();
 
