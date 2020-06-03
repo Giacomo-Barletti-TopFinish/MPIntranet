@@ -271,7 +271,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1144, 490);
             this.tableLayoutPanel1.TabIndex = 69;
-            this.tableLayoutPanel1.DoubleClick += new System.EventHandler(this.tableLayoutPanel1_DoubleClick);
             // 
             // GestisciProdottoFinitoFrm
             // 

@@ -171,10 +171,7 @@ namespace MPPreventivatore
         }
 
 
-        private void tableLayoutPanel1_DoubleClick(object sender, EventArgs e)
-        {
-
-        }
+     
     }
 
 }
