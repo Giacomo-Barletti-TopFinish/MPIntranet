@@ -12,10 +12,10 @@
     @Html.Label("Reparti")
     @Html.DropDownList("ddlReparti", new SelectList(@ViewData["Reparti"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlReparti" })
     <div class="col-lg-2">
-        <input type="button" onclick="AggiungiNuovo();" class="btn btn-primary" value="Ricerca" />
+        <input type="button" onclick="caricaDati();" class="btn btn-primary" value="Ricerca" />
     </div>
     <div class="col-lg-2">
-        <input type="button" onclick="AggiungiNuovo();" class="btn btn-primary" value="Export" />
+        <input type="button" onclick="Export();" class="btn btn-primary" value="Export" />
     </div>
 </div>
 
@@ -25,11 +25,11 @@
 <script language="javascript" type="text/javascript">
     $(function ()
     {
-        $("#ddlReparti").change(function () {
-            var selectedText = $(this).find("option:selected").text();
-            var selectedValue = $(this).val();
-            caricaDati();
-        });
+        //$("#ddlReparti").change(function () {
+        //    var selectedText = $(this).find("option:selected").text();
+        //    var selectedValue = $(this).val();
+        //    caricaDati();
+        //});
 
         $('#ddlReparti').val('@MPIntranet.Entities.ElementiVuoti.TuttiReparti.ToString()').trigger("change");
     });
@@ -59,5 +59,41 @@
                 document.close();
             }
         });
-        }
+    }
+
+  function Export()
+    {
+       
+      debugger;
+
+        var url = '@Url.Action("ExportExcel", "Report")';
+        //url = url + '?Anno='+anno;
+        //url = url + '&Settimana=' + settimana;
+        //url = url + '&Macchina='+macchina;
+
+
+        var win = window.open(url, '_blank');
+        win.document.title = "Export";
+        win.focus();
+
+
+    }
+    function CaricaReparto ()
+     {
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 </script>

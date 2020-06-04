@@ -35,5 +35,15 @@ namespace MPIntranetWeb.Controllers
 
             return PartialView("CaricoLavoroPartial", caricoLavoroList);
         }
+
+        public FileResult ExportExcel()
+        {
+
+            Report report = new Report();
+            byte[] fileContents = report.CreaExcelCaricoLavoro(-1);
+
+
+            return File(fileContents, "application/excel", "ExportExcel.Excel.Application");
+        }
     }
 }

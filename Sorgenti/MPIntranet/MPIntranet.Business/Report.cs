@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MPIntranet.Helpers;
 
 namespace MPIntranet.Business
 {
@@ -14,7 +15,7 @@ namespace MPIntranet.Business
         private ReportDS _ds = new ReportDS();
         public List<CaricoRepartoModel> CreaListaCaricoReparto(decimal idReparto)
         {
-            List<CaricoRepartoModel> caricoLavoro = new List<CaricoRepartoModel>();
+            List<CaricoRepartoModel> caricoLavoro = new List<CaricoRepartoModel>(); 
 
             using (ReportBusiness bReport = new ReportBusiness())
                 bReport.FillODL_APERTI(_ds);
@@ -44,6 +45,17 @@ namespace MPIntranet.Business
             caricoRepartoModel.Qta = odl_aperto.IsQTANull() ? 0: odl_aperto.QTA;
             caricoRepartoModel.Qtadater = odl_aperto.IsQTADATERNull() ? 0: odl_aperto.QTADATER;
             return caricoRepartoModel;
+        }
+
+        public byte[] CreaExcelCaricoLavoro(decimal idReparto)
+        {
+
+            using (ReportBusiness bReport = new ReportBusiness())
+                bReport.FillODL_APERTI(_ds);
+
+            ExcelHelper eh = new ExcelHelper();
+            return eh.CaricoLavoroExcel(_ds);
+
         }
 
     }
