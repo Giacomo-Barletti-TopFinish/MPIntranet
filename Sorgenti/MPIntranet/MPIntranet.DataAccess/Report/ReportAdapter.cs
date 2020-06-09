@@ -16,15 +16,37 @@ namespace MPIntranet.DataAccess.Report
          base(connection, transaction)
         { }
 
-        public void FillODL_APERTI(ReportDS ds)
+        public void FillODL_APERTI(ReportDS ds, String reparto)
         {
             string select = @"select * from ituser.odl_aperti where datamovfase > to_date('31/12/2019','dd/mm/yyyy') ";
 
-            select += "ORDER BY datamovfase";
-            using (DbDataAdapter da = BuildDataAdapter(select))
+            if (reparto != ElementiVuoti.TuttiReparti.ToString())
+                select += " AND ragionesoc = $P<REPARTO> ";
+
+            select += " ORDER BY datamovfase";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("REPARTO", DbType.String, reparto);
+
+            using (DbDataAdapter da = BuildDataAdapter(select,ps))
             {
                 da.Fill(ds.ODL_APERTI);
             }
         }
+
+        public List<string> EstraiRepartiODL_Aperti(ReportDS ds)
+        {
+            string query = @"select distinct ragionesoc from ituser.odl_aperti where datamovfase > to_date('31/12/2019','dd/mm/yyyy') ";
+
+            using (DbCommand cmd = BuildCommand(query))
+            using (IDataReader reader = cmd.ExecuteReader())
+            {
+                List<string> returnedData = new List<string>();
+                while (reader.Read())
+                    returnedData.Add(reader.GetString(0));
+                return returnedData;
+            }
+        }
+
     }
 }

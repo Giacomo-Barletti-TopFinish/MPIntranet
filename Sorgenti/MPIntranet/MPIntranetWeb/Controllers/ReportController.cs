@@ -15,10 +15,12 @@ namespace MPIntranetWeb.Controllers
     {
         public ActionResult CaricoLavoro()
         {
-            Anagrafica anagrafica = new Anagrafica();
-            List<RepartoModel> reparti = anagrafica.CreaListaRepartoModel();
 
-            List<MPIntranetListItem> repartiList = reparti.Select(x => new MPIntranetListItem(x.Descrizione, x.IdReparto.ToString())).ToList();
+            Report report = new Report();
+            List<string> reparti = report.EstraiRepartiODL_Aperti();
+
+
+            List<MPIntranetListItem> repartiList = reparti.Select(x => new MPIntranetListItem(x, x)).ToList();
             repartiList.Insert(0, new MPIntranetListItem("** TUTTI I REPARTI **", ElementiVuoti.TuttiReparti.ToString()));
 
             ViewData.Add("Reparti", repartiList);
@@ -27,7 +29,7 @@ namespace MPIntranetWeb.Controllers
             return View();
         }
 
-        public ActionResult CaricaCaricoReparto(decimal idReparto)
+        public ActionResult CaricaCaricoReparto(string idReparto)
         {
             Report report = new Report();
             List<CaricoRepartoModel> caricoLavoroList = report.CreaListaCaricoReparto(idReparto);
@@ -36,14 +38,14 @@ namespace MPIntranetWeb.Controllers
             return PartialView("CaricoLavoroPartial", caricoLavoroList);
         }
 
-        public FileResult ExportExcel()
+        public FileResult ExportExcel(string idReparto)
         {
 
             Report report = new Report();
-            byte[] fileContents = report.CreaExcelCaricoLavoro(-1);
+            byte[] fileContents = report.CreaExcelCaricoLavoro(idReparto);
 
 
-            return File(fileContents, "application/excel", "ExportExcel.Excel.Application");
+            return File(fileContents, "application/excel", "CaricoLavoro.xlsx");
         }
     }
 }

@@ -13,12 +13,14 @@ namespace MPIntranet.Business
     public class Report
     {
         private ReportDS _ds = new ReportDS();
-        public List<CaricoRepartoModel> CreaListaCaricoReparto(decimal idReparto)
+     //   private string reparto;
+
+        public List<CaricoRepartoModel> CreaListaCaricoReparto(string reparto)
         {
             List<CaricoRepartoModel> caricoLavoro = new List<CaricoRepartoModel>(); 
 
             using (ReportBusiness bReport = new ReportBusiness())
-                bReport.FillODL_APERTI(_ds);
+                bReport.FillODL_APERTI(_ds,reparto);
 
             foreach (ReportDS.ODL_APERTIRow odl_aperto in _ds.ODL_APERTI)
                 caricoLavoro.Add(CreaCaricoRepartoModel(odl_aperto));
@@ -47,15 +49,22 @@ namespace MPIntranet.Business
             return caricoRepartoModel;
         }
 
-        public byte[] CreaExcelCaricoLavoro(decimal idReparto)
+        public byte[] CreaExcelCaricoLavoro(string reparto)
         {
 
             using (ReportBusiness bReport = new ReportBusiness())
-                bReport.FillODL_APERTI(_ds);
+                bReport.FillODL_APERTI(_ds,reparto);
 
             ExcelHelper eh = new ExcelHelper();
             return eh.CaricoLavoroExcel(_ds);
 
+        }
+
+        public List<string> EstraiRepartiODL_Aperti()
+        {
+
+            using (ReportBusiness bReport = new ReportBusiness())
+               return bReport.EstraiRepartiODL_Aperti(_ds);
         }
 
     }

@@ -28,13 +28,13 @@
         //$("#ddlReparti").change(function () {
         //    var selectedText = $(this).find("option:selected").text();
         //    var selectedValue = $(this).val();
-        //    caricaDati();
+        //    caricaDati(selectedValue);
         //});
 
-        $('#ddlReparti').val('@MPIntranet.Entities.ElementiVuoti.TuttiReparti.ToString()').trigger("change");
+        @*$('#ddlReparti').val('@MPIntranet.Entities.ElementiVuoti.TuttiReparti.ToString()').trigger("change");*@
     });
 
-        function caricaDati()
+    function caricaDati()
         {
             var idreparto = $('#ddlReparti').val();
             if (idreparto == null || idreparto == '')
@@ -63,13 +63,13 @@
 
   function Export()
     {
-       
-      debugger;
+
+     var idreparto = $('#ddlReparti').val();
+            if (idreparto == null || idreparto == '')
+          idreparto = '@MPIntranet.Entities.ElementiVuoti.TuttiReparti.ToString()';
 
         var url = '@Url.Action("ExportExcel", "Report")';
-        //url = url + '?Anno='+anno;
-        //url = url + '&Settimana=' + settimana;
-        //url = url + '&Macchina='+macchina;
+      url = url + '?idReparto=' + idreparto;
 
 
         var win = window.open(url, '_blank');
