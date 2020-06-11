@@ -1,12 +1,13 @@
-﻿using MPIntanet.ScheduledServices.Properties;
+﻿using MPIntranet.ScheduledServices.Properties;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MPIntanet.ScheduledServices
+namespace MPIntranet.ScheduledServices
 {
     static class Program
     {
@@ -16,9 +17,7 @@ namespace MPIntanet.ScheduledServices
         static void Main()
         {
             log4net.Config.XmlConfigurator.Configure();
-
             ScheduledService scheduledService = new ScheduledService();
-
             if (Settings.Default.StartAsApplication)
             {
                 scheduledService.OnStartAsApplication();

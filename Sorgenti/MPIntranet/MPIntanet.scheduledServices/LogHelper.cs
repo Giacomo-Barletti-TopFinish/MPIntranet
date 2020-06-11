@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MPIntanet.ScheduledServices
+namespace MPIntranet.ScheduledServices
 {
     class LogHelper
     {

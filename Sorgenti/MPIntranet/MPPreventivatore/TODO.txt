@@ -1,0 +1,11 @@
+﻿
+- aggiungere immagini ad ogni elemento della diba, le immagini dovrebbero venire da un copia incolla di immagini, possibilmente da snipping tools
+- aggiungere il processo standard a livello di elemento preventivo
+- aggiungere il calcolo del costo come struttura di derivazione ad oggetti
+- aggiungere il flag per fissare il livello di preventivo nella diba
+- rimuovere i gruppi 
+- il prezzo del prezioso è per cliente
+- c'è da capire come stimare le scoperture
+- c'è da gestire il costo della legatura/slegatura
+- la verniciatura va come costo del personale, il costo delle vernici è pressoche irrisorio, quindi non importa inserire i processi di verniciatura
+

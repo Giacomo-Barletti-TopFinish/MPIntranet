@@ -1,4 +1,4 @@
-﻿namespace MPIntanet.ScheduledServices
+﻿namespace MPIntranet.ScheduledServices
 {
     partial class ProjectInstaller
     {

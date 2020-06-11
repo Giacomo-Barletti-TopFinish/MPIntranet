@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30104.148
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.779
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPIntranetWeb", "MPIntranetWeb\MPIntranetWeb.csproj", "{6AD09EAF-29D6-463E-9186-503ED71EF651}"
 EndProject
@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPIntranet.Common", "MPInra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPIntranet.Helpers", "MPIntranet.Helpers\MPIntranet.Helpers.csproj", "{95B32CAE-042B-4BF3-984E-617B9397C8CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPIntanet.ScheduledServices", "MPIntanet.scheduledServices\MPIntanet.ScheduledServices.csproj", "{AC684276-F824-4945-B545-265F0F1A58F5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPIntranet.ScheduledServices", "MPIntanet.scheduledServices\MPIntranet.ScheduledServices.csproj", "{AC684276-F824-4945-B545-265F0F1A58F5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPIntranet.Servicemanagers", "MPIntranet.Servicemanagers\MPIntranet.Servicemanagers.csproj", "{E9676EF9-C646-4647-B72D-0DF955833A6C}"
 EndProject

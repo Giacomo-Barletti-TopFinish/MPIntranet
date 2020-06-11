@@ -1,4 +1,4 @@
-﻿using MPIntanet.ScheduledServices.Properties;
+﻿using MPIntranet.ScheduledServices.Properties;
 using MPIntranet.Servicemanagers;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MPIntanet.ScheduledServices
+namespace MPIntranet.ScheduledServices
 {
     public partial class ScheduledService : ServiceBase
     {
