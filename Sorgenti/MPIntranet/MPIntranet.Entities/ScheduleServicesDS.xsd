@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ScheduleServicesDS" targetNamespace="http://tempuri.org/ScheduleServicesDS.xsd" xmlns:mstns="http://tempuri.org/ScheduleServicesDS.xsd" xmlns="http://tempuri.org/ScheduleServicesDS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (Settings)" PropertyReference="ApplicationSettings.MPIntranet.Entities.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="System.Data.OracleClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ScheduleServicesDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ScheduleServicesDS" msprop:Generator_UserDSName="ScheduleServicesDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="SCHEDULE" msprop:Generator_TableClassName="SCHEDULEDataTable" msprop:Generator_TableVarName="tableSCHEDULE" msprop:Generator_TablePropName="SCHEDULE" msprop:Generator_RowDeletingName="SCHEDULERowDeleting" msprop:Generator_RowChangingName="SCHEDULERowChanging" msprop:Generator_RowEvHandlerName="SCHEDULERowChangeEventHandler" msprop:Generator_RowDeletedName="SCHEDULERowDeleted" msprop:Generator_UserTableName="SCHEDULE" msprop:Generator_RowChangedName="SCHEDULERowChanged" msprop:Generator_RowEvArgName="SCHEDULERowChangeEvent" msprop:Generator_RowClassName="SCHEDULERow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDSCHEDULE" msprop:Generator_ColumnVarNameInTable="columnIDSCHEDULE" msprop:Generator_ColumnPropNameInRow="IDSCHEDULE" msprop:Generator_ColumnPropNameInTable="IDSCHEDULEColumn" msprop:Generator_UserColumnName="IDSCHEDULE" type="xs:decimal" minOccurs="0" />
+              <xs:element name="SERVIZIO" msprop:Generator_ColumnVarNameInTable="columnSERVIZIO" msprop:Generator_ColumnPropNameInRow="SERVIZIO" msprop:Generator_ColumnPropNameInTable="SERVIZIOColumn" msprop:Generator_UserColumnName="SERVIZIO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATAESECUZIONE" msprop:Generator_ColumnVarNameInTable="columnDATAESECUZIONE" msprop:Generator_ColumnPropNameInRow="DATAESECUZIONE" msprop:Generator_ColumnPropNameInTable="DATAESECUZIONEColumn" msprop:Generator_UserColumnName="DATAESECUZIONE" type="xs:dateTime" />
+              <xs:element name="ORAESECUZIONE" msprop:Generator_ColumnVarNameInTable="columnORAESECUZIONE" msprop:Generator_ColumnPropNameInRow="ORAESECUZIONE" msprop:Generator_ColumnPropNameInTable="ORAESECUZIONEColumn" msprop:Generator_UserColumnName="ORAESECUZIONE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ESEGUITA" msprop:Generator_ColumnVarNameInTable="columnESEGUITA" msprop:Generator_ColumnPropNameInRow="ESEGUITA" msprop:Generator_ColumnPropNameInTable="ESEGUITAColumn" msprop:Generator_UserColumnName="ESEGUITA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FREQUENZA" msprop:Generator_ColumnVarNameInTable="columnFREQUENZA" msprop:Generator_ColumnPropNameInRow="FREQUENZA" msprop:Generator_ColumnPropNameInTable="FREQUENZAColumn" msprop:Generator_UserColumnName="FREQUENZA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -64,12 +64,6 @@
     <Compile Include="MPIntranet.ScheduledServicesInstaller.Designer.cs">
       <DependentUpon>MPIntranet.ScheduledServicesInstaller.cs</DependentUpon>
     </Compile>
-    <Compile Include="ScheduleDS.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ScheduleDS.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="ScheduleAdapter.cs" />
     <Compile Include="ScheduledService.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -87,17 +81,6 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="ScheduleDS.xsc">
-      <DependentUpon>ScheduleDS.xsd</DependentUpon>
-    </None>
-    <None Include="ScheduleDS.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ScheduleDS.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="ScheduleDS.xss">
-      <DependentUpon>ScheduleDS.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

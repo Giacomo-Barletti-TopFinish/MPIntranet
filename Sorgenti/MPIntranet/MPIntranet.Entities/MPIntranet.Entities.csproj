@@ -84,6 +84,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RVLDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="ScheduleServicesDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScheduleServicesDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="SecurityDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -172,6 +177,17 @@
     </None>
     <None Include="RVLDS.xss">
       <DependentUpon>RVLDS.xsd</DependentUpon>
+    </None>
+    <None Include="ScheduleServicesDS.xsc">
+      <DependentUpon>ScheduleServicesDS.xsd</DependentUpon>
+    </None>
+    <None Include="ScheduleServicesDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ScheduleServicesDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="ScheduleServicesDS.xss">
+      <DependentUpon>ScheduleServicesDS.xsd</DependentUpon>
     </None>
     <None Include="SecurityDS.xsc">
       <DependentUpon>SecurityDS.xsd</DependentUpon>
