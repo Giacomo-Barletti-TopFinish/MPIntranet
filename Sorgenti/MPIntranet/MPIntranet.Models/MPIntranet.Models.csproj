@@ -72,6 +72,7 @@
     <Compile Include="Manutenzione\RiferimentiModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\CaricoRepartoModel.cs" />
+    <Compile Include="Schedule\ScheduleModel.cs" />
     <Compile Include="Security\LoginModel.cs" />
     <Compile Include="Security\MenuModel.cs" />
     <Compile Include="Security\TokenModel.cs" />

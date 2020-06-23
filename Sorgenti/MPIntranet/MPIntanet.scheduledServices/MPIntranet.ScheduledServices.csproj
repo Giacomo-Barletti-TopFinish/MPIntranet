@@ -51,7 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MPIntranetAdapterBase.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -89,6 +88,18 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MPInranet.Common\MPIntranet.Common.csproj">
+      <Project>{B6A1BF70-B611-4F84-863E-285C05AD833A}</Project>
+      <Name>MPIntranet.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MPIntranet.Business\MPIntranet.Business.csproj">
+      <Project>{11EE71D3-C51C-4B99-A5C9-431099326DA7}</Project>
+      <Name>MPIntranet.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MPIntranet.Entities\MPIntranet.Entities.csproj">
+      <Project>{055D9B2D-98FD-417E-AB6A-970203561B5C}</Project>
+      <Name>MPIntranet.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MPIntranet.Servicemanagers\MPIntranet.Servicemanagers.csproj">
       <Project>{e9676ef9-c646-4647-b72d-0df955833a6c}</Project>
       <Name>MPIntranet.Servicemanagers</Name>

@@ -73,6 +73,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\ReportAdapter.cs" />
     <Compile Include="Report\ReportBusiness.cs" />
+    <Compile Include="Schedule\ScheduleAdapter.cs" />
+    <Compile Include="Schedule\ScheduleBusiness.cs" />
+    <Compile Include="Security\Schedule\ScheduleAdapter.cs" />
     <Compile Include="Security\SecurityAdapter.cs" />
     <Compile Include="Security\SecurityBusiness.cs" />
   </ItemGroup>

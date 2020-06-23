@@ -1,4 +1,7 @@
-﻿using MPIntranet.ScheduledServices.Properties;
+﻿using MPIntranet.Business;
+using MPIntranet.Common;
+using MPIntranet.Entities;
+using MPIntranet.ScheduledServices.Properties;
 using MPIntranet.Servicemanagers;
 using System;
 using System.Collections.Generic;
@@ -6,6 +9,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading;
@@ -41,12 +45,78 @@ namespace MPIntranet.ScheduledServices
             IsAsync = true;
             try
             {
-                using (GestioneOrdiniCliente gos = new GestioneOrdiniCliente())
+                using (ScheduleServicesDS ds = new ScheduleServicesDS())
                 {
-                    LogHelper.LogInfo("Inizio attivita");
-                    gos.DoIt();
-                    LogHelper.LogInfo("Fine attivita");
+                    Schedule schedule = new Schedule();
+                    LogHelper.LogInfo("inizio attività");
+                    schedule.EstraiSchedule(ds);
+                    foreach (ScheduleServicesDS.SCHEDULERow riga in ds.SCHEDULE)
+                    {
+                        string[] elementi = riga.ORAESECUZIONE.Split(':');
+                        if (elementi.Length < 2 || elementi.Length > 3)
+                        {
+                            LogHelper.LogError(string.Format("Errore nella stringa ora {0} del servizio schedulato id: {1} ", riga.ORAESECUZIONE, riga.IDSCHEDULE));
+                            return;
+                        }
+
+                        int ora = 0;
+                        int minuti = 0;
+                        int secondi = 0;
+
+                        if (!int.TryParse(elementi[0], out ora))
+                        {
+                            LogHelper.LogError(string.Format("Errore nella conversione della stringa ora {0} del servizio schedulato id: {1} ", riga.ORAESECUZIONE, riga.IDSCHEDULE));
+                            return;
+                        }
+                        if (!int.TryParse(elementi[1], out minuti))
+                        {
+                            LogHelper.LogError(string.Format("Errore nella conversione della stringa ora {0} del servizio schedulato id: {1} ", riga.ORAESECUZIONE, riga.IDSCHEDULE));
+                            return;
+                        }
+                        if (elementi.Length == 3)
+                        {
+                            if (!int.TryParse(elementi[2], out secondi))
+                            {
+                                LogHelper.LogError(string.Format("Errore nella conversione della stringa ora {0} del servizio schedulato id: {1} ", riga.ORAESECUZIONE, riga.IDSCHEDULE));
+                                return;
+                            }
+                        }
+
+                        DateTime oraSchedulata = new DateTime(riga.DATAESECUZIONE.Year, riga.DATAESECUZIONE.Month, riga.DATAESECUZIONE.Day, ora, minuti, secondi);
+                        if(oraSchedulata<DateTime.Now)
+                        {
+
+                            riga.ESEGUITA = SiNo.Si;
+                            schedule.RischedulaServizio(riga,ds);
+                            schedule.SalvaModificheSchedulazione(ds);
+
+                            IScheduledTask task = schedule.EstraiScheduledTask(riga);
+                            try
+                            {
+                                task.Esegui();
+                            }
+                            catch (Exception exc)
+                            {
+                                LogHelper.LogError("Errore in task.esegui", exc);
+                            }
+
+
+
+
+
+
+                            
+                        }
+                    }
+
+
                 }
+                //using (GestioneOrdiniCliente gos = new GestioneOrdiniCliente())
+                //{
+                //    LogHelper.LogInfo("Inizio attivita");
+                //    gos.DoIt();
+                //    LogHelper.LogInfo("Fine attivita");
+                //}
             }
             catch (Exception ex)
             {
