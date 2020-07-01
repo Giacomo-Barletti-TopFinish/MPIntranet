@@ -29,6 +29,24 @@ namespace MPIntranetWeb.Controllers
             return View();
         }
 
+        public ActionResult ReportQuantita()
+        {
+
+            Report report = new Report();
+            List<string> quantita = report.EstraiReportQuantita();
+
+
+            List<MPIntranetListItem> quantitaList = quantita.Select(x => new MPIntranetListItem(x, x)).ToList();
+            quantitaList.Insert(0, new MPIntranetListItem("** TUTTI LE QUANTITA **", ElementiVuoti.TutteQuantita.ToString()));
+
+            ViewData.Add("Quantita", quantitaList);
+
+
+            return View();
+        }
+
+
+
         public ActionResult CaricaCaricoReparto(string idReparto)
         {
             Report report = new Report();
@@ -38,10 +56,10 @@ namespace MPIntranetWeb.Controllers
             return PartialView("CaricoLavoroPartial", caricoLavoroList);
         }
 
-        public ActionResult CaricaReportQuantita(string ragionesoc)
+        public ActionResult CaricaReportQuantita( )
         {
             Report report = new Report();
-            List<ReportQuantitaModel> reportQuantitaList = report.CreaListaReportQuantita(ragionesoc);
+            List<ReportQuantitaModel> reportQuantitaList = report.CreaListaReportQuantita();
 
             return PartialView("ReportQuantitaPartial", reportQuantitaList);
         }
@@ -58,11 +76,11 @@ namespace MPIntranetWeb.Controllers
             return File(fileContents, "application/excel", "CaricoLavoro.xlsx");
             }
 
-        public FileResult ExportRQExcel(string ragionesoc)                              //RQ = reportquantita
+        public FileResult ExportRQExcel( )                              //RQ = reportquantita
         {
 
             Report report = new Report();
-            byte[] fileContents = report.CreaExcelReportQuantita(ragionesoc);
+            byte[] fileContents = report.CreaExcelReportQuantita();
 
 
             return File(fileContents, "application/excel", "ReportQuantita.xlsx");

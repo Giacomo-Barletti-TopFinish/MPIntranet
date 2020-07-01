@@ -29,15 +29,15 @@ namespace MPIntranet.Business
 
         }
 
-        public List<ReportQuantitaModel> CreaListaReportQuantita(string ragionesoc)
+        public List<ReportQuantitaModel> CreaListaReportQuantita()
         {
             List<ReportQuantitaModel> reportquantitalist = new List<ReportQuantitaModel>();
 
             using (ReportBusiness bReport = new ReportBusiness())
-                bReport.FillREPORTQUANTITA(_ds, ragionesoc);
+                bReport.FillREPORTQUANTITA(_ds);
 
-            //foreach (ReportDS.REPORTQUANTITARow reportquantita in _ds.REPORTQUANTITA)
-            //    reportquantitalist.Add(ReportQuantitaModel(reportquantita));
+            foreach (ReportDS.REPORTQUANTITARow reportquantita in _ds.REPORTQUANTITA)
+                reportquantitalist.Add(CreaReportQuantitaModel(reportquantita));
 
             return reportquantitalist;
 
@@ -86,10 +86,10 @@ namespace MPIntranet.Business
 
         }
 
-        public byte[] CreaExcelReportQuantita(string ragionesoc)
+        public byte[] CreaExcelReportQuantita()
         {
             using (ReportBusiness bReport = new ReportBusiness())
-                bReport.FillREPORTQUANTITA(_ds, ragionesoc);
+                bReport.FillREPORTQUANTITA(_ds);
 
             ExcelHelper eh = new ExcelHelper();
             return eh.ReportQuantitaExcel(_ds);
@@ -99,8 +99,17 @@ namespace MPIntranet.Business
         {
 
             using (ReportBusiness bReport = new ReportBusiness())
-               return bReport.EstraiRepartiODL_Aperti(_ds);
+               return bReport.EstraiReportQuantita(_ds);
         }
+
+        public List<string> EstraiReportQuantita()
+        {
+
+            using (ReportBusiness bReport = new ReportBusiness())
+                return bReport.EstraiReportQuantita(_ds);
+        }
+
+
 
     }
 }

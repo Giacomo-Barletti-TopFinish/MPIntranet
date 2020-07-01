@@ -10,9 +10,7 @@
 </div>
 <div class="row col-lg-6">
     @Html.Label("Report")
-    @*@Html.DropDownList("ddlReparti", new SelectList(@ViewData["Reparti"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlReparti" })*@
-    @*<div class="col-lg-2">
-        <input type="button" onclick="caricaDati();" class="btn btn-primary" value="Ricerca" />*@
+  
     </div>
     <div class="col-lg-2">
         <input type="button" onclick="Export();" class="btn btn-primary" value="Export" />
@@ -25,13 +23,9 @@
 <script language="javascript" type="text/javascript">
     $(function ()
     {
-        //$("#ddlReparti").change(function () {
-        //    var selectedText = $(this).find("option:selected").text();
-        //    var selectedValue = $(this).val();
-        //    caricaDati(selectedValue);
-        //});
-
-        @*$('#ddlReparti').val('@MPIntranet.Entities.ElementiVuoti.TuttiReparti.ToString()').trigger("change");*@
+       
+      caricaDati();
+     
     });
 
     function caricaDati()
@@ -44,7 +38,7 @@
         $.ajax({
             url: url,
             data: {
-                idReport: idreport
+               
             },
             cache: false,
             type: "POST",
@@ -64,12 +58,12 @@
   function Export()
     {
 
-     var idreparto = $('#ddlReport').val();
+     var idreport = $('#ddlReport').val();
             if (idreport == null || idreport == '')
-          idreparto = '@MPIntranet.Entities.ElementiVuoti.TutteQuantita.ToString()';
+          idreport = '@MPIntranet.Entities.ElementiVuoti.TutteQuantita.ToString()';
 
-        var url = '@Url.Action("ExportExcel", "Report")';
-      url = url + '?idReport=' + idreport;
+        var url = '@Url.Action("ExportRQExcel", "Report")';
+     
 
 
         var win = window.open(url, '_blank');
@@ -79,15 +73,5 @@
 
     }
     
-
-
-
-
-
-
-
-
-
-
 
 </script>

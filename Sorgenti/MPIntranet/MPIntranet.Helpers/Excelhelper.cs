@@ -207,7 +207,7 @@ namespace MPIntranet.Helpers
                 worksheetPart.Worksheet.AppendChild(columns);
 
                 Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
-                Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Report Quantita'" };
+                Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Report" };
 
                 sheets.Append(sheet);
 
@@ -219,10 +219,10 @@ namespace MPIntranet.Helpers
 
                 Row row = new Row();
 
-                row.Append(ConstructCell("Codice Clifo", CellValues.String, 2));
+                row.Append(ConstructCell("Codice", CellValues.String, 2));
                 row.Append(ConstructCell("Ragione Soc", CellValues.String, 2));
-                row.Append(ConstructCell("Somma", CellValues.Number, 2));
-                row.Append(ConstructCell("Percentuale", CellValues.Number, 2));
+                row.Append(ConstructCell("Somma", CellValues.String, 2));
+                row.Append(ConstructCell("Percentuale", CellValues.String, 2));
 
 
                 sheetData.AppendChild(row);
@@ -232,8 +232,8 @@ namespace MPIntranet.Helpers
                     Row rowDati = new Row();
                     rowDati.Append(ConstructCell(reportquantita.CODICECLIFO, CellValues.String, 1));
                     rowDati.Append(ConstructCell(reportquantita.RAGIONESOC, CellValues.String, 1));
-                    rowDati.Append(ConstructCell(reportquantita.SOMMA.ToString(), CellValues.Number, 1));
-                    rowDati.Append(ConstructCell(reportquantita.PERC.ToString(), CellValues.Number, 1));
+                    rowDati.Append(ConstructCell(reportquantita.SOMMA.ToString(), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(reportquantita.PERC.ToString(), CellValues.String, 1));
 
 
 

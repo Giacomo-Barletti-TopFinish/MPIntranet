@@ -16,15 +16,16 @@ namespace MPIntranet.DataAccess.Report
             a.FillODL_APERTI(ds, reparto);
         }
 
-        public void FillREPORTQUANTITA(ReportDS ds, string ragionesoc)
+        [DataContext]
+        public void FillREPORTQUANTITA(ReportDS ds)
         {
             ReportAdapter r = new ReportAdapter(DbConnection, DbTransaction);
-            r.FillREPORTQUANTITA(ds, ragionesoc);
+            r.FillREPORTQUANTITA(ds);
 
         }
 
         [DataContext]
-        public List<string> EstraiRepartiODL_Aperti(ReportDS ds)
+        public List<string> EstraiReportQuantita(ReportDS ds)
         {
             ReportAdapter a = new ReportAdapter(DbConnection, DbTransaction);
             return a.EstraiRepartiODL_Aperti(ds);

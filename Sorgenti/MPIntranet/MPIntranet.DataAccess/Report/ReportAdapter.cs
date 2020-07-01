@@ -28,7 +28,7 @@ namespace MPIntranet.DataAccess.Report
             ParamSet ps = new ParamSet();
             ps.AddParam("REPARTO", DbType.String, reparto);
 
-            using (DbDataAdapter da = BuildDataAdapter(select,ps))
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
                 da.Fill(ds.ODL_APERTI);
             }
@@ -48,12 +48,13 @@ namespace MPIntranet.DataAccess.Report
             }
         }
 
-        public void FillREPORTQUANTITA(ReportDS ds, String ragionesoc)
+        public void FillREPORTQUANTITA(ReportDS ds)
         {
-            string query = @"SELECT * FROM REPORTQUANTITA ";
-           
-
-            query += " order by ragionesociale";
+            string query = @"select CODICECLIFO, trim(ragionesoc) as RAGIONESOC, sum (qta) as SOMMA,round(sum (qta)/(select sum(qta) from ITUSER.odl_aperti ),4)*100 as PERC
+                                from ITUSER.odl_aperti
+                                --where substr(codiceclifo,1,1)= '0' 
+                                group by codiceclifo , ragionesoc 
+                                order by sum(qta) desc";
 
             using (DbDataAdapter da = BuildDataAdapter(query))
             {
