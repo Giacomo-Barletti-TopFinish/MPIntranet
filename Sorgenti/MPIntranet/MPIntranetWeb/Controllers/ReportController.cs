@@ -38,14 +38,34 @@ namespace MPIntranetWeb.Controllers
             return PartialView("CaricoLavoroPartial", caricoLavoroList);
         }
 
-        public FileResult ExportExcel(string idReparto)
+        public ActionResult CaricaReportQuantita(string ragionesoc)
         {
+            Report report = new Report();
+            List<ReportQuantitaModel> reportQuantitaList = report.CreaListaReportQuantita(ragionesoc);
+
+            return PartialView("ReportQuantitaPartial", reportQuantitaList);
+        }
+
+
+
+            public FileResult ExportExcel(string idReparto)
+            {
 
             Report report = new Report();
             byte[] fileContents = report.CreaExcelCaricoLavoro(idReparto);
-
+            
 
             return File(fileContents, "application/excel", "CaricoLavoro.xlsx");
+            }
+
+        public FileResult ExportRQExcel(string ragionesoc)                              //RQ = reportquantita
+        {
+
+            Report report = new Report();
+            byte[] fileContents = report.CreaExcelReportQuantita(ragionesoc);
+
+
+            return File(fileContents, "application/excel", "ReportQuantita.xlsx");
         }
     }
 }

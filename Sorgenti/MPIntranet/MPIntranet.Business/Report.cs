@@ -29,6 +29,32 @@ namespace MPIntranet.Business
 
         }
 
+        public List<ReportQuantitaModel> CreaListaReportQuantita(string ragionesoc)
+        {
+            List<ReportQuantitaModel> reportquantitalist = new List<ReportQuantitaModel>();
+
+            using (ReportBusiness bReport = new ReportBusiness())
+                bReport.FillREPORTQUANTITA(_ds, ragionesoc);
+
+            //foreach (ReportDS.REPORTQUANTITARow reportquantita in _ds.REPORTQUANTITA)
+            //    reportquantitalist.Add(ReportQuantitaModel(reportquantita));
+
+            return reportquantitalist;
+
+        }
+
+        private ReportQuantitaModel CreaReportQuantitaModel(ReportDS.REPORTQUANTITARow reportquantita)
+        {
+            ReportQuantitaModel reportQuantitaModel = new ReportQuantitaModel();
+            reportQuantitaModel.Codiceclifo = reportquantita.CODICECLIFO;
+            reportQuantitaModel.Ragionesoc = reportquantita.RAGIONESOC;
+            reportQuantitaModel.Somma = reportquantita.SOMMA;
+            reportQuantitaModel.Perc = reportquantita.PERC;
+            return reportQuantitaModel;
+        }
+
+
+
         private CaricoRepartoModel CreaCaricoRepartoModel(ReportDS.ODL_APERTIRow odl_aperto)
         {
             CaricoRepartoModel caricoRepartoModel = new CaricoRepartoModel();
@@ -58,6 +84,15 @@ namespace MPIntranet.Business
             ExcelHelper eh = new ExcelHelper();
             return eh.CaricoLavoroExcel(_ds);
 
+        }
+
+        public byte[] CreaExcelReportQuantita(string ragionesoc)
+        {
+            using (ReportBusiness bReport = new ReportBusiness())
+                bReport.FillREPORTQUANTITA(_ds, ragionesoc);
+
+            ExcelHelper eh = new ExcelHelper();
+            return eh.ReportQuantitaExcel(_ds);
         }
 
         public List<string> EstraiRepartiODL_Aperti()

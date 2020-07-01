@@ -103,52 +103,138 @@ namespace MPIntranet.Helpers
                 row.Append(ConstructCell("Nota", CellValues.String, 2));
                 row.Append(ConstructCell("Appoggio", CellValues.String, 2));
 
-                sheetData.AppendChild(row);               
+                sheetData.AppendChild(row);
 
                 foreach (ReportDS.ODL_APERTIRow odl_aperto in ds.ODL_APERTI)
                 {
-                   Row rowDati = new Row();
-                   rowDati.Append(ConstructCell(odl_aperto.IsAZIENDANull() ? string.Empty : odl_aperto.AZIENDA, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsDESTIPOLANCIONull() ? string.Empty : odl_aperto.DESTIPOLANCIO, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsCODICETIPOONull() ? string.Empty : odl_aperto.CODICETIPOO, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsCODICECLIFONull() ? string.Empty : odl_aperto.CODICECLIFO, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsRAGIONESOCNull() ? string.Empty : odl_aperto.RAGIONESOC, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsNUMMOVFASENull() ? string.Empty : odl_aperto.NUMMOVFASE, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsPIANIFICATO_SNNull() ? string.Empty : odl_aperto.PIANIFICATO_SN, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsNOMECOMMESSANull() ? string.Empty : odl_aperto.NOMECOMMESSA, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsSEGNALATORENull() ? string.Empty : odl_aperto.SEGNALATORE, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsCODTIPOMOVFASENull() ? string.Empty : odl_aperto.CODTIPOMOVFASE, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsDESTIPOMOVFASENull() ? string.Empty : odl_aperto.DESTIPOMOVFASE, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsMODELLO_LANCIONull() ? string.Empty : odl_aperto.MODELLO_LANCIO, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsDESMODELLO_LANCIONull() ? string.Empty : odl_aperto.DESMODELLO_LANCIO, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsIDMAGAZZ_WIPNull() ? string.Empty : odl_aperto.IDMAGAZZ_WIP, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsMODELLO_WIPNull() ? string.Empty : odl_aperto.MODELLO_WIP, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsDESMODELLO_WIPNull() ? string.Empty : odl_aperto.DESMODELLO_WIP, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsELENCOFASINull() ? string.Empty : odl_aperto.ELENCOFASI, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsDATAMOVFASENull() ? string.Empty : odl_aperto.DATAMOVFASE.ToShortDateString(), CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsDATAINIZIO_ODLNull() ? string.Empty : odl_aperto.DATAINIZIO_ODL.ToShortDateString(), CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsDATAPRIMOINVIO_ODLNull() ? string.Empty : odl_aperto.DATAPRIMOINVIO_ODL.ToShortDateString(), CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsDOCUMENTI_INVIONull() ? string.Empty : odl_aperto.DOCUMENTI_INVIO, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsDATAFINE_ODL_E_MULTIPLANull() ? string.Empty : odl_aperto.DATAFINE_ODL_E_MULTIPLA.ToShortDateString(), CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsDATAFINE_FASECOMMESSANull() ? string.Empty : odl_aperto.DATAFINE_FASECOMMESSA.ToShortDateString(), CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsCONTA_MULTIPLENull() ? string.Empty : odl_aperto.CONTA_MULTIPLE, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsCODICEUNIMINull() ? string.Empty : odl_aperto.CODICEUNIMI, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsQTANull() ? string.Empty : odl_aperto.QTA.ToString(), CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsQTADATERNull() ? string.Empty : odl_aperto.QTADATER.ToString(), CellValues.Number, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsPRIORITANull() ? string.Empty : odl_aperto.PRIORITA.ToString(), CellValues.Number, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsNOTEPARTICOLARIFASENull() ? string.Empty : odl_aperto.NOTEPARTICOLARIFASE, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsNOTAPARTICOLAREODLNull() ? string.Empty : odl_aperto.NOTAPARTICOLAREODL, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsMODELLO_LANCIO_MPNull() ? string.Empty : odl_aperto.MODELLO_LANCIO_MP, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsDESMODELLO_LANCIO_MPNull() ? string.Empty : odl_aperto.DESMODELLO_LANCIO_MP, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsIMPEGNATOAREPARTONull() ? string.Empty : odl_aperto.IMPEGNATOAREPARTO, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsINTERNOESTERNONull() ? string.Empty : odl_aperto.INTERNOESTERNO, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsFERMOUNASETTIMANANull() ? string.Empty : odl_aperto.FERMOUNASETTIMANA, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsSCADUTONull() ? string.Empty : odl_aperto.SCADUTO, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsANNOCARICONull() ? string.Empty : odl_aperto.ANNOCARICO.ToString(), CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsSETTIMANACARICONull() ? string.Empty : odl_aperto.SETTIMANACARICO.ToString(), CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsAPERTODADUEGIORNINull() ? string.Empty : odl_aperto.APERTODADUEGIORNI, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsNOTANull() ? string.Empty : odl_aperto.NOTA, CellValues.String, 1));
-                   rowDati.Append(ConstructCell(odl_aperto.IsAPPOGGIONull() ? string.Empty : odl_aperto.APPOGGIO, CellValues.String, 1));
+                    Row rowDati = new Row();
+                    rowDati.Append(ConstructCell(odl_aperto.IsAZIENDANull() ? string.Empty : odl_aperto.AZIENDA, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsDESTIPOLANCIONull() ? string.Empty : odl_aperto.DESTIPOLANCIO, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsCODICETIPOONull() ? string.Empty : odl_aperto.CODICETIPOO, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsCODICECLIFONull() ? string.Empty : odl_aperto.CODICECLIFO, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsRAGIONESOCNull() ? string.Empty : odl_aperto.RAGIONESOC, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsNUMMOVFASENull() ? string.Empty : odl_aperto.NUMMOVFASE, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsPIANIFICATO_SNNull() ? string.Empty : odl_aperto.PIANIFICATO_SN, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsNOMECOMMESSANull() ? string.Empty : odl_aperto.NOMECOMMESSA, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsSEGNALATORENull() ? string.Empty : odl_aperto.SEGNALATORE, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsCODTIPOMOVFASENull() ? string.Empty : odl_aperto.CODTIPOMOVFASE, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsDESTIPOMOVFASENull() ? string.Empty : odl_aperto.DESTIPOMOVFASE, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsMODELLO_LANCIONull() ? string.Empty : odl_aperto.MODELLO_LANCIO, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsDESMODELLO_LANCIONull() ? string.Empty : odl_aperto.DESMODELLO_LANCIO, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsIDMAGAZZ_WIPNull() ? string.Empty : odl_aperto.IDMAGAZZ_WIP, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsMODELLO_WIPNull() ? string.Empty : odl_aperto.MODELLO_WIP, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsDESMODELLO_WIPNull() ? string.Empty : odl_aperto.DESMODELLO_WIP, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsELENCOFASINull() ? string.Empty : odl_aperto.ELENCOFASI, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsDATAMOVFASENull() ? string.Empty : odl_aperto.DATAMOVFASE.ToShortDateString(), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsDATAINIZIO_ODLNull() ? string.Empty : odl_aperto.DATAINIZIO_ODL.ToShortDateString(), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsDATAPRIMOINVIO_ODLNull() ? string.Empty : odl_aperto.DATAPRIMOINVIO_ODL.ToShortDateString(), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsDOCUMENTI_INVIONull() ? string.Empty : odl_aperto.DOCUMENTI_INVIO, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsDATAFINE_ODL_E_MULTIPLANull() ? string.Empty : odl_aperto.DATAFINE_ODL_E_MULTIPLA.ToShortDateString(), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsDATAFINE_FASECOMMESSANull() ? string.Empty : odl_aperto.DATAFINE_FASECOMMESSA.ToShortDateString(), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsCONTA_MULTIPLENull() ? string.Empty : odl_aperto.CONTA_MULTIPLE, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsCODICEUNIMINull() ? string.Empty : odl_aperto.CODICEUNIMI, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsQTANull() ? string.Empty : odl_aperto.QTA.ToString(), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsQTADATERNull() ? string.Empty : odl_aperto.QTADATER.ToString(), CellValues.Number, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsPRIORITANull() ? string.Empty : odl_aperto.PRIORITA.ToString(), CellValues.Number, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsNOTEPARTICOLARIFASENull() ? string.Empty : odl_aperto.NOTEPARTICOLARIFASE, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsNOTAPARTICOLAREODLNull() ? string.Empty : odl_aperto.NOTAPARTICOLAREODL, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsMODELLO_LANCIO_MPNull() ? string.Empty : odl_aperto.MODELLO_LANCIO_MP, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsDESMODELLO_LANCIO_MPNull() ? string.Empty : odl_aperto.DESMODELLO_LANCIO_MP, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsIMPEGNATOAREPARTONull() ? string.Empty : odl_aperto.IMPEGNATOAREPARTO, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsINTERNOESTERNONull() ? string.Empty : odl_aperto.INTERNOESTERNO, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsFERMOUNASETTIMANANull() ? string.Empty : odl_aperto.FERMOUNASETTIMANA, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsSCADUTONull() ? string.Empty : odl_aperto.SCADUTO, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsANNOCARICONull() ? string.Empty : odl_aperto.ANNOCARICO.ToString(), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsSETTIMANACARICONull() ? string.Empty : odl_aperto.SETTIMANACARICO.ToString(), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsAPERTODADUEGIORNINull() ? string.Empty : odl_aperto.APERTODADUEGIORNI, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsNOTANull() ? string.Empty : odl_aperto.NOTA, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(odl_aperto.IsAPPOGGIONull() ? string.Empty : odl_aperto.APPOGGIO, CellValues.String, 1));
+
+
+                    sheetData.AppendChild(rowDati);
+                }
+
+
+
+
+                workbookPart.Workbook.Save();
+                document.Save();
+                document.Close();
+
+                ms.Seek(0, SeekOrigin.Begin);
+                content = ms.ToArray();
+                
+            }
+            return content;
+
+
+
+        }
+
+        public byte[] ReportQuantitaExcel(ReportDS ds)
+        {
+
+
+            byte[] content;
+            MemoryStream ms = new MemoryStream();
+
+            using (SpreadsheetDocument document = SpreadsheetDocument.Create(ms, SpreadsheetDocumentType.Workbook))
+            {
+                WorkbookPart workbookPart = document.AddWorkbookPart();
+                workbookPart.Workbook = new Workbook();
+
+                WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+                worksheetPart.Worksheet = new Worksheet();
+
+                // Adding style
+                WorkbookStylesPart stylePart = workbookPart.AddNewPart<WorkbookStylesPart>();
+                stylePart.Stylesheet = GenerateStylesheet();
+                stylePart.Stylesheet.Save();
+
+                int numeroColonne = 4;
+                Columns columns = new Columns();
+                for (int i = 0; i < numeroColonne; i++)
+                {
+                    Column c = new Column();
+                    UInt32Value u = new UInt32Value((uint)(i + 1));
+                    c.Min = u;
+                    c.Max = u;
+                    c.Width = 15;
+
+                    columns.Append(c);
+                }
+
+                worksheetPart.Worksheet.AppendChild(columns);
+
+                Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
+                Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Report Quantita'" };
+
+                sheets.Append(sheet);
+
+                workbookPart.Workbook.Save();
+
+                SheetData sheetData = worksheetPart.Worksheet.AppendChild(new SheetData());
+
+                // Constructing header
+
+                Row row = new Row();
+
+                row.Append(ConstructCell("Codice Clifo", CellValues.String, 2));
+                row.Append(ConstructCell("Ragione Soc", CellValues.String, 2));
+                row.Append(ConstructCell("Somma", CellValues.Number, 2));
+                row.Append(ConstructCell("Percentuale", CellValues.Number, 2));
+
+
+                sheetData.AppendChild(row);
+
+                foreach (ReportDS.REPORTQUANTITARow reportquantita in ds.REPORTQUANTITA)
+                {
+                    Row rowDati = new Row();
+                    rowDati.Append(ConstructCell(reportquantita.CODICECLIFO, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(reportquantita.RAGIONESOC, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(reportquantita.SOMMA.ToString(), CellValues.Number, 1));
+                    rowDati.Append(ConstructCell(reportquantita.PERC.ToString(), CellValues.Number, 1));
+
 
 
                     sheetData.AppendChild(rowDati);
@@ -164,335 +250,8 @@ namespace MPIntranet.Helpers
                 ms.Seek(0, SeekOrigin.Begin);
                 content = ms.ToArray();
             }
-
             return content;
-
-
-
-
-            //******************************************************************************************
-
-
-
-            /*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            byte[] content;
-            MemoryStream ms = new MemoryStream();
-            //string filename = @"c:\temp\mancanti.xlsx";
-            using (SpreadsheetDocument document = SpreadsheetDocument.Create(ms, SpreadsheetDocumentType.Workbook))
-            {
-                WorkbookPart workbookPart = document.AddWorkbookPart();
-                workbookPart.Workbook = new Workbook();
-
-                WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
-                worksheetPart.Worksheet = new Worksheet();
-
-                // Adding style
-                WorkbookStylesPart stylePart = workbookPart.AddNewPart<WorkbookStylesPart>();
-                stylePart.Stylesheet = GenerateStylesheet();
-                stylePart.Stylesheet.Save();
-
-                // Setting up columns
-                Columns columns = new Columns(
-                        new Column
-                        {
-                            Min = 1,
-                            Max = 2,
-                            Width = 15
-                        }
-);
-                //new Column
-                //{
-                //    Min = 3,
-                //    Max = 3,
-                //    Width = 20,
-                //    CustomWidth = true
-                //},
-                //new Column
-                //{
-                //    Min = 4,
-                //    Max = 4,
-                //    Width = 40,
-                //    CustomWidth = false
-                //},
-                //new Column
-                //{
-                //    Min = 5,
-                //    Max = 5,
-                //    Width = 60,
-                //    CustomWidth = true
-                //},
-                //new Column
-                //{
-                //    Min = 1,
-                //    Max = 1,
-                //    Width = 15,
-                //    CustomWidth = true
-                //},
-                // new Column
-                // {
-                //     Min = 5,
-                //     Max = 5,
-                //     Width = 60,
-                //     CustomWidth = true
-                // },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  },
-                //  new Column
-                //  {
-                //      Min = 5,
-                //      Max = 5,
-                //      Width = 60,
-                //      CustomWidth = true
-                //  }
-                //            );
-
-                workbookPart.Workbook.Save();
-
-                SheetData sheetData = worksheetPart.Worksheet.AppendChild(new SheetData());
-
-
-
-
-
-                workbookPart.Workbook.Save();
-                document.Save();
-                document.Close();
-
-                ms.Seek(0, SeekOrigin.Begin);
-                content = ms.ToArray();
-
-                FileStream fs = new FileStream(@"c:\temp\test.xlsx", FileMode.Create);
-                fs.Write(content, 0, content.Length);
-                fs.Flush();
-                fs.Close();
-                ms.Close();
-            }
-
-            return content;
-            */
+      
         }
 
         private Cell ConstructCell(string value, CellValues dataType, uint styleIndex = 0)

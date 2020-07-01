@@ -14,7 +14,7 @@
   <xs:element name="ReportDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ReportDS" msprop:Generator_UserDSName="ReportDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="ODL_APERTI" msprop:Generator_TableClassName="ODL_APERTIDataTable" msprop:Generator_TableVarName="tableODL_APERTI" msprop:Generator_TablePropName="ODL_APERTI" msprop:Generator_RowDeletingName="ODL_APERTIRowDeleting" msprop:Generator_RowChangingName="ODL_APERTIRowChanging" msprop:Generator_RowEvHandlerName="ODL_APERTIRowChangeEventHandler" msprop:Generator_RowDeletedName="ODL_APERTIRowDeleted" msprop:Generator_UserTableName="ODL_APERTI" msprop:Generator_RowChangedName="ODL_APERTIRowChanged" msprop:Generator_RowEvArgName="ODL_APERTIRowChangeEvent" msprop:Generator_RowClassName="ODL_APERTIRow">
+        <xs:element name="ODL_APERTI" msprop:Generator_TableClassName="ODL_APERTIDataTable" msprop:Generator_TableVarName="tableODL_APERTI" msprop:Generator_RowChangedName="ODL_APERTIRowChanged" msprop:Generator_TablePropName="ODL_APERTI" msprop:Generator_RowDeletingName="ODL_APERTIRowDeleting" msprop:Generator_RowChangingName="ODL_APERTIRowChanging" msprop:Generator_RowEvHandlerName="ODL_APERTIRowChangeEventHandler" msprop:Generator_RowDeletedName="ODL_APERTIRowDeleted" msprop:Generator_RowClassName="ODL_APERTIRow" msprop:Generator_UserTableName="ODL_APERTI" msprop:Generator_RowEvArgName="ODL_APERTIRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDPRDMOVFASE" msprop:Generator_ColumnVarNameInTable="columnIDPRDMOVFASE" msprop:Generator_ColumnPropNameInRow="IDPRDMOVFASE" msprop:Generator_ColumnPropNameInTable="IDPRDMOVFASEColumn" msprop:Generator_UserColumnName="IDPRDMOVFASE" minOccurs="0">
@@ -265,6 +265,16 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="REPORTQUANTITA" msprop:Generator_TableClassName="REPORTQUANTITADataTable" msprop:Generator_TableVarName="tableREPORTQUANTITA" msprop:Generator_TablePropName="REPORTQUANTITA" msprop:Generator_RowDeletingName="REPORTQUANTITARowDeleting" msprop:Generator_RowChangingName="REPORTQUANTITARowChanging" msprop:Generator_RowEvHandlerName="REPORTQUANTITARowChangeEventHandler" msprop:Generator_RowDeletedName="REPORTQUANTITARowDeleted" msprop:Generator_UserTableName="REPORTQUANTITA" msprop:Generator_RowChangedName="REPORTQUANTITARowChanged" msprop:Generator_RowEvArgName="REPORTQUANTITARowChangeEvent" msprop:Generator_RowClassName="REPORTQUANTITARow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CODICECLIFO" msprop:Generator_ColumnVarNameInTable="columnCODICECLIFO" msprop:Generator_ColumnPropNameInRow="CODICECLIFO" msprop:Generator_ColumnPropNameInTable="CODICECLIFOColumn" msprop:Generator_UserColumnName="CODICECLIFO" type="xs:string" />
+              <xs:element name="RAGIONESOC" msprop:Generator_ColumnVarNameInTable="columnRAGIONESOC" msprop:Generator_ColumnPropNameInRow="RAGIONESOC" msprop:Generator_ColumnPropNameInTable="RAGIONESOCColumn" msprop:Generator_UserColumnName="RAGIONESOC" type="xs:string" />
+              <xs:element name="SOMMA" msprop:Generator_ColumnVarNameInTable="columnSOMMA" msprop:Generator_ColumnPropNameInRow="SOMMA" msprop:Generator_ColumnPropNameInTable="SOMMAColumn" msprop:Generator_UserColumnName="SOMMA" type="xs:decimal" />
+              <xs:element name="PERC" msprop:Generator_ColumnVarNameInTable="columnPERC" msprop:Generator_ColumnPropNameInRow="PERC" msprop:Generator_ColumnPropNameInTable="PERCColumn" msprop:Generator_UserColumnName="PERC" type="xs:decimal" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

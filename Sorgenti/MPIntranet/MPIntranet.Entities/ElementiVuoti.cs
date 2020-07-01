@@ -22,5 +22,6 @@ namespace MPIntranet.Entities
         public const decimal GruppoVuoto = -1;
         public const decimal ImpiantoVuoto = -1;
         public const decimal TuttiReparti = -4;
+        public const decimal TutteQuantita = -4;
     }
 }

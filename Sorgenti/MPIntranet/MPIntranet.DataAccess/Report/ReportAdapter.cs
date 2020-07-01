@@ -48,5 +48,19 @@ namespace MPIntranet.DataAccess.Report
             }
         }
 
+        public void FillREPORTQUANTITA(ReportDS ds, String ragionesoc)
+        {
+            string query = @"SELECT * FROM REPORTQUANTITA ";
+           
+
+            query += " order by ragionesociale";
+
+            using (DbDataAdapter da = BuildDataAdapter(query))
+            {
+                da.Fill(ds.REPORTQUANTITA);
+            }
+
+        }
+
     }
 }

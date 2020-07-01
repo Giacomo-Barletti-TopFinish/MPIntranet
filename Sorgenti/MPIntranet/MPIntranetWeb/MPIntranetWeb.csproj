@@ -451,6 +451,8 @@
     <Content Include="Views\Galvanica\CaricaTelaiPartial.cshtml" />
     <Content Include="Views\Report\CaricoLavoro.cshtml" />
     <Content Include="Views\Report\CaricoLavoroPartial.cshtml" />
+    <Content Include="Views\Report\ReportQuantita.cshtml" />
+    <Content Include="Views\Report\ReportQuantitaPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
