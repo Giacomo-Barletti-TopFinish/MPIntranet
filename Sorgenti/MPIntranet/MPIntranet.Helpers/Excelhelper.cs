@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using MPIntranet.Entities;
+using MPIntranet.Models.Report;
 
 namespace MPIntranet.Helpers
 {
@@ -252,6 +253,101 @@ namespace MPIntranet.Helpers
             }
             return content;
       
+        }
+
+        public byte[] ReportOrdiniAttiviExcel(List<OrdiniAttiviModel> lista)
+        {
+
+
+            byte[] content;
+            MemoryStream ms = new MemoryStream();
+
+            using (SpreadsheetDocument document = SpreadsheetDocument.Create(ms, SpreadsheetDocumentType.Workbook))
+            {
+                WorkbookPart workbookPart = document.AddWorkbookPart();
+                workbookPart.Workbook = new Workbook();
+
+                WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+                worksheetPart.Worksheet = new Worksheet();
+
+                // Adding style
+                WorkbookStylesPart stylePart = workbookPart.AddNewPart<WorkbookStylesPart>();
+                stylePart.Stylesheet = GenerateStylesheet();
+                stylePart.Stylesheet.Save();
+
+                int numeroColonne = 12;
+                Columns columns = new Columns();
+                for (int i = 0; i < numeroColonne; i++)
+                {
+                    Column c = new Column();
+                    UInt32Value u = new UInt32Value((uint)(i + 1));
+                    c.Min = u;
+                    c.Max = u;
+                    c.Width = 15;
+
+                    columns.Append(c);
+                }
+
+                worksheetPart.Worksheet.AppendChild(columns);
+
+                Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
+                Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Report" };
+
+                sheets.Append(sheet);
+
+                workbookPart.Workbook.Save();
+
+                SheetData sheetData = worksheetPart.Worksheet.AppendChild(new SheetData());
+
+                // Constructing header
+
+                Row row = new Row();
+
+                row.Append(ConstructCell("Cliente", CellValues.String, 2));
+                row.Append(ConstructCell("Quantità", CellValues.String, 2));
+                row.Append(ConstructCell("Quantità non spedita", CellValues.String, 2));
+                row.Append(ConstructCell("Quantità annullata", CellValues.String, 2));
+                row.Append(ConstructCell("Valore", CellValues.String, 2));
+                row.Append(ConstructCell("Valore non spedito", CellValues.String, 2));
+                row.Append(ConstructCell("Valore annullato", CellValues.String, 2));
+                row.Append(ConstructCell("Valore scaduto", CellValues.String, 2));
+                row.Append(ConstructCell("Valore non scaduto", CellValues.String, 2));
+                row.Append(ConstructCell("% scaduto su cliente", CellValues.String, 2));
+                row.Append(ConstructCell("% scaduto su totale", CellValues.String, 2));
+
+
+                sheetData.AppendChild(row);
+
+                foreach (OrdiniAttiviModel reportquantita in lista)
+                {
+                    Row rowDati = new Row();
+                    rowDati.Append(ConstructCell(reportquantita.Cliente, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(reportquantita.Quantita.ToString(), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(reportquantita.QuantitaNonSpedita.ToString(), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(reportquantita.QuantitaAnnullata.ToString(), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(reportquantita.Valore.ToString(), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(reportquantita.ValoreNonSpedito.ToString(), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(reportquantita.ValoreAnnullato.ToString(), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(reportquantita.ValoreScaduto.ToString(), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(reportquantita.ValoreNonScaduto.ToString(), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(reportquantita.PercScadutoCliente.ToString(), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(reportquantita.PercScadutoSulTotale.ToString(), CellValues.String, 1));
+
+                    sheetData.AppendChild(rowDati);
+                }
+
+
+
+
+                workbookPart.Workbook.Save();
+                document.Save();
+                document.Close();
+
+                ms.Seek(0, SeekOrigin.Begin);
+                content = ms.ToArray();
+            }
+            return content;
+
         }
 
         private Cell ConstructCell(string value, CellValues dataType, uint styleIndex = 0)

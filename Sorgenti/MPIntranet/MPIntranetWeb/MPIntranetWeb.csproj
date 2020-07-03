@@ -453,6 +453,8 @@
     <Content Include="Views\Report\CaricoLavoroPartial.cshtml" />
     <Content Include="Views\Report\ReportQuantita.cshtml" />
     <Content Include="Views\Report\ReportQuantitaPartial.cshtml" />
+    <Content Include="Views\Report\ReportOrdiniAttivi.cshtml" />
+    <Content Include="Views\Report\ReportOrdiniAttiviPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

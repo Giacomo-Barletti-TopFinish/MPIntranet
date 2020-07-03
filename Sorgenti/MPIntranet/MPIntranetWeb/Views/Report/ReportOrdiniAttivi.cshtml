@@ -6,7 +6,7 @@
 
 
 <div class="content-top">
-    <h2>Report Quantita'</h2>
+    <h2>Report Ordini Attivi</h2>
 </div>
 <div class="row col-lg-6">
     @Html.Label("Report")
@@ -34,7 +34,7 @@
             if (idreport == null || idreport == '')
                 idreport = '@MPIntranet.Entities.ElementiVuoti.TutteQuantita.ToString()';
 
-         var url = '@Url.Action("CaricaReportQuantita", "Report")';
+         var url = '@Url.Action("CaricaReportOrdiniAttivi", "Report")';
         $.ajax({
             url: url,
             data: {
@@ -62,7 +62,7 @@
             if (idreport == null || idreport == '')
           idreport = '@MPIntranet.Entities.ElementiVuoti.TutteQuantita.ToString()';
 
-        var url = '@Url.Action("ExportRQExcel", "Report")';
+        var url = '@Url.Action("ExportOrdiniAttiviExcel", "Report")';
 
 
 

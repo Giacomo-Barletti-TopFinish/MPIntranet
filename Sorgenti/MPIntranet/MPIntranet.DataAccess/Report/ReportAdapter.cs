@@ -63,5 +63,15 @@ namespace MPIntranet.DataAccess.Report
 
         }
 
+        public void FillORDINIATTIVI(ReportDS ds)
+        {
+            string query = @"select * from ITUSER.ORDINIATTIVI WHERE QTANOSPE>0";
+
+            using (DbDataAdapter da = BuildDataAdapter(query))
+            {
+                da.Fill(ds.ORDINIATTIVI);
+            }
+
+        }
     }
 }

@@ -30,6 +30,13 @@ namespace MPIntranet.DataAccess.Report
             ReportAdapter a = new ReportAdapter(DbConnection, DbTransaction);
             return a.EstraiRepartiODL_Aperti(ds);
         }
+
+        [DataContext]
+        public void FillORDINIATTIVI(ReportDS ds)
+        {
+            ReportAdapter a = new ReportAdapter(DbConnection, DbTransaction);
+            a.FillORDINIATTIVI(ds);
+        }
     }
 
 }

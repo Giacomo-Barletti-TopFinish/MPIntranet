@@ -56,7 +56,7 @@ namespace MPIntranetWeb.Controllers
             return PartialView("CaricoLavoroPartial", caricoLavoroList);
         }
 
-        public ActionResult CaricaReportQuantita( )
+        public ActionResult CaricaReportQuantita()
         {
             Report report = new Report();
             List<ReportQuantitaModel> reportQuantitaList = report.CreaListaReportQuantita();
@@ -66,21 +66,56 @@ namespace MPIntranetWeb.Controllers
 
 
 
-            public FileResult ExportExcel(string idReparto)
-            {
+        public FileResult ExportExcel(string idReparto)
+        {
 
             Report report = new Report();
             byte[] fileContents = report.CreaExcelCaricoLavoro(idReparto);
-            
+
 
             return File(fileContents, "application/excel", "CaricoLavoro.xlsx");
-            }
+        }
 
-        public FileResult ExportRQExcel( )                              //RQ = reportquantita
+        public FileResult ExportRQExcel()                              //RQ = reportquantita
         {
 
             Report report = new Report();
             byte[] fileContents = report.CreaExcelReportQuantita();
+
+
+            return File(fileContents, "application/excel", "ReportQuantita.xlsx");
+        }
+
+        public ActionResult ReportOrdiniAttivi()
+        {
+
+            Report report = new Report();
+            List<string> quantita = report.EstraiReportQuantita();
+
+
+            List<MPIntranetListItem> quantitaList = quantita.Select(x => new MPIntranetListItem(x, x)).ToList();
+            quantitaList.Insert(0, new MPIntranetListItem("** TUTTI LE QUANTITA **", ElementiVuoti.TutteQuantita.ToString()));
+
+            ViewData.Add("Quantita", quantitaList);
+
+
+            return View();
+        }
+
+        public ActionResult CaricaReportOrdiniAttivi()
+        {
+            Report report = new Report();
+            List<OrdiniAttiviModel> reportOrdiniAttivi = report.CreaListaOrdiniAttivitModel();
+
+            return PartialView("ReportOrdiniAttiviPartial", reportOrdiniAttivi);
+        }
+
+        public FileResult ExportOrdiniAttiviExcel()                              
+        {
+
+            Report report = new Report();
+            List<OrdiniAttiviModel> reportOrdiniAttivi = report.CreaListaOrdiniAttivitModel();
+            byte[] fileContents = report.CreaExcelOrdiniAttivi(reportOrdiniAttivi);
 
 
             return File(fileContents, "application/excel", "ReportQuantita.xlsx");
