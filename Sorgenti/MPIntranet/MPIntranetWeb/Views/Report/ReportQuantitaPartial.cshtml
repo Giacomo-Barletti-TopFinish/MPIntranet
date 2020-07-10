@@ -7,28 +7,26 @@
 }
 else
 {
-    <div>
+    <div style="overflow-y:auto; overflow-x:hidden; height:600px">
         <table id="grigliaRisultati" class="table table-condensed table-hover">
             <thead style="background-color:aliceblue">
                 <tr>
                     <th width="15%">Codice Clifo</th>
                     <th width="34%">Ragione Sociale</th>
-                    <th width="20%">Somma</th>
-                    <th width="20%">Percentuale</th>
+                    <th width="20%">Elenco fasi</th>
+                    <th width="15%">Somma</th>
+                    <th width="15%">Percentuale</th>
 
                     <th></th>
                 </tr>
             </thead>
-        </table>
-    </div>
-    <div style="overflow-y:auto; overflow-x:hidden; height:600px">
-        <table id="grigliaRisultati" class="table table-condensed table-hover">
             <tbody>
                 @foreach (ReportQuantitaModel report in Model)
                 {
                     <tr>
                         <td width="15%">@report.Codiceclifo</td>
                         <td width="35%">@report.Ragionesoc</td>
+                        <td width="35%">@report.ElencoFasi</td>
                         <td width="20%">@report.Somma</td>
                         <td width="20%">@report.Perc</td>
                         <td></td>

@@ -10,6 +10,7 @@ namespace MPIntranet.Models.Report
     {
         public string Codiceclifo { get; set; }
         public string Ragionesoc { get; set; }
+        public string ElencoFasi { get; set; }
         public decimal Somma { get; set; }
         public decimal Perc { get; set; }
     }

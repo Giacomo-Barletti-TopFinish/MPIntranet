@@ -73,6 +73,7 @@ namespace MPIntranet.Business
                 ordineAttivoModel.Quantita = quantita;
                 ordineAttivoModel.QuantitaNonSpedita = quantitaNonSpedita;
                 ordineAttivoModel.QuantitaAnnullata = quantitaAnnullato;
+                ordineAttivoModel.QuantitaScaduta = quantitaNonSpeditaScaduto;
                 ordineAttivoModel.Valore = valore;
                 ordineAttivoModel.ValoreNonSpedito = valoreNonSpedito;
                 ordineAttivoModel.ValoreAnnullato = valoreAnnullato;
@@ -84,35 +85,35 @@ namespace MPIntranet.Business
                 lista.Add(ordineAttivoModel);
             }
 
-            foreach (string cliente in _ds.ORDINIATTIVI.Where(x => x.IsSEGNALATORENull()).Select(x => x.CLIENTE))
-            {
-                decimal valore = _ds.ORDINIATTIVI.Where(x => x.CLIENTE == cliente).Sum(x => x.VALORE);
-                decimal quantita = _ds.ORDINIATTIVI.Where(x => x.CLIENTE == cliente).Sum(x => x.QTATOT);
-                decimal valoreAnnullato = _ds.ORDINIATTIVI.Where(x => x.CLIENTE == cliente).Sum(x => x.VALOREANN);
-                decimal quantitaAnnullato = _ds.ORDINIATTIVI.Where(x => x.CLIENTE == cliente).Sum(x => x.QTAANN);
-                decimal valoreNonSpedito = _ds.ORDINIATTIVI.Where(x => x.CLIENTE == cliente).Sum(x => x.VALORENOSPE);
-                decimal quantitaNonSpedita = _ds.ORDINIATTIVI.Where(x => x.CLIENTE == cliente).Sum(x => x.QTANOSPE);
-                decimal valoreNonSpeditoScaduto = _ds.ORDINIATTIVI.Where(x => x.CLIENTE == cliente && x.SCADUTO == "SI").Sum(x => x.VALORENOSPE);
-                decimal quantitaNonSpeditaScaduto = _ds.ORDINIATTIVI.Where(x => x.CLIENTE == cliente && x.SCADUTO == "SI").Sum(x => x.QTANOSPE);
-                decimal valoreNonSpeditoNonScaduto = _ds.ORDINIATTIVI.Where(x => x.CLIENTE == cliente && x.SCADUTO == "NO").Sum(x => x.VALORENOSPE);
-                decimal quantitaNonSpeditaNonScaduto = _ds.ORDINIATTIVI.Where(x => x.CLIENTE == cliente && x.SCADUTO == "NO").Sum(x => x.QTANOSPE);
-                decimal scadutoPerCliente = valoreNonSpedito == 0 ? 0 : Math.Round(valoreNonSpeditoScaduto / valoreNonSpedito, 2) * 100;
-                decimal scadutoSulTotale = valoreTotaleScaduti == 0 ? 0 : Math.Round(valoreNonSpeditoScaduto / valoreTotaleScaduti, 2) * 100;
-                OrdiniAttiviModel ordineAttivoModel = new OrdiniAttiviModel();
-                ordineAttivoModel.Cliente = cliente;
-                ordineAttivoModel.Quantita = quantita;
-                ordineAttivoModel.QuantitaNonSpedita = quantitaNonSpedita;
-                ordineAttivoModel.QuantitaAnnullata = quantitaAnnullato;
-                ordineAttivoModel.Valore = valore;
-                ordineAttivoModel.ValoreNonSpedito = valoreNonSpedito;
-                ordineAttivoModel.ValoreAnnullato = valoreAnnullato;
-                ordineAttivoModel.ValoreScaduto = valoreNonSpeditoScaduto;
-                ordineAttivoModel.ValoreNonScaduto = valoreNonSpeditoNonScaduto;
-                ordineAttivoModel.PercScadutoCliente = scadutoPerCliente;
-                ordineAttivoModel.PercScadutoSulTotale = scadutoSulTotale;
+            //foreach (string cliente in _ds.ORDINIATTIVI.Where(x => x.IsSEGNALATORENull()).Select(x => x.SEGNALATORE))
+            //{
+            //    decimal valore = _ds.ORDINIATTIVI.Where(x => x.CLIENTE == cliente).Sum(x => x.VALORE);
+            //    decimal quantita = _ds.ORDINIATTIVI.Where(x => x.CLIENTE == cliente).Sum(x => x.QTATOT);
+            //    decimal valoreAnnullato = _ds.ORDINIATTIVI.Where(x => x.CLIENTE == cliente).Sum(x => x.VALOREANN);
+            //    decimal quantitaAnnullato = _ds.ORDINIATTIVI.Where(x => x.CLIENTE == cliente).Sum(x => x.QTAANN);
+            //    decimal valoreNonSpedito = _ds.ORDINIATTIVI.Where(x => x.CLIENTE == cliente).Sum(x => x.VALORENOSPE);
+            //    decimal quantitaNonSpedita = _ds.ORDINIATTIVI.Where(x => x.CLIENTE == cliente).Sum(x => x.QTANOSPE);
+            //    decimal valoreNonSpeditoScaduto = _ds.ORDINIATTIVI.Where(x => x.CLIENTE == cliente && x.SCADUTO == "SI").Sum(x => x.VALORENOSPE);
+            //    decimal quantitaNonSpeditaScaduto = _ds.ORDINIATTIVI.Where(x => x.CLIENTE == cliente && x.SCADUTO == "SI").Sum(x => x.QTANOSPE);
+            //    decimal valoreNonSpeditoNonScaduto = _ds.ORDINIATTIVI.Where(x => x.CLIENTE == cliente && x.SCADUTO == "NO").Sum(x => x.VALORENOSPE);
+            //    decimal quantitaNonSpeditaNonScaduto = _ds.ORDINIATTIVI.Where(x => x.CLIENTE == cliente && x.SCADUTO == "NO").Sum(x => x.QTANOSPE);
+            //    decimal scadutoPerCliente = valoreNonSpedito == 0 ? 0 : Math.Round(valoreNonSpeditoScaduto / valoreNonSpedito, 2) * 100;
+            //    decimal scadutoSulTotale = valoreTotaleScaduti == 0 ? 0 : Math.Round(valoreNonSpeditoScaduto / valoreTotaleScaduti, 2) * 100;
+            //    OrdiniAttiviModel ordineAttivoModel = new OrdiniAttiviModel();
+            //    ordineAttivoModel.Cliente = cliente;
+            //    ordineAttivoModel.Quantita = quantita;
+            //    ordineAttivoModel.QuantitaNonSpedita = quantitaNonSpedita;
+            //    ordineAttivoModel.QuantitaAnnullata = quantitaAnnullato;
+            //    ordineAttivoModel.Valore = valore;
+            //    ordineAttivoModel.ValoreNonSpedito = valoreNonSpedito;
+            //    ordineAttivoModel.ValoreAnnullato = valoreAnnullato;
+            //    ordineAttivoModel.ValoreScaduto = valoreNonSpeditoScaduto;
+            //    ordineAttivoModel.ValoreNonScaduto = valoreNonSpeditoNonScaduto;
+            //    ordineAttivoModel.PercScadutoCliente = scadutoPerCliente;
+            //    ordineAttivoModel.PercScadutoSulTotale = scadutoSulTotale;
 
-                lista.Add(ordineAttivoModel);
-            }
+            //    lista.Add(ordineAttivoModel);
+            //}
 
             return lista;
 
@@ -126,6 +127,7 @@ namespace MPIntranet.Business
             reportQuantitaModel.Ragionesoc = reportquantita.RAGIONESOC;
             reportQuantitaModel.Somma = reportquantita.SOMMA;
             reportQuantitaModel.Perc = reportquantita.PERC;
+            reportQuantitaModel.ElencoFasi = reportquantita.IsELENCOFASINull() ? string.Empty : reportquantita.ELENCOFASI;
             return reportQuantitaModel;
         }
 
@@ -171,7 +173,7 @@ namespace MPIntranet.Business
             return eh.ReportQuantitaExcel(_ds);
         }
 
-        public byte[] CreaExcelOrdiniAttivi(List<OrdiniAttiviModel>lista)
+        public byte[] CreaExcelOrdiniAttivi(List<OrdiniAttiviModel> lista)
         {
             ExcelHelper eh = new ExcelHelper();
             return eh.ReportOrdiniAttiviExcel(lista);

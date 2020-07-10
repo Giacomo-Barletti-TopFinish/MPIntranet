@@ -12,6 +12,7 @@ namespace MPIntranet.Models.Report
         public decimal Quantita { get; set; }
         public decimal QuantitaNonSpedita{ get; set; }
         public decimal QuantitaAnnullata { get; set; }
+        public decimal QuantitaScaduta{ get; set; }
         public decimal Valore { get; set; }
         public decimal ValoreNonSpedito { get; set; }
         public decimal ValoreAnnullato { get; set; }

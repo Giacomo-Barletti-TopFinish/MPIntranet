@@ -1284,6 +1284,8 @@ namespace MPIntranet.Entities {
             
             private global::System.Data.DataColumn columnPERC;
             
+            private global::System.Data.DataColumn columnELENCOFASI;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public REPORTQUANTITADataTable() {
@@ -1351,6 +1353,14 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn ELENCOFASIColumn {
+                get {
+                    return this.columnELENCOFASI;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1386,13 +1396,14 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public REPORTQUANTITARow AddREPORTQUANTITARow(string CODICECLIFO, string RAGIONESOC, decimal SOMMA, decimal PERC) {
+            public REPORTQUANTITARow AddREPORTQUANTITARow(string CODICECLIFO, string RAGIONESOC, decimal SOMMA, decimal PERC, string ELENCOFASI) {
                 REPORTQUANTITARow rowREPORTQUANTITARow = ((REPORTQUANTITARow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         CODICECLIFO,
                         RAGIONESOC,
                         SOMMA,
-                        PERC};
+                        PERC,
+                        ELENCOFASI};
                 rowREPORTQUANTITARow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowREPORTQUANTITARow);
                 return rowREPORTQUANTITARow;
@@ -1419,6 +1430,7 @@ namespace MPIntranet.Entities {
                 this.columnRAGIONESOC = base.Columns["RAGIONESOC"];
                 this.columnSOMMA = base.Columns["SOMMA"];
                 this.columnPERC = base.Columns["PERC"];
+                this.columnELENCOFASI = base.Columns["ELENCOFASI"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1432,6 +1444,8 @@ namespace MPIntranet.Entities {
                 base.Columns.Add(this.columnSOMMA);
                 this.columnPERC = new global::System.Data.DataColumn("PERC", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPERC);
+                this.columnELENCOFASI = new global::System.Data.DataColumn("ELENCOFASI", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnELENCOFASI);
                 this.columnCODICECLIFO.AllowDBNull = false;
                 this.columnRAGIONESOC.AllowDBNull = false;
                 this.columnSOMMA.AllowDBNull = false;
@@ -3440,6 +3454,34 @@ namespace MPIntranet.Entities {
                 set {
                     this[this.tableREPORTQUANTITA.PERCColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string ELENCOFASI {
+                get {
+                    try {
+                        return ((string)(this[this.tableREPORTQUANTITA.ELENCOFASIColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ELENCOFASI\' in table \'REPORTQUANTITA\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableREPORTQUANTITA.ELENCOFASIColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsELENCOFASINull() {
+                return this.IsNull(this.tableREPORTQUANTITA.ELENCOFASIColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetELENCOFASINull() {
+                this[this.tableREPORTQUANTITA.ELENCOFASIColumn] = global::System.Convert.DBNull;
             }
         }
         

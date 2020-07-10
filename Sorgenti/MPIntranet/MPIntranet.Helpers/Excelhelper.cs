@@ -303,15 +303,15 @@ namespace MPIntranet.Helpers
 
                 Row row = new Row();
 
-                row.Append(ConstructCell("Cliente", CellValues.String, 2));
+                row.Append(ConstructCell("Segnalatore", CellValues.String, 2));
                 row.Append(ConstructCell("Quantità", CellValues.String, 2));
                 row.Append(ConstructCell("Quantità non spedita", CellValues.String, 2));
+                row.Append(ConstructCell("Quantità scaduta", CellValues.String, 2));
                 row.Append(ConstructCell("Quantità annullata", CellValues.String, 2));
                 row.Append(ConstructCell("Valore", CellValues.String, 2));
                 row.Append(ConstructCell("Valore non spedito", CellValues.String, 2));
-                row.Append(ConstructCell("Valore annullato", CellValues.String, 2));
                 row.Append(ConstructCell("Valore scaduto", CellValues.String, 2));
-                row.Append(ConstructCell("Valore non scaduto", CellValues.String, 2));
+                row.Append(ConstructCell("Valore annullato", CellValues.String, 2));
                 row.Append(ConstructCell("% scaduto su cliente", CellValues.String, 2));
                 row.Append(ConstructCell("% scaduto su totale", CellValues.String, 2));
 
@@ -324,12 +324,12 @@ namespace MPIntranet.Helpers
                     rowDati.Append(ConstructCell(reportquantita.Cliente, CellValues.String, 1));
                     rowDati.Append(ConstructCell(reportquantita.Quantita.ToString(), CellValues.String, 1));
                     rowDati.Append(ConstructCell(reportquantita.QuantitaNonSpedita.ToString(), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(reportquantita.QuantitaScaduta.ToString(), CellValues.String, 1));
                     rowDati.Append(ConstructCell(reportquantita.QuantitaAnnullata.ToString(), CellValues.String, 1));
                     rowDati.Append(ConstructCell(reportquantita.Valore.ToString(), CellValues.String, 1));
                     rowDati.Append(ConstructCell(reportquantita.ValoreNonSpedito.ToString(), CellValues.String, 1));
-                    rowDati.Append(ConstructCell(reportquantita.ValoreAnnullato.ToString(), CellValues.String, 1));
                     rowDati.Append(ConstructCell(reportquantita.ValoreScaduto.ToString(), CellValues.String, 1));
-                    rowDati.Append(ConstructCell(reportquantita.ValoreNonScaduto.ToString(), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(reportquantita.ValoreAnnullato.ToString(), CellValues.String, 1));
                     rowDati.Append(ConstructCell(reportquantita.PercScadutoCliente.ToString(), CellValues.String, 1));
                     rowDati.Append(ConstructCell(reportquantita.PercScadutoSulTotale.ToString(), CellValues.String, 1));
 

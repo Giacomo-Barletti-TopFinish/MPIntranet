@@ -7,29 +7,25 @@
 }
 else
 {
-    <div>
+    <div style="overflow-y:auto; overflow-x:hidden; height:600px">
         <table id="grigliaRisultati" class="table table-condensed table-hover">
             <thead style="background-color:aliceblue">
                 <tr>
                     <th width="20%">Cliente</th>
                     <th width="8%">Quantità</th>
                     <th width="8%">Quantità no sped</th>
+                    <th width="8%">Quantità scaduta</th>
                     <th width="8%">Quantità annullata</th>
                     <th width="8%">Valore</th>
                     <th width="8%">Valore no sped</th>
-                    <th width="8%">Valore annullato</th>
                     <th width="8%">Valore scaduto</th>
-                    <th width="8%">Valore non sca</th>
+                    <th width="8%">Valore annullato</th>
                     <th width="8%">Perc scad cli</th>
                     <th width="8%">Perc scad tot</th>
 
                     <th></th>
                 </tr>
             </thead>
-        </table>
-    </div>
-    <div style="overflow-y:auto; overflow-x:hidden; height:600px">
-        <table id="grigliaRisultati" class="table table-condensed table-hover">
             <tbody>
                 @foreach (OrdiniAttiviModel report in Model)
                 {
@@ -37,12 +33,12 @@ else
                     <td width="20%">@report.Cliente</td>
                     <td width="8%">@report.Quantita</td>
                     <td width="8%">@report.QuantitaNonSpedita</td>
+                    <td width="8%">@report.QuantitaScaduta</td>
                     <td width="8%">@report.QuantitaAnnullata</td>
                     <td width="8%">@report.Valore</td>
                     <td width="8%">@report.ValoreNonSpedito</td>
-                    <td width="8%">@report.ValoreAnnullato</td>
                     <td width="8%">@report.ValoreScaduto</td>
-                    <td width="8%">@report.ValoreNonScaduto</td>
+                    <td width="8%">@report.ValoreAnnullato</td>
                     <td width="8%">@report.PercScadutoCliente</td>
                     <td width="8%">@report.PercScadutoSulTotale</td>
                     <td></td>
