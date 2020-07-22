@@ -35,7 +35,11 @@
         <input type="button" onclick="SalvaProcesso();" class="btn btn-primary" value="Salva processo" />
     </div>
     <div class="col-sm-1">
-        <input type="button" onclick="CancellaProcesso();" class="btn btn-primary" value="Cancella processo" />
+        @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(81))
+        {
+
+            <input type="button" onclick="CancellaProcesso();" class="btn btn-primary" value="Cancella processo" />
+        }
     </div>
 </div>
 @if (Model.Colore.IdColore != MPIntranet.Entities.ElementiVuoti.ColoreVuoto)
