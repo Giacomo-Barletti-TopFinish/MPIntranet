@@ -215,7 +215,8 @@ namespace MPPreventivatore
 
             ddlProcessiGalvanici.Items.Clear();
             _processiGalvanici = pg.CaricaProcessiStandard();
-            _processiGalvanici = _processiGalvanici.Where(x => x.Colore.IdColore == prodottoFinitoUC1.ProdottoFinitoModel.Colore.IdColore).ToList();
+            if (prodottoFinitoUC1.ProdottoFinitoModel.Colore != null)
+                _processiGalvanici = _processiGalvanici.Where(x => x.Colore.IdColore == prodottoFinitoUC1.ProdottoFinitoModel.Colore.IdColore).ToList();
             ddlProcessiGalvanici.Items.AddRange(_processiGalvanici.ToArray());
         }
 
@@ -256,7 +257,7 @@ namespace MPPreventivatore
             treeView1.ExpandAll();
             caricaGrigliaElementiPreventivo();
 
-            if(_preventivoSelezionato!=null)
+            if (_preventivoSelezionato != null)
             {
                 if (_articolo.CreaListaPreventivoCostiModel(_preventivoSelezionato.IdPreventivo).Count() > 0)
                     abilitaControlli(false);
@@ -652,7 +653,7 @@ namespace MPPreventivatore
             ProcessoModel processoSelezionato = (ProcessoModel)ddlProcessiGalvanici.SelectedItem;
 
             dgvProcessoGalvanico.Rows.Clear();
-            foreach(FaseProcessoModel fase in processoSelezionato.Fasi)
+            foreach (FaseProcessoModel fase in processoSelezionato.Fasi)
             {
                 int indiceRiga = dgvProcessoGalvanico.Rows.Add(new object[] { fase.Vasca.DescrizioneBreve, fase.Vasca.Materiale.Descrizione, fase.SpessoreMinimo, fase.SpessoreNominale, fase.SpessoreMassimo });
                 if (fase.Vasca.Materiale.Prezioso == SiNo.Si)

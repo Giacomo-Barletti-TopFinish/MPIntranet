@@ -40,16 +40,6 @@
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.lstFasi = new System.Windows.Forms.ListBox();
             this.dgvElementi = new System.Windows.Forms.DataGridView();
-            this.IdEelementoPreventivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Articolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Codice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descrizione = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reparto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Peso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Superficie = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Quantita = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PezziOrari = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nota = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lstMateriePrime = new System.Windows.Forms.ListBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -70,6 +60,17 @@
             this.ddlProcessiGalvanici = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.IdEelementoPreventivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Articolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Codice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descrizione = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reparto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Processo = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Peso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Superficie = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantita = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PezziOrari = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nota = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvElementi)).BeginInit();
@@ -206,6 +207,7 @@
             this.Codice,
             this.Descrizione,
             this.Reparto,
+            this.Processo,
             this.Peso,
             this.Superficie,
             this.Quantita,
@@ -222,80 +224,6 @@
             this.dgvElementi.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvElementi_CellClick);
             this.dgvElementi.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvElementi_CellEndEdit);
             this.dgvElementi.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvElementi_EditingControlShowing);
-            // 
-            // IdEelementoPreventivo
-            // 
-            this.IdEelementoPreventivo.DataPropertyName = "IdElementoPreventivo";
-            this.IdEelementoPreventivo.HeaderText = "IdEelementoPreventivo";
-            this.IdEelementoPreventivo.Name = "IdEelementoPreventivo";
-            this.IdEelementoPreventivo.Visible = false;
-            // 
-            // Articolo
-            // 
-            this.Articolo.DataPropertyName = "Articolo";
-            this.Articolo.HeaderText = "Articolo";
-            this.Articolo.MaxInputLength = 30;
-            this.Articolo.Name = "Articolo";
-            // 
-            // Codice
-            // 
-            this.Codice.DataPropertyName = "Codice";
-            this.Codice.HeaderText = "Codice";
-            this.Codice.Name = "Codice";
-            this.Codice.ReadOnly = true;
-            // 
-            // Descrizione
-            // 
-            this.Descrizione.DataPropertyName = "Descrizione";
-            this.Descrizione.HeaderText = "Descrizione";
-            this.Descrizione.Name = "Descrizione";
-            this.Descrizione.ReadOnly = true;
-            // 
-            // Reparto
-            // 
-            this.Reparto.DataPropertyName = "Reparto";
-            this.Reparto.HeaderText = "Reparto";
-            this.Reparto.Name = "Reparto";
-            this.Reparto.ReadOnly = true;
-            // 
-            // Peso
-            // 
-            this.Peso.DataPropertyName = "Peso";
-            this.Peso.FillWeight = 80F;
-            this.Peso.HeaderText = "Peso";
-            this.Peso.Name = "Peso";
-            this.Peso.Width = 80;
-            // 
-            // Superficie
-            // 
-            this.Superficie.DataPropertyName = "Superficie";
-            this.Superficie.FillWeight = 80F;
-            this.Superficie.HeaderText = "Superficie";
-            this.Superficie.Name = "Superficie";
-            this.Superficie.Width = 80;
-            // 
-            // Quantita
-            // 
-            this.Quantita.DataPropertyName = "Quantita";
-            this.Quantita.FillWeight = 80F;
-            this.Quantita.HeaderText = "Quantità";
-            this.Quantita.Name = "Quantita";
-            this.Quantita.Width = 80;
-            // 
-            // PezziOrari
-            // 
-            this.PezziOrari.DataPropertyName = "PezziOrari";
-            this.PezziOrari.FillWeight = 80F;
-            this.PezziOrari.HeaderText = "Pezzi orari";
-            this.PezziOrari.Name = "PezziOrari";
-            this.PezziOrari.Width = 80;
-            // 
-            // Nota
-            // 
-            this.Nota.DataPropertyName = "Nota";
-            this.Nota.HeaderText = "Nota";
-            this.Nota.MaxInputLength = 200;
-            this.Nota.Name = "Nota";
             // 
             // lstMateriePrime
             // 
@@ -512,6 +440,85 @@
             this.label5.TabIndex = 12;
             this.label5.Text = "Premere shift per inserire dopo il nodo selezionato";
             // 
+            // IdEelementoPreventivo
+            // 
+            this.IdEelementoPreventivo.DataPropertyName = "IdElementoPreventivo";
+            this.IdEelementoPreventivo.HeaderText = "IdEelementoPreventivo";
+            this.IdEelementoPreventivo.Name = "IdEelementoPreventivo";
+            this.IdEelementoPreventivo.Visible = false;
+            // 
+            // Articolo
+            // 
+            this.Articolo.DataPropertyName = "Articolo";
+            this.Articolo.HeaderText = "Articolo";
+            this.Articolo.MaxInputLength = 30;
+            this.Articolo.Name = "Articolo";
+            // 
+            // Codice
+            // 
+            this.Codice.DataPropertyName = "Codice";
+            this.Codice.HeaderText = "Codice";
+            this.Codice.Name = "Codice";
+            this.Codice.ReadOnly = true;
+            // 
+            // Descrizione
+            // 
+            this.Descrizione.DataPropertyName = "Descrizione";
+            this.Descrizione.HeaderText = "Descrizione";
+            this.Descrizione.Name = "Descrizione";
+            this.Descrizione.ReadOnly = true;
+            // 
+            // Reparto
+            // 
+            this.Reparto.DataPropertyName = "Reparto";
+            this.Reparto.HeaderText = "Reparto";
+            this.Reparto.Name = "Reparto";
+            this.Reparto.ReadOnly = true;
+            // 
+            // Processo
+            // 
+            this.Processo.HeaderText = "Processo";
+            this.Processo.Name = "Processo";
+            // 
+            // Peso
+            // 
+            this.Peso.DataPropertyName = "Peso";
+            this.Peso.FillWeight = 80F;
+            this.Peso.HeaderText = "Peso";
+            this.Peso.Name = "Peso";
+            this.Peso.Width = 80;
+            // 
+            // Superficie
+            // 
+            this.Superficie.DataPropertyName = "Superficie";
+            this.Superficie.FillWeight = 80F;
+            this.Superficie.HeaderText = "Superficie";
+            this.Superficie.Name = "Superficie";
+            this.Superficie.Width = 80;
+            // 
+            // Quantita
+            // 
+            this.Quantita.DataPropertyName = "Quantita";
+            this.Quantita.FillWeight = 80F;
+            this.Quantita.HeaderText = "Quantità";
+            this.Quantita.Name = "Quantita";
+            this.Quantita.Width = 80;
+            // 
+            // PezziOrari
+            // 
+            this.PezziOrari.DataPropertyName = "PezziOrari";
+            this.PezziOrari.FillWeight = 80F;
+            this.PezziOrari.HeaderText = "Pezzi orari";
+            this.PezziOrari.Name = "PezziOrari";
+            this.PezziOrari.Width = 80;
+            // 
+            // Nota
+            // 
+            this.Nota.DataPropertyName = "Nota";
+            this.Nota.HeaderText = "Nota";
+            this.Nota.MaxInputLength = 200;
+            this.Nota.Name = "Nota";
+            // 
             // PreventivoFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -566,16 +573,6 @@
         private System.Windows.Forms.Button btnAggiorna2;
         private System.Windows.Forms.ComboBox ddlProcessiGalvanici;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdEelementoPreventivo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Articolo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Codice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descrizione;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Reparto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Peso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Superficie;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Quantita;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PezziOrari;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nota;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
@@ -586,5 +583,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SpessoreNominale;
         private System.Windows.Forms.DataGridViewTextBoxColumn SpessoreMassimo;
         private System.Windows.Forms.ListBox lstReparti;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdEelementoPreventivo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Articolo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Codice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Descrizione;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Reparto;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Processo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Peso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Superficie;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Quantita;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PezziOrari;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nota;
     }
 }

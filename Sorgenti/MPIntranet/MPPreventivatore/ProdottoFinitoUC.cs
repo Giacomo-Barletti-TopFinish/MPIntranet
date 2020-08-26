@@ -38,7 +38,7 @@ namespace MPPreventivatore
                 txtCodice.Text = ProdottoFinitoModel.Codice;
                 txtCodiceDefinitivo.Text = ProdottoFinitoModel.CodiceDefinitivo;
                 txtCodiceProvvisorio.Text = ProdottoFinitoModel.CodiceProvvisorio;
-                txtColore.Text = ProdottoFinitoModel.Colore.ToString();
+                txtColore.Text = (ProdottoFinitoModel.Colore == null) ? string.Empty : ProdottoFinitoModel.Colore.ToString();
                 txtDescrizione.Text = ProdottoFinitoModel.Descrizione;
                 txtModello.Text = ProdottoFinitoModel.Modello;
                 txtTipoProdotto.Text = ProdottoFinitoModel.TipoProdotto.ToString();
