@@ -30,7 +30,6 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.prodottoFinitoUC1 = new MPPreventivatore.ProdottoFinitoUC();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -42,22 +41,6 @@
             this.ddlPreventivi = new System.Windows.Forms.ComboBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.dgvElementi = new System.Windows.Forms.DataGridView();
-            this.IdElementoCosto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IncludiPreventivo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Articolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Codice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descrizione = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Reparto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Gruppo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Peso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Superficie = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Quantita = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PezziOrari = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Costo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ricarico = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCostoArticolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCostoFigli = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCostoCompleto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabTotali = new System.Windows.Forms.TabPage();
             this.nuPrezzoProdottoFinito = new System.Windows.Forms.NumericUpDown();
@@ -103,9 +86,27 @@
             this.RicaricoCostoFisso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CostoCostoFisso = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PressoCostoFisso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lstCostiFissi = new MPPreventivatore.DraggableListbox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvCostiGalvanica = new System.Windows.Forms.DataGridView();
+            this.IdElementoCosto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IncludiPreventivo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Articolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Codice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descrizione = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reparto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Gruppo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Processo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Peso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Superficie = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantita = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PezziOrari = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Costo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ricarico = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCostoArticolo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCostoFigli = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCostoCompleto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lstCostiFissi = new MPPreventivatore.DraggableListbox();
+            this.prodottoFinitoUC1 = new MPPreventivatore.ProdottoFinitoUC();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvElementi)).BeginInit();
@@ -133,15 +134,6 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Prodotto finito";
-            // 
-            // prodottoFinitoUC1
-            // 
-            this.prodottoFinitoUC1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.prodottoFinitoUC1.Location = new System.Drawing.Point(6, 17);
-            this.prodottoFinitoUC1.Name = "prodottoFinitoUC1";
-            this.prodottoFinitoUC1.Size = new System.Drawing.Size(767, 157);
-            this.prodottoFinitoUC1.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -262,6 +254,7 @@
             this.Descrizione,
             this.Reparto,
             this.Gruppo,
+            this.Processo,
             this.Peso,
             this.Superficie,
             this.Quantita,
@@ -283,125 +276,6 @@
             this.dgvElementi.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvElementi_CellValidated);
             this.dgvElementi.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvElementi_EditingControlShowing);
             this.dgvElementi.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvElementi_RowPrePaint);
-            // 
-            // IdElementoCosto
-            // 
-            this.IdElementoCosto.DataPropertyName = "IdElementoCosto";
-            this.IdElementoCosto.Frozen = true;
-            this.IdElementoCosto.HeaderText = "IdElementoCosto";
-            this.IdElementoCosto.Name = "IdElementoCosto";
-            this.IdElementoCosto.Visible = false;
-            // 
-            // IncludiPreventivo
-            // 
-            this.IncludiPreventivo.DataPropertyName = "IncludiPreventivo";
-            this.IncludiPreventivo.Frozen = true;
-            this.IncludiPreventivo.HeaderText = "Includi";
-            this.IncludiPreventivo.Name = "IncludiPreventivo";
-            // 
-            // Articolo
-            // 
-            this.Articolo.DataPropertyName = "ElementoPreventivo.Articolo";
-            this.Articolo.Frozen = true;
-            this.Articolo.HeaderText = "Articolo";
-            this.Articolo.MaxInputLength = 30;
-            this.Articolo.Name = "Articolo";
-            this.Articolo.ReadOnly = true;
-            // 
-            // Codice
-            // 
-            this.Codice.DataPropertyName = "ElementoPreventivo.Codice";
-            this.Codice.Frozen = true;
-            this.Codice.HeaderText = "Codice";
-            this.Codice.Name = "Codice";
-            this.Codice.ReadOnly = true;
-            // 
-            // Descrizione
-            // 
-            this.Descrizione.DataPropertyName = "ElementoPreventivo.Descrizione";
-            this.Descrizione.Frozen = true;
-            this.Descrizione.HeaderText = "Descrizione";
-            this.Descrizione.Name = "Descrizione";
-            this.Descrizione.ReadOnly = true;
-            // 
-            // Reparto
-            // 
-            this.Reparto.DataPropertyName = "ElementoPreventivo.Reparto";
-            this.Reparto.Frozen = true;
-            this.Reparto.HeaderText = "Reparto";
-            this.Reparto.Name = "Reparto";
-            this.Reparto.ReadOnly = true;
-            // 
-            // Gruppo
-            // 
-            this.Gruppo.HeaderText = "ElementoPreventivo.Gruppo";
-            this.Gruppo.Name = "Gruppo";
-            this.Gruppo.ReadOnly = true;
-            // 
-            // Peso
-            // 
-            this.Peso.DataPropertyName = "ElementoPreventivo.Peso";
-            this.Peso.FillWeight = 80F;
-            this.Peso.HeaderText = "Peso";
-            this.Peso.Name = "Peso";
-            this.Peso.ReadOnly = true;
-            this.Peso.Width = 80;
-            // 
-            // Superficie
-            // 
-            this.Superficie.DataPropertyName = "ElementoPreventivo.Superficie";
-            this.Superficie.FillWeight = 80F;
-            this.Superficie.HeaderText = "Superficie";
-            this.Superficie.Name = "Superficie";
-            this.Superficie.ReadOnly = true;
-            this.Superficie.Width = 80;
-            // 
-            // Quantita
-            // 
-            this.Quantita.DataPropertyName = "ElementoPreventivo.Quantita";
-            this.Quantita.FillWeight = 80F;
-            this.Quantita.HeaderText = "Quantità";
-            this.Quantita.Name = "Quantita";
-            this.Quantita.ReadOnly = true;
-            this.Quantita.Width = 80;
-            // 
-            // PezziOrari
-            // 
-            this.PezziOrari.DataPropertyName = "PezziOrari";
-            this.PezziOrari.FillWeight = 80F;
-            this.PezziOrari.HeaderText = "Pezzi orari";
-            this.PezziOrari.Name = "PezziOrari";
-            this.PezziOrari.Width = 80;
-            // 
-            // Costo
-            // 
-            this.Costo.DataPropertyName = "CostoOrario";
-            this.Costo.HeaderText = "CostoHH";
-            this.Costo.Name = "Costo";
-            // 
-            // Ricarico
-            // 
-            this.Ricarico.DataPropertyName = "Ricarico";
-            this.Ricarico.HeaderText = "Ricarico";
-            this.Ricarico.Name = "Ricarico";
-            // 
-            // colCostoArticolo
-            // 
-            this.colCostoArticolo.DataPropertyName = "CostoArticolo";
-            this.colCostoArticolo.HeaderText = "Costo articolo";
-            this.colCostoArticolo.Name = "colCostoArticolo";
-            // 
-            // colCostoFigli
-            // 
-            this.colCostoFigli.DataPropertyName = "CostoFigli";
-            this.colCostoFigli.HeaderText = "Costo figli";
-            this.colCostoFigli.Name = "colCostoFigli";
-            // 
-            // colCostoCompleto
-            // 
-            this.colCostoCompleto.DataPropertyName = "CostoCompleto";
-            this.colCostoCompleto.HeaderText = "Costo completo";
-            this.colCostoCompleto.Name = "colCostoCompleto";
             // 
             // tabControl1
             // 
@@ -858,13 +732,6 @@
             this.PressoCostoFisso.Name = "PressoCostoFisso";
             this.PressoCostoFisso.ReadOnly = true;
             // 
-            // lstCostiFissi
-            // 
-            this.lstCostiFissi.Location = new System.Drawing.Point(6, 6);
-            this.lstCostiFissi.Name = "lstCostiFissi";
-            this.lstCostiFissi.Size = new System.Drawing.Size(292, 329);
-            this.lstCostiFissi.TabIndex = 3;
-            // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.dgvCostiGalvanica);
@@ -885,8 +752,153 @@
             this.dgvCostiGalvanica.Location = new System.Drawing.Point(3, 3);
             this.dgvCostiGalvanica.Name = "dgvCostiGalvanica";
             this.dgvCostiGalvanica.ReadOnly = true;
-            this.dgvCostiGalvanica.Size = new System.Drawing.Size(894, 387);
+            this.dgvCostiGalvanica.Size = new System.Drawing.Size(894, 389);
             this.dgvCostiGalvanica.TabIndex = 0;
+            // 
+            // IdElementoCosto
+            // 
+            this.IdElementoCosto.DataPropertyName = "IdElementoCosto";
+            this.IdElementoCosto.Frozen = true;
+            this.IdElementoCosto.HeaderText = "IdElementoCosto";
+            this.IdElementoCosto.Name = "IdElementoCosto";
+            this.IdElementoCosto.Visible = false;
+            // 
+            // IncludiPreventivo
+            // 
+            this.IncludiPreventivo.DataPropertyName = "IncludiPreventivo";
+            this.IncludiPreventivo.Frozen = true;
+            this.IncludiPreventivo.HeaderText = "Includi";
+            this.IncludiPreventivo.Name = "IncludiPreventivo";
+            // 
+            // Articolo
+            // 
+            this.Articolo.DataPropertyName = "ElementoPreventivo.Articolo";
+            this.Articolo.Frozen = true;
+            this.Articolo.HeaderText = "Articolo";
+            this.Articolo.MaxInputLength = 30;
+            this.Articolo.Name = "Articolo";
+            this.Articolo.ReadOnly = true;
+            // 
+            // Codice
+            // 
+            this.Codice.DataPropertyName = "ElementoPreventivo.Codice";
+            this.Codice.Frozen = true;
+            this.Codice.HeaderText = "Codice";
+            this.Codice.Name = "Codice";
+            this.Codice.ReadOnly = true;
+            // 
+            // Descrizione
+            // 
+            this.Descrizione.DataPropertyName = "ElementoPreventivo.Descrizione";
+            this.Descrizione.Frozen = true;
+            this.Descrizione.HeaderText = "Descrizione";
+            this.Descrizione.Name = "Descrizione";
+            this.Descrizione.ReadOnly = true;
+            // 
+            // Reparto
+            // 
+            this.Reparto.DataPropertyName = "ElementoPreventivo.Reparto";
+            this.Reparto.Frozen = true;
+            this.Reparto.HeaderText = "Reparto";
+            this.Reparto.Name = "Reparto";
+            this.Reparto.ReadOnly = true;
+            // 
+            // Gruppo
+            // 
+            this.Gruppo.Frozen = true;
+            this.Gruppo.HeaderText = "ElementoPreventivo.Gruppo";
+            this.Gruppo.Name = "Gruppo";
+            this.Gruppo.ReadOnly = true;
+            this.Gruppo.Visible = false;
+            // 
+            // Processo
+            // 
+            this.Processo.Frozen = true;
+            this.Processo.HeaderText = "Processo";
+            this.Processo.Name = "Processo";
+            this.Processo.ReadOnly = true;
+            // 
+            // Peso
+            // 
+            this.Peso.DataPropertyName = "ElementoPreventivo.Peso";
+            this.Peso.FillWeight = 80F;
+            this.Peso.Frozen = true;
+            this.Peso.HeaderText = "Peso";
+            this.Peso.Name = "Peso";
+            this.Peso.ReadOnly = true;
+            this.Peso.Width = 80;
+            // 
+            // Superficie
+            // 
+            this.Superficie.DataPropertyName = "ElementoPreventivo.Superficie";
+            this.Superficie.FillWeight = 80F;
+            this.Superficie.HeaderText = "Superficie";
+            this.Superficie.Name = "Superficie";
+            this.Superficie.ReadOnly = true;
+            this.Superficie.Width = 80;
+            // 
+            // Quantita
+            // 
+            this.Quantita.DataPropertyName = "ElementoPreventivo.Quantita";
+            this.Quantita.FillWeight = 80F;
+            this.Quantita.HeaderText = "Quantità";
+            this.Quantita.Name = "Quantita";
+            this.Quantita.ReadOnly = true;
+            this.Quantita.Width = 80;
+            // 
+            // PezziOrari
+            // 
+            this.PezziOrari.DataPropertyName = "PezziOrari";
+            this.PezziOrari.FillWeight = 80F;
+            this.PezziOrari.HeaderText = "Pezzi orari";
+            this.PezziOrari.Name = "PezziOrari";
+            this.PezziOrari.Width = 80;
+            // 
+            // Costo
+            // 
+            this.Costo.DataPropertyName = "CostoOrario";
+            this.Costo.HeaderText = "CostoHH";
+            this.Costo.Name = "Costo";
+            // 
+            // Ricarico
+            // 
+            this.Ricarico.DataPropertyName = "Ricarico";
+            this.Ricarico.HeaderText = "Ricarico";
+            this.Ricarico.Name = "Ricarico";
+            // 
+            // colCostoArticolo
+            // 
+            this.colCostoArticolo.DataPropertyName = "CostoArticolo";
+            this.colCostoArticolo.HeaderText = "Costo articolo";
+            this.colCostoArticolo.Name = "colCostoArticolo";
+            // 
+            // colCostoFigli
+            // 
+            this.colCostoFigli.DataPropertyName = "CostoFigli";
+            this.colCostoFigli.HeaderText = "Costo figli";
+            this.colCostoFigli.Name = "colCostoFigli";
+            // 
+            // colCostoCompleto
+            // 
+            this.colCostoCompleto.DataPropertyName = "CostoCompleto";
+            this.colCostoCompleto.HeaderText = "Costo completo";
+            this.colCostoCompleto.Name = "colCostoCompleto";
+            // 
+            // lstCostiFissi
+            // 
+            this.lstCostiFissi.Location = new System.Drawing.Point(6, 6);
+            this.lstCostiFissi.Name = "lstCostiFissi";
+            this.lstCostiFissi.Size = new System.Drawing.Size(292, 329);
+            this.lstCostiFissi.TabIndex = 3;
+            // 
+            // prodottoFinitoUC1
+            // 
+            this.prodottoFinitoUC1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.prodottoFinitoUC1.Location = new System.Drawing.Point(6, 17);
+            this.prodottoFinitoUC1.Name = "prodottoFinitoUC1";
+            this.prodottoFinitoUC1.Size = new System.Drawing.Size(767, 157);
+            this.prodottoFinitoUC1.TabIndex = 0;
             // 
             // CostoFrm
             // 
@@ -967,8 +979,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn RicaricoCostoFisso;
         private System.Windows.Forms.DataGridViewTextBoxColumn CostoCostoFisso;
         private System.Windows.Forms.DataGridViewTextBoxColumn PressoCostoFisso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdElementoCosto;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn IncludiPreventivo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colElementoArticolo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colElementoCodice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colElementoDescrizione;
@@ -980,20 +990,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colElementoPezziOrari;
         private System.Windows.Forms.DataGridViewTextBoxColumn colElementoCostoOrario;
         private System.Windows.Forms.DataGridViewTextBoxColumn colElementoRicarico;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCostoArticolo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCostoFigli;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCostoCompleto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Articolo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Codice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descrizione;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Reparto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Gruppo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Peso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Superficie;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Quantita;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PezziOrari;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Costo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ricarico;
         private System.Windows.Forms.TextBox txtProcessoGalvanico;
         private System.Windows.Forms.DataGridView dgvProcessoGalvanico;
         private System.Windows.Forms.DataGridViewTextBoxColumn Vasca;
@@ -1014,5 +1010,22 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox txtMargineProdottoFinito;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdElementoCosto;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn IncludiPreventivo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Articolo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Codice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Descrizione;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Reparto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Gruppo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Processo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Peso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Superficie;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Quantita;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PezziOrari;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Costo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ricarico;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCostoArticolo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCostoFigli;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCostoCompleto;
     }
 }

@@ -24,4 +24,9 @@ namespace MPIntranet.Entities
         public const decimal TuttiReparti = -4;
         public const decimal TutteQuantita = -4;
     }
+
+    public static class Reparti
+    {
+        public const string Galvanica= "GALVA";
+    }
 }

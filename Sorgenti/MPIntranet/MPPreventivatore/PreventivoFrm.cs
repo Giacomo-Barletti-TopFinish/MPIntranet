@@ -71,6 +71,21 @@ namespace MPPreventivatore
 
             _source.DataSource = _elementiPreventivo;
             dgvElementi.DataSource = _source;
+
+            foreach (DataGridViewRow riga in dgvElementi.Rows)
+            {
+                if (riga.Cells["Reparto"].Value != null)
+                {
+                    RepartoModel reparto = (RepartoModel)riga.Cells["Reparto"].Value;
+
+                    if (reparto.Codice == Reparti.Galvanica)
+                    {
+                        DataGridViewComboBoxCell cella = (DataGridViewComboBoxCell)riga.Cells["Processo"];
+                        cella.Items.Clear();
+                        cella.Items.AddRange(_processiGalvanici.Select(x=>x.Descrizione).ToArray());
+                    }
+                }
+            }
         }
         private void RimuoviRamoClick(object sender, EventArgs e)
         {
@@ -214,7 +229,7 @@ namespace MPPreventivatore
             ProcessoGalvanico pg = new ProcessoGalvanico();
 
             ddlProcessiGalvanici.Items.Clear();
-            _processiGalvanici = pg.CaricaProcessiStandard();
+            _processiGalvanici = pg.CaricaProcessiStandard(prodottoFinitoUC1.ProdottoFinitoModel.Brand.IdBrand);
             if (prodottoFinitoUC1.ProdottoFinitoModel.Colore != null)
                 _processiGalvanici = _processiGalvanici.Where(x => x.Colore.IdColore == prodottoFinitoUC1.ProdottoFinitoModel.Colore.IdColore).ToList();
             ddlProcessiGalvanici.Items.AddRange(_processiGalvanici.ToArray());
@@ -615,15 +630,28 @@ namespace MPPreventivatore
             {
                 _disabilitaEdit = true;
 
+                decimal idElemento = (decimal)dgvElementi.Rows[e.RowIndex].Cells[0].Value;
                 if (e.ColumnIndex == 1)
                 {
-                    decimal idElemento = (decimal)dgvElementi.Rows[e.RowIndex].Cells[0].Value;
                     TreeNode[] nodi = treeView1.Nodes.Find(idElemento.ToString(), true);
                     if (nodi.Length == 1)
                     {
                         TreeNode nodo = nodi[0];
                         nodo.Text = ((ElementoPreventivoModel)(nodo.Tag)).ToString();
                     }
+                }
+
+                if (e.ColumnIndex == dgvElementi.Columns["Processo"].Index)
+                {
+                    DataGridViewComboBoxCell cella = (DataGridViewComboBoxCell)dgvElementi.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    if (cella == null) return;
+                    string descrizioneProcesso = (string)cella.Value;
+                    ProcessoModel processoSelezionato = _processiGalvanici.Where(x => x.Descrizione == descrizioneProcesso).FirstOrDefault();
+                    if (processoSelezionato == null) return;
+                    ElementoPreventivoModel elementoPreventivo = _elementiPreventivo.Where(x => x.IdElementoPreventivo == idElemento).FirstOrDefault();
+                    elementoPreventivo.TabellaEsterna = "PROCESSI";
+                    elementoPreventivo.IdEsterna = processoSelezionato.IdProcesso;
+                    elementoPreventivo.Processo = descrizioneProcesso;
                 }
             }
             catch (Exception ex)

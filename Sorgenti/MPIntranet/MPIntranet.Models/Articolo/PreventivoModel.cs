@@ -40,6 +40,7 @@ namespace MPIntranet.Models.Articolo
         public decimal Quantita { get; set; }
         public string Descrizione { get; set; }
         public string Articolo { get; set; }
+        public string Processo { get; set; }
         public string Nota{ get; set; }
         public override string ToString()
         {

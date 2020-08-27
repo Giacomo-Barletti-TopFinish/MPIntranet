@@ -916,7 +916,14 @@ namespace MPIntranet.Business
             elementoModel.Ricarico = elementoPreventivo.IsRICARICONull() ? 0 : elementoPreventivo.RICARICO;
             elementoModel.Superficie = elementoPreventivo.IsSUPERFICIENull() ? 0 : elementoPreventivo.SUPERFICIE;
             elementoModel.TabellaEsterna = elementoPreventivo.IsTABELLAESTERNANull() ? string.Empty : elementoPreventivo.TABELLAESTERNA;
-
+            elementoModel.IdEsterna = elementoPreventivo.IsIDESTERNANull() ? ElementiVuoti.ProcessoGalvanicoVuoto : elementoPreventivo.IDESTERNA;
+            elementoModel.Processo = string.Empty;
+            if (!elementoPreventivo.IsIDESTERNANull())
+            {
+                ProcessoGalvanico pg = new ProcessoGalvanico();
+                ProcessoModel processo= pg.EstraiProcesso(elementoPreventivo.IDESTERNA);
+                elementoModel.Processo = processo.Descrizione;
+            }
             return elementoModel;
         }
 
@@ -962,6 +969,8 @@ namespace MPIntranet.Business
                     elementoDatabase.SUPERFICIE = elementoPreventivoModel.Superficie;
 
                     elementoDatabase.TABELLAESTERNA = correggiString(elementoPreventivoModel.TabellaEsterna, 25);
+                    if (elementoPreventivoModel.IdEsterna != ElementiVuoti.ProcessoGalvanicoVuoto)
+                        elementoDatabase.IDESTERNA = elementoPreventivoModel.IdEsterna;
                     elementoDatabase.INCLUDIPREVENTIVO = elementoPreventivoModel.IncludiPreventivo ? SiNo.Si : SiNo.No;
                 }
 

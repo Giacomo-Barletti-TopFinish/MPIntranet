@@ -16,14 +16,16 @@ namespace MPIntranet.Models.Articolo
         public ColoreModel Colore { get; set; }
         public TipoProdottoModel TipoProdotto { get; set; }
         public string Descrizione { get; set; }
-        public string CodiceDefinitivo{ get; set; }
+        public string CodiceDefinitivo { get; set; }
         public string CodiceProvvisorio { get; set; }
         public bool Prevenivo { get; set; }
         public bool Preserie { get; set; }
         public bool Produzione { get; set; }
         public override string ToString()
         {
-            return string.Format("{0}-{1}({2})",Codice,Modello,Colore.CodiceFigurativo);
+            if (Colore != null)
+                return string.Format("{0}-{1}({2})", Codice, Modello, Colore.CodiceFigurativo);
+            return string.Format("{0}-{1}({2})", Codice, Modello, string.Empty);
         }
 
     }

@@ -76,6 +76,12 @@ namespace MPIntranet.Business
             return processiModel;
         }
 
+        public List<ProcessoModel> CaricaProcessiStandard(Decimal idBrand)
+        {
+            List<ProcessoModel> processi = CaricaProcessiStandard();
+            return processi.Where(x =>x.Colore!=null && x.Colore.IdBrand == idBrand).ToList();
+        }
+
         public ProcessoModel CreaProcessoModel(decimal idProcesso, List<TelaioModel> telai)
         {
 
@@ -84,7 +90,7 @@ namespace MPIntranet.Business
             {
                 using (ArticoloBusiness bArticolo = new ArticoloBusiness())
                 {
-                    bArticolo.GetProcesso(_ds, idProcesso,false);
+                    bArticolo.GetProcesso(_ds, idProcesso, false);
                     bArticolo.GetFasiProcesso(_ds, idProcesso, false);
                 }
                 processo = _ds.PROCESSI.Where(x => x.IDPROCESSO == idProcesso).FirstOrDefault();
