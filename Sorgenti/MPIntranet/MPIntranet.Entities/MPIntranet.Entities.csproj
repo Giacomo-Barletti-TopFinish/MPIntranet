@@ -58,6 +58,11 @@
       <DependentUpon>DocumentiDS.xsd</DependentUpon>
     </Compile>
     <Compile Include="ElementiVuoti.cs" />
+    <Compile Include="FBVDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FBVDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="GalvanicaDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -132,6 +137,17 @@
     </None>
     <None Include="DocumentiDS.xss">
       <DependentUpon>DocumentiDS.xsd</DependentUpon>
+    </None>
+    <None Include="FBVDS.xsc">
+      <DependentUpon>FBVDS.xsd</DependentUpon>
+    </None>
+    <None Include="FBVDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FBVDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="FBVDS.xss">
+      <DependentUpon>FBVDS.xsd</DependentUpon>
     </None>
     <None Include="GalvanicaDS.xsc">
       <DependentUpon>GalvanicaDS.xsd</DependentUpon>

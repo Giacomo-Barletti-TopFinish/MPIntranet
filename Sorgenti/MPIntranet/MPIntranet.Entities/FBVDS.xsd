@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="FBVDS" targetNamespace="http://tempuri.org/FBVDS.xsd" xmlns:mstns="http://tempuri.org/FBVDS.xsd" xmlns="http://tempuri.org/FBVDS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (Settings)" PropertyReference="ApplicationSettings.MPIntranet.Entities.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="System.Data.OracleClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="FBVDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="FBVDS" msprop:Generator_UserDSName="FBVDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="FBVATTRIBUTI" msprop:Generator_TableClassName="FBVATTRIBUTIDataTable" msprop:Generator_TableVarName="tableFBVATTRIBUTI" msprop:Generator_TablePropName="FBVATTRIBUTI" msprop:Generator_RowDeletingName="FBVATTRIBUTIRowDeleting" msprop:Generator_RowChangingName="FBVATTRIBUTIRowChanging" msprop:Generator_RowEvHandlerName="FBVATTRIBUTIRowChangeEventHandler" msprop:Generator_RowDeletedName="FBVATTRIBUTIRowDeleted" msprop:Generator_UserTableName="FBVATTRIBUTI" msprop:Generator_RowChangedName="FBVATTRIBUTIRowChanged" msprop:Generator_RowEvArgName="FBVATTRIBUTIRowChangeEvent" msprop:Generator_RowClassName="FBVATTRIBUTIRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDFBVATTRIBUTI" msprop:Generator_ColumnVarNameInTable="columnIDFBVATTRIBUTI" msprop:Generator_ColumnPropNameInRow="IDFBVATTRIBUTI" msprop:Generator_ColumnPropNameInTable="IDFBVATTRIBUTIColumn" msprop:Generator_UserColumnName="IDFBVATTRIBUTI" type="xs:decimal" minOccurs="0" />
+              <xs:element name="IDFBVPROPRIETA" msprop:Generator_ColumnVarNameInTable="columnIDFBVPROPRIETA" msprop:Generator_ColumnPropNameInRow="IDFBVPROPRIETA" msprop:Generator_ColumnPropNameInTable="IDFBVPROPRIETAColumn" msprop:Generator_UserColumnName="IDFBVPROPRIETA" type="xs:decimal" />
+              <xs:element name="CODICE" msprop:Generator_ColumnVarNameInTable="columnCODICE" msprop:Generator_ColumnPropNameInRow="CODICE" msprop:Generator_ColumnPropNameInTable="CODICEColumn" msprop:Generator_UserColumnName="CODICE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DESCRIZIONE" msprop:Generator_ColumnVarNameInTable="columnDESCRIZIONE" msprop:Generator_ColumnPropNameInRow="DESCRIZIONE" msprop:Generator_ColumnPropNameInTable="DESCRIZIONEColumn" msprop:Generator_UserColumnName="DESCRIZIONE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CANCELLATO" msprop:Generator_ColumnVarNameInTable="columnCANCELLATO" msprop:Generator_ColumnPropNameInRow="CANCELLATO" msprop:Generator_ColumnPropNameInTable="CANCELLATOColumn" msprop:Generator_UserColumnName="CANCELLATO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATAMODIFICA" msprop:Generator_ColumnVarNameInTable="columnDATAMODIFICA" msprop:Generator_ColumnPropNameInRow="DATAMODIFICA" msprop:Generator_ColumnPropNameInTable="DATAMODIFICAColumn" msprop:Generator_UserColumnName="DATAMODIFICA" type="xs:dateTime" />
+              <xs:element name="UTENTEMODIFICA" msprop:Generator_ColumnVarNameInTable="columnUTENTEMODIFICA" msprop:Generator_ColumnPropNameInRow="UTENTEMODIFICA" msprop:Generator_ColumnPropNameInTable="UTENTEMODIFICAColumn" msprop:Generator_UserColumnName="UTENTEMODIFICA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="FBVFASI" msprop:Generator_TableClassName="FBVFASIDataTable" msprop:Generator_TableVarName="tableFBVFASI" msprop:Generator_TablePropName="FBVFASI" msprop:Generator_RowDeletingName="FBVFASIRowDeleting" msprop:Generator_RowChangingName="FBVFASIRowChanging" msprop:Generator_RowEvHandlerName="FBVFASIRowChangeEventHandler" msprop:Generator_RowDeletedName="FBVFASIRowDeleted" msprop:Generator_UserTableName="FBVFASI" msprop:Generator_RowChangedName="FBVFASIRowChanged" msprop:Generator_RowEvArgName="FBVFASIRowChangeEvent" msprop:Generator_RowClassName="FBVFASIRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDFBVFASE" msprop:Generator_ColumnVarNameInTable="columnIDFBVFASE" msprop:Generator_ColumnPropNameInRow="IDFBVFASE" msprop:Generator_ColumnPropNameInTable="IDFBVFASEColumn" msprop:Generator_UserColumnName="IDFBVFASE" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CODICE" msprop:Generator_ColumnVarNameInTable="columnCODICE" msprop:Generator_ColumnPropNameInRow="CODICE" msprop:Generator_ColumnPropNameInTable="CODICEColumn" msprop:Generator_UserColumnName="CODICE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DESCRIZIONE" msprop:Generator_ColumnVarNameInTable="columnDESCRIZIONE" msprop:Generator_ColumnPropNameInRow="DESCRIZIONE" msprop:Generator_ColumnPropNameInTable="DESCRIZIONEColumn" msprop:Generator_UserColumnName="DESCRIZIONE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RICARICO" msprop:Generator_ColumnVarNameInTable="columnRICARICO" msprop:Generator_ColumnPropNameInRow="RICARICO" msprop:Generator_ColumnPropNameInTable="RICARICOColumn" msprop:Generator_UserColumnName="RICARICO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="COSTOORARIO" msprop:Generator_ColumnVarNameInTable="columnCOSTOORARIO" msprop:Generator_ColumnPropNameInRow="COSTOORARIO" msprop:Generator_ColumnPropNameInTable="COSTOORARIOColumn" msprop:Generator_UserColumnName="COSTOORARIO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CANCELLATO" msprop:Generator_ColumnVarNameInTable="columnCANCELLATO" msprop:Generator_ColumnPropNameInRow="CANCELLATO" msprop:Generator_ColumnPropNameInTable="CANCELLATOColumn" msprop:Generator_UserColumnName="CANCELLATO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATAMODIFICA" msprop:Generator_ColumnVarNameInTable="columnDATAMODIFICA" msprop:Generator_ColumnPropNameInRow="DATAMODIFICA" msprop:Generator_ColumnPropNameInTable="DATAMODIFICAColumn" msprop:Generator_UserColumnName="DATAMODIFICA" type="xs:dateTime" />
+              <xs:element name="UTENTEMODIFICA" msprop:Generator_ColumnVarNameInTable="columnUTENTEMODIFICA" msprop:Generator_ColumnPropNameInRow="UTENTEMODIFICA" msprop:Generator_ColumnPropNameInTable="UTENTEMODIFICAColumn" msprop:Generator_UserColumnName="UTENTEMODIFICA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="FBVFASIPROPRIETA" msprop:Generator_TableClassName="FBVFASIPROPRIETADataTable" msprop:Generator_TableVarName="tableFBVFASIPROPRIETA" msprop:Generator_TablePropName="FBVFASIPROPRIETA" msprop:Generator_RowDeletingName="FBVFASIPROPRIETARowDeleting" msprop:Generator_RowChangingName="FBVFASIPROPRIETARowChanging" msprop:Generator_RowEvHandlerName="FBVFASIPROPRIETARowChangeEventHandler" msprop:Generator_RowDeletedName="FBVFASIPROPRIETARowDeleted" msprop:Generator_UserTableName="FBVFASIPROPRIETA" msprop:Generator_RowChangedName="FBVFASIPROPRIETARowChanged" msprop:Generator_RowEvArgName="FBVFASIPROPRIETARowChangeEvent" msprop:Generator_RowClassName="FBVFASIPROPRIETARow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDFBVFASIPROPRIETA" msprop:Generator_ColumnVarNameInTable="columnIDFBVFASIPROPRIETA" msprop:Generator_ColumnPropNameInRow="IDFBVFASIPROPRIETA" msprop:Generator_ColumnPropNameInTable="IDFBVFASIPROPRIETAColumn" msprop:Generator_UserColumnName="IDFBVFASIPROPRIETA" type="xs:decimal" minOccurs="0" />
+              <xs:element name="IDFBVPROPRIETA" msprop:Generator_ColumnVarNameInTable="columnIDFBVPROPRIETA" msprop:Generator_ColumnPropNameInRow="IDFBVPROPRIETA" msprop:Generator_ColumnPropNameInTable="IDFBVPROPRIETAColumn" msprop:Generator_UserColumnName="IDFBVPROPRIETA" type="xs:decimal" />
+              <xs:element name="IDFBVFASE" msprop:Generator_ColumnVarNameInTable="columnIDFBVFASE" msprop:Generator_ColumnPropNameInRow="IDFBVFASE" msprop:Generator_ColumnPropNameInTable="IDFBVFASEColumn" msprop:Generator_UserColumnName="IDFBVFASE" type="xs:decimal" />
+              <xs:element name="CANCELLATO" msprop:Generator_ColumnVarNameInTable="columnCANCELLATO" msprop:Generator_ColumnPropNameInRow="CANCELLATO" msprop:Generator_ColumnPropNameInTable="CANCELLATOColumn" msprop:Generator_UserColumnName="CANCELLATO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATAMODIFICA" msprop:Generator_ColumnVarNameInTable="columnDATAMODIFICA" msprop:Generator_ColumnPropNameInRow="DATAMODIFICA" msprop:Generator_ColumnPropNameInTable="DATAMODIFICAColumn" msprop:Generator_UserColumnName="DATAMODIFICA" type="xs:dateTime" />
+              <xs:element name="UTENTEMODIFICA" msprop:Generator_ColumnVarNameInTable="columnUTENTEMODIFICA" msprop:Generator_ColumnPropNameInRow="UTENTEMODIFICA" msprop:Generator_ColumnPropNameInTable="UTENTEMODIFICAColumn" msprop:Generator_UserColumnName="UTENTEMODIFICA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="FBVPROCESSI" msprop:Generator_TableClassName="FBVPROCESSIDataTable" msprop:Generator_TableVarName="tableFBVPROCESSI" msprop:Generator_TablePropName="FBVPROCESSI" msprop:Generator_RowDeletingName="FBVPROCESSIRowDeleting" msprop:Generator_RowChangingName="FBVPROCESSIRowChanging" msprop:Generator_RowEvHandlerName="FBVPROCESSIRowChangeEventHandler" msprop:Generator_RowDeletedName="FBVPROCESSIRowDeleted" msprop:Generator_UserTableName="FBVPROCESSI" msprop:Generator_RowChangedName="FBVPROCESSIRowChanged" msprop:Generator_RowEvArgName="FBVPROCESSIRowChangeEvent" msprop:Generator_RowClassName="FBVPROCESSIRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDFBVPROCESSO" msprop:Generator_ColumnVarNameInTable="columnIDFBVPROCESSO" msprop:Generator_ColumnPropNameInRow="IDFBVPROCESSO" msprop:Generator_ColumnPropNameInTable="IDFBVPROCESSOColumn" msprop:Generator_UserColumnName="IDFBVPROCESSO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="IDARTICOLO" msprop:Generator_ColumnVarNameInTable="columnIDARTICOLO" msprop:Generator_ColumnPropNameInRow="IDARTICOLO" msprop:Generator_ColumnPropNameInTable="IDARTICOLOColumn" msprop:Generator_UserColumnName="IDARTICOLO" type="xs:decimal" />
+              <xs:element name="IDCOLORE" msprop:Generator_ColumnVarNameInTable="columnIDCOLORE" msprop:Generator_ColumnPropNameInRow="IDCOLORE" msprop:Generator_ColumnPropNameInTable="IDCOLOREColumn" msprop:Generator_UserColumnName="IDCOLORE" type="xs:decimal" />
+              <xs:element name="DESCRIZIONE" msprop:Generator_ColumnVarNameInTable="columnDESCRIZIONE" msprop:Generator_ColumnPropNameInRow="DESCRIZIONE" msprop:Generator_ColumnPropNameInTable="DESCRIZIONEColumn" msprop:Generator_UserColumnName="DESCRIZIONE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="STANDARD" msprop:Generator_ColumnVarNameInTable="columnSTANDARD" msprop:Generator_ColumnPropNameInRow="STANDARD" msprop:Generator_ColumnPropNameInTable="STANDARDColumn" msprop:Generator_UserColumnName="STANDARD">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CANCELLATO" msprop:Generator_ColumnVarNameInTable="columnCANCELLATO" msprop:Generator_ColumnPropNameInRow="CANCELLATO" msprop:Generator_ColumnPropNameInTable="CANCELLATOColumn" msprop:Generator_UserColumnName="CANCELLATO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATAMODIFICA" msprop:Generator_ColumnVarNameInTable="columnDATAMODIFICA" msprop:Generator_ColumnPropNameInRow="DATAMODIFICA" msprop:Generator_ColumnPropNameInTable="DATAMODIFICAColumn" msprop:Generator_UserColumnName="DATAMODIFICA" type="xs:dateTime" />
+              <xs:element name="UTENTEMODIFICA" msprop:Generator_ColumnVarNameInTable="columnUTENTEMODIFICA" msprop:Generator_ColumnPropNameInRow="UTENTEMODIFICA" msprop:Generator_ColumnPropNameInTable="UTENTEMODIFICAColumn" msprop:Generator_UserColumnName="UTENTEMODIFICA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="FBVPROPRIETA" msprop:Generator_TableClassName="FBVPROPRIETADataTable" msprop:Generator_TableVarName="tableFBVPROPRIETA" msprop:Generator_TablePropName="FBVPROPRIETA" msprop:Generator_RowDeletingName="FBVPROPRIETARowDeleting" msprop:Generator_RowChangingName="FBVPROPRIETARowChanging" msprop:Generator_RowEvHandlerName="FBVPROPRIETARowChangeEventHandler" msprop:Generator_RowDeletedName="FBVPROPRIETARowDeleted" msprop:Generator_UserTableName="FBVPROPRIETA" msprop:Generator_RowChangedName="FBVPROPRIETARowChanged" msprop:Generator_RowEvArgName="FBVPROPRIETARowChangeEvent" msprop:Generator_RowClassName="FBVPROPRIETARow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDFBVPROPRIETA" msprop:Generator_ColumnVarNameInTable="columnIDFBVPROPRIETA" msprop:Generator_ColumnPropNameInRow="IDFBVPROPRIETA" msprop:Generator_ColumnPropNameInTable="IDFBVPROPRIETAColumn" msprop:Generator_UserColumnName="IDFBVPROPRIETA" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CODICE" msprop:Generator_ColumnVarNameInTable="columnCODICE" msprop:Generator_ColumnPropNameInRow="CODICE" msprop:Generator_ColumnPropNameInTable="CODICEColumn" msprop:Generator_UserColumnName="CODICE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DESCRIZIONE" msprop:Generator_ColumnVarNameInTable="columnDESCRIZIONE" msprop:Generator_ColumnPropNameInRow="DESCRIZIONE" msprop:Generator_ColumnPropNameInTable="DESCRIZIONEColumn" msprop:Generator_UserColumnName="DESCRIZIONE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="40" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CANCELLATO" msprop:Generator_ColumnVarNameInTable="columnCANCELLATO" msprop:Generator_ColumnPropNameInRow="CANCELLATO" msprop:Generator_ColumnPropNameInTable="CANCELLATOColumn" msprop:Generator_UserColumnName="CANCELLATO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATAMODIFICA" msprop:Generator_ColumnVarNameInTable="columnDATAMODIFICA" msprop:Generator_ColumnPropNameInRow="DATAMODIFICA" msprop:Generator_ColumnPropNameInTable="DATAMODIFICAColumn" msprop:Generator_UserColumnName="DATAMODIFICA" type="xs:dateTime" />
+              <xs:element name="UTENTEMODIFICA" msprop:Generator_ColumnVarNameInTable="columnUTENTEMODIFICA" msprop:Generator_ColumnPropNameInRow="UTENTEMODIFICA" msprop:Generator_ColumnPropNameInTable="UTENTEMODIFICAColumn" msprop:Generator_UserColumnName="UTENTEMODIFICA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="FBVPROCESSIFASI" msprop:Generator_TableClassName="FBVPROCESSIFASIDataTable" msprop:Generator_TableVarName="tableFBVPROCESSIFASI" msprop:Generator_TablePropName="FBVPROCESSIFASI" msprop:Generator_RowDeletingName="FBVPROCESSIFASIRowDeleting" msprop:Generator_RowChangingName="FBVPROCESSIFASIRowChanging" msprop:Generator_RowEvHandlerName="FBVPROCESSIFASIRowChangeEventHandler" msprop:Generator_RowDeletedName="FBVPROCESSIFASIRowDeleted" msprop:Generator_UserTableName="FBVPROCESSIFASI" msprop:Generator_RowChangedName="FBVPROCESSIFASIRowChanged" msprop:Generator_RowEvArgName="FBVPROCESSIFASIRowChangeEvent" msprop:Generator_RowClassName="FBVPROCESSIFASIRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDFBVPROCESSIFASI" msprop:Generator_ColumnVarNameInTable="columnIDFBVPROCESSIFASI" msprop:Generator_ColumnPropNameInRow="IDFBVPROCESSIFASI" msprop:Generator_ColumnPropNameInTable="IDFBVPROCESSIFASIColumn" msprop:Generator_UserColumnName="IDFBVPROCESSIFASI" type="xs:decimal" minOccurs="0" />
+              <xs:element name="IDFBVFASE" msprop:Generator_ColumnVarNameInTable="columnIDFBVFASE" msprop:Generator_ColumnPropNameInRow="IDFBVFASE" msprop:Generator_ColumnPropNameInTable="IDFBVFASEColumn" msprop:Generator_UserColumnName="IDFBVFASE" type="xs:decimal" />
+              <xs:element name="IDFBVPROCESSO" msprop:Generator_ColumnVarNameInTable="columnIDFBVPROCESSO" msprop:Generator_ColumnPropNameInRow="IDFBVPROCESSO" msprop:Generator_ColumnPropNameInTable="IDFBVPROCESSOColumn" msprop:Generator_UserColumnName="IDFBVPROCESSO" type="xs:decimal" />
+              <xs:element name="IDFBVATTRIBUTI" msprop:Generator_ColumnVarNameInTable="columnIDFBVATTRIBUTI" msprop:Generator_ColumnPropNameInRow="IDFBVATTRIBUTI" msprop:Generator_ColumnPropNameInTable="IDFBVATTRIBUTIColumn" msprop:Generator_UserColumnName="IDFBVATTRIBUTI" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PEZZIORARI" msprop:Generator_ColumnVarNameInTable="columnPEZZIORARI" msprop:Generator_ColumnPropNameInRow="PEZZIORARI" msprop:Generator_ColumnPropNameInTable="PEZZIORARIColumn" msprop:Generator_UserColumnName="PEZZIORARI" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DURATA" msprop:Generator_ColumnVarNameInTable="columnDURATA" msprop:Generator_ColumnPropNameInRow="DURATA" msprop:Generator_ColumnPropNameInTable="DURATAColumn" msprop:Generator_UserColumnName="DURATA" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="8" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SEQUENZA" msprop:Generator_ColumnVarNameInTable="columnSEQUENZA" msprop:Generator_ColumnPropNameInRow="SEQUENZA" msprop:Generator_ColumnPropNameInTable="SEQUENZAColumn" msprop:Generator_UserColumnName="SEQUENZA" type="xs:decimal" />
+              <xs:element name="QUANTITA" msprop:Generator_ColumnVarNameInTable="columnQUANTITA" msprop:Generator_ColumnPropNameInRow="QUANTITA" msprop:Generator_ColumnPropNameInTable="QUANTITAColumn" msprop:Generator_UserColumnName="QUANTITA" type="xs:decimal" minOccurs="0" />
+              <xs:element name="VELOCITA" msprop:Generator_ColumnVarNameInTable="columnVELOCITA" msprop:Generator_ColumnPropNameInRow="VELOCITA" msprop:Generator_ColumnPropNameInTable="VELOCITAColumn" msprop:Generator_UserColumnName="VELOCITA" type="xs:decimal" minOccurs="0" />
+              <xs:element name="VIBRATORE" msprop:Generator_ColumnVarNameInTable="columnVIBRATORE" msprop:Generator_ColumnPropNameInRow="VIBRATORE" msprop:Generator_ColumnPropNameInTable="VIBRATOREColumn" msprop:Generator_UserColumnName="VIBRATORE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="BARATTOLO" msprop:Generator_ColumnVarNameInTable="columnBARATTOLO" msprop:Generator_ColumnPropNameInRow="BARATTOLO" msprop:Generator_ColumnPropNameInTable="BARATTOLOColumn" msprop:Generator_UserColumnName="BARATTOLO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RICARICO" msprop:Generator_ColumnVarNameInTable="columnRICARICO" msprop:Generator_ColumnPropNameInRow="RICARICO" msprop:Generator_ColumnPropNameInTable="RICARICOColumn" msprop:Generator_UserColumnName="RICARICO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="COSTOORARIO" msprop:Generator_ColumnVarNameInTable="columnCOSTOORARIO" msprop:Generator_ColumnPropNameInRow="COSTOORARIO" msprop:Generator_ColumnPropNameInTable="COSTOORARIOColumn" msprop:Generator_UserColumnName="COSTOORARIO" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CANCELLATO" msprop:Generator_ColumnVarNameInTable="columnCANCELLATO" msprop:Generator_ColumnPropNameInRow="CANCELLATO" msprop:Generator_ColumnPropNameInTable="CANCELLATOColumn" msprop:Generator_UserColumnName="CANCELLATO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATAMODIFICA" msprop:Generator_ColumnVarNameInTable="columnDATAMODIFICA" msprop:Generator_ColumnPropNameInRow="DATAMODIFICA" msprop:Generator_ColumnPropNameInTable="DATAMODIFICAColumn" msprop:Generator_UserColumnName="DATAMODIFICA" type="xs:dateTime" />
+              <xs:element name="UTENTEMODIFICA" msprop:Generator_ColumnVarNameInTable="columnUTENTEMODIFICA" msprop:Generator_ColumnPropNameInRow="UTENTEMODIFICA" msprop:Generator_ColumnPropNameInTable="UTENTEMODIFICAColumn" msprop:Generator_UserColumnName="UTENTEMODIFICA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
