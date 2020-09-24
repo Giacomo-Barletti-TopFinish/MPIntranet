@@ -71,5 +71,5 @@ namespace MPIntranet.DataAccess.Galvanica
             }
         }
     }
-}
+} 
 

@@ -14,7 +14,7 @@
   <xs:element name="FBVDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="FBVDS" msprop:Generator_UserDSName="FBVDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="FBVATTRIBUTI" msprop:Generator_TableClassName="FBVATTRIBUTIDataTable" msprop:Generator_TableVarName="tableFBVATTRIBUTI" msprop:Generator_RowChangedName="FBVATTRIBUTIRowChanged" msprop:Generator_TablePropName="FBVATTRIBUTI" msprop:Generator_RowDeletingName="FBVATTRIBUTIRowDeleting" msprop:Generator_RowChangingName="FBVATTRIBUTIRowChanging" msprop:Generator_RowEvHandlerName="FBVATTRIBUTIRowChangeEventHandler" msprop:Generator_RowDeletedName="FBVATTRIBUTIRowDeleted" msprop:Generator_RowClassName="FBVATTRIBUTIRow" msprop:Generator_UserTableName="FBVATTRIBUTI" msprop:Generator_RowEvArgName="FBVATTRIBUTIRowChangeEvent">
+        <xs:element name="FBVATTRIBUTI" msprop:Generator_TableClassName="FBVATTRIBUTIDataTable" msprop:Generator_TableVarName="tableFBVATTRIBUTI" msprop:Generator_TablePropName="FBVATTRIBUTI" msprop:Generator_RowDeletingName="FBVATTRIBUTIRowDeleting" msprop:Generator_RowChangingName="FBVATTRIBUTIRowChanging" msprop:Generator_RowEvHandlerName="FBVATTRIBUTIRowChangeEventHandler" msprop:Generator_RowDeletedName="FBVATTRIBUTIRowDeleted" msprop:Generator_UserTableName="FBVATTRIBUTI" msprop:Generator_RowChangedName="FBVATTRIBUTIRowChanged" msprop:Generator_RowEvArgName="FBVATTRIBUTIRowChangeEvent" msprop:Generator_RowClassName="FBVATTRIBUTIRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDFBVATTRIBUTI" msprop:Generator_ColumnVarNameInTable="columnIDFBVATTRIBUTI" msprop:Generator_ColumnPropNameInRow="IDFBVATTRIBUTI" msprop:Generator_ColumnPropNameInTable="IDFBVATTRIBUTIColumn" msprop:Generator_UserColumnName="IDFBVATTRIBUTI" type="xs:decimal" minOccurs="0" />
@@ -51,7 +51,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="FBVFASI" msprop:Generator_TableClassName="FBVFASIDataTable" msprop:Generator_TableVarName="tableFBVFASI" msprop:Generator_RowChangedName="FBVFASIRowChanged" msprop:Generator_TablePropName="FBVFASI" msprop:Generator_RowDeletingName="FBVFASIRowDeleting" msprop:Generator_RowChangingName="FBVFASIRowChanging" msprop:Generator_RowEvHandlerName="FBVFASIRowChangeEventHandler" msprop:Generator_RowDeletedName="FBVFASIRowDeleted" msprop:Generator_RowClassName="FBVFASIRow" msprop:Generator_UserTableName="FBVFASI" msprop:Generator_RowEvArgName="FBVFASIRowChangeEvent">
+        <xs:element name="FBVFASI" msprop:Generator_TableClassName="FBVFASIDataTable" msprop:Generator_TableVarName="tableFBVFASI" msprop:Generator_TablePropName="FBVFASI" msprop:Generator_RowDeletingName="FBVFASIRowDeleting" msprop:Generator_RowChangingName="FBVFASIRowChanging" msprop:Generator_RowEvHandlerName="FBVFASIRowChangeEventHandler" msprop:Generator_RowDeletedName="FBVFASIRowDeleted" msprop:Generator_UserTableName="FBVFASI" msprop:Generator_RowChangedName="FBVFASIRowChanged" msprop:Generator_RowEvArgName="FBVFASIRowChangeEvent" msprop:Generator_RowClassName="FBVFASIRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDFBVFASE" msprop:Generator_ColumnVarNameInTable="columnIDFBVFASE" msprop:Generator_ColumnPropNameInRow="IDFBVFASE" msprop:Generator_ColumnPropNameInTable="IDFBVFASEColumn" msprop:Generator_UserColumnName="IDFBVFASE" type="xs:decimal" minOccurs="0" />
@@ -89,7 +89,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="FBVFASIPROPRIETA" msprop:Generator_TableClassName="FBVFASIPROPRIETADataTable" msprop:Generator_TableVarName="tableFBVFASIPROPRIETA" msprop:Generator_RowChangedName="FBVFASIPROPRIETARowChanged" msprop:Generator_TablePropName="FBVFASIPROPRIETA" msprop:Generator_RowDeletingName="FBVFASIPROPRIETARowDeleting" msprop:Generator_RowChangingName="FBVFASIPROPRIETARowChanging" msprop:Generator_RowEvHandlerName="FBVFASIPROPRIETARowChangeEventHandler" msprop:Generator_RowDeletedName="FBVFASIPROPRIETARowDeleted" msprop:Generator_RowClassName="FBVFASIPROPRIETARow" msprop:Generator_UserTableName="FBVFASIPROPRIETA" msprop:Generator_RowEvArgName="FBVFASIPROPRIETARowChangeEvent">
+        <xs:element name="FBVFASIPROPRIETA" msprop:Generator_TableClassName="FBVFASIPROPRIETADataTable" msprop:Generator_TableVarName="tableFBVFASIPROPRIETA" msprop:Generator_TablePropName="FBVFASIPROPRIETA" msprop:Generator_RowDeletingName="FBVFASIPROPRIETARowDeleting" msprop:Generator_RowChangingName="FBVFASIPROPRIETARowChanging" msprop:Generator_RowEvHandlerName="FBVFASIPROPRIETARowChangeEventHandler" msprop:Generator_RowDeletedName="FBVFASIPROPRIETARowDeleted" msprop:Generator_UserTableName="FBVFASIPROPRIETA" msprop:Generator_RowChangedName="FBVFASIPROPRIETARowChanged" msprop:Generator_RowEvArgName="FBVFASIPROPRIETARowChangeEvent" msprop:Generator_RowClassName="FBVFASIPROPRIETARow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDFBVFASIPROPRIETA" msprop:Generator_ColumnVarNameInTable="columnIDFBVFASIPROPRIETA" msprop:Generator_ColumnPropNameInRow="IDFBVFASIPROPRIETA" msprop:Generator_ColumnPropNameInTable="IDFBVFASIPROPRIETAColumn" msprop:Generator_UserColumnName="IDFBVFASIPROPRIETA" type="xs:decimal" minOccurs="0" />
@@ -113,7 +113,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="FBVPROCESSI" msprop:Generator_TableClassName="FBVPROCESSIDataTable" msprop:Generator_TableVarName="tableFBVPROCESSI" msprop:Generator_RowChangedName="FBVPROCESSIRowChanged" msprop:Generator_TablePropName="FBVPROCESSI" msprop:Generator_RowDeletingName="FBVPROCESSIRowDeleting" msprop:Generator_RowChangingName="FBVPROCESSIRowChanging" msprop:Generator_RowEvHandlerName="FBVPROCESSIRowChangeEventHandler" msprop:Generator_RowDeletedName="FBVPROCESSIRowDeleted" msprop:Generator_RowClassName="FBVPROCESSIRow" msprop:Generator_UserTableName="FBVPROCESSI" msprop:Generator_RowEvArgName="FBVPROCESSIRowChangeEvent">
+        <xs:element name="FBVPROCESSI" msprop:Generator_TableClassName="FBVPROCESSIDataTable" msprop:Generator_TableVarName="tableFBVPROCESSI" msprop:Generator_TablePropName="FBVPROCESSI" msprop:Generator_RowDeletingName="FBVPROCESSIRowDeleting" msprop:Generator_RowChangingName="FBVPROCESSIRowChanging" msprop:Generator_RowEvHandlerName="FBVPROCESSIRowChangeEventHandler" msprop:Generator_RowDeletedName="FBVPROCESSIRowDeleted" msprop:Generator_UserTableName="FBVPROCESSI" msprop:Generator_RowChangedName="FBVPROCESSIRowChanged" msprop:Generator_RowEvArgName="FBVPROCESSIRowChangeEvent" msprop:Generator_RowClassName="FBVPROCESSIRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDFBVPROCESSO" msprop:Generator_ColumnVarNameInTable="columnIDFBVPROCESSO" msprop:Generator_ColumnPropNameInRow="IDFBVPROCESSO" msprop:Generator_ColumnPropNameInTable="IDFBVPROCESSOColumn" msprop:Generator_UserColumnName="IDFBVPROCESSO" type="xs:decimal" minOccurs="0" />
@@ -151,7 +151,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="FBVPROCESSIFASI" msprop:Generator_TableClassName="FBVPROCESSIFASIDataTable" msprop:Generator_TableVarName="tableFBVPROCESSIFASI" msprop:Generator_RowChangedName="FBVPROCESSIFASIRowChanged" msprop:Generator_TablePropName="FBVPROCESSIFASI" msprop:Generator_RowDeletingName="FBVPROCESSIFASIRowDeleting" msprop:Generator_RowChangingName="FBVPROCESSIFASIRowChanging" msprop:Generator_RowEvHandlerName="FBVPROCESSIFASIRowChangeEventHandler" msprop:Generator_RowDeletedName="FBVPROCESSIFASIRowDeleted" msprop:Generator_RowClassName="FBVPROCESSIFASIRow" msprop:Generator_UserTableName="FBVPROCESSIFASI" msprop:Generator_RowEvArgName="FBVPROCESSIFASIRowChangeEvent">
+        <xs:element name="FBVPROCESSIFASI" msprop:Generator_TableClassName="FBVPROCESSIFASIDataTable" msprop:Generator_TableVarName="tableFBVPROCESSIFASI" msprop:Generator_TablePropName="FBVPROCESSIFASI" msprop:Generator_RowDeletingName="FBVPROCESSIFASIRowDeleting" msprop:Generator_RowChangingName="FBVPROCESSIFASIRowChanging" msprop:Generator_RowEvHandlerName="FBVPROCESSIFASIRowChangeEventHandler" msprop:Generator_RowDeletedName="FBVPROCESSIFASIRowDeleted" msprop:Generator_UserTableName="FBVPROCESSIFASI" msprop:Generator_RowChangedName="FBVPROCESSIFASIRowChanged" msprop:Generator_RowEvArgName="FBVPROCESSIFASIRowChangeEvent" msprop:Generator_RowClassName="FBVPROCESSIFASIRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDFBVPROCESSIFASI" msprop:Generator_ColumnVarNameInTable="columnIDFBVPROCESSIFASI" msprop:Generator_ColumnPropNameInRow="IDFBVPROCESSIFASI" msprop:Generator_ColumnPropNameInTable="IDFBVPROCESSIFASIColumn" msprop:Generator_UserColumnName="IDFBVPROCESSIFASI" type="xs:decimal" minOccurs="0" />
@@ -203,7 +203,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="FBVGRUPPIPROPRIETA" msprop:Generator_TableClassName="FBVGRUPPIPROPRIETADataTable" msprop:Generator_TableVarName="tableFBVGRUPPIPROPRIETA" msprop:Generator_TablePropName="FBVGRUPPIPROPRIETA" msprop:Generator_RowDeletingName="FBVGRUPPIPROPRIETARowDeleting" msprop:Generator_RowChangingName="FBVGRUPPIPROPRIETARowChanging" msprop:Generator_RowEvHandlerName="FBVGRUPPIPROPRIETARowChangeEventHandler" msprop:Generator_RowDeletedName="FBVGRUPPIPROPRIETARowDeleted" msprop:Generator_UserTableName="FBVGRUPPIPROPRIETA" msprop:Generator_RowChangedName="FBVGRUPPIPROPRIETARowChanged" msprop:Generator_RowEvArgName="FBVGRUPPIPROPRIETARowChangeEvent" msprop:Generator_RowClassName="FBVGRUPPIPROPRIETARow">
+        <xs:element name="FBVGRUPPIPROPRIETA" msprop:Generator_TableClassName="FBVGRUPPIPROPRIETADataTable" msprop:Generator_TableVarName="tableFBVGRUPPIPROPRIETA" msprop:Generator_RowChangedName="FBVGRUPPIPROPRIETARowChanged" msprop:Generator_TablePropName="FBVGRUPPIPROPRIETA" msprop:Generator_RowDeletingName="FBVGRUPPIPROPRIETARowDeleting" msprop:Generator_RowChangingName="FBVGRUPPIPROPRIETARowChanging" msprop:Generator_RowEvHandlerName="FBVGRUPPIPROPRIETARowChangeEventHandler" msprop:Generator_RowDeletedName="FBVGRUPPIPROPRIETARowDeleted" msprop:Generator_RowClassName="FBVGRUPPIPROPRIETARow" msprop:Generator_UserTableName="FBVGRUPPIPROPRIETA" msprop:Generator_RowEvArgName="FBVGRUPPIPROPRIETARowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDFBVGRUPPO" msprop:Generator_ColumnVarNameInTable="columnIDFBVGRUPPO" msprop:Generator_ColumnPropNameInRow="IDFBVGRUPPO" msprop:Generator_ColumnPropNameInTable="IDFBVGRUPPOColumn" msprop:Generator_UserColumnName="IDFBVGRUPPO" type="xs:decimal" minOccurs="0" />
@@ -239,11 +239,11 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="FBVPROPRIETA" msprop:Generator_TableClassName="FBVPROPRIETADataTable" msprop:Generator_TableVarName="tableFBVPROPRIETA" msprop:Generator_TablePropName="FBVPROPRIETA" msprop:Generator_RowDeletingName="FBVPROPRIETARowDeleting" msprop:Generator_RowChangingName="FBVPROPRIETARowChanging" msprop:Generator_RowEvHandlerName="FBVPROPRIETARowChangeEventHandler" msprop:Generator_RowDeletedName="FBVPROPRIETARowDeleted" msprop:Generator_UserTableName="FBVPROPRIETA" msprop:Generator_RowChangedName="FBVPROPRIETARowChanged" msprop:Generator_RowEvArgName="FBVPROPRIETARowChangeEvent" msprop:Generator_RowClassName="FBVPROPRIETARow">
+        <xs:element name="FBVPROPRIETA" msprop:Generator_TableClassName="FBVPROPRIETADataTable" msprop:Generator_TableVarName="tableFBVPROPRIETA" msprop:Generator_RowChangedName="FBVPROPRIETARowChanged" msprop:Generator_TablePropName="FBVPROPRIETA" msprop:Generator_RowDeletingName="FBVPROPRIETARowDeleting" msprop:Generator_RowChangingName="FBVPROPRIETARowChanging" msprop:Generator_RowEvHandlerName="FBVPROPRIETARowChangeEventHandler" msprop:Generator_RowDeletedName="FBVPROPRIETARowDeleted" msprop:Generator_RowClassName="FBVPROPRIETARow" msprop:Generator_UserTableName="FBVPROPRIETA" msprop:Generator_RowEvArgName="FBVPROPRIETARowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDFBVPROPRIETA" msprop:Generator_ColumnVarNameInTable="columnIDFBVPROPRIETA" msprop:Generator_ColumnPropNameInRow="IDFBVPROPRIETA" msprop:Generator_ColumnPropNameInTable="IDFBVPROPRIETAColumn" msprop:Generator_UserColumnName="IDFBVPROPRIETA" type="xs:decimal" minOccurs="0" />
-              <xs:element name="IDFBVGRUPPO" msprop:Generator_ColumnVarNameInTable="columnIDFBVGRUPPO" msprop:Generator_ColumnPropNameInRow="IDFBVGRUPPO" msprop:Generator_ColumnPropNameInTable="IDFBVGRUPPOColumn" msprop:Generator_UserColumnName="IDFBVGRUPPO" type="xs:decimal" />
+              <xs:element name="IDFBVGRUPPO" msprop:Generator_ColumnVarNameInTable="columnIDFBVGRUPPO" msprop:Generator_ColumnPropNameInRow="IDFBVGRUPPO" msprop:Generator_ColumnPropNameInTable="IDFBVGRUPPOColumn" msprop:Generator_UserColumnName="IDFBVGRUPPO" type="xs:decimal" minOccurs="0" />
               <xs:element name="CODICE" msprop:Generator_ColumnVarNameInTable="columnCODICE" msprop:Generator_ColumnPropNameInRow="CODICE" msprop:Generator_ColumnPropNameInTable="CODICEColumn" msprop:Generator_UserColumnName="CODICE">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">

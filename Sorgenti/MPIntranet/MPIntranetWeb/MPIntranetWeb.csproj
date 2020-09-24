@@ -136,6 +136,7 @@
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\DocumentiController.cs" />
     <Compile Include="Controllers\ErrorPageController.cs" />
+    <Compile Include="Controllers\FinitureBurattoVarieController.cs" />
     <Compile Include="Controllers\GalvanicaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManutenzioneController.cs" />
@@ -455,6 +456,8 @@
     <Content Include="Views\Report\ReportQuantitaPartial.cshtml" />
     <Content Include="Views\Report\ReportOrdiniAttivi.cshtml" />
     <Content Include="Views\Report\ReportOrdiniAttiviPartial.cshtml" />
+    <Content Include="Views\FinitureBurattoVarie\Proprieta.cshtml" />
+    <Content Include="Views\FinitureBurattoVarie\CaricaProprietaPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

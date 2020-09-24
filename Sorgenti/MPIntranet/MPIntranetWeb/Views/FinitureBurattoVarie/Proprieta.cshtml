@@ -1,0 +1,203 @@
+﻿@using MPIntranet.Models.Common
+
+@{
+    ViewBag.Title = "Proprieta";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+
+}
+
+<div class="content-top">
+    <h2>Gestione Proprieta</h2>
+</div>
+@if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(310))
+{
+    <div class="row col-lg-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th width="25%">Codice</th>
+                    <th width="25%">Descrizione</th>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td width="25%">
+                        @Html.TextBox("txtCodice", null, new { @class = "form-control input-sm", @id = "txtCodice", @maxlength = "45" })
+                    </td>
+                    <td width="25%">
+                        @Html.TextBox("txtDescrizione", null, new { @class = "form-control input-sm", @id = "txtDescrizione", @maxlength = "45" })
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row col-lg-2">
+        <div style="display:inline-block; width:50%">
+            <input type="button" onclick="AggiungiNuovo();" class="btn btn-primary" value="Nuova Proprieta" />
+        </div>
+    </div>
+}
+<label class="text-red input-sm" id="lblMessage"></label>
+<br />
+<div class="col-md-12" id="divRisultati">
+
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+        
+        caricaDati();
+    });
+    function CancellaProprieta(IdFbvProprieta) {
+        
+     var url = '@Url.Action("CancellaProprieta", "FinitureBurattovarie")';
+            $.ajax({
+                url: url,
+                data: {
+                    idFbvProprieta: IdFbvProprieta
+                },
+                cache: false,
+                type: "POST",
+                success: function (data)
+                {
+                    caricaDati();
+                },
+                error: function (response)
+                {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+                }
+            });
+    }
+
+    function caricaDati() {
+         var url = '@Url.Action("CaricaProprieta", "FinitureBurattovarie")';
+        $.ajax({
+            url: url,
+            data: {
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divRisultati').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function AggiungiNuovo() {
+        var codice = $('#txtCodice').val();
+        var descrizione = $('#txtDescrizione').val();
+
+        
+        var esito = true;
+        var messaggio = '';
+
+        if (codice == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Codice" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        if (descrizione == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Descrizione" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        $('#lblMessage').html(messaggio);
+        if (!esito) return;
+
+
+        var url = '@Url.Action("CreaProprieta", "FinitureBurattovarie")';
+        $.ajax({
+            url: url,
+            data: {
+                Codice: codice,
+                Descrizione: descrizione,
+
+            },
+            cache: false,
+            type: "POST",
+            success: function (data) {
+
+                if (data == null || data == '') {
+                    caricaDati();
+                }
+                else {
+                    $('#lblMessage').html(data);
+                }
+            },
+            error: function (response) {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function ModificaProprieta(sender, IdFbvProprieta) {
+        var parent = $(sender).closest('tr');
+        var tds = parent.find('td');
+
+        var codice = $(parent).find('#txtCodiceS').val();
+        var descrizione = $(parent).find('#txtDescrizioneS').val();
+
+        
+        var esito = true;
+        var messaggio = '';
+
+        if (codice == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Codice" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        if (descrizione == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Descrizione" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+    $('#lblMessage').html(messaggio);
+
+    if (!esito) return;
+
+     var url = '@Url.Action("ModificaProprieta", "FinitureBurattovarie")';
+        $.ajax({
+            url: url,
+            data: {
+                IdFbvproprieta: IdFbvProprieta,
+                codice: codice,
+                descrizione: descrizione,
+                
+           },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+
+                if (data == null || data == '') {
+                    caricaDati();
+                }
+                else {
+                    $('#lblMessage').html(data);
+                }
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }  
+        });
+    }
+</script>
+

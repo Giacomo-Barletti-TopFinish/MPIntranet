@@ -64,6 +64,8 @@
     <Compile Include="Core\DataContextAttribute.cs" />
     <Compile Include="Documenti\DocumentiAdapter.cs" />
     <Compile Include="Documenti\DocumentiBusiness.cs" />
+    <Compile Include="Finiture Burattovarie\FbvAdapter.cs" />
+    <Compile Include="Finiture Burattovarie\FbvBusiness.cs" />
     <Compile Include="Galvanica\GalvanicaAdapter.cs" />
     <Compile Include="Galvanica\GalvanicaBusiness.cs" />
     <Compile Include="Manutenzione\ManutenzioneAdapter.cs" />

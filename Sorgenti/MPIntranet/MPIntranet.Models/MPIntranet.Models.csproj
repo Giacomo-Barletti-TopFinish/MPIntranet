@@ -61,6 +61,13 @@
     <Compile Include="Articolo\ProdottoFinitoModel.cs" />
     <Compile Include="Common\MPIntranetListItem.cs" />
     <Compile Include="Documenti\DocumentoModel.cs" />
+    <Compile Include="Finiture Burattovarie\AttributiModel.cs" />
+    <Compile Include="Finiture Burattovarie\FasiModel.cs" />
+    <Compile Include="Finiture Burattovarie\FasiProprietaModel.cs" />
+    <Compile Include="Finiture Burattovarie\GruppiModel.cs" />
+    <Compile Include="Finiture Burattovarie\ProcessiFasiModel.cs" />
+    <Compile Include="Finiture Burattovarie\ProcessiModel.cs" />
+    <Compile Include="Finiture Burattovarie\ProprietaModel.cs" />
     <Compile Include="Galvanica\ImpiantoModel.cs" />
     <Compile Include="Galvanica\TelaioModel.cs" />
     <Compile Include="Galvanica\VascaModel.cs" />

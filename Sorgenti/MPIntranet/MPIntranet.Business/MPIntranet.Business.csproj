@@ -46,6 +46,7 @@
     <Compile Include="Articolo.cs" />
     <Compile Include="BusinessBase.cs" />
     <Compile Include="Documenti.cs" />
+    <Compile Include="FinitureBurattovarie.cs" />
     <Compile Include="Galvanica.cs" />
     <Compile Include="Manutenzione.cs" />
     <Compile Include="ProcessoGalvanico.cs" />

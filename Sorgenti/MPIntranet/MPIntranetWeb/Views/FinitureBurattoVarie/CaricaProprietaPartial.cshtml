@@ -1,0 +1,52 @@
+﻿@using MPIntranet.Models.Finiture_Burattovarie
+@model List<ProprietaModel>
+
+@if (Model != null && Model.Count() == 0)
+{
+    <text><b>Nessun risultato trovato</b></text>
+}
+
+else
+{
+    <table id="grigliaDitte" class="table table-condensed table-hover">
+        <thead style="background-color:aliceblue">
+            <tr>
+                <th width="20%">Codice</th>
+                <th width="20%">Descrizione</th>
+                <th width="2%"></th>
+                <th width="2%"></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ProprietaModel td in Model)
+            {
+                <tr>
+                    <td  height="60">
+                        <input type="hidden" class="hdIdFbvProprieta" value="@td.IdFbvProprieta" />
+                        @Html.TextBox("txtCodiceS", td.Codice, new { @class = "form-control input-sm", @id = "txtCodiceS", @maxlength = "45" })
+                    </td>
+                    <td  height="60">
+                        <input type="hidden" class="hdIdFbvProprieta" value="@td.IdFbvProprieta" />
+                        @Html.TextBox("txtDescrizioneS", td.Descrizione, new { @class = "form-control input-sm", @id = "txtDescrizioneS", @maxlength = "45" })
+                    </td>
+                    <td align="right">
+                        @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(313))
+                        {
+                            <a onclick="ModificaProprieta(this,@td.IdFbvProprieta)" title="Modifica"><i class="fa fa-fw fa-pencil"></i></a>
+                        }
+                    </td>
+                    <td align="right">
+                        @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(312))
+                        {
+                            <a onclick="CancellaProprieta(@td.IdFbvProprieta)" title="Cancella"><i class="fa fa-fw fa-remove"></i></a>
+                        }
+                    </td>
+                    <td></td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+
+}

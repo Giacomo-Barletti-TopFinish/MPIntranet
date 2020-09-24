@@ -12,7 +12,7 @@
     <Shape ID="DesignTable:FBVPROCESSI" ZOrder="4" X="762" Y="70" Height="181" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="86" />
     <Shape ID="DesignTable:FBVPROCESSIFASI" ZOrder="3" X="1207" Y="70" Height="257" Width="171" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="86" />
     <Shape ID="DesignTable:FBVGRUPPIPROPRIETA" ZOrder="2" X="790" Y="396" Height="143" Width="200" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="139" />
-    <Shape ID="DesignTable:FBVPROPRIETA" ZOrder="1" X="368" Y="443" Height="162" Width="155" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="206" />
+    <Shape ID="DesignTable:FBVPROPRIETA" ZOrder="1" X="368" Y="443" Height="162" Width="155" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="158" />
   </Shapes>
   <Connectors />
 </DiagramLayout>
