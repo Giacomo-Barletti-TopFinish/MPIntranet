@@ -458,6 +458,10 @@
     <Content Include="Views\Report\ReportOrdiniAttiviPartial.cshtml" />
     <Content Include="Views\FinitureBurattoVarie\Proprieta.cshtml" />
     <Content Include="Views\FinitureBurattoVarie\CaricaProprietaPartial.cshtml" />
+    <Content Include="Views\FinitureBurattoVarie\Attributi.cshtml" />
+    <Content Include="Views\FinitureBurattoVarie\CaricaAttributiPartial.cshtml" />
+    <Content Include="Views\FinitureBurattoVarie\Fasi.cshtml" />
+    <Content Include="Views\FinitureBurattoVarie\CaricaFasiPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

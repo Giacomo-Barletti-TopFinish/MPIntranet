@@ -13,5 +13,6 @@ namespace MPIntranet.Models.Finiture_Burattovarie
         public string Codice { get; set; }
         public string Descrizione { get; set; }
 
+
     }
 }

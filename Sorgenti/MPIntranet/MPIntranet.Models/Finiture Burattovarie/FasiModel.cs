@@ -8,7 +8,7 @@ namespace MPIntranet.Models.Finiture_Burattovarie
 {
     public class FasiModel
     {
-        public decimal IdFbvFase { get; set; }
+        public decimal IdFbvFasi { get; set; }
         public string Codice { get; set; }
         public string Descrizione { get; set; }
         public decimal Ricarico { get; set; }

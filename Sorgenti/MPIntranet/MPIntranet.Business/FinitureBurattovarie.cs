@@ -5,37 +5,15 @@ using MPIntranet.Models.Finiture_Burattovarie;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MPIntranet.Business
 {
     public class FinitureBurattovarie : BusinessBase
     {
-        private  FBVDS _ds = new FBVDS();
-        private Anagrafica _anagrafica = new Anagrafica();
+        private FBVDS _ds = new FBVDS();
 
-        public List<AttributiModel> CreaListaAttributiModel()
-        {
-            List<AttributiModel> lista = new List<AttributiModel>();
 
-            using (FbvBusiness bFbv = new FbvBusiness())
-            {
-                bFbv.FillAttributi(_ds, true);
-                foreach (FBVDS.FBVATTRIBUTIRow attributo in _ds.FBVATTRIBUTI)
-                {
-                    AttributiModel m = new AttributiModel()
-                    {
-                        IdFbvAttributi = attributo.IDFBVATTRIBUTI,
-                        IdFbvProprieta = attributo.IDFBVPROPRIETA,
-                        Codice = attributo.CODICE,
-                        Descrizione = attributo.DESCRIZIONE,
-                    };
-                    lista.Add(m);
-                }
-            }
-            return lista;
-        }
+
 
         public List<FasiModel> CreaListaFasiModel()
         {
@@ -48,7 +26,7 @@ namespace MPIntranet.Business
                 {
                     FasiModel m = new FasiModel()
                     {
-                        IdFbvFase = fase.IDFBVFASE,
+                        IdFbvFasi = fase.IDFBVFASE,
                         Codice = fase.CODICE,
                         Descrizione = fase.DESCRIZIONE,
                         Ricarico = fase.RICARICO,
@@ -59,6 +37,77 @@ namespace MPIntranet.Business
             }
             return lista;
         }
+
+        public string CreaFasi(string Codice, string Descrizione, decimal Ricarico, decimal CostoOrario, string account)
+        {
+            Descrizione = correggiString(Descrizione, 30);
+            Codice = correggiString(Codice, 10);
+            
+
+
+            using (FbvBusiness bFbv = new FbvBusiness())
+            {
+                bFbv.FillFasi(_ds, false);
+
+                FBVDS.FBVFASIRow fasi = _ds.FBVFASI.NewFBVFASIRow();
+                fasi.CODICE = Codice;
+                fasi.DESCRIZIONE = Descrizione;
+                fasi.RICARICO = Ricarico;
+                fasi.COSTOORARIO = CostoOrario;
+
+
+                fasi.CANCELLATO = SiNo.No;
+                fasi.DATAMODIFICA = DateTime.Now;
+                fasi.UTENTEMODIFICA = account;
+
+                _ds.FBVFASI.AddFBVFASIRow(fasi);
+                bFbv.UpdateTable(_ds, _ds.FBVFASI.TableName);
+
+                return string.Empty;
+            }
+        }
+
+        public void ModificaFasi(decimal IdFbvFasi, string Codice, string Descrizione, decimal Ricarico, decimal CostoOrario, string account)
+        {
+            Codice = (Codice.Length > 10 ? Codice.Substring(0, 10) : Codice).ToUpper();
+            Descrizione = (Descrizione.Length > 30 ? Descrizione.Substring(0, 30) : Descrizione).ToUpper();
+
+            using (FbvBusiness bFbv = new FbvBusiness())
+            {
+                bFbv.FillFasi(_ds, true);
+                FBVDS.FBVFASIRow br = _ds.FBVFASI.Where(x => x.IDFBVFASE == IdFbvFasi).FirstOrDefault();
+                if (br != null)
+                {
+                    br.CODICE = Codice;
+                    br.DESCRIZIONE = Descrizione;
+                    br.RICARICO = Ricarico;
+                    br.COSTOORARIO = CostoOrario;
+                    br.CANCELLATO = SiNo.No;
+                    br.DATAMODIFICA = DateTime.Now;
+                    br.UTENTEMODIFICA = account;
+
+                    bFbv.UpdateTable(_ds, _ds.FBVFASI.TableName);
+                }
+            }
+        }
+
+        public void CancellaFasi(decimal IdFbvFasi, string account)
+        {
+            using (FbvBusiness bFbv = new FbvBusiness())
+            {
+                bFbv.FillFasi(_ds, true);
+                FBVDS.FBVFASIRow fasi = _ds.FBVFASI.Where(x => x.IDFBVFASE == IdFbvFasi).FirstOrDefault();
+                if (fasi != null)
+                {
+                    fasi.CANCELLATO = SiNo.Si;
+                    fasi.DATAMODIFICA = DateTime.Now;
+                    fasi.UTENTEMODIFICA = account;
+
+                    bFbv.UpdateTable(_ds, _ds.FBVFASI.TableName);
+                }
+            }
+        }
+
 
         public List<GruppiModel> CreaListaGruppiModel()
         {
@@ -74,7 +123,7 @@ namespace MPIntranet.Business
                         IdFbvGruppo = gruppo.IDFBVGRUPPO,
                         Codice = gruppo.CODICE,
                         Descrizione = gruppo.DESCRIZIONE,
-                       
+
                     };
                     lista.Add(m);
                 }
@@ -132,7 +181,7 @@ namespace MPIntranet.Business
             descrizione = correggiString(descrizione, 45);
             codice = correggiString(codice, 45);
 
-            
+
 
             using (FbvBusiness bFbv = new FbvBusiness())
             {
@@ -164,7 +213,7 @@ namespace MPIntranet.Business
             using (FbvBusiness bFbv = new FbvBusiness())
             {
                 bFbv.FillProprieta(_ds, true);
-                FBVDS.FBVPROPRIETARow br = _ds.FBVPROPRIETA.Where(x => x.IDFBVPROPRIETA == idfbvproprieta ).FirstOrDefault();
+                FBVDS.FBVPROPRIETARow br = _ds.FBVPROPRIETA.Where(x => x.IDFBVPROPRIETA == idfbvproprieta).FirstOrDefault();
                 if (br != null)
                 {
                     br.CODICE = codice;
@@ -193,5 +242,100 @@ namespace MPIntranet.Business
                 }
             }
         }
+
+        public List<AttributiModel> CreaListaAttributiModel()
+        {
+            List<AttributiModel> lista = new List<AttributiModel>();
+
+            using (FbvBusiness bFbv = new FbvBusiness())
+            {
+                bFbv.FillAttributi(_ds, true);
+                bFbv.FillProprieta(_ds, true);
+
+                foreach (FBVDS.FBVATTRIBUTIRow attributi in _ds.FBVATTRIBUTI)
+                {
+                    FBVDS.FBVPROPRIETARow proprieta = _ds.FBVPROPRIETA.Where(x => x.IDFBVPROPRIETA == attributi.IDFBVPROPRIETA).FirstOrDefault();
+                    string materiale = string.Empty;
+
+                    AttributiModel m = new AttributiModel()
+                    {
+                        IdFbvAttributi = attributi.IDFBVATTRIBUTI,
+                        Codice = attributi.CODICE,
+                        Descrizione = attributi.DESCRIZIONE,
+                        IdFbvProprieta = attributi.IDFBVPROPRIETA,
+
+                    };
+                    lista.Add(m);
+                }
+            }
+            return lista;
+        }
+
+
+
+        public string CreaAttributi(string codice, string descrizione, decimal IdFbvProprieta, string account)
+        {
+            descrizione = correggiString(descrizione, 30);
+            codice = correggiString(codice, 10);
+
+            using (FbvBusiness bFbv = new FbvBusiness())
+            {
+                bFbv.FillAttributi(_ds, false);
+
+                FBVDS.FBVATTRIBUTIRow attributi = _ds.FBVATTRIBUTI.NewFBVATTRIBUTIRow();
+                attributi.CODICE = codice;
+                attributi.DESCRIZIONE = descrizione;
+                attributi.IDFBVPROPRIETA = IdFbvProprieta;
+                attributi.CANCELLATO = SiNo.No;
+                attributi.DATAMODIFICA = DateTime.Now;
+                attributi.UTENTEMODIFICA = account;
+
+                _ds.FBVATTRIBUTI.AddFBVATTRIBUTIRow(attributi);
+                bFbv.UpdateTable(_ds, _ds.FBVATTRIBUTI.TableName);
+
+                return string.Empty;
+            }
+        }
+
+        public void CancellaAttributi(decimal IdFbvAttributi, string account)
+        {
+            using (FbvBusiness bFbv = new FbvBusiness())
+            {
+                bFbv.FillAttributi(_ds, true);
+                FBVDS.FBVATTRIBUTIRow attributi = _ds.FBVATTRIBUTI.Where(x => x.IDFBVATTRIBUTI == IdFbvAttributi).FirstOrDefault();
+                if (attributi != null)
+                {
+                    attributi.CANCELLATO = SiNo.Si;
+                    attributi.DATAMODIFICA = DateTime.Now;
+                    attributi.UTENTEMODIFICA = account;
+
+                    bFbv.UpdateTable(_ds, _ds.FBVATTRIBUTI.TableName);
+                }
+            }
+        }
+
+        public void ModificaAttributi(decimal IdFbvAttributi, string codice, string descrizione, string account)
+        {
+            codice = (codice.Length > 10 ? codice.Substring(0, 10) : codice).ToUpper();
+            descrizione = (descrizione.Length > 30 ? descrizione.Substring(0, 30) : descrizione).ToUpper();
+
+
+            using (FbvBusiness bFbv = new FbvBusiness())
+            {
+                bFbv.FillAttributi(_ds, true);
+                FBVDS.FBVATTRIBUTIRow attributi = _ds.FBVATTRIBUTI.Where(x => x.IDFBVATTRIBUTI == IdFbvAttributi).FirstOrDefault();
+                if (attributi != null)
+                {
+                    attributi.CODICE = codice;
+                    attributi.DESCRIZIONE = descrizione;
+                    attributi.DATAMODIFICA = DateTime.Now;
+                    attributi.UTENTEMODIFICA = account;
+
+                    bFbv.UpdateTable(_ds, _ds.FBVATTRIBUTI.TableName);
+                }
+            }
+        }
+
     }
 }
+

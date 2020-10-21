@@ -280,7 +280,7 @@ namespace MPIntranet.Business
         {
             descrizioneBreve = (descrizioneBreve.Length > 30 ? descrizioneBreve.Substring(0, 30) : descrizioneBreve).ToUpper();
             descrizione = (descrizione.Length > 80 ? descrizione.Substring(0, 80) : descrizione).ToUpper();
-
+            
             using (GalvanicaBusiness bGalvanica = new GalvanicaBusiness())
             {
                 bGalvanica.FillVasche(_ds, true);

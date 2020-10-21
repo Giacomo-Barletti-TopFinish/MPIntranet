@@ -58,6 +58,9 @@
       <DependentUpon>DocumentiDS.xsd</DependentUpon>
     </Compile>
     <Compile Include="ElementiVuoti.cs" />
+    <Compile Include="FBVDS.cs">
+      <DependentUpon>FBVDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="FBVDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
