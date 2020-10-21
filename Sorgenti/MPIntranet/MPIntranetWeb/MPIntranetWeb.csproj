@@ -462,6 +462,8 @@
     <Content Include="Views\FinitureBurattoVarie\CaricaAttributiPartial.cshtml" />
     <Content Include="Views\FinitureBurattoVarie\Fasi.cshtml" />
     <Content Include="Views\FinitureBurattoVarie\CaricaFasiPartial.cshtml" />
+    <Content Include="Views\Report\BolleVendita.cshtml" />
+    <Content Include="Views\Report\ReportBolleVenditaPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

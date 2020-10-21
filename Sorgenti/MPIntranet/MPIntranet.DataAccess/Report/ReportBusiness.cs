@@ -1,6 +1,7 @@
 ﻿//using Microsoft.VisualStudio.DebuggerVisualizers;
 using MPIntranet.DataAccess.Core;
 using MPIntranet.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace MPIntranet.DataAccess.Report
@@ -21,6 +22,14 @@ namespace MPIntranet.DataAccess.Report
         {
             ReportAdapter r = new ReportAdapter(DbConnection, DbTransaction);
             r.FillREPORTQUANTITA(ds);
+
+        }
+
+        [DataContext]
+        public void FillBOLLE_VENDITA(DateTime inizio, DateTime fine, ReportDS ds)
+        {
+            ReportAdapter r = new ReportAdapter(DbConnection, DbTransaction);
+            r.FillBOLLE_VENDITA(inizio, fine, ds);
 
         }
 

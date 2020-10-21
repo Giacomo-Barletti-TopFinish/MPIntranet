@@ -43,6 +43,19 @@ namespace MPIntranet.Business
 
         }
 
+        public List<BolleVenditaModel> CreaListaReportBolleVendita(DateTime inizio, DateTime fine)
+        {
+            List<BolleVenditaModel> lista = new List<BolleVenditaModel>();
+
+            using (ReportBusiness bReport = new ReportBusiness())
+                bReport.FillBOLLE_VENDITA(inizio, fine, _ds);
+
+            foreach (ReportDS.BOLLE_VENDITARow riga in _ds.BOLLE_VENDITA)
+                lista.Add(CreaBolleVenditaModel(riga));
+
+            return lista;
+
+        }
         public List<OrdiniAttiviModel> CreaListaOrdiniAttivitModel()
         {
             List<OrdiniAttiviModel> lista = new List<OrdiniAttiviModel>();
@@ -131,7 +144,32 @@ namespace MPIntranet.Business
             return reportQuantitaModel;
         }
 
+        private BolleVenditaModel CreaBolleVenditaModel(ReportDS.BOLLE_VENDITARow riga)
+        {
+            BolleVenditaModel bolla = new BolleVenditaModel();
+            bolla.Azienda = riga.AZIENDA;
+            bolla.CodiceTipoO = riga.CODICETIPOO;
+            bolla.DescrizioneTipoO = riga.DESTABTIPOO;
+            bolla.Causale = riga.CODICECAUTR;
+            bolla.DescrizioneCausale = riga.DESTABCAUTR;
+            bolla.FullNumDoc = riga.FULLNUMDOC;
+            bolla.DataDocumento = riga.DATDOC;
+            bolla.Numero = riga.NUMDOC;
+            bolla.Segnalatore = riga.SEGNALATORE_RS.Trim();
+            bolla.Cliente = riga.RAGIONESOC.Trim();
+            bolla.NumeroRiga = riga.NRRIGA;
+            bolla.Modello = riga.MODELLO;
+            bolla.Quantita = riga.QTATOT;
+            bolla.Prezzo = riga.PREZZOTOT;
+            bolla.Valore = riga.VALORE;
+            bolla.Ordine = riga.FULLNUMDOC_OC;
+            bolla.DataOrdine = riga.DATDOC_OC;
+            bolla.DataRichiesta = riga.DATA_RICHIESTA;
+            bolla.DataConferma = riga.DATA_CONFERMA;
+            bolla.Riferimento = riga.IsRIFERIMENTONull() ? string.Empty : riga.RIFERIMENTO;
 
+            return bolla;
+        }
 
         private CaricoRepartoModel CreaCaricoRepartoModel(ReportDS.ODL_APERTIRow odl_aperto)
         {
@@ -161,6 +199,17 @@ namespace MPIntranet.Business
 
             ExcelHelper eh = new ExcelHelper();
             return eh.CaricoLavoroExcel(_ds);
+
+        }
+
+        public byte[] CreaExcelBolleVendite(DateTime inizio, DateTime fine)
+        {
+
+            using (ReportBusiness bReport = new ReportBusiness())
+                bReport.FillBOLLE_VENDITA(inizio, fine, _ds);
+
+            ExcelHelper eh = new ExcelHelper();
+            return eh.BolleVenditaExcel(_ds);
 
         }
 
