@@ -92,17 +92,17 @@ namespace MPIntranet.Helpers
                     rowDati.Append(ConstructCell(bolla.FULLNUMDOC, CellValues.String, 1));
                     rowDati.Append(ConstructCell(bolla.DATDOC.ToString("dd/MM/yyyy"), CellValues.String, 1));
                     rowDati.Append(ConstructCell(bolla.NUMDOC, CellValues.String, 1));
-                    rowDati.Append(ConstructCell(bolla.SEGNALATORE_RS.Trim(), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(bolla.IsSEGNALATORE_RSNull() ? string.Empty : bolla.SEGNALATORE_RS.Trim(), CellValues.String, 1));
                     rowDati.Append(ConstructCell(bolla.RAGIONESOC.Trim(), CellValues.String, 1));
                     rowDati.Append(ConstructCell(bolla.NRRIGA, CellValues.String, 1));
                     rowDati.Append(ConstructCell(bolla.MODELLO, CellValues.String, 1));
-                    rowDati.Append(ConstructCell(bolla.QTATOT.ToString().Replace(',','.'), CellValues.Number, 1));
+                    rowDati.Append(ConstructCell(bolla.QTATOT.ToString().Replace(',', '.'), CellValues.Number, 1));
                     rowDati.Append(ConstructCell(bolla.PREZZOTOT.ToString().Replace(',', '.'), CellValues.Number, 1));
                     rowDati.Append(ConstructCell(bolla.VALORE.ToString().Replace(',', '.'), CellValues.Number, 1));
-                    rowDati.Append(ConstructCell(bolla.FULLNUMDOC_OC, CellValues.String, 1));
-                    rowDati.Append(ConstructCell(bolla.DATDOC_OC.ToString("dd/MM/yyyy"), CellValues.String, 1));
-                    rowDati.Append(ConstructCell(bolla.DATA_RICHIESTA.ToString("dd/MM/yyyy"), CellValues.String, 1));
-                    rowDati.Append(ConstructCell(bolla.DATA_CONFERMA.ToString("dd/MM/yyyy"), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(bolla.IsFULLNUMDOC_OCNull() ? string.Empty : bolla.FULLNUMDOC_OC, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(bolla.IsDATDOC_OCNull() ? string.Empty : bolla.DATDOC_OC.ToString("dd/MM/yyyy"), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(bolla.IsDATA_RICHIESTANull() ? string.Empty : bolla.DATA_RICHIESTA.ToString("dd/MM/yyyy"), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(bolla.IsDATA_CONFERMANull() ? string.Empty : bolla.DATA_CONFERMA.ToString("dd/MM/yyyy"), CellValues.String, 1));
                     rowDati.Append(ConstructCell(bolla.IsRIFERIMENTONull() ? string.Empty : bolla.RIFERIMENTO, CellValues.String, 1));
 
                     sheetData.AppendChild(rowDati);
@@ -274,7 +274,7 @@ namespace MPIntranet.Helpers
 
                 ms.Seek(0, SeekOrigin.Begin);
                 content = ms.ToArray();
-                
+
             }
             return content;
 
@@ -362,7 +362,7 @@ namespace MPIntranet.Helpers
                 content = ms.ToArray();
             }
             return content;
-      
+
         }
 
         public byte[] ReportOrdiniAttiviExcel(List<OrdiniAttiviModel> lista)

@@ -155,17 +155,17 @@ namespace MPIntranet.Business
             bolla.FullNumDoc = riga.FULLNUMDOC;
             bolla.DataDocumento = riga.DATDOC;
             bolla.Numero = riga.NUMDOC;
-            bolla.Segnalatore = riga.SEGNALATORE_RS.Trim();
+            bolla.Segnalatore = riga.IsSEGNALATORE_RSNull() ? String.Empty : riga.SEGNALATORE_RS.Trim();
             bolla.Cliente = riga.RAGIONESOC.Trim();
             bolla.NumeroRiga = riga.NRRIGA;
             bolla.Modello = riga.MODELLO;
             bolla.Quantita = riga.QTATOT;
             bolla.Prezzo = riga.PREZZOTOT;
             bolla.Valore = riga.VALORE;
-            bolla.Ordine = riga.FULLNUMDOC_OC;
-            bolla.DataOrdine = riga.DATDOC_OC;
-            bolla.DataRichiesta = riga.DATA_RICHIESTA;
-            bolla.DataConferma = riga.DATA_CONFERMA;
+            bolla.Ordine = riga.IsFULLNUMDOC_OCNull() ? string.Empty : riga.FULLNUMDOC_OC;
+            bolla.DataOrdine = riga.IsDATDOC_OCNull() ? string.Empty : riga.DATDOC_OC.ToString("dd/MM/yyyy");
+            bolla.DataRichiesta = riga.IsDATA_RICHIESTANull() ? string.Empty : riga.DATA_RICHIESTA.ToString("dd/MM/yyyy");
+            bolla.DataConferma = riga.IsDATA_CONFERMANull() ? string.Empty : riga.DATA_CONFERMA.ToString("dd/MM/yyyy");
             bolla.Riferimento = riga.IsRIFERIMENTONull() ? string.Empty : riga.RIFERIMENTO;
 
             return bolla;

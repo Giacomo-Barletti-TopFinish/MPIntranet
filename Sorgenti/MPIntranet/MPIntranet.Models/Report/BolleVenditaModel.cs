@@ -24,9 +24,9 @@ namespace MPIntranet.Models.Report
         public decimal Prezzo { get; set; }
         public decimal Valore { get; set; }
         public string Ordine { get; set; }
-        public DateTime DataOrdine { get; set; }
-        public DateTime DataRichiesta { get; set; }
-        public DateTime DataConferma { get; set; }
+        public string DataOrdine { get; set; }
+        public string DataRichiesta { get; set; }
+        public string DataConferma { get; set; }
 
         public string Riferimento { get; set; }
     }
