@@ -23,7 +23,7 @@ else
             {
                 <tr>
                     <td width="20%">
-                        @Html.TextBox("txtCodiceS", td.Codice, new { @class = "form-control input-sm", @id = "txtCodiceS", @maxlength = "10" })
+                        @td.Codice                       
                     </td>
                     <td width="20%">
                         @Html.TextBox("txtDescrizioneS", td.Descrizione, new { @class = "form-control input-sm", @id = "txtDescrizioneS", @maxlength = "30" })
@@ -53,23 +53,47 @@ else
             }
         </tbody>
     </table>
-    @*<div class="col-md-12" id="divProprieta"></div>
+    <div class="col-lg-12 row">
+        <div class="col-lg-2 text-center">
+            <label id="faseSelezionata"></label>
+            <input type="hidden" id="hfFase" />
+        </div>
+    </div>
+    <div class="col-md-12" id="divProprieta"></div>
+}
+<script language="javascript" type="text/javascript">
 
-    <script language="javascript" type="text/javascript">
-        $("#tablename tr").click(function () {
+    $(function () {
+        $("#grigliaFasi tr").click(function () {
+            debugger;
+            var tds = $(this).find('td');
+            var codiceFase = tds[0].innerText;
+            $('#hfFase').val(codiceFase);
+            caricaProprieta(); 
+        });
 
-        caricaProprieta();
+        
+      
     });
 
     function caricaProprieta()
     {
-        var url = '@Url.Action("CaricaFasi", "FinitureBurattovarie")';
+        var codiceFase = $('#hfFase').val();
+        if (codiceFase == null || codiceFase == '') {
+            return;
+        }
+        var url = '@Url.Action("CaricaProprieta", "FinitureBurattovarie")';
         $.ajax({
+
+//            select fp.*, pr.codice, pr.descrizione from fbvfasiproprieta fp
+//inner join fbvfasi fa on fa.idfbvfase = fp.idfbvfase
+//inner join fbvproprieta pr on pr.idfbvproprieta = fp.idfbvproprieta
+//where fa.codice = 'BAU'
 
         url: url,
             data:
             {
-            },
+            }, 
             cache: false,
             type: "POST",
             success: function(data)
@@ -83,6 +107,7 @@ else
                 document.close();
             }
         });
-}*@
-
+    }
+</script>
+                    
 

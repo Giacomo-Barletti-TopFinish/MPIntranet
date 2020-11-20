@@ -1,5 +1,18 @@
 ﻿@using MPIntranet.Models.Finiture_Burattovarie
+@using MPIntranet.Models.Common
 @model List<ProprietaModel>
+
+<div class="row,col-lg-12">
+    <div class="col-lg-1">
+        <label>Proprietà da selezionare</label>
+    </div>
+    <div class="col-lg-2">
+        @Html.DropDownList("ddlProprieta", new SelectList(@ViewData["Proprieta"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlProprieta" })
+    </div>
+    <div style="display:inline-block; width:50%">
+        <input type="button" onclick="AggiungiProprieta();" class="btn btn-primary" value="Aggiungi proprietà" />
+    </div>
+</div>
 
 @if (Model != null && Model.Count() == 0)
 {
@@ -22,11 +35,11 @@ else
             @foreach (ProprietaModel td in Model)
             {
                 <tr>
-                    <td  height="60">
+                    <td height="60">
                         <input type="hidden" class="hdIdFbvProprieta" value="@td.IdFbvProprieta" />
                         @Html.TextBox("txtCodiceS", td.Codice, new { @class = "form-control input-sm", @id = "txtCodiceS", @maxlength = "45" })
                     </td>
-                    <td  height="60">
+                    <td height="60">
                         <input type="hidden" class="hdIdFbvProprieta" value="@td.IdFbvProprieta" />
                         @Html.TextBox("txtDescrizioneS", td.Descrizione, new { @class = "form-control input-sm", @id = "txtDescrizioneS", @maxlength = "45" })
                     </td>

@@ -22,6 +22,9 @@ namespace MPIntranetWeb.Controllers
         {
             FinitureBurattovarie a = new FinitureBurattovarie();
             List<ProprietaModel> proprietaModel = a.CreaListaProprietaModel();
+            List<MPIntranetListItem> proprieta = proprietaModel.OrderBy(x => x.Codice).Select(x => new MPIntranetListItem(x.ToString(),x.IdFbvProprieta.ToString())).ToList();
+
+            ViewData.Add("Proprieta", proprieta);
             return PartialView("CaricaProprietaPartial", proprietaModel);
         }
 

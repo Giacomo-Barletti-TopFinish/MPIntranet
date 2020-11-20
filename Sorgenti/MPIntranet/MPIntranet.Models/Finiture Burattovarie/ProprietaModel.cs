@@ -13,5 +13,9 @@ namespace MPIntranet.Models.Finiture_Burattovarie
         public string Codice { get; set; }
         public string Descrizione { get; set; }
 
+        public override string ToString()
+        {
+            return string.Format("{0}-{1}",Codice,Descrizione);
+        }
     }
 }
