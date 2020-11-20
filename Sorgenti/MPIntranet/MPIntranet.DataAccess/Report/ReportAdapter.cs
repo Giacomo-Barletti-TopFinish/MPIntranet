@@ -70,6 +70,21 @@ order by sum(qta) desc";
 
         }
 
+        public void FillBOLLE_VENDITA(DateTime inizio, DateTime fine, ReportDS ds)
+        {
+            string query = @" select * from ituser.bolle_vendita 
+                            where datdoc >= to_date('{0} 00:00:00','dd/mm/yyyy HH24:Mi:SS')
+                            and datdoc <= to_date('{1} 23:59:59','dd/mm/yyyy HH24:Mi:SS')
+                            order by azienda, numdoc,nrriga";
+
+            query = string.Format(query, inizio.ToString("dd/MM/yyyy"), fine.ToString("dd/MM/yyyy"));
+
+            using (DbDataAdapter da = BuildDataAdapter(query))
+            {
+                da.Fill(ds.BOLLE_VENDITA);
+            }
+
+        }
         public void FillORDINIATTIVI(ReportDS ds)
         {
             string query = @"select * from ITUSER.ORDINIATTIVI ";

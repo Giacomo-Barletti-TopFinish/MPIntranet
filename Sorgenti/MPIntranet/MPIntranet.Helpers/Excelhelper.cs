@@ -14,6 +14,116 @@ namespace MPIntranet.Helpers
 {
     public class ExcelHelper
     {
+        public byte[] BolleVenditaExcel(ReportDS ds)
+        {
+
+
+            byte[] content;
+            MemoryStream ms = new MemoryStream();
+
+            using (SpreadsheetDocument document = SpreadsheetDocument.Create(ms, SpreadsheetDocumentType.Workbook))
+            {
+                WorkbookPart workbookPart = document.AddWorkbookPart();
+                workbookPart.Workbook = new Workbook();
+
+                WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+                worksheetPart.Worksheet = new Worksheet();
+
+                // Adding style
+                WorkbookStylesPart stylePart = workbookPart.AddNewPart<WorkbookStylesPart>();
+                stylePart.Stylesheet = GenerateStylesheet();
+                stylePart.Stylesheet.Save();
+
+                int numeroColonne = 18;
+                Columns columns = new Columns();
+                for (int i = 0; i < numeroColonne; i++)
+                {
+                    Column c = new Column();
+                    UInt32Value u = new UInt32Value((uint)(i + 1));
+                    c.Min = u;
+                    c.Max = u;
+                    c.Width = 15;
+
+                    columns.Append(c);
+                }
+
+                worksheetPart.Worksheet.AppendChild(columns);
+
+                Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
+                Sheet sheet = new Sheet() { Id = workbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Bolle vendita" };
+
+                sheets.Append(sheet);
+
+                workbookPart.Workbook.Save();
+
+                SheetData sheetData = worksheetPart.Worksheet.AppendChild(new SheetData());
+
+                // Constructing header
+
+                Row row = new Row();
+
+                row.Append(ConstructCell("Azienda", CellValues.String, 2));
+                row.Append(ConstructCell("Tipo", CellValues.String, 2));
+                row.Append(ConstructCell("Causale", CellValues.String, 2));
+                row.Append(ConstructCell("Documento", CellValues.String, 2));
+                row.Append(ConstructCell("Data documento", CellValues.String, 2));
+                row.Append(ConstructCell("Numero documento", CellValues.String, 2));
+                row.Append(ConstructCell("Segnalatore", CellValues.String, 2));
+                row.Append(ConstructCell("Cliente", CellValues.String, 2));
+                row.Append(ConstructCell("Riga", CellValues.String, 2));
+                row.Append(ConstructCell("Modello", CellValues.String, 2));
+                row.Append(ConstructCell("Quantità", CellValues.String, 2));
+                row.Append(ConstructCell("Prezzo", CellValues.String, 2));
+                row.Append(ConstructCell("Valore", CellValues.String, 2));
+                row.Append(ConstructCell("Ordine cliente", CellValues.String, 2));
+                row.Append(ConstructCell("Data ordine", CellValues.String, 2));
+                row.Append(ConstructCell("Data richiesta", CellValues.String, 2));
+                row.Append(ConstructCell("Data conferma", CellValues.String, 2));
+                row.Append(ConstructCell("Riferimento", CellValues.String, 2));
+
+                sheetData.AppendChild(row);
+
+                foreach (ReportDS.BOLLE_VENDITARow bolla in ds.BOLLE_VENDITA)
+                {
+                    Row rowDati = new Row();
+                    rowDati.Append(ConstructCell(bolla.IsAZIENDANull() ? string.Empty : bolla.AZIENDA, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(string.Format("{0}-{1}", bolla.CODICETIPOO, bolla.DESTABTIPOO), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(string.Format("{0}-{1}", bolla.CODICECAUTR, bolla.DESTABCAUTR), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(bolla.FULLNUMDOC, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(bolla.DATDOC.ToString("dd/MM/yyyy"), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(bolla.NUMDOC, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(bolla.IsSEGNALATORE_RSNull() ? string.Empty : bolla.SEGNALATORE_RS.Trim(), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(bolla.RAGIONESOC.Trim(), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(bolla.NRRIGA, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(bolla.MODELLO, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(bolla.QTATOT.ToString().Replace(',', '.'), CellValues.Number, 1));
+                    rowDati.Append(ConstructCell(bolla.PREZZOTOT.ToString().Replace(',', '.'), CellValues.Number, 1));
+                    rowDati.Append(ConstructCell(bolla.VALORE.ToString().Replace(',', '.'), CellValues.Number, 1));
+                    rowDati.Append(ConstructCell(bolla.IsFULLNUMDOC_OCNull() ? string.Empty : bolla.FULLNUMDOC_OC, CellValues.String, 1));
+                    rowDati.Append(ConstructCell(bolla.IsDATDOC_OCNull() ? string.Empty : bolla.DATDOC_OC.ToString("dd/MM/yyyy"), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(bolla.IsDATA_RICHIESTANull() ? string.Empty : bolla.DATA_RICHIESTA.ToString("dd/MM/yyyy"), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(bolla.IsDATA_CONFERMANull() ? string.Empty : bolla.DATA_CONFERMA.ToString("dd/MM/yyyy"), CellValues.String, 1));
+                    rowDati.Append(ConstructCell(bolla.IsRIFERIMENTONull() ? string.Empty : bolla.RIFERIMENTO, CellValues.String, 1));
+
+                    sheetData.AppendChild(rowDati);
+                }
+
+
+
+
+                workbookPart.Workbook.Save();
+                document.Save();
+                document.Close();
+
+                ms.Seek(0, SeekOrigin.Begin);
+                content = ms.ToArray();
+
+            }
+            return content;
+
+
+
+        }
         public byte[] CaricoLavoroExcel(ReportDS ds)
         {
 
@@ -164,7 +274,7 @@ namespace MPIntranet.Helpers
 
                 ms.Seek(0, SeekOrigin.Begin);
                 content = ms.ToArray();
-                
+
             }
             return content;
 
@@ -252,7 +362,7 @@ namespace MPIntranet.Helpers
                 content = ms.ToArray();
             }
             return content;
-      
+
         }
 
         public byte[] ReportOrdiniAttiviExcel(List<OrdiniAttiviModel> lista)
