@@ -109,9 +109,9 @@ namespace MPIntranet.Business
             if (brand == null) return "Brand non valido";
 
             Articolo articolo = Articolo.EstraiArticolo(anagrafica);
-
             if (articolo != null)
                 return "Esiste già un articolo con questa anagrafica";
+
             ArticoliDS ds = new ArticoliDS();
             using (ArticoliBusiness bArticolo = new ArticoliBusiness())
             {

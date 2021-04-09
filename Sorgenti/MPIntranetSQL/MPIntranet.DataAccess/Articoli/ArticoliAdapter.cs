@@ -35,7 +35,7 @@ namespace MPIntranet.DataAccess.Articoli
             if (soloNonCancellati)
                 select += "AND CANCELLATO = 0 ";
 
-            select += "ORDER BY DESCRIZIONE";
+            select += " ORDER BY DESCRIZIONE";
 
             ParamSet ps = new ParamSet();
             ps.AddParam("ANAGRAFICA", DbType.String, anagrafica);
@@ -52,7 +52,7 @@ namespace MPIntranet.DataAccess.Articoli
             if (soloNonCancellati)
                 select += "WHERE CANCELLATO = 0 ";
 
-            select += "ORDER BY DESCRIZIONE ";
+            select += " ORDER BY DESCRIZIONE ";
 
             using (DbDataAdapter da = BuildDataAdapter(select))
             {

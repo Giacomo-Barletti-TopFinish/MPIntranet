@@ -37,7 +37,7 @@ namespace MPIntranetWeb.Controllers
 
         public ActionResult SalvaArticolo(int idBrand, string anagrafica, string descrizione, string codiceCliente, string codiceColore)
         {
-            string messaggio = Articolo.CreaArticolo(idBrand, anagrafica, descrizione, codiceCliente, codiceColore, ConnectedUser);
+            string messaggio = Articolo.CreaArticolo(idBrand, anagrafica.ToUpper(), descrizione.ToUpper(), codiceCliente.ToUpper(), codiceColore.ToUpper(), ConnectedUser);
             return Content(messaggio);
         }
     }
