@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArticoloModel.cs" />
+    <Compile Include="BaseModel.cs" />
+    <Compile Include="BrandModel.cs" />
     <Compile Include="Common\MPIntranetListItem.cs" />
     <Compile Include="Json\SalvaProcessoJson.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

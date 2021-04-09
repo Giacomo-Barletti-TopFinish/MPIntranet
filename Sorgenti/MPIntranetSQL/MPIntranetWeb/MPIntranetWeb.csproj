@@ -131,6 +131,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArticoloController.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\ErrorPageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -409,6 +410,8 @@
     <Content Include="Views\Account\AbilitaMenu.cshtml" />
     <Content Include="Views\Account\GetMenuUtentePartial.cshtml" />
     <Content Include="Views\ErrorPage\AccountNonAutorizzato.cshtml" />
+    <Content Include="Views\Articolo\RicercaArticolo.cshtml" />
+    <Content Include="Views\Articolo\CreaArticolo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

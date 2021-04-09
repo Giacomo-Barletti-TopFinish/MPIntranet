@@ -1,0 +1,136 @@
+﻿@using MPIntranet.Models.Common
+@{
+    ViewBag.Title = "Crea Articolo";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+
+
+<div class="content-top">
+    <h2>Crea articolo</h2>
+</div>
+<div class="content-scheda">
+    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(12))
+    {
+        <div class="row col-lg-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th width="10%">Brand</th>
+                        <th width="10%">Anagrafica</th>
+                        <th width="20%">Descrizione</th>
+                        <th width="10%">Codice cliente</th>
+                        <th width="10%">Colore</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td width="10%">
+                            @Html.DropDownList("ddlBrand", new SelectList(ViewData["dllBrand"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @style = "height: 21px;" })
+                        </td>
+                        <td width="10%">
+                            @Html.TextBox("txtAnagrafica", null, new { @class = "form-control input-sm ", @id = "txtAnagrafica", @maxlength = "17" })
+                        </td>
+                        <td width="20%">
+                            @Html.TextBox("txtDescrizione", null, new { @class = "form-control input-sm ", @id = "txtDescrizione", @maxlength = "50" })
+                        </td>
+                        <td width="10%">
+                            @Html.TextBox("txtCodiceCliente", null, new { @class = "form-control input-sm ", @id = "txtCodiceCliente", @maxlength = "20" })
+                        </td>
+                        <td width="10%">
+                            @Html.TextBox("txtCodiceColore", null, new { @class = "form-control input-sm ", @id = "txtCodiceColore", @maxlength = "15" })
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row col-lg-2">
+            <div style="display:inline-block; width:50%">
+                <input type="button" onclick="AggiungiNuovo();" class="btn btn-primary" value="Nuovo articolo" />
+            </div>
+        </div>
+    }
+    <div class="row">
+        <label class="text-red input-sm" id="lblMessage"></label>
+        <br />
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+    });
+
+
+
+    function AggiungiNuovo()
+    {
+        debugger;
+        var idBrand = $('#ddlBrand').val();
+        var anagrafica = $('#txtAnagrafica').val();
+        var descrizione= $('#txtDescrizione').val();
+        var codiceCliente = $('#txtCodiceCliente').val();
+        var codiceColore = $('#txtCodiceColore').val();
+
+        var esito = true;
+        var messaggio = '';
+
+        if (idBrand =='-1' )
+        {
+            esito=false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Brand" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        if (descrizione == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Descrizione" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        if (codiceColore == null || codiceColore == '') codiceColore = '';
+        if (anagrafica == null || anagrafica == '') anagrafica = '';
+        if (codiceCliente == null || codiceCliente == '') codiceCliente = '';
+
+        $('#lblMessage').html(messaggio);
+        if(!esito) return;
+
+
+        var url = '@Url.Action("SalvaArticolo", "Articolo")';
+        $.ajax({
+            url: url,
+            data: {
+                idBrand: idBrand,
+                anagrafica: anagrafica,
+                descrizione: descrizione,
+                codiceCliente: codiceCliente,
+                codiceColore: codiceColore
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#lblMessage').html(data);
+                if (data == 'Articolo creato correttamente')
+                    svuotaCampi();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function svuotaCampi() {
+
+        $('#ddlBrand').val('');
+        $('#txtAnagrafica').val('');
+        $('#txtDescrizione').val('');
+        $('#txtCodiceCliente').val('');
+        $('#txtCodiceColore').val('');
+    }
+
+</script>
