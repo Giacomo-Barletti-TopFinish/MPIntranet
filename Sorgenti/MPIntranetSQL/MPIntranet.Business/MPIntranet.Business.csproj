@@ -43,9 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Articolo.cs" />
+    <Compile Include="Blocco.cs" />
     <Compile Include="Brand.cs" />
     <Compile Include="BusinessBase.cs" />
+    <Compile Include="Documento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TipoDocumento.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MPIntranet.Common\MPIntranet.Common.csproj">

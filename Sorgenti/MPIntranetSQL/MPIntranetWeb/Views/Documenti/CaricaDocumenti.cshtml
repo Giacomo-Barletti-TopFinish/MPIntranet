@@ -1,0 +1,142 @@
+﻿
+
+@using MPIntranet.Business
+@using MPIntranet.Models.Common
+
+@model List<Documento>
+
+@if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(20))
+{
+    <tr>
+        <td>
+            @Html.DropDownList("ddlTipologia", new SelectList(ViewData["ddlTipoDocumenti"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @style = "height: 21px;" })
+        </td>
+        <td>
+            <input type="file" id="FileUpload1" />
+        </td>
+        <td><a onclick="AggiungiDocumento(this,@ViewData["IdEsterna"] ,@ViewData["TabellaEsterna"] )" title="Aggiungi"><i class="fa fa-fw fa-plus"></i></a></td>
+        <td></td>
+    </tr>
+}
+
+
+
+@*<table class="table table-condensed table-hover">
+    <tr style="background-color:aliceblue">
+        <th>Tipo documento</th>
+        <th>Filename</th>
+        <th width="2%"></th>
+        <th width="2%"></th>
+    </tr>
+    @foreach (DocumentoModel documento in Model.Documenti)
+    {
+        <tr>
+            <td>@documento.TipoDocumento.Descrizione</td>
+            <td>@documento.Filename</td>
+
+            <td>
+                @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(92))
+                {
+                    @Html.ActionLink(" ", "EstraiDocumento", "Documenti", new { IdDocumento = documento.IdDocumento }, new { target = "_blank", @class = "fa fa-fw fa-external-link" })
+                }
+            </td>
+            <td>
+                @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(91))
+                {
+                    <a onclick="CancellaDocumento(@documento.IdDocumento)" title="Cancella"><i class="fa fa-fw fa-remove"></i></a>
+                }
+            </td>
+        </tr>
+    }
+    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(90))
+    {
+        <tr>
+            <td>
+                @Html.DropDownList("ddlTipologia", new SelectList(ViewData["TipiDocumento"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @style = "height: 21px;" })
+            </td>
+            <td>
+                <input type="file" id="FileUpload1" />
+            </td>
+            <td><a onclick="AggiungiDocumento(this,@Model.IdEsterna,'@Model.TabellaEsterna' )" title="Aggiungi"><i class="fa fa-fw fa-plus"></i></a></td>
+            <td></td>
+        </tr>
+    }
+
+</table>*@
+
+<script>
+    function AggiungiDocumento(sender, IdEsterna, TabellaEsterna) {
+
+        var tipoDocumento = $('#ddlTipologia').val();
+        if (tipoDocumento == null || tipoDocumento == '' || tipoDocumento=='@MPIntranet.Entities.ElementiVuoti.TipoDocumentoVuoto')
+        {
+            $('#lblMessage').html(MESSAGGIO_PUNTINO + " " + "Tipo documento " + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO);
+            return;
+        }
+
+        // Checking whether FormData is available in browser
+        if (window.FormData !== undefined) {
+
+            var fileUpload = $("#FileUpload1").get(0);
+            var files = fileUpload.files;
+            if (files.length == 0)
+            {
+                $('#lblMessage').html(MESSAGGIO_PUNTINO + " " + "filename " + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO);
+                return;
+            }
+            // Create FormData object
+            var fileData = new FormData();
+            // Looping over all files and add it to FormData object
+            for (var i = 0; i < files.length; i++) {
+                fileData.append(files[i].name, files[i]);
+            }
+
+            // Adding one more key to FormData object
+            fileData.append('IdEsterna', IdEsterna);
+            fileData.append('TabellaEsterna', TabellaEsterna);
+            fileData.append('TipoDocumento', tipoDocumento);
+             var url = '@Url.Action("AggiungiDocumento", "Documenti")';
+            $.ajax({
+                url: url,
+                type: "POST",
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data: fileData,
+                success: function (result) {
+                    caricaDati();
+                },
+                error: function (response) {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+                }
+            });
+        } else {
+            alert("FormData is not supported.");
+        }
+
+    }
+
+    function CancellaDocumento(IdDocumento) {
+
+     var url = '@Url.Action("CancellaDocumento", "Documenti")';
+            $.ajax({
+                url: url,
+                data: {
+                    IdDocumento: IdDocumento
+                },
+                cache: false,
+                type: "POST",
+                success: function (data)
+                {
+                    caricaDati();
+                },
+                error: function (response)
+                {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+                }
+            });
+    }
+</script>  

@@ -1,0 +1,159 @@
+﻿@using MPIntranet.Business
+@using MPIntranet.Entities
+@model Articolo
+@{
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+
+<div class="content-top">
+    <h2>Scheda Articolo</h2>
+    <div style="display:inline-block; width:50%">
+        @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(15))
+        {
+            <input type="button" onclick="SubmitForm(this);" class="btn btn-primary" value="Salva" />
+        }
+        <input type="button" onclick="EseguiChiudiArticolo();" class="btn btn-primary" value="Chiudi" />
+        <input type="button" onclick="EseguiNuovaRicerca();" class="btn btn-primary" value="Nuova ricerca" />
+    </div>
+    <div style="display:inline-block; float:right">
+        @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(14))
+        {
+            <input type="button" id="btnCancellaArticolo" onclick="ConfermaCancellaArticolo();" class="btn btn-primary" value="Cancella" />
+        }
+    </div>
+</div>
+<div id="ArticleScrolledContent" class="content-scheda" style="overflow-y:auto; overflow-x:hidden; height:500px">
+    @Html.Hidden("hdIdArticolo", Model.IdArticolo)
+    <div class="box" id="sectionDatiGenerali">
+        <div class="box-header with-border">
+            <h4 class="box-title text-bold">Dati Generali</h4>
+            <div class="box-tools pull-right">
+                <button id="btnCollapseDatiGenerali" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-chevron-up"></i></button>
+            </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body form-group-sm">
+            <div class="row">
+                <div class="col-md-8" id="headRow">
+                    <div class="row">
+                        <div class="col-md-3">
+                            @Html.Label("Anagrafica", new { @class = "input-sm" })
+                            @Html.TextBox("txtAnagrafica", @Model.Anagrafica, new { @class = "form-control input-sm ", @readonly = true, @id = "txtAnagrafica", @maxlength = "20" })
+
+                        </div>
+                        <div class="col-md-3">
+                            @Html.Label("Brand", new { @class = "input-sm" })
+                            @Html.TextBox("txtBrand", @Model.Brand.Descrizione, new { @class = "form-control input-sm ", @readonly = true, @id = "txtBrand", @maxlength = "15" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.Label("Descrizione", new { @class = "input-sm" })
+                            @Html.TextBox("txtDescrizione", @Model.Descrizione, new { @class = "form-control input-sm ", @readonly = true, @id = "txtDescrizione", @maxlength = "50" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            @Html.Label("Codice Cliente", new { @class = "input-sm" })
+                            @Html.TextBox("txtCodiceCliente", @Model.CodiceCliente, new { @class = "form-control input-sm ", @readonly = true, @id = "txtCodiceCliente", @maxlength = "20" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.Label("Colore", new { @class = "input-sm" })
+                            @Html.TextBox("txtColore", @Model.Colore, new { @class = "form-control input-sm ", @readonly = true, @id = "txtCodiceSAM", @maxlength = "15" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(16))
+    {
+        <div class="box box-primary" id="sectionDocumentiTecnici">
+            <div class="box-header with-border">
+                <h4 class="box-title text-bold">Documenti Tecnici</h4>
+                <div class="box-tools pull-right">
+                    <button id="btnCollapseProcessoGalvanico" type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-chevron-up"></i></button>
+                </div>
+            </div>
+            <div class="box-body">
+                <div id="divDocumentiTecniciContainer"></div>
+            </div>
+        </div>
+    }
+
+    <br />
+</div>
+
+
+<script language="javascript" type="text/javascript">
+    $(function () {
+         CaricaDocumentiTecnici();
+    });
+
+    function CaricaDocumentiTecnici() {
+        debugger;
+        var idArticolo = $('#hdIdArticolo').val();
+          var url = '@Url.Action("CaricaDocumenti", "Documenti")';
+         $.ajax({
+                url: url,
+                data: {
+                    idEsterna: idArticolo,
+                    tabellaEsterna: '@TabelleEsterne.Articoli'
+
+                },
+                cache: false,
+                type: "POST",
+                success: function (data)
+                {
+                    $('#divDocumentiTecniciContainer').html(data).show();
+                },
+                error: function (response)
+                {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+                }
+            });
+    }
+
+    function ConfermaCancellaArticolo() {
+
+        var idArticolo = $('#hdIdArticolo').val();
+        if (idArticolo != null && idArticolo!='')
+            ConfirmPopup("Eliminare l''articolo?", EseguiCancellaArticolo);
+    }
+
+    function EseguiCancellaArticolo() {
+
+        var idArticolo = $('#hdIdArticolo').val();
+          var url = '@Url.Action("CancellaArticolo", "Articolo")';
+         $.ajax({
+                url: url,
+                data: {
+                    idArticolo: idArticolo
+                },
+                cache: false,
+                type: "POST",
+                success: function (data)
+                {
+                    window.location.href =' @Url.Action("Index", "Home")'
+                },
+                error: function (response)
+                {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+                }
+            });
+    }
+
+     function EseguiChiudiArticolo()
+        {
+            var url = '/ARTICOLO/RICERCAARTICOLO/?TipoRicerca=1';
+            window.location.href=url;
+        }
+
+    function EseguiNuovaRicerca() {
+        var url = '/ARTICOLO/RICERCAARTICOLO/?TipoRicerca=1';
+        window.location.href = url;
+    }
+</script>

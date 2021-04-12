@@ -133,6 +133,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArticoloController.cs" />
     <Compile Include="Controllers\ControllerBase.cs" />
+    <Compile Include="Controllers\DocumentiController.cs" />
     <Compile Include="Controllers\ErrorPageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -412,6 +413,9 @@
     <Content Include="Views\ErrorPage\AccountNonAutorizzato.cshtml" />
     <Content Include="Views\Articolo\RicercaArticolo.cshtml" />
     <Content Include="Views\Articolo\CreaArticolo.cshtml" />
+    <Content Include="Views\Articolo\CaricaArticoliModel.cshtml" />
+    <Content Include="Views\Articolo\Scheda.cshtml" />
+    <Content Include="Views\Documenti\CaricaDocumenti.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

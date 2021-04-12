@@ -9,39 +9,24 @@ using System.Threading.Tasks;
 
 namespace MPIntranet.Business
 {
-    public class Articolo
+    public class Articolo : BaseModel
     {
-        private ArticoloModel _model;
-        public ArticoloModel EstraiModello()
-        {
-            return _model;
-        }
-        public ArticoloModel Model
-        {
-            get
-            {
-                return _model;
-            }
-        }
-
-        public int ID
-        {
-            get
-            {
-                if (_model == null) return ElementiVuoti.Brand;
-                return _model.IdArticolo;
-            }
-        }
+        public int IdArticolo { get; set; }
+        public Brand Brand { get; set; }
+        public string Descrizione { get; set; }
+        public string Anagrafica { get; set; }
+        public string Colore { get; set; }
+        public string CodiceCliente { get; set; }
 
         public static Articolo EstraiArticolo(int idArticolo)
         {
             List<Articolo> lista = EstraiListaArticoli(false);
-            return lista.Where(x => x.ID == idArticolo).FirstOrDefault();
+            return lista.Where(x => x.IdArticolo == idArticolo).FirstOrDefault();
         }
         public static Articolo EstraiArticolo(string anagrafica)
         {
             List<Articolo> lista = EstraiListaArticoli(anagrafica, false);
-            return lista.Where(x => x.Model.Anagrafica == anagrafica).FirstOrDefault();
+            return lista.Where(x => x.Anagrafica == anagrafica).FirstOrDefault();
         }
 
         public static List<Articolo> EstraiListaArticoli(bool soloNonCancellati)
@@ -55,9 +40,7 @@ namespace MPIntranet.Business
             List<Articolo> articoli = new List<Articolo>();
             foreach (ArticoliDS.ARTICOLIRow riga in ds.ARTICOLI)
             {
-                ArticoloModel model = CreaModello(riga);
-                Articolo articolo = new Articolo();
-                articolo._model = model;
+                Articolo articolo = CreaArticolo(riga);
                 articoli.Add(articolo);
             }
             return articoli;
@@ -74,34 +57,47 @@ namespace MPIntranet.Business
             List<Articolo> articoli = new List<Articolo>();
             foreach (ArticoliDS.ARTICOLIRow riga in ds.ARTICOLI)
             {
-                ArticoloModel model = CreaModello(riga);
-                Articolo articolo = new Articolo();
-                articolo._model = model;
+                Articolo articolo = CreaArticolo(riga);
                 articoli.Add(articolo);
             }
             return articoli;
         }
 
-        private static ArticoloModel CreaModello(ArticoliDS.ARTICOLIRow riga)
+        private static Articolo CreaArticolo(ArticoliDS.ARTICOLIRow riga)
         {
 
             if (riga == null) return null;
-            ArticoloModel model = new ArticoloModel();
-            model.IdArticolo = riga.IDARTICOLO;
-            model.Brand = Brand.EstraiBrand(riga.IDBRAND).Model;
-            model.Descrizione = riga.DESCRIZIONE;
-            model.CodiceCliente = riga.IsCODICECLIENTENull() ? string.Empty : riga.CODICECLIENTE;
-            model.Colore = riga.IsCOLORENull() ? string.Empty : riga.COLORE;
-            model.Anagrafica = riga.IsANAGRAFICANull() ? string.Empty : riga.ANAGRAFICA;
+            Articolo articolo = new Articolo();
+            articolo.IdArticolo = riga.IDARTICOLO;
+            articolo.Brand = Brand.EstraiBrand(riga.IDBRAND);
+            articolo.Descrizione = riga.DESCRIZIONE;
+            articolo.CodiceCliente = riga.IsCODICECLIENTENull() ? string.Empty : riga.CODICECLIENTE;
+            articolo.Colore = riga.IsCOLORENull() ? string.Empty : riga.COLORE;
+            articolo.Anagrafica = riga.IsANAGRAFICANull() ? string.Empty : riga.ANAGRAFICA;
 
-            model.Cancellato = riga.CANCELLATO;
-            model.DataModifica = riga.DATAMODIFICA;
-            model.Descrizione = riga.DESCRIZIONE;
-            model.UtenteModifica = riga.UTENTEMODIFICA;
+            articolo.Cancellato = riga.CANCELLATO;
+            articolo.DataModifica = riga.DATAMODIFICA;
+            articolo.Descrizione = riga.DESCRIZIONE;
+            articolo.UtenteModifica = riga.UTENTEMODIFICA;
 
-            return model;
+            return articolo;
         }
 
+        public void Cancella()
+        {
+            ArticoliDS ds = new ArticoliDS();
+            using (ArticoliBusiness bArticolo = new ArticoliBusiness())
+            {
+                bArticolo.GetArticolo(ds, IdArticolo);
+                ArticoliDS.ARTICOLIRow articoloDs = ds.ARTICOLI.Where(x => x.IDARTICOLO == IdArticolo).FirstOrDefault();
+                if (articoloDs != null)
+                {
+                    this.Cancellato = true;
+                    articoloDs.CANCELLATO = true;
+                    bArticolo.UpdateTable(ds.ARTICOLI.TableName, ds);
+                }
+            }
+        }
 
         public static string CreaArticolo(int idBrand, string anagrafica, string descrizione, string codiceCliente, string codiceColore, string account)
         {
@@ -134,7 +130,24 @@ namespace MPIntranet.Business
             }
             return "Articolo creato correttamente";
         }
-     
+
+        public static List<Articolo> TrovaArticoli(string anagrafica, string descrizione, int idBrand, string codiceCliente, string colore)
+        {
+            List<Articolo> articoli = new List<Articolo>();
+            ArticoliDS ds = new ArticoliDS();
+            using (ArticoliBusiness bArticolo = new ArticoliBusiness())
+            {
+                bArticolo.TrovaArticoli(ds, true, idBrand, anagrafica, descrizione, codiceCliente, colore);
+
+                foreach (ArticoliDS.ARTICOLIRow riga in ds.ARTICOLI)
+                {
+                    Articolo articolo = CreaArticolo(riga);
+                    articoli.Add(articolo);
+                }
+                return articoli;
+            }
+        }
+
     }
 
 }

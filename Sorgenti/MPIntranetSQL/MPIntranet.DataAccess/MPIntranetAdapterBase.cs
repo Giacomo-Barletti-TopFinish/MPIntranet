@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MPIntranet.DataAccess
 {
-    public class MPIntranetAdapterBase:AdapterBase
+    public class MPIntranetAdapterBase : AdapterBase
     {
         public MPIntranetAdapterBase(IDbConnection connection, IDbTransaction transaction) :
           base(connection, transaction)
@@ -31,7 +31,7 @@ namespace MPIntranet.DataAccess
                 if (useLike)
                 {
                     query += string.Format(CultureInfo.InvariantCulture, " AND {0} LIKE $P<{1}> ", fieldName, parameterName);
-                    ps.AddParam(parameterName, DbType.String, parameterValue + "%");
+                    ps.AddParam(parameterName, DbType.String, "%" + parameterValue + "%");
                 }
                 else
                 {

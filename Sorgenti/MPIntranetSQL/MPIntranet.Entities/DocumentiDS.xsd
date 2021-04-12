@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DocumentiDS" targetNamespace="http://tempuri.org/DocumentiDS.xsd" xmlns:mstns="http://tempuri.org/DocumentiDS.xsd" xmlns="http://tempuri.org/DocumentiDS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="MPIConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="MPIConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.MPIntranet.Entities.Properties.Settings.GlobalReference.Default.MPIConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DocumentiDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DocumentiDS" msprop:Generator_UserDSName="DocumentiDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DOCUMENTI" msprop:Generator_TableClassName="DOCUMENTIDataTable" msprop:Generator_TableVarName="tableDOCUMENTI" msprop:Generator_TablePropName="DOCUMENTI" msprop:Generator_RowDeletingName="DOCUMENTIRowDeleting" msprop:Generator_RowChangingName="DOCUMENTIRowChanging" msprop:Generator_RowEvHandlerName="DOCUMENTIRowChangeEventHandler" msprop:Generator_RowDeletedName="DOCUMENTIRowDeleted" msprop:Generator_UserTableName="DOCUMENTI" msprop:Generator_RowChangedName="DOCUMENTIRowChanged" msprop:Generator_RowEvArgName="DOCUMENTIRowChangeEvent" msprop:Generator_RowClassName="DOCUMENTIRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDDOCUMENTO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnIDDOCUMENTO" msprop:Generator_ColumnPropNameInRow="IDDOCUMENTO" msprop:Generator_ColumnPropNameInTable="IDDOCUMENTOColumn" msprop:Generator_UserColumnName="IDDOCUMENTO" type="xs:int" />
+              <xs:element name="IDTIPODOCUMENTO" msprop:Generator_ColumnVarNameInTable="columnIDTIPODOCUMENTO" msprop:Generator_ColumnPropNameInRow="IDTIPODOCUMENTO" msprop:Generator_ColumnPropNameInTable="IDTIPODOCUMENTOColumn" msprop:Generator_UserColumnName="IDTIPODOCUMENTO" type="xs:int" />
+              <xs:element name="FILENAME" msprop:Generator_ColumnVarNameInTable="columnFILENAME" msprop:Generator_ColumnPropNameInRow="FILENAME" msprop:Generator_ColumnPropNameInTable="FILENAMEColumn" msprop:Generator_UserColumnName="FILENAME" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ESTENSIONE" msprop:Generator_ColumnVarNameInTable="columnESTENSIONE" msprop:Generator_ColumnPropNameInRow="ESTENSIONE" msprop:Generator_ColumnPropNameInTable="ESTENSIONEColumn" msprop:Generator_UserColumnName="ESTENSIONE" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DATI" msprop:Generator_ColumnVarNameInTable="columnDATI" msprop:Generator_ColumnPropNameInRow="DATI" msprop:Generator_ColumnPropNameInTable="DATIColumn" msprop:Generator_UserColumnName="DATI" type="xs:base64Binary" />
+              <xs:element name="IDESTERNA" msprop:Generator_ColumnVarNameInTable="columnIDESTERNA" msprop:Generator_ColumnPropNameInRow="IDESTERNA" msprop:Generator_ColumnPropNameInTable="IDESTERNAColumn" msprop:Generator_UserColumnName="IDESTERNA" type="xs:int" minOccurs="0" />
+              <xs:element name="TABELLAESTERNA" msprop:Generator_ColumnVarNameInTable="columnTABELLAESTERNA" msprop:Generator_ColumnPropNameInRow="TABELLAESTERNA" msprop:Generator_ColumnPropNameInTable="TABELLAESTERNAColumn" msprop:Generator_UserColumnName="TABELLAESTERNA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IDBLOCCO" msprop:Generator_ColumnVarNameInTable="columnIDBLOCCO" msprop:Generator_ColumnPropNameInRow="IDBLOCCO" msprop:Generator_ColumnPropNameInTable="IDBLOCCOColumn" msprop:Generator_UserColumnName="IDBLOCCO" type="xs:int" minOccurs="0" />
+              <xs:element name="CANCELLATO" msprop:Generator_ColumnVarNameInTable="columnCANCELLATO" msprop:Generator_ColumnPropNameInRow="CANCELLATO" msprop:Generator_ColumnPropNameInTable="CANCELLATOColumn" msprop:Generator_UserColumnName="CANCELLATO" type="xs:boolean" minOccurs="0" />
+              <xs:element name="DATAMODIFICA" msprop:Generator_ColumnVarNameInTable="columnDATAMODIFICA" msprop:Generator_ColumnPropNameInRow="DATAMODIFICA" msprop:Generator_ColumnPropNameInTable="DATAMODIFICAColumn" msprop:Generator_UserColumnName="DATAMODIFICA" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="UTENTEMODIFICA" msprop:Generator_ColumnVarNameInTable="columnUTENTEMODIFICA" msprop:Generator_ColumnPropNameInRow="UTENTEMODIFICA" msprop:Generator_ColumnPropNameInTable="UTENTEMODIFICAColumn" msprop:Generator_UserColumnName="UTENTEMODIFICA" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TIPIDOCUMENTO" msprop:Generator_TableClassName="TIPIDOCUMENTODataTable" msprop:Generator_TableVarName="tableTIPIDOCUMENTO" msprop:Generator_TablePropName="TIPIDOCUMENTO" msprop:Generator_RowDeletingName="TIPIDOCUMENTORowDeleting" msprop:Generator_RowChangingName="TIPIDOCUMENTORowChanging" msprop:Generator_RowEvHandlerName="TIPIDOCUMENTORowChangeEventHandler" msprop:Generator_RowDeletedName="TIPIDOCUMENTORowDeleted" msprop:Generator_UserTableName="TIPIDOCUMENTO" msprop:Generator_RowChangedName="TIPIDOCUMENTORowChanged" msprop:Generator_RowEvArgName="TIPIDOCUMENTORowChangeEvent" msprop:Generator_RowClassName="TIPIDOCUMENTORow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDTIPODOCUMENTO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnIDTIPODOCUMENTO" msprop:Generator_ColumnPropNameInRow="IDTIPODOCUMENTO" msprop:Generator_ColumnPropNameInTable="IDTIPODOCUMENTOColumn" msprop:Generator_UserColumnName="IDTIPODOCUMENTO" type="xs:int" />
+              <xs:element name="DESCRIZIONE" msprop:Generator_ColumnVarNameInTable="columnDESCRIZIONE" msprop:Generator_ColumnPropNameInRow="DESCRIZIONE" msprop:Generator_ColumnPropNameInTable="DESCRIZIONEColumn" msprop:Generator_UserColumnName="DESCRIZIONE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CARTELLA" msprop:Generator_ColumnVarNameInTable="columnCARTELLA" msprop:Generator_ColumnPropNameInRow="CARTELLA" msprop:Generator_ColumnPropNameInTable="CARTELLAColumn" msprop:Generator_UserColumnName="CARTELLA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CANCELLATO" msprop:Generator_ColumnVarNameInTable="columnCANCELLATO" msprop:Generator_ColumnPropNameInRow="CANCELLATO" msprop:Generator_ColumnPropNameInTable="CANCELLATOColumn" msprop:Generator_UserColumnName="CANCELLATO" type="xs:boolean" />
+              <xs:element name="DATAMODIFICA" msprop:Generator_ColumnVarNameInTable="columnDATAMODIFICA" msprop:Generator_ColumnPropNameInRow="DATAMODIFICA" msprop:Generator_ColumnPropNameInTable="DATAMODIFICAColumn" msprop:Generator_UserColumnName="DATAMODIFICA" type="xs:dateTime" />
+              <xs:element name="UTENTEMODIFICA" msprop:Generator_ColumnVarNameInTable="columnUTENTEMODIFICA" msprop:Generator_ColumnPropNameInRow="UTENTEMODIFICA" msprop:Generator_ColumnPropNameInTable="UTENTEMODIFICAColumn" msprop:Generator_UserColumnName="UTENTEMODIFICA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="BLOCCHI" msprop:Generator_TableClassName="BLOCCHIDataTable" msprop:Generator_TableVarName="tableBLOCCHI" msprop:Generator_TablePropName="BLOCCHI" msprop:Generator_RowDeletingName="BLOCCHIRowDeleting" msprop:Generator_RowChangingName="BLOCCHIRowChanging" msprop:Generator_RowEvHandlerName="BLOCCHIRowChangeEventHandler" msprop:Generator_RowDeletedName="BLOCCHIRowDeleted" msprop:Generator_UserTableName="BLOCCHI" msprop:Generator_RowChangedName="BLOCCHIRowChanged" msprop:Generator_RowEvArgName="BLOCCHIRowChangeEvent" msprop:Generator_RowClassName="BLOCCHIRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDBLOCCO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnIDBLOCCO" msprop:Generator_ColumnPropNameInRow="IDBLOCCO" msprop:Generator_ColumnPropNameInTable="IDBLOCCOColumn" msprop:Generator_UserColumnName="IDBLOCCO" type="xs:int" />
+              <xs:element name="UTENTE" msprop:Generator_ColumnVarNameInTable="columnUTENTE" msprop:Generator_ColumnPropNameInRow="UTENTE" msprop:Generator_ColumnPropNameInTable="UTENTEColumn" msprop:Generator_UserColumnName="UTENTE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TIPOBLOCCO" msprop:Generator_ColumnVarNameInTable="columnTIPOBLOCCO" msprop:Generator_ColumnPropNameInRow="TIPOBLOCCO" msprop:Generator_ColumnPropNameInTable="TIPOBLOCCOColumn" msprop:Generator_UserColumnName="TIPOBLOCCO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="INIZIOBLOCCO" msprop:Generator_ColumnVarNameInTable="columnINIZIOBLOCCO" msprop:Generator_ColumnPropNameInRow="INIZIOBLOCCO" msprop:Generator_ColumnPropNameInTable="INIZIOBLOCCOColumn" msprop:Generator_UserColumnName="INIZIOBLOCCO" type="xs:dateTime" />
+              <xs:element name="FINEBLOCCO" msprop:Generator_ColumnVarNameInTable="columnFINEBLOCCO" msprop:Generator_ColumnPropNameInRow="FINEBLOCCO" msprop:Generator_ColumnPropNameInTable="FINEBLOCCOColumn" msprop:Generator_UserColumnName="FINEBLOCCO" type="xs:dateTime" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:DOCUMENTI" />
+      <xs:field xpath="mstns:IDDOCUMENTO" />
+    </xs:unique>
+    <xs:unique name="TIPIDOCUMENTO_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:TIPIDOCUMENTO" />
+      <xs:field xpath="mstns:IDTIPODOCUMENTO" />
+    </xs:unique>
+    <xs:unique name="BLOCCHI_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:BLOCCHI" />
+      <xs:field xpath="mstns:IDBLOCCO" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

@@ -13,26 +13,29 @@ namespace MPIntranetWeb.Controllers
     {
         public ActionResult RicercaArticolo(int TipoRicerca)
         {
+            List<MPIntranetListItem> brandsItems = CreaListaBrand();
+            ViewData.Add("Brand", brandsItems);
 
-            //Anagrafica a = new Anagrafica();
-            //List<BrandModel> brandModels = a.CreaListaBrandModel();
-            //List<MPIntranetListItem> brands = brandModels.Select(x => new MPIntranetListItem(x.Brand, x.IdBrand.ToString())).ToList();
-            //brands.Insert(0, new MPIntranetListItem(string.Empty, "-1"));
-
-            //ViewData.Add("Brand", brands);
-            //ViewData.Add("TipoRicerca", TipoRicerca);
+            ViewData.Add("TipoRicerca", TipoRicerca);
             return View();
         }
 
         public ActionResult CreaArticolo()
         {
-            List<Brand> brands = Brand.EstraiListaBrand(true);
-            List<MPIntranetListItem> brandsItems = brands.Select(x => new MPIntranetListItem(x.Model.Descrizione, x.ID.ToString())).ToList();
-            brandsItems.Insert(0, new MPIntranetListItem(string.Empty, ElementiVuoti.Brand.ToString()));
-
+            List<MPIntranetListItem> brandsItems = CreaListaBrand();
             ViewData.Add("dllBrand", brandsItems);
 
             return View();
+        }
+
+        private List<MPIntranetListItem> CreaListaBrand()
+        {
+            List<Brand> brands = Brand.EstraiListaBrand(true);
+            List<MPIntranetListItem> brandsItems = brands.Select(x => new MPIntranetListItem(x.Descrizione, x.IdBrand.ToString())).ToList();
+            brandsItems.Insert(0, new MPIntranetListItem(string.Empty, ElementiVuoti.Brand.ToString()));
+
+            return brandsItems;
+
         }
 
         public ActionResult SalvaArticolo(int idBrand, string anagrafica, string descrizione, string codiceCliente, string codiceColore)
@@ -40,7 +43,43 @@ namespace MPIntranetWeb.Controllers
             string messaggio = Articolo.CreaArticolo(idBrand, anagrafica.ToUpper(), descrizione.ToUpper(), codiceCliente.ToUpper(), codiceColore.ToUpper(), ConnectedUser);
             return Content(messaggio);
         }
-    }
 
+        public ActionResult TrovaArticolo(string anagrafica, string descrizione, int idBrand, string codiceCliente, string colore, int TipoRicerca)
+        {
+
+            List<Articolo> articoli = Articolo.TrovaArticoli(anagrafica, descrizione, idBrand, codiceCliente, colore);
+
+            switch (TipoRicerca)
+            {
+                case (int)MPIntranet.Common.TipoRicerca.Scheda:
+                    ViewData.Add("ControllerName", "Articolo");
+                    ViewData.Add("ActionName", "Scheda");
+                    break;
+                case (int)MPIntranet.Common.TipoRicerca.Processo:
+                    ViewData.Add("ControllerName", "Articolo");
+                    ViewData.Add("ActionName", "CreaProcesso");
+                    break;
+                default:
+                    ViewData.Add("ControllerName", string.Empty);
+                    ViewData.Add("ActionName", string.Empty);
+                    break;
+            }
+            return PartialView("CaricaArticoliModel", articoli);
+        }
+        public ActionResult Scheda(int idArticolo)
+        {
+            Articolo articolo = Articolo.EstraiArticolo(idArticolo);
+            return View(articolo);
+        }
+
+        public ActionResult CancellaArticolo(int idArticolo)
+        {
+            Articolo a = Articolo.EstraiArticolo(idArticolo);
+            a.Cancella();
+            return null;
+        }
+
+     
+    }
 
 }

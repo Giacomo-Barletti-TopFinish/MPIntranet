@@ -33,6 +33,18 @@ namespace MPIntranet.DataAccess.Articoli
             a.FillBrand(ds, soloNonCancellati);
         }
 
+        [DataContext]
+        public void GetArticolo(ArticoliDS ds, int idArticolo)
+        {
+            ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
+            a.GetArticolo(ds, idArticolo);
+        }
+        [DataContext]
+        public void TrovaArticoli(ArticoliDS ds, bool soloNonCancellati, int idBrand, string anagrafica, string descrizione, string codiceCliente, string colore)
+        {
+            ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
+            a.TrovaArticoli(ds, soloNonCancellati, idBrand, anagrafica, descrizione, codiceCliente, colore);
+        }
         [DataContext(true)]
         public void UpdateTable(string tablename, ArticoliDS ds)
         {

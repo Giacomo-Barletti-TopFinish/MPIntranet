@@ -9,10 +9,11 @@ namespace MPIntranet.Entities
     public static class ElementiVuoti
     {
         public const int Brand = -1;
+        public const int TipoDocumento = -1;
     }
 
     public static class Reparti
     {
-        public const string Galvanica= "GALVA";
+        public const string Galvanica = "GALVA";
     }
 }

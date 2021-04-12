@@ -22,7 +22,7 @@
               <xs:element name="DESCRIZIONE" msprop:Generator_ColumnVarNameInTable="columnDESCRIZIONE" msprop:Generator_ColumnPropNameInRow="DESCRIZIONE" msprop:Generator_ColumnPropNameInTable="DESCRIZIONEColumn" msprop:Generator_UserColumnName="DESCRIZIONE">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="15" />
+                    <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>

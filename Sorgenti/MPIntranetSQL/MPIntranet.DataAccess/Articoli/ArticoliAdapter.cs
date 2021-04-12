@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MPIntranet.DataAccess.Articoli
 {
-    public class ArticoliAdapter: MPIntranetAdapterBase
+    public class ArticoliAdapter : MPIntranetAdapterBase
     {
         public ArticoliAdapter(System.Data.IDbConnection connection, IDbTransaction transaction) :
           base(connection, transaction)
@@ -57,6 +57,42 @@ namespace MPIntranet.DataAccess.Articoli
             using (DbDataAdapter da = BuildDataAdapter(select))
             {
                 da.Fill(ds.BRANDS);
+            }
+        }
+
+        public void GetArticolo(ArticoliDS ds, int idArticolo)
+        {
+            string select = @"SELECT * FROM ARTICOLI WHERE IDARTICOLO = $P<IDARTICOLO>";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDARTICOLO", DbType.Int32, idArticolo);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.ARTICOLI);
+            }
+        }
+        public void TrovaArticoli(ArticoliDS ds, bool soloNonCancellati, int idBrand, string anagrafica, string descrizione, string codiceCliente, string colore)
+        {
+            ParamSet ps = new ParamSet();
+
+            string query = @"SELECT * FROM ARTICOLI ";
+            string where = " WHERE 1=1 ";
+
+            if (soloNonCancellati)
+                where += "AND CANCELLATO = 0 ";
+
+            AddConditionAndParam(ref where, "ANAGRAFICA", "an1", anagrafica.ToUpper(), ps, true);
+            AddConditionAndParam(ref where, "DESCRIZIONE", "d1", descrizione.ToUpper(), ps, true);
+            AddConditionAndParam(ref where, "CODICECLIENTE", "cc1", codiceCliente.ToUpper(), ps, true);
+            AddConditionAndParam(ref where, "COLORE", "co1", colore.ToUpper(), ps, true);
+            if (idBrand > 0)
+                AddConditionAndParam(ref where, "IDBRAND", "b1", idBrand.ToString().ToUpper(), ps, false);
+
+            string select = $"{query}{where}";
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.ARTICOLI);
             }
         }
 

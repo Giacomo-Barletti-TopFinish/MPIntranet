@@ -1,0 +1,55 @@
+﻿
+@using MPIntranet.Models
+@using MPIntranet.Business
+@model List<Articolo>
+
+@if (Model != null && Model.Count() == 0)
+{
+    <text><b>Nessun risultato trovato</b></text>
+}
+else
+{
+    <table id="grigliaRisultati" class="table table-condensed table-hover">
+        <thead style="background-color:aliceblue">
+            <tr>
+                <th width="10%"></th>
+                <th width="10%">Brand</th>
+                <th width="10%">Anagrafica</th>
+                <th width="5%">Codice cliente</th>
+                <th width="8%">Colore</th>
+                <th width="25%">Descrizione</th>
+                <th width="2%"></th>
+                <th width="2%"></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Articolo td in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="@Url.Action(ViewData["ActionName"] as string, ViewData["ControllerName"] as string, new { idArticolo = td.IdArticolo})">
+                            Seleziona
+                        </a>
+                    </td>
+                    <th width="10%">@td.Brand.Descrizione</th>
+                    <th width="10%">@td.Anagrafica</th>
+                    <th width="5%">@td.CodiceCliente</th>
+                    <th width="8%">@td.Colore</th>
+                    <th width="25%">@td.Descrizione</th>
+                    <th width="2%"></th>
+                    <th width="2%"></th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="12">
+                        <hr style="margin-bottom:10px; margin-top:10px !important" />
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+}
+
+

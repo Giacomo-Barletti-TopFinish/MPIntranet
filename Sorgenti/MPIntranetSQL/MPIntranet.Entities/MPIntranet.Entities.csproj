@@ -47,6 +47,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ArticoliDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DocumentiDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DocumentiDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="ElementiVuoti.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -59,6 +64,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SecurityDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="TabelleEsterne.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -72,6 +78,17 @@
     </None>
     <None Include="ArticoliDS.xss">
       <DependentUpon>ArticoliDS.xsd</DependentUpon>
+    </None>
+    <None Include="DocumentiDS.xsc">
+      <DependentUpon>DocumentiDS.xsd</DependentUpon>
+    </None>
+    <None Include="DocumentiDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DocumentiDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DocumentiDS.xss">
+      <DependentUpon>DocumentiDS.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

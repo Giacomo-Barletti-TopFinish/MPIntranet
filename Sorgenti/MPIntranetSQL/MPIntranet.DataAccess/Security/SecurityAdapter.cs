@@ -42,7 +42,7 @@ namespace MPIntranet.DataAccess.Security
             tipoMessaggio = tipoMessaggio.Length > 15 ? tipoMessaggio.Substring(0, 15) : tipoMessaggio;
 
             string insert = @"insert into $T{LOGMESSAGGI} (IDLOG,MESSAGGIO,STACK,MODULO,TIPOMESAGGIO,DATA)
-                                values (NULL,$P{MESSAGGIO},$P{STACK},$P{MODULO},$P{TIPOMESAGGIO},SYSDATE)";
+                                values (NULL,$P{MESSAGGIO},$P{STACK},$P{MODULO},$P{TIPOMESAGGIO},SYSDATETIME())";
 
             ParamSet ps = new ParamSet();
             ps.AddParam("MESSAGGIO", DbType.String, messaggio);
