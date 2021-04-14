@@ -5,18 +5,22 @@
 
 @model List<Documento>
 
-@if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(20))
+@if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(17))
 {
-    <tr>
-        <td>
-            @Html.DropDownList("ddlTipologia", new SelectList(ViewData["ddlTipoDocumenti"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @style = "height: 21px;" })
-        </td>
-        <td>
-            <input type="file" id="FileUpload1" />
-        </td>
-        <td><a onclick="AggiungiDocumento(this,@ViewData["IdEsterna"] ,@ViewData["TabellaEsterna"] )" title="Aggiungi"><i class="fa fa-fw fa-plus"></i></a></td>
-        <td></td>
-    </tr>
+<div class="row">
+    <div class="col-lg-1">
+        @Html.Label("Tipo documento", new { @class = "input-sm" })
+    </div>
+    <div class="col-lg-2">
+        @Html.DropDownList("ddlTipologia", new SelectList(ViewData["ddlTipoDocumenti"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @style = "height: 21px;" })
+    </div>
+    <div class="col-lg-3">
+        <input type="file" id="FileUpload1" />
+    </div>
+    <div class="col-lg-3">
+        <a onclick="AggiungiDocumento(this,@ViewData["IdEsterna"] ,'@ViewData["TabellaEsterna"]' )" title="Aggiungi"><i class="fa fa-fw fa-plus"></i></a>
+    </div>
+</div>
 }
 
 
@@ -66,9 +70,9 @@
 
 <script>
     function AggiungiDocumento(sender, IdEsterna, TabellaEsterna) {
-
+        debugger;
         var tipoDocumento = $('#ddlTipologia').val();
-        if (tipoDocumento == null || tipoDocumento == '' || tipoDocumento=='@MPIntranet.Entities.ElementiVuoti.TipoDocumentoVuoto')
+        if (tipoDocumento == null || tipoDocumento == '' || tipoDocumento=='@MPIntranet.Entities.ElementiVuoti.TipoDocumento')
         {
             $('#lblMessage').html(MESSAGGIO_PUNTINO + " " + "Tipo documento " + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO);
             return;
@@ -103,7 +107,8 @@
                 processData: false, // Not to process data
                 data: fileData,
                 success: function (result) {
-                    caricaDati();
+                    debugger;
+                    CaricaDocumenti();
                 },
                 error: function (response) {
                     document.open();
