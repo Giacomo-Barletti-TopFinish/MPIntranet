@@ -14,7 +14,7 @@
   <xs:element name="DocumentiDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DocumentiDS" msprop:Generator_UserDSName="DocumentiDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="DOCUMENTI" msprop:Generator_TableClassName="DOCUMENTIDataTable" msprop:Generator_TableVarName="tableDOCUMENTI" msprop:Generator_TablePropName="DOCUMENTI" msprop:Generator_RowDeletingName="DOCUMENTIRowDeleting" msprop:Generator_RowChangingName="DOCUMENTIRowChanging" msprop:Generator_RowEvHandlerName="DOCUMENTIRowChangeEventHandler" msprop:Generator_RowDeletedName="DOCUMENTIRowDeleted" msprop:Generator_UserTableName="DOCUMENTI" msprop:Generator_RowChangedName="DOCUMENTIRowChanged" msprop:Generator_RowEvArgName="DOCUMENTIRowChangeEvent" msprop:Generator_RowClassName="DOCUMENTIRow">
+        <xs:element name="DOCUMENTI" msprop:Generator_TableClassName="DOCUMENTIDataTable" msprop:Generator_TableVarName="tableDOCUMENTI" msprop:Generator_RowChangedName="DOCUMENTIRowChanged" msprop:Generator_TablePropName="DOCUMENTI" msprop:Generator_RowDeletingName="DOCUMENTIRowDeleting" msprop:Generator_RowChangingName="DOCUMENTIRowChanging" msprop:Generator_RowEvHandlerName="DOCUMENTIRowChangeEventHandler" msprop:Generator_RowDeletedName="DOCUMENTIRowDeleted" msprop:Generator_RowClassName="DOCUMENTIRow" msprop:Generator_UserTableName="DOCUMENTI" msprop:Generator_RowEvArgName="DOCUMENTIRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDDOCUMENTO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnIDDOCUMENTO" msprop:Generator_ColumnPropNameInRow="IDDOCUMENTO" msprop:Generator_ColumnPropNameInTable="IDDOCUMENTOColumn" msprop:Generator_UserColumnName="IDDOCUMENTO" type="xs:int" />
@@ -33,7 +33,7 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="DATI" msprop:Generator_ColumnVarNameInTable="columnDATI" msprop:Generator_ColumnPropNameInRow="DATI" msprop:Generator_ColumnPropNameInTable="DATIColumn" msprop:Generator_UserColumnName="DATI" type="xs:base64Binary" />
+              <xs:element name="DATI" msprop:Generator_ColumnVarNameInTable="columnDATI" msprop:Generator_ColumnPropNameInRow="DATI" msprop:Generator_ColumnPropNameInTable="DATIColumn" msprop:Generator_UserColumnName="DATI" type="xs:base64Binary" minOccurs="0" />
               <xs:element name="IDESTERNA" msprop:Generator_ColumnVarNameInTable="columnIDESTERNA" msprop:Generator_ColumnPropNameInRow="IDESTERNA" msprop:Generator_ColumnPropNameInTable="IDESTERNAColumn" msprop:Generator_UserColumnName="IDESTERNA" type="xs:int" minOccurs="0" />
               <xs:element name="TABELLAESTERNA" msprop:Generator_ColumnVarNameInTable="columnTABELLAESTERNA" msprop:Generator_ColumnPropNameInRow="TABELLAESTERNA" msprop:Generator_ColumnPropNameInTable="TABELLAESTERNAColumn" msprop:Generator_UserColumnName="TABELLAESTERNA">
                 <xs:simpleType>
@@ -55,7 +55,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="TIPIDOCUMENTO" msprop:Generator_TableClassName="TIPIDOCUMENTODataTable" msprop:Generator_TableVarName="tableTIPIDOCUMENTO" msprop:Generator_TablePropName="TIPIDOCUMENTO" msprop:Generator_RowDeletingName="TIPIDOCUMENTORowDeleting" msprop:Generator_RowChangingName="TIPIDOCUMENTORowChanging" msprop:Generator_RowEvHandlerName="TIPIDOCUMENTORowChangeEventHandler" msprop:Generator_RowDeletedName="TIPIDOCUMENTORowDeleted" msprop:Generator_UserTableName="TIPIDOCUMENTO" msprop:Generator_RowChangedName="TIPIDOCUMENTORowChanged" msprop:Generator_RowEvArgName="TIPIDOCUMENTORowChangeEvent" msprop:Generator_RowClassName="TIPIDOCUMENTORow">
+        <xs:element name="TIPIDOCUMENTO" msprop:Generator_TableClassName="TIPIDOCUMENTODataTable" msprop:Generator_TableVarName="tableTIPIDOCUMENTO" msprop:Generator_RowChangedName="TIPIDOCUMENTORowChanged" msprop:Generator_TablePropName="TIPIDOCUMENTO" msprop:Generator_RowDeletingName="TIPIDOCUMENTORowDeleting" msprop:Generator_RowChangingName="TIPIDOCUMENTORowChanging" msprop:Generator_RowEvHandlerName="TIPIDOCUMENTORowChangeEventHandler" msprop:Generator_RowDeletedName="TIPIDOCUMENTORowDeleted" msprop:Generator_RowClassName="TIPIDOCUMENTORow" msprop:Generator_UserTableName="TIPIDOCUMENTO" msprop:Generator_RowEvArgName="TIPIDOCUMENTORowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDTIPODOCUMENTO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnIDTIPODOCUMENTO" msprop:Generator_ColumnPropNameInRow="IDTIPODOCUMENTO" msprop:Generator_ColumnPropNameInTable="IDTIPODOCUMENTOColumn" msprop:Generator_UserColumnName="IDTIPODOCUMENTO" type="xs:int" />
@@ -85,7 +85,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="BLOCCHI" msprop:Generator_TableClassName="BLOCCHIDataTable" msprop:Generator_TableVarName="tableBLOCCHI" msprop:Generator_TablePropName="BLOCCHI" msprop:Generator_RowDeletingName="BLOCCHIRowDeleting" msprop:Generator_RowChangingName="BLOCCHIRowChanging" msprop:Generator_RowEvHandlerName="BLOCCHIRowChangeEventHandler" msprop:Generator_RowDeletedName="BLOCCHIRowDeleted" msprop:Generator_UserTableName="BLOCCHI" msprop:Generator_RowChangedName="BLOCCHIRowChanged" msprop:Generator_RowEvArgName="BLOCCHIRowChangeEvent" msprop:Generator_RowClassName="BLOCCHIRow">
+        <xs:element name="BLOCCHI" msprop:Generator_TableClassName="BLOCCHIDataTable" msprop:Generator_TableVarName="tableBLOCCHI" msprop:Generator_RowChangedName="BLOCCHIRowChanged" msprop:Generator_TablePropName="BLOCCHI" msprop:Generator_RowDeletingName="BLOCCHIRowDeleting" msprop:Generator_RowChangingName="BLOCCHIRowChanging" msprop:Generator_RowEvHandlerName="BLOCCHIRowChangeEventHandler" msprop:Generator_RowDeletedName="BLOCCHIRowDeleted" msprop:Generator_RowClassName="BLOCCHIRow" msprop:Generator_UserTableName="BLOCCHI" msprop:Generator_RowEvArgName="BLOCCHIRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDBLOCCO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnIDBLOCCO" msprop:Generator_ColumnPropNameInRow="IDBLOCCO" msprop:Generator_ColumnPropNameInTable="IDBLOCCOColumn" msprop:Generator_UserColumnName="IDBLOCCO" type="xs:int" />

@@ -16,7 +16,16 @@ namespace MPIntranet.DataAccess.Security
             base(connection, transaction)
         { }
 
-
+        public void EstraiConfigurazioni(SecurityDS ds, string codice)
+        {
+            string select = @"SELECT * FROM CONFIGURAZIONI where CODICE = $P{CODICE}";
+            ParamSet ps = new ParamSet();
+            ps.AddParam("CODICE", DbType.String, codice);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.CONFIGURAZIONI);
+            }
+        }
         public void SaveToken(string account, string token, int durata, string ipAddress)
         {
             string insert = @"insert into $T{TOKEN} (UTENTE,DATACREAZIONE,TOKEN,DURATA,IPADDRESS)

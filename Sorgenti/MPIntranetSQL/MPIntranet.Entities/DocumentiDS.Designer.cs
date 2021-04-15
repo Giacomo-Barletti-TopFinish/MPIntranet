@@ -621,7 +621,6 @@ namespace MPIntranet.Entities {
                 this.columnIDTIPODOCUMENTO.AllowDBNull = false;
                 this.columnFILENAME.MaxLength = 50;
                 this.columnESTENSIONE.MaxLength = 10;
-                this.columnDATI.AllowDBNull = false;
                 this.columnTABELLAESTERNA.AllowDBNull = false;
                 this.columnTABELLAESTERNA.MaxLength = 20;
                 this.columnUTENTEMODIFICA.MaxLength = 50;
@@ -1486,7 +1485,12 @@ namespace MPIntranet.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public byte[] DATI {
                 get {
-                    return ((byte[])(this[this.tableDOCUMENTI.DATIColumn]));
+                    try {
+                        return ((byte[])(this[this.tableDOCUMENTI.DATIColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DATI\' in table \'DOCUMENTI\' is DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableDOCUMENTI.DATIColumn] = value;
@@ -1606,6 +1610,18 @@ namespace MPIntranet.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetESTENSIONENull() {
                 this[this.tableDOCUMENTI.ESTENSIONEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsDATINull() {
+                return this.IsNull(this.tableDOCUMENTI.DATIColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetDATINull() {
+                this[this.tableDOCUMENTI.DATIColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

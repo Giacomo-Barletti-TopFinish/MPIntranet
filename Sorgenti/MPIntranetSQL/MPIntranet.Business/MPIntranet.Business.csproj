@@ -46,6 +46,7 @@
     <Compile Include="Blocco.cs" />
     <Compile Include="Brand.cs" />
     <Compile Include="BusinessBase.cs" />
+    <Compile Include="Configurazioni.cs" />
     <Compile Include="Documento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TipoDocumento.cs" />

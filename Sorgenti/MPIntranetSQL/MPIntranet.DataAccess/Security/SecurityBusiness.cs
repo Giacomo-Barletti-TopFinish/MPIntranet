@@ -33,6 +33,12 @@ namespace MPIntranet.DataAccess.Security
         }
 
         [DataContext]
+        public void EstraiConfigurazioni(SecurityDS ds, string codice)
+        {
+            SecurityAdapter a = new SecurityAdapter(DbConnection, DbTransaction);
+            a.EstraiConfigurazioni(ds, codice);
+        }
+        [DataContext]
         public void FillMenu(SecurityDS ds)
         {
             SecurityAdapter a = new SecurityAdapter(DbConnection, DbTransaction);

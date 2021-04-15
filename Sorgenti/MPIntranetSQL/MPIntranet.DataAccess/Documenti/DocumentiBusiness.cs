@@ -21,6 +21,17 @@ namespace MPIntranet.DataAccess.Documenti
             DocumentiAdapter a = new DocumentiAdapter(DbConnection, DbTransaction);
             a.FillTipiDocumento(ds, soloNonCancellati);
         }
-
+        [DataContext]
+        public void FillDocumenti(DocumentiDS ds, int idEsterna, string TabellaEsterna, bool soloNonCancellati)
+        {
+            DocumentiAdapter a = new DocumentiAdapter(DbConnection, DbTransaction);
+            a.FillDocumenti(ds, idEsterna, TabellaEsterna, soloNonCancellati);
+        }
+        [DataContext(true)]
+        public void UpdateTable(string tablename, DocumentiDS ds)
+        {
+            DocumentiAdapter a = new DocumentiAdapter(DbConnection, DbTransaction);
+            a.UpdateTable(tablename, ds);
+        }
     }
 }

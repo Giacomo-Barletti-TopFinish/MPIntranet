@@ -15,74 +15,81 @@ namespace MPIntranetWeb.Controllers
         public ActionResult CaricaDocumenti(int idEsterna, string tabellaEsterna)
         {
 
-
             List<TipoDocumento> tipiDocumento = TipoDocumento.EstraiListaTipiDocumento(false);
             List<MPIntranetListItem> tipoDocumentoItems = tipiDocumento.Select(x => new MPIntranetListItem(x.Descrizione, x.IdTipoDocumento.ToString())).ToList();
             tipoDocumentoItems.Insert(0, new MPIntranetListItem(string.Empty, ElementiVuoti.TipoDocumento.ToString()));
             ViewData.Add("ddlTipoDocumenti", tipoDocumentoItems);
 
-            //Galvanica g = new Galvanica();
-            //List<ImpiantoModel> impiantiModel = g.CreaListaImpiantoModel();
-            //List<MPIntranetListItem> impianti = impiantiModel.Select(x => new MPIntranetListItem(x.Descrizione, x.IdImpianto.ToString())).ToList();
-            //ViewData.Add("Impianti", impianti);
+            List<Documento> documenti = Documento.EstraiListaDocumenti(idEsterna, tabellaEsterna);
 
-            //ProcessoGalvanico p = new ProcessoGalvanico();
-            //List<ProcessoModel> processiModel = p.CaricaProcessi(idArticolo, impiantiModel[0].IdImpianto);
-            //List<MPIntranetListItem> processi = processiModel.Select(x => new MPIntranetListItem(x.Descrizione, x.IdProcesso.ToString())).ToList();
-            //ViewData.Add("Processi", processi);
             ViewData.Add("IdEsterna", idEsterna);
             ViewData.Add("TabellaEsterna", tabellaEsterna);
-            return PartialView("CaricaDocumenti");
+
+            DocumentoCaricatoModel model = new DocumentoCaricatoModel();
+
+            model.Documenti = documenti;
+            model.IdEsterna = idEsterna;
+            model.TabellaEsterna = tabellaEsterna;
+            model.TipiDocumento = tipoDocumentoItems;
+
+
+            return PartialView("CaricaDocumenti", model);
         }
+
+
         [HttpPost]
-        public ActionResult AggiungiDocumento()
+        public ActionResult AggiungiDocumento(DocumentoCaricatoModel model)
         {
-            decimal IdEsterna = decimal.Parse(Request["IdEsterna"]);
-            string TabellaEsterna = Request["TabellaEsterna"];
-            decimal IdTipoDocumento = decimal.Parse(Request["TipoDocumento"]);
-            if (Request.Files.Count > 0)
+
+            try
             {
-                try
+
+                string filename = model.Attachment.FileName;
+                if (filename.Length > 50)
                 {
-                    HttpFileCollectionBase files = Request.Files;
-                    for (int i = 0; i < files.Count; i++)
+                    string newFilename = Path.GetFileNameWithoutExtension(filename).Replace(Path.GetExtension(filename), string.Empty);
+                    if (newFilename.Length > 50 - Path.GetExtension(filename).Length)
                     {
-                        HttpPostedFileBase file = files[i];
-                        string fname;
-
-                        // Checking for Internet Explorer  
-                        if (Request.Browser.Browser.ToUpper() == "IE" || Request.Browser.Browser.ToUpper() == "INTERNETEXPLORER")
-                        {
-                            string[] testfiles = file.FileName.Split(new char[] { '\\' });
-                            fname = testfiles[testfiles.Length - 1];
-                        }
-                        else
-                        {
-                            fname = file.FileName;
-                        }
-
-                        byte[] fileData = null;
-                        using (var binaryReader = new BinaryReader(file.InputStream))
-                        {
-                            fileData = binaryReader.ReadBytes(file.ContentLength);
-                        }
-
-                        //Documenti d = new Documenti();
-                        //d.CreaDocumento(IdEsterna, TabellaEsterna, IdTipoDocumento, fname, fileData, ConnectedUser);
+                        newFilename = newFilename.Substring(0, 50 - Path.GetExtension(filename).Length);
+                        filename = newFilename + Path.GetExtension(filename);
                     }
-                    // Returns message that successfully uploaded  
-                    return Json("File caricato correttamente");
                 }
-                catch (Exception ex)
-                {
-                    return Json("Errore impossibile caricare il file: " + ex.Message);
-                }
-            }
-            else
-            {
-                return Json("Nessun file selezionato.");
-            }
+                string path = Path.Combine(Configurazioni.PathPDM, Path.GetFileName(filename));
 
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                }
+
+                model.Attachment.SaveAs(path);
+
+                byte[] fileData = null;
+                using (var binaryReader = new BinaryReader(model.Attachment.InputStream))
+                {
+                    fileData = binaryReader.ReadBytes(model.Attachment.ContentLength);
+                }
+
+                int tipoDocumento = Int32.Parse(model.SelectedTipoDocumento);
+
+
+                Documento.SalvaDocumento(tipoDocumento, filename, Path.GetExtension(filename), model.IdEsterna, model.TabellaEsterna, fileData, ConnectedUser);
+                switch (model.TabellaEsterna)
+                {
+                    case TabelleEsterne.Articoli:
+                        return RedirectToAction("Scheda", "Articolo", new { idArticolo = model.IdEsterna });
+
+
+                }
+                return null;
+
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "ERRORE:" + ex.Message.ToString();
+            }
+            return null;
         }
+
+  
     }
 }
