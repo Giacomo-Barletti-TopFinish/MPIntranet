@@ -3,6 +3,7 @@ using MPIntranet.Entities;
 using MPIntranet.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,8 +18,9 @@ namespace MPIntranet.Business
         public string Estensione { get; set; }
         public int IdEsterna { get; set; }
         public string TabellaEsterna { get; set; }
+        public byte[] Dati { get; set; }
         public Blocco Blocco { get; set; }
-        public static void SalvaDocumento(int idTipoDocumento, string filename, string estensione, int idEsterna, string tabellaEsterna, byte[] dati, string utente)
+        public static Documento SalvaDocumento(int idTipoDocumento, string filename, string estensione, int idEsterna, string tabellaEsterna, byte[] dati, string utente)
         {
             DocumentiDS ds = new DocumentiDS();
             using (DocumentiBusiness bDocumenti = new DocumentiBusiness())
@@ -36,6 +38,78 @@ namespace MPIntranet.Business
 
                 ds.DOCUMENTI.AddDOCUMENTIRow(documento);
                 bDocumenti.UpdateTable(ds.DOCUMENTI.TableName, ds);
+            }
+            return CreaDocumento(ds.DOCUMENTI.FirstOrDefault());
+        }
+
+        public string CreaPathSalvataggio()
+        {
+            string pathFile = Configurazioni.PathPDM;
+            if (!string.IsNullOrEmpty(TabellaEsterna))
+                pathFile = Path.Combine(pathFile, TabellaEsterna);
+
+            pathFile = Path.Combine(pathFile, IdEsterna.ToString());
+
+            if (!string.IsNullOrEmpty(TipoDocumento.Cartella))
+                pathFile = Path.Combine(pathFile, TipoDocumento.Cartella);
+
+            pathFile = Path.Combine(pathFile, Filename);
+
+            return recuperaFIleNameUnivoco(pathFile);
+
+        }
+
+        private string recuperaFIleNameUnivoco(string fileName)
+        {
+            string extension = Path.GetExtension(fileName);
+
+            int i = 0;
+            while (File.Exists(fileName))
+            {
+                if (i == 0)
+                    fileName = fileName.Replace(extension, "(" + ++i + ")" + extension);
+                else
+                    fileName = fileName.Replace("(" + i + ")" + extension, "(" + ++i + ")" + extension);
+            }
+
+            return fileName;
+        }
+
+        public string ContentType
+        {
+            get
+            {
+                switch (Estensione)
+                {
+                    case ".PDF":
+                        return "application/pdf";
+                    case ".JPG":
+                    case ".JPEG":
+                    case ".JPE":
+                        return "image/jpeg";
+                    case ".PNG":
+                        return "image/png";
+                    case ".AVI":
+                        return "video/avi";
+                    case ".PPS":
+                    case ".PPT":
+                        return "application/mspowerpoint";
+                    case ".TIF":
+                    case ".TIFF":
+                        return "image/tiff";
+                    case ".BMP":
+                        return "image/bmp";
+                    case ".RTF":
+                        return "application/rtf";
+                    case ".DOC":
+                    case ".DOT":
+                        return "application/msword";
+                    case ".XLS":
+                    case ".XLSX":
+                        return "application/excel";
+                    default:
+                        return "application/octet-stream";
+                }
             }
         }
 
@@ -67,11 +141,23 @@ namespace MPIntranet.Business
             documento.IdEsterna = riga.IsIDESTERNANull() ? -1 : riga.IDESTERNA;
             documento.TabellaEsterna = riga.TABELLAESTERNA;
 
+            if (!riga.IsDATINull())
+                documento.Dati = riga.DATI;
             documento.Cancellato = riga.CANCELLATO;
             documento.DataModifica = riga.DATAMODIFICA;
             documento.UtenteModifica = riga.UTENTEMODIFICA;
 
             return documento;
+        }
+
+        public static Documento EstraiDocumentoCompleto(int idDocumento)
+        {
+            DocumentiDS ds = new DocumentiDS();
+            using (DocumentiBusiness bDocumenti = new DocumentiBusiness())
+            {
+                bDocumenti.EstraiDocumentoCompleto(ds, idDocumento);
+            }
+            return CreaDocumento(ds.DOCUMENTI.FirstOrDefault());
         }
 
     }

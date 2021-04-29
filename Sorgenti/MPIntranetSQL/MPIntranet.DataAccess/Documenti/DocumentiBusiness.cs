@@ -33,5 +33,12 @@ namespace MPIntranet.DataAccess.Documenti
             DocumentiAdapter a = new DocumentiAdapter(DbConnection, DbTransaction);
             a.UpdateTable(tablename, ds);
         }
+
+        [DataContext]
+        public void EstraiDocumentoCompleto(DocumentiDS ds, int idDocumento)
+        {
+            DocumentiAdapter a = new DocumentiAdapter(DbConnection, DbTransaction);
+            a.EstraiDocumentoCompleto(ds, idDocumento);
+        }
     }
 }

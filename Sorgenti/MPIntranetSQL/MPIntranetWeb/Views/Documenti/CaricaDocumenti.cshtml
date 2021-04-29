@@ -33,7 +33,7 @@
             <table id="grigliaDocumenti" class="table table-condensed table-hover">
                 <thead style="background-color:aliceblue">
                     <tr>
-                        <th width="10%"></th>
+                        <th width="5%"></th>
                         <th width="10%">Tipo documento</th>
                         <th width="10%">Filename</th>
                         <th width="5%">Estensione</th>
@@ -47,9 +47,7 @@
                     {
                     <tr>
                         <td>
-                            <a href="@Url.Action("" , "", new { idArticolo = doc.IdDocumento})">
-                                Seleziona
-                            </a>
+                            @Html.ActionLink(" Estrai", "EstraiDocumento", "Documenti", new { IdDocumento = doc.IdDocumento }, new { target = "_blank" })
                         </td>
                         <td width="10%">@doc.TipoDocumento.Descrizione</td>
                         <td width="10%">@doc.Filename</td>

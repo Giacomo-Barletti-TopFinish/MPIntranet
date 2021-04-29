@@ -3,6 +3,7 @@ using MPIntranet.Entities;
 using MPIntranet.Models.Common;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,12 @@ namespace MPIntranetWeb.Controllers
 {
     public class DocumentiController : ControllerBase
     {
+        public ActionResult EstraiDocumento(int idDocumento)
+        {
+            Documento documento = Documento.EstraiDocumentoCompleto(idDocumento);
+            Response.AppendHeader("content-disposition", string.Format(CultureInfo.InvariantCulture, "inline; filename={0}", documento.Filename));
+            return new FileStreamResult(new MemoryStream(documento.Dati), documento.ContentType);
+        }
         public ActionResult CaricaDocumenti(int idEsterna, string tabellaEsterna)
         {
 
@@ -54,14 +61,6 @@ namespace MPIntranetWeb.Controllers
                         filename = newFilename + Path.GetExtension(filename);
                     }
                 }
-                string path = Path.Combine(Configurazioni.PathPDM, Path.GetFileName(filename));
-
-                if (System.IO.File.Exists(path))
-                {
-                    System.IO.File.Delete(path);
-                }
-
-                model.Attachment.SaveAs(path);
 
                 byte[] fileData = null;
                 using (var binaryReader = new BinaryReader(model.Attachment.InputStream))
@@ -72,13 +71,18 @@ namespace MPIntranetWeb.Controllers
                 int tipoDocumento = Int32.Parse(model.SelectedTipoDocumento);
 
 
-                Documento.SalvaDocumento(tipoDocumento, filename, Path.GetExtension(filename), model.IdEsterna, model.TabellaEsterna, fileData, ConnectedUser);
+                Documento documento = Documento.SalvaDocumento(tipoDocumento, filename, Path.GetExtension(filename), model.IdEsterna, model.TabellaEsterna, fileData, ConnectedUser);
+
+
+                string path = documento.CreaPathSalvataggio();
+                if (System.IO.File.Exists(path))
+                    System.IO.File.Delete(path);
+
+                model.Attachment.SaveAs(path);
                 switch (model.TabellaEsterna)
                 {
                     case TabelleEsterne.Articoli:
                         return RedirectToAction("Scheda", "Articolo", new { idArticolo = model.IdEsterna });
-
-
                 }
                 return null;
 
@@ -90,6 +94,6 @@ namespace MPIntranetWeb.Controllers
             return null;
         }
 
-  
+
     }
 }
