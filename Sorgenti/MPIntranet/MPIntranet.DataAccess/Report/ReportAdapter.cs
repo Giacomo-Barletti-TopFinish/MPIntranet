@@ -85,6 +85,25 @@ order by sum(qta) desc";
             }
 
         }
+
+        public void FillSALDIUBICAZIONI(string Articolo, ReportDS ds)
+        {
+            string query = @" select ma.modello,tm.codicemag,
+                                ITUSER.CLASSIFICA_MAGAZZINO(tm.codicemag ,'','', tm.destabmag ) categoria,val.costo1,sg.qesi, sg.qesi*val.costo1 valore, SG.QTOT_DISP_ESI
+                                from ditta1.saldi_gen sg
+                                inner join gruppo.magazz ma on ma.idmagazz = sg.idmagazz
+                                inner join gruppo.tabmag tm on tm.idtabmag = sg.idtabmag
+                                left outer join ditta1.USR_INVENTARIOs val on val.idmagazz = sg.idmagazz and val.idinventariot= '81af466b-104b-4ca9-998c-5bf5e4d22e0c' 
+                                WHERE SG.QESI > 0
+                                AND ma.MODELLO LIKE '{0}%' ";
+            query = string.Format(query, Articolo);
+
+            using (DbDataAdapter da = BuildDataAdapter(query))
+            {
+                da.Fill(ds.SALDIUBICAZIONI);
+            }
+
+        }
         public void FillORDINIATTIVI(ReportDS ds)
         {
             string query = @"select * from ITUSER.ORDINIATTIVI ";

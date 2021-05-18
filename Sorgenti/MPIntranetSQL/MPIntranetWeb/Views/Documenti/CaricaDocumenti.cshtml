@@ -37,6 +37,10 @@
                         <th width="10%">Tipo documento</th>
                         <th width="10%">Filename</th>
                         <th width="5%">Estensione</th>
+
+                        <th width="10%">Blocco lettura</th>
+                        <th width="10%">Blocco scrittura</th>
+
                         <th width="2%"></th>
                         <th width="2%"></th>
                         <th></th>
@@ -45,17 +49,25 @@
                 <tbody>
                     @foreach (Documento doc in Model.Documenti)
                     {
-                    <tr>
-                        <td>
-                            @Html.ActionLink(" Estrai", "EstraiDocumento", "Documenti", new { IdDocumento = doc.IdDocumento }, new { target = "_blank" })
-                        </td>
-                        <td width="10%">@doc.TipoDocumento.Descrizione</td>
-                        <td width="10%">@doc.Filename</td>
-                        <td width="10%">@doc.Estensione</td>
-                        <th width="2%"></th>
-                        <th width="2%"></th>
-                        <td></td>
-                    </tr>
+                        <tr>
+                            <td>
+                                @Html.ActionLink(" Estrai", "EstraiDocumento", "Documenti", new { IdDocumento = doc.IdDocumento }, new { target = "_blank" })
+                            </td>
+                            <td width="10%">@doc.TipoDocumento.Descrizione</td>
+                            <td width="10%">@doc.Filename</td>
+                            <td width="10%">@doc.Estensione</td>
+
+                            <td width="10%">
+                                <input type="checkbox" onchange="onBlocco(@doc.IdDocumento,this,@TipoBloccoDocumento.Lettura);" />
+                            </td>
+                            <td width="10%">
+                                <input type="checkbox" onchange="onBlocco(@doc.IdDocumento,this,@TipoBloccoDocumento.Scrittura);" />
+                            </td>
+
+                            <td width="2%"></td>
+                            <td width="2%"></td>
+                            <td></td>
+                        </tr>
                         <tr>
                             <td colspan="12">
                                 <hr style="margin-bottom:10px; margin-top:10px !important" />
@@ -71,3 +83,33 @@
 
 }
 
+<script language="javascript" type="text/javascript">
+
+    function onBlocco(idDocumento, sender, tipoBlocco) {
+        debugger;
+        var statoCheckbox = $(sender).prop("checked");
+
+        var url = '@Url.Action("BloccoDocumento", "Documenti")';
+         $.ajax({
+                url: url,
+                data: {
+                    idDocumento: idDocumento,
+                    stato: statoCheckbox
+                },
+                cache: false,
+                type: "POST",
+                success: function (data)
+                {
+                 CaricaDocumenti()
+             },
+                error: function (response)
+                {
+                    document.open();
+                    document.write(response.responseText);
+                    document.close();
+                }
+            });
+
+    }
+
+</script>

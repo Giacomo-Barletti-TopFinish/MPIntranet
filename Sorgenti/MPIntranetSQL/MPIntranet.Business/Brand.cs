@@ -50,5 +50,10 @@ namespace MPIntranet.Business
             return brand;
         }
 
+        public override string ToString()
+        {
+            return Descrizione;
+        }
+
     }
 }

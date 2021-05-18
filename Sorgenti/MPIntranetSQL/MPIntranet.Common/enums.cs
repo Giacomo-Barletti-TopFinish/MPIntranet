@@ -27,4 +27,6 @@ namespace MPIntranet.Common
         public const string Macchine = "MACCHINE";
         public const string ProdottiFiniti = "PRODOTTI FINITI";
     }
+
+    public enum TipoAperturaForn {Nuovo,Apri }
 }

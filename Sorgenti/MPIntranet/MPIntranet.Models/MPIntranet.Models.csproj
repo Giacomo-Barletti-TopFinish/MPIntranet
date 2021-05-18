@@ -82,6 +82,7 @@
     <Compile Include="Report\CaricoRepartoModel.cs" />
     <Compile Include="Report\OrdiniAttiviModel.cs" />
     <Compile Include="Report\ReportQuantitaModel.cs" />
+    <Compile Include="Report\SaldoUbicazioneModel.cs" />
     <Compile Include="Schedule\ScheduleModel.cs" />
     <Compile Include="Security\LoginModel.cs" />
     <Compile Include="Security\MenuModel.cs" />

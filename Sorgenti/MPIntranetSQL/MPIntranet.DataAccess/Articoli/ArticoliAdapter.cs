@@ -29,6 +29,30 @@ namespace MPIntranet.DataAccess.Articoli
             }
         }
 
+        public void GetDistintaBase(ArticoliDS ds, int idDiba)
+        {
+            string select = @"SELECT * FROM DIBA WHERE IDDIBA = $P<IDDIBA>";
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDDIBA", DbType.Int32, idDiba);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.DIBA);
+            }
+        }
+        public void FillDistintaBase(ArticoliDS ds, int idArticolo, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM DIBA WHERE IDARTICOLO = $P<IDARTICOLO> ";
+            if (soloNonCancellati)
+                select += "AND CANCELLATO = 0 ";
+            select += " ORDER BY IDTIPODIBA,VERSIONE ";
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDARTICOLO", DbType.Int32, idArticolo);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.DIBA);
+            }
+        }
+
         public void FillArticoli(string anagrafica, ArticoliDS ds, bool soloNonCancellati)
         {
             string select = @"SELECT * FROM ARTICOLI WHERE IDARTICOLO >=0 AND ANAGRAFICA = $P<ANAGRAFICA>";
@@ -60,6 +84,19 @@ namespace MPIntranet.DataAccess.Articoli
             }
         }
 
+        public void FillTipiDistinta(ArticoliDS ds, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM TIPIDIBA ";
+            if (soloNonCancellati)
+                select += "WHERE CANCELLATO = 0 ";
+
+            select += " ORDER BY TIPODIBA ";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.TIPIDIBA);
+            }
+        }
         public void GetArticolo(ArticoliDS ds, int idArticolo)
         {
             string select = @"SELECT * FROM ARTICOLI WHERE IDARTICOLO = $P<IDARTICOLO>";
@@ -127,6 +164,43 @@ namespace MPIntranet.DataAccess.Articoli
             }
         }
 
+        public void UpdateDistintaBaseTable(ArticoliDS ds)
+        {
+            string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", ds.DIBA.TableName);
+
+            using (DbDataAdapter a = BuildDataAdapter(query))
+            {
+                InstallRowUpdatedHandler(a, UpdateDistintaBaseHander);
+                a.ContinueUpdateOnError = false;
+                DataTable dt = ds.DIBA;
+                DbCommandBuilder cmd = BuildCommandBuilder(a);
+                a.AcceptChangesDuringFill = true;
+                a.UpdateCommand = cmd.GetUpdateCommand();
+                a.DeleteCommand = cmd.GetDeleteCommand();
+                a.InsertCommand = cmd.GetInsertCommand();
+
+                a.Update(dt);
+            }
+        }
+        private void UpdateDistintaBaseHander(object sender, RowUpdatedEventArgs e)
+        {
+            if ((e.Status == UpdateStatus.Continue) && (e.StatementType == StatementType.Insert))
+            {
+                ArticoliDS.DIBARow row = (ArticoliDS.DIBARow)e.Row;
+                ArticoliDS.DIBADataTable dt = row.Table as ArticoliDS.DIBADataTable;
+
+                bool isIdentityReadOnly = dt.IDDIBAColumn.ReadOnly;
+                dt.IDDIBAColumn.ReadOnly = false;
+                try
+                {
+                    row.IDDIBA = (int)RetrievePostUpdateID<decimal>(e.Command, row);
+                }
+                finally
+                {
+                    dt.IDDIBAColumn.ReadOnly = isIdentityReadOnly;
+                }
+            }
+        }
         /***************************************************************
 
         //excel

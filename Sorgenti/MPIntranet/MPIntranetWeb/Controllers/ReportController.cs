@@ -37,7 +37,7 @@ namespace MPIntranetWeb.Controllers
 
 
             List<MPIntranetListItem> quantitaList = quantita.Select(x => new MPIntranetListItem(x, x)).ToList();
-            quantitaList.Insert(0, new MPIntranetListItem("** TUTTI LE QUANTITA **", ElementiVuoti.TutteQuantita.ToString()));
+            quantitaList.Insert(0, new MPIntranetListItem("** TUTTE LE QUANTITA **", ElementiVuoti.TutteQuantita.ToString()));
 
             ViewData.Add("Quantita", quantitaList);
 
@@ -61,12 +61,38 @@ namespace MPIntranetWeb.Controllers
             return View();
         }
 
+
+        public ActionResult SALDIUBICAZIONI()
+        {
+
+            //Report report = new Report();
+            //List<string> quantita = report.EstraiReportQuantita();
+
+
+            //List<MPIntranetListItem> quantitaList = quantita.Select(x => new MPIntranetListItem(x, x)).ToList();
+            //quantitaList.Insert(0, new MPIntranetListItem("** TUTTI LE QUANTITA **", ElementiVuoti.TutteQuantita.ToString()));
+
+            //ViewData.Add("Quantita", quantitaList);
+
+
+            return View();
+        }
+
+        public ActionResult CaricaSaldiUbicazioni(string Articolo)
+        {
+
+            Report report = new Report();
+            List<SaldoUbicazioneModel> lista = report.CreaListaSaldoUbicazioneModel(Articolo);
+
+            return PartialView("ReportSaldoUbicazionePartial", lista);
+
+        }
         public ActionResult CaricaReportBolleVendita(string Inizio, string Fine)
         {
             DateTime dtInizio = DateTime.Parse(Inizio);
             DateTime dtFine = DateTime.Parse(Fine);
             Report report = new Report();
-            List<BolleVenditaModel> reportBolleList = report.CreaListaReportBolleVendita(dtInizio,dtFine);
+            List<BolleVenditaModel> reportBolleList = report.CreaListaReportBolleVendita(dtInizio, dtFine);
 
             return PartialView("ReportBolleVenditaPartial", reportBolleList);
         }
@@ -100,12 +126,12 @@ namespace MPIntranetWeb.Controllers
             return File(fileContents, "application/excel", "CaricoLavoro.xlsx");
         }
 
-        public FileResult ExportExcelBolleVendita(string inizio,string fine)
+        public FileResult ExportExcelBolleVendita(string inizio, string fine)
         {
             DateTime dtInizio = DateTime.Parse(inizio);
             DateTime dtFine = DateTime.Parse(fine);
             Report report = new Report();
-            byte[] fileContents = report.CreaExcelBolleVendite(dtInizio,dtFine);
+            byte[] fileContents = report.CreaExcelBolleVendite(dtInizio, dtFine);
 
 
             return File(fileContents, "application/excel", "BolleVendite.xlsx");
@@ -144,7 +170,7 @@ namespace MPIntranetWeb.Controllers
             return PartialView("ReportOrdiniAttiviPartial", reportOrdiniAttivi);
         }
 
-        public FileResult ExportOrdiniAttiviExcel()                              
+        public FileResult ExportOrdiniAttiviExcel()
         {
 
             Report report = new Report();

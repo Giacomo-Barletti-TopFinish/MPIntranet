@@ -34,6 +34,13 @@ namespace MPIntranet.DataAccess.Report
         }
 
         [DataContext]
+        public void FillSALDIUBICAZIONI(String Articolo, ReportDS ds)
+        {
+            ReportAdapter r = new ReportAdapter(DbConnection, DbTransaction);
+            r.FillSALDIUBICAZIONI(Articolo, ds);
+
+        }
+        [DataContext]
         public List<string> EstraiReportQuantita(ReportDS ds)
         {
             ReportAdapter a = new ReportAdapter(DbConnection, DbTransaction);

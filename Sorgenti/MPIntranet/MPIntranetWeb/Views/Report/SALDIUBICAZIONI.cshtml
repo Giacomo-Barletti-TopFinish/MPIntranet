@@ -1,0 +1,95 @@
+﻿@using MPIntranet.Models.Common
+@{
+    ViewBag.Title = "Saldi Ubicazioni";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+
+
+<div class="content-top">
+    <h2>Saldi Ubicazioni</h2>
+</div>
+<div class="row col-lg-6">
+    @Html.Label("Report")
+    <label class="text-red input-sm" id="lblMessage"></label>
+</div>
+<div class="row col-lg-12">
+    <div class="col-md-3">
+        <label>Articolo</label><br />
+        <input type="text" id="articolo" />
+    </div>
+    <div class="col-lg-2">
+        <input type="button" onclick="caricaDati();" class="btn btn-primary" value="Trova" />
+    </div>
+
+</div>
+
+
+<br />
+<div class="col-md-12" style="font-size:8px" id="divReportSaldi"></div>
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+        caricaDati();
+
+    });
+
+    function caricaDati()
+    {
+
+        var articolo = $('#articolo').val();
+
+        if (articolo == null || articolo =='') {
+            $('#lblMessage').html('Indicare un articolo.');
+            $('#divReportSaldi').html('');
+            return;
+        }
+
+         var url = '@Url.Action("CaricaSaldiUbicazioni", "Report")';
+        $.ajax({
+            url: url,
+            data: {
+                Articolo: articolo
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divReportSaldi').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+  function Export()
+    {
+
+      var inizio = $('#dtInizio').val();
+      var fine = $('#dtFine').val();
+
+      if (inizio > fine) {
+          $('#lblMessage').html('La data inizio deve essere minore o uguale alla data fine.');
+          $('#divReportBolle').html('');
+          return;
+      }
+
+
+        var url = '@Url.Action("ExportExcelBolleVendita", "Report")';
+      url = url + '?inizio=' + inizio;
+      url = url + '&fine=' + fine;
+
+
+        var win = window.open(url, '_blank');
+        win.document.title = "Export";
+        win.focus();
+
+
+    }
+
+
+</script>

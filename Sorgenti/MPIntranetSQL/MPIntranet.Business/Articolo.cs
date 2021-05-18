@@ -17,7 +17,13 @@ namespace MPIntranet.Business
         public string Anagrafica { get; set; }
         public string Colore { get; set; }
         public string CodiceCliente { get; set; }
-
+        public override string ToString()
+        {
+            if (string.IsNullOrEmpty(Anagrafica))
+                return Descrizione;
+            else
+                return string.Format("{0} - {1}", Anagrafica, Descrizione);
+        }
         public static Articolo EstraiArticolo(int idArticolo)
         {
             List<Articolo> lista = EstraiListaArticoli(false);

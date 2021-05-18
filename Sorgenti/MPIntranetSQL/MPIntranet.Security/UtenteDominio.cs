@@ -7,7 +7,7 @@ using System.DirectoryServices.AccountManagement;
 
 namespace MPIntranet.Security
 {
-    public class Utente
+    public class UtenteDominio
     {
         private UserPrincipal userPrincipal;
         public bool AbilitaAnagrafica { get; private set; }
@@ -19,7 +19,7 @@ namespace MPIntranet.Security
 
         public string IDUSER { get; private set; }
 
-        public Utente()
+        public UtenteDominio()
         {
             string username = Environment.UserName;
 

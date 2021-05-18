@@ -60,6 +60,20 @@ namespace MPIntranet.DataAccess.Documenti
                 da.Fill(ds.DOCUMENTI);
             }
         }
+
+        public void FillBlocchiDocumento(DocumentiDS ds, int idDocumento)
+        {
+            string select = @"SELECT * FROM BLOCCHIDOCUMENTO WHERE IDDOCUMENTO = $P<IDDOCUMENTO> ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDDOCUMENTO", DbType.Int32, idDocumento);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.BLOCCHIDOCUMENTO);
+            }
+        }
+
         public void UpdateTable(string tablename, DocumentiDS ds)
         {
             string tablenameDB = tablename;

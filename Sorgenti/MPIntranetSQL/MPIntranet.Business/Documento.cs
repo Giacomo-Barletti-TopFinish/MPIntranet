@@ -19,7 +19,7 @@ namespace MPIntranet.Business
         public int IdEsterna { get; set; }
         public string TabellaEsterna { get; set; }
         public byte[] Dati { get; set; }
-        public Blocco Blocco { get; set; }
+        public List<BloccoDocumento> Blocchi { get; set; }
         public static Documento SalvaDocumento(int idTipoDocumento, string filename, string estensione, int idEsterna, string tabellaEsterna, byte[] dati, string utente)
         {
             DocumentiDS ds = new DocumentiDS();
@@ -140,7 +140,7 @@ namespace MPIntranet.Business
             documento.Estensione = riga.IsESTENSIONENull() ? string.Empty : riga.ESTENSIONE;
             documento.IdEsterna = riga.IsIDESTERNANull() ? -1 : riga.IDESTERNA;
             documento.TabellaEsterna = riga.TABELLAESTERNA;
-
+            documento.Blocchi = BloccoDocumento.EstraiBlocchiDocumento(riga.IDDOCUMENTO);
             if (!riga.IsDATINull())
                 documento.Dati = riga.DATI;
             documento.Cancellato = riga.CANCELLATO;
@@ -148,6 +148,42 @@ namespace MPIntranet.Business
             documento.UtenteModifica = riga.UTENTEMODIFICA;
 
             return documento;
+        }
+
+        public void ModificaBloccoDocumento(int idDocumento, bool stato, string tipoBlocco, string utente)
+        {
+            DocumentiDS ds = new DocumentiDS();
+            using (DocumentiBusiness bDocumenti = new DocumentiBusiness())
+            {
+                bDocumenti.FillBlocchiDocumento(ds, idDocumento);
+
+                if (!stato)
+                {
+                    DocumentiDS.BLOCCHIDOCUMENTORow bloccoAttivo = ds.BLOCCHIDOCUMENTO.Where(x => x.IDDOCUMENTO == idDocumento && x.ATTIVO == true && x.TIPOBLOCCO == tipoBlocco).FirstOrDefault();
+                    if (bloccoAttivo != null)
+                    {
+                        bloccoAttivo.ATTIVO = false;
+                        bloccoAttivo.FINEBLOCCO = DateTime.Now;
+                        bloccoAttivo.UTENTEFINE = utente;
+                    }
+                }
+                else
+                {
+                    DocumentiDS.BLOCCHIDOCUMENTORow bloccoAttivo = ds.BLOCCHIDOCUMENTO.Where(x => x.IDDOCUMENTO == idDocumento && x.ATTIVO == true && x.TIPOBLOCCO == tipoBlocco).FirstOrDefault();
+                    if (bloccoAttivo == null)
+                    {
+                        DocumentiDS.BLOCCHIDOCUMENTORow nuovoBlocco = ds.BLOCCHIDOCUMENTO.NewBLOCCHIDOCUMENTORow();
+                        nuovoBlocco.ATTIVO = true;
+                        nuovoBlocco.IDDOCUMENTO = idDocumento;
+                        nuovoBlocco.INIZIOBLOCCO = DateTime.Now;
+                        nuovoBlocco.TIPOBLOCCO = tipoBlocco;
+                        nuovoBlocco.UTENTEINIZIO = utente;
+                        ds.BLOCCHIDOCUMENTO.AddBLOCCHIDOCUMENTORow(nuovoBlocco);
+                    }
+                }
+                bDocumenti.UpdateTable(ds.BLOCCHIDOCUMENTO.TableName, ds);
+            }
+
         }
 
         public static Documento EstraiDocumentoCompleto(int idDocumento)
@@ -161,4 +197,5 @@ namespace MPIntranet.Business
         }
 
     }
+
 }

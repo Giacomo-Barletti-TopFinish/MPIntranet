@@ -464,6 +464,8 @@
     <Content Include="Views\FinitureBurattoVarie\CaricaFasiPartial.cshtml" />
     <Content Include="Views\Report\BolleVendita.cshtml" />
     <Content Include="Views\Report\ReportBolleVenditaPartial.cshtml" />
+    <Content Include="Views\Report\SALDIUBICAZIONI.cshtml" />
+    <Content Include="Views\Report\ReportSaldoUbicazionePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

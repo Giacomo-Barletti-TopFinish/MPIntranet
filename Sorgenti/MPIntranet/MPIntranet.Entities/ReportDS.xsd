@@ -14,7 +14,7 @@
   <xs:element name="ReportDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ReportDS" msprop:Generator_UserDSName="ReportDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="ODL_APERTI" msprop:Generator_TableClassName="ODL_APERTIDataTable" msprop:Generator_TableVarName="tableODL_APERTI" msprop:Generator_TablePropName="ODL_APERTI" msprop:Generator_RowDeletingName="ODL_APERTIRowDeleting" msprop:Generator_RowChangingName="ODL_APERTIRowChanging" msprop:Generator_RowEvHandlerName="ODL_APERTIRowChangeEventHandler" msprop:Generator_RowDeletedName="ODL_APERTIRowDeleted" msprop:Generator_UserTableName="ODL_APERTI" msprop:Generator_RowChangedName="ODL_APERTIRowChanged" msprop:Generator_RowEvArgName="ODL_APERTIRowChangeEvent" msprop:Generator_RowClassName="ODL_APERTIRow">
+        <xs:element name="ODL_APERTI" msprop:Generator_TableClassName="ODL_APERTIDataTable" msprop:Generator_TableVarName="tableODL_APERTI" msprop:Generator_RowChangedName="ODL_APERTIRowChanged" msprop:Generator_TablePropName="ODL_APERTI" msprop:Generator_RowDeletingName="ODL_APERTIRowDeleting" msprop:Generator_RowChangingName="ODL_APERTIRowChanging" msprop:Generator_RowEvHandlerName="ODL_APERTIRowChangeEventHandler" msprop:Generator_RowDeletedName="ODL_APERTIRowDeleted" msprop:Generator_RowClassName="ODL_APERTIRow" msprop:Generator_UserTableName="ODL_APERTI" msprop:Generator_RowEvArgName="ODL_APERTIRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDPRDMOVFASE" msprop:Generator_ColumnVarNameInTable="columnIDPRDMOVFASE" msprop:Generator_ColumnPropNameInRow="IDPRDMOVFASE" msprop:Generator_ColumnPropNameInTable="IDPRDMOVFASEColumn" msprop:Generator_UserColumnName="IDPRDMOVFASE" minOccurs="0">
@@ -268,7 +268,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="REPORTQUANTITA" msprop:Generator_TableClassName="REPORTQUANTITADataTable" msprop:Generator_TableVarName="tableREPORTQUANTITA" msprop:Generator_RowChangedName="REPORTQUANTITARowChanged" msprop:Generator_TablePropName="REPORTQUANTITA" msprop:Generator_RowDeletingName="REPORTQUANTITARowDeleting" msprop:Generator_RowChangingName="REPORTQUANTITARowChanging" msprop:Generator_RowEvHandlerName="REPORTQUANTITARowChangeEventHandler" msprop:Generator_RowDeletedName="REPORTQUANTITARowDeleted" msprop:Generator_RowClassName="REPORTQUANTITARow" msprop:Generator_UserTableName="REPORTQUANTITA" msprop:Generator_RowEvArgName="REPORTQUANTITARowChangeEvent">
+        <xs:element name="REPORTQUANTITA" msprop:Generator_TableClassName="REPORTQUANTITADataTable" msprop:Generator_TableVarName="tableREPORTQUANTITA" msprop:Generator_TablePropName="REPORTQUANTITA" msprop:Generator_RowDeletingName="REPORTQUANTITARowDeleting" msprop:Generator_RowChangingName="REPORTQUANTITARowChanging" msprop:Generator_RowEvHandlerName="REPORTQUANTITARowChangeEventHandler" msprop:Generator_RowDeletedName="REPORTQUANTITARowDeleted" msprop:Generator_UserTableName="REPORTQUANTITA" msprop:Generator_RowChangedName="REPORTQUANTITARowChanged" msprop:Generator_RowEvArgName="REPORTQUANTITARowChangeEvent" msprop:Generator_RowClassName="REPORTQUANTITARow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="CODICECLIFO" msprop:Generator_ColumnVarNameInTable="columnCODICECLIFO" msprop:Generator_ColumnPropNameInRow="CODICECLIFO" msprop:Generator_ColumnPropNameInTable="CODICECLIFOColumn" msprop:Generator_UserColumnName="CODICECLIFO" type="xs:string" />
@@ -279,7 +279,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="ORDINIATTIVI" msprop:Generator_TableClassName="ORDINIATTIVIDataTable" msprop:Generator_TableVarName="tableORDINIATTIVI" msprop:Generator_TablePropName="ORDINIATTIVI" msprop:Generator_RowDeletingName="ORDINIATTIVIRowDeleting" msprop:Generator_RowChangingName="ORDINIATTIVIRowChanging" msprop:Generator_RowEvHandlerName="ORDINIATTIVIRowChangeEventHandler" msprop:Generator_RowDeletedName="ORDINIATTIVIRowDeleted" msprop:Generator_UserTableName="ORDINIATTIVI" msprop:Generator_RowChangedName="ORDINIATTIVIRowChanged" msprop:Generator_RowEvArgName="ORDINIATTIVIRowChangeEvent" msprop:Generator_RowClassName="ORDINIATTIVIRow">
+        <xs:element name="ORDINIATTIVI" msprop:Generator_TableClassName="ORDINIATTIVIDataTable" msprop:Generator_TableVarName="tableORDINIATTIVI" msprop:Generator_RowChangedName="ORDINIATTIVIRowChanged" msprop:Generator_TablePropName="ORDINIATTIVI" msprop:Generator_RowDeletingName="ORDINIATTIVIRowDeleting" msprop:Generator_RowChangingName="ORDINIATTIVIRowChanging" msprop:Generator_RowEvHandlerName="ORDINIATTIVIRowChangeEventHandler" msprop:Generator_RowDeletedName="ORDINIATTIVIRowDeleted" msprop:Generator_RowClassName="ORDINIATTIVIRow" msprop:Generator_UserTableName="ORDINIATTIVI" msprop:Generator_RowEvArgName="ORDINIATTIVIRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="AZIENDA" msprop:Generator_ColumnVarNameInTable="columnAZIENDA" msprop:Generator_ColumnPropNameInRow="AZIENDA" msprop:Generator_ColumnPropNameInTable="AZIENDAColumn" msprop:Generator_UserColumnName="AZIENDA" minOccurs="0">
@@ -379,7 +379,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="BOLLE_VENDITA" msprop:Generator_TableClassName="BOLLE_VENDITADataTable" msprop:Generator_TableVarName="tableBOLLE_VENDITA" msprop:Generator_TablePropName="BOLLE_VENDITA" msprop:Generator_RowDeletingName="BOLLE_VENDITARowDeleting" msprop:Generator_RowChangingName="BOLLE_VENDITARowChanging" msprop:Generator_RowEvHandlerName="BOLLE_VENDITARowChangeEventHandler" msprop:Generator_RowDeletedName="BOLLE_VENDITARowDeleted" msprop:Generator_UserTableName="BOLLE_VENDITA" msprop:Generator_RowChangedName="BOLLE_VENDITARowChanged" msprop:Generator_RowEvArgName="BOLLE_VENDITARowChangeEvent" msprop:Generator_RowClassName="BOLLE_VENDITARow">
+        <xs:element name="BOLLE_VENDITA" msprop:Generator_TableClassName="BOLLE_VENDITADataTable" msprop:Generator_TableVarName="tableBOLLE_VENDITA" msprop:Generator_RowChangedName="BOLLE_VENDITARowChanged" msprop:Generator_TablePropName="BOLLE_VENDITA" msprop:Generator_RowDeletingName="BOLLE_VENDITARowDeleting" msprop:Generator_RowChangingName="BOLLE_VENDITARowChanging" msprop:Generator_RowEvHandlerName="BOLLE_VENDITARowChangeEventHandler" msprop:Generator_RowDeletedName="BOLLE_VENDITARowDeleted" msprop:Generator_RowClassName="BOLLE_VENDITARow" msprop:Generator_UserTableName="BOLLE_VENDITA" msprop:Generator_RowEvArgName="BOLLE_VENDITARowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="AZIENDA" msprop:Generator_ColumnVarNameInTable="columnAZIENDA" msprop:Generator_ColumnPropNameInRow="AZIENDA" msprop:Generator_ColumnPropNameInTable="AZIENDAColumn" msprop:Generator_UserColumnName="AZIENDA" minOccurs="0">
@@ -612,6 +612,37 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SALDIUBICAZIONI" msprop:Generator_TableClassName="SALDIUBICAZIONIDataTable" msprop:Generator_TableVarName="tableSALDIUBICAZIONI" msprop:Generator_TablePropName="SALDIUBICAZIONI" msprop:Generator_RowDeletingName="SALDIUBICAZIONIRowDeleting" msprop:Generator_RowChangingName="SALDIUBICAZIONIRowChanging" msprop:Generator_RowEvHandlerName="SALDIUBICAZIONIRowChangeEventHandler" msprop:Generator_RowDeletedName="SALDIUBICAZIONIRowDeleted" msprop:Generator_UserTableName="SALDIUBICAZIONI" msprop:Generator_RowChangedName="SALDIUBICAZIONIRowChanged" msprop:Generator_RowEvArgName="SALDIUBICAZIONIRowChangeEvent" msprop:Generator_RowClassName="SALDIUBICAZIONIRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MODELLO" msprop:Generator_ColumnVarNameInTable="columnMODELLO" msprop:Generator_ColumnPropNameInRow="MODELLO" msprop:Generator_ColumnPropNameInTable="MODELLOColumn" msprop:Generator_UserColumnName="MODELLO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CODICEMAG" msprop:Generator_ColumnVarNameInTable="columnCODICEMAG" msprop:Generator_ColumnPropNameInRow="CODICEMAG" msprop:Generator_ColumnPropNameInTable="CODICEMAGColumn" msprop:Generator_UserColumnName="CODICEMAG">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CATEGORIA" msprop:Generator_ColumnVarNameInTable="columnCATEGORIA" msprop:Generator_ColumnPropNameInRow="CATEGORIA" msprop:Generator_ColumnPropNameInTable="CATEGORIAColumn" msprop:Generator_UserColumnName="CATEGORIA" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4000" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COSTO1" msprop:Generator_ColumnVarNameInTable="columnCOSTO1" msprop:Generator_ColumnPropNameInRow="COSTO1" msprop:Generator_ColumnPropNameInTable="COSTO1Column" msprop:Generator_UserColumnName="COSTO1" type="xs:decimal" minOccurs="0" />
+              <xs:element name="QESI" msprop:Generator_ColumnVarNameInTable="columnQESI" msprop:Generator_ColumnPropNameInRow="QESI" msprop:Generator_ColumnPropNameInTable="QESIColumn" msprop:Generator_UserColumnName="QESI" type="xs:decimal" />
+              <xs:element name="VALORE" msprop:Generator_ColumnVarNameInTable="columnVALORE" msprop:Generator_ColumnPropNameInRow="VALORE" msprop:Generator_ColumnPropNameInTable="VALOREColumn" msprop:Generator_UserColumnName="VALORE" type="xs:decimal" minOccurs="0" />
+              <xs:element name="QTOT_DISP_ESI" msprop:Generator_ColumnVarNameInTable="columnQTOT_DISP_ESI" msprop:Generator_ColumnPropNameInRow="QTOT_DISP_ESI" msprop:Generator_ColumnPropNameInTable="QTOT_DISP_ESIColumn" msprop:Generator_UserColumnName="QTOT_DISP_ESI" type="xs:decimal" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

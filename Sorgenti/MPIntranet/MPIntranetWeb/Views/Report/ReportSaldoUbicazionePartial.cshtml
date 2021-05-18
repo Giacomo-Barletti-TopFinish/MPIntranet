@@ -1,0 +1,68 @@
+﻿
+@using MPIntranet.Models.Report
+@model List<SaldoUbicazioneModel>
+
+@if (Model != null && Model.Count() == 0)
+{
+    <text><b>Nessun risultato trovato</b></text>
+}
+else
+{
+    <div style="overflow-y:auto; overflow-x:hidden; height:600px">
+        <table id="grigliaRisultati" class="table table-condensed table-hover">
+            <thead style="background-color:aliceblue">
+                <tr>
+                    <th width="8%">Azienda</th>
+                    <th width="8%">Tipo</th>
+                    <th width="8%">Causale</th>
+                    <th width="8%">Documento</th>
+                    <th width="8%">Data documento</th>
+                    <th width="8%">Numero documento</th>
+                    <th width="8%">Segnalatore</th>
+                    <th width="8%">Cliente</th>
+                    <th width="8%">Riga</th>
+                    <th width="8%">Modello</th>
+                    <th width="8%">Quantità</th>
+                    <th width="8%">Prezzo</th>
+                    <th width="8%">Valore</th>
+                    <th width="8%">Ordine cliente</th>
+                    <th width="8%">Data ordine</th>
+                    <th width="8%">Data richiesta</th>
+                    <th width="8%">Data confermata</th>
+                    <th width="8%">Riferimento</th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (BolleVenditaModel bolla in Model)
+                {
+                    <tr>
+                        <td width="8%">@bolla.Azienda</td>
+                        <td width="8%">@string.Format("{0}-{1}", bolla.CodiceTipoO, bolla.DescrizioneTipoO)</td>
+                        <td width="8%">@string.Format("{0}-{1}", bolla.Causale, bolla.DescrizioneCausale)</td>
+                        <td width="8%">@bolla.FullNumDoc</td>
+                        <td width="8%">@bolla.DataDocumento.ToString("dd/MM/yyyy")</td>
+                        <td width="8%">@bolla.Numero</td>
+                        <td width="8%">@bolla.Segnalatore</td>
+                        <td width="8%">@bolla.Cliente</td>
+                        <td width="8%">@bolla.NumeroRiga</td>
+                        <td width="8%">@bolla.Modello</td>
+                        <td width="8%">@bolla.Quantita</td>
+                        <td width="8%">@bolla.Prezzo</td>
+                        <td width="8%">@bolla.Valore</td>
+                        <td width="8%">@bolla.Ordine</td>
+                        <td width="8%">@bolla.DataOrdine</td>
+                        <td width="8%">@bolla.DataRichiesta</td>
+                        <td width="8%">@bolla.DataConferma</td>
+                        <td width="8%">@bolla.Riferimento</td>
+                        <td></td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+

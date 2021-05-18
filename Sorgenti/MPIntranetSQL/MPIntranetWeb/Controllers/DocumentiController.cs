@@ -15,10 +15,19 @@ namespace MPIntranetWeb.Controllers
     {
         public ActionResult EstraiDocumento(int idDocumento)
         {
+
             Documento documento = Documento.EstraiDocumentoCompleto(idDocumento);
             Response.AppendHeader("content-disposition", string.Format(CultureInfo.InvariantCulture, "inline; filename={0}", documento.Filename));
             return new FileStreamResult(new MemoryStream(documento.Dati), documento.ContentType);
         }
+
+        public ActionResult BloccoDocumento(int idDocumento, bool statoCheckbox, string tipoBlocco)
+        {
+            Documento documento = Documento.EstraiDocumentoCompleto(idDocumento);
+            documento.ModificaBloccoDocumento(idDocumento, statoCheckbox, tipoBlocco, ConnectedUser);
+            return null;
+        }
+
         public ActionResult CaricaDocumenti(int idEsterna, string tabellaEsterna)
         {
 

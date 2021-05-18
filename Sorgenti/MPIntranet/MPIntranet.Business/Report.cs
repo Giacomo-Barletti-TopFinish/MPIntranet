@@ -56,6 +56,19 @@ namespace MPIntranet.Business
             return lista;
 
         }
+        public List<SaldoUbicazioneModel> CreaListaSaldoUbicazioneModel(string Articolo)
+        {
+            List<SaldoUbicazioneModel> lista = new List<SaldoUbicazioneModel>();
+
+            using (ReportBusiness bReport = new ReportBusiness())
+                bReport.FillSALDIUBICAZIONI(Articolo, _ds);
+
+            foreach (ReportDS.SALDIUBICAZIONIRow riga in _ds.SALDIUBICAZIONI)
+                lista.Add(CreaSaldoUbicazioneModel(riga));
+
+            return lista;
+
+        }
         public List<OrdiniAttiviModel> CreaListaOrdiniAttivitModel()
         {
             List<OrdiniAttiviModel> lista = new List<OrdiniAttiviModel>();
@@ -171,6 +184,18 @@ namespace MPIntranet.Business
             return bolla;
         }
 
+        private SaldoUbicazioneModel CreaSaldoUbicazioneModel(ReportDS.SALDIUBICAZIONIRow riga)
+        {
+            SaldoUbicazioneModel saldo = new SaldoUbicazioneModel();
+
+            saldo.Modello = riga.MODELLO;
+            saldo.CodiceMagazzino = riga.CODICEMAG;
+            saldo.Costo = riga.IsCOSTO1Null()?0:riga.COSTO1;
+            saldo.Quantita = riga.QESI;
+            saldo.Valore = riga.IsVALORENull()?0:riga.VALORE;
+            saldo.QuantitaNettaDisponibile = riga.IsQTOT_DISP_ESINull()?0:riga.QTOT_DISP_ESI;
+            return saldo;
+        }
         private CaricoRepartoModel CreaCaricoRepartoModel(ReportDS.ODL_APERTIRow odl_aperto)
         {
             CaricoRepartoModel caricoRepartoModel = new CaricoRepartoModel();

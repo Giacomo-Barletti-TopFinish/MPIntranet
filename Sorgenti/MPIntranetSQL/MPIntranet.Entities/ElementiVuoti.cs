@@ -10,6 +10,8 @@ namespace MPIntranet.Entities
     {
         public const int Brand = -1;
         public const int TipoDocumento = -1;
+        public const int Articolo = -1;
+        public const int DistintaBase = -1;
     }
 
     public static class Reparti
