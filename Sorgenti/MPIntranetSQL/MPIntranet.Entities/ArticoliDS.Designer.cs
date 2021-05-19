@@ -34,6 +34,8 @@ namespace MPIntranet.Entities {
         
         private TIPIDIBADataTable tableTIPIDIBA;
         
+        private global::System.Data.DataRelation relationFASEDIBA_PADRE;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -290,6 +292,7 @@ namespace MPIntranet.Entities {
                     this.tableTIPIDIBA.InitVars();
                 }
             }
+            this.relationFASEDIBA_PADRE = this.Relations["FASEDIBA_PADRE"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -310,6 +313,10 @@ namespace MPIntranet.Entities {
             base.Tables.Add(this.tableFASIDIBA);
             this.tableTIPIDIBA = new TIPIDIBADataTable();
             base.Tables.Add(this.tableTIPIDIBA);
+            this.relationFASEDIBA_PADRE = new global::System.Data.DataRelation("FASEDIBA_PADRE", new global::System.Data.DataColumn[] {
+                        this.tableFASIDIBA.IDDIBAColumn}, new global::System.Data.DataColumn[] {
+                        this.tableFASIDIBA.IDPADREColumn}, false);
+            this.Relations.Add(this.relationFASEDIBA_PADRE);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1792,7 +1799,7 @@ namespace MPIntranet.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public FASIDIBARow AddFASIDIBARow(
                         int IDDIBA, 
-                        int IDPADRE, 
+                        FASIDIBARow parentFASIDIBARowByFASEDIBA_PADRE, 
                         string TIPOFASE, 
                         string DESCRIZIONE, 
                         string ANAGRAFICA, 
@@ -1815,7 +1822,7 @@ namespace MPIntranet.Entities {
                 object[] columnValuesArray = new object[] {
                         null,
                         IDDIBA,
-                        IDPADRE,
+                        null,
                         TIPOFASE,
                         DESCRIZIONE,
                         ANAGRAFICA,
@@ -1834,6 +1841,9 @@ namespace MPIntranet.Entities {
                         CANCELLATO,
                         DATAMODIFICA,
                         UTENTEMODIFICA};
+                if ((parentFASIDIBARowByFASEDIBA_PADRE != null)) {
+                    columnValuesArray[2] = parentFASIDIBARowByFASEDIBA_PADRE[1];
+                }
                 rowFASIDIBARow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowFASIDIBARow);
                 return rowFASIDIBARow;
@@ -3072,6 +3082,17 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public FASIDIBARow FASIDIBARowParent {
+                get {
+                    return ((FASIDIBARow)(this.GetParentRow(this.Table.ParentRelations["FASEDIBA_PADRE"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FASEDIBA_PADRE"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsIDPADRENull() {
                 return this.IsNull(this.tableFASIDIBA.IDPADREColumn);
             }
@@ -3188,6 +3209,17 @@ namespace MPIntranet.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetDATAMODIFICANull() {
                 this[this.tableFASIDIBA.DATAMODIFICAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public FASIDIBARow[] GetFASIDIBARows() {
+                if ((this.Table.ChildRelations["FASEDIBA_PADRE"] == null)) {
+                    return new FASIDIBARow[0];
+                }
+                else {
+                    return ((FASIDIBARow[])(base.GetChildRows(this.Table.ChildRelations["FASEDIBA_PADRE"])));
+                }
             }
         }
         

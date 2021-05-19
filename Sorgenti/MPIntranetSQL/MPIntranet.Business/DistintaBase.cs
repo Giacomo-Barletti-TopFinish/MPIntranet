@@ -17,7 +17,7 @@ namespace MPIntranet.Business
         public Articolo Articolo { get; set; }
         public string Descrizione { get; set; }
         public bool Standard { get; set; }
-
+        public List<FaseDistinta> Fasi { get; set; }
 
         public static DistintaBase EstraiDistintaBase(int idDiba)
         {
@@ -60,7 +60,7 @@ namespace MPIntranet.Business
             distinta.Cancellato = riga.CANCELLATO;
             distinta.DataModifica = riga.DATAMODIFICA;
             distinta.UtenteModifica = riga.UTENTEMODIFICA;
-
+            distinta.Fasi = new List<FaseDistinta>();
             return distinta;
         }
 
@@ -85,7 +85,7 @@ namespace MPIntranet.Business
                 dibaNuova.CANCELLATO = false;
                 dibaNuova.DATAMODIFICA = DateTime.Now;
                 dibaNuova.UTENTEMODIFICA = account;
-
+                
                 ds.DIBA.AddDIBARow(dibaNuova);
                 bArticolo.UpdateDistintaBaseTable(ds);
                 idDiba = dibaNuova.IDDIBA;

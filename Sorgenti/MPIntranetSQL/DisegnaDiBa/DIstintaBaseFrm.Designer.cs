@@ -30,32 +30,6 @@
         {
             this.tvDiBa = new System.Windows.Forms.TreeView();
             this.dgvNodi = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MODELLO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DESCRIZIONE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.REPARTO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FASE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IDMAGAZZ = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ANAGRAFICA = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CODICECICLO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.COLLEGAMENTOCICLO = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.COLLEGAMENTODIBA = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.PEZZIORARI = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OREPERIODO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NOTESTANDARD = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QUANTITA = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QUANTITACONSUMO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QUANTITAOCCORRENZA = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UM = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.METODO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.VERSIONE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ATTIVA = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CONTROLLATA = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FORNITOCOMMITTENTE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PESO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SUPERFICIE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NOTETECNICHE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ContoLavoro = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.txtArticolo = new System.Windows.Forms.TextBox();
             this.btnCercaDiBa = new System.Windows.Forms.Button();
@@ -66,6 +40,23 @@
             this.txtVersioneDiba = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnNuovaDistinta = new System.Windows.Forms.Button();
+            this.IdFase = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdPadre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdDiba = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descrizione = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Anagrafica = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AreaProduzione = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Task = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SchedaProcesso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CollegamentoDiba = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CollegamentoCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantita = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UMQuantita = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PezziOrari = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Periodo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Setup = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Attesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Movimentazione = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNodi)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,231 +77,27 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvNodi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvNodi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID,
-            this.MODELLO,
-            this.DESCRIZIONE,
-            this.REPARTO,
-            this.FASE,
-            this.IDMAGAZZ,
-            this.ANAGRAFICA,
-            this.CODICECICLO,
-            this.COLLEGAMENTOCICLO,
-            this.COLLEGAMENTODIBA,
-            this.PEZZIORARI,
-            this.OREPERIODO,
-            this.NOTESTANDARD,
-            this.QUANTITA,
-            this.QUANTITACONSUMO,
-            this.QUANTITAOCCORRENZA,
-            this.UM,
-            this.METODO,
-            this.VERSIONE,
-            this.ATTIVA,
-            this.CONTROLLATA,
-            this.FORNITOCOMMITTENTE,
-            this.PESO,
-            this.SUPERFICIE,
-            this.NOTETECNICHE,
-            this.ContoLavoro});
+            this.IdFase,
+            this.IdPadre,
+            this.IdDiba,
+            this.Descrizione,
+            this.Anagrafica,
+            this.AreaProduzione,
+            this.Task,
+            this.SchedaProcesso,
+            this.CollegamentoDiba,
+            this.CollegamentoCiclo,
+            this.Quantita,
+            this.UMQuantita,
+            this.PezziOrari,
+            this.Periodo,
+            this.Setup,
+            this.Attesa,
+            this.Movimentazione});
             this.dgvNodi.Location = new System.Drawing.Point(571, 50);
             this.dgvNodi.Name = "dgvNodi";
             this.dgvNodi.Size = new System.Drawing.Size(1088, 838);
             this.dgvNodi.TabIndex = 5;
-            // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.Frozen = true;
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            // 
-            // MODELLO
-            // 
-            this.MODELLO.DataPropertyName = "Modello";
-            this.MODELLO.Frozen = true;
-            this.MODELLO.HeaderText = "MODELLO";
-            this.MODELLO.Name = "MODELLO";
-            // 
-            // DESCRIZIONE
-            // 
-            this.DESCRIZIONE.DataPropertyName = "DescrizioneArticolo";
-            this.DESCRIZIONE.Frozen = true;
-            this.DESCRIZIONE.HeaderText = "DESCRIZIONE";
-            this.DESCRIZIONE.Name = "DESCRIZIONE";
-            this.DESCRIZIONE.ReadOnly = true;
-            // 
-            // REPARTO
-            // 
-            this.REPARTO.DataPropertyName = "Reparto";
-            this.REPARTO.Frozen = true;
-            this.REPARTO.HeaderText = "REPARTO";
-            this.REPARTO.Name = "REPARTO";
-            this.REPARTO.ReadOnly = true;
-            // 
-            // FASE
-            // 
-            this.FASE.DataPropertyName = "Fase";
-            this.FASE.Frozen = true;
-            this.FASE.HeaderText = "FASE";
-            this.FASE.Name = "FASE";
-            this.FASE.ReadOnly = true;
-            // 
-            // IDMAGAZZ
-            // 
-            this.IDMAGAZZ.DataPropertyName = "IDMAGAZZ";
-            this.IDMAGAZZ.Frozen = true;
-            this.IDMAGAZZ.HeaderText = "IDMAGAZZ";
-            this.IDMAGAZZ.Name = "IDMAGAZZ";
-            // 
-            // ANAGRAFICA
-            // 
-            this.ANAGRAFICA.DataPropertyName = "Anagrafica";
-            this.ANAGRAFICA.FillWeight = 160F;
-            this.ANAGRAFICA.Frozen = true;
-            this.ANAGRAFICA.HeaderText = "ANAGRAFICA";
-            this.ANAGRAFICA.Name = "ANAGRAFICA";
-            this.ANAGRAFICA.Width = 160;
-            // 
-            // CODICECICLO
-            // 
-            this.CODICECICLO.DataPropertyName = "CodiceCiclo";
-            this.CODICECICLO.FillWeight = 80F;
-            this.CODICECICLO.HeaderText = "CODICE CICLO";
-            this.CODICECICLO.Name = "CODICECICLO";
-            this.CODICECICLO.Width = 80;
-            // 
-            // COLLEGAMENTOCICLO
-            // 
-            this.COLLEGAMENTOCICLO.DataPropertyName = "CollegamentoCiclo";
-            this.COLLEGAMENTOCICLO.HeaderText = "COLLEGAMENTO CICLO";
-            this.COLLEGAMENTOCICLO.Name = "COLLEGAMENTOCICLO";
-            this.COLLEGAMENTOCICLO.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.COLLEGAMENTOCICLO.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.COLLEGAMENTOCICLO.Width = 80;
-            // 
-            // COLLEGAMENTODIBA
-            // 
-            this.COLLEGAMENTODIBA.DataPropertyName = "CollegamentoDiba";
-            this.COLLEGAMENTODIBA.HeaderText = "COLLEGAMENTO DISTINTA";
-            this.COLLEGAMENTODIBA.Name = "COLLEGAMENTODIBA";
-            this.COLLEGAMENTODIBA.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.COLLEGAMENTODIBA.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.COLLEGAMENTODIBA.Width = 80;
-            // 
-            // PEZZIORARI
-            // 
-            this.PEZZIORARI.DataPropertyName = "PezziOrari";
-            this.PEZZIORARI.HeaderText = "PEZZI ORARI";
-            this.PEZZIORARI.Name = "PEZZIORARI";
-            this.PEZZIORARI.Width = 50;
-            // 
-            // OREPERIODO
-            // 
-            this.OREPERIODO.DataPropertyName = "OrePeriodo";
-            this.OREPERIODO.FillWeight = 50F;
-            this.OREPERIODO.HeaderText = "ORE PERIODO";
-            this.OREPERIODO.Name = "OREPERIODO";
-            this.OREPERIODO.Width = 50;
-            // 
-            // NOTESTANDARD
-            // 
-            this.NOTESTANDARD.DataPropertyName = "NoteStandard";
-            this.NOTESTANDARD.HeaderText = "NOTE STANDARD";
-            this.NOTESTANDARD.Name = "NOTESTANDARD";
-            this.NOTESTANDARD.ReadOnly = true;
-            this.NOTESTANDARD.Width = 200;
-            // 
-            // QUANTITA
-            // 
-            this.QUANTITA.DataPropertyName = "Quantita";
-            this.QUANTITA.HeaderText = "QUANTITA";
-            this.QUANTITA.Name = "QUANTITA";
-            // 
-            // QUANTITACONSUMO
-            // 
-            this.QUANTITACONSUMO.DataPropertyName = "QuantitaConsumo";
-            this.QUANTITACONSUMO.HeaderText = "QUANTITA CONSUMO";
-            this.QUANTITACONSUMO.Name = "QUANTITACONSUMO";
-            this.QUANTITACONSUMO.ReadOnly = true;
-            // 
-            // QUANTITAOCCORRENZA
-            // 
-            this.QUANTITAOCCORRENZA.DataPropertyName = "QualitaOccorrenza";
-            this.QUANTITAOCCORRENZA.HeaderText = "QUANTITA OCCORRENZA";
-            this.QUANTITAOCCORRENZA.Name = "QUANTITAOCCORRENZA";
-            this.QUANTITAOCCORRENZA.ReadOnly = true;
-            // 
-            // UM
-            // 
-            this.UM.DataPropertyName = "UM";
-            this.UM.HeaderText = "UM";
-            this.UM.Name = "UM";
-            // 
-            // METODO
-            // 
-            this.METODO.DataPropertyName = "Metodo";
-            this.METODO.HeaderText = "METODO";
-            this.METODO.Name = "METODO";
-            this.METODO.ReadOnly = true;
-            // 
-            // VERSIONE
-            // 
-            this.VERSIONE.DataPropertyName = "Versione";
-            this.VERSIONE.HeaderText = "VERSIONE";
-            this.VERSIONE.Name = "VERSIONE";
-            this.VERSIONE.ReadOnly = true;
-            // 
-            // ATTIVA
-            // 
-            this.ATTIVA.DataPropertyName = "Attiva";
-            this.ATTIVA.HeaderText = "ATTIVA";
-            this.ATTIVA.Name = "ATTIVA";
-            this.ATTIVA.ReadOnly = true;
-            // 
-            // CONTROLLATA
-            // 
-            this.CONTROLLATA.DataPropertyName = "Controllata";
-            this.CONTROLLATA.HeaderText = "CONTROLLATA";
-            this.CONTROLLATA.Name = "CONTROLLATA";
-            this.CONTROLLATA.ReadOnly = true;
-            // 
-            // FORNITOCOMMITTENTE
-            // 
-            this.FORNITOCOMMITTENTE.DataPropertyName = "FornitoDaCommittente";
-            this.FORNITOCOMMITTENTE.HeaderText = "FORN. COMMIT.";
-            this.FORNITOCOMMITTENTE.Name = "FORNITOCOMMITTENTE";
-            this.FORNITOCOMMITTENTE.ReadOnly = true;
-            // 
-            // PESO
-            // 
-            this.PESO.DataPropertyName = "Peso";
-            this.PESO.HeaderText = "PESO";
-            this.PESO.Name = "PESO";
-            this.PESO.ReadOnly = true;
-            this.PESO.Width = 50;
-            // 
-            // SUPERFICIE
-            // 
-            this.SUPERFICIE.DataPropertyName = "Superficie";
-            this.SUPERFICIE.HeaderText = "SUPERFICIE";
-            this.SUPERFICIE.Name = "SUPERFICIE";
-            this.SUPERFICIE.ReadOnly = true;
-            this.SUPERFICIE.Width = 50;
-            // 
-            // NOTETECNICHE
-            // 
-            this.NOTETECNICHE.DataPropertyName = "NoteTecniche";
-            this.NOTETECNICHE.HeaderText = "NOTE TECNICHE";
-            this.NOTETECNICHE.Name = "NOTETECNICHE";
-            this.NOTETECNICHE.ReadOnly = true;
-            this.NOTETECNICHE.Width = 200;
-            // 
-            // ContoLavoro
-            // 
-            this.ContoLavoro.DataPropertyName = "ContoLavoro";
-            this.ContoLavoro.HeaderText = "ContoLavoro";
-            this.ContoLavoro.Name = "ContoLavoro";
-            this.ContoLavoro.Visible = false;
             // 
             // label1
             // 
@@ -401,6 +188,108 @@
             this.btnNuovaDistinta.UseVisualStyleBackColor = true;
             this.btnNuovaDistinta.Click += new System.EventHandler(this.btnNuovaDistinta_Click);
             // 
+            // IdFase
+            // 
+            this.IdFase.DataPropertyName = "IdFase";
+            this.IdFase.HeaderText = "IdFase";
+            this.IdFase.Name = "IdFase";
+            // 
+            // IdPadre
+            // 
+            this.IdPadre.DataPropertyName = "IdPadre";
+            this.IdPadre.HeaderText = "IdPadre";
+            this.IdPadre.Name = "IdPadre";
+            // 
+            // IdDiba
+            // 
+            this.IdDiba.DataPropertyName = "IdDiba";
+            this.IdDiba.HeaderText = "IdDiba";
+            this.IdDiba.Name = "IdDiba";
+            // 
+            // Descrizione
+            // 
+            this.Descrizione.DataPropertyName = "Descrizione";
+            this.Descrizione.HeaderText = "Descrizione";
+            this.Descrizione.Name = "Descrizione";
+            // 
+            // Anagrafica
+            // 
+            this.Anagrafica.DataPropertyName = "Anagrafica";
+            this.Anagrafica.HeaderText = "Anagrafica";
+            this.Anagrafica.Name = "Anagrafica";
+            // 
+            // AreaProduzione
+            // 
+            this.AreaProduzione.DataPropertyName = "AreaProduzione";
+            this.AreaProduzione.HeaderText = "AreaProduzione";
+            this.AreaProduzione.Name = "AreaProduzione";
+            // 
+            // Task
+            // 
+            this.Task.DataPropertyName = "Task";
+            this.Task.HeaderText = "Task";
+            this.Task.Name = "Task";
+            // 
+            // SchedaProcesso
+            // 
+            this.SchedaProcesso.DataPropertyName = "SchedaProcesso";
+            this.SchedaProcesso.HeaderText = "SchedaProcesso";
+            this.SchedaProcesso.Name = "SchedaProcesso";
+            // 
+            // CollegamentoDiba
+            // 
+            this.CollegamentoDiba.DataPropertyName = "CollegamentoDiba";
+            this.CollegamentoDiba.HeaderText = "CollegamentoDiba";
+            this.CollegamentoDiba.Name = "CollegamentoDiba";
+            // 
+            // CollegamentoCiclo
+            // 
+            this.CollegamentoCiclo.DataPropertyName = "CollegamentoCiclo";
+            this.CollegamentoCiclo.HeaderText = "CollegamentoCiclo";
+            this.CollegamentoCiclo.Name = "CollegamentoCiclo";
+            // 
+            // Quantita
+            // 
+            this.Quantita.DataPropertyName = "Quantita";
+            this.Quantita.HeaderText = "Quantita";
+            this.Quantita.Name = "Quantita";
+            // 
+            // UMQuantita
+            // 
+            this.UMQuantita.DataPropertyName = "UMQuantita";
+            this.UMQuantita.HeaderText = "UMQuantita";
+            this.UMQuantita.Name = "UMQuantita";
+            // 
+            // PezziOrari
+            // 
+            this.PezziOrari.DataPropertyName = "PezziOrari";
+            this.PezziOrari.HeaderText = "PezziOrari";
+            this.PezziOrari.Name = "PezziOrari";
+            // 
+            // Periodo
+            // 
+            this.Periodo.DataPropertyName = "Periodo";
+            this.Periodo.HeaderText = "Periodo";
+            this.Periodo.Name = "Periodo";
+            // 
+            // Setup
+            // 
+            this.Setup.DataPropertyName = "Setup";
+            this.Setup.HeaderText = "Setup";
+            this.Setup.Name = "Setup";
+            // 
+            // Attesa
+            // 
+            this.Attesa.DataPropertyName = "Attesa";
+            this.Attesa.HeaderText = "Attesa";
+            this.Attesa.Name = "Attesa";
+            // 
+            // Movimentazione
+            // 
+            this.Movimentazione.DataPropertyName = "Movimentazione";
+            this.Movimentazione.HeaderText = "Movimentazione";
+            this.Movimentazione.Name = "Movimentazione";
+            // 
             // DistintaBaseFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -431,32 +320,6 @@
 
         private System.Windows.Forms.TreeView tvDiBa;
         private System.Windows.Forms.DataGridView dgvNodi;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MODELLO;
-        private System.Windows.Forms.DataGridViewTextBoxColumn DESCRIZIONE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn REPARTO;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FASE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IDMAGAZZ;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ANAGRAFICA;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CODICECICLO;
-        private System.Windows.Forms.DataGridViewComboBoxColumn COLLEGAMENTOCICLO;
-        private System.Windows.Forms.DataGridViewComboBoxColumn COLLEGAMENTODIBA;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PEZZIORARI;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OREPERIODO;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NOTESTANDARD;
-        private System.Windows.Forms.DataGridViewTextBoxColumn QUANTITA;
-        private System.Windows.Forms.DataGridViewTextBoxColumn QUANTITACONSUMO;
-        private System.Windows.Forms.DataGridViewTextBoxColumn QUANTITAOCCORRENZA;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UM;
-        private System.Windows.Forms.DataGridViewTextBoxColumn METODO;
-        private System.Windows.Forms.DataGridViewTextBoxColumn VERSIONE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ATTIVA;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CONTROLLATA;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FORNITOCOMMITTENTE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PESO;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SUPERFICIE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NOTETECNICHE;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn ContoLavoro;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtArticolo;
         private System.Windows.Forms.Button btnCercaDiBa;
@@ -467,5 +330,22 @@
         private System.Windows.Forms.TextBox txtVersioneDiba;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnNuovaDistinta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdFase;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdPadre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdDiba;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Descrizione;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Anagrafica;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AreaProduzione;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Task;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SchedaProcesso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CollegamentoDiba;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CollegamentoCiclo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Quantita;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UMQuantita;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PezziOrari;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Periodo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Setup;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Attesa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Movimentazione;
     }
 }

@@ -49,6 +49,7 @@
     <Compile Include="Configurazioni.cs" />
     <Compile Include="DistintaBase.cs" />
     <Compile Include="Documento.cs" />
+    <Compile Include="FaseDistinta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TipoDistinta.cs" />
     <Compile Include="TipoDocumento.cs" />
