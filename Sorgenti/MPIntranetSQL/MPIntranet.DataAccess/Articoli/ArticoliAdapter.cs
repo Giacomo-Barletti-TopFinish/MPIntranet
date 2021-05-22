@@ -39,6 +39,18 @@ namespace MPIntranet.DataAccess.Articoli
                 da.Fill(ds.DIBA);
             }
         }
+
+        public void FillFASIDIBA(ArticoliDS ds, int idDiba)
+        {
+            string select = @"SELECT * FROM FASIDIBA WHERE IDDIBA = $P<IDDIBA> AND CANCELLATO = 0 ";
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDDIBA", DbType.Int32, idDiba);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.FASIDIBA);
+            }
+        }
+
         public void FillDistintaBase(ArticoliDS ds, int idArticolo, bool soloNonCancellati)
         {
             string select = @"SELECT * FROM DIBA WHERE IDARTICOLO = $P<IDARTICOLO> ";
@@ -69,6 +81,23 @@ namespace MPIntranet.DataAccess.Articoli
             }
         }
 
+        public void FillTask(ArticoliDS ds)
+        {
+            string select = @"SELECT * FROM Task";
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.Task);
+            }
+        }
+
+        public void FillAreeProduzione(ArticoliDS ds)
+        {
+            string select = @"SELECT * FROM AreeProduzione";
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.AreeProduzione);
+            }
+        }
 
         public void FillBrand(ArticoliDS ds, bool soloNonCancellati)
         {
@@ -201,68 +230,44 @@ namespace MPIntranet.DataAccess.Articoli
                 }
             }
         }
-        /***************************************************************
 
-        //excel
-        public void Update_EXCEL_Table(CDCDS ds)
+        public void UpdateFaseDistintaBaseTable(ArticoliDS ds)
         {
-            string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM $T<{0}>", ds.CDC_EXCEL.TableName);
+            string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", ds.FASIDIBA.TableName);
 
             using (DbDataAdapter a = BuildDataAdapter(query))
             {
-                try
-                {
-                    InstallRowUpdatedHandler(a, Update_EXCEL_ElementHandler);
-                    a.ContinueUpdateOnError = false;
-                    DataTable dt = ds.CDC_EXCEL;
-                    DbCommandBuilder cmd = BuildCommandBuilder(a);
-                    a.UpdateCommand = cmd.GetUpdateCommand();
-                    a.DeleteCommand = cmd.GetDeleteCommand();
-                    a.InsertCommand = cmd.GetInsertCommand();
-                    a.Update(dt);
+                InstallRowUpdatedHandler(a, UpdateFaseDistintaBaseHander);
+                a.ContinueUpdateOnError = false;
+                DataTable dt = ds.FASIDIBA;
+                DbCommandBuilder cmd = BuildCommandBuilder(a);
+                a.AcceptChangesDuringFill = true;
+                a.UpdateCommand = cmd.GetUpdateCommand();
+                a.DeleteCommand = cmd.GetDeleteCommand();
+                a.InsertCommand = cmd.GetInsertCommand();
 
-                }
-                catch (DBConcurrencyException ex)
-                {
-
-                }
-                catch
-                {
-                    throw;
-                }
+                a.Update(dt);
             }
         }
-
-        private void Update_EXCEL_ElementHandler(object sender, RowUpdatedEventArgs e)
+        private void UpdateFaseDistintaBaseHander(object sender, RowUpdatedEventArgs e)
         {
             if ((e.Status == UpdateStatus.Continue) && (e.StatementType == StatementType.Insert))
             {
-                //ArticleDS.SPELEMENTIRow row = (ArticleDS.SPELEMENTIRow)e.Row;
-                CDCDS.CDC_EXCELRow row = (CDCDS.CDC_EXCELRow)e.Row;
+                ArticoliDS.FASIDIBARow row = (ArticoliDS.FASIDIBARow)e.Row;
+                ArticoliDS.FASIDIBADataTable dt = row.Table as ArticoliDS.FASIDIBADataTable;
 
-                //ArticleDS.SPELEMENTIDataTable dt = row.Table as ArticleDS.SPELEMENTIDataTable;
-                CDCDS.CDC_EXCELDataTable dt = row.Table as CDCDS.CDC_EXCELDataTable;
-
-                //bool isIdentityReadOnly = dt.ID_SPELEMColumn.ReadOnly;
-                bool isIdentityReadOnly = dt.IDEXCELColumn.ReadOnly;
-
-                //dt.ID_SPELEMColumn.ReadOnly = false;
-                dt.IDEXCELColumn.ReadOnly = false;
-
+                bool isIdentityReadOnly = dt.IDDIBAColumn.ReadOnly;
+                dt.IDFASEDIBAColumn.ReadOnly = false;
                 try
                 {
-                    //row.ID_SPELEM = (long)RetrievePostUpdateID<decimal>(e.Command, row);
-                    row.IDEXCEL = (long)RetrievePostUpdateID<decimal>(e.Command, row);
+                    row.IDFASEDIBA = (int)RetrievePostUpdateID<decimal>(e.Command, row);
                 }
                 finally
                 {
-                    //dt.ID_SPELEMColumn.ReadOnly = isIdentityReadOnly;
-                    dt.IDEXCELColumn.ReadOnly = isIdentityReadOnly;
+                    dt.IDFASEDIBAColumn.ReadOnly = isIdentityReadOnly;
                 }
             }
-
         }
-        conformita
-        */
+
     }
 }

@@ -18,7 +18,7 @@ namespace DisegnaDiBa
         private Articolo _articolo;
         private DistintaBase _distinta;
         private int indiceNodi = 0;
-
+        private BindingSource source;
         private int estraiIndice()
         {
             indiceNodi--;
@@ -38,12 +38,27 @@ namespace DisegnaDiBa
             if (_idArticolo == ElementiVuoti.Articolo)
                 return;
 
+            caricaAreeProduzione();
+            caricaTask();
+
             _articolo = Articolo.EstraiArticolo(_idArticolo);
 
             if (_articolo != null)
             {
                 txtArticolo.Text = _articolo.ToString();
             }
+        }
+
+        private void caricaAreeProduzione()
+        {
+            List<AreaProduzione> aree = MPIntranet.Business.AreaProduzione.EstraiListaAreeProduzione();
+            lstAreeProduzione.Items.AddRange(aree.ToArray());
+        }
+
+        private void caricaTask()
+        {
+            List<MPIntranet.Business.Task> tasks = MPIntranet.Business.Task.EstraiListaTask();
+            lstTask.Items.AddRange(tasks.ToArray());
         }
 
         private void btnNuovaDistinta_Click(object sender, EventArgs e)
@@ -73,6 +88,39 @@ namespace DisegnaDiBa
 
             creaAlbero();
             PopolaGrigliaFasi();
+        }
+        private void aggiornaNodoAlbero(int idFaseDiba, string areaProduzione, string anagrafica)
+        {
+            string etichettaNodo = string.Format("{0} {1} {2}", idFaseDiba, areaProduzione, anagrafica);
+            etichettaNodo = etichettaNodo.Trim();
+
+            TreeNode nodoCercato = null;
+
+            if (trovaNodo(tvDiBa.Nodes[0], idFaseDiba, out nodoCercato))
+            {
+                nodoCercato.Text = etichettaNodo;
+            }
+
+        }
+
+        private bool trovaNodo(TreeNode nodoPadre, int idFaseDistinta, out TreeNode nodoTrovato)
+        {
+            nodoTrovato = null;
+            foreach (TreeNode n in nodoPadre.Nodes)
+            {
+                if (n.Tag == null) return false;
+
+                FaseDistinta fd = (FaseDistinta)n.Tag;
+                if (fd == null) return false;
+                if (fd.IdFaseDiba == idFaseDistinta)
+                {
+                    nodoTrovato = n;
+                    return true;
+                }
+                bool esito = trovaNodo(n, idFaseDistinta, out nodoTrovato);
+                if (esito) return true;
+            }
+            return false;
         }
 
         private void creaAlbero()
@@ -138,6 +186,8 @@ namespace DisegnaDiBa
             nodo.Nodes.Add(tn);
             rinumeraIdPadreFaseDistinta(tvDiBa.Nodes[0]);
             nodo.ExpandAll();
+            source.ResetBindings(false);
+
         }
 
         private void rinumeraIdPadreFaseDistinta(TreeNode n)
@@ -153,7 +203,7 @@ namespace DisegnaDiBa
             {
                 if (n.Tag != null)
                 {
-                    FaseDistinta f = (FaseDistinta)n.Tag;
+                    FaseDistinta f = (FaseDistinta)nFiglio.Tag;
                     f.IdPadre = idFasePadre;
                 }
                 rinumeraIdPadreFaseDistinta(nFiglio);
@@ -167,7 +217,8 @@ namespace DisegnaDiBa
             TreeNode nodo = creaNodo(string.Empty, string.Empty, tn);
             tn.Nodes.Add(nodo);
             tn.ExpandAll();
-            dgvNodi.Update();
+            source.ResetBindings(false);
+
         }
         private void RimuoviElementoSingoloClick(object sender, EventArgs e)
         {
@@ -197,16 +248,69 @@ namespace DisegnaDiBa
                 }
                 tn.Remove();
             }
+            source.ResetBindings(false);
 
         }
 
         private void PopolaGrigliaFasi()
         {
             dgvNodi.AutoGenerateColumns = false;
-            var bindingList = new BindingList<FaseDistinta>(_distinta.Fasi);
-            var source = new BindingSource(bindingList, null);
+            BindingList<FaseDistinta> bindingList = new BindingList<FaseDistinta>(_distinta.Fasi);
+            source = new BindingSource(bindingList, null);
             dgvNodi.DataSource = source;
             dgvNodi.Update();
+        }
+
+        private void lstTask_MouseDown(object sender, MouseEventArgs e)
+        {
+            lstTask.DoDragDrop(lstTask.SelectedItem, DragDropEffects.Copy);
+        }
+
+        private void dgvNodi_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(MPIntranet.Business.Task)))
+            {
+                MPIntranet.Business.Task item = (MPIntranet.Business.Task)e.Data.GetData(typeof(MPIntranet.Business.Task));
+                Point clientPoint = dgvNodi.PointToClient(new Point(e.X, e.Y));
+                DataGridView.HitTestInfo info = dgvNodi.HitTest(clientPoint.X, clientPoint.Y);
+                if (info.RowIndex < 0 || info.RowIndex > dgvNodi.Rows.Count) return;
+                dgvNodi.Rows[info.RowIndex].Cells[Task.Index].Value = item.ToString();
+            }
+
+            if (e.Data.GetDataPresent(typeof(MPIntranet.Business.AreaProduzione)))
+            {
+                MPIntranet.Business.AreaProduzione item = (MPIntranet.Business.AreaProduzione)e.Data.GetData(typeof(MPIntranet.Business.AreaProduzione));
+                Point clientPoint = dgvNodi.PointToClient(new Point(e.X, e.Y));
+                DataGridView.HitTestInfo info = dgvNodi.HitTest(clientPoint.X, clientPoint.Y);
+                if (info.RowIndex < 0 || info.RowIndex > dgvNodi.Rows.Count) return;
+                dgvNodi.Rows[info.RowIndex].Cells[AreaProduzione.Index].Value = item.ToString();
+
+                int idFaseDistinta = (int)dgvNodi.Rows[info.RowIndex].Cells[IdFase.Index].Value;
+                string anagrafica = (string)dgvNodi.Rows[info.RowIndex].Cells[Anagrafica.Index].Value;
+
+                aggiornaNodoAlbero(idFaseDistinta, item.ToString(), anagrafica);
+            }
+
+        }
+
+        private void dgvNodi_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(MPIntranet.Business.Task)))
+                e.Effect = DragDropEffects.Copy;
+            else if (e.Data.GetDataPresent(typeof(MPIntranet.Business.AreaProduzione)))
+                e.Effect = DragDropEffects.Copy;
+            else
+                e.Effect = DragDropEffects.None;
+        }
+
+        private void lstAreeProduzione_MouseDown(object sender, MouseEventArgs e)
+        {
+            lstAreeProduzione.DoDragDrop(lstAreeProduzione.SelectedItem, DragDropEffects.Copy);
+        }
+
+        private void btnSalvaDiba_Click(object sender, EventArgs e)
+        {
+            _distinta.SalvaListaFasiDistinta(_utenteConnesso);
         }
     }
 }

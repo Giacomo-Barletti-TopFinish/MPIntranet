@@ -42,6 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArticoliDS.cs">
+      <DependentUpon>ArticoliDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="ArticoliDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

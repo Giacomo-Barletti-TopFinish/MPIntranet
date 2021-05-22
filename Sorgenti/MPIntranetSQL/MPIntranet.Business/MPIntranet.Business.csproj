@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AreaProduzione.cs" />
     <Compile Include="Articolo.cs" />
     <Compile Include="BloccoDocumento.cs" />
     <Compile Include="Brand.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="Documento.cs" />
     <Compile Include="FaseDistinta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Task.cs" />
     <Compile Include="TipoDistinta.cs" />
     <Compile Include="TipoDocumento.cs" />
   </ItemGroup>

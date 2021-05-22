@@ -26,6 +26,12 @@ namespace MPIntranet.DataAccess.Articoli
             a.GetDistintaBase(ds, idDiba);
         }
         [DataContext]
+        public void FillFASIDIBA(ArticoliDS ds, int idDiba)
+        {
+            ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
+            a.FillFASIDIBA(ds, idDiba);
+        }
+        [DataContext]
         public void FillDistintaBase(ArticoliDS ds, int idArticolo, bool soloNonCancellati)
         {
             ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
@@ -37,7 +43,18 @@ namespace MPIntranet.DataAccess.Articoli
             ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
             a.FillArticoli(anagrafica, ds, soloNonCancellati);
         }
-
+        [DataContext]
+        public void FillTask( ArticoliDS ds)
+        {
+            ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
+            a.FillTask( ds);
+        }
+        [DataContext]
+        public void FillAreeProduzione( ArticoliDS ds)
+        {
+            ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
+            a.FillAreeProduzione( ds);
+        }
         [DataContext]
         public void FillBrand(ArticoliDS ds, bool soloNonCancellati)
         {
@@ -75,6 +92,12 @@ namespace MPIntranet.DataAccess.Articoli
         {
             ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
             a.UpdateDistintaBaseTable(ds);
+        }
+        [DataContext(true)]
+        public void UpdateFaseDistintaBaseTable(ArticoliDS ds)
+        {
+            ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
+            a.UpdateFaseDistintaBaseTable(ds);
         }
     }
 }
