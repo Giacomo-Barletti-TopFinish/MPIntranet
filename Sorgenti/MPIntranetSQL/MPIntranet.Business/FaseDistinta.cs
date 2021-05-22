@@ -131,7 +131,8 @@ namespace MPIntranet.Business
                     }
                     else
                     {
-                        faseDistinta.IDPADRE = fd.IdPadre;
+                        if (fd.IdPadre != 0)
+                            faseDistinta.IDPADRE = fd.IdPadre;
                         faseDistinta.DESCRIZIONE = fd.Descrizione;
                         faseDistinta.ANAGRAFICA = fd.Anagrafica;
                         faseDistinta.AREAPRODUZIONE = fd.AreaProduzione;

@@ -125,8 +125,33 @@ namespace DisegnaDiBa
 
         private void creaAlbero()
         {
-            tvDiBa.Nodes.Add(creaNodo(_articolo.Descrizione, _articolo.Anagrafica, null));
+            tvDiBa.Nodes.Clear();
+            if (_distinta.Fasi.Count() == 0)
+                tvDiBa.Nodes.Add(creaNodo(_articolo.Descrizione, _articolo.Anagrafica, null));
+            else
+            {
+                FaseDistinta faseRoot = _distinta.Fasi.Where(x => x.IdPadre == 0).FirstOrDefault();
+                if (faseRoot == null) return;
 
+                string etichettaNodo = string.Format("{0} {1}", faseRoot.IdFaseDiba, faseRoot.Anagrafica);
+                TreeNode radice = new TreeNode(etichettaNodo);
+                radice.Tag = faseRoot;
+                tvDiBa.Nodes.Add(radice);
+                aggiungiNodoEsistente(faseRoot.IdFaseDiba, radice);
+            }
+        }
+
+        private void aggiungiNodoEsistente(int idFaseDistintaPadre, TreeNode nodoPadre)
+        {
+            foreach (FaseDistinta faseFiglio in _distinta.Fasi.Where(x => x.IdPadre == idFaseDistintaPadre))
+            {
+                string etichettaNodo = string.Format("{0} {1} {2}", faseFiglio.IdFaseDiba, faseFiglio.AreaProduzione, faseFiglio.Anagrafica);
+                TreeNode nodoFiglio = new TreeNode(etichettaNodo);
+                nodoFiglio.Tag = faseFiglio;
+                nodoPadre.Nodes.Add(nodoFiglio);
+
+                aggiungiNodoEsistente(faseFiglio.IdFaseDiba, nodoFiglio);
+            }
         }
 
         private TreeNode creaNodo(string descrizione, string anagrafica, TreeNode nodoPadre)
@@ -311,6 +336,8 @@ namespace DisegnaDiBa
         private void btnSalvaDiba_Click(object sender, EventArgs e)
         {
             _distinta.SalvaListaFasiDistinta(_utenteConnesso);
+            creaAlbero();
+            PopolaGrigliaFasi();
         }
     }
 }
