@@ -1,4 +1,5 @@
-﻿using MPIntranet.Common;
+﻿using MPIntranet.Business;
+using MPIntranet.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ namespace DisegnaDiBa
 {
     public partial class MainForm : MPIBaseForm
     {
+        public List<FaseDistinta> FasiDistintaDaCopiare;
         public MainForm()
         {
             InitializeComponent();

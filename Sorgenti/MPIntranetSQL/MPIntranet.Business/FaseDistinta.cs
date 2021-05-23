@@ -28,10 +28,36 @@ namespace MPIntranet.Business
         public double Setup { get; set; }
         public double Attesa { get; set; }
         public double Movimentazione { get; set; }
+        public string Errore { get; set; }
 
         public FaseDistinta(int idDiba)
         {
             IdDiba = idDiba;
+        }
+
+        public FaseDistinta CopiaFase(int idFaseDistinta, int idPadre)
+        {
+            FaseDistinta faseCopiata = new FaseDistinta(IdDiba);
+            faseCopiata.IdFaseDiba = idFaseDistinta;
+            faseCopiata.IdPadre = idPadre;
+            faseCopiata.Descrizione = Descrizione;
+            faseCopiata.Anagrafica = Anagrafica;
+            faseCopiata.AreaProduzione = AreaProduzione;
+            faseCopiata.Task = Task;
+            faseCopiata.SchedaProcesso = SchedaProcesso;
+            faseCopiata.CollegamentoCiclo = CollegamentoCiclo;
+            faseCopiata.CollegamentoDiba = CollegamentoDiba;
+            faseCopiata.Quantita = Quantita;
+            faseCopiata.PezziOrari = PezziOrari;
+            faseCopiata.Periodo = Periodo;
+            faseCopiata.UMQuantita = UMQuantita;
+            faseCopiata.Setup = Setup;
+            faseCopiata.Attesa = Attesa;
+            faseCopiata.Movimentazione = Movimentazione;
+            faseCopiata.Cancellato = Cancellato;
+            faseCopiata.DataModifica = DataModifica;
+            faseCopiata.UtenteModifica = UtenteModifica;
+            return faseCopiata;
         }
 
         public static List<FaseDistinta> EstraiListaFaseDistinta(int idDiba)

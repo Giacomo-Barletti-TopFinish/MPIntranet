@@ -19,6 +19,11 @@ namespace DisegnaDiBa
         private DistintaBase _distinta;
         private int indiceNodi = 0;
         private BindingSource source;
+        protected List<FaseDistinta> FasiDistintaDaCopiare
+        {
+            get { return (MdiParent as MainForm).FasiDistintaDaCopiare; }
+            set { (MdiParent as MainForm).FasiDistintaDaCopiare = value; }
+        }
         private int estraiIndice()
         {
             indiceNodi--;
@@ -125,6 +130,7 @@ namespace DisegnaDiBa
 
         private void creaAlbero()
         {
+            if (_distinta == null) return;
             tvDiBa.Nodes.Clear();
             if (_distinta.Fasi.Count() == 0)
                 tvDiBa.Nodes.Add(creaNodo(_articolo.Descrizione, _articolo.Anagrafica, null));
@@ -139,6 +145,7 @@ namespace DisegnaDiBa
                 tvDiBa.Nodes.Add(radice);
                 aggiungiNodoEsistente(faseRoot.IdFaseDiba, radice);
             }
+            tvDiBa.ExpandAll();
         }
 
         private void aggiungiNodoEsistente(int idFaseDistintaPadre, TreeNode nodoPadre)
@@ -174,6 +181,7 @@ namespace DisegnaDiBa
         }
         private void popolaCampi()
         {
+            if (_distinta == null) return;
             txtDescrizioneDiba.Text = _distinta.Descrizione;
             txtVersioneDiba.Text = _distinta.Versione.ToString();
             txtTipoDiba.Text = _distinta.TipoDistinta.TipoDiba;
@@ -195,10 +203,62 @@ namespace DisegnaDiBa
             cm.MenuItems.Add("Aggiungi nodo sopra", new EventHandler(AggiungiNodoSopraClick));
             cm.MenuItems.Add("Aggiungi nodo sotto", new EventHandler(AggiungiNodoSottoClick));
             cm.MenuItems.Add("Rimuovi nodo", new EventHandler(RimuoviElementoSingoloClick));
+            cm.MenuItems.Add("Copia ramo", new EventHandler(CopiaRamoClick));
+            cm.MenuItems.Add("Incolla ramo", new EventHandler(IncollaRamoClick));
             tvDiBa.ContextMenu = cm;
 
         }
 
+        private void CopiaRamoClick(object sender, EventArgs e)
+        {
+            TreeNode tn = tvDiBa.SelectedNode;
+            if (tn == null) return;
+            if (tn.Tag == null) return;
+            FasiDistintaDaCopiare = new List<FaseDistinta>();
+
+            FaseDistinta faseSelezionata = (FaseDistinta)tn.Tag;
+            copiaFaseDistintaRicorsiva(faseSelezionata, 0);
+        }
+        private void copiaFaseDistintaRicorsiva(FaseDistinta faseSelezionata, int idPadre)
+        {
+            FaseDistinta faseCopiata = faseSelezionata.CopiaFase(estraiIndice(), idPadre);
+            FasiDistintaDaCopiare.Add(faseCopiata);
+
+            foreach (FaseDistinta faseFiglio in _distinta.Fasi.Where(x => x.IdPadre == faseSelezionata.IdFaseDiba))
+            {
+                copiaFaseDistintaRicorsiva(faseFiglio, faseCopiata.IdFaseDiba);
+            }
+        }
+        private void IncollaRamoClick(object sender, EventArgs e)
+        {
+            if (FasiDistintaDaCopiare == null) return;
+
+            TreeNode tn = tvDiBa.SelectedNode;
+            if (tn == null) return;
+            if (tn.Tag == null) return;
+
+            FaseDistinta faseSelezionata = (FaseDistinta)tn.Tag;
+            FaseDistinta faseIniziale = FasiDistintaDaCopiare.Where(x => x.IdPadre == 0).FirstOrDefault();
+            incollaFaseDistintaRicorsiva(faseIniziale, faseSelezionata.IdFaseDiba, tn);
+            PopolaGrigliaFasi();
+            tn.ExpandAll();
+        }
+        private void incollaFaseDistintaRicorsiva(FaseDistinta faseIniziale, int idPadre, TreeNode nodoPadre)
+        {
+            if (faseIniziale == null) return;
+
+            FaseDistinta FaseInizialeCopiata = faseIniziale.CopiaFase(estraiIndice(), idPadre);
+
+            string etichettaNodo = string.Format("{0} {1} {2}", FaseInizialeCopiata.IdFaseDiba, FaseInizialeCopiata.AreaProduzione, FaseInizialeCopiata.Anagrafica);
+            TreeNode nodoFiglio = new TreeNode(etichettaNodo);
+            nodoFiglio.Tag = FaseInizialeCopiata;
+            nodoPadre.Nodes.Add(nodoFiglio);
+            _distinta.Fasi.Add(FaseInizialeCopiata);
+            foreach (FaseDistinta figlio in FasiDistintaDaCopiare.Where(x => x.IdPadre == faseIniziale.IdFaseDiba))
+            {
+                incollaFaseDistintaRicorsiva(figlio, FaseInizialeCopiata.IdFaseDiba, nodoFiglio);
+            }
+        }
         private void AggiungiNodoSopraClick(object sender, EventArgs e)
         {
             TreeNode tn = tvDiBa.SelectedNode;
@@ -279,6 +339,7 @@ namespace DisegnaDiBa
 
         private void PopolaGrigliaFasi()
         {
+            if (_distinta == null) return;
             dgvNodi.AutoGenerateColumns = false;
             BindingList<FaseDistinta> bindingList = new BindingList<FaseDistinta>(_distinta.Fasi);
             source = new BindingSource(bindingList, null);
@@ -332,12 +393,39 @@ namespace DisegnaDiBa
         {
             lstAreeProduzione.DoDragDrop(lstAreeProduzione.SelectedItem, DragDropEffects.Copy);
         }
-
+        private bool verificaDistinta()
+        {
+            bool esito = true;
+            foreach (FaseDistinta fase in _distinta.Fasi)
+            {
+                if (string.IsNullOrEmpty(fase.AreaProduzione))
+                {
+                    esito = false;
+                    fase.Errore = "-> Inserire Area Produzione ";
+                }
+                if (string.IsNullOrEmpty(fase.Task))
+                {
+                    esito = false;
+                    fase.Errore = "-> Inserire Task ";
+                }
+                if (fase.Quantita <= 0)
+                {
+                    esito = false;
+                    fase.Errore = "-> Inserire Quantità ";
+                }
+            }
+            return esito;
+        }
         private void btnSalvaDiba_Click(object sender, EventArgs e)
         {
-            _distinta.SalvaListaFasiDistinta(_utenteConnesso);
-            creaAlbero();
-            PopolaGrigliaFasi();
+            if (_distinta == null) return;
+            if (verificaDistinta())
+            {
+                _distinta.SalvaListaFasiDistinta(_utenteConnesso);
+                _distinta = DistintaBase.EstraiDistintaBase(_distinta.IdDiba);
+                creaAlbero();
+                PopolaGrigliaFasi();
+            }
         }
     }
 }

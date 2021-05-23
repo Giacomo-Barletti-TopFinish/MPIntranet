@@ -3751,9 +3751,7 @@ namespace MPIntranet.Entities {
                 this.columnIDFASEDIBA.Unique = true;
                 this.columnIDDIBA.AllowDBNull = false;
                 this.columnTIPOFASE.MaxLength = 20;
-                this.columnDESCRIZIONE.AllowDBNull = false;
                 this.columnDESCRIZIONE.MaxLength = 50;
-                this.columnANAGRAFICA.AllowDBNull = false;
                 this.columnANAGRAFICA.MaxLength = 20;
                 this.columnAREAPRODUZIONE.AllowDBNull = false;
                 this.columnAREAPRODUZIONE.MaxLength = 20;
@@ -5069,7 +5067,12 @@ namespace MPIntranet.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string DESCRIZIONE {
                 get {
-                    return ((string)(this[this.tableFASIDIBA.DESCRIZIONEColumn]));
+                    try {
+                        return ((string)(this[this.tableFASIDIBA.DESCRIZIONEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DESCRIZIONE\' in table \'FASIDIBA\' is DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableFASIDIBA.DESCRIZIONEColumn] = value;
@@ -5080,7 +5083,12 @@ namespace MPIntranet.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string ANAGRAFICA {
                 get {
-                    return ((string)(this[this.tableFASIDIBA.ANAGRAFICAColumn]));
+                    try {
+                        return ((string)(this[this.tableFASIDIBA.ANAGRAFICAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ANAGRAFICA\' in table \'FASIDIBA\' is DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableFASIDIBA.ANAGRAFICAColumn] = value;
@@ -5329,6 +5337,30 @@ namespace MPIntranet.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetTIPOFASENull() {
                 this[this.tableFASIDIBA.TIPOFASEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsDESCRIZIONENull() {
+                return this.IsNull(this.tableFASIDIBA.DESCRIZIONEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetDESCRIZIONENull() {
+                this[this.tableFASIDIBA.DESCRIZIONEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsANAGRAFICANull() {
+                return this.IsNull(this.tableFASIDIBA.ANAGRAFICAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetANAGRAFICANull() {
+                this[this.tableFASIDIBA.ANAGRAFICAColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

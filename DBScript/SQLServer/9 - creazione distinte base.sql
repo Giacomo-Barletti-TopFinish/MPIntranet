@@ -111,8 +111,8 @@ CREATE TABLE [FASIDIBA]
  [IDDIBA]            int NOT NULL ,
  [IDPADRE]           int NULL ,
  [TIPOFASE]			 nvarchar(20) NULL ,
- [DESCRIZIONE]       nvarchar(50) NOT NULL ,
- [ANAGRAFICA]        nvarchar(20) NOT NULL ,
+ [DESCRIZIONE]       nvarchar(50) NULL ,
+ [ANAGRAFICA]        nvarchar(20) NULL ,
  [AREAPRODUZIONE]    nvarchar(20) NOT NULL ,
  [TASK]              nvarchar(10) NOT NULL ,
  [SCHEDAPROCESSO]    nvarchar(20) NULL ,
@@ -125,8 +125,8 @@ CREATE TABLE [FASIDIBA]
  [SETUP]             float NULL ,
  [ATTESA]            float NULL ,
  [MOVIMENTAZIONE]    float NULL ,
-  [CANCELLATO]     bit NULL ,
- [DATAMODIFICA]   datetime NULL ,
+  [CANCELLATO]     bit not NULL ,
+ [DATAMODIFICA]   datetime not NULL ,
  [UTENTEMODIFICA] nvarchar(50) NOT NULL 
 
  CONSTRAINT [PK_fasidiba] PRIMARY KEY CLUSTERED ([IDFASEDIBA] ASC),
