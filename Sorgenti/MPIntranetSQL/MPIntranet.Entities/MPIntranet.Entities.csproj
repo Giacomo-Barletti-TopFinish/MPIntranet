@@ -50,6 +50,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ArticoliDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Ciclo.cs" />
+    <Compile Include="Distinta.cs" />
     <Compile Include="DocumentiDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

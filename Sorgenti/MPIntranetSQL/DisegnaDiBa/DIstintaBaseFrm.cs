@@ -1,11 +1,13 @@
 ﻿using MPIntranet.Business;
 using MPIntranet.Common;
 using MPIntranet.Entities;
+using MPIntranet.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -426,6 +428,209 @@ namespace DisegnaDiBa
                 creaAlbero();
                 PopolaGrigliaFasi();
             }
+        }
+
+        private void btnEsporta_Click(object sender, EventArgs e)
+        {
+            List<Ciclo> cicli;
+            List<Distinta> distinte;
+            string errori = string.Empty;
+            bool esito = true;
+            StringBuilder sb = new StringBuilder();
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                if (!VerificaCicli(out cicli, out errori))
+                {
+                    esito = false;
+                    sb.AppendLine(errori);
+                }
+
+                if (!VerificaDistinte(out distinte, out errori))
+                {
+                    esito = false;
+                    sb.AppendLine(errori);
+                }
+
+                if (esito)
+                {
+                    salvaCicli(cicli);
+                }
+            }
+            catch (Exception ex)
+            {
+                txtNotifiche.Text = ex.Message;
+                sb.AppendLine(ex.Message);
+                MostraEccezione(ex, "Errore in verifica cicli");
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+                txtNotifiche.Text = sb.ToString();
+            }
+        }
+
+        private void salvaDistinte(List<Distinta> distinte)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Excel Files (*.xlsx)|*.xlsx";
+            sfd.DefaultExt = "xlsx";
+            sfd.AddExtension = true;
+            if (sfd.ShowDialog() == DialogResult.Cancel) return;
+
+            string pathCompleto = sfd.FileName;
+
+            if (File.Exists(pathCompleto))
+                File.Delete(pathCompleto);
+
+            FileStream fs = new FileStream(pathCompleto, FileMode.Create);
+            string errori = string.Empty;
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                ExcelHelper hExcel = new ExcelHelper();
+                byte[] filedata = hExcel.CreaFileCompoentiDistinta(distinte, out errori);
+                fs.Write(filedata, 0, filedata.Length);
+                fs.Flush();
+                fs.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione(ex, "Errore nel creare il file");
+                Cursor.Current = Cursors.Default;
+
+            }
+            finally
+            {
+                fs.Close();
+            }
+        }
+        private void salvaCicli(List<Ciclo> cicli)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Excel Files (*.xlsx)|*.xlsx";
+            sfd.DefaultExt = "xlsx";
+            sfd.AddExtension = true;
+            if (sfd.ShowDialog() == DialogResult.Cancel) return;
+
+            string pathCompleto = sfd.FileName;
+
+            if (File.Exists(pathCompleto))
+                File.Delete(pathCompleto);
+
+            string errori = string.Empty;
+            FileStream fs = new FileStream(sfd.FileName, FileMode.Create);
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                ExcelHelper hExcel = new ExcelHelper();
+                byte[] filedata = hExcel.CreaFileFaseCicli(cicli, out errori);
+
+                fs.Write(filedata, 0, filedata.Length);
+                fs.Flush();
+                fs.Close();
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione(ex, "Errore nel creare il file");
+                Cursor.Current = Cursors.Default;
+
+            }
+            finally
+            {
+                fs.Close();
+            }
+        }
+        private bool VerificaDistinte(out List<Distinta> distinte, out string errori)
+        {
+            bool esito = true;
+            errori = string.Empty;
+            distinte = new List<Distinta>();
+            StringBuilder sb = new StringBuilder();
+
+            List<FaseDistinta> faseConAnagrafica = _distinta.Fasi.Where(x => !string.IsNullOrEmpty(x.Anagrafica)).OrderByDescending(x => x.IdFaseDiba).ToList();
+            if (faseConAnagrafica.Count == 0)
+            {
+                sb.AppendLine("Nessuna anagrafica trovata");
+                esito = false;
+            }
+
+            foreach (FaseDistinta fase in faseConAnagrafica)
+            {
+                List<FaseDistinta> fasiFiglie = _distinta.Fasi.Where(x => x.IdPadre == fase.IdFaseDiba).ToList();
+                if (fasiFiglie.Count == 0) continue;
+
+                while (fasiFiglie.Count > 1 || !(string.IsNullOrEmpty(fasiFiglie[0].Anagrafica)))
+                {
+                    if (fasiFiglie.Count > 1)
+                    {
+                        List<Componente> componenti = new List<Componente>();
+                        fasiFiglie.ForEach(x => componenti.Add(new Componente(x.Anagrafica, x.Quantita, x.CollegamentoDiba, x.UMQuantita, x.IdFaseDiba, fase.Anagrafica)));
+
+                        distinte.Add(new Distinta(fase.Anagrafica, componenti));
+                    }
+
+                }
+
+            }
+
+            errori = sb.ToString();
+            return esito;
+        }
+
+        private bool VerificaCicli(out List<Ciclo> cicli, out string errori)
+        {
+            bool esito = true;
+            errori = string.Empty;
+            cicli = new List<Ciclo>();
+            StringBuilder sb = new StringBuilder();
+
+            string messaggioErrore = string.Empty;
+
+
+            List<FaseDistinta> faseConAnagrafica = _distinta.Fasi.Where(x => !string.IsNullOrEmpty(x.Anagrafica)).OrderByDescending(x => x.IdFaseDiba).ToList();
+            if (faseConAnagrafica.Count == 0)
+            {
+                sb.AppendLine("Nessuna anagrafica trovata");
+                esito = false;
+            }
+
+            foreach (FaseDistinta fase in faseConAnagrafica)
+            {
+                int operazione = 10;
+                Ciclo c = new Ciclo(fase.Anagrafica);
+                List<FaseDistinta> fasiFiglie = _distinta.Fasi.Where(x => x.IdPadre == fase.IdFaseDiba).ToList();
+
+                while (fasiFiglie.Count == 1 && string.IsNullOrEmpty(fasiFiglie[0].Anagrafica))
+                {
+                    Fase f = new Fase();
+                    f.Operazione = operazione;
+                    operazione += 10;
+                    f.AreaProduzione = fasiFiglie[0].AreaProduzione;
+                    if (string.IsNullOrEmpty(f.AreaProduzione))
+                    {
+                        sb.AppendLine("Area di produzione nulla");
+                        esito = false;
+                    }
+                    f.TempoLavorazione = fasiFiglie[0].Periodo;
+                    f.Collegamento = fasiFiglie[0].CollegamentoCiclo;
+                    f.DimensioneLotto = fasiFiglie[0].PezziOrari;
+                    f.Task = fasiFiglie[0].Task;
+                    if (string.IsNullOrEmpty(f.Task))
+                    {
+                        sb.AppendLine("Task nullo");
+                        esito = false;
+                    }
+                    f.Commenti = new List<string>();
+                    c.Fasi.Add(f);
+                }
+
+            }
+            errori = sb.ToString();
+            return esito;
         }
     }
 }
