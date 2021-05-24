@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tvDiBa = new System.Windows.Forms.TreeView();
             this.dgvNodi = new System.Windows.Forms.DataGridView();
             this.IdFase = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,8 +67,8 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btnEsporta = new System.Windows.Forms.Button();
             this.txtNotifiche = new System.Windows.Forms.TextBox();
+            this.btnEsporta = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNodi)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -115,6 +115,7 @@
             this.dgvNodi.Name = "dgvNodi";
             this.dgvNodi.Size = new System.Drawing.Size(940, 907);
             this.dgvNodi.TabIndex = 5;
+            this.dgvNodi.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvNodi_EditingControlShowing);
             this.dgvNodi.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvNodi_DragDrop);
             this.dgvNodi.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgvNodi_DragEnter);
             // 
@@ -128,8 +129,8 @@
             // Errore
             // 
             this.Errore.DataPropertyName = "Errore";
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Red;
-            this.Errore.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Red;
+            this.Errore.DefaultCellStyle = dataGridViewCellStyle2;
             this.Errore.HeaderText = "Errore";
             this.Errore.Name = "Errore";
             this.Errore.ReadOnly = true;
@@ -389,6 +390,9 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(554, 50);
@@ -424,16 +428,6 @@
             this.tabPage2.Text = "Notifiche";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // btnEsporta
-            // 
-            this.btnEsporta.Location = new System.Drawing.Point(16, 16);
-            this.btnEsporta.Name = "btnEsporta";
-            this.btnEsporta.Size = new System.Drawing.Size(119, 36);
-            this.btnEsporta.TabIndex = 0;
-            this.btnEsporta.Text = "Esporta";
-            this.btnEsporta.UseVisualStyleBackColor = true;
-            this.btnEsporta.Click += new System.EventHandler(this.btnEsporta_Click);
-            // 
             // txtNotifiche
             // 
             this.txtNotifiche.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -445,6 +439,16 @@
             this.txtNotifiche.ReadOnly = true;
             this.txtNotifiche.Size = new System.Drawing.Size(1079, 727);
             this.txtNotifiche.TabIndex = 1;
+            // 
+            // btnEsporta
+            // 
+            this.btnEsporta.Location = new System.Drawing.Point(16, 16);
+            this.btnEsporta.Name = "btnEsporta";
+            this.btnEsporta.Size = new System.Drawing.Size(119, 36);
+            this.btnEsporta.TabIndex = 0;
+            this.btnEsporta.Text = "Esporta";
+            this.btnEsporta.UseVisualStyleBackColor = true;
+            this.btnEsporta.Click += new System.EventHandler(this.btnEsporta_Click);
             // 
             // DistintaBaseFrm
             // 

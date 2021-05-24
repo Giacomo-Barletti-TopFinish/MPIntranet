@@ -21,6 +21,8 @@ namespace DisegnaDiBa
         private DistintaBase _distinta;
         private int indiceNodi = 0;
         private BindingSource source;
+        private AutoCompleteStringCollection _autoAreeProduzione = new AutoCompleteStringCollection();
+        private AutoCompleteStringCollection _autoTask = new AutoCompleteStringCollection();
         protected List<FaseDistinta> FasiDistintaDaCopiare
         {
             get { return (MdiParent as MainForm).FasiDistintaDaCopiare; }
@@ -60,12 +62,18 @@ namespace DisegnaDiBa
         {
             List<AreaProduzione> aree = MPIntranet.Business.AreaProduzione.EstraiListaAreeProduzione();
             lstAreeProduzione.Items.AddRange(aree.ToArray());
+
+            string[] etichette = aree.Select(x => x.Codice).ToArray();
+            _autoAreeProduzione.AddRange(etichette);
         }
 
         private void caricaTask()
         {
             List<MPIntranet.Business.Task> tasks = MPIntranet.Business.Task.EstraiListaTask();
             lstTask.Items.AddRange(tasks.ToArray());
+
+            string[] etichette = tasks.Select(x => x.Codice).ToArray();
+            _autoTask.AddRange(etichette);
         }
 
         private void btnNuovaDistinta_Click(object sender, EventArgs e)
@@ -175,6 +183,8 @@ namespace DisegnaDiBa
             if (fasePadre != null) fase.IdPadre = fasePadre.IdFaseDiba;
             fase.Descrizione = descrizione;
             fase.Anagrafica = anagrafica;
+            fase.Quantita = 1;
+            fase.UMQuantita = "NR";
             string etichettaNodo = string.Format("{0} {1}", fase.IdFaseDiba, fase.Anagrafica);
             TreeNode nodo = new TreeNode(etichettaNodo);
             nodo.Tag = fase;
@@ -442,12 +452,18 @@ namespace DisegnaDiBa
                 Cursor.Current = Cursors.WaitCursor;
                 if (!VerificaCicli(out cicli, out errori))
                 {
+                    sb.AppendLine(String.Empty);
+                    sb.AppendLine(String.Empty);
+                    sb.AppendLine("*** ANALISI cicli ***");
                     esito = false;
                     sb.AppendLine(errori);
                 }
 
                 if (!VerificaDistinte(out distinte, out errori))
                 {
+                    sb.AppendLine(String.Empty);
+                    sb.AppendLine(String.Empty);
+                    sb.AppendLine("*** ANALISI DISTINTE ***");
                     esito = false;
                     sb.AppendLine(errori);
                 }
@@ -555,24 +571,32 @@ namespace DisegnaDiBa
             if (faseConAnagrafica.Count == 0)
             {
                 sb.AppendLine("Nessuna anagrafica trovata");
-                esito = false;
+                return false;
+            }
+            if (faseConAnagrafica.Count == 1)
+            {
+                sb.AppendLine("Una sola anagrafica");
+                return false;
             }
 
             foreach (FaseDistinta fase in faseConAnagrafica)
             {
                 List<FaseDistinta> fasiFiglie = _distinta.Fasi.Where(x => x.IdPadre == fase.IdFaseDiba).ToList();
-                if (fasiFiglie.Count == 0) continue;
 
-                while (fasiFiglie.Count > 1 || !(string.IsNullOrEmpty(fasiFiglie[0].Anagrafica)))
+                while (fasiFiglie.Count > 0)
                 {
-                    if (fasiFiglie.Count > 1)
+                    if (fasiFiglie.Count > 1 || !(string.IsNullOrEmpty(fasiFiglie[0].Anagrafica)))
                     {
-                        List<Componente> componenti = new List<Componente>();
-                        fasiFiglie.ForEach(x => componenti.Add(new Componente(x.Anagrafica, x.Quantita, x.CollegamentoDiba, x.UMQuantita, x.IdFaseDiba, fase.Anagrafica)));
+                        if (fasiFiglie.Count > 1)
+                        {
+                            List<Componente> componenti = new List<Componente>();
+                            fasiFiglie.ForEach(x => componenti.Add(new Componente(x.Anagrafica, x.Quantita, x.CollegamentoDiba, x.UMQuantita, x.IdFaseDiba, fase.Anagrafica)));
 
-                        distinte.Add(new Distinta(fase.Anagrafica, componenti));
+                            distinte.Add(new Distinta(fase.Anagrafica, componenti));
+                        }
+
                     }
-
+                    fasiFiglie = _distinta.Fasi.Where(x => x.IdPadre == fasiFiglie[0].IdFaseDiba).ToList();
                 }
 
             }
@@ -595,9 +619,13 @@ namespace DisegnaDiBa
             if (faseConAnagrafica.Count == 0)
             {
                 sb.AppendLine("Nessuna anagrafica trovata");
-                esito = false;
+                return false;
             }
-
+            if (faseConAnagrafica.Count == 1)
+            {
+                sb.AppendLine("Una sola anagrafica trovata");
+                return false;
+            }
             foreach (FaseDistinta fase in faseConAnagrafica)
             {
                 int operazione = 10;
@@ -626,11 +654,39 @@ namespace DisegnaDiBa
                     }
                     f.Commenti = new List<string>();
                     c.Fasi.Add(f);
+                    fasiFiglie = _distinta.Fasi.Where(x => x.IdPadre == fasiFiglie[0].IdFaseDiba).ToList();
                 }
 
+                if (c.Fasi.Count > 0)
+                    cicli.Add(c);
             }
             errori = sb.ToString();
             return esito;
+        }
+
+        private void dgvNodi_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            int columnIndex = dgvNodi.CurrentCell.ColumnIndex;
+
+            if (columnIndex == AreaProduzione.Index)
+            {
+                TextBox tb = e.Control as TextBox;
+                {
+                    tb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                    tb.AutoCompleteCustomSource = _autoAreeProduzione;
+                    tb.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                }
+            }
+            if (columnIndex == Task.Index)
+            {
+                TextBox tb = e.Control as TextBox;
+                {
+                    tb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                    tb.AutoCompleteCustomSource = _autoTask;
+                    tb.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                }
+            }
+
         }
     }
 }
