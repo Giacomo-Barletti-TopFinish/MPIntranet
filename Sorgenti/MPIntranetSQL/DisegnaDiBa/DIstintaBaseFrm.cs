@@ -23,6 +23,7 @@ namespace DisegnaDiBa
         private BindingSource source;
         private AutoCompleteStringCollection _autoAreeProduzione = new AutoCompleteStringCollection();
         private AutoCompleteStringCollection _autoTask = new AutoCompleteStringCollection();
+        private AutoCompleteStringCollection _autoItems = new AutoCompleteStringCollection();
         protected List<FaseDistinta> FasiDistintaDaCopiare
         {
             get { return (MdiParent as MainForm).FasiDistintaDaCopiare; }
@@ -49,6 +50,7 @@ namespace DisegnaDiBa
 
             caricaAreeProduzione();
             caricaTask();
+            caricaItems();
 
             _articolo = Articolo.EstraiArticolo(_idArticolo);
 
@@ -61,16 +63,20 @@ namespace DisegnaDiBa
         private void caricaAreeProduzione()
         {
             List<AreaProduzione> aree = MPIntranet.Business.AreaProduzione.EstraiListaAreeProduzione();
-            lstAreeProduzione.Items.AddRange(aree.ToArray());
 
             string[] etichette = aree.Select(x => x.Codice).ToArray();
             _autoAreeProduzione.AddRange(etichette);
         }
+        private void caricaItems()
+        {
+            List<Item> items = Item.EstraiListaItems();
 
+            string[] etichette = items.Select(x => x.Anagrafica).ToArray();
+            _autoItems.AddRange(etichette);
+        }
         private void caricaTask()
         {
             List<MPIntranet.Business.Task> tasks = MPIntranet.Business.Task.EstraiListaTask();
-            lstTask.Items.AddRange(tasks.ToArray());
 
             string[] etichette = tasks.Select(x => x.Codice).ToArray();
             _autoTask.AddRange(etichette);
@@ -359,11 +365,6 @@ namespace DisegnaDiBa
             dgvNodi.Update();
         }
 
-        private void lstTask_MouseDown(object sender, MouseEventArgs e)
-        {
-            lstTask.DoDragDrop(lstTask.SelectedItem, DragDropEffects.Copy);
-        }
-
         private void dgvNodi_DragDrop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(typeof(MPIntranet.Business.Task)))
@@ -401,10 +402,6 @@ namespace DisegnaDiBa
                 e.Effect = DragDropEffects.None;
         }
 
-        private void lstAreeProduzione_MouseDown(object sender, MouseEventArgs e)
-        {
-            lstAreeProduzione.DoDragDrop(lstAreeProduzione.SelectedItem, DragDropEffects.Copy);
-        }
         private bool verificaDistinta()
         {
             bool esito = true;
@@ -686,7 +683,15 @@ namespace DisegnaDiBa
                     tb.AutoCompleteSource = AutoCompleteSource.CustomSource;
                 }
             }
-
+            if (columnIndex == Anagrafica.Index)
+            {
+                TextBox tb = e.Control as TextBox;
+                {
+                    tb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                    tb.AutoCompleteCustomSource = _autoItems;
+                    tb.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                }
+            }
         }
     }
 }

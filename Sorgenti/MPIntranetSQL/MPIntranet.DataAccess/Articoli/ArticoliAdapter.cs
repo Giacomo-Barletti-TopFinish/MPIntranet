@@ -90,6 +90,14 @@ namespace MPIntranet.DataAccess.Articoli
             }
         }
 
+        public void FillItems(ArticoliDS ds)
+        {
+            string select = @"SELECT * FROM Items";
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.Items);
+            }
+        }
         public void FillAreeProduzione(ArticoliDS ds)
         {
             string select = @"SELECT * FROM AreeProduzione";

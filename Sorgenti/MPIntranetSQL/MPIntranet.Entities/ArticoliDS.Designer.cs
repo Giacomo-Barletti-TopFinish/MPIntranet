@@ -38,6 +38,8 @@ namespace MPIntranet.Entities {
         
         private FASIDIBADataTable tableFASIDIBA;
         
+        private ItemsDataTable tableItems;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -86,6 +88,9 @@ namespace MPIntranet.Entities {
                 }
                 if ((ds.Tables["FASIDIBA"] != null)) {
                     base.Tables.Add(new FASIDIBADataTable(ds.Tables["FASIDIBA"]));
+                }
+                if ((ds.Tables["Items"] != null)) {
+                    base.Tables.Add(new ItemsDataTable(ds.Tables["Items"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -177,6 +182,16 @@ namespace MPIntranet.Entities {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public ItemsDataTable Items {
+            get {
+                return this.tableItems;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -263,6 +278,9 @@ namespace MPIntranet.Entities {
                 if ((ds.Tables["FASIDIBA"] != null)) {
                     base.Tables.Add(new FASIDIBADataTable(ds.Tables["FASIDIBA"]));
                 }
+                if ((ds.Tables["Items"] != null)) {
+                    base.Tables.Add(new ItemsDataTable(ds.Tables["Items"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -338,6 +356,12 @@ namespace MPIntranet.Entities {
                     this.tableFASIDIBA.InitVars();
                 }
             }
+            this.tableItems = ((ItemsDataTable)(base.Tables["Items"]));
+            if ((initTable == true)) {
+                if ((this.tableItems != null)) {
+                    this.tableItems.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -362,6 +386,8 @@ namespace MPIntranet.Entities {
             base.Tables.Add(this.tableTask);
             this.tableFASIDIBA = new FASIDIBADataTable();
             base.Tables.Add(this.tableFASIDIBA);
+            this.tableItems = new ItemsDataTable();
+            base.Tables.Add(this.tableItems);
             global::System.Data.ForeignKeyConstraint fkc;
             fkc = new global::System.Data.ForeignKeyConstraint("FK_202", new global::System.Data.DataColumn[] {
                         this.tableFASIDIBA.IDFASEDIBAColumn}, new global::System.Data.DataColumn[] {
@@ -411,6 +437,12 @@ namespace MPIntranet.Entities {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private bool ShouldSerializeFASIDIBA() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        private bool ShouldSerializeItems() {
             return false;
         }
         
@@ -489,6 +521,9 @@ namespace MPIntranet.Entities {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public delegate void FASIDIBARowChangeEventHandler(object sender, FASIDIBARowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public delegate void ItemsRowChangeEventHandler(object sender, ItemsRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -3891,6 +3926,2651 @@ namespace MPIntranet.Entities {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class ItemsDataTable : global::System.Data.TypedTableBase<ItemsRow> {
+            
+            private global::System.Data.DataColumn columntimestamp;
+            
+            private global::System.Data.DataColumn columnNo_;
+            
+            private global::System.Data.DataColumn columnNo__2;
+            
+            private global::System.Data.DataColumn columnDescription;
+            
+            private global::System.Data.DataColumn columnSearch_Description;
+            
+            private global::System.Data.DataColumn columnDescription_2;
+            
+            private global::System.Data.DataColumn columnBase_Unit_of_Measure;
+            
+            private global::System.Data.DataColumn columnPrice_Unit_Conversion;
+            
+            private global::System.Data.DataColumn columnType;
+            
+            private global::System.Data.DataColumn columnInventory_Posting_Group;
+            
+            private global::System.Data.DataColumn columnShelf_No_;
+            
+            private global::System.Data.DataColumn columnItem_Disc__Group;
+            
+            private global::System.Data.DataColumn columnAllow_Invoice_Disc_;
+            
+            private global::System.Data.DataColumn columnStatistics_Group;
+            
+            private global::System.Data.DataColumn columnCommission_Group;
+            
+            private global::System.Data.DataColumn columnUnit_Price;
+            
+            private global::System.Data.DataColumn columnPrice_Profit_Calculation;
+            
+            private global::System.Data.DataColumn columnProfit__;
+            
+            private global::System.Data.DataColumn columnCosting_Method;
+            
+            private global::System.Data.DataColumn columnUnit_Cost;
+            
+            private global::System.Data.DataColumn columnStandard_Cost;
+            
+            private global::System.Data.DataColumn columnLast_Direct_Cost;
+            
+            private global::System.Data.DataColumn columnIndirect_Cost__;
+            
+            private global::System.Data.DataColumn columnCost_is_Adjusted;
+            
+            private global::System.Data.DataColumn columnAllow_Online_Adjustment;
+            
+            private global::System.Data.DataColumn columnVendor_No_;
+            
+            private global::System.Data.DataColumn columnVendor_Item_No_;
+            
+            private global::System.Data.DataColumn columnLead_Time_Calculation;
+            
+            private global::System.Data.DataColumn columnReorder_Point;
+            
+            private global::System.Data.DataColumn columnMaximum_Inventory;
+            
+            private global::System.Data.DataColumn columnReorder_Quantity;
+            
+            private global::System.Data.DataColumn columnAlternative_Item_No_;
+            
+            private global::System.Data.DataColumn columnUnit_List_Price;
+            
+            private global::System.Data.DataColumn columnDuty_Due__;
+            
+            private global::System.Data.DataColumn columnDuty_Code;
+            
+            private global::System.Data.DataColumn columnGross_Weight;
+            
+            private global::System.Data.DataColumn columnNet_Weight;
+            
+            private global::System.Data.DataColumn columnUnits_per_Parcel;
+            
+            private global::System.Data.DataColumn columnUnit_Volume;
+            
+            private global::System.Data.DataColumn columnDurability;
+            
+            private global::System.Data.DataColumn columnFreight_Type;
+            
+            private global::System.Data.DataColumn columnTariff_No_;
+            
+            private global::System.Data.DataColumn columnDuty_Unit_Conversion;
+            
+            private global::System.Data.DataColumn columnCountry_Region_Purchased_Code;
+            
+            private global::System.Data.DataColumn columnBudget_Quantity;
+            
+            private global::System.Data.DataColumn columnBudgeted_Amount;
+            
+            private global::System.Data.DataColumn columnBudget_Profit;
+            
+            private global::System.Data.DataColumn columnBlocked;
+            
+            private global::System.Data.DataColumn columnBlock_Reason;
+            
+            private global::System.Data.DataColumn columnLast_DateTime_Modified;
+            
+            private global::System.Data.DataColumn columnLast_Date_Modified;
+            
+            private global::System.Data.DataColumn columnLast_Time_Modified;
+            
+            private global::System.Data.DataColumn columnPrice_Includes_VAT;
+            
+            private global::System.Data.DataColumn _columnVAT_Bus__Posting_Gr___Price_;
+            
+            private global::System.Data.DataColumn columnGen__Prod__Posting_Group;
+            
+            private global::System.Data.DataColumn columnPicture;
+            
+            private global::System.Data.DataColumn columnCountry_Region_of_Origin_Code;
+            
+            private global::System.Data.DataColumn columnAutomatic_Ext__Texts;
+            
+            private global::System.Data.DataColumn columnNo__Series;
+            
+            private global::System.Data.DataColumn columnTax_Group_Code;
+            
+            private global::System.Data.DataColumn columnVAT_Prod__Posting_Group;
+            
+            private global::System.Data.DataColumn columnReserve;
+            
+            private global::System.Data.DataColumn columnGlobal_Dimension_1_Code;
+            
+            private global::System.Data.DataColumn columnGlobal_Dimension_2_Code;
+            
+            private global::System.Data.DataColumn columnStockout_Warning;
+            
+            private global::System.Data.DataColumn columnPrevent_Negative_Inventory;
+            
+            private global::System.Data.DataColumn columnApplication_Wksh__User_ID;
+            
+            private global::System.Data.DataColumn columnAssembly_Policy;
+            
+            private global::System.Data.DataColumn columnGTIN;
+            
+            private global::System.Data.DataColumn columnDefault_Deferral_Template_Code;
+            
+            private global::System.Data.DataColumn _columnLow_Level_Code;
+            
+            private global::System.Data.DataColumn columnLot_Size;
+            
+            private global::System.Data.DataColumn columnSerial_Nos_;
+            
+            private global::System.Data.DataColumn columnLast_Unit_Cost_Calc__Date;
+            
+            private global::System.Data.DataColumn _columnRolled_up_Material_Cost;
+            
+            private global::System.Data.DataColumn _columnRolled_up_Capacity_Cost;
+            
+            private global::System.Data.DataColumn columnScrap__;
+            
+            private global::System.Data.DataColumn columnInventory_Value_Zero;
+            
+            private global::System.Data.DataColumn columnDiscrete_Order_Quantity;
+            
+            private global::System.Data.DataColumn columnMinimum_Order_Quantity;
+            
+            private global::System.Data.DataColumn columnMaximum_Order_Quantity;
+            
+            private global::System.Data.DataColumn columnSafety_Stock_Quantity;
+            
+            private global::System.Data.DataColumn columnOrder_Multiple;
+            
+            private global::System.Data.DataColumn columnSafety_Lead_Time;
+            
+            private global::System.Data.DataColumn columnFlushing_Method;
+            
+            private global::System.Data.DataColumn columnReplenishment_System;
+            
+            private global::System.Data.DataColumn columnRounding_Precision;
+            
+            private global::System.Data.DataColumn columnSales_Unit_of_Measure;
+            
+            private global::System.Data.DataColumn columnPurch__Unit_of_Measure;
+            
+            private global::System.Data.DataColumn columnTime_Bucket;
+            
+            private global::System.Data.DataColumn columnReordering_Policy;
+            
+            private global::System.Data.DataColumn columnInclude_Inventory;
+            
+            private global::System.Data.DataColumn columnManufacturing_Policy;
+            
+            private global::System.Data.DataColumn columnRescheduling_Period;
+            
+            private global::System.Data.DataColumn columnLot_Accumulation_Period;
+            
+            private global::System.Data.DataColumn columnDampener_Period;
+            
+            private global::System.Data.DataColumn columnDampener_Quantity;
+            
+            private global::System.Data.DataColumn columnOverflow_Level;
+            
+            private global::System.Data.DataColumn columnManufacturer_Code;
+            
+            private global::System.Data.DataColumn columnItem_Category_Code;
+            
+            private global::System.Data.DataColumn columnCreated_From_Nonstock_Item;
+            
+            private global::System.Data.DataColumn columnProduct_Group_Code;
+            
+            private global::System.Data.DataColumn columnPurchasing_Code;
+            
+            private global::System.Data.DataColumn columnService_Item_Group;
+            
+            private global::System.Data.DataColumn columnItem_Tracking_Code;
+            
+            private global::System.Data.DataColumn columnLot_Nos_;
+            
+            private global::System.Data.DataColumn columnExpiration_Calculation;
+            
+            private global::System.Data.DataColumn columnWarehouse_Class_Code;
+            
+            private global::System.Data.DataColumn columnSpecial_Equipment_Code;
+            
+            private global::System.Data.DataColumn _columnPut_away_Template_Code;
+            
+            private global::System.Data.DataColumn _columnPut_away_Unit_of_Measure_Code;
+            
+            private global::System.Data.DataColumn columnPhys_Invt_Counting_Period_Code;
+            
+            private global::System.Data.DataColumn columnLast_Counting_Period_Update;
+            
+            private global::System.Data.DataColumn _columnUse_Cross_Docking;
+            
+            private global::System.Data.DataColumn columnNext_Counting_Start_Date;
+            
+            private global::System.Data.DataColumn columnNext_Counting_End_Date;
+            
+            private global::System.Data.DataColumn columnId;
+            
+            private global::System.Data.DataColumn columnUnit_of_Measure_Id;
+            
+            private global::System.Data.DataColumn columnTax_Group_Id;
+            
+            private global::System.Data.DataColumn columnSales_Blocked;
+            
+            private global::System.Data.DataColumn columnPurchasing_Blocked;
+            
+            private global::System.Data.DataColumn columnItem_Category_Id;
+            
+            private global::System.Data.DataColumn _columnOver_Receipt_Code;
+            
+            private global::System.Data.DataColumn columnLifo_Category;
+            
+            private global::System.Data.DataColumn columnInventory_Valuation;
+            
+            private global::System.Data.DataColumn columnRouting_No_;
+            
+            private global::System.Data.DataColumn columnProduction_BOM_No_;
+            
+            private global::System.Data.DataColumn _columnSingle_Level_Material_Cost;
+            
+            private global::System.Data.DataColumn _columnSingle_Level_Capacity_Cost;
+            
+            private global::System.Data.DataColumn _columnSingle_Level_Subcontrd__Cost;
+            
+            private global::System.Data.DataColumn _columnSingle_Level_Cap__Ovhd_Cost;
+            
+            private global::System.Data.DataColumn _columnSingle_Level_Mfg__Ovhd_Cost;
+            
+            private global::System.Data.DataColumn columnOverhead_Rate;
+            
+            private global::System.Data.DataColumn _columnRolled_up_Subcontracted_Cost;
+            
+            private global::System.Data.DataColumn _columnRolled_up_Mfg__Ovhd_Cost;
+            
+            private global::System.Data.DataColumn _columnRolled_up_Cap__Overhead_Cost;
+            
+            private global::System.Data.DataColumn columnOrder_Tracking_Policy;
+            
+            private global::System.Data.DataColumn columnCritical;
+            
+            private global::System.Data.DataColumn columnCommon_Item_No_;
+            
+            private global::System.Data.DataColumn _column_systemId;
+            
+            private global::System.Data.DataColumn _column_systemCreatedAt;
+            
+            private global::System.Data.DataColumn _column_systemCreatedBy;
+            
+            private global::System.Data.DataColumn _column_systemModifiedAt;
+            
+            private global::System.Data.DataColumn _column_systemModifiedBy;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public ItemsDataTable() {
+                this.TableName = "Items";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal ItemsDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected ItemsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn timestampColumn {
+                get {
+                    return this.columntimestamp;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn No_Column {
+                get {
+                    return this.columnNo_;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn No__2Column {
+                get {
+                    return this.columnNo__2;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DescriptionColumn {
+                get {
+                    return this.columnDescription;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Search_DescriptionColumn {
+                get {
+                    return this.columnSearch_Description;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Description_2Column {
+                get {
+                    return this.columnDescription_2;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Base_Unit_of_MeasureColumn {
+                get {
+                    return this.columnBase_Unit_of_Measure;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Price_Unit_ConversionColumn {
+                get {
+                    return this.columnPrice_Unit_Conversion;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn TypeColumn {
+                get {
+                    return this.columnType;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Inventory_Posting_GroupColumn {
+                get {
+                    return this.columnInventory_Posting_Group;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Shelf_No_Column {
+                get {
+                    return this.columnShelf_No_;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Item_Disc__GroupColumn {
+                get {
+                    return this.columnItem_Disc__Group;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Allow_Invoice_Disc_Column {
+                get {
+                    return this.columnAllow_Invoice_Disc_;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Statistics_GroupColumn {
+                get {
+                    return this.columnStatistics_Group;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Commission_GroupColumn {
+                get {
+                    return this.columnCommission_Group;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Unit_PriceColumn {
+                get {
+                    return this.columnUnit_Price;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Price_Profit_CalculationColumn {
+                get {
+                    return this.columnPrice_Profit_Calculation;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Profit__Column {
+                get {
+                    return this.columnProfit__;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Costing_MethodColumn {
+                get {
+                    return this.columnCosting_Method;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Unit_CostColumn {
+                get {
+                    return this.columnUnit_Cost;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Standard_CostColumn {
+                get {
+                    return this.columnStandard_Cost;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Last_Direct_CostColumn {
+                get {
+                    return this.columnLast_Direct_Cost;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Indirect_Cost__Column {
+                get {
+                    return this.columnIndirect_Cost__;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Cost_is_AdjustedColumn {
+                get {
+                    return this.columnCost_is_Adjusted;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Allow_Online_AdjustmentColumn {
+                get {
+                    return this.columnAllow_Online_Adjustment;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Vendor_No_Column {
+                get {
+                    return this.columnVendor_No_;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Vendor_Item_No_Column {
+                get {
+                    return this.columnVendor_Item_No_;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Lead_Time_CalculationColumn {
+                get {
+                    return this.columnLead_Time_Calculation;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Reorder_PointColumn {
+                get {
+                    return this.columnReorder_Point;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Maximum_InventoryColumn {
+                get {
+                    return this.columnMaximum_Inventory;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Reorder_QuantityColumn {
+                get {
+                    return this.columnReorder_Quantity;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Alternative_Item_No_Column {
+                get {
+                    return this.columnAlternative_Item_No_;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Unit_List_PriceColumn {
+                get {
+                    return this.columnUnit_List_Price;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Duty_Due__Column {
+                get {
+                    return this.columnDuty_Due__;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Duty_CodeColumn {
+                get {
+                    return this.columnDuty_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Gross_WeightColumn {
+                get {
+                    return this.columnGross_Weight;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Net_WeightColumn {
+                get {
+                    return this.columnNet_Weight;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Units_per_ParcelColumn {
+                get {
+                    return this.columnUnits_per_Parcel;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Unit_VolumeColumn {
+                get {
+                    return this.columnUnit_Volume;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DurabilityColumn {
+                get {
+                    return this.columnDurability;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Freight_TypeColumn {
+                get {
+                    return this.columnFreight_Type;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Tariff_No_Column {
+                get {
+                    return this.columnTariff_No_;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Duty_Unit_ConversionColumn {
+                get {
+                    return this.columnDuty_Unit_Conversion;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Country_Region_Purchased_CodeColumn {
+                get {
+                    return this.columnCountry_Region_Purchased_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Budget_QuantityColumn {
+                get {
+                    return this.columnBudget_Quantity;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Budgeted_AmountColumn {
+                get {
+                    return this.columnBudgeted_Amount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Budget_ProfitColumn {
+                get {
+                    return this.columnBudget_Profit;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn BlockedColumn {
+                get {
+                    return this.columnBlocked;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Block_ReasonColumn {
+                get {
+                    return this.columnBlock_Reason;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Last_DateTime_ModifiedColumn {
+                get {
+                    return this.columnLast_DateTime_Modified;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Last_Date_ModifiedColumn {
+                get {
+                    return this.columnLast_Date_Modified;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Last_Time_ModifiedColumn {
+                get {
+                    return this.columnLast_Time_Modified;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Price_Includes_VATColumn {
+                get {
+                    return this.columnPrice_Includes_VAT;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn _VAT_Bus__Posting_Gr___Price_Column {
+                get {
+                    return this._columnVAT_Bus__Posting_Gr___Price_;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Gen__Prod__Posting_GroupColumn {
+                get {
+                    return this.columnGen__Prod__Posting_Group;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn PictureColumn {
+                get {
+                    return this.columnPicture;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Country_Region_of_Origin_CodeColumn {
+                get {
+                    return this.columnCountry_Region_of_Origin_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Automatic_Ext__TextsColumn {
+                get {
+                    return this.columnAutomatic_Ext__Texts;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn No__SeriesColumn {
+                get {
+                    return this.columnNo__Series;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Tax_Group_CodeColumn {
+                get {
+                    return this.columnTax_Group_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn VAT_Prod__Posting_GroupColumn {
+                get {
+                    return this.columnVAT_Prod__Posting_Group;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn ReserveColumn {
+                get {
+                    return this.columnReserve;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Global_Dimension_1_CodeColumn {
+                get {
+                    return this.columnGlobal_Dimension_1_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Global_Dimension_2_CodeColumn {
+                get {
+                    return this.columnGlobal_Dimension_2_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Stockout_WarningColumn {
+                get {
+                    return this.columnStockout_Warning;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Prevent_Negative_InventoryColumn {
+                get {
+                    return this.columnPrevent_Negative_Inventory;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Application_Wksh__User_IDColumn {
+                get {
+                    return this.columnApplication_Wksh__User_ID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Assembly_PolicyColumn {
+                get {
+                    return this.columnAssembly_Policy;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn GTINColumn {
+                get {
+                    return this.columnGTIN;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Default_Deferral_Template_CodeColumn {
+                get {
+                    return this.columnDefault_Deferral_Template_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn _Low_Level_CodeColumn {
+                get {
+                    return this._columnLow_Level_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Lot_SizeColumn {
+                get {
+                    return this.columnLot_Size;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Serial_Nos_Column {
+                get {
+                    return this.columnSerial_Nos_;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Last_Unit_Cost_Calc__DateColumn {
+                get {
+                    return this.columnLast_Unit_Cost_Calc__Date;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn _Rolled_up_Material_CostColumn {
+                get {
+                    return this._columnRolled_up_Material_Cost;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn _Rolled_up_Capacity_CostColumn {
+                get {
+                    return this._columnRolled_up_Capacity_Cost;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Scrap__Column {
+                get {
+                    return this.columnScrap__;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Inventory_Value_ZeroColumn {
+                get {
+                    return this.columnInventory_Value_Zero;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Discrete_Order_QuantityColumn {
+                get {
+                    return this.columnDiscrete_Order_Quantity;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Minimum_Order_QuantityColumn {
+                get {
+                    return this.columnMinimum_Order_Quantity;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Maximum_Order_QuantityColumn {
+                get {
+                    return this.columnMaximum_Order_Quantity;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Safety_Stock_QuantityColumn {
+                get {
+                    return this.columnSafety_Stock_Quantity;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Order_MultipleColumn {
+                get {
+                    return this.columnOrder_Multiple;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Safety_Lead_TimeColumn {
+                get {
+                    return this.columnSafety_Lead_Time;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Flushing_MethodColumn {
+                get {
+                    return this.columnFlushing_Method;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Replenishment_SystemColumn {
+                get {
+                    return this.columnReplenishment_System;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Rounding_PrecisionColumn {
+                get {
+                    return this.columnRounding_Precision;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Sales_Unit_of_MeasureColumn {
+                get {
+                    return this.columnSales_Unit_of_Measure;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Purch__Unit_of_MeasureColumn {
+                get {
+                    return this.columnPurch__Unit_of_Measure;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Time_BucketColumn {
+                get {
+                    return this.columnTime_Bucket;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Reordering_PolicyColumn {
+                get {
+                    return this.columnReordering_Policy;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Include_InventoryColumn {
+                get {
+                    return this.columnInclude_Inventory;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Manufacturing_PolicyColumn {
+                get {
+                    return this.columnManufacturing_Policy;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Rescheduling_PeriodColumn {
+                get {
+                    return this.columnRescheduling_Period;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Lot_Accumulation_PeriodColumn {
+                get {
+                    return this.columnLot_Accumulation_Period;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Dampener_PeriodColumn {
+                get {
+                    return this.columnDampener_Period;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Dampener_QuantityColumn {
+                get {
+                    return this.columnDampener_Quantity;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Overflow_LevelColumn {
+                get {
+                    return this.columnOverflow_Level;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Manufacturer_CodeColumn {
+                get {
+                    return this.columnManufacturer_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Item_Category_CodeColumn {
+                get {
+                    return this.columnItem_Category_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Created_From_Nonstock_ItemColumn {
+                get {
+                    return this.columnCreated_From_Nonstock_Item;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Product_Group_CodeColumn {
+                get {
+                    return this.columnProduct_Group_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Purchasing_CodeColumn {
+                get {
+                    return this.columnPurchasing_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Service_Item_GroupColumn {
+                get {
+                    return this.columnService_Item_Group;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Item_Tracking_CodeColumn {
+                get {
+                    return this.columnItem_Tracking_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Lot_Nos_Column {
+                get {
+                    return this.columnLot_Nos_;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Expiration_CalculationColumn {
+                get {
+                    return this.columnExpiration_Calculation;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Warehouse_Class_CodeColumn {
+                get {
+                    return this.columnWarehouse_Class_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Special_Equipment_CodeColumn {
+                get {
+                    return this.columnSpecial_Equipment_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn _Put_away_Template_CodeColumn {
+                get {
+                    return this._columnPut_away_Template_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn _Put_away_Unit_of_Measure_CodeColumn {
+                get {
+                    return this._columnPut_away_Unit_of_Measure_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Phys_Invt_Counting_Period_CodeColumn {
+                get {
+                    return this.columnPhys_Invt_Counting_Period_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Last_Counting_Period_UpdateColumn {
+                get {
+                    return this.columnLast_Counting_Period_Update;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn _Use_Cross_DockingColumn {
+                get {
+                    return this._columnUse_Cross_Docking;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Next_Counting_Start_DateColumn {
+                get {
+                    return this.columnNext_Counting_Start_Date;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Next_Counting_End_DateColumn {
+                get {
+                    return this.columnNext_Counting_End_Date;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IdColumn {
+                get {
+                    return this.columnId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Unit_of_Measure_IdColumn {
+                get {
+                    return this.columnUnit_of_Measure_Id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Tax_Group_IdColumn {
+                get {
+                    return this.columnTax_Group_Id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Sales_BlockedColumn {
+                get {
+                    return this.columnSales_Blocked;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Purchasing_BlockedColumn {
+                get {
+                    return this.columnPurchasing_Blocked;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Item_Category_IdColumn {
+                get {
+                    return this.columnItem_Category_Id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn _Over_Receipt_CodeColumn {
+                get {
+                    return this._columnOver_Receipt_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Lifo_CategoryColumn {
+                get {
+                    return this.columnLifo_Category;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Inventory_ValuationColumn {
+                get {
+                    return this.columnInventory_Valuation;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Routing_No_Column {
+                get {
+                    return this.columnRouting_No_;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Production_BOM_No_Column {
+                get {
+                    return this.columnProduction_BOM_No_;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn _Single_Level_Material_CostColumn {
+                get {
+                    return this._columnSingle_Level_Material_Cost;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn _Single_Level_Capacity_CostColumn {
+                get {
+                    return this._columnSingle_Level_Capacity_Cost;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn _Single_Level_Subcontrd__CostColumn {
+                get {
+                    return this._columnSingle_Level_Subcontrd__Cost;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn _Single_Level_Cap__Ovhd_CostColumn {
+                get {
+                    return this._columnSingle_Level_Cap__Ovhd_Cost;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn _Single_Level_Mfg__Ovhd_CostColumn {
+                get {
+                    return this._columnSingle_Level_Mfg__Ovhd_Cost;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Overhead_RateColumn {
+                get {
+                    return this.columnOverhead_Rate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn _Rolled_up_Subcontracted_CostColumn {
+                get {
+                    return this._columnRolled_up_Subcontracted_Cost;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn _Rolled_up_Mfg__Ovhd_CostColumn {
+                get {
+                    return this._columnRolled_up_Mfg__Ovhd_Cost;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn _Rolled_up_Cap__Overhead_CostColumn {
+                get {
+                    return this._columnRolled_up_Cap__Overhead_Cost;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Order_Tracking_PolicyColumn {
+                get {
+                    return this.columnOrder_Tracking_Policy;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CriticalColumn {
+                get {
+                    return this.columnCritical;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Common_Item_No_Column {
+                get {
+                    return this.columnCommon_Item_No_;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn @__systemIdColumn {
+                get {
+                    return this._column_systemId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn @__systemCreatedAtColumn {
+                get {
+                    return this._column_systemCreatedAt;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn @__systemCreatedByColumn {
+                get {
+                    return this._column_systemCreatedBy;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn @__systemModifiedAtColumn {
+                get {
+                    return this._column_systemModifiedAt;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn @__systemModifiedByColumn {
+                get {
+                    return this._column_systemModifiedBy;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public ItemsRow this[int index] {
+                get {
+                    return ((ItemsRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event ItemsRowChangeEventHandler ItemsRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event ItemsRowChangeEventHandler ItemsRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event ItemsRowChangeEventHandler ItemsRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event ItemsRowChangeEventHandler ItemsRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void AddItemsRow(ItemsRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public ItemsRow AddItemsRow(
+                        byte[] timestamp, 
+                        string No_, 
+                        string No__2, 
+                        string Description, 
+                        string Search_Description, 
+                        string Description_2, 
+                        string Base_Unit_of_Measure, 
+                        int Price_Unit_Conversion, 
+                        int Type, 
+                        string Inventory_Posting_Group, 
+                        string Shelf_No_, 
+                        string Item_Disc__Group, 
+                        byte Allow_Invoice_Disc_, 
+                        int Statistics_Group, 
+                        int Commission_Group, 
+                        decimal Unit_Price, 
+                        int Price_Profit_Calculation, 
+                        decimal Profit__, 
+                        int Costing_Method, 
+                        decimal Unit_Cost, 
+                        decimal Standard_Cost, 
+                        decimal Last_Direct_Cost, 
+                        decimal Indirect_Cost__, 
+                        byte Cost_is_Adjusted, 
+                        byte Allow_Online_Adjustment, 
+                        string Vendor_No_, 
+                        string Vendor_Item_No_, 
+                        string Lead_Time_Calculation, 
+                        decimal Reorder_Point, 
+                        decimal Maximum_Inventory, 
+                        decimal Reorder_Quantity, 
+                        string Alternative_Item_No_, 
+                        decimal Unit_List_Price, 
+                        decimal Duty_Due__, 
+                        string Duty_Code, 
+                        decimal Gross_Weight, 
+                        decimal Net_Weight, 
+                        decimal Units_per_Parcel, 
+                        decimal Unit_Volume, 
+                        string Durability, 
+                        string Freight_Type, 
+                        string Tariff_No_, 
+                        decimal Duty_Unit_Conversion, 
+                        string Country_Region_Purchased_Code, 
+                        decimal Budget_Quantity, 
+                        decimal Budgeted_Amount, 
+                        decimal Budget_Profit, 
+                        byte Blocked, 
+                        string Block_Reason, 
+                        System.DateTime Last_DateTime_Modified, 
+                        System.DateTime Last_Date_Modified, 
+                        System.DateTime Last_Time_Modified, 
+                        byte Price_Includes_VAT, 
+                        string _VAT_Bus__Posting_Gr___Price_, 
+                        string Gen__Prod__Posting_Group, 
+                        System.Guid Picture, 
+                        string Country_Region_of_Origin_Code, 
+                        byte Automatic_Ext__Texts, 
+                        string No__Series, 
+                        string Tax_Group_Code, 
+                        string VAT_Prod__Posting_Group, 
+                        int Reserve, 
+                        string Global_Dimension_1_Code, 
+                        string Global_Dimension_2_Code, 
+                        int Stockout_Warning, 
+                        int Prevent_Negative_Inventory, 
+                        string Application_Wksh__User_ID, 
+                        int Assembly_Policy, 
+                        string GTIN, 
+                        string Default_Deferral_Template_Code, 
+                        int _Low_Level_Code, 
+                        decimal Lot_Size, 
+                        string Serial_Nos_, 
+                        System.DateTime Last_Unit_Cost_Calc__Date, 
+                        decimal _Rolled_up_Material_Cost, 
+                        decimal _Rolled_up_Capacity_Cost, 
+                        decimal Scrap__, 
+                        byte Inventory_Value_Zero, 
+                        int Discrete_Order_Quantity, 
+                        decimal Minimum_Order_Quantity, 
+                        decimal Maximum_Order_Quantity, 
+                        decimal Safety_Stock_Quantity, 
+                        decimal Order_Multiple, 
+                        string Safety_Lead_Time, 
+                        int Flushing_Method, 
+                        int Replenishment_System, 
+                        decimal Rounding_Precision, 
+                        string Sales_Unit_of_Measure, 
+                        string Purch__Unit_of_Measure, 
+                        string Time_Bucket, 
+                        int Reordering_Policy, 
+                        byte Include_Inventory, 
+                        int Manufacturing_Policy, 
+                        string Rescheduling_Period, 
+                        string Lot_Accumulation_Period, 
+                        string Dampener_Period, 
+                        decimal Dampener_Quantity, 
+                        decimal Overflow_Level, 
+                        string Manufacturer_Code, 
+                        string Item_Category_Code, 
+                        byte Created_From_Nonstock_Item, 
+                        string Product_Group_Code, 
+                        string Purchasing_Code, 
+                        string Service_Item_Group, 
+                        string Item_Tracking_Code, 
+                        string Lot_Nos_, 
+                        string Expiration_Calculation, 
+                        string Warehouse_Class_Code, 
+                        string Special_Equipment_Code, 
+                        string _Put_away_Template_Code, 
+                        string _Put_away_Unit_of_Measure_Code, 
+                        string Phys_Invt_Counting_Period_Code, 
+                        System.DateTime Last_Counting_Period_Update, 
+                        byte _Use_Cross_Docking, 
+                        System.DateTime Next_Counting_Start_Date, 
+                        System.DateTime Next_Counting_End_Date, 
+                        System.Guid Id, 
+                        System.Guid Unit_of_Measure_Id, 
+                        System.Guid Tax_Group_Id, 
+                        byte Sales_Blocked, 
+                        byte Purchasing_Blocked, 
+                        System.Guid Item_Category_Id, 
+                        string _Over_Receipt_Code, 
+                        string Lifo_Category, 
+                        int Inventory_Valuation, 
+                        string Routing_No_, 
+                        string Production_BOM_No_, 
+                        decimal _Single_Level_Material_Cost, 
+                        decimal _Single_Level_Capacity_Cost, 
+                        decimal _Single_Level_Subcontrd__Cost, 
+                        decimal _Single_Level_Cap__Ovhd_Cost, 
+                        decimal _Single_Level_Mfg__Ovhd_Cost, 
+                        decimal Overhead_Rate, 
+                        decimal _Rolled_up_Subcontracted_Cost, 
+                        decimal _Rolled_up_Mfg__Ovhd_Cost, 
+                        decimal _Rolled_up_Cap__Overhead_Cost, 
+                        int Order_Tracking_Policy, 
+                        byte Critical, 
+                        string Common_Item_No_, 
+                        System.Guid @__systemId, 
+                        System.DateTime @__systemCreatedAt, 
+                        System.Guid @__systemCreatedBy, 
+                        System.DateTime @__systemModifiedAt, 
+                        System.Guid @__systemModifiedBy) {
+                ItemsRow rowItemsRow = ((ItemsRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        timestamp,
+                        No_,
+                        No__2,
+                        Description,
+                        Search_Description,
+                        Description_2,
+                        Base_Unit_of_Measure,
+                        Price_Unit_Conversion,
+                        Type,
+                        Inventory_Posting_Group,
+                        Shelf_No_,
+                        Item_Disc__Group,
+                        Allow_Invoice_Disc_,
+                        Statistics_Group,
+                        Commission_Group,
+                        Unit_Price,
+                        Price_Profit_Calculation,
+                        Profit__,
+                        Costing_Method,
+                        Unit_Cost,
+                        Standard_Cost,
+                        Last_Direct_Cost,
+                        Indirect_Cost__,
+                        Cost_is_Adjusted,
+                        Allow_Online_Adjustment,
+                        Vendor_No_,
+                        Vendor_Item_No_,
+                        Lead_Time_Calculation,
+                        Reorder_Point,
+                        Maximum_Inventory,
+                        Reorder_Quantity,
+                        Alternative_Item_No_,
+                        Unit_List_Price,
+                        Duty_Due__,
+                        Duty_Code,
+                        Gross_Weight,
+                        Net_Weight,
+                        Units_per_Parcel,
+                        Unit_Volume,
+                        Durability,
+                        Freight_Type,
+                        Tariff_No_,
+                        Duty_Unit_Conversion,
+                        Country_Region_Purchased_Code,
+                        Budget_Quantity,
+                        Budgeted_Amount,
+                        Budget_Profit,
+                        Blocked,
+                        Block_Reason,
+                        Last_DateTime_Modified,
+                        Last_Date_Modified,
+                        Last_Time_Modified,
+                        Price_Includes_VAT,
+                        _VAT_Bus__Posting_Gr___Price_,
+                        Gen__Prod__Posting_Group,
+                        Picture,
+                        Country_Region_of_Origin_Code,
+                        Automatic_Ext__Texts,
+                        No__Series,
+                        Tax_Group_Code,
+                        VAT_Prod__Posting_Group,
+                        Reserve,
+                        Global_Dimension_1_Code,
+                        Global_Dimension_2_Code,
+                        Stockout_Warning,
+                        Prevent_Negative_Inventory,
+                        Application_Wksh__User_ID,
+                        Assembly_Policy,
+                        GTIN,
+                        Default_Deferral_Template_Code,
+                        _Low_Level_Code,
+                        Lot_Size,
+                        Serial_Nos_,
+                        Last_Unit_Cost_Calc__Date,
+                        _Rolled_up_Material_Cost,
+                        _Rolled_up_Capacity_Cost,
+                        Scrap__,
+                        Inventory_Value_Zero,
+                        Discrete_Order_Quantity,
+                        Minimum_Order_Quantity,
+                        Maximum_Order_Quantity,
+                        Safety_Stock_Quantity,
+                        Order_Multiple,
+                        Safety_Lead_Time,
+                        Flushing_Method,
+                        Replenishment_System,
+                        Rounding_Precision,
+                        Sales_Unit_of_Measure,
+                        Purch__Unit_of_Measure,
+                        Time_Bucket,
+                        Reordering_Policy,
+                        Include_Inventory,
+                        Manufacturing_Policy,
+                        Rescheduling_Period,
+                        Lot_Accumulation_Period,
+                        Dampener_Period,
+                        Dampener_Quantity,
+                        Overflow_Level,
+                        Manufacturer_Code,
+                        Item_Category_Code,
+                        Created_From_Nonstock_Item,
+                        Product_Group_Code,
+                        Purchasing_Code,
+                        Service_Item_Group,
+                        Item_Tracking_Code,
+                        Lot_Nos_,
+                        Expiration_Calculation,
+                        Warehouse_Class_Code,
+                        Special_Equipment_Code,
+                        _Put_away_Template_Code,
+                        _Put_away_Unit_of_Measure_Code,
+                        Phys_Invt_Counting_Period_Code,
+                        Last_Counting_Period_Update,
+                        _Use_Cross_Docking,
+                        Next_Counting_Start_Date,
+                        Next_Counting_End_Date,
+                        Id,
+                        Unit_of_Measure_Id,
+                        Tax_Group_Id,
+                        Sales_Blocked,
+                        Purchasing_Blocked,
+                        Item_Category_Id,
+                        _Over_Receipt_Code,
+                        Lifo_Category,
+                        Inventory_Valuation,
+                        Routing_No_,
+                        Production_BOM_No_,
+                        _Single_Level_Material_Cost,
+                        _Single_Level_Capacity_Cost,
+                        _Single_Level_Subcontrd__Cost,
+                        _Single_Level_Cap__Ovhd_Cost,
+                        _Single_Level_Mfg__Ovhd_Cost,
+                        Overhead_Rate,
+                        _Rolled_up_Subcontracted_Cost,
+                        _Rolled_up_Mfg__Ovhd_Cost,
+                        _Rolled_up_Cap__Overhead_Cost,
+                        Order_Tracking_Policy,
+                        Critical,
+                        Common_Item_No_,
+                        @__systemId,
+                        @__systemCreatedAt,
+                        @__systemCreatedBy,
+                        @__systemModifiedAt,
+                        @__systemModifiedBy};
+                rowItemsRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowItemsRow);
+                return rowItemsRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public ItemsRow FindByNo_(string No_) {
+                return ((ItemsRow)(this.Rows.Find(new object[] {
+                            No_})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                ItemsDataTable cln = ((ItemsDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new ItemsDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal void InitVars() {
+                this.columntimestamp = base.Columns["timestamp"];
+                this.columnNo_ = base.Columns["No_"];
+                this.columnNo__2 = base.Columns["No_ 2"];
+                this.columnDescription = base.Columns["Description"];
+                this.columnSearch_Description = base.Columns["Search Description"];
+                this.columnDescription_2 = base.Columns["Description 2"];
+                this.columnBase_Unit_of_Measure = base.Columns["Base Unit of Measure"];
+                this.columnPrice_Unit_Conversion = base.Columns["Price Unit Conversion"];
+                this.columnType = base.Columns["Type"];
+                this.columnInventory_Posting_Group = base.Columns["Inventory Posting Group"];
+                this.columnShelf_No_ = base.Columns["Shelf No_"];
+                this.columnItem_Disc__Group = base.Columns["Item Disc_ Group"];
+                this.columnAllow_Invoice_Disc_ = base.Columns["Allow Invoice Disc_"];
+                this.columnStatistics_Group = base.Columns["Statistics Group"];
+                this.columnCommission_Group = base.Columns["Commission Group"];
+                this.columnUnit_Price = base.Columns["Unit Price"];
+                this.columnPrice_Profit_Calculation = base.Columns["Price_Profit Calculation"];
+                this.columnProfit__ = base.Columns["Profit _"];
+                this.columnCosting_Method = base.Columns["Costing Method"];
+                this.columnUnit_Cost = base.Columns["Unit Cost"];
+                this.columnStandard_Cost = base.Columns["Standard Cost"];
+                this.columnLast_Direct_Cost = base.Columns["Last Direct Cost"];
+                this.columnIndirect_Cost__ = base.Columns["Indirect Cost _"];
+                this.columnCost_is_Adjusted = base.Columns["Cost is Adjusted"];
+                this.columnAllow_Online_Adjustment = base.Columns["Allow Online Adjustment"];
+                this.columnVendor_No_ = base.Columns["Vendor No_"];
+                this.columnVendor_Item_No_ = base.Columns["Vendor Item No_"];
+                this.columnLead_Time_Calculation = base.Columns["Lead Time Calculation"];
+                this.columnReorder_Point = base.Columns["Reorder Point"];
+                this.columnMaximum_Inventory = base.Columns["Maximum Inventory"];
+                this.columnReorder_Quantity = base.Columns["Reorder Quantity"];
+                this.columnAlternative_Item_No_ = base.Columns["Alternative Item No_"];
+                this.columnUnit_List_Price = base.Columns["Unit List Price"];
+                this.columnDuty_Due__ = base.Columns["Duty Due _"];
+                this.columnDuty_Code = base.Columns["Duty Code"];
+                this.columnGross_Weight = base.Columns["Gross Weight"];
+                this.columnNet_Weight = base.Columns["Net Weight"];
+                this.columnUnits_per_Parcel = base.Columns["Units per Parcel"];
+                this.columnUnit_Volume = base.Columns["Unit Volume"];
+                this.columnDurability = base.Columns["Durability"];
+                this.columnFreight_Type = base.Columns["Freight Type"];
+                this.columnTariff_No_ = base.Columns["Tariff No_"];
+                this.columnDuty_Unit_Conversion = base.Columns["Duty Unit Conversion"];
+                this.columnCountry_Region_Purchased_Code = base.Columns["Country_Region Purchased Code"];
+                this.columnBudget_Quantity = base.Columns["Budget Quantity"];
+                this.columnBudgeted_Amount = base.Columns["Budgeted Amount"];
+                this.columnBudget_Profit = base.Columns["Budget Profit"];
+                this.columnBlocked = base.Columns["Blocked"];
+                this.columnBlock_Reason = base.Columns["Block Reason"];
+                this.columnLast_DateTime_Modified = base.Columns["Last DateTime Modified"];
+                this.columnLast_Date_Modified = base.Columns["Last Date Modified"];
+                this.columnLast_Time_Modified = base.Columns["Last Time Modified"];
+                this.columnPrice_Includes_VAT = base.Columns["Price Includes VAT"];
+                this._columnVAT_Bus__Posting_Gr___Price_ = base.Columns["VAT Bus_ Posting Gr_ (Price)"];
+                this.columnGen__Prod__Posting_Group = base.Columns["Gen_ Prod_ Posting Group"];
+                this.columnPicture = base.Columns["Picture"];
+                this.columnCountry_Region_of_Origin_Code = base.Columns["Country_Region of Origin Code"];
+                this.columnAutomatic_Ext__Texts = base.Columns["Automatic Ext_ Texts"];
+                this.columnNo__Series = base.Columns["No_ Series"];
+                this.columnTax_Group_Code = base.Columns["Tax Group Code"];
+                this.columnVAT_Prod__Posting_Group = base.Columns["VAT Prod_ Posting Group"];
+                this.columnReserve = base.Columns["Reserve"];
+                this.columnGlobal_Dimension_1_Code = base.Columns["Global Dimension 1 Code"];
+                this.columnGlobal_Dimension_2_Code = base.Columns["Global Dimension 2 Code"];
+                this.columnStockout_Warning = base.Columns["Stockout Warning"];
+                this.columnPrevent_Negative_Inventory = base.Columns["Prevent Negative Inventory"];
+                this.columnApplication_Wksh__User_ID = base.Columns["Application Wksh_ User ID"];
+                this.columnAssembly_Policy = base.Columns["Assembly Policy"];
+                this.columnGTIN = base.Columns["GTIN"];
+                this.columnDefault_Deferral_Template_Code = base.Columns["Default Deferral Template Code"];
+                this._columnLow_Level_Code = base.Columns["Low-Level Code"];
+                this.columnLot_Size = base.Columns["Lot Size"];
+                this.columnSerial_Nos_ = base.Columns["Serial Nos_"];
+                this.columnLast_Unit_Cost_Calc__Date = base.Columns["Last Unit Cost Calc_ Date"];
+                this._columnRolled_up_Material_Cost = base.Columns["Rolled-up Material Cost"];
+                this._columnRolled_up_Capacity_Cost = base.Columns["Rolled-up Capacity Cost"];
+                this.columnScrap__ = base.Columns["Scrap _"];
+                this.columnInventory_Value_Zero = base.Columns["Inventory Value Zero"];
+                this.columnDiscrete_Order_Quantity = base.Columns["Discrete Order Quantity"];
+                this.columnMinimum_Order_Quantity = base.Columns["Minimum Order Quantity"];
+                this.columnMaximum_Order_Quantity = base.Columns["Maximum Order Quantity"];
+                this.columnSafety_Stock_Quantity = base.Columns["Safety Stock Quantity"];
+                this.columnOrder_Multiple = base.Columns["Order Multiple"];
+                this.columnSafety_Lead_Time = base.Columns["Safety Lead Time"];
+                this.columnFlushing_Method = base.Columns["Flushing Method"];
+                this.columnReplenishment_System = base.Columns["Replenishment System"];
+                this.columnRounding_Precision = base.Columns["Rounding Precision"];
+                this.columnSales_Unit_of_Measure = base.Columns["Sales Unit of Measure"];
+                this.columnPurch__Unit_of_Measure = base.Columns["Purch_ Unit of Measure"];
+                this.columnTime_Bucket = base.Columns["Time Bucket"];
+                this.columnReordering_Policy = base.Columns["Reordering Policy"];
+                this.columnInclude_Inventory = base.Columns["Include Inventory"];
+                this.columnManufacturing_Policy = base.Columns["Manufacturing Policy"];
+                this.columnRescheduling_Period = base.Columns["Rescheduling Period"];
+                this.columnLot_Accumulation_Period = base.Columns["Lot Accumulation Period"];
+                this.columnDampener_Period = base.Columns["Dampener Period"];
+                this.columnDampener_Quantity = base.Columns["Dampener Quantity"];
+                this.columnOverflow_Level = base.Columns["Overflow Level"];
+                this.columnManufacturer_Code = base.Columns["Manufacturer Code"];
+                this.columnItem_Category_Code = base.Columns["Item Category Code"];
+                this.columnCreated_From_Nonstock_Item = base.Columns["Created From Nonstock Item"];
+                this.columnProduct_Group_Code = base.Columns["Product Group Code"];
+                this.columnPurchasing_Code = base.Columns["Purchasing Code"];
+                this.columnService_Item_Group = base.Columns["Service Item Group"];
+                this.columnItem_Tracking_Code = base.Columns["Item Tracking Code"];
+                this.columnLot_Nos_ = base.Columns["Lot Nos_"];
+                this.columnExpiration_Calculation = base.Columns["Expiration Calculation"];
+                this.columnWarehouse_Class_Code = base.Columns["Warehouse Class Code"];
+                this.columnSpecial_Equipment_Code = base.Columns["Special Equipment Code"];
+                this._columnPut_away_Template_Code = base.Columns["Put-away Template Code"];
+                this._columnPut_away_Unit_of_Measure_Code = base.Columns["Put-away Unit of Measure Code"];
+                this.columnPhys_Invt_Counting_Period_Code = base.Columns["Phys Invt Counting Period Code"];
+                this.columnLast_Counting_Period_Update = base.Columns["Last Counting Period Update"];
+                this._columnUse_Cross_Docking = base.Columns["Use Cross-Docking"];
+                this.columnNext_Counting_Start_Date = base.Columns["Next Counting Start Date"];
+                this.columnNext_Counting_End_Date = base.Columns["Next Counting End Date"];
+                this.columnId = base.Columns["Id"];
+                this.columnUnit_of_Measure_Id = base.Columns["Unit of Measure Id"];
+                this.columnTax_Group_Id = base.Columns["Tax Group Id"];
+                this.columnSales_Blocked = base.Columns["Sales Blocked"];
+                this.columnPurchasing_Blocked = base.Columns["Purchasing Blocked"];
+                this.columnItem_Category_Id = base.Columns["Item Category Id"];
+                this._columnOver_Receipt_Code = base.Columns["Over-Receipt Code"];
+                this.columnLifo_Category = base.Columns["Lifo Category"];
+                this.columnInventory_Valuation = base.Columns["Inventory Valuation"];
+                this.columnRouting_No_ = base.Columns["Routing No_"];
+                this.columnProduction_BOM_No_ = base.Columns["Production BOM No_"];
+                this._columnSingle_Level_Material_Cost = base.Columns["Single-Level Material Cost"];
+                this._columnSingle_Level_Capacity_Cost = base.Columns["Single-Level Capacity Cost"];
+                this._columnSingle_Level_Subcontrd__Cost = base.Columns["Single-Level Subcontrd_ Cost"];
+                this._columnSingle_Level_Cap__Ovhd_Cost = base.Columns["Single-Level Cap_ Ovhd Cost"];
+                this._columnSingle_Level_Mfg__Ovhd_Cost = base.Columns["Single-Level Mfg_ Ovhd Cost"];
+                this.columnOverhead_Rate = base.Columns["Overhead Rate"];
+                this._columnRolled_up_Subcontracted_Cost = base.Columns["Rolled-up Subcontracted Cost"];
+                this._columnRolled_up_Mfg__Ovhd_Cost = base.Columns["Rolled-up Mfg_ Ovhd Cost"];
+                this._columnRolled_up_Cap__Overhead_Cost = base.Columns["Rolled-up Cap_ Overhead Cost"];
+                this.columnOrder_Tracking_Policy = base.Columns["Order Tracking Policy"];
+                this.columnCritical = base.Columns["Critical"];
+                this.columnCommon_Item_No_ = base.Columns["Common Item No_"];
+                this._column_systemId = base.Columns["$systemId"];
+                this._column_systemCreatedAt = base.Columns["$systemCreatedAt"];
+                this._column_systemCreatedBy = base.Columns["$systemCreatedBy"];
+                this._column_systemModifiedAt = base.Columns["$systemModifiedAt"];
+                this._column_systemModifiedBy = base.Columns["$systemModifiedBy"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            private void InitClass() {
+                this.columntimestamp = new global::System.Data.DataColumn("timestamp", typeof(byte[]), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntimestamp);
+                this.columnNo_ = new global::System.Data.DataColumn("No_", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNo_);
+                this.columnNo__2 = new global::System.Data.DataColumn("No_ 2", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNo__2);
+                this.columnDescription = new global::System.Data.DataColumn("Description", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDescription);
+                this.columnSearch_Description = new global::System.Data.DataColumn("Search Description", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSearch_Description);
+                this.columnDescription_2 = new global::System.Data.DataColumn("Description 2", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDescription_2);
+                this.columnBase_Unit_of_Measure = new global::System.Data.DataColumn("Base Unit of Measure", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBase_Unit_of_Measure);
+                this.columnPrice_Unit_Conversion = new global::System.Data.DataColumn("Price Unit Conversion", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPrice_Unit_Conversion);
+                this.columnType = new global::System.Data.DataColumn("Type", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnType);
+                this.columnInventory_Posting_Group = new global::System.Data.DataColumn("Inventory Posting Group", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInventory_Posting_Group);
+                this.columnShelf_No_ = new global::System.Data.DataColumn("Shelf No_", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnShelf_No_);
+                this.columnItem_Disc__Group = new global::System.Data.DataColumn("Item Disc_ Group", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnItem_Disc__Group);
+                this.columnAllow_Invoice_Disc_ = new global::System.Data.DataColumn("Allow Invoice Disc_", typeof(byte), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAllow_Invoice_Disc_);
+                this.columnStatistics_Group = new global::System.Data.DataColumn("Statistics Group", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnStatistics_Group);
+                this.columnCommission_Group = new global::System.Data.DataColumn("Commission Group", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCommission_Group);
+                this.columnUnit_Price = new global::System.Data.DataColumn("Unit Price", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUnit_Price);
+                this.columnPrice_Profit_Calculation = new global::System.Data.DataColumn("Price_Profit Calculation", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPrice_Profit_Calculation);
+                this.columnProfit__ = new global::System.Data.DataColumn("Profit _", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProfit__);
+                this.columnCosting_Method = new global::System.Data.DataColumn("Costing Method", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCosting_Method);
+                this.columnUnit_Cost = new global::System.Data.DataColumn("Unit Cost", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUnit_Cost);
+                this.columnStandard_Cost = new global::System.Data.DataColumn("Standard Cost", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnStandard_Cost);
+                this.columnLast_Direct_Cost = new global::System.Data.DataColumn("Last Direct Cost", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLast_Direct_Cost);
+                this.columnIndirect_Cost__ = new global::System.Data.DataColumn("Indirect Cost _", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIndirect_Cost__);
+                this.columnCost_is_Adjusted = new global::System.Data.DataColumn("Cost is Adjusted", typeof(byte), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCost_is_Adjusted);
+                this.columnAllow_Online_Adjustment = new global::System.Data.DataColumn("Allow Online Adjustment", typeof(byte), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAllow_Online_Adjustment);
+                this.columnVendor_No_ = new global::System.Data.DataColumn("Vendor No_", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnVendor_No_);
+                this.columnVendor_Item_No_ = new global::System.Data.DataColumn("Vendor Item No_", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnVendor_Item_No_);
+                this.columnLead_Time_Calculation = new global::System.Data.DataColumn("Lead Time Calculation", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLead_Time_Calculation);
+                this.columnReorder_Point = new global::System.Data.DataColumn("Reorder Point", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnReorder_Point);
+                this.columnMaximum_Inventory = new global::System.Data.DataColumn("Maximum Inventory", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMaximum_Inventory);
+                this.columnReorder_Quantity = new global::System.Data.DataColumn("Reorder Quantity", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnReorder_Quantity);
+                this.columnAlternative_Item_No_ = new global::System.Data.DataColumn("Alternative Item No_", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAlternative_Item_No_);
+                this.columnUnit_List_Price = new global::System.Data.DataColumn("Unit List Price", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUnit_List_Price);
+                this.columnDuty_Due__ = new global::System.Data.DataColumn("Duty Due _", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDuty_Due__);
+                this.columnDuty_Code = new global::System.Data.DataColumn("Duty Code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDuty_Code);
+                this.columnGross_Weight = new global::System.Data.DataColumn("Gross Weight", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnGross_Weight);
+                this.columnNet_Weight = new global::System.Data.DataColumn("Net Weight", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNet_Weight);
+                this.columnUnits_per_Parcel = new global::System.Data.DataColumn("Units per Parcel", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUnits_per_Parcel);
+                this.columnUnit_Volume = new global::System.Data.DataColumn("Unit Volume", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUnit_Volume);
+                this.columnDurability = new global::System.Data.DataColumn("Durability", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDurability);
+                this.columnFreight_Type = new global::System.Data.DataColumn("Freight Type", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFreight_Type);
+                this.columnTariff_No_ = new global::System.Data.DataColumn("Tariff No_", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTariff_No_);
+                this.columnDuty_Unit_Conversion = new global::System.Data.DataColumn("Duty Unit Conversion", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDuty_Unit_Conversion);
+                this.columnCountry_Region_Purchased_Code = new global::System.Data.DataColumn("Country_Region Purchased Code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCountry_Region_Purchased_Code);
+                this.columnBudget_Quantity = new global::System.Data.DataColumn("Budget Quantity", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBudget_Quantity);
+                this.columnBudgeted_Amount = new global::System.Data.DataColumn("Budgeted Amount", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBudgeted_Amount);
+                this.columnBudget_Profit = new global::System.Data.DataColumn("Budget Profit", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBudget_Profit);
+                this.columnBlocked = new global::System.Data.DataColumn("Blocked", typeof(byte), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBlocked);
+                this.columnBlock_Reason = new global::System.Data.DataColumn("Block Reason", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBlock_Reason);
+                this.columnLast_DateTime_Modified = new global::System.Data.DataColumn("Last DateTime Modified", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLast_DateTime_Modified);
+                this.columnLast_Date_Modified = new global::System.Data.DataColumn("Last Date Modified", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLast_Date_Modified);
+                this.columnLast_Time_Modified = new global::System.Data.DataColumn("Last Time Modified", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLast_Time_Modified);
+                this.columnPrice_Includes_VAT = new global::System.Data.DataColumn("Price Includes VAT", typeof(byte), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPrice_Includes_VAT);
+                this._columnVAT_Bus__Posting_Gr___Price_ = new global::System.Data.DataColumn("VAT Bus_ Posting Gr_ (Price)", typeof(string), null, global::System.Data.MappingType.Element);
+                this._columnVAT_Bus__Posting_Gr___Price_.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnVAT_Bus__Posting_Gr___Price_");
+                this._columnVAT_Bus__Posting_Gr___Price_.ExtendedProperties.Add("Generator_UserColumnName", "VAT Bus_ Posting Gr_ (Price)");
+                base.Columns.Add(this._columnVAT_Bus__Posting_Gr___Price_);
+                this.columnGen__Prod__Posting_Group = new global::System.Data.DataColumn("Gen_ Prod_ Posting Group", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnGen__Prod__Posting_Group);
+                this.columnPicture = new global::System.Data.DataColumn("Picture", typeof(global::System.Guid), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPicture);
+                this.columnCountry_Region_of_Origin_Code = new global::System.Data.DataColumn("Country_Region of Origin Code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCountry_Region_of_Origin_Code);
+                this.columnAutomatic_Ext__Texts = new global::System.Data.DataColumn("Automatic Ext_ Texts", typeof(byte), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAutomatic_Ext__Texts);
+                this.columnNo__Series = new global::System.Data.DataColumn("No_ Series", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNo__Series);
+                this.columnTax_Group_Code = new global::System.Data.DataColumn("Tax Group Code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTax_Group_Code);
+                this.columnVAT_Prod__Posting_Group = new global::System.Data.DataColumn("VAT Prod_ Posting Group", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnVAT_Prod__Posting_Group);
+                this.columnReserve = new global::System.Data.DataColumn("Reserve", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnReserve);
+                this.columnGlobal_Dimension_1_Code = new global::System.Data.DataColumn("Global Dimension 1 Code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnGlobal_Dimension_1_Code);
+                this.columnGlobal_Dimension_2_Code = new global::System.Data.DataColumn("Global Dimension 2 Code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnGlobal_Dimension_2_Code);
+                this.columnStockout_Warning = new global::System.Data.DataColumn("Stockout Warning", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnStockout_Warning);
+                this.columnPrevent_Negative_Inventory = new global::System.Data.DataColumn("Prevent Negative Inventory", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPrevent_Negative_Inventory);
+                this.columnApplication_Wksh__User_ID = new global::System.Data.DataColumn("Application Wksh_ User ID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnApplication_Wksh__User_ID);
+                this.columnAssembly_Policy = new global::System.Data.DataColumn("Assembly Policy", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAssembly_Policy);
+                this.columnGTIN = new global::System.Data.DataColumn("GTIN", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnGTIN);
+                this.columnDefault_Deferral_Template_Code = new global::System.Data.DataColumn("Default Deferral Template Code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDefault_Deferral_Template_Code);
+                this._columnLow_Level_Code = new global::System.Data.DataColumn("Low-Level Code", typeof(int), null, global::System.Data.MappingType.Element);
+                this._columnLow_Level_Code.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnLow_Level_Code");
+                this._columnLow_Level_Code.ExtendedProperties.Add("Generator_UserColumnName", "Low-Level Code");
+                base.Columns.Add(this._columnLow_Level_Code);
+                this.columnLot_Size = new global::System.Data.DataColumn("Lot Size", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLot_Size);
+                this.columnSerial_Nos_ = new global::System.Data.DataColumn("Serial Nos_", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSerial_Nos_);
+                this.columnLast_Unit_Cost_Calc__Date = new global::System.Data.DataColumn("Last Unit Cost Calc_ Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLast_Unit_Cost_Calc__Date);
+                this._columnRolled_up_Material_Cost = new global::System.Data.DataColumn("Rolled-up Material Cost", typeof(decimal), null, global::System.Data.MappingType.Element);
+                this._columnRolled_up_Material_Cost.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnRolled_up_Material_Cost");
+                this._columnRolled_up_Material_Cost.ExtendedProperties.Add("Generator_UserColumnName", "Rolled-up Material Cost");
+                base.Columns.Add(this._columnRolled_up_Material_Cost);
+                this._columnRolled_up_Capacity_Cost = new global::System.Data.DataColumn("Rolled-up Capacity Cost", typeof(decimal), null, global::System.Data.MappingType.Element);
+                this._columnRolled_up_Capacity_Cost.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnRolled_up_Capacity_Cost");
+                this._columnRolled_up_Capacity_Cost.ExtendedProperties.Add("Generator_UserColumnName", "Rolled-up Capacity Cost");
+                base.Columns.Add(this._columnRolled_up_Capacity_Cost);
+                this.columnScrap__ = new global::System.Data.DataColumn("Scrap _", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnScrap__);
+                this.columnInventory_Value_Zero = new global::System.Data.DataColumn("Inventory Value Zero", typeof(byte), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInventory_Value_Zero);
+                this.columnDiscrete_Order_Quantity = new global::System.Data.DataColumn("Discrete Order Quantity", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDiscrete_Order_Quantity);
+                this.columnMinimum_Order_Quantity = new global::System.Data.DataColumn("Minimum Order Quantity", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMinimum_Order_Quantity);
+                this.columnMaximum_Order_Quantity = new global::System.Data.DataColumn("Maximum Order Quantity", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMaximum_Order_Quantity);
+                this.columnSafety_Stock_Quantity = new global::System.Data.DataColumn("Safety Stock Quantity", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSafety_Stock_Quantity);
+                this.columnOrder_Multiple = new global::System.Data.DataColumn("Order Multiple", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOrder_Multiple);
+                this.columnSafety_Lead_Time = new global::System.Data.DataColumn("Safety Lead Time", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSafety_Lead_Time);
+                this.columnFlushing_Method = new global::System.Data.DataColumn("Flushing Method", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFlushing_Method);
+                this.columnReplenishment_System = new global::System.Data.DataColumn("Replenishment System", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnReplenishment_System);
+                this.columnRounding_Precision = new global::System.Data.DataColumn("Rounding Precision", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRounding_Precision);
+                this.columnSales_Unit_of_Measure = new global::System.Data.DataColumn("Sales Unit of Measure", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSales_Unit_of_Measure);
+                this.columnPurch__Unit_of_Measure = new global::System.Data.DataColumn("Purch_ Unit of Measure", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPurch__Unit_of_Measure);
+                this.columnTime_Bucket = new global::System.Data.DataColumn("Time Bucket", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTime_Bucket);
+                this.columnReordering_Policy = new global::System.Data.DataColumn("Reordering Policy", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnReordering_Policy);
+                this.columnInclude_Inventory = new global::System.Data.DataColumn("Include Inventory", typeof(byte), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInclude_Inventory);
+                this.columnManufacturing_Policy = new global::System.Data.DataColumn("Manufacturing Policy", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnManufacturing_Policy);
+                this.columnRescheduling_Period = new global::System.Data.DataColumn("Rescheduling Period", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRescheduling_Period);
+                this.columnLot_Accumulation_Period = new global::System.Data.DataColumn("Lot Accumulation Period", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLot_Accumulation_Period);
+                this.columnDampener_Period = new global::System.Data.DataColumn("Dampener Period", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDampener_Period);
+                this.columnDampener_Quantity = new global::System.Data.DataColumn("Dampener Quantity", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDampener_Quantity);
+                this.columnOverflow_Level = new global::System.Data.DataColumn("Overflow Level", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOverflow_Level);
+                this.columnManufacturer_Code = new global::System.Data.DataColumn("Manufacturer Code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnManufacturer_Code);
+                this.columnItem_Category_Code = new global::System.Data.DataColumn("Item Category Code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnItem_Category_Code);
+                this.columnCreated_From_Nonstock_Item = new global::System.Data.DataColumn("Created From Nonstock Item", typeof(byte), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCreated_From_Nonstock_Item);
+                this.columnProduct_Group_Code = new global::System.Data.DataColumn("Product Group Code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProduct_Group_Code);
+                this.columnPurchasing_Code = new global::System.Data.DataColumn("Purchasing Code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPurchasing_Code);
+                this.columnService_Item_Group = new global::System.Data.DataColumn("Service Item Group", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnService_Item_Group);
+                this.columnItem_Tracking_Code = new global::System.Data.DataColumn("Item Tracking Code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnItem_Tracking_Code);
+                this.columnLot_Nos_ = new global::System.Data.DataColumn("Lot Nos_", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLot_Nos_);
+                this.columnExpiration_Calculation = new global::System.Data.DataColumn("Expiration Calculation", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnExpiration_Calculation);
+                this.columnWarehouse_Class_Code = new global::System.Data.DataColumn("Warehouse Class Code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnWarehouse_Class_Code);
+                this.columnSpecial_Equipment_Code = new global::System.Data.DataColumn("Special Equipment Code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSpecial_Equipment_Code);
+                this._columnPut_away_Template_Code = new global::System.Data.DataColumn("Put-away Template Code", typeof(string), null, global::System.Data.MappingType.Element);
+                this._columnPut_away_Template_Code.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnPut_away_Template_Code");
+                this._columnPut_away_Template_Code.ExtendedProperties.Add("Generator_UserColumnName", "Put-away Template Code");
+                base.Columns.Add(this._columnPut_away_Template_Code);
+                this._columnPut_away_Unit_of_Measure_Code = new global::System.Data.DataColumn("Put-away Unit of Measure Code", typeof(string), null, global::System.Data.MappingType.Element);
+                this._columnPut_away_Unit_of_Measure_Code.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnPut_away_Unit_of_Measure_Code");
+                this._columnPut_away_Unit_of_Measure_Code.ExtendedProperties.Add("Generator_UserColumnName", "Put-away Unit of Measure Code");
+                base.Columns.Add(this._columnPut_away_Unit_of_Measure_Code);
+                this.columnPhys_Invt_Counting_Period_Code = new global::System.Data.DataColumn("Phys Invt Counting Period Code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPhys_Invt_Counting_Period_Code);
+                this.columnLast_Counting_Period_Update = new global::System.Data.DataColumn("Last Counting Period Update", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLast_Counting_Period_Update);
+                this._columnUse_Cross_Docking = new global::System.Data.DataColumn("Use Cross-Docking", typeof(byte), null, global::System.Data.MappingType.Element);
+                this._columnUse_Cross_Docking.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnUse_Cross_Docking");
+                this._columnUse_Cross_Docking.ExtendedProperties.Add("Generator_UserColumnName", "Use Cross-Docking");
+                base.Columns.Add(this._columnUse_Cross_Docking);
+                this.columnNext_Counting_Start_Date = new global::System.Data.DataColumn("Next Counting Start Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNext_Counting_Start_Date);
+                this.columnNext_Counting_End_Date = new global::System.Data.DataColumn("Next Counting End Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNext_Counting_End_Date);
+                this.columnId = new global::System.Data.DataColumn("Id", typeof(global::System.Guid), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnId);
+                this.columnUnit_of_Measure_Id = new global::System.Data.DataColumn("Unit of Measure Id", typeof(global::System.Guid), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUnit_of_Measure_Id);
+                this.columnTax_Group_Id = new global::System.Data.DataColumn("Tax Group Id", typeof(global::System.Guid), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTax_Group_Id);
+                this.columnSales_Blocked = new global::System.Data.DataColumn("Sales Blocked", typeof(byte), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSales_Blocked);
+                this.columnPurchasing_Blocked = new global::System.Data.DataColumn("Purchasing Blocked", typeof(byte), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPurchasing_Blocked);
+                this.columnItem_Category_Id = new global::System.Data.DataColumn("Item Category Id", typeof(global::System.Guid), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnItem_Category_Id);
+                this._columnOver_Receipt_Code = new global::System.Data.DataColumn("Over-Receipt Code", typeof(string), null, global::System.Data.MappingType.Element);
+                this._columnOver_Receipt_Code.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnOver_Receipt_Code");
+                this._columnOver_Receipt_Code.ExtendedProperties.Add("Generator_UserColumnName", "Over-Receipt Code");
+                base.Columns.Add(this._columnOver_Receipt_Code);
+                this.columnLifo_Category = new global::System.Data.DataColumn("Lifo Category", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLifo_Category);
+                this.columnInventory_Valuation = new global::System.Data.DataColumn("Inventory Valuation", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInventory_Valuation);
+                this.columnRouting_No_ = new global::System.Data.DataColumn("Routing No_", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRouting_No_);
+                this.columnProduction_BOM_No_ = new global::System.Data.DataColumn("Production BOM No_", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProduction_BOM_No_);
+                this._columnSingle_Level_Material_Cost = new global::System.Data.DataColumn("Single-Level Material Cost", typeof(decimal), null, global::System.Data.MappingType.Element);
+                this._columnSingle_Level_Material_Cost.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnSingle_Level_Material_Cost");
+                this._columnSingle_Level_Material_Cost.ExtendedProperties.Add("Generator_UserColumnName", "Single-Level Material Cost");
+                base.Columns.Add(this._columnSingle_Level_Material_Cost);
+                this._columnSingle_Level_Capacity_Cost = new global::System.Data.DataColumn("Single-Level Capacity Cost", typeof(decimal), null, global::System.Data.MappingType.Element);
+                this._columnSingle_Level_Capacity_Cost.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnSingle_Level_Capacity_Cost");
+                this._columnSingle_Level_Capacity_Cost.ExtendedProperties.Add("Generator_UserColumnName", "Single-Level Capacity Cost");
+                base.Columns.Add(this._columnSingle_Level_Capacity_Cost);
+                this._columnSingle_Level_Subcontrd__Cost = new global::System.Data.DataColumn("Single-Level Subcontrd_ Cost", typeof(decimal), null, global::System.Data.MappingType.Element);
+                this._columnSingle_Level_Subcontrd__Cost.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnSingle_Level_Subcontrd__Cost");
+                this._columnSingle_Level_Subcontrd__Cost.ExtendedProperties.Add("Generator_UserColumnName", "Single-Level Subcontrd_ Cost");
+                base.Columns.Add(this._columnSingle_Level_Subcontrd__Cost);
+                this._columnSingle_Level_Cap__Ovhd_Cost = new global::System.Data.DataColumn("Single-Level Cap_ Ovhd Cost", typeof(decimal), null, global::System.Data.MappingType.Element);
+                this._columnSingle_Level_Cap__Ovhd_Cost.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnSingle_Level_Cap__Ovhd_Cost");
+                this._columnSingle_Level_Cap__Ovhd_Cost.ExtendedProperties.Add("Generator_UserColumnName", "Single-Level Cap_ Ovhd Cost");
+                base.Columns.Add(this._columnSingle_Level_Cap__Ovhd_Cost);
+                this._columnSingle_Level_Mfg__Ovhd_Cost = new global::System.Data.DataColumn("Single-Level Mfg_ Ovhd Cost", typeof(decimal), null, global::System.Data.MappingType.Element);
+                this._columnSingle_Level_Mfg__Ovhd_Cost.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnSingle_Level_Mfg__Ovhd_Cost");
+                this._columnSingle_Level_Mfg__Ovhd_Cost.ExtendedProperties.Add("Generator_UserColumnName", "Single-Level Mfg_ Ovhd Cost");
+                base.Columns.Add(this._columnSingle_Level_Mfg__Ovhd_Cost);
+                this.columnOverhead_Rate = new global::System.Data.DataColumn("Overhead Rate", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOverhead_Rate);
+                this._columnRolled_up_Subcontracted_Cost = new global::System.Data.DataColumn("Rolled-up Subcontracted Cost", typeof(decimal), null, global::System.Data.MappingType.Element);
+                this._columnRolled_up_Subcontracted_Cost.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnRolled_up_Subcontracted_Cost");
+                this._columnRolled_up_Subcontracted_Cost.ExtendedProperties.Add("Generator_UserColumnName", "Rolled-up Subcontracted Cost");
+                base.Columns.Add(this._columnRolled_up_Subcontracted_Cost);
+                this._columnRolled_up_Mfg__Ovhd_Cost = new global::System.Data.DataColumn("Rolled-up Mfg_ Ovhd Cost", typeof(decimal), null, global::System.Data.MappingType.Element);
+                this._columnRolled_up_Mfg__Ovhd_Cost.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnRolled_up_Mfg__Ovhd_Cost");
+                this._columnRolled_up_Mfg__Ovhd_Cost.ExtendedProperties.Add("Generator_UserColumnName", "Rolled-up Mfg_ Ovhd Cost");
+                base.Columns.Add(this._columnRolled_up_Mfg__Ovhd_Cost);
+                this._columnRolled_up_Cap__Overhead_Cost = new global::System.Data.DataColumn("Rolled-up Cap_ Overhead Cost", typeof(decimal), null, global::System.Data.MappingType.Element);
+                this._columnRolled_up_Cap__Overhead_Cost.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnRolled_up_Cap__Overhead_Cost");
+                this._columnRolled_up_Cap__Overhead_Cost.ExtendedProperties.Add("Generator_UserColumnName", "Rolled-up Cap_ Overhead Cost");
+                base.Columns.Add(this._columnRolled_up_Cap__Overhead_Cost);
+                this.columnOrder_Tracking_Policy = new global::System.Data.DataColumn("Order Tracking Policy", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOrder_Tracking_Policy);
+                this.columnCritical = new global::System.Data.DataColumn("Critical", typeof(byte), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCritical);
+                this.columnCommon_Item_No_ = new global::System.Data.DataColumn("Common Item No_", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCommon_Item_No_);
+                this._column_systemId = new global::System.Data.DataColumn("$systemId", typeof(global::System.Guid), null, global::System.Data.MappingType.Element);
+                this._column_systemId.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_column_systemId");
+                this._column_systemId.ExtendedProperties.Add("Generator_UserColumnName", "$systemId");
+                base.Columns.Add(this._column_systemId);
+                this._column_systemCreatedAt = new global::System.Data.DataColumn("$systemCreatedAt", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                this._column_systemCreatedAt.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_column_systemCreatedAt");
+                this._column_systemCreatedAt.ExtendedProperties.Add("Generator_UserColumnName", "$systemCreatedAt");
+                base.Columns.Add(this._column_systemCreatedAt);
+                this._column_systemCreatedBy = new global::System.Data.DataColumn("$systemCreatedBy", typeof(global::System.Guid), null, global::System.Data.MappingType.Element);
+                this._column_systemCreatedBy.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_column_systemCreatedBy");
+                this._column_systemCreatedBy.ExtendedProperties.Add("Generator_UserColumnName", "$systemCreatedBy");
+                base.Columns.Add(this._column_systemCreatedBy);
+                this._column_systemModifiedAt = new global::System.Data.DataColumn("$systemModifiedAt", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                this._column_systemModifiedAt.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_column_systemModifiedAt");
+                this._column_systemModifiedAt.ExtendedProperties.Add("Generator_UserColumnName", "$systemModifiedAt");
+                base.Columns.Add(this._column_systemModifiedAt);
+                this._column_systemModifiedBy = new global::System.Data.DataColumn("$systemModifiedBy", typeof(global::System.Guid), null, global::System.Data.MappingType.Element);
+                this._column_systemModifiedBy.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_column_systemModifiedBy");
+                this._column_systemModifiedBy.ExtendedProperties.Add("Generator_UserColumnName", "$systemModifiedBy");
+                base.Columns.Add(this._column_systemModifiedBy);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnNo_}, true));
+                this.columntimestamp.ReadOnly = true;
+                this.columnNo_.AllowDBNull = false;
+                this.columnNo_.Unique = true;
+                this.columnNo_.MaxLength = 20;
+                this.columnNo__2.AllowDBNull = false;
+                this.columnNo__2.MaxLength = 20;
+                this.columnDescription.AllowDBNull = false;
+                this.columnDescription.MaxLength = 100;
+                this.columnSearch_Description.AllowDBNull = false;
+                this.columnSearch_Description.MaxLength = 100;
+                this.columnDescription_2.AllowDBNull = false;
+                this.columnDescription_2.MaxLength = 50;
+                this.columnBase_Unit_of_Measure.AllowDBNull = false;
+                this.columnBase_Unit_of_Measure.MaxLength = 10;
+                this.columnPrice_Unit_Conversion.AllowDBNull = false;
+                this.columnType.AllowDBNull = false;
+                this.columnInventory_Posting_Group.AllowDBNull = false;
+                this.columnInventory_Posting_Group.MaxLength = 20;
+                this.columnShelf_No_.AllowDBNull = false;
+                this.columnShelf_No_.MaxLength = 10;
+                this.columnItem_Disc__Group.AllowDBNull = false;
+                this.columnItem_Disc__Group.MaxLength = 20;
+                this.columnAllow_Invoice_Disc_.AllowDBNull = false;
+                this.columnStatistics_Group.AllowDBNull = false;
+                this.columnCommission_Group.AllowDBNull = false;
+                this.columnUnit_Price.AllowDBNull = false;
+                this.columnPrice_Profit_Calculation.AllowDBNull = false;
+                this.columnProfit__.AllowDBNull = false;
+                this.columnCosting_Method.AllowDBNull = false;
+                this.columnUnit_Cost.AllowDBNull = false;
+                this.columnStandard_Cost.AllowDBNull = false;
+                this.columnLast_Direct_Cost.AllowDBNull = false;
+                this.columnIndirect_Cost__.AllowDBNull = false;
+                this.columnCost_is_Adjusted.AllowDBNull = false;
+                this.columnAllow_Online_Adjustment.AllowDBNull = false;
+                this.columnVendor_No_.AllowDBNull = false;
+                this.columnVendor_No_.MaxLength = 20;
+                this.columnVendor_Item_No_.AllowDBNull = false;
+                this.columnVendor_Item_No_.MaxLength = 50;
+                this.columnLead_Time_Calculation.AllowDBNull = false;
+                this.columnLead_Time_Calculation.MaxLength = 32;
+                this.columnReorder_Point.AllowDBNull = false;
+                this.columnMaximum_Inventory.AllowDBNull = false;
+                this.columnReorder_Quantity.AllowDBNull = false;
+                this.columnAlternative_Item_No_.AllowDBNull = false;
+                this.columnAlternative_Item_No_.MaxLength = 20;
+                this.columnUnit_List_Price.AllowDBNull = false;
+                this.columnDuty_Due__.AllowDBNull = false;
+                this.columnDuty_Code.AllowDBNull = false;
+                this.columnDuty_Code.MaxLength = 10;
+                this.columnGross_Weight.AllowDBNull = false;
+                this.columnNet_Weight.AllowDBNull = false;
+                this.columnUnits_per_Parcel.AllowDBNull = false;
+                this.columnUnit_Volume.AllowDBNull = false;
+                this.columnDurability.AllowDBNull = false;
+                this.columnDurability.MaxLength = 10;
+                this.columnFreight_Type.AllowDBNull = false;
+                this.columnFreight_Type.MaxLength = 10;
+                this.columnTariff_No_.AllowDBNull = false;
+                this.columnTariff_No_.MaxLength = 20;
+                this.columnDuty_Unit_Conversion.AllowDBNull = false;
+                this.columnCountry_Region_Purchased_Code.AllowDBNull = false;
+                this.columnCountry_Region_Purchased_Code.MaxLength = 10;
+                this.columnBudget_Quantity.AllowDBNull = false;
+                this.columnBudgeted_Amount.AllowDBNull = false;
+                this.columnBudget_Profit.AllowDBNull = false;
+                this.columnBlocked.AllowDBNull = false;
+                this.columnBlock_Reason.AllowDBNull = false;
+                this.columnBlock_Reason.MaxLength = 250;
+                this.columnLast_DateTime_Modified.AllowDBNull = false;
+                this.columnLast_Date_Modified.AllowDBNull = false;
+                this.columnLast_Time_Modified.AllowDBNull = false;
+                this.columnPrice_Includes_VAT.AllowDBNull = false;
+                this._columnVAT_Bus__Posting_Gr___Price_.AllowDBNull = false;
+                this._columnVAT_Bus__Posting_Gr___Price_.MaxLength = 20;
+                this.columnGen__Prod__Posting_Group.AllowDBNull = false;
+                this.columnGen__Prod__Posting_Group.MaxLength = 20;
+                this.columnPicture.AllowDBNull = false;
+                this.columnCountry_Region_of_Origin_Code.AllowDBNull = false;
+                this.columnCountry_Region_of_Origin_Code.MaxLength = 10;
+                this.columnAutomatic_Ext__Texts.AllowDBNull = false;
+                this.columnNo__Series.AllowDBNull = false;
+                this.columnNo__Series.MaxLength = 20;
+                this.columnTax_Group_Code.AllowDBNull = false;
+                this.columnTax_Group_Code.MaxLength = 20;
+                this.columnVAT_Prod__Posting_Group.AllowDBNull = false;
+                this.columnVAT_Prod__Posting_Group.MaxLength = 20;
+                this.columnReserve.AllowDBNull = false;
+                this.columnGlobal_Dimension_1_Code.AllowDBNull = false;
+                this.columnGlobal_Dimension_1_Code.MaxLength = 20;
+                this.columnGlobal_Dimension_2_Code.AllowDBNull = false;
+                this.columnGlobal_Dimension_2_Code.MaxLength = 20;
+                this.columnStockout_Warning.AllowDBNull = false;
+                this.columnPrevent_Negative_Inventory.AllowDBNull = false;
+                this.columnApplication_Wksh__User_ID.AllowDBNull = false;
+                this.columnApplication_Wksh__User_ID.MaxLength = 128;
+                this.columnAssembly_Policy.AllowDBNull = false;
+                this.columnGTIN.AllowDBNull = false;
+                this.columnGTIN.MaxLength = 14;
+                this.columnDefault_Deferral_Template_Code.AllowDBNull = false;
+                this.columnDefault_Deferral_Template_Code.MaxLength = 10;
+                this._columnLow_Level_Code.AllowDBNull = false;
+                this.columnLot_Size.AllowDBNull = false;
+                this.columnSerial_Nos_.AllowDBNull = false;
+                this.columnSerial_Nos_.MaxLength = 20;
+                this.columnLast_Unit_Cost_Calc__Date.AllowDBNull = false;
+                this._columnRolled_up_Material_Cost.AllowDBNull = false;
+                this._columnRolled_up_Capacity_Cost.AllowDBNull = false;
+                this.columnScrap__.AllowDBNull = false;
+                this.columnInventory_Value_Zero.AllowDBNull = false;
+                this.columnDiscrete_Order_Quantity.AllowDBNull = false;
+                this.columnMinimum_Order_Quantity.AllowDBNull = false;
+                this.columnMaximum_Order_Quantity.AllowDBNull = false;
+                this.columnSafety_Stock_Quantity.AllowDBNull = false;
+                this.columnOrder_Multiple.AllowDBNull = false;
+                this.columnSafety_Lead_Time.AllowDBNull = false;
+                this.columnSafety_Lead_Time.MaxLength = 32;
+                this.columnFlushing_Method.AllowDBNull = false;
+                this.columnReplenishment_System.AllowDBNull = false;
+                this.columnRounding_Precision.AllowDBNull = false;
+                this.columnSales_Unit_of_Measure.AllowDBNull = false;
+                this.columnSales_Unit_of_Measure.MaxLength = 10;
+                this.columnPurch__Unit_of_Measure.AllowDBNull = false;
+                this.columnPurch__Unit_of_Measure.MaxLength = 10;
+                this.columnTime_Bucket.AllowDBNull = false;
+                this.columnTime_Bucket.MaxLength = 32;
+                this.columnReordering_Policy.AllowDBNull = false;
+                this.columnInclude_Inventory.AllowDBNull = false;
+                this.columnManufacturing_Policy.AllowDBNull = false;
+                this.columnRescheduling_Period.AllowDBNull = false;
+                this.columnRescheduling_Period.MaxLength = 32;
+                this.columnLot_Accumulation_Period.AllowDBNull = false;
+                this.columnLot_Accumulation_Period.MaxLength = 32;
+                this.columnDampener_Period.AllowDBNull = false;
+                this.columnDampener_Period.MaxLength = 32;
+                this.columnDampener_Quantity.AllowDBNull = false;
+                this.columnOverflow_Level.AllowDBNull = false;
+                this.columnManufacturer_Code.AllowDBNull = false;
+                this.columnManufacturer_Code.MaxLength = 10;
+                this.columnItem_Category_Code.AllowDBNull = false;
+                this.columnItem_Category_Code.MaxLength = 20;
+                this.columnCreated_From_Nonstock_Item.AllowDBNull = false;
+                this.columnProduct_Group_Code.AllowDBNull = false;
+                this.columnProduct_Group_Code.MaxLength = 10;
+                this.columnPurchasing_Code.AllowDBNull = false;
+                this.columnPurchasing_Code.MaxLength = 10;
+                this.columnService_Item_Group.AllowDBNull = false;
+                this.columnService_Item_Group.MaxLength = 10;
+                this.columnItem_Tracking_Code.AllowDBNull = false;
+                this.columnItem_Tracking_Code.MaxLength = 10;
+                this.columnLot_Nos_.AllowDBNull = false;
+                this.columnLot_Nos_.MaxLength = 20;
+                this.columnExpiration_Calculation.AllowDBNull = false;
+                this.columnExpiration_Calculation.MaxLength = 32;
+                this.columnWarehouse_Class_Code.AllowDBNull = false;
+                this.columnWarehouse_Class_Code.MaxLength = 10;
+                this.columnSpecial_Equipment_Code.AllowDBNull = false;
+                this.columnSpecial_Equipment_Code.MaxLength = 10;
+                this._columnPut_away_Template_Code.AllowDBNull = false;
+                this._columnPut_away_Template_Code.MaxLength = 10;
+                this._columnPut_away_Unit_of_Measure_Code.AllowDBNull = false;
+                this._columnPut_away_Unit_of_Measure_Code.MaxLength = 10;
+                this.columnPhys_Invt_Counting_Period_Code.AllowDBNull = false;
+                this.columnPhys_Invt_Counting_Period_Code.MaxLength = 10;
+                this.columnLast_Counting_Period_Update.AllowDBNull = false;
+                this._columnUse_Cross_Docking.AllowDBNull = false;
+                this.columnNext_Counting_Start_Date.AllowDBNull = false;
+                this.columnNext_Counting_End_Date.AllowDBNull = false;
+                this.columnId.AllowDBNull = false;
+                this.columnUnit_of_Measure_Id.AllowDBNull = false;
+                this.columnTax_Group_Id.AllowDBNull = false;
+                this.columnSales_Blocked.AllowDBNull = false;
+                this.columnPurchasing_Blocked.AllowDBNull = false;
+                this.columnItem_Category_Id.AllowDBNull = false;
+                this._columnOver_Receipt_Code.AllowDBNull = false;
+                this._columnOver_Receipt_Code.MaxLength = 20;
+                this.columnLifo_Category.AllowDBNull = false;
+                this.columnLifo_Category.MaxLength = 20;
+                this.columnInventory_Valuation.AllowDBNull = false;
+                this.columnRouting_No_.AllowDBNull = false;
+                this.columnRouting_No_.MaxLength = 20;
+                this.columnProduction_BOM_No_.AllowDBNull = false;
+                this.columnProduction_BOM_No_.MaxLength = 20;
+                this._columnSingle_Level_Material_Cost.AllowDBNull = false;
+                this._columnSingle_Level_Capacity_Cost.AllowDBNull = false;
+                this._columnSingle_Level_Subcontrd__Cost.AllowDBNull = false;
+                this._columnSingle_Level_Cap__Ovhd_Cost.AllowDBNull = false;
+                this._columnSingle_Level_Mfg__Ovhd_Cost.AllowDBNull = false;
+                this.columnOverhead_Rate.AllowDBNull = false;
+                this._columnRolled_up_Subcontracted_Cost.AllowDBNull = false;
+                this._columnRolled_up_Mfg__Ovhd_Cost.AllowDBNull = false;
+                this._columnRolled_up_Cap__Overhead_Cost.AllowDBNull = false;
+                this.columnOrder_Tracking_Policy.AllowDBNull = false;
+                this.columnCritical.AllowDBNull = false;
+                this.columnCommon_Item_No_.AllowDBNull = false;
+                this.columnCommon_Item_No_.MaxLength = 20;
+                this._column_systemId.AllowDBNull = false;
+                this._column_systemCreatedAt.AllowDBNull = false;
+                this._column_systemCreatedBy.AllowDBNull = false;
+                this._column_systemModifiedAt.AllowDBNull = false;
+                this._column_systemModifiedBy.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public ItemsRow NewItemsRow() {
+                return ((ItemsRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new ItemsRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(ItemsRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.ItemsRowChanged != null)) {
+                    this.ItemsRowChanged(this, new ItemsRowChangeEvent(((ItemsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.ItemsRowChanging != null)) {
+                    this.ItemsRowChanging(this, new ItemsRowChangeEvent(((ItemsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.ItemsRowDeleted != null)) {
+                    this.ItemsRowDeleted(this, new ItemsRowChangeEvent(((ItemsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.ItemsRowDeleting != null)) {
+                    this.ItemsRowDeleting(this, new ItemsRowChangeEvent(((ItemsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void RemoveItemsRow(ItemsRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                ArticoliDS ds = new ArticoliDS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "ItemsDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class ARTICOLIRow : global::System.Data.DataRow {
@@ -5497,6 +8177,1622 @@ namespace MPIntranet.Entities {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class ItemsRow : global::System.Data.DataRow {
+            
+            private ItemsDataTable tableItems;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal ItemsRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableItems = ((ItemsDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public byte[] timestamp {
+                get {
+                    try {
+                        return ((byte[])(this[this.tableItems.timestampColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'timestamp\' in table \'Items\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableItems.timestampColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string No_ {
+                get {
+                    return ((string)(this[this.tableItems.No_Column]));
+                }
+                set {
+                    this[this.tableItems.No_Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string No__2 {
+                get {
+                    return ((string)(this[this.tableItems.No__2Column]));
+                }
+                set {
+                    this[this.tableItems.No__2Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Description {
+                get {
+                    return ((string)(this[this.tableItems.DescriptionColumn]));
+                }
+                set {
+                    this[this.tableItems.DescriptionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Search_Description {
+                get {
+                    return ((string)(this[this.tableItems.Search_DescriptionColumn]));
+                }
+                set {
+                    this[this.tableItems.Search_DescriptionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Description_2 {
+                get {
+                    return ((string)(this[this.tableItems.Description_2Column]));
+                }
+                set {
+                    this[this.tableItems.Description_2Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Base_Unit_of_Measure {
+                get {
+                    return ((string)(this[this.tableItems.Base_Unit_of_MeasureColumn]));
+                }
+                set {
+                    this[this.tableItems.Base_Unit_of_MeasureColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int Price_Unit_Conversion {
+                get {
+                    return ((int)(this[this.tableItems.Price_Unit_ConversionColumn]));
+                }
+                set {
+                    this[this.tableItems.Price_Unit_ConversionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int Type {
+                get {
+                    return ((int)(this[this.tableItems.TypeColumn]));
+                }
+                set {
+                    this[this.tableItems.TypeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Inventory_Posting_Group {
+                get {
+                    return ((string)(this[this.tableItems.Inventory_Posting_GroupColumn]));
+                }
+                set {
+                    this[this.tableItems.Inventory_Posting_GroupColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Shelf_No_ {
+                get {
+                    return ((string)(this[this.tableItems.Shelf_No_Column]));
+                }
+                set {
+                    this[this.tableItems.Shelf_No_Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Item_Disc__Group {
+                get {
+                    return ((string)(this[this.tableItems.Item_Disc__GroupColumn]));
+                }
+                set {
+                    this[this.tableItems.Item_Disc__GroupColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public byte Allow_Invoice_Disc_ {
+                get {
+                    return ((byte)(this[this.tableItems.Allow_Invoice_Disc_Column]));
+                }
+                set {
+                    this[this.tableItems.Allow_Invoice_Disc_Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int Statistics_Group {
+                get {
+                    return ((int)(this[this.tableItems.Statistics_GroupColumn]));
+                }
+                set {
+                    this[this.tableItems.Statistics_GroupColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int Commission_Group {
+                get {
+                    return ((int)(this[this.tableItems.Commission_GroupColumn]));
+                }
+                set {
+                    this[this.tableItems.Commission_GroupColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Unit_Price {
+                get {
+                    return ((decimal)(this[this.tableItems.Unit_PriceColumn]));
+                }
+                set {
+                    this[this.tableItems.Unit_PriceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int Price_Profit_Calculation {
+                get {
+                    return ((int)(this[this.tableItems.Price_Profit_CalculationColumn]));
+                }
+                set {
+                    this[this.tableItems.Price_Profit_CalculationColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Profit__ {
+                get {
+                    return ((decimal)(this[this.tableItems.Profit__Column]));
+                }
+                set {
+                    this[this.tableItems.Profit__Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int Costing_Method {
+                get {
+                    return ((int)(this[this.tableItems.Costing_MethodColumn]));
+                }
+                set {
+                    this[this.tableItems.Costing_MethodColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Unit_Cost {
+                get {
+                    return ((decimal)(this[this.tableItems.Unit_CostColumn]));
+                }
+                set {
+                    this[this.tableItems.Unit_CostColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Standard_Cost {
+                get {
+                    return ((decimal)(this[this.tableItems.Standard_CostColumn]));
+                }
+                set {
+                    this[this.tableItems.Standard_CostColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Last_Direct_Cost {
+                get {
+                    return ((decimal)(this[this.tableItems.Last_Direct_CostColumn]));
+                }
+                set {
+                    this[this.tableItems.Last_Direct_CostColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Indirect_Cost__ {
+                get {
+                    return ((decimal)(this[this.tableItems.Indirect_Cost__Column]));
+                }
+                set {
+                    this[this.tableItems.Indirect_Cost__Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public byte Cost_is_Adjusted {
+                get {
+                    return ((byte)(this[this.tableItems.Cost_is_AdjustedColumn]));
+                }
+                set {
+                    this[this.tableItems.Cost_is_AdjustedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public byte Allow_Online_Adjustment {
+                get {
+                    return ((byte)(this[this.tableItems.Allow_Online_AdjustmentColumn]));
+                }
+                set {
+                    this[this.tableItems.Allow_Online_AdjustmentColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Vendor_No_ {
+                get {
+                    return ((string)(this[this.tableItems.Vendor_No_Column]));
+                }
+                set {
+                    this[this.tableItems.Vendor_No_Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Vendor_Item_No_ {
+                get {
+                    return ((string)(this[this.tableItems.Vendor_Item_No_Column]));
+                }
+                set {
+                    this[this.tableItems.Vendor_Item_No_Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Lead_Time_Calculation {
+                get {
+                    return ((string)(this[this.tableItems.Lead_Time_CalculationColumn]));
+                }
+                set {
+                    this[this.tableItems.Lead_Time_CalculationColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Reorder_Point {
+                get {
+                    return ((decimal)(this[this.tableItems.Reorder_PointColumn]));
+                }
+                set {
+                    this[this.tableItems.Reorder_PointColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Maximum_Inventory {
+                get {
+                    return ((decimal)(this[this.tableItems.Maximum_InventoryColumn]));
+                }
+                set {
+                    this[this.tableItems.Maximum_InventoryColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Reorder_Quantity {
+                get {
+                    return ((decimal)(this[this.tableItems.Reorder_QuantityColumn]));
+                }
+                set {
+                    this[this.tableItems.Reorder_QuantityColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Alternative_Item_No_ {
+                get {
+                    return ((string)(this[this.tableItems.Alternative_Item_No_Column]));
+                }
+                set {
+                    this[this.tableItems.Alternative_Item_No_Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Unit_List_Price {
+                get {
+                    return ((decimal)(this[this.tableItems.Unit_List_PriceColumn]));
+                }
+                set {
+                    this[this.tableItems.Unit_List_PriceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Duty_Due__ {
+                get {
+                    return ((decimal)(this[this.tableItems.Duty_Due__Column]));
+                }
+                set {
+                    this[this.tableItems.Duty_Due__Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Duty_Code {
+                get {
+                    return ((string)(this[this.tableItems.Duty_CodeColumn]));
+                }
+                set {
+                    this[this.tableItems.Duty_CodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Gross_Weight {
+                get {
+                    return ((decimal)(this[this.tableItems.Gross_WeightColumn]));
+                }
+                set {
+                    this[this.tableItems.Gross_WeightColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Net_Weight {
+                get {
+                    return ((decimal)(this[this.tableItems.Net_WeightColumn]));
+                }
+                set {
+                    this[this.tableItems.Net_WeightColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Units_per_Parcel {
+                get {
+                    return ((decimal)(this[this.tableItems.Units_per_ParcelColumn]));
+                }
+                set {
+                    this[this.tableItems.Units_per_ParcelColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Unit_Volume {
+                get {
+                    return ((decimal)(this[this.tableItems.Unit_VolumeColumn]));
+                }
+                set {
+                    this[this.tableItems.Unit_VolumeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Durability {
+                get {
+                    return ((string)(this[this.tableItems.DurabilityColumn]));
+                }
+                set {
+                    this[this.tableItems.DurabilityColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Freight_Type {
+                get {
+                    return ((string)(this[this.tableItems.Freight_TypeColumn]));
+                }
+                set {
+                    this[this.tableItems.Freight_TypeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Tariff_No_ {
+                get {
+                    return ((string)(this[this.tableItems.Tariff_No_Column]));
+                }
+                set {
+                    this[this.tableItems.Tariff_No_Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Duty_Unit_Conversion {
+                get {
+                    return ((decimal)(this[this.tableItems.Duty_Unit_ConversionColumn]));
+                }
+                set {
+                    this[this.tableItems.Duty_Unit_ConversionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Country_Region_Purchased_Code {
+                get {
+                    return ((string)(this[this.tableItems.Country_Region_Purchased_CodeColumn]));
+                }
+                set {
+                    this[this.tableItems.Country_Region_Purchased_CodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Budget_Quantity {
+                get {
+                    return ((decimal)(this[this.tableItems.Budget_QuantityColumn]));
+                }
+                set {
+                    this[this.tableItems.Budget_QuantityColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Budgeted_Amount {
+                get {
+                    return ((decimal)(this[this.tableItems.Budgeted_AmountColumn]));
+                }
+                set {
+                    this[this.tableItems.Budgeted_AmountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Budget_Profit {
+                get {
+                    return ((decimal)(this[this.tableItems.Budget_ProfitColumn]));
+                }
+                set {
+                    this[this.tableItems.Budget_ProfitColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public byte Blocked {
+                get {
+                    return ((byte)(this[this.tableItems.BlockedColumn]));
+                }
+                set {
+                    this[this.tableItems.BlockedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Block_Reason {
+                get {
+                    return ((string)(this[this.tableItems.Block_ReasonColumn]));
+                }
+                set {
+                    this[this.tableItems.Block_ReasonColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime Last_DateTime_Modified {
+                get {
+                    return ((global::System.DateTime)(this[this.tableItems.Last_DateTime_ModifiedColumn]));
+                }
+                set {
+                    this[this.tableItems.Last_DateTime_ModifiedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime Last_Date_Modified {
+                get {
+                    return ((global::System.DateTime)(this[this.tableItems.Last_Date_ModifiedColumn]));
+                }
+                set {
+                    this[this.tableItems.Last_Date_ModifiedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime Last_Time_Modified {
+                get {
+                    return ((global::System.DateTime)(this[this.tableItems.Last_Time_ModifiedColumn]));
+                }
+                set {
+                    this[this.tableItems.Last_Time_ModifiedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public byte Price_Includes_VAT {
+                get {
+                    return ((byte)(this[this.tableItems.Price_Includes_VATColumn]));
+                }
+                set {
+                    this[this.tableItems.Price_Includes_VATColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string _VAT_Bus__Posting_Gr___Price_ {
+                get {
+                    return ((string)(this[this.tableItems._VAT_Bus__Posting_Gr___Price_Column]));
+                }
+                set {
+                    this[this.tableItems._VAT_Bus__Posting_Gr___Price_Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Gen__Prod__Posting_Group {
+                get {
+                    return ((string)(this[this.tableItems.Gen__Prod__Posting_GroupColumn]));
+                }
+                set {
+                    this[this.tableItems.Gen__Prod__Posting_GroupColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.Guid Picture {
+                get {
+                    return ((global::System.Guid)(this[this.tableItems.PictureColumn]));
+                }
+                set {
+                    this[this.tableItems.PictureColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Country_Region_of_Origin_Code {
+                get {
+                    return ((string)(this[this.tableItems.Country_Region_of_Origin_CodeColumn]));
+                }
+                set {
+                    this[this.tableItems.Country_Region_of_Origin_CodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public byte Automatic_Ext__Texts {
+                get {
+                    return ((byte)(this[this.tableItems.Automatic_Ext__TextsColumn]));
+                }
+                set {
+                    this[this.tableItems.Automatic_Ext__TextsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string No__Series {
+                get {
+                    return ((string)(this[this.tableItems.No__SeriesColumn]));
+                }
+                set {
+                    this[this.tableItems.No__SeriesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Tax_Group_Code {
+                get {
+                    return ((string)(this[this.tableItems.Tax_Group_CodeColumn]));
+                }
+                set {
+                    this[this.tableItems.Tax_Group_CodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string VAT_Prod__Posting_Group {
+                get {
+                    return ((string)(this[this.tableItems.VAT_Prod__Posting_GroupColumn]));
+                }
+                set {
+                    this[this.tableItems.VAT_Prod__Posting_GroupColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int Reserve {
+                get {
+                    return ((int)(this[this.tableItems.ReserveColumn]));
+                }
+                set {
+                    this[this.tableItems.ReserveColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Global_Dimension_1_Code {
+                get {
+                    return ((string)(this[this.tableItems.Global_Dimension_1_CodeColumn]));
+                }
+                set {
+                    this[this.tableItems.Global_Dimension_1_CodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Global_Dimension_2_Code {
+                get {
+                    return ((string)(this[this.tableItems.Global_Dimension_2_CodeColumn]));
+                }
+                set {
+                    this[this.tableItems.Global_Dimension_2_CodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int Stockout_Warning {
+                get {
+                    return ((int)(this[this.tableItems.Stockout_WarningColumn]));
+                }
+                set {
+                    this[this.tableItems.Stockout_WarningColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int Prevent_Negative_Inventory {
+                get {
+                    return ((int)(this[this.tableItems.Prevent_Negative_InventoryColumn]));
+                }
+                set {
+                    this[this.tableItems.Prevent_Negative_InventoryColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Application_Wksh__User_ID {
+                get {
+                    return ((string)(this[this.tableItems.Application_Wksh__User_IDColumn]));
+                }
+                set {
+                    this[this.tableItems.Application_Wksh__User_IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int Assembly_Policy {
+                get {
+                    return ((int)(this[this.tableItems.Assembly_PolicyColumn]));
+                }
+                set {
+                    this[this.tableItems.Assembly_PolicyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string GTIN {
+                get {
+                    return ((string)(this[this.tableItems.GTINColumn]));
+                }
+                set {
+                    this[this.tableItems.GTINColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Default_Deferral_Template_Code {
+                get {
+                    return ((string)(this[this.tableItems.Default_Deferral_Template_CodeColumn]));
+                }
+                set {
+                    this[this.tableItems.Default_Deferral_Template_CodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int _Low_Level_Code {
+                get {
+                    return ((int)(this[this.tableItems._Low_Level_CodeColumn]));
+                }
+                set {
+                    this[this.tableItems._Low_Level_CodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Lot_Size {
+                get {
+                    return ((decimal)(this[this.tableItems.Lot_SizeColumn]));
+                }
+                set {
+                    this[this.tableItems.Lot_SizeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Serial_Nos_ {
+                get {
+                    return ((string)(this[this.tableItems.Serial_Nos_Column]));
+                }
+                set {
+                    this[this.tableItems.Serial_Nos_Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime Last_Unit_Cost_Calc__Date {
+                get {
+                    return ((global::System.DateTime)(this[this.tableItems.Last_Unit_Cost_Calc__DateColumn]));
+                }
+                set {
+                    this[this.tableItems.Last_Unit_Cost_Calc__DateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal _Rolled_up_Material_Cost {
+                get {
+                    return ((decimal)(this[this.tableItems._Rolled_up_Material_CostColumn]));
+                }
+                set {
+                    this[this.tableItems._Rolled_up_Material_CostColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal _Rolled_up_Capacity_Cost {
+                get {
+                    return ((decimal)(this[this.tableItems._Rolled_up_Capacity_CostColumn]));
+                }
+                set {
+                    this[this.tableItems._Rolled_up_Capacity_CostColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Scrap__ {
+                get {
+                    return ((decimal)(this[this.tableItems.Scrap__Column]));
+                }
+                set {
+                    this[this.tableItems.Scrap__Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public byte Inventory_Value_Zero {
+                get {
+                    return ((byte)(this[this.tableItems.Inventory_Value_ZeroColumn]));
+                }
+                set {
+                    this[this.tableItems.Inventory_Value_ZeroColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int Discrete_Order_Quantity {
+                get {
+                    return ((int)(this[this.tableItems.Discrete_Order_QuantityColumn]));
+                }
+                set {
+                    this[this.tableItems.Discrete_Order_QuantityColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Minimum_Order_Quantity {
+                get {
+                    return ((decimal)(this[this.tableItems.Minimum_Order_QuantityColumn]));
+                }
+                set {
+                    this[this.tableItems.Minimum_Order_QuantityColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Maximum_Order_Quantity {
+                get {
+                    return ((decimal)(this[this.tableItems.Maximum_Order_QuantityColumn]));
+                }
+                set {
+                    this[this.tableItems.Maximum_Order_QuantityColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Safety_Stock_Quantity {
+                get {
+                    return ((decimal)(this[this.tableItems.Safety_Stock_QuantityColumn]));
+                }
+                set {
+                    this[this.tableItems.Safety_Stock_QuantityColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Order_Multiple {
+                get {
+                    return ((decimal)(this[this.tableItems.Order_MultipleColumn]));
+                }
+                set {
+                    this[this.tableItems.Order_MultipleColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Safety_Lead_Time {
+                get {
+                    return ((string)(this[this.tableItems.Safety_Lead_TimeColumn]));
+                }
+                set {
+                    this[this.tableItems.Safety_Lead_TimeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int Flushing_Method {
+                get {
+                    return ((int)(this[this.tableItems.Flushing_MethodColumn]));
+                }
+                set {
+                    this[this.tableItems.Flushing_MethodColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int Replenishment_System {
+                get {
+                    return ((int)(this[this.tableItems.Replenishment_SystemColumn]));
+                }
+                set {
+                    this[this.tableItems.Replenishment_SystemColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Rounding_Precision {
+                get {
+                    return ((decimal)(this[this.tableItems.Rounding_PrecisionColumn]));
+                }
+                set {
+                    this[this.tableItems.Rounding_PrecisionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Sales_Unit_of_Measure {
+                get {
+                    return ((string)(this[this.tableItems.Sales_Unit_of_MeasureColumn]));
+                }
+                set {
+                    this[this.tableItems.Sales_Unit_of_MeasureColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Purch__Unit_of_Measure {
+                get {
+                    return ((string)(this[this.tableItems.Purch__Unit_of_MeasureColumn]));
+                }
+                set {
+                    this[this.tableItems.Purch__Unit_of_MeasureColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Time_Bucket {
+                get {
+                    return ((string)(this[this.tableItems.Time_BucketColumn]));
+                }
+                set {
+                    this[this.tableItems.Time_BucketColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int Reordering_Policy {
+                get {
+                    return ((int)(this[this.tableItems.Reordering_PolicyColumn]));
+                }
+                set {
+                    this[this.tableItems.Reordering_PolicyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public byte Include_Inventory {
+                get {
+                    return ((byte)(this[this.tableItems.Include_InventoryColumn]));
+                }
+                set {
+                    this[this.tableItems.Include_InventoryColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int Manufacturing_Policy {
+                get {
+                    return ((int)(this[this.tableItems.Manufacturing_PolicyColumn]));
+                }
+                set {
+                    this[this.tableItems.Manufacturing_PolicyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Rescheduling_Period {
+                get {
+                    return ((string)(this[this.tableItems.Rescheduling_PeriodColumn]));
+                }
+                set {
+                    this[this.tableItems.Rescheduling_PeriodColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Lot_Accumulation_Period {
+                get {
+                    return ((string)(this[this.tableItems.Lot_Accumulation_PeriodColumn]));
+                }
+                set {
+                    this[this.tableItems.Lot_Accumulation_PeriodColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Dampener_Period {
+                get {
+                    return ((string)(this[this.tableItems.Dampener_PeriodColumn]));
+                }
+                set {
+                    this[this.tableItems.Dampener_PeriodColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Dampener_Quantity {
+                get {
+                    return ((decimal)(this[this.tableItems.Dampener_QuantityColumn]));
+                }
+                set {
+                    this[this.tableItems.Dampener_QuantityColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Overflow_Level {
+                get {
+                    return ((decimal)(this[this.tableItems.Overflow_LevelColumn]));
+                }
+                set {
+                    this[this.tableItems.Overflow_LevelColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Manufacturer_Code {
+                get {
+                    return ((string)(this[this.tableItems.Manufacturer_CodeColumn]));
+                }
+                set {
+                    this[this.tableItems.Manufacturer_CodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Item_Category_Code {
+                get {
+                    return ((string)(this[this.tableItems.Item_Category_CodeColumn]));
+                }
+                set {
+                    this[this.tableItems.Item_Category_CodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public byte Created_From_Nonstock_Item {
+                get {
+                    return ((byte)(this[this.tableItems.Created_From_Nonstock_ItemColumn]));
+                }
+                set {
+                    this[this.tableItems.Created_From_Nonstock_ItemColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Product_Group_Code {
+                get {
+                    return ((string)(this[this.tableItems.Product_Group_CodeColumn]));
+                }
+                set {
+                    this[this.tableItems.Product_Group_CodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Purchasing_Code {
+                get {
+                    return ((string)(this[this.tableItems.Purchasing_CodeColumn]));
+                }
+                set {
+                    this[this.tableItems.Purchasing_CodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Service_Item_Group {
+                get {
+                    return ((string)(this[this.tableItems.Service_Item_GroupColumn]));
+                }
+                set {
+                    this[this.tableItems.Service_Item_GroupColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Item_Tracking_Code {
+                get {
+                    return ((string)(this[this.tableItems.Item_Tracking_CodeColumn]));
+                }
+                set {
+                    this[this.tableItems.Item_Tracking_CodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Lot_Nos_ {
+                get {
+                    return ((string)(this[this.tableItems.Lot_Nos_Column]));
+                }
+                set {
+                    this[this.tableItems.Lot_Nos_Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Expiration_Calculation {
+                get {
+                    return ((string)(this[this.tableItems.Expiration_CalculationColumn]));
+                }
+                set {
+                    this[this.tableItems.Expiration_CalculationColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Warehouse_Class_Code {
+                get {
+                    return ((string)(this[this.tableItems.Warehouse_Class_CodeColumn]));
+                }
+                set {
+                    this[this.tableItems.Warehouse_Class_CodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Special_Equipment_Code {
+                get {
+                    return ((string)(this[this.tableItems.Special_Equipment_CodeColumn]));
+                }
+                set {
+                    this[this.tableItems.Special_Equipment_CodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string _Put_away_Template_Code {
+                get {
+                    return ((string)(this[this.tableItems._Put_away_Template_CodeColumn]));
+                }
+                set {
+                    this[this.tableItems._Put_away_Template_CodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string _Put_away_Unit_of_Measure_Code {
+                get {
+                    return ((string)(this[this.tableItems._Put_away_Unit_of_Measure_CodeColumn]));
+                }
+                set {
+                    this[this.tableItems._Put_away_Unit_of_Measure_CodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Phys_Invt_Counting_Period_Code {
+                get {
+                    return ((string)(this[this.tableItems.Phys_Invt_Counting_Period_CodeColumn]));
+                }
+                set {
+                    this[this.tableItems.Phys_Invt_Counting_Period_CodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime Last_Counting_Period_Update {
+                get {
+                    return ((global::System.DateTime)(this[this.tableItems.Last_Counting_Period_UpdateColumn]));
+                }
+                set {
+                    this[this.tableItems.Last_Counting_Period_UpdateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public byte _Use_Cross_Docking {
+                get {
+                    return ((byte)(this[this.tableItems._Use_Cross_DockingColumn]));
+                }
+                set {
+                    this[this.tableItems._Use_Cross_DockingColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime Next_Counting_Start_Date {
+                get {
+                    return ((global::System.DateTime)(this[this.tableItems.Next_Counting_Start_DateColumn]));
+                }
+                set {
+                    this[this.tableItems.Next_Counting_Start_DateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime Next_Counting_End_Date {
+                get {
+                    return ((global::System.DateTime)(this[this.tableItems.Next_Counting_End_DateColumn]));
+                }
+                set {
+                    this[this.tableItems.Next_Counting_End_DateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.Guid Id {
+                get {
+                    return ((global::System.Guid)(this[this.tableItems.IdColumn]));
+                }
+                set {
+                    this[this.tableItems.IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.Guid Unit_of_Measure_Id {
+                get {
+                    return ((global::System.Guid)(this[this.tableItems.Unit_of_Measure_IdColumn]));
+                }
+                set {
+                    this[this.tableItems.Unit_of_Measure_IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.Guid Tax_Group_Id {
+                get {
+                    return ((global::System.Guid)(this[this.tableItems.Tax_Group_IdColumn]));
+                }
+                set {
+                    this[this.tableItems.Tax_Group_IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public byte Sales_Blocked {
+                get {
+                    return ((byte)(this[this.tableItems.Sales_BlockedColumn]));
+                }
+                set {
+                    this[this.tableItems.Sales_BlockedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public byte Purchasing_Blocked {
+                get {
+                    return ((byte)(this[this.tableItems.Purchasing_BlockedColumn]));
+                }
+                set {
+                    this[this.tableItems.Purchasing_BlockedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.Guid Item_Category_Id {
+                get {
+                    return ((global::System.Guid)(this[this.tableItems.Item_Category_IdColumn]));
+                }
+                set {
+                    this[this.tableItems.Item_Category_IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string _Over_Receipt_Code {
+                get {
+                    return ((string)(this[this.tableItems._Over_Receipt_CodeColumn]));
+                }
+                set {
+                    this[this.tableItems._Over_Receipt_CodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Lifo_Category {
+                get {
+                    return ((string)(this[this.tableItems.Lifo_CategoryColumn]));
+                }
+                set {
+                    this[this.tableItems.Lifo_CategoryColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int Inventory_Valuation {
+                get {
+                    return ((int)(this[this.tableItems.Inventory_ValuationColumn]));
+                }
+                set {
+                    this[this.tableItems.Inventory_ValuationColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Routing_No_ {
+                get {
+                    return ((string)(this[this.tableItems.Routing_No_Column]));
+                }
+                set {
+                    this[this.tableItems.Routing_No_Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Production_BOM_No_ {
+                get {
+                    return ((string)(this[this.tableItems.Production_BOM_No_Column]));
+                }
+                set {
+                    this[this.tableItems.Production_BOM_No_Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal _Single_Level_Material_Cost {
+                get {
+                    return ((decimal)(this[this.tableItems._Single_Level_Material_CostColumn]));
+                }
+                set {
+                    this[this.tableItems._Single_Level_Material_CostColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal _Single_Level_Capacity_Cost {
+                get {
+                    return ((decimal)(this[this.tableItems._Single_Level_Capacity_CostColumn]));
+                }
+                set {
+                    this[this.tableItems._Single_Level_Capacity_CostColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal _Single_Level_Subcontrd__Cost {
+                get {
+                    return ((decimal)(this[this.tableItems._Single_Level_Subcontrd__CostColumn]));
+                }
+                set {
+                    this[this.tableItems._Single_Level_Subcontrd__CostColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal _Single_Level_Cap__Ovhd_Cost {
+                get {
+                    return ((decimal)(this[this.tableItems._Single_Level_Cap__Ovhd_CostColumn]));
+                }
+                set {
+                    this[this.tableItems._Single_Level_Cap__Ovhd_CostColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal _Single_Level_Mfg__Ovhd_Cost {
+                get {
+                    return ((decimal)(this[this.tableItems._Single_Level_Mfg__Ovhd_CostColumn]));
+                }
+                set {
+                    this[this.tableItems._Single_Level_Mfg__Ovhd_CostColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal Overhead_Rate {
+                get {
+                    return ((decimal)(this[this.tableItems.Overhead_RateColumn]));
+                }
+                set {
+                    this[this.tableItems.Overhead_RateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal _Rolled_up_Subcontracted_Cost {
+                get {
+                    return ((decimal)(this[this.tableItems._Rolled_up_Subcontracted_CostColumn]));
+                }
+                set {
+                    this[this.tableItems._Rolled_up_Subcontracted_CostColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal _Rolled_up_Mfg__Ovhd_Cost {
+                get {
+                    return ((decimal)(this[this.tableItems._Rolled_up_Mfg__Ovhd_CostColumn]));
+                }
+                set {
+                    this[this.tableItems._Rolled_up_Mfg__Ovhd_CostColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal _Rolled_up_Cap__Overhead_Cost {
+                get {
+                    return ((decimal)(this[this.tableItems._Rolled_up_Cap__Overhead_CostColumn]));
+                }
+                set {
+                    this[this.tableItems._Rolled_up_Cap__Overhead_CostColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int Order_Tracking_Policy {
+                get {
+                    return ((int)(this[this.tableItems.Order_Tracking_PolicyColumn]));
+                }
+                set {
+                    this[this.tableItems.Order_Tracking_PolicyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public byte Critical {
+                get {
+                    return ((byte)(this[this.tableItems.CriticalColumn]));
+                }
+                set {
+                    this[this.tableItems.CriticalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Common_Item_No_ {
+                get {
+                    return ((string)(this[this.tableItems.Common_Item_No_Column]));
+                }
+                set {
+                    this[this.tableItems.Common_Item_No_Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.Guid @__systemId {
+                get {
+                    return ((global::System.Guid)(this[this.tableItems.@__systemIdColumn]));
+                }
+                set {
+                    this[this.tableItems.@__systemIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime @__systemCreatedAt {
+                get {
+                    return ((global::System.DateTime)(this[this.tableItems.@__systemCreatedAtColumn]));
+                }
+                set {
+                    this[this.tableItems.@__systemCreatedAtColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.Guid @__systemCreatedBy {
+                get {
+                    return ((global::System.Guid)(this[this.tableItems.@__systemCreatedByColumn]));
+                }
+                set {
+                    this[this.tableItems.@__systemCreatedByColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime @__systemModifiedAt {
+                get {
+                    return ((global::System.DateTime)(this[this.tableItems.@__systemModifiedAtColumn]));
+                }
+                set {
+                    this[this.tableItems.@__systemModifiedAtColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.Guid @__systemModifiedBy {
+                get {
+                    return ((global::System.Guid)(this[this.tableItems.@__systemModifiedByColumn]));
+                }
+                set {
+                    this[this.tableItems.@__systemModifiedByColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IstimestampNull() {
+                return this.IsNull(this.tableItems.timestampColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SettimestampNull() {
+                this[this.tableItems.timestampColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -5720,6 +10016,40 @@ namespace MPIntranet.Entities {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public FASIDIBARow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public class ItemsRowChangeEvent : global::System.EventArgs {
+            
+            private ItemsRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public ItemsRowChangeEvent(ItemsRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public ItemsRow Row {
                 get {
                     return this.eventRow;
                 }

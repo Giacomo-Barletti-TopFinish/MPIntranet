@@ -28,9 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tvDiBa = new System.Windows.Forms.TreeView();
             this.dgvNodi = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtArticolo = new System.Windows.Forms.TextBox();
+            this.btnCercaDiBa = new System.Windows.Forms.Button();
+            this.txtTipoDiba = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtDescrizioneDiba = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtVersioneDiba = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnNuovaDistinta = new System.Windows.Forms.Button();
+            this.btnSalvaDiba = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.txtNotifiche = new System.Windows.Forms.TextBox();
+            this.btnEsporta = new System.Windows.Forms.Button();
             this.IdFase = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Errore = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IdPadre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,26 +65,6 @@
             this.Setup = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Attesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Movimentazione = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtArticolo = new System.Windows.Forms.TextBox();
-            this.btnCercaDiBa = new System.Windows.Forms.Button();
-            this.txtTipoDiba = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtDescrizioneDiba = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtVersioneDiba = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btnNuovaDistinta = new System.Windows.Forms.Button();
-            this.lstTask = new System.Windows.Forms.ListBox();
-            this.lstAreeProduzione = new System.Windows.Forms.ListBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.btnSalvaDiba = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.txtNotifiche = new System.Windows.Forms.TextBox();
-            this.btnEsporta = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNodi)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -86,7 +82,6 @@
             // 
             // dgvNodi
             // 
-            this.dgvNodi.AllowDrop = true;
             this.dgvNodi.AllowUserToAddRows = false;
             this.dgvNodi.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -113,141 +108,11 @@
             this.Movimentazione});
             this.dgvNodi.Location = new System.Drawing.Point(6, 27);
             this.dgvNodi.Name = "dgvNodi";
-            this.dgvNodi.Size = new System.Drawing.Size(940, 907);
+            this.dgvNodi.Size = new System.Drawing.Size(1108, 907);
             this.dgvNodi.TabIndex = 5;
             this.dgvNodi.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvNodi_EditingControlShowing);
             this.dgvNodi.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvNodi_DragDrop);
             this.dgvNodi.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgvNodi_DragEnter);
-            // 
-            // IdFase
-            // 
-            this.IdFase.DataPropertyName = "IdFaseDiba";
-            this.IdFase.HeaderText = "IdFase";
-            this.IdFase.Name = "IdFase";
-            this.IdFase.Visible = false;
-            // 
-            // Errore
-            // 
-            this.Errore.DataPropertyName = "Errore";
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Red;
-            this.Errore.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Errore.HeaderText = "Errore";
-            this.Errore.Name = "Errore";
-            this.Errore.ReadOnly = true;
-            // 
-            // IdPadre
-            // 
-            this.IdPadre.DataPropertyName = "IdPadre";
-            this.IdPadre.HeaderText = "IdPadre";
-            this.IdPadre.Name = "IdPadre";
-            this.IdPadre.Visible = false;
-            // 
-            // IdDiba
-            // 
-            this.IdDiba.DataPropertyName = "IdDiba";
-            this.IdDiba.HeaderText = "IdDiba";
-            this.IdDiba.Name = "IdDiba";
-            this.IdDiba.Visible = false;
-            // 
-            // Descrizione
-            // 
-            this.Descrizione.DataPropertyName = "Descrizione";
-            this.Descrizione.FillWeight = 150F;
-            this.Descrizione.HeaderText = "Descrizione";
-            this.Descrizione.Name = "Descrizione";
-            this.Descrizione.Width = 150;
-            // 
-            // Anagrafica
-            // 
-            this.Anagrafica.DataPropertyName = "Anagrafica";
-            this.Anagrafica.FillWeight = 80F;
-            this.Anagrafica.HeaderText = "Anagrafica";
-            this.Anagrafica.Name = "Anagrafica";
-            this.Anagrafica.Width = 80;
-            // 
-            // AreaProduzione
-            // 
-            this.AreaProduzione.DataPropertyName = "AreaProduzione";
-            this.AreaProduzione.HeaderText = "AreaProduzione";
-            this.AreaProduzione.Name = "AreaProduzione";
-            // 
-            // Task
-            // 
-            this.Task.DataPropertyName = "Task";
-            this.Task.HeaderText = "Task";
-            this.Task.Name = "Task";
-            // 
-            // SchedaProcesso
-            // 
-            this.SchedaProcesso.DataPropertyName = "SchedaProcesso";
-            this.SchedaProcesso.HeaderText = "SchedaProcesso";
-            this.SchedaProcesso.Name = "SchedaProcesso";
-            // 
-            // CollegamentoDiba
-            // 
-            this.CollegamentoDiba.DataPropertyName = "CollegamentoDiba";
-            this.CollegamentoDiba.HeaderText = "CollegamentoDiba";
-            this.CollegamentoDiba.Name = "CollegamentoDiba";
-            // 
-            // CollegamentoCiclo
-            // 
-            this.CollegamentoCiclo.DataPropertyName = "CollegamentoCiclo";
-            this.CollegamentoCiclo.HeaderText = "CollegamentoCiclo";
-            this.CollegamentoCiclo.Name = "CollegamentoCiclo";
-            // 
-            // Quantita
-            // 
-            this.Quantita.DataPropertyName = "Quantita";
-            this.Quantita.FillWeight = 60F;
-            this.Quantita.HeaderText = "Quantita";
-            this.Quantita.Name = "Quantita";
-            this.Quantita.Width = 60;
-            // 
-            // UMQuantita
-            // 
-            this.UMQuantita.DataPropertyName = "UMQuantita";
-            this.UMQuantita.FillWeight = 70F;
-            this.UMQuantita.HeaderText = "UMQuantita";
-            this.UMQuantita.Name = "UMQuantita";
-            this.UMQuantita.Width = 70;
-            // 
-            // PezziOrari
-            // 
-            this.PezziOrari.DataPropertyName = "PezziOrari";
-            this.PezziOrari.FillWeight = 60F;
-            this.PezziOrari.HeaderText = "PezziOrari";
-            this.PezziOrari.Name = "PezziOrari";
-            this.PezziOrari.Width = 60;
-            // 
-            // Periodo
-            // 
-            this.Periodo.DataPropertyName = "Periodo";
-            this.Periodo.FillWeight = 60F;
-            this.Periodo.HeaderText = "Periodo";
-            this.Periodo.Name = "Periodo";
-            this.Periodo.Width = 60;
-            // 
-            // Setup
-            // 
-            this.Setup.DataPropertyName = "Setup";
-            this.Setup.FillWeight = 60F;
-            this.Setup.HeaderText = "Setup";
-            this.Setup.Name = "Setup";
-            this.Setup.Width = 60;
-            // 
-            // Attesa
-            // 
-            this.Attesa.DataPropertyName = "Attesa";
-            this.Attesa.FillWeight = 60F;
-            this.Attesa.HeaderText = "Attesa";
-            this.Attesa.Name = "Attesa";
-            this.Attesa.Width = 60;
-            // 
-            // Movimentazione
-            // 
-            this.Movimentazione.DataPropertyName = "Movimentazione";
-            this.Movimentazione.HeaderText = "Movimentazione";
-            this.Movimentazione.Name = "Movimentazione";
             // 
             // label1
             // 
@@ -338,46 +203,6 @@
             this.btnNuovaDistinta.UseVisualStyleBackColor = true;
             this.btnNuovaDistinta.Click += new System.EventHandler(this.btnNuovaDistinta_Click);
             // 
-            // lstTask
-            // 
-            this.lstTask.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lstTask.FormattingEnabled = true;
-            this.lstTask.Location = new System.Drawing.Point(984, 35);
-            this.lstTask.Name = "lstTask";
-            this.lstTask.Size = new System.Drawing.Size(120, 303);
-            this.lstTask.TabIndex = 16;
-            this.lstTask.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lstTask_MouseDown);
-            // 
-            // lstAreeProduzione
-            // 
-            this.lstAreeProduzione.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lstAreeProduzione.FormattingEnabled = true;
-            this.lstAreeProduzione.Location = new System.Drawing.Point(984, 371);
-            this.lstAreeProduzione.Name = "lstAreeProduzione";
-            this.lstAreeProduzione.Size = new System.Drawing.Size(120, 303);
-            this.lstAreeProduzione.TabIndex = 16;
-            this.lstAreeProduzione.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lstAreeProduzione_MouseDown);
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(981, 19);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(36, 13);
-            this.label5.TabIndex = 17;
-            this.label5.Text = "Tasks";
-            // 
-            // label6
-            // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(981, 355);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(95, 13);
-            this.label6.TabIndex = 18;
-            this.label6.Text = "Aree di produzione";
-            // 
             // btnSalvaDiba
             // 
             this.btnSalvaDiba.Location = new System.Drawing.Point(533, 10);
@@ -404,10 +229,6 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.dgvNodi);
-            this.tabPage1.Controls.Add(this.lstAreeProduzione);
-            this.tabPage1.Controls.Add(this.label6);
-            this.tabPage1.Controls.Add(this.lstTask);
-            this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -450,6 +271,137 @@
             this.btnEsporta.UseVisualStyleBackColor = true;
             this.btnEsporta.Click += new System.EventHandler(this.btnEsporta_Click);
             // 
+            // IdFase
+            // 
+            this.IdFase.DataPropertyName = "IdFaseDiba";
+            this.IdFase.FillWeight = 60F;
+            this.IdFase.HeaderText = "ID";
+            this.IdFase.Name = "IdFase";
+            this.IdFase.Width = 60;
+            // 
+            // Errore
+            // 
+            this.Errore.DataPropertyName = "Errore";
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Red;
+            this.Errore.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Errore.HeaderText = "Errore";
+            this.Errore.Name = "Errore";
+            this.Errore.ReadOnly = true;
+            // 
+            // IdPadre
+            // 
+            this.IdPadre.DataPropertyName = "IdPadre";
+            this.IdPadre.HeaderText = "IdPadre";
+            this.IdPadre.Name = "IdPadre";
+            this.IdPadre.Visible = false;
+            // 
+            // IdDiba
+            // 
+            this.IdDiba.DataPropertyName = "IdDiba";
+            this.IdDiba.HeaderText = "IdDiba";
+            this.IdDiba.Name = "IdDiba";
+            this.IdDiba.Visible = false;
+            // 
+            // Descrizione
+            // 
+            this.Descrizione.DataPropertyName = "Descrizione";
+            this.Descrizione.FillWeight = 150F;
+            this.Descrizione.HeaderText = "Descrizione";
+            this.Descrizione.Name = "Descrizione";
+            this.Descrizione.Width = 150;
+            // 
+            // Anagrafica
+            // 
+            this.Anagrafica.DataPropertyName = "Anagrafica";
+            this.Anagrafica.FillWeight = 130F;
+            this.Anagrafica.HeaderText = "Anagrafica";
+            this.Anagrafica.Name = "Anagrafica";
+            this.Anagrafica.Width = 130;
+            // 
+            // AreaProduzione
+            // 
+            this.AreaProduzione.DataPropertyName = "AreaProduzione";
+            this.AreaProduzione.HeaderText = "AreaProduzione";
+            this.AreaProduzione.Name = "AreaProduzione";
+            // 
+            // Task
+            // 
+            this.Task.DataPropertyName = "Task";
+            this.Task.HeaderText = "Task";
+            this.Task.Name = "Task";
+            // 
+            // SchedaProcesso
+            // 
+            this.SchedaProcesso.DataPropertyName = "SchedaProcesso";
+            this.SchedaProcesso.HeaderText = "SchedaProcesso";
+            this.SchedaProcesso.Name = "SchedaProcesso";
+            // 
+            // CollegamentoDiba
+            // 
+            this.CollegamentoDiba.DataPropertyName = "CollegamentoDiba";
+            this.CollegamentoDiba.HeaderText = "CollegamentoDiba";
+            this.CollegamentoDiba.Name = "CollegamentoDiba";
+            // 
+            // CollegamentoCiclo
+            // 
+            this.CollegamentoCiclo.DataPropertyName = "CollegamentoCiclo";
+            this.CollegamentoCiclo.HeaderText = "CollegamentoCiclo";
+            this.CollegamentoCiclo.Name = "CollegamentoCiclo";
+            // 
+            // Quantita
+            // 
+            this.Quantita.DataPropertyName = "Quantita";
+            this.Quantita.FillWeight = 60F;
+            this.Quantita.HeaderText = "Quantita";
+            this.Quantita.Name = "Quantita";
+            this.Quantita.Width = 60;
+            // 
+            // UMQuantita
+            // 
+            this.UMQuantita.DataPropertyName = "UMQuantita";
+            this.UMQuantita.FillWeight = 70F;
+            this.UMQuantita.HeaderText = "UMQuantita";
+            this.UMQuantita.Name = "UMQuantita";
+            this.UMQuantita.Width = 70;
+            // 
+            // PezziOrari
+            // 
+            this.PezziOrari.DataPropertyName = "PezziOrari";
+            this.PezziOrari.FillWeight = 60F;
+            this.PezziOrari.HeaderText = "PezziOrari";
+            this.PezziOrari.Name = "PezziOrari";
+            this.PezziOrari.Width = 60;
+            // 
+            // Periodo
+            // 
+            this.Periodo.DataPropertyName = "Periodo";
+            this.Periodo.FillWeight = 60F;
+            this.Periodo.HeaderText = "Periodo";
+            this.Periodo.Name = "Periodo";
+            this.Periodo.Width = 60;
+            // 
+            // Setup
+            // 
+            this.Setup.DataPropertyName = "Setup";
+            this.Setup.FillWeight = 60F;
+            this.Setup.HeaderText = "Setup";
+            this.Setup.Name = "Setup";
+            this.Setup.Width = 60;
+            // 
+            // Attesa
+            // 
+            this.Attesa.DataPropertyName = "Attesa";
+            this.Attesa.FillWeight = 60F;
+            this.Attesa.HeaderText = "Attesa";
+            this.Attesa.Name = "Attesa";
+            this.Attesa.Width = 60;
+            // 
+            // Movimentazione
+            // 
+            this.Movimentazione.DataPropertyName = "Movimentazione";
+            this.Movimentazione.HeaderText = "Movimentazione";
+            this.Movimentazione.Name = "Movimentazione";
+            // 
             // DistintaBaseFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -474,7 +426,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvNodi)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
@@ -496,11 +447,12 @@
         private System.Windows.Forms.TextBox txtVersioneDiba;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnNuovaDistinta;
-        private System.Windows.Forms.ListBox lstTask;
-        private System.Windows.Forms.ListBox lstAreeProduzione;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnSalvaDiba;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TextBox txtNotifiche;
+        private System.Windows.Forms.Button btnEsporta;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdFase;
         private System.Windows.Forms.DataGridViewTextBoxColumn Errore;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdPadre;
@@ -519,10 +471,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Setup;
         private System.Windows.Forms.DataGridViewTextBoxColumn Attesa;
         private System.Windows.Forms.DataGridViewTextBoxColumn Movimentazione;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TextBox txtNotifiche;
-        private System.Windows.Forms.Button btnEsporta;
     }
 }

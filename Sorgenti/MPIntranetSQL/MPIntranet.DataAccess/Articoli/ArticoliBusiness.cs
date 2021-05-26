@@ -50,6 +50,12 @@ namespace MPIntranet.DataAccess.Articoli
             a.FillTask( ds);
         }
         [DataContext]
+        public void FillItems(ArticoliDS ds)
+        {
+            ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
+            a.FillItems(ds);
+        }
+        [DataContext]
         public void FillAreeProduzione( ArticoliDS ds)
         {
             ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
