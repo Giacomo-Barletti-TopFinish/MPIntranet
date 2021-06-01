@@ -47,17 +47,27 @@ namespace DisegnaDiBa
             int _idArticolo = nForm.IDArticolo;
             if (_idArticolo == ElementiVuoti.Articolo)
                 return;
-
-            caricaAreeProduzione();
-            caricaTask();
-            caricaItems();
-
-            _articolo = Articolo.EstraiArticolo(_idArticolo);
-
-            if (_articolo != null)
+            try
             {
-                txtArticolo.Text = _articolo.ToString();
+                Cursor.Current = Cursors.WaitCursor;
+                caricaAreeProduzione();
+                caricaTask();
+                caricaItems();
+
+                _articolo = Articolo.EstraiArticolo(_idArticolo);
+
+                if (_articolo != null)
+                {
+                    txtArticolo.Text = _articolo.ToString();
+                }
+
             }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+
+            }
+
         }
 
         private void caricaAreeProduzione()
@@ -112,16 +122,15 @@ namespace DisegnaDiBa
         }
         private void aggiornaNodoAlbero(int idFaseDiba, string areaProduzione, string anagrafica)
         {
-            string etichettaNodo = string.Format("{0} {1} {2}", idFaseDiba, areaProduzione, anagrafica);
-            etichettaNodo = etichettaNodo.Trim();
+            string etichettaNodo = string.Format("{0} {1} {2}", idFaseDiba, areaProduzione, anagrafica).Trim();
 
             TreeNode nodoCercato = null;
 
             if (trovaNodo(tvDiBa.Nodes[0], idFaseDiba, out nodoCercato))
             {
                 nodoCercato.Text = etichettaNodo;
+                coloraNodo(nodoCercato);
             }
-
         }
 
         private bool trovaNodo(TreeNode nodoPadre, int idFaseDistinta, out TreeNode nodoTrovato)
@@ -158,6 +167,7 @@ namespace DisegnaDiBa
                 string etichettaNodo = string.Format("{0} {1}", faseRoot.IdFaseDiba, faseRoot.Anagrafica);
                 TreeNode radice = new TreeNode(etichettaNodo);
                 radice.Tag = faseRoot;
+                coloraNodo(radice);
                 tvDiBa.Nodes.Add(radice);
                 aggiungiNodoEsistente(faseRoot.IdFaseDiba, radice);
             }
@@ -173,6 +183,7 @@ namespace DisegnaDiBa
                 nodoFiglio.Tag = faseFiglio;
                 nodoPadre.Nodes.Add(nodoFiglio);
 
+                coloraNodo(nodoFiglio);
                 aggiungiNodoEsistente(faseFiglio.IdFaseDiba, nodoFiglio);
             }
         }
@@ -194,12 +205,14 @@ namespace DisegnaDiBa
             string etichettaNodo = string.Format("{0} {1}", fase.IdFaseDiba, fase.Anagrafica);
             TreeNode nodo = new TreeNode(etichettaNodo);
             nodo.Tag = fase;
+            coloraNodo(nodo);
             _distinta.Fasi.Add(fase);
             return nodo;
         }
         private void popolaCampi()
         {
             if (_distinta == null) return;
+            this.Text = string.Format("{0} {1} {2}", _distinta.Articolo.ToString(), _distinta.TipoDistinta, _distinta.Versione);
             txtDescrizioneDiba.Text = _distinta.Descrizione;
             txtVersioneDiba.Text = _distinta.Versione.ToString();
             txtTipoDiba.Text = _distinta.TipoDistinta.TipoDiba;
@@ -207,12 +220,24 @@ namespace DisegnaDiBa
 
         private void btnCercaDiBa_Click(object sender, EventArgs e)
         {
+            this.Text = string.Empty;
+            if (_articolo == null) return;
+
             SelezionaDistintaFrm form = new SelezionaDistintaFrm(_articolo);
             form.ShowDialog();
-            _distinta = form.DistintaSelezionata;
-            popolaCampi();
-            creaAlbero();
-            PopolaGrigliaFasi();
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                _distinta = form.DistintaSelezionata;
+                popolaCampi();
+                creaAlbero();
+                PopolaGrigliaFasi();
+            }
+            catch { }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
         }
 
         private void CreaMenuContestualeTreeView()
@@ -270,6 +295,7 @@ namespace DisegnaDiBa
             string etichettaNodo = string.Format("{0} {1} {2}", FaseInizialeCopiata.IdFaseDiba, FaseInizialeCopiata.AreaProduzione, FaseInizialeCopiata.Anagrafica);
             TreeNode nodoFiglio = new TreeNode(etichettaNodo);
             nodoFiglio.Tag = FaseInizialeCopiata;
+            coloraNodo(nodoFiglio);
             nodoPadre.Nodes.Add(nodoFiglio);
             _distinta.Fasi.Add(FaseInizialeCopiata);
             foreach (FaseDistinta figlio in FasiDistintaDaCopiare.Where(x => x.IdPadre == faseIniziale.IdFaseDiba))
@@ -291,6 +317,17 @@ namespace DisegnaDiBa
             nodo.ExpandAll();
             source.ResetBindings(false);
 
+        }
+
+        private void coloraNodo(TreeNode nodo)
+        {
+            if (nodo.Tag != null)
+            {
+                FaseDistinta fase = (FaseDistinta)nodo.Tag;
+                if (!string.IsNullOrEmpty(fase.Anagrafica))
+                    nodo.ForeColor = Color.Red;
+
+            }
         }
 
         private void rinumeraIdPadreFaseDistinta(TreeNode n)
@@ -402,59 +439,64 @@ namespace DisegnaDiBa
                 e.Effect = DragDropEffects.None;
         }
 
-        private bool verificaDistinta()
+        private bool verificaDistintaPerSalvataggio()
         {
             bool esito = true;
             foreach (FaseDistinta fase in _distinta.Fasi)
             {
+                fase.Errore = string.Empty;
                 if (string.IsNullOrEmpty(fase.AreaProduzione))
                 {
                     esito = false;
-                    fase.Errore = "-> Inserire Area Produzione ";
+                    fase.Errore = "Inserire Area Produzione ";
                 }
                 if (string.IsNullOrEmpty(fase.Task))
                 {
                     esito = false;
-                    fase.Errore = "-> Inserire Task ";
+                    fase.Errore = "Inserire Task ";
                 }
                 if (fase.Quantita <= 0)
                 {
                     esito = false;
-                    fase.Errore = "-> Inserire Quantità ";
+                    fase.Errore = "Inserire Quantità ";
                 }
             }
             return esito;
         }
         private void btnSalvaDiba_Click(object sender, EventArgs e)
         {
-            if (_distinta == null) return;
-            if (verificaDistinta())
+            try
             {
-                _distinta.SalvaListaFasiDistinta(_utenteConnesso);
-                _distinta = DistintaBase.EstraiDistintaBase(_distinta.IdDiba);
-                creaAlbero();
+                if (_distinta == null) return;
+                if (verificaDistintaPerSalvataggio())
+                {
+                    _distinta.SalvaListaFasiDistinta(_utenteConnesso);
+                    _distinta = DistintaBase.EstraiDistintaBase(_distinta.IdDiba);
+                    creaAlbero();
+                }
                 PopolaGrigliaFasi();
+            }
+            catch (Exception ex)
+            {
+                txtNotifiche.Text = ex.Message;
+                MostraEccezione(ex, "Errore in verifica cicli");
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
             }
         }
 
         private void btnEsporta_Click(object sender, EventArgs e)
         {
-            List<Ciclo> cicli;
-            List<Distinta> distinte;
+            List<CicloBusinessCentral> cicli;
+            List<DistintaBusinessCentral> distinte;
             string errori = string.Empty;
             bool esito = true;
             StringBuilder sb = new StringBuilder();
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                if (!VerificaCicli(out cicli, out errori))
-                {
-                    sb.AppendLine(String.Empty);
-                    sb.AppendLine(String.Empty);
-                    sb.AppendLine("*** ANALISI cicli ***");
-                    esito = false;
-                    sb.AppendLine(errori);
-                }
 
                 if (!VerificaDistinte(out distinte, out errori))
                 {
@@ -465,9 +507,19 @@ namespace DisegnaDiBa
                     sb.AppendLine(errori);
                 }
 
+                if (!VerificaCicli(out cicli, out errori))
+                {
+                    sb.AppendLine(String.Empty);
+                    sb.AppendLine(String.Empty);
+                    sb.AppendLine("*** ANALISI cicli ***");
+                    esito = false;
+                    sb.AppendLine(errori);
+                }
+
                 if (esito)
                 {
                     salvaCicli(cicli);
+                    salvaDistinte(distinte);
                 }
             }
             catch (Exception ex)
@@ -483,9 +535,11 @@ namespace DisegnaDiBa
             }
         }
 
-        private void salvaDistinte(List<Distinta> distinte)
+        private void salvaDistinte(List<DistintaBusinessCentral> distinte)
         {
             SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Title = "INDICARE IL FILE PER SALVARE LE DISTINTE";
+
             sfd.Filter = "Excel Files (*.xlsx)|*.xlsx";
             sfd.DefaultExt = "xlsx";
             sfd.AddExtension = true;
@@ -520,9 +574,10 @@ namespace DisegnaDiBa
                 fs.Close();
             }
         }
-        private void salvaCicli(List<Ciclo> cicli)
+        private void salvaCicli(List<CicloBusinessCentral> cicli)
         {
             SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Title = "INDICARE IL FILE PER SALVARE I CICLI";
             sfd.Filter = "Excel Files (*.xlsx)|*.xlsx";
             sfd.DefaultExt = "xlsx";
             sfd.AddExtension = true;
@@ -557,11 +612,11 @@ namespace DisegnaDiBa
                 fs.Close();
             }
         }
-        private bool VerificaDistinte(out List<Distinta> distinte, out string errori)
+        private bool VerificaDistinte(out List<DistintaBusinessCentral> distinte, out string errori)
         {
             bool esito = true;
             errori = string.Empty;
-            distinte = new List<Distinta>();
+            distinte = new List<DistintaBusinessCentral>();
             StringBuilder sb = new StringBuilder();
 
             List<FaseDistinta> faseConAnagrafica = _distinta.Fasi.Where(x => !string.IsNullOrEmpty(x.Anagrafica)).OrderByDescending(x => x.IdFaseDiba).ToList();
@@ -582,18 +637,49 @@ namespace DisegnaDiBa
 
                 while (fasiFiglie.Count > 0)
                 {
-                    if (fasiFiglie.Count > 1 || !(string.IsNullOrEmpty(fasiFiglie[0].Anagrafica)))
+                    List<ComponenteDistintaBusinessCentral> componenti = new List<ComponenteDistintaBusinessCentral>();
+                    bool esitoFiglio = true;
+                    if (fasiFiglie.Count > 1)
                     {
-                        if (fasiFiglie.Count > 1)
+                        foreach (FaseDistinta figlio in fasiFiglie)
                         {
-                            List<Componente> componenti = new List<Componente>();
-                            fasiFiglie.ForEach(x => componenti.Add(new Componente(x.Anagrafica, x.Quantita, x.CollegamentoDiba, x.UMQuantita, x.IdFaseDiba, fase.Anagrafica)));
+                            if (string.IsNullOrEmpty(figlio.Anagrafica))
+                            {
+                                figlio.Errore = "Anagrafica non definita";
+                                sb.AppendLine(string.Format("Fase {0} manca anagrafica", figlio.IdFaseDiba));
+                                esitoFiglio = false;
+                                esito = false;
+                            }
+                            if (figlio.Quantita <= 0)
+                            {
+                                figlio.Errore += " Anagrafica non definita";
+                                sb.AppendLine(string.Format("Fase {0} quantità non valida", figlio.IdFaseDiba));
+                                esitoFiglio = false;
+                                esito = false;
 
-                            distinte.Add(new Distinta(fase.Anagrafica, componenti));
+                            }
+                            componenti.Add(new ComponenteDistintaBusinessCentral(figlio.Anagrafica, figlio.Quantita, figlio.CollegamentoDiba, figlio.UMQuantita, figlio.IdFaseDiba, fase.Anagrafica));
+
                         }
+                        if (esitoFiglio)
+                            distinte.Add(new DistintaBusinessCentral(fase.Anagrafica, componenti));
+
+                        fasiFiglie = new List<FaseDistinta>();
+                        continue;
 
                     }
-                    fasiFiglie = _distinta.Fasi.Where(x => x.IdPadre == fasiFiglie[0].IdFaseDiba).ToList();
+                    else
+                    {
+                        if (!string.IsNullOrEmpty(fasiFiglie[0].Anagrafica))
+                        {
+                            componenti.Add(new ComponenteDistintaBusinessCentral(fasiFiglie[0].Anagrafica, fasiFiglie[0].Quantita, fasiFiglie[0].CollegamentoDiba, fasiFiglie[0].UMQuantita, fasiFiglie[0].IdFaseDiba, fase.Anagrafica));
+                            distinte.Add(new DistintaBusinessCentral(fase.Anagrafica, componenti));
+                            fasiFiglie = new List<FaseDistinta>();
+                        }
+                        else
+                            fasiFiglie = _distinta.Fasi.Where(x => x.IdPadre == fasiFiglie[0].IdFaseDiba).ToList();
+
+                    }
                 }
 
             }
@@ -602,11 +688,11 @@ namespace DisegnaDiBa
             return esito;
         }
 
-        private bool VerificaCicli(out List<Ciclo> cicli, out string errori)
+        private bool VerificaCicli(out List<CicloBusinessCentral> cicli, out string errori)
         {
             bool esito = true;
             errori = string.Empty;
-            cicli = new List<Ciclo>();
+            cicli = new List<CicloBusinessCentral>();
             StringBuilder sb = new StringBuilder();
 
             string messaggioErrore = string.Empty;
@@ -626,32 +712,23 @@ namespace DisegnaDiBa
             foreach (FaseDistinta fase in faseConAnagrafica)
             {
                 int operazione = 10;
-                Ciclo c = new Ciclo(fase.Anagrafica);
+                CicloBusinessCentral c = new CicloBusinessCentral(fase.Anagrafica);
+                c.AggiungiFase(fase, operazione, out errori);
+                operazione += 10;
+                sb.Append(errori);
+
                 List<FaseDistinta> fasiFiglie = _distinta.Fasi.Where(x => x.IdPadre == fase.IdFaseDiba).ToList();
 
                 while (fasiFiglie.Count == 1 && string.IsNullOrEmpty(fasiFiglie[0].Anagrafica))
                 {
-                    Fase f = new Fase();
-                    f.Operazione = operazione;
-                    operazione += 10;
-                    f.AreaProduzione = fasiFiglie[0].AreaProduzione;
-                    if (string.IsNullOrEmpty(f.AreaProduzione))
+                    if (string.IsNullOrEmpty(fasiFiglie[0].Anagrafica))
                     {
-                        sb.AppendLine("Area di produzione nulla");
-                        esito = false;
+                        string erroriFase;
+                        c.AggiungiFase(fasiFiglie[0], operazione, out erroriFase);
+                        operazione += 10;
+                        sb.Append(errori);
+                        fasiFiglie = _distinta.Fasi.Where(x => x.IdPadre == fasiFiglie[0].IdFaseDiba).ToList();
                     }
-                    f.TempoLavorazione = fasiFiglie[0].Periodo;
-                    f.Collegamento = fasiFiglie[0].CollegamentoCiclo;
-                    f.DimensioneLotto = fasiFiglie[0].PezziOrari;
-                    f.Task = fasiFiglie[0].Task;
-                    if (string.IsNullOrEmpty(f.Task))
-                    {
-                        sb.AppendLine("Task nullo");
-                        esito = false;
-                    }
-                    f.Commenti = new List<string>();
-                    c.Fasi.Add(f);
-                    fasiFiglie = _distinta.Fasi.Where(x => x.IdPadre == fasiFiglie[0].IdFaseDiba).ToList();
                 }
 
                 if (c.Fasi.Count > 0)
@@ -691,6 +768,36 @@ namespace DisegnaDiBa
                     tb.AutoCompleteCustomSource = _autoItems;
                     tb.AutoCompleteSource = AutoCompleteSource.CustomSource;
                 }
+            }
+        }
+
+        private void dgvNodi_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+
+
+        }
+
+        private void dgvNodi_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            int idFaseDiba = (int)dgvNodi.Rows[e.RowIndex].Cells[IdFase.Index].Value;
+            string anagrafica = (string)dgvNodi.Rows[e.RowIndex].Cells[Anagrafica.Index].Value;
+            string areaProduzione = (string)dgvNodi.Rows[e.RowIndex].Cells[AreaProduzione.Index].Value;
+
+            aggiornaNodoAlbero(idFaseDiba, areaProduzione, anagrafica);
+        }
+
+        private void tvDiBa_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            FaseDistinta faseDistinta = (FaseDistinta)e.Node.Tag;
+
+            foreach (DataGridViewRow riga in dgvNodi.Rows)
+            {
+                int IDRiga = (int)riga.Cells[IdFase.Index].Value;
+                if (IDRiga == faseDistinta.IdFaseDiba)
+                    riga.DefaultCellStyle.BackColor = Color.Yellow;
+                else
+                    riga.DefaultCellStyle.BackColor = Color.White;
             }
         }
     }

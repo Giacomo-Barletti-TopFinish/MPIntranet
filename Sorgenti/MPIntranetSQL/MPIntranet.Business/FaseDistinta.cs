@@ -3,6 +3,7 @@ using MPIntranet.Entities;
 using MPIntranet.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -125,13 +126,14 @@ namespace MPIntranet.Business
                     faseDaCancellare.DATAMODIFICA = DateTime.Now;
                 }
 
-                foreach (FaseDistinta fd in fasi)
+                foreach (FaseDistinta fd in fasi.OrderByDescending(x => x.IdPadre))
                 {
                     ArticoliDS.FASIDIBARow faseDistinta = ds.FASIDIBA.Where(x => x.RowState != System.Data.DataRowState.Deleted && x.IDFASEDIBA == fd.IdFaseDiba).FirstOrDefault();
 
-                    if (faseDistinta == null)
+                    if (faseDistinta == null || fd.IdFaseDiba < 0)
                     {
                         faseDistinta = ds.FASIDIBA.NewFASIDIBARow();
+                        faseDistinta.IDFASEDIBA = fd.IdFaseDiba;
                         if (fd.IdPadre != 0)
                             faseDistinta.IDPADRE = fd.IdPadre;
                         faseDistinta.IDDIBA = fd.IdDiba;
@@ -179,7 +181,10 @@ namespace MPIntranet.Business
                     }
 
                 }
-                bArticolo.UpdateFaseDistintaBaseTable(ds);
+                DataRow[] drs = ds.FASIDIBA.OrderBy(x => x.IDFASEDIBA).ToArray();
+
+
+                bArticolo.UpdateFaseDistintaBaseTable(ds.FASIDIBA.TableName,drs);
             }
 
         }

@@ -239,22 +239,21 @@ namespace MPIntranet.DataAccess.Articoli
             }
         }
 
-        public void UpdateFaseDistintaBaseTable(ArticoliDS ds)
+        public void UpdateFaseDistintaBaseTable(string tablename,DataRow[] drs)
         {
-            string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", ds.FASIDIBA.TableName);
+            string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);
 
             using (DbDataAdapter a = BuildDataAdapter(query))
             {
                 InstallRowUpdatedHandler(a, UpdateFaseDistintaBaseHander);
                 a.ContinueUpdateOnError = false;
-                DataTable dt = ds.FASIDIBA;
                 DbCommandBuilder cmd = BuildCommandBuilder(a);
                 a.AcceptChangesDuringFill = true;
                 a.UpdateCommand = cmd.GetUpdateCommand();
                 a.DeleteCommand = cmd.GetDeleteCommand();
                 a.InsertCommand = cmd.GetInsertCommand();
 
-                a.Update(dt);
+                a.Update(drs);
             }
         }
         private void UpdateFaseDistintaBaseHander(object sender, RowUpdatedEventArgs e)

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using MPIntranet.Entities;
+using MPIntranet.Business;
 
 namespace MPIntranet.Helpers
 {
@@ -68,7 +68,7 @@ namespace MPIntranet.Helpers
             return styleSheet;
         }
 
-        public byte[] CreaFileFaseCicli(List<Ciclo> cicli, out string errori)
+        public byte[] CreaFileFaseCicli(List<CicloBusinessCentral> cicli, out string errori)
         {
             errori = string.Empty;
             StringBuilder sb = new StringBuilder();
@@ -167,9 +167,9 @@ namespace MPIntranet.Helpers
                 rowHeaderDettaglio.Append(ConstructCell("Commento", CellValues.String, 2));
                 sheetDataDettaglio.AppendChild(rowHeaderDettaglio);
 
-                foreach (Ciclo c in cicli)
+                foreach (CicloBusinessCentral c in cicli)
                 {
-                    foreach (Fase f in c.Fasi)
+                    foreach (FaseCicloBusinessCentral f in c.Fasi)
                     {
                         Row rowTestata = new Row();
 
@@ -255,7 +255,7 @@ namespace MPIntranet.Helpers
             return stringhe;
         }
 
-        public byte[] CreaFileCompoentiDistinta(List<Distinta> distinte, out string errori)
+        public byte[] CreaFileCompoentiDistinta(List<DistintaBusinessCentral> distinte, out string errori)
         {
             errori = string.Empty;
             StringBuilder sb = new StringBuilder();
@@ -321,10 +321,10 @@ namespace MPIntranet.Helpers
                 rowHeader.Append(ConstructCell("Cod. formula", CellValues.String, 2));
                 sheetDistinte.AppendChild(rowHeader);
 
-                foreach (Distinta d in distinte)
+                foreach (DistintaBusinessCentral d in distinte)
                 {
                     int numeroRiga = 1000;
-                    foreach (Componente c in d.Componenti)
+                    foreach (ComponenteDistintaBusinessCentral c in d.Componenti)
                     {
                         Row row = new Row();
                         row.Append(ConstructCell(d.Codice, CellValues.String, 1));

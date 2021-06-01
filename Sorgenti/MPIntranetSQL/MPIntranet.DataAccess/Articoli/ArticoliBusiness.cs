@@ -2,6 +2,7 @@
 using MPIntranet.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,10 +45,10 @@ namespace MPIntranet.DataAccess.Articoli
             a.FillArticoli(anagrafica, ds, soloNonCancellati);
         }
         [DataContext]
-        public void FillTask( ArticoliDS ds)
+        public void FillTask(ArticoliDS ds)
         {
             ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
-            a.FillTask( ds);
+            a.FillTask(ds);
         }
         [DataContext]
         public void FillItems(ArticoliDS ds)
@@ -56,10 +57,10 @@ namespace MPIntranet.DataAccess.Articoli
             a.FillItems(ds);
         }
         [DataContext]
-        public void FillAreeProduzione( ArticoliDS ds)
+        public void FillAreeProduzione(ArticoliDS ds)
         {
             ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
-            a.FillAreeProduzione( ds);
+            a.FillAreeProduzione(ds);
         }
         [DataContext]
         public void FillBrand(ArticoliDS ds, bool soloNonCancellati)
@@ -100,10 +101,10 @@ namespace MPIntranet.DataAccess.Articoli
             a.UpdateDistintaBaseTable(ds);
         }
         [DataContext(true)]
-        public void UpdateFaseDistintaBaseTable(ArticoliDS ds)
+        public void UpdateFaseDistintaBaseTable(string tablename, DataRow[] drs)
         {
             ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
-            a.UpdateFaseDistintaBaseTable(ds);
+            a.UpdateFaseDistintaBaseTable(tablename, drs);
         }
     }
 }

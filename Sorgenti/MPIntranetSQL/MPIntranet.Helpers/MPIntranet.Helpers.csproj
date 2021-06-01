@@ -60,6 +60,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MPIntranet.Business\MPIntranet.Business.csproj">
+      <Project>{11EE71D3-C51C-4B99-A5C9-431099326DA7}</Project>
+      <Name>MPIntranet.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MPIntranet.Entities\MPIntranet.Entities.csproj">
       <Project>{055d9b2d-98fd-417e-ab6a-970203561b5c}</Project>
       <Name>MPIntranet.Entities</Name>

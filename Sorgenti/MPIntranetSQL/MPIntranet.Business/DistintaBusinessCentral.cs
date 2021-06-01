@@ -4,24 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MPIntranet.Entities
+namespace MPIntranet.Business
 {
-    public class Distinta
+    public class DistintaBusinessCentral
     {
         public string Codice;
-        public List<Componente> Componenti = new List<Componente>();
+        public List<ComponenteDistintaBusinessCentral> Componenti = new List<ComponenteDistintaBusinessCentral>();
         public string Versione = string.Empty;
 
 
 
-        public Distinta(string Codice, List<Componente> Componenti)
+        public DistintaBusinessCentral(string Codice, List<ComponenteDistintaBusinessCentral> Componenti)
         {
             this.Codice = Codice;
             this.Componenti = Componenti;
         }
+
+
     }
 
-    public class Componente
+    public class ComponenteDistintaBusinessCentral
     {
         public int ID;
         public string Tipo = "Articolo";
@@ -38,7 +40,7 @@ namespace MPIntranet.Entities
         public string ArticoloNeutro = string.Empty;
         public string Formula = string.Empty;
         public string DistintaPadre = string.Empty;
-        public Componente(string Anagrafica, double Quantita, string Collegamento, string UM, int ID, string DistintaPadre)
+        public ComponenteDistintaBusinessCentral(string Anagrafica, double Quantita, string Collegamento, string UM, int ID, string DistintaPadre)
         {
             this.Anagrafica = Anagrafica;
             this.Quantita = Quantita;

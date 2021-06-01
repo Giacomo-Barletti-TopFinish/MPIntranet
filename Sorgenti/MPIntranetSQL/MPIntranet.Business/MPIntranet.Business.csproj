@@ -47,8 +47,10 @@
     <Compile Include="BloccoDocumento.cs" />
     <Compile Include="Brand.cs" />
     <Compile Include="BusinessBase.cs" />
+    <Compile Include="CicloBusinessCentral.cs" />
     <Compile Include="Configurazioni.cs" />
     <Compile Include="DistintaBase.cs" />
+    <Compile Include="DistintaBusinessCentral.cs" />
     <Compile Include="Documento.cs" />
     <Compile Include="FaseDistinta.cs" />
     <Compile Include="Item.cs" />
@@ -69,10 +71,6 @@
     <ProjectReference Include="..\MPIntranet.Entities\MPIntranet.Entities.csproj">
       <Project>{055D9B2D-98FD-417E-AB6A-970203561B5C}</Project>
       <Name>MPIntranet.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MPIntranet.Helpers\MPIntranet.Helpers.csproj">
-      <Project>{95b32cae-042b-4bf3-984e-617b9397c8ce}</Project>
-      <Name>MPIntranet.Helpers</Name>
     </ProjectReference>
     <ProjectReference Include="..\MPIntranet.Models\MPIntranet.Models.csproj">
       <Project>{FECD5686-E3F2-4EFF-BA4D-88A23A4EA08A}</Project>
