@@ -474,6 +474,10 @@ namespace DisegnaDiBa
                     _distinta = DistintaBase.EstraiDistintaBase(_distinta.IdDiba);
                     creaAlbero();
                 }
+                else
+                {
+                    MessageBox.Show("Ci sono errori nelle righe la distinte NON è stata salvata", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
                 PopolaGrigliaFasi();
             }
             catch (Exception ex)
