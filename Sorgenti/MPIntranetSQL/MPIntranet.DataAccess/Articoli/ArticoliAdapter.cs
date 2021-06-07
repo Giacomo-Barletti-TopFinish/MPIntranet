@@ -276,5 +276,112 @@ namespace MPIntranet.DataAccess.Articoli
             }
         }
 
+        public void GetDistinteBCTestata(ArticoliDS ds, string codiceTestata)
+        {
+            string select = @"select * from DistinteBCTestata where No_ = $P<TESTATA>";
+            ParamSet ps = new ParamSet();
+            ps.AddParam("TESTATA", DbType.String, codiceTestata);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.DistinteBCTestata);
+            }
+        }
+
+        public void GetDistinteBCDettaglio(ArticoliDS ds, string codiceTestata)
+        {
+            string select = @"select * from DistinteBCDettaglio where [Production BOM No_] =  $P<TESTATA>";
+            ParamSet ps = new ParamSet();
+            ps.AddParam("TESTATA", DbType.String, codiceTestata);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.DistinteBCDettaglio);
+            }
+        }
+
+        public void GetCicliBCTestata(ArticoliDS ds, string codiceTestata)
+        {
+            string select = @"select * from CicliBCTestata where No_ = $P<TESTATA>";
+            ParamSet ps = new ParamSet();
+            ps.AddParam("TESTATA", DbType.String, codiceTestata);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.CicliBCTestata);
+            }
+        }
+
+        public void GetCicliBCDettaglio(ArticoliDS ds, string codiceTestata)
+        {
+            string select = @"select * from CicliBCDettaglio where [Routing No_] =  $P<TESTATA> order by [Operation No_] asc";
+            ParamSet ps = new ParamSet();
+            ps.AddParam("TESTATA", DbType.String, codiceTestata);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.CicliBCDettaglio);
+            }
+        }
+
+        public void GetCOMPONENTI(ArticoliDS ds, int idDiba, bool soloNonCancellati)
+        {
+            string select = @"select * from COMPONENTI where [IDDIBA] =  $P<IDDIBA> ";
+            if (soloNonCancellati)
+                select += "WHERE CANCELLATO = 0 ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDDIBA", DbType.Int32, idDiba);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.COMPONENTI);
+            }
+        }
+
+        public void GetFASICICLO(ArticoliDS ds, int idDiba, bool soloNonCancellati)
+        {
+            string select = @"select * from FASICICLO where [IDDIBA] =  $P<IDDIBA> ";
+            if (soloNonCancellati)
+                select += "WHERE CANCELLATO = 0 ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDDIBA", DbType.Int32, idDiba);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.FASICICLO);
+            }
+        }
+        public void UpdateComponentiTable(string tablename, DataRow[] drs)
+        {
+            string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);
+
+            using (DbDataAdapter a = BuildDataAdapter(query))
+            {
+                InstallRowUpdatedHandler(a, UpdateComponentiHander);
+                a.ContinueUpdateOnError = false;
+                DbCommandBuilder cmd = BuildCommandBuilder(a);
+                a.AcceptChangesDuringFill = true;
+                a.UpdateCommand = cmd.GetUpdateCommand();
+                a.DeleteCommand = cmd.GetDeleteCommand();
+                a.InsertCommand = cmd.GetInsertCommand();
+
+                a.Update(drs);
+            }
+        }
+        private void UpdateComponentiHander(object sender, RowUpdatedEventArgs e)
+        {
+            if ((e.Status == UpdateStatus.Continue) && (e.StatementType == StatementType.Insert))
+            {
+                ArticoliDS.COMPONENTIRow row = (ArticoliDS.COMPONENTIRow)e.Row;
+                ArticoliDS.COMPONENTIDataTable dt = row.Table as ArticoliDS.COMPONENTIDataTable;
+
+                bool isIdentityReadOnly = dt.IDCOMPONENTEColumn.ReadOnly;
+                dt.IDCOMPONENTEColumn.ReadOnly = false;
+                try
+                {
+                    row.IDCOMPONENTE = (int)RetrievePostUpdateID<decimal>(e.Command, row);
+                }
+                finally
+                {
+                    dt.IDCOMPONENTEColumn.ReadOnly = isIdentityReadOnly;
+                }
+            }
+        }
     }
 }

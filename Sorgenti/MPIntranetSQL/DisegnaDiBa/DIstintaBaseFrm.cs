@@ -493,8 +493,8 @@ namespace DisegnaDiBa
 
         private void btnEsporta_Click(object sender, EventArgs e)
         {
-            List<CicloBusinessCentral> cicli;
-            List<DistintaBusinessCentral> distinte;
+            List<ExpCicloBusinessCentral> cicli;
+            List<ExpDistintaBusinessCentral> distinte;
             string errori = string.Empty;
             bool esito = true;
             StringBuilder sb = new StringBuilder();
@@ -539,7 +539,7 @@ namespace DisegnaDiBa
             }
         }
 
-        private void salvaDistinte(List<DistintaBusinessCentral> distinte)
+        private void salvaDistinte(List<ExpDistintaBusinessCentral> distinte)
         {
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Title = "INDICARE IL FILE PER SALVARE LE DISTINTE";
@@ -578,7 +578,7 @@ namespace DisegnaDiBa
                 fs.Close();
             }
         }
-        private void salvaCicli(List<CicloBusinessCentral> cicli)
+        private void salvaCicli(List<ExpCicloBusinessCentral> cicli)
         {
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Title = "INDICARE IL FILE PER SALVARE I CICLI";
@@ -616,11 +616,11 @@ namespace DisegnaDiBa
                 fs.Close();
             }
         }
-        private bool VerificaDistinte(out List<DistintaBusinessCentral> distinte, out string errori)
+        private bool VerificaDistinte(out List<ExpDistintaBusinessCentral> distinte, out string errori)
         {
             bool esito = true;
             errori = string.Empty;
-            distinte = new List<DistintaBusinessCentral>();
+            distinte = new List<ExpDistintaBusinessCentral>();
             StringBuilder sb = new StringBuilder();
 
             List<FaseDistinta> faseConAnagrafica = _distinta.Fasi.Where(x => !string.IsNullOrEmpty(x.Anagrafica)).OrderByDescending(x => x.IdFaseDiba).ToList();
@@ -666,7 +666,7 @@ namespace DisegnaDiBa
 
                         }
                         if (esitoFiglio)
-                            distinte.Add(new DistintaBusinessCentral(fase.Anagrafica, componenti));
+                            distinte.Add(new ExpDistintaBusinessCentral(fase.Anagrafica, componenti));
 
                         fasiFiglie = new List<FaseDistinta>();
                         continue;
@@ -677,7 +677,7 @@ namespace DisegnaDiBa
                         if (!string.IsNullOrEmpty(fasiFiglie[0].Anagrafica))
                         {
                             componenti.Add(new ComponenteDistintaBusinessCentral(fasiFiglie[0].Anagrafica, fasiFiglie[0].Quantita, fasiFiglie[0].CollegamentoDiba, fasiFiglie[0].UMQuantita, fasiFiglie[0].IdFaseDiba, fase.Anagrafica));
-                            distinte.Add(new DistintaBusinessCentral(fase.Anagrafica, componenti));
+                            distinte.Add(new ExpDistintaBusinessCentral(fase.Anagrafica, componenti));
                             fasiFiglie = new List<FaseDistinta>();
                         }
                         else
@@ -692,11 +692,11 @@ namespace DisegnaDiBa
             return esito;
         }
 
-        private bool VerificaCicli(out List<CicloBusinessCentral> cicli, out string errori)
+        private bool VerificaCicli(out List<ExpCicloBusinessCentral> cicli, out string errori)
         {
             bool esito = true;
             errori = string.Empty;
-            cicli = new List<CicloBusinessCentral>();
+            cicli = new List<ExpCicloBusinessCentral>();
             StringBuilder sb = new StringBuilder();
 
             string messaggioErrore = string.Empty;
@@ -716,7 +716,7 @@ namespace DisegnaDiBa
             foreach (FaseDistinta fase in faseConAnagrafica)
             {
                 int operazione = 10;
-                CicloBusinessCentral c = new CicloBusinessCentral(fase.Anagrafica);
+                ExpCicloBusinessCentral c = new ExpCicloBusinessCentral(fase.Anagrafica);
                 c.AggiungiFase(fase, operazione, out errori);
                 operazione += 10;
                 sb.Append(errori);

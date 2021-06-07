@@ -41,15 +41,15 @@
             this.lblMessage = new System.Windows.Forms.Label();
             this.btnCreaArticolo = new System.Windows.Forms.Button();
             this.dgvArticoli = new System.Windows.Forms.DataGridView();
-            this.BrandColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cancellato = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.btnTrovaArticolo = new System.Windows.Forms.Button();
             this.IdArticoloColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Brand = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descrizione = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Colore = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Anagrafica = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CodiceCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BrandColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cancellato = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.btnTrovaArticolo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticoli)).BeginInit();
             this.SuspendLayout();
             // 
@@ -90,7 +90,7 @@
             this.txtDescrizione.MaxLength = 50;
             this.txtDescrizione.Name = "txtDescrizione";
             this.txtDescrizione.Size = new System.Drawing.Size(240, 21);
-            this.txtDescrizione.TabIndex = 2;
+            this.txtDescrizione.TabIndex = 4;
             // 
             // label3
             // 
@@ -128,7 +128,7 @@
             this.txtColore.MaxLength = 15;
             this.txtColore.Name = "txtColore";
             this.txtColore.Size = new System.Drawing.Size(240, 21);
-            this.txtColore.TabIndex = 2;
+            this.txtColore.TabIndex = 5;
             // 
             // label5
             // 
@@ -147,7 +147,7 @@
             this.txtCodiceCliente.MaxLength = 20;
             this.txtCodiceCliente.Name = "txtCodiceCliente";
             this.txtCodiceCliente.Size = new System.Drawing.Size(152, 21);
-            this.txtCodiceCliente.TabIndex = 2;
+            this.txtCodiceCliente.TabIndex = 3;
             // 
             // lblMessage
             // 
@@ -166,7 +166,7 @@
             this.btnCreaArticolo.Location = new System.Drawing.Point(593, 100);
             this.btnCreaArticolo.Name = "btnCreaArticolo";
             this.btnCreaArticolo.Size = new System.Drawing.Size(89, 30);
-            this.btnCreaArticolo.TabIndex = 3;
+            this.btnCreaArticolo.TabIndex = 7;
             this.btnCreaArticolo.Text = "Crea articolo";
             this.btnCreaArticolo.UseVisualStyleBackColor = true;
             this.btnCreaArticolo.Click += new System.EventHandler(this.btnCreaArticolo_Click);
@@ -189,28 +189,6 @@
             this.dgvArticoli.Size = new System.Drawing.Size(708, 125);
             this.dgvArticoli.TabIndex = 4;
             this.dgvArticoli.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvArticoli_CellDoubleClick);
-            // 
-            // BrandColumn
-            // 
-            this.BrandColumn.DataPropertyName = "Brand";
-            this.BrandColumn.HeaderText = "Brand";
-            this.BrandColumn.Name = "BrandColumn";
-            // 
-            // Cancellato
-            // 
-            this.Cancellato.HeaderText = "Cancellato";
-            this.Cancellato.Name = "Cancellato";
-            // 
-            // btnTrovaArticolo
-            // 
-            this.btnTrovaArticolo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrovaArticolo.Location = new System.Drawing.Point(442, 100);
-            this.btnTrovaArticolo.Name = "btnTrovaArticolo";
-            this.btnTrovaArticolo.Size = new System.Drawing.Size(89, 30);
-            this.btnTrovaArticolo.TabIndex = 3;
-            this.btnTrovaArticolo.Text = "Trova articolo";
-            this.btnTrovaArticolo.UseVisualStyleBackColor = true;
-            this.btnTrovaArticolo.Click += new System.EventHandler(this.btnTrovaArticolo_Click);
             // 
             // IdArticoloColumn
             // 
@@ -256,6 +234,28 @@
             this.CodiceCliente.HeaderText = "Codice cliente";
             this.CodiceCliente.Name = "CodiceCliente";
             this.CodiceCliente.ReadOnly = true;
+            // 
+            // BrandColumn
+            // 
+            this.BrandColumn.DataPropertyName = "Brand";
+            this.BrandColumn.HeaderText = "Brand";
+            this.BrandColumn.Name = "BrandColumn";
+            // 
+            // Cancellato
+            // 
+            this.Cancellato.HeaderText = "Cancellato";
+            this.Cancellato.Name = "Cancellato";
+            // 
+            // btnTrovaArticolo
+            // 
+            this.btnTrovaArticolo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTrovaArticolo.Location = new System.Drawing.Point(442, 100);
+            this.btnTrovaArticolo.Name = "btnTrovaArticolo";
+            this.btnTrovaArticolo.Size = new System.Drawing.Size(89, 30);
+            this.btnTrovaArticolo.TabIndex = 6;
+            this.btnTrovaArticolo.Text = "Trova articolo";
+            this.btnTrovaArticolo.UseVisualStyleBackColor = true;
+            this.btnTrovaArticolo.Click += new System.EventHandler(this.btnTrovaArticolo_Click);
             // 
             // NuovoArticoloFrm
             // 

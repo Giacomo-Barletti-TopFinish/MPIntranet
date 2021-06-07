@@ -47,11 +47,14 @@
     <Compile Include="BloccoDocumento.cs" />
     <Compile Include="Brand.cs" />
     <Compile Include="BusinessBase.cs" />
-    <Compile Include="CicloBusinessCentral.cs" />
+    <Compile Include="Componente.cs" />
+    <Compile Include="DistintaBC.cs" />
+    <Compile Include="ExpCicloBusinessCentral.cs" />
     <Compile Include="Configurazioni.cs" />
     <Compile Include="DistintaBase.cs" />
-    <Compile Include="DistintaBusinessCentral.cs" />
+    <Compile Include="ExpDistintaBusinessCentral.cs" />
     <Compile Include="Documento.cs" />
+    <Compile Include="FaseCiclo.cs" />
     <Compile Include="FaseDistinta.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

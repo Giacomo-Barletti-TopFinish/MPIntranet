@@ -106,6 +106,87 @@ namespace MPIntranet.Business
             return fase;
         }
 
+        public static FaseDistinta CreaFaseDistinta(ArticoliDS.DistinteBCTestataRow riga, ArticoliDS.CicliBCDettaglioRow ciclo, int idFaseDiba, int idPadre)
+        {
+            if (riga == null || ciclo == null) return null;
+            FaseDistinta fase = new FaseDistinta(1);
+            fase.IdFaseDiba = idFaseDiba;
+            fase.IdPadre = idPadre;
+            fase.IdDiba = 1;
+            fase.Descrizione = string.Empty;
+            fase.Anagrafica = riga.No_;
+            fase.AreaProduzione = ciclo.Work_Center_No_;
+            fase.Task = ciclo.Standard_Task_Code;
+            fase.SchedaProcesso = string.Empty;
+            fase.CollegamentoCiclo = ciclo.Routing_Link_Code;
+            fase.CollegamentoDiba = string.Empty;
+            fase.Quantita = 1;
+            fase.PezziOrari = (double)ciclo.Lot_Size;
+            fase.Periodo = (double)ciclo.Run_Time;
+            fase.UMQuantita = riga.Unit_of_Measure_Code;
+            fase.Setup = (double)ciclo.Setup_Time;
+            fase.Attesa = (double)ciclo.Wait_Time;
+            fase.Movimentazione = (double)ciclo.Move_Time;
+            fase.Cancellato = false;
+            fase.DataModifica = DateTime.Now;
+            fase.UtenteModifica = string.Empty;
+
+            return fase;
+        }
+        public static FaseDistinta CreaFaseDistinta(ArticoliDS.DistinteBCDettaglioRow riga, ArticoliDS.CicliBCDettaglioRow ciclo, int idFaseDiba, int idPadre)
+        {
+            if (riga == null || ciclo == null) return null;
+            FaseDistinta fase = new FaseDistinta(1);
+            fase.IdFaseDiba = idFaseDiba;
+            fase.IdPadre = idPadre;
+            fase.IdDiba = 1;
+            fase.Descrizione = string.Empty;
+            fase.Anagrafica = riga.No_;
+            fase.AreaProduzione = ciclo.Work_Center_No_;
+            fase.Task = ciclo.Standard_Task_Code;
+            fase.SchedaProcesso = string.Empty;
+            fase.CollegamentoCiclo = ciclo.Routing_Link_Code;
+            fase.CollegamentoDiba = riga.Routing_Link_Code;
+            fase.Quantita = (double)riga.Quantity_per;
+            fase.PezziOrari = (double)ciclo.Lot_Size;
+            fase.Periodo = (double)ciclo.Run_Time;
+            fase.UMQuantita = riga.Unit_of_Measure_Code;
+            fase.Setup = (double)ciclo.Setup_Time;
+            fase.Attesa = (double)ciclo.Wait_Time;
+            fase.Movimentazione = (double)ciclo.Move_Time;
+            fase.Cancellato = false;
+            fase.DataModifica = DateTime.Now;
+            fase.UtenteModifica = string.Empty;
+
+            return fase;
+        }
+        public static FaseDistinta CreaFaseDistinta(ArticoliDS.CicliBCDettaglioRow ciclo, int idFaseDiba, int idPadre)
+        {
+            if (ciclo == null) return null;
+            FaseDistinta fase = new FaseDistinta(1);
+            fase.IdFaseDiba = idFaseDiba;
+            fase.IdPadre = idPadre;
+            fase.IdDiba = 1;
+            fase.Descrizione = string.Empty;
+            fase.Anagrafica = string.Empty;
+            fase.AreaProduzione = ciclo.Work_Center_No_;
+            fase.Task = ciclo.Standard_Task_Code;
+            fase.SchedaProcesso = string.Empty;
+            fase.CollegamentoCiclo = ciclo.Routing_Link_Code;
+            fase.CollegamentoDiba = string.Empty;
+            fase.Quantita = 1;
+            fase.PezziOrari = (double)ciclo.Lot_Size;
+            fase.Periodo = (double)ciclo.Run_Time;
+            fase.UMQuantita = string.Empty;
+            fase.Setup = (double)ciclo.Setup_Time;
+            fase.Attesa = (double)ciclo.Wait_Time;
+            fase.Movimentazione = (double)ciclo.Move_Time;
+            fase.Cancellato = false;
+            fase.DataModifica = DateTime.Now;
+            fase.UtenteModifica = string.Empty;
+
+            return fase;
+        }
         public static void SalvaListaFasiDistinta(List<FaseDistinta> fasi, string utente)
         {
             if (fasi.Count() == 0) return;
@@ -184,7 +265,7 @@ namespace MPIntranet.Business
                 DataRow[] drs = ds.FASIDIBA.OrderBy(x => x.IDFASEDIBA).ToArray();
 
 
-                bArticolo.UpdateFaseDistintaBaseTable(ds.FASIDIBA.TableName,drs);
+                bArticolo.UpdateFaseDistintaBaseTable(ds.FASIDIBA.TableName, drs);
             }
 
         }

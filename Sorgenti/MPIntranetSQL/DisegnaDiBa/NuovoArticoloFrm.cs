@@ -17,11 +17,12 @@ namespace DisegnaDiBa
         public string Utente;
         public int IDArticolo = ElementiVuoti.Articolo;
         private List<Articolo> articoli = new List<Articolo>();
-        public NuovoArticoloFrm()
+        public NuovoArticoloFrm(bool NascondiCreaArticolo = false)
         {
             InitializeComponent();
             lblMessage.Text = string.Empty;
             dgvArticoli.AutoGenerateColumns = false;
+            btnCreaArticolo.Visible = !NascondiCreaArticolo;
         }
 
         private void NuovoArticoloFrm_Load(object sender, EventArgs e)
@@ -96,7 +97,7 @@ namespace DisegnaDiBa
             Brand brand = (Brand)ddlBrands.SelectedItem;
             articoli = Articolo.TrovaArticoli(txtAnagrafica.Text, txtDescrizione.Text, brand.IdBrand, txtCodiceCliente.Text, txtColore.Text);
             BindingList<Articolo> bl = new BindingList<Articolo>(articoli);
-            BindingSource bs = new BindingSource(bl,null);
+            BindingSource bs = new BindingSource(bl, null);
             dgvArticoli.DataSource = bs;
             dgvArticoli.Update();
             dgvArticoli.Refresh();

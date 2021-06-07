@@ -71,6 +71,21 @@ namespace DisegnaDiBa
         {
             try
             {
+                DistintaBaseFrm2 form = new DistintaBaseFrm2();
+//                DistintaBaseFrm form = new DistintaBaseFrm();
+                form.MdiParent = this;
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                base.MostraEccezione(ex, "Errore in apertura finestra distinta base");
+            }
+        }
+
+        private void businessCentralToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
 
                 DistintaBaseFrm form = new DistintaBaseFrm();
                 form.MdiParent = this;

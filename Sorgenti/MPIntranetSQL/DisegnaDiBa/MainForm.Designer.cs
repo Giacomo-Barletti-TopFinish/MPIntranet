@@ -38,6 +38,7 @@
             this.disponiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cascataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.organizzaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.businessCentralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preventiviMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,7 +76,8 @@
             // 
             this.distinteRVLToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nuovaDistintaToolStripMenuItem,
-            this.apriEsistenteToolStripMenuItem});
+            this.apriEsistenteToolStripMenuItem,
+            this.businessCentralToolStripMenuItem});
             this.distinteRVLToolStripMenuItem.Name = "distinteRVLToolStripMenuItem";
             this.distinteRVLToolStripMenuItem.Size = new System.Drawing.Size(95, 21);
             this.distinteRVLToolStripMenuItem.Text = "Distinte base";
@@ -126,6 +128,13 @@
             this.organizzaToolStripMenuItem.Text = "Organizza orizzontale";
             this.organizzaToolStripMenuItem.Click += new System.EventHandler(this.organizzaToolStripMenuItem_Click);
             // 
+            // businessCentralToolStripMenuItem
+            // 
+            this.businessCentralToolStripMenuItem.Name = "businessCentralToolStripMenuItem";
+            this.businessCentralToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.businessCentralToolStripMenuItem.Text = "Business Central...";
+            this.businessCentralToolStripMenuItem.Click += new System.EventHandler(this.businessCentralToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -154,6 +163,7 @@
         private System.Windows.Forms.ToolStripMenuItem cascataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem organizzaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem apriEsistenteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem businessCentralToolStripMenuItem;
     }
 }
 

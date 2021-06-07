@@ -14,6 +14,34 @@ namespace MPIntranet.DataAccess.Articoli
         public ArticoliBusiness() : base() { }
 
         [DataContext]
+        public void GetCicliBCDettaglio(ArticoliDS ds, string codiceTestata)
+        {
+            ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
+            a.GetCicliBCDettaglio(ds, codiceTestata);
+        }
+
+        [DataContext]
+        public void GetCicliBCTestata(ArticoliDS ds, string codiceTestata)
+        {
+            ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
+            a.GetCicliBCTestata(ds, codiceTestata);
+        }
+
+        [DataContext]
+        public void GetDistinteBCDettaglio(ArticoliDS ds, string codiceTestata)
+        {
+            ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
+            a.GetDistinteBCDettaglio(ds, codiceTestata);
+        }
+
+        [DataContext]
+        public void GetDistinteBCTestata(ArticoliDS ds, string codiceTestata)
+        {
+            ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
+            a.GetDistinteBCTestata(ds, codiceTestata);
+        }
+
+        [DataContext]
         public void FillArticoli(ArticoliDS ds, bool soloNonCancellati)
         {
             ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
@@ -88,6 +116,18 @@ namespace MPIntranet.DataAccess.Articoli
             ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
             a.TrovaArticoli(ds, soloNonCancellati, idBrand, anagrafica, descrizione, codiceCliente, colore);
         }
+        [DataContext]
+        public void GetFASICICLO(ArticoliDS ds, int IdDiba, bool soloNonCancellati)
+        {
+            ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
+            a.GetFASICICLO(ds, IdDiba,soloNonCancellati);
+        }
+        [DataContext]
+        public void GetCOMPONENTI(ArticoliDS ds, int IdDiba, bool soloNonCancellati)
+        {
+            ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
+            a.GetCOMPONENTI(ds, IdDiba,soloNonCancellati);
+        }
         [DataContext(true)]
         public void UpdateTable(string tablename, ArticoliDS ds)
         {
@@ -105,6 +145,12 @@ namespace MPIntranet.DataAccess.Articoli
         {
             ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
             a.UpdateFaseDistintaBaseTable(tablename, drs);
+        }
+        [DataContext(true)]
+        public void UpdateComponentiTable(string tablename, DataRow[] drs)
+        {
+            ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
+            a.UpdateComponentiTable(tablename, drs);
         }
     }
 }

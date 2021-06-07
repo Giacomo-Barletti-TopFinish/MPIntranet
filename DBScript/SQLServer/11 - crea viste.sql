@@ -1,4 +1,4 @@
-USE [MPI]
+USE [MPI_TEST]
 GO
 
 /****** Object:  View [dbo].[Task]    Script Date: 25/05/2021 15:49:14 ******/
@@ -44,3 +44,18 @@ create view [dbo].[Items] as
 select * from [TEST].[dbo].[MetalPlus_WS$Item$437dbf0e-84ff-417a-965d-ed2bb9650972]
 GO
 
+create view [dbo].[CicliBCTestata] as
+SELECT * FROM [TEST].[dbo].[MetalPlus_WS$Routing Header$437dbf0e-84ff-417a-965d-ed2bb9650972]
+go
+
+create view [dbo].[CicliBCDettaglio] as
+SELECT * FROM [TEST].[dbo].[MetalPlus_WS$Routing Line$437dbf0e-84ff-417a-965d-ed2bb9650972]
+go
+
+
+create view [dbo].[DistinteBCTestata] as
+SELECT * FROM [TEST].[dbo].[MetalPlus_WS$Production BOM Header$437dbf0e-84ff-417a-965d-ed2bb9650972]
+go
+
+create view [dbo].[DistinteBCDettaglio] as
+SELECT * FROM  [TEST].[dbo].[MetalPlus_WS$Production BOM Line$437dbf0e-84ff-417a-965d-ed2bb9650972]go

@@ -68,7 +68,7 @@ namespace MPIntranet.Helpers
             return styleSheet;
         }
 
-        public byte[] CreaFileFaseCicli(List<CicloBusinessCentral> cicli, out string errori)
+        public byte[] CreaFileFaseCicli(List<ExpCicloBusinessCentral> cicli, out string errori)
         {
             errori = string.Empty;
             StringBuilder sb = new StringBuilder();
@@ -167,7 +167,7 @@ namespace MPIntranet.Helpers
                 rowHeaderDettaglio.Append(ConstructCell("Commento", CellValues.String, 2));
                 sheetDataDettaglio.AppendChild(rowHeaderDettaglio);
 
-                foreach (CicloBusinessCentral c in cicli)
+                foreach (ExpCicloBusinessCentral c in cicli)
                 {
                     foreach (FaseCicloBusinessCentral f in c.Fasi)
                     {
@@ -255,7 +255,7 @@ namespace MPIntranet.Helpers
             return stringhe;
         }
 
-        public byte[] CreaFileCompoentiDistinta(List<DistintaBusinessCentral> distinte, out string errori)
+        public byte[] CreaFileCompoentiDistinta(List<ExpDistintaBusinessCentral> distinte, out string errori)
         {
             errori = string.Empty;
             StringBuilder sb = new StringBuilder();
@@ -321,7 +321,7 @@ namespace MPIntranet.Helpers
                 rowHeader.Append(ConstructCell("Cod. formula", CellValues.String, 2));
                 sheetDistinte.AppendChild(rowHeader);
 
-                foreach (DistintaBusinessCentral d in distinte)
+                foreach (ExpDistintaBusinessCentral d in distinte)
                 {
                     int numeroRiga = 1000;
                     foreach (ComponenteDistintaBusinessCentral c in d.Componenti)

@@ -76,11 +76,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DistintaBaseFrm2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DistintaBaseFrm2.Designer.cs">
+      <DependentUpon>DistintaBaseFrm2.cs</DependentUpon>
+    </Compile>
     <Compile Include="DistintaBaseFrm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DistintaBaseFrm.Designer.cs">
       <DependentUpon>DistintaBaseFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DistintaBusinessCentralFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DistintaBusinessCentralFrm.Designer.cs">
+      <DependentUpon>DistintaBusinessCentralFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -102,14 +114,26 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SelezionaDistintaBCFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelezionaDistintaBCFrm.Designer.cs">
+      <DependentUpon>SelezionaDistintaBCFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SelezionaDistintaFrm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SelezionaDistintaFrm.Designer.cs">
       <DependentUpon>SelezionaDistintaFrm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="DistintaBaseFrm2.resx">
+      <DependentUpon>DistintaBaseFrm2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DIstintaBaseFrm.resx">
       <DependentUpon>DistintaBaseFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DistintaBusinessCentralFrm.resx">
+      <DependentUpon>DistintaBusinessCentralFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -129,6 +153,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SelezionaDistintaBCFrm.resx">
+      <DependentUpon>SelezionaDistintaBCFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SelezionaDistintaFrm.resx">
       <DependentUpon>SelezionaDistintaFrm.cs</DependentUpon>
     </EmbeddedResource>

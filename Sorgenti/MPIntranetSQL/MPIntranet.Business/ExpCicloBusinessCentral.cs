@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace MPIntranet.Business
 {
-    public class CicloBusinessCentral
+    public class ExpCicloBusinessCentral
     {
         public static string CodiceStandard = "IMPORT";
         public string Codice;
         public List<FaseCicloBusinessCentral> Fasi;
-        public CicloBusinessCentral(string Codice)
+        public ExpCicloBusinessCentral(string Codice)
         {
             this.Codice = Codice;
             Fasi = new List<FaseCicloBusinessCentral>();

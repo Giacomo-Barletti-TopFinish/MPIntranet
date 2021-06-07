@@ -6,21 +6,17 @@ using System.Threading.Tasks;
 
 namespace MPIntranet.Business
 {
-    public class DistintaBusinessCentral
+    public class ExpDistintaBusinessCentral
     {
         public string Codice;
         public List<ComponenteDistintaBusinessCentral> Componenti = new List<ComponenteDistintaBusinessCentral>();
         public string Versione = string.Empty;
 
-
-
-        public DistintaBusinessCentral(string Codice, List<ComponenteDistintaBusinessCentral> Componenti)
+        public ExpDistintaBusinessCentral(string Codice, List<ComponenteDistintaBusinessCentral> Componenti)
         {
             this.Codice = Codice;
             this.Componenti = Componenti;
         }
-
-
     }
 
     public class ComponenteDistintaBusinessCentral

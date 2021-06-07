@@ -62,5 +62,16 @@ namespace MPIntranet.Entities.Properties {
                 return ((string)(this["MPIConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=srv-sql;Initial Catalog=MPI_TEST;Persist Security Info=True;User ID=M" +
+            "PI;Password=MPI")]
+        public string MPI_TESTConnectionString {
+            get {
+                return ((string)(this["MPI_TESTConnectionString"]));
+            }
+        }
     }
 }
