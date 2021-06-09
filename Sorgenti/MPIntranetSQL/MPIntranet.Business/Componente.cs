@@ -65,6 +65,30 @@ namespace MPIntranet.Business
             return componente;
         }
 
+        public Componente Copia(int idComponente, int idPadre)
+        {
+            int idFaseCiclo = 0;
+            Componente componente = new Componente();
+            componente.IdDiba = IdDiba;
+            componente.IdComponente = idComponente;
+            componente.IdPadre = idPadre;
+            componente.Anagrafica = Anagrafica;
+            componente.Descrizione = Descrizione;
+            componente.CollegamentoDiBa = CollegamentoDiBa;
+            componente.UMQuantita = UMQuantita;
+            componente.Quantita = Quantita;
+
+            componente.Cancellato = Cancellato;
+            componente.DataModifica = DataModifica;
+            componente.UtenteModifica = UtenteModifica;
+            componente.FasiCiclo = new List<FaseCiclo>();
+
+            foreach (FaseCiclo fc in FasiCiclo)
+                componente.FasiCiclo.Add(fc.Copia(idFaseCiclo-=10,idComponente)); 
+
+            return componente;
+        }
+
         public static void SalvaListaComponenti(List<Componente> componenti, string utente)
         {
             if (componenti.Count() == 0) return;

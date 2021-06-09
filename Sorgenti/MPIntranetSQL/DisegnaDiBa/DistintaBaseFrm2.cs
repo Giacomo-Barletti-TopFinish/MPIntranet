@@ -29,15 +29,16 @@ namespace DisegnaDiBa
         private int _idComponenteSelezionato;
         private bool _newrow = false;
 
+        protected List<Componente> ComponentiDaCopiare
+        {
+            get { return (MdiParent as MainForm).ComponentiDaCopiare; }
+            set { (MdiParent as MainForm).ComponentiDaCopiare = value; }
+        }
+
         private int estraiIndiceComponenti()
         {
             indiceComponenti--;
             return indiceComponenti;
-        }
-        private int estraiIndiceFaseCiclo()
-        {
-            indiceFaseCiclo--;
-            return indiceFaseCiclo;
         }
         public DistintaBaseFrm2()
         {
@@ -48,6 +49,7 @@ namespace DisegnaDiBa
         private void DistintaBaseFrm_Load(object sender, EventArgs e)
         {
             NuovoArticoloFrm nForm = new NuovoArticoloFrm();
+            nForm.Utente = _utenteConnesso;
             nForm.ShowDialog();
             int _idArticolo = nForm.IDArticolo;
             if (_idArticolo == ElementiVuoti.Articolo)
@@ -152,20 +154,7 @@ namespace DisegnaDiBa
                 bool esito = trovaNodo(n, IdComponente, out nodoTrovato);
                 if (esito) return true;
             }
-            //foreach (TreeNode n in nodoPadre.Nodes)
-            //{
-            //    if (n.Tag == null) return false;
 
-            //    componente = (Componente)n.Tag;
-            //    if (componente == null) return false;
-            //    if (componente.IdComponente == IdComponente)
-            //    {
-            //        nodoTrovato = n;
-            //        return true;
-            //    }
-            //    bool esito = trovaNodo(n, IdComponente, out nodoTrovato);
-            //    if (esito) return true;
-            //}
             return false;
         }
 
@@ -260,11 +249,59 @@ namespace DisegnaDiBa
             cm.MenuItems.Add("Aggiungi nodo sopra", new EventHandler(AggiungiNodoSopraClick));
             cm.MenuItems.Add("Aggiungi nodo sotto", new EventHandler(AggiungiNodoSottoClick));
             cm.MenuItems.Add("Rimuovi nodo", new EventHandler(RimuoviElementoSingoloClick));
-            tvDiBa.ContextMenu = cm;
-
+            cm.MenuItems.Add("Copia ramo", new EventHandler(CopiaRamoClick));
+            cm.MenuItems.Add("Incolla ramo", new EventHandler(IncollaRamoClick)); tvDiBa.ContextMenu = cm;
         }
 
+        private void CopiaRamoClick(object sender, EventArgs e)
+        {
+            TreeNode tn = tvDiBa.SelectedNode;
+            if (tn == null) return;
+            if (tn.Tag == null) return;
+            ComponentiDaCopiare = new List<Componente>();
 
+            Componente componenteSelezionato = (Componente)tn.Tag;
+            copiaComponenteRicorsivo(componenteSelezionato, 0);
+        }
+        private void copiaComponenteRicorsivo(Componente componenteSelezionato, int idPadre)
+        {
+            Componente componenteCopiato = componenteSelezionato.Copia(estraiIndiceComponenti(), idPadre);
+            ComponentiDaCopiare.Add(componenteCopiato);
+
+            foreach (Componente componenteFiglio in _distinta.Componenti.Where(x => x.IdPadre == componenteSelezionato.IdComponente))
+            {
+                copiaComponenteRicorsivo(componenteFiglio, componenteCopiato.IdComponente);
+            }
+        }
+        private void IncollaRamoClick(object sender, EventArgs e)
+        {
+            if (ComponentiDaCopiare == null) return;
+
+            TreeNode tn = tvDiBa.SelectedNode;
+            if (tn == null) return;
+            if (tn.Tag == null) return;
+
+            Componente componenteSelezionato = (Componente)tn.Tag;
+            Componente componenteIniziale = ComponentiDaCopiare.Where(x => x.IdPadre == 0).FirstOrDefault();
+            incollaFaseDistintaRicorsiva(componenteIniziale, componenteSelezionato.IdComponente, tn);
+            PopolaGrigliaComponenti();
+            tn.ExpandAll();
+        }
+        private void incollaFaseDistintaRicorsiva(Componente componenteIniziale, int idPadre, TreeNode nodoPadre)
+        {
+            if (componenteIniziale == null) return;
+
+            Componente componenteInizialeCopiato = componenteIniziale.Copia(estraiIndiceComponenti(), idPadre);
+
+            TreeNode nodoFiglio = new TreeNode(componenteInizialeCopiato.CreaEtichetta());
+            nodoFiglio.Tag = componenteInizialeCopiato;
+            nodoPadre.Nodes.Add(nodoFiglio);
+            _distinta.Componenti.Add(componenteInizialeCopiato);
+            foreach (Componente figlio in ComponentiDaCopiare.Where(x => x.IdPadre == componenteIniziale.IdComponente))
+            {
+                incollaFaseDistintaRicorsiva(figlio, componenteInizialeCopiato.IdComponente, nodoFiglio);
+            }
+        }
         private void AggiungiNodoSopraClick(object sender, EventArgs e)
         {
             TreeNode tn = tvDiBa.SelectedNode;
@@ -350,6 +387,8 @@ namespace DisegnaDiBa
             if (componente == null)
                 dgvFasiCiclo.DataSource = null;
             dgvFasiCiclo.AutoGenerateColumns = false;
+            if (componente.FasiCiclo == null) componente.FasiCiclo = new List<FaseCiclo>();
+
             BindingList<FaseCiclo> bindingList = new BindingList<FaseCiclo>(componente.FasiCiclo);
             sourceFasiCicli = new BindingSource(bindingList, null);
             dgvFasiCiclo.DataSource = sourceFasiCicli;
@@ -385,27 +424,6 @@ namespace DisegnaDiBa
             }
             catch (Exception ex)
             {
-                MostraEccezione(ex, "Errore in verifica cicli");
-            }
-            finally
-            {
-                Cursor.Current = Cursors.Default;
-            }
-        }
-
-        private void btnEsporta_Click(object sender, EventArgs e)
-        {
-            List<ExpCicloBusinessCentral> cicli;
-            List<ExpDistintaBusinessCentral> distinte;
-            string errori = string.Empty;
-            bool esito = true;
-            StringBuilder sb = new StringBuilder();
-            try
-            {
-            }
-            catch (Exception ex)
-            {
-                sb.AppendLine(ex.Message);
                 MostraEccezione(ex, "Errore in verifica cicli");
             }
             finally
@@ -525,12 +543,16 @@ namespace DisegnaDiBa
             _distinta.TrovaComponente(_idComponenteSelezionato, out componenteTrovato);
 
             int operazione = 10;
+            int idFaseCiclo = -1;
             if (componenteTrovato != null && componenteTrovato.FasiCiclo.Count > 0)
+            {
                 operazione = componenteTrovato.FasiCiclo.Max(x => x.Operazione) + 10;
-
+                int min = componenteTrovato.FasiCiclo.Min(x => x.IdFaseCiclo);
+                idFaseCiclo = min < 0 ? min - 1 : -1;
+            }
             DataGridViewRow row = dgvFasiCiclo.Rows[e.RowIndex - 1];
 
-            row.Cells[clmIDFaseCiclo.Index].Value = estraiIndiceFaseCiclo();
+            row.Cells[clmIDFaseCiclo.Index].Value = idFaseCiclo;
             row.Cells[clmIdDibaFaseCiclo.Index].Value = _distinta.IdDiba;
             row.Cells[clmIdComponenteFaseCiclo.Index].Value = _idComponenteSelezionato;
             row.Cells[clmOperazioneFaseCiclo.Index].Value = operazione;
@@ -550,6 +572,19 @@ namespace DisegnaDiBa
         private void dgvFasiCiclo_NewRowNeeded(object sender, DataGridViewRowEventArgs e)
         {
             _newrow = true;
+        }
+
+        private void dgvComponenti_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            if (dgvFasiCiclo.CurrentCell.ColumnIndex == clmAnagraficaComponente.Index)
+            {
+                TextBox tb = e.Control as TextBox;
+                {
+                    tb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                    tb.AutoCompleteCustomSource = _autoItems;
+                    tb.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                }
+            }
         }
     }
 }

@@ -15,6 +15,7 @@ namespace DisegnaDiBa
     public partial class MainForm : MPIBaseForm
     {
         public List<FaseDistinta> FasiDistintaDaCopiare;
+        public List<Componente> ComponentiDaCopiare;
         public MainForm()
         {
             InitializeComponent();
@@ -34,7 +35,6 @@ namespace DisegnaDiBa
                     foreach (Form f in MdiChildren)
                         f.Close();
                 }
-
             }
             catch (Exception ex)
             {

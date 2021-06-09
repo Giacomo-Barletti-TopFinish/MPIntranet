@@ -53,30 +53,54 @@ namespace MPIntranet.Business
             }
             return fasiCiclo;
         }
+        public FaseCiclo Copia(int nuovaIdFaseCiclo, int nuovoIdCOmponente)
+        {
+            FaseCiclo faseCiclo = new FaseCiclo();
+
+            faseCiclo.IdDiba = IdDiba;
+            faseCiclo.IdFaseCiclo = nuovaIdFaseCiclo;
+            faseCiclo.IdComponente = nuovoIdCOmponente;
+            faseCiclo.Descrizione = Descrizione;
+            faseCiclo.Operazione = Operazione;
+            faseCiclo.AreaProduzione = AreaProduzione;
+            faseCiclo.Task = Task;
+            faseCiclo.SchedaProcesso = SchedaProcesso;
+            faseCiclo.CollegamentoCiclo = CollegamentoCiclo;
+            faseCiclo.PezziPeriodo = PezziPeriodo;
+            faseCiclo.Periodo = Periodo;
+            faseCiclo.Setup = Setup;
+            faseCiclo.Attesa = Attesa;
+            faseCiclo.Movimentazione = Movimentazione;
+            faseCiclo.Errore = string.Empty;
+            faseCiclo.Cancellato = Cancellato;
+            faseCiclo.DataModifica = DataModifica;
+            faseCiclo.UtenteModifica = UtenteModifica;
+            return faseCiclo;
+        }
         private static FaseCiclo CreaFaseCiclo(ArticoliDS.FASICICLORow riga)
         {
 
             if (riga == null) return null;
-            FaseCiclo distinta = new FaseCiclo();
-            distinta.IdDiba = riga.IDDIBA;
-            distinta.IdFaseCiclo = riga.IDFASECICLO;
-            distinta.IdComponente = riga.IDCOMPONENTE;
-            distinta.Descrizione = riga.IsDESCRIZIONENull() ? string.Empty : riga.DESCRIZIONE;
-            distinta.Operazione = riga.OPERAZIONE;
-            distinta.AreaProduzione = riga.IsAREAPRODUZIONENull() ? string.Empty : riga.AREAPRODUZIONE;
-            distinta.Task = riga.IsTASKNull() ? string.Empty : riga.TASK;
-            distinta.SchedaProcesso = riga.IsSCHEDAPROCESSONull() ? string.Empty : riga.SCHEDAPROCESSO;
-            distinta.CollegamentoCiclo = riga.IsCOLLEGAMENTOCICLONull() ? string.Empty : riga.COLLEGAMENTOCICLO;
-            distinta.PezziPeriodo = riga.IsPEZZIPERIODONull() ? 0 : riga.PEZZIPERIODO;
-            distinta.Periodo = riga.IsPERIODONull() ? 0 : riga.PERIODO;
-            distinta.Setup = riga.IsSETUPNull() ? 0 : riga.SETUP;
-            distinta.Attesa = riga.IsATTESANull() ? 0 : riga.ATTESA;
-            distinta.Movimentazione = riga.IsMOVIMENTAZIONENull() ? 0 : riga.MOVIMENTAZIONE;
-            distinta.Errore = string.Empty;
-            distinta.Cancellato = riga.CANCELLATO;
-            distinta.DataModifica = riga.DATAMODIFICA;
-            distinta.UtenteModifica = riga.UTENTEMODIFICA;
-            return distinta;
+            FaseCiclo faseCiclo = new FaseCiclo();
+            faseCiclo.IdDiba = riga.IDDIBA;
+            faseCiclo.IdFaseCiclo = riga.IDFASECICLO;
+            faseCiclo.IdComponente = riga.IDCOMPONENTE;
+            faseCiclo.Descrizione = riga.IsDESCRIZIONENull() ? string.Empty : riga.DESCRIZIONE;
+            faseCiclo.Operazione = riga.OPERAZIONE;
+            faseCiclo.AreaProduzione = riga.IsAREAPRODUZIONENull() ? string.Empty : riga.AREAPRODUZIONE;
+            faseCiclo.Task = riga.IsTASKNull() ? string.Empty : riga.TASK;
+            faseCiclo.SchedaProcesso = riga.IsSCHEDAPROCESSONull() ? string.Empty : riga.SCHEDAPROCESSO;
+            faseCiclo.CollegamentoCiclo = riga.IsCOLLEGAMENTOCICLONull() ? string.Empty : riga.COLLEGAMENTOCICLO;
+            faseCiclo.PezziPeriodo = riga.IsPEZZIPERIODONull() ? 0 : riga.PEZZIPERIODO;
+            faseCiclo.Periodo = riga.IsPERIODONull() ? 0 : riga.PERIODO;
+            faseCiclo.Setup = riga.IsSETUPNull() ? 0 : riga.SETUP;
+            faseCiclo.Attesa = riga.IsATTESANull() ? 0 : riga.ATTESA;
+            faseCiclo.Movimentazione = riga.IsMOVIMENTAZIONENull() ? 0 : riga.MOVIMENTAZIONE;
+            faseCiclo.Errore = string.Empty;
+            faseCiclo.Cancellato = riga.CANCELLATO;
+            faseCiclo.DataModifica = riga.DATAMODIFICA;
+            faseCiclo.UtenteModifica = riga.UTENTEMODIFICA;
+            return faseCiclo;
         }
 
         public static void SalvaListaFaseCiclo(List<FaseCiclo> fasiCiclo, string utente, ArticoliDS ds)
