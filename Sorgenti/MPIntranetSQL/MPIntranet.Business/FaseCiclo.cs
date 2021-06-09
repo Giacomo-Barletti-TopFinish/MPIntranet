@@ -15,6 +15,7 @@ namespace MPIntranet.Business
         public int IdDiba { get; set; }
         public string Descrizione { get; set; }
         public int IdComponente { get; set; }
+        public int Operazione { get; set; }
         public string AreaProduzione { get; set; }
         public string Task { get; set; }
         public string SchedaProcesso { get; set; }
@@ -41,6 +42,17 @@ namespace MPIntranet.Business
             }
             return fasiCiclo;
         }
+
+        public static List<FaseCiclo> EstraiListaFaseCiclo(Componente componente, ArticoliDS ds)
+        {
+            List<FaseCiclo> fasiCiclo = new List<FaseCiclo>();
+            foreach (ArticoliDS.FASICICLORow riga in ds.FASICICLO.Where(x => x.IDCOMPONENTE == componente.IdComponente))
+            {
+                FaseCiclo faseCiclo = CreaFaseCiclo(riga);
+                fasiCiclo.Add(faseCiclo);
+            }
+            return fasiCiclo;
+        }
         private static FaseCiclo CreaFaseCiclo(ArticoliDS.FASICICLORow riga)
         {
 
@@ -50,6 +62,7 @@ namespace MPIntranet.Business
             distinta.IdFaseCiclo = riga.IDFASECICLO;
             distinta.IdComponente = riga.IDCOMPONENTE;
             distinta.Descrizione = riga.IsDESCRIZIONENull() ? string.Empty : riga.DESCRIZIONE;
+            distinta.Operazione = riga.OPERAZIONE;
             distinta.AreaProduzione = riga.IsAREAPRODUZIONENull() ? string.Empty : riga.AREAPRODUZIONE;
             distinta.Task = riga.IsTASKNull() ? string.Empty : riga.TASK;
             distinta.SchedaProcesso = riga.IsSCHEDAPROCESSONull() ? string.Empty : riga.SCHEDAPROCESSO;
@@ -64,6 +77,75 @@ namespace MPIntranet.Business
             distinta.DataModifica = riga.DATAMODIFICA;
             distinta.UtenteModifica = riga.UTENTEMODIFICA;
             return distinta;
+        }
+
+        public static void SalvaListaFaseCiclo(List<FaseCiclo> fasiCiclo, string utente, ArticoliDS ds)
+        {
+            if (fasiCiclo.Count() == 0) return;
+
+            int idDiba = fasiCiclo[0].IdDiba;
+            using (ArticoliBusiness bArticolo = new ArticoliBusiness())
+            {
+                bArticolo.GetFASICICLO(ds, idDiba, false);
+
+                List<int> idFasiCicloAttive = fasiCiclo.Select(x => x.IdComponente).ToList();
+                List<int> idFasiCicloDaCancellare = ds.FASICICLO.Where(x => !idFasiCicloAttive.Contains(x.IDFASECICLO)).Select(x => x.IDFASECICLO).ToList();
+                foreach (int idFaseCicloDaCancellare in idFasiCicloDaCancellare)
+                {
+                    ArticoliDS.FASICICLORow faseCicloDaCancellare = ds.FASICICLO.Where(x => x.RowState != System.Data.DataRowState.Deleted && x.IDFASECICLO == idFaseCicloDaCancellare).FirstOrDefault();
+                    faseCicloDaCancellare.CANCELLATO = true;
+                    faseCicloDaCancellare.UTENTEMODIFICA = utente;
+                    faseCicloDaCancellare.DATAMODIFICA = DateTime.Now;
+                }
+
+                foreach (FaseCiclo faseCiclo in fasiCiclo)
+                {
+                    ArticoliDS.FASICICLORow rigaFaseCiclo = ds.FASICICLO.Where(x => x.RowState != System.Data.DataRowState.Deleted && x.IDFASECICLO == faseCiclo.IdFaseCiclo).FirstOrDefault();
+
+                    if (rigaFaseCiclo == null)
+                    {
+                        rigaFaseCiclo = ds.FASICICLO.NewFASICICLORow();
+                        rigaFaseCiclo.IDFASECICLO = faseCiclo.IdFaseCiclo;
+                        rigaFaseCiclo.IDCOMPONENTE = faseCiclo.IdComponente;
+                        rigaFaseCiclo.IDDIBA = faseCiclo.IdDiba;
+                        rigaFaseCiclo.OPERAZIONE = faseCiclo.Operazione;
+                        rigaFaseCiclo.DESCRIZIONE = faseCiclo.Descrizione;
+                        rigaFaseCiclo.AREAPRODUZIONE = faseCiclo.AreaProduzione;
+                        rigaFaseCiclo.TASK = faseCiclo.Task;
+                        rigaFaseCiclo.SCHEDAPROCESSO = faseCiclo.SchedaProcesso;
+                        rigaFaseCiclo.COLLEGAMENTOCICLO = faseCiclo.CollegamentoCiclo;
+                        rigaFaseCiclo.PEZZIPERIODO = faseCiclo.PezziPeriodo;
+                        rigaFaseCiclo.PERIODO = faseCiclo.Periodo;
+                        rigaFaseCiclo.SETUP = faseCiclo.Setup;
+                        rigaFaseCiclo.ATTESA = faseCiclo.Attesa;
+                        rigaFaseCiclo.MOVIMENTAZIONE = faseCiclo.Movimentazione;
+                        rigaFaseCiclo.CANCELLATO = false;
+                        rigaFaseCiclo.DATAMODIFICA = DateTime.Now;
+                        rigaFaseCiclo.UTENTEMODIFICA = utente;
+
+                        ds.FASICICLO.AddFASICICLORow(rigaFaseCiclo);
+                    }
+                    else
+                    {
+                        rigaFaseCiclo.OPERAZIONE = faseCiclo.Operazione;
+                        rigaFaseCiclo.DESCRIZIONE = faseCiclo.Descrizione;
+                        rigaFaseCiclo.AREAPRODUZIONE = faseCiclo.AreaProduzione;
+                        rigaFaseCiclo.TASK = faseCiclo.Task;
+                        rigaFaseCiclo.SCHEDAPROCESSO = faseCiclo.SchedaProcesso;
+                        rigaFaseCiclo.COLLEGAMENTOCICLO = faseCiclo.CollegamentoCiclo;
+                        rigaFaseCiclo.PEZZIPERIODO = faseCiclo.PezziPeriodo;
+                        rigaFaseCiclo.PERIODO = faseCiclo.Periodo;
+                        rigaFaseCiclo.SETUP = faseCiclo.Setup;
+                        rigaFaseCiclo.ATTESA = faseCiclo.Attesa;
+                        rigaFaseCiclo.MOVIMENTAZIONE = faseCiclo.Movimentazione;
+                        rigaFaseCiclo.CANCELLATO = false;
+                        rigaFaseCiclo.DATAMODIFICA = DateTime.Now;
+                        rigaFaseCiclo.UTENTEMODIFICA = utente;
+                    }
+                }
+                bArticolo.UpdateTable(ds.FASICICLO.TableName, ds);
+            }
+
         }
     }
 }

@@ -37,6 +37,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Image = global::MPIntranet.Common.Properties.Resources.it;
             this.pictureBox1.Location = new System.Drawing.Point(11, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(501, 201);

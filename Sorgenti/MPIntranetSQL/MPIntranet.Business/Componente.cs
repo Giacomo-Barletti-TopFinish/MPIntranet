@@ -23,22 +23,23 @@ namespace MPIntranet.Business
         public double Quantita { get; set; }
         public List<FaseCiclo> FasiCiclo { get; set; }
 
-        public static List<Componente> EstraiListaCompoenti(int idDiba)
+        public static List<Componente> EstraiListaComponenti(int idDiba)
         {
             ArticoliDS ds = new ArticoliDS();
             using (ArticoliBusiness bArticolo = new ArticoliBusiness())
             {
                 bArticolo.GetCOMPONENTI(ds, idDiba, true);
+                bArticolo.GetFASICICLO(ds, idDiba, true);
             }
             List<Componente> componenti = new List<Componente>();
             foreach (ArticoliDS.COMPONENTIRow riga in ds.COMPONENTI)
             {
-                Componente componente = CreaComponente(riga);
+                Componente componente = CreaComponente(riga, ds);
                 componenti.Add(componente);
             }
             return componenti;
         }
-        private static Componente CreaComponente(ArticoliDS.COMPONENTIRow riga)
+        private static Componente CreaComponente(ArticoliDS.COMPONENTIRow riga, ArticoliDS ds)
         {
 
             if (riga == null) return null;
@@ -58,6 +59,9 @@ namespace MPIntranet.Business
             componente.Cancellato = riga.CANCELLATO;
             componente.DataModifica = riga.DATAMODIFICA;
             componente.UtenteModifica = riga.UTENTEMODIFICA;
+
+            componente.FasiCiclo = FaseCiclo.EstraiListaFaseCiclo(componente, ds);
+
             return componente;
         }
 
@@ -117,18 +121,24 @@ namespace MPIntranet.Business
                         rigaComponente.UTENTEMODIFICA = utente;
                     }
 
+                    DataRow[] root = ds.COMPONENTI.Where(x => x.IsIDPADRENull()).ToArray();
+                    DataRow[] altriNodi = ds.COMPONENTI.Where(x => !x.IsIDPADRENull()).OrderByDescending(x => x.IDPADRE).ToArray();
+
+
+                    bArticolo.UpdateComponentiTable(ds.COMPONENTI.TableName, root);
+                    bArticolo.UpdateComponentiTable(ds.COMPONENTI.TableName, altriNodi);
+                    FaseCiclo.SalvaListaFaseCiclo(componente.FasiCiclo, utente, ds);
                 }
-                //                DataRow[] componentiEsistenti = ds.COMPONENTI.Where(x => x.IDCOMPONENTE >= 0).OrderBy(x => x.IDPADRE).ToArray();
-                DataRow[] primicomponenti = ds.COMPONENTI.Where(x => x.IsIDPADRENull()).ToArray();
-
-                DataRow[] componentiNuovi = ds.COMPONENTI.Where(x => !x.IsIDPADRENull()).OrderByDescending(x => x.IDPADRE).ToArray();
-
-
-                bArticolo.UpdateComponentiTable(ds.COMPONENTI.TableName, primicomponenti);
-                bArticolo.UpdateComponentiTable(ds.COMPONENTI.TableName, componentiNuovi);
-//                bArticolo.UpdateComponentiTable(ds.COMPONENTI.TableName, drs2);
             }
 
+        }
+
+        public string CreaEtichetta()
+        {
+            if (string.IsNullOrEmpty(Anagrafica))
+                return string.Format("{0} {1}", IdComponente, Descrizione).Trim();
+            else
+                return string.Format("{0} {1} ({2})", IdComponente, Descrizione, Anagrafica).Trim();
         }
 
         public static bool VerificaListaComponentiPerSalvataggio(List<Componente> componenti)
@@ -140,17 +150,17 @@ namespace MPIntranet.Business
                 if (componente.Anagrafica != null && componente.Anagrafica.Length > 20)
                 {
                     esito = false;
-                    componente.Errore = "Anagrafica è troppo lunga";
+                    componente.Errore = "Anagrafica è troppo lunga ";
                 }
                 if (string.IsNullOrEmpty(componente.Descrizione))
                 {
                     esito = false;
-                    componente.Errore = "Descrizione obbligatoria";
+                    componente.Errore = "Descrizione obbligatoria ";
                 }
                 else if (componente.Descrizione.Length > 50)
                 {
                     esito = false;
-                    componente.Errore = "Descrizione troppo lunga";
+                    componente.Errore = "Descrizione troppo lunga ";
                 }
                 if (componente.Quantita <= 0)
                 {
@@ -160,7 +170,7 @@ namespace MPIntranet.Business
                 if (componente.IdDiba < 0)
                 {
                     esito = false;
-                    componente.Errore = "Codice diba non valido";
+                    componente.Errore = "Codice diba non valido ";
                 }
             }
             return esito;

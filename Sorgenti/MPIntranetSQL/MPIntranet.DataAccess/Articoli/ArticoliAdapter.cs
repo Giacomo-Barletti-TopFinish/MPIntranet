@@ -324,7 +324,7 @@ namespace MPIntranet.DataAccess.Articoli
         {
             string select = @"select * from COMPONENTI where [IDDIBA] =  $P<IDDIBA> ";
             if (soloNonCancellati)
-                select += "WHERE CANCELLATO = 0 ";
+                select += "AND CANCELLATO = 0 ";
 
             ParamSet ps = new ParamSet();
             ps.AddParam("IDDIBA", DbType.Int32, idDiba);
@@ -338,10 +338,25 @@ namespace MPIntranet.DataAccess.Articoli
         {
             string select = @"select * from FASICICLO where [IDDIBA] =  $P<IDDIBA> ";
             if (soloNonCancellati)
-                select += "WHERE CANCELLATO = 0 ";
+                select += "AND CANCELLATO = 0 ";
+
+            select += " ORDER BY IDCOMPONENTE,OPERAZIONE ";
 
             ParamSet ps = new ParamSet();
             ps.AddParam("IDDIBA", DbType.Int32, idDiba);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.FASICICLO);
+            }
+        }
+        public void GetFASICICLOPERCOMPONENTE(ArticoliDS ds, int idCoponente, bool soloNonCancellati)
+        {
+            string select = @"select * from FASICICLO where [IDCOMPONENTE] =  $P<IDCOMPONENTE> ";
+            if (soloNonCancellati)
+                select += "AND CANCELLATO = 0 ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDCOMPONENTE", DbType.Int32, idCoponente);
             using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
                 da.Fill(ds.FASICICLO);

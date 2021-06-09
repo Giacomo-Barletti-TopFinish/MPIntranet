@@ -123,6 +123,12 @@ namespace MPIntranet.DataAccess.Articoli
             a.GetFASICICLO(ds, IdDiba,soloNonCancellati);
         }
         [DataContext]
+        public void GetFASICICLOPERCOMPONENTE(ArticoliDS ds, int IdComponente, bool soloNonCancellati)
+        {
+            ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
+            a.GetFASICICLOPERCOMPONENTE(ds, IdComponente, soloNonCancellati);
+        }
+        [DataContext]
         public void GetCOMPONENTI(ArticoliDS ds, int IdDiba, bool soloNonCancellati)
         {
             ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);

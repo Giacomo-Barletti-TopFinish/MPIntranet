@@ -32,20 +32,20 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tvDiBa = new System.Windows.Forms.TreeView();
             this.dgvFasiCiclo = new System.Windows.Forms.DataGridView();
-            this.IdFase = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Errore = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IdDiba = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Anagrafica = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AreaProduzione = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Task = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SchedaProcesso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CollegamentoDiba = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CollegamentoCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PezziOrari = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Periodo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Setup = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Attesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Movimentazione = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmIDFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmIdComponenteFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmErroreFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmIdDibaFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmOperazioneFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmAreaProduzioneFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmTaskFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmSchedaProcessoFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmCollegamentoCicloFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmPezziOrariFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmPeriodoFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmSetupFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmAttesaFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmMovimentazioneFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.txtArticolo = new System.Windows.Forms.TextBox();
             this.btnCercaDiBa = new System.Windows.Forms.Button();
@@ -88,127 +88,134 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvFasiCiclo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFasiCiclo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IdFase,
-            this.Errore,
-            this.IdDiba,
-            this.Anagrafica,
-            this.AreaProduzione,
-            this.Task,
-            this.SchedaProcesso,
-            this.CollegamentoDiba,
-            this.CollegamentoCiclo,
-            this.PezziOrari,
-            this.Periodo,
-            this.Setup,
-            this.Attesa,
-            this.Movimentazione});
+            this.clmIDFaseCiclo,
+            this.clmIdComponenteFaseCiclo,
+            this.clmErroreFaseCiclo,
+            this.clmIdDibaFaseCiclo,
+            this.clmOperazioneFaseCiclo,
+            this.clmAreaProduzioneFaseCiclo,
+            this.clmTaskFaseCiclo,
+            this.clmSchedaProcessoFaseCiclo,
+            this.clmCollegamentoCicloFaseCiclo,
+            this.clmPezziOrariFaseCiclo,
+            this.clmPeriodoFaseCiclo,
+            this.clmSetupFaseCiclo,
+            this.clmAttesaFaseCiclo,
+            this.clmMovimentazioneFaseCiclo});
             this.dgvFasiCiclo.Location = new System.Drawing.Point(676, 50);
             this.dgvFasiCiclo.Name = "dgvFasiCiclo";
             this.dgvFasiCiclo.Size = new System.Drawing.Size(995, 870);
             this.dgvFasiCiclo.TabIndex = 5;
-            this.dgvFasiCiclo.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvNodi_CellValueChanged);
+            this.dgvFasiCiclo.VirtualMode = true;
             this.dgvFasiCiclo.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvNodi_EditingControlShowing);
-            this.dgvFasiCiclo.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvNodi_DragDrop);
+            this.dgvFasiCiclo.NewRowNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvFasiCiclo_NewRowNeeded);
+            this.dgvFasiCiclo.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvFasiCiclo_RowsAdded);
             // 
-            // IdFase
+            // clmIDFaseCiclo
             // 
-            this.IdFase.DataPropertyName = "IdFaseDiba";
-            this.IdFase.FillWeight = 60F;
-            this.IdFase.HeaderText = "ID";
-            this.IdFase.Name = "IdFase";
-            this.IdFase.Width = 60;
+            this.clmIDFaseCiclo.DataPropertyName = "IdFaseCiclo";
+            this.clmIDFaseCiclo.FillWeight = 60F;
+            this.clmIDFaseCiclo.HeaderText = "IdFaseCiclo";
+            this.clmIDFaseCiclo.Name = "clmIDFaseCiclo";
+            this.clmIDFaseCiclo.ReadOnly = true;
+            this.clmIDFaseCiclo.Width = 60;
             // 
-            // Errore
+            // clmIdComponenteFaseCiclo
             // 
-            this.Errore.DataPropertyName = "Errore";
+            this.clmIdComponenteFaseCiclo.DataPropertyName = "IdComponente";
+            this.clmIdComponenteFaseCiclo.HeaderText = "IdComponente";
+            this.clmIdComponenteFaseCiclo.Name = "clmIdComponenteFaseCiclo";
+            this.clmIdComponenteFaseCiclo.ReadOnly = true;
+            // 
+            // clmErroreFaseCiclo
+            // 
+            this.clmErroreFaseCiclo.DataPropertyName = "Errore";
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Red;
-            this.Errore.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Errore.HeaderText = "Errore";
-            this.Errore.Name = "Errore";
-            this.Errore.ReadOnly = true;
+            this.clmErroreFaseCiclo.DefaultCellStyle = dataGridViewCellStyle3;
+            this.clmErroreFaseCiclo.HeaderText = "Errore";
+            this.clmErroreFaseCiclo.Name = "clmErroreFaseCiclo";
+            this.clmErroreFaseCiclo.ReadOnly = true;
             // 
-            // IdDiba
+            // clmIdDibaFaseCiclo
             // 
-            this.IdDiba.DataPropertyName = "IdDiba";
-            this.IdDiba.HeaderText = "IdDiba";
-            this.IdDiba.Name = "IdDiba";
-            this.IdDiba.Visible = false;
+            this.clmIdDibaFaseCiclo.DataPropertyName = "IdDiba";
+            this.clmIdDibaFaseCiclo.FillWeight = 60F;
+            this.clmIdDibaFaseCiclo.HeaderText = "IdDiba";
+            this.clmIdDibaFaseCiclo.Name = "clmIdDibaFaseCiclo";
+            this.clmIdDibaFaseCiclo.Visible = false;
+            this.clmIdDibaFaseCiclo.Width = 60;
             // 
-            // Anagrafica
+            // clmOperazioneFaseCiclo
             // 
-            this.Anagrafica.DataPropertyName = "Anagrafica";
-            this.Anagrafica.FillWeight = 130F;
-            this.Anagrafica.HeaderText = "Anagrafica";
-            this.Anagrafica.Name = "Anagrafica";
-            this.Anagrafica.Width = 130;
+            this.clmOperazioneFaseCiclo.DataPropertyName = "Operazione";
+            this.clmOperazioneFaseCiclo.FillWeight = 50F;
+            this.clmOperazioneFaseCiclo.HeaderText = "Operazione";
+            this.clmOperazioneFaseCiclo.Name = "clmOperazioneFaseCiclo";
+            this.clmOperazioneFaseCiclo.Width = 50;
             // 
-            // AreaProduzione
+            // clmAreaProduzioneFaseCiclo
             // 
-            this.AreaProduzione.DataPropertyName = "AreaProduzione";
-            this.AreaProduzione.HeaderText = "AreaProduzione";
-            this.AreaProduzione.Name = "AreaProduzione";
+            this.clmAreaProduzioneFaseCiclo.DataPropertyName = "AreaProduzione";
+            this.clmAreaProduzioneFaseCiclo.HeaderText = "AreaProduzione";
+            this.clmAreaProduzioneFaseCiclo.Name = "clmAreaProduzioneFaseCiclo";
             // 
-            // Task
+            // clmTaskFaseCiclo
             // 
-            this.Task.DataPropertyName = "Task";
-            this.Task.HeaderText = "Task";
-            this.Task.Name = "Task";
+            this.clmTaskFaseCiclo.DataPropertyName = "Task";
+            this.clmTaskFaseCiclo.FillWeight = 70F;
+            this.clmTaskFaseCiclo.HeaderText = "Task";
+            this.clmTaskFaseCiclo.Name = "clmTaskFaseCiclo";
+            this.clmTaskFaseCiclo.Width = 70;
             // 
-            // SchedaProcesso
+            // clmSchedaProcessoFaseCiclo
             // 
-            this.SchedaProcesso.DataPropertyName = "SchedaProcesso";
-            this.SchedaProcesso.HeaderText = "SchedaProcesso";
-            this.SchedaProcesso.Name = "SchedaProcesso";
+            this.clmSchedaProcessoFaseCiclo.DataPropertyName = "SchedaProcesso";
+            this.clmSchedaProcessoFaseCiclo.HeaderText = "SchedaProcesso";
+            this.clmSchedaProcessoFaseCiclo.Name = "clmSchedaProcessoFaseCiclo";
             // 
-            // CollegamentoDiba
+            // clmCollegamentoCicloFaseCiclo
             // 
-            this.CollegamentoDiba.DataPropertyName = "CollegamentoDiba";
-            this.CollegamentoDiba.HeaderText = "CollegamentoDiba";
-            this.CollegamentoDiba.Name = "CollegamentoDiba";
+            this.clmCollegamentoCicloFaseCiclo.DataPropertyName = "CollegamentoCiclo";
+            this.clmCollegamentoCicloFaseCiclo.HeaderText = "CollegamentoCiclo";
+            this.clmCollegamentoCicloFaseCiclo.Name = "clmCollegamentoCicloFaseCiclo";
             // 
-            // CollegamentoCiclo
+            // clmPezziOrariFaseCiclo
             // 
-            this.CollegamentoCiclo.DataPropertyName = "CollegamentoCiclo";
-            this.CollegamentoCiclo.HeaderText = "CollegamentoCiclo";
-            this.CollegamentoCiclo.Name = "CollegamentoCiclo";
+            this.clmPezziOrariFaseCiclo.DataPropertyName = "PezziOrari";
+            this.clmPezziOrariFaseCiclo.FillWeight = 60F;
+            this.clmPezziOrariFaseCiclo.HeaderText = "PezziOrari";
+            this.clmPezziOrariFaseCiclo.Name = "clmPezziOrariFaseCiclo";
+            this.clmPezziOrariFaseCiclo.Width = 60;
             // 
-            // PezziOrari
+            // clmPeriodoFaseCiclo
             // 
-            this.PezziOrari.DataPropertyName = "PezziOrari";
-            this.PezziOrari.FillWeight = 60F;
-            this.PezziOrari.HeaderText = "PezziOrari";
-            this.PezziOrari.Name = "PezziOrari";
-            this.PezziOrari.Width = 60;
+            this.clmPeriodoFaseCiclo.DataPropertyName = "Periodo";
+            this.clmPeriodoFaseCiclo.FillWeight = 60F;
+            this.clmPeriodoFaseCiclo.HeaderText = "Periodo";
+            this.clmPeriodoFaseCiclo.Name = "clmPeriodoFaseCiclo";
+            this.clmPeriodoFaseCiclo.Width = 60;
             // 
-            // Periodo
+            // clmSetupFaseCiclo
             // 
-            this.Periodo.DataPropertyName = "Periodo";
-            this.Periodo.FillWeight = 60F;
-            this.Periodo.HeaderText = "Periodo";
-            this.Periodo.Name = "Periodo";
-            this.Periodo.Width = 60;
+            this.clmSetupFaseCiclo.DataPropertyName = "Setup";
+            this.clmSetupFaseCiclo.FillWeight = 60F;
+            this.clmSetupFaseCiclo.HeaderText = "Setup";
+            this.clmSetupFaseCiclo.Name = "clmSetupFaseCiclo";
+            this.clmSetupFaseCiclo.Width = 60;
             // 
-            // Setup
+            // clmAttesaFaseCiclo
             // 
-            this.Setup.DataPropertyName = "Setup";
-            this.Setup.FillWeight = 60F;
-            this.Setup.HeaderText = "Setup";
-            this.Setup.Name = "Setup";
-            this.Setup.Width = 60;
+            this.clmAttesaFaseCiclo.DataPropertyName = "Attesa";
+            this.clmAttesaFaseCiclo.FillWeight = 60F;
+            this.clmAttesaFaseCiclo.HeaderText = "Attesa";
+            this.clmAttesaFaseCiclo.Name = "clmAttesaFaseCiclo";
+            this.clmAttesaFaseCiclo.Width = 60;
             // 
-            // Attesa
+            // clmMovimentazioneFaseCiclo
             // 
-            this.Attesa.DataPropertyName = "Attesa";
-            this.Attesa.FillWeight = 60F;
-            this.Attesa.HeaderText = "Attesa";
-            this.Attesa.Name = "Attesa";
-            this.Attesa.Width = 60;
-            // 
-            // Movimentazione
-            // 
-            this.Movimentazione.DataPropertyName = "Movimentazione";
-            this.Movimentazione.HeaderText = "Movimentazione";
-            this.Movimentazione.Name = "Movimentazione";
+            this.clmMovimentazioneFaseCiclo.DataPropertyName = "Movimentazione";
+            this.clmMovimentazioneFaseCiclo.HeaderText = "Movimentazione";
+            this.clmMovimentazioneFaseCiclo.Name = "clmMovimentazioneFaseCiclo";
             // 
             // label1
             // 
@@ -328,6 +335,7 @@
             this.dgvComponenti.Name = "dgvComponenti";
             this.dgvComponenti.Size = new System.Drawing.Size(646, 435);
             this.dgvComponenti.TabIndex = 21;
+            this.dgvComponenti.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvComponenti_CellEndEdit);
             this.dgvComponenti.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvComponenti_CellValueChanged);
             this.dgvComponenti.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvComponenti_RowEnter);
             this.dgvComponenti.RowLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvComponenti_RowLeave);
@@ -451,20 +459,6 @@
         private System.Windows.Forms.Button btnNuovaDistinta;
         private System.Windows.Forms.Button btnSalvaDiba;
         private System.Windows.Forms.DataGridView dgvComponenti;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdFase;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Errore;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdDiba;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Anagrafica;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AreaProduzione;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Task;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SchedaProcesso;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CollegamentoDiba;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CollegamentoCiclo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PezziOrari;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Periodo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Setup;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Attesa;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Movimentazione;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmIdComponente;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmIdPadreComponente;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmErroreComponente;
@@ -474,5 +468,19 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clmCollegamentoDibaComponente;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmQuantitaComponente;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmUMQuantitaComponente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmIDFaseCiclo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmIdComponenteFaseCiclo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmErroreFaseCiclo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmIdDibaFaseCiclo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmOperazioneFaseCiclo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmAreaProduzioneFaseCiclo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmTaskFaseCiclo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmSchedaProcessoFaseCiclo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmCollegamentoCicloFaseCiclo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmPezziOrariFaseCiclo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmPeriodoFaseCiclo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmSetupFaseCiclo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmAttesaFaseCiclo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmMovimentazioneFaseCiclo;
     }
 }

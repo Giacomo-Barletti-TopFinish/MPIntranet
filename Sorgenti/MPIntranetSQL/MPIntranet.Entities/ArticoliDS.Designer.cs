@@ -9917,6 +9917,8 @@ namespace MPIntranet.Entities {
             
             private global::System.Data.DataColumn columnUTENTEMODIFICA;
             
+            private global::System.Data.DataColumn columnOPERAZIONE;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public FASICICLODataTable() {
@@ -10080,6 +10082,14 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn OPERAZIONEColumn {
+                get {
+                    return this.columnOPERAZIONE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -10115,7 +10125,23 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public FASICICLORow AddFASICICLORow(int IDDIBA, string DESCRIZIONE, int IDCOMPONENTE, string AREAPRODUZIONE, string TASK, string SCHEDAPROCESSO, string COLLEGAMENTOCICLO, double PEZZIPERIODO, double PERIODO, double SETUP, double ATTESA, double MOVIMENTAZIONE, bool CANCELLATO, System.DateTime DATAMODIFICA, string UTENTEMODIFICA) {
+            public FASICICLORow AddFASICICLORow(
+                        int IDDIBA, 
+                        string DESCRIZIONE, 
+                        int IDCOMPONENTE, 
+                        string AREAPRODUZIONE, 
+                        string TASK, 
+                        string SCHEDAPROCESSO, 
+                        string COLLEGAMENTOCICLO, 
+                        double PEZZIPERIODO, 
+                        double PERIODO, 
+                        double SETUP, 
+                        double ATTESA, 
+                        double MOVIMENTAZIONE, 
+                        bool CANCELLATO, 
+                        System.DateTime DATAMODIFICA, 
+                        string UTENTEMODIFICA, 
+                        int OPERAZIONE) {
                 FASICICLORow rowFASICICLORow = ((FASICICLORow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -10133,7 +10159,8 @@ namespace MPIntranet.Entities {
                         MOVIMENTAZIONE,
                         CANCELLATO,
                         DATAMODIFICA,
-                        UTENTEMODIFICA};
+                        UTENTEMODIFICA,
+                        OPERAZIONE};
                 rowFASICICLORow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowFASICICLORow);
                 return rowFASICICLORow;
@@ -10179,6 +10206,7 @@ namespace MPIntranet.Entities {
                 this.columnCANCELLATO = base.Columns["CANCELLATO"];
                 this.columnDATAMODIFICA = base.Columns["DATAMODIFICA"];
                 this.columnUTENTEMODIFICA = base.Columns["UTENTEMODIFICA"];
+                this.columnOPERAZIONE = base.Columns["OPERAZIONE"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10216,6 +10244,8 @@ namespace MPIntranet.Entities {
                 base.Columns.Add(this.columnDATAMODIFICA);
                 this.columnUTENTEMODIFICA = new global::System.Data.DataColumn("UTENTEMODIFICA", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUTENTEMODIFICA);
+                this.columnOPERAZIONE = new global::System.Data.DataColumn("OPERAZIONE", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOPERAZIONE);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnIDFASECICLO}, true));
                 this.columnIDFASECICLO.AutoIncrement = true;
@@ -10235,6 +10265,7 @@ namespace MPIntranet.Entities {
                 this.columnDATAMODIFICA.AllowDBNull = false;
                 this.columnUTENTEMODIFICA.AllowDBNull = false;
                 this.columnUTENTEMODIFICA.MaxLength = 50;
+                this.columnOPERAZIONE.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -15280,6 +15311,17 @@ namespace MPIntranet.Entities {
                 }
                 set {
                     this[this.tableFASICICLO.UTENTEMODIFICAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int OPERAZIONE {
+                get {
+                    return ((int)(this[this.tableFASICICLO.OPERAZIONEColumn]));
+                }
+                set {
+                    this[this.tableFASICICLO.OPERAZIONEColumn] = value;
                 }
             }
             

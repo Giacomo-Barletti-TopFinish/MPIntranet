@@ -19,17 +19,25 @@ namespace DisegnaDiBa
     {
         private Articolo _articolo;
         private DistintaBase _distinta;
-        private int indiceNodi = 0;
+        private int indiceComponenti = 0;
+        private int indiceFaseCiclo = 0;
         private BindingSource sourceFasiCicli;
         private BindingSource sourceComponenti;
         private AutoCompleteStringCollection _autoAreeProduzione = new AutoCompleteStringCollection();
         private AutoCompleteStringCollection _autoTask = new AutoCompleteStringCollection();
         private AutoCompleteStringCollection _autoItems = new AutoCompleteStringCollection();
+        private int _idComponenteSelezionato;
+        private bool _newrow = false;
 
-        private int estraiIndice()
+        private int estraiIndiceComponenti()
         {
-            indiceNodi--;
-            return indiceNodi;
+            indiceComponenti--;
+            return indiceComponenti;
+        }
+        private int estraiIndiceFaseCiclo()
+        {
+            indiceFaseCiclo--;
+            return indiceFaseCiclo;
         }
         public DistintaBaseFrm2()
         {
@@ -165,32 +173,32 @@ namespace DisegnaDiBa
         {
             if (_distinta == null) return;
             tvDiBa.Nodes.Clear();
-            if (_distinta.Fasi.Count() == 0)
+            if (_distinta.Componenti.Count() == 0)
                 tvDiBa.Nodes.Add(creaNodo(null));
             else
             {
-                FaseDistinta faseRoot = _distinta.Fasi.Where(x => x.IdPadre == 0).FirstOrDefault();
-                if (faseRoot == null) return;
+                Componente componenteBase = _distinta.Componenti.Where(x => x.IdPadre == 0).FirstOrDefault();
+                if (componenteBase == null) return;
 
-                string etichettaNodo = string.Format("{0} {1}", faseRoot.IdFaseDiba, faseRoot.Anagrafica);
+                string etichettaNodo = componenteBase.CreaEtichetta();
                 TreeNode radice = new TreeNode(etichettaNodo);
-                radice.Tag = faseRoot;
+                radice.Tag = componenteBase;
                 tvDiBa.Nodes.Add(radice);
-                aggiungiNodoEsistente(faseRoot.IdFaseDiba, radice);
+                aggiungiNodoEsistente(componenteBase.IdComponente, radice);
             }
             tvDiBa.ExpandAll();
         }
 
-        private void aggiungiNodoEsistente(int idFaseDistintaPadre, TreeNode nodoPadre)
+        private void aggiungiNodoEsistente(int IdComponente, TreeNode nodoPadre)
         {
-            foreach (FaseDistinta faseFiglio in _distinta.Fasi.Where(x => x.IdPadre == idFaseDistintaPadre))
+            foreach (Componente componente in _distinta.Componenti.Where(x => x.IdPadre == IdComponente))
             {
-                string etichettaNodo = string.Format("{0} {1} {2}", faseFiglio.IdFaseDiba, faseFiglio.AreaProduzione, faseFiglio.Anagrafica);
+                string etichettaNodo = componente.CreaEtichetta();
                 TreeNode nodoFiglio = new TreeNode(etichettaNodo);
-                nodoFiglio.Tag = faseFiglio;
+                nodoFiglio.Tag = componente;
                 nodoPadre.Nodes.Add(nodoFiglio);
 
-                aggiungiNodoEsistente(faseFiglio.IdFaseDiba, nodoFiglio);
+                aggiungiNodoEsistente(componente.IdComponente, nodoFiglio);
             }
         }
 
@@ -202,7 +210,7 @@ namespace DisegnaDiBa
                 componentePadre = (Componente)nodoPadre.Tag;
 
             Componente componente = new Componente();
-            componente.IdComponente = estraiIndice();
+            componente.IdComponente = estraiIndiceComponenti();
             componente.IdDiba = _distinta.IdDiba;
 
             if (componentePadre != null) componente.IdPadre = componentePadre.IdComponente;
@@ -358,33 +366,6 @@ namespace DisegnaDiBa
             dgvComponenti.Update();
         }
 
-        private void dgvNodi_DragDrop(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(typeof(MPIntranet.Business.Task)))
-            {
-                MPIntranet.Business.Task item = (MPIntranet.Business.Task)e.Data.GetData(typeof(MPIntranet.Business.Task));
-                Point clientPoint = dgvFasiCiclo.PointToClient(new Point(e.X, e.Y));
-                DataGridView.HitTestInfo info = dgvFasiCiclo.HitTest(clientPoint.X, clientPoint.Y);
-                if (info.RowIndex < 0 || info.RowIndex > dgvFasiCiclo.Rows.Count) return;
-                dgvFasiCiclo.Rows[info.RowIndex].Cells[Task.Index].Value = item.ToString();
-            }
-
-            if (e.Data.GetDataPresent(typeof(MPIntranet.Business.AreaProduzione)))
-            {
-                MPIntranet.Business.AreaProduzione item = (MPIntranet.Business.AreaProduzione)e.Data.GetData(typeof(MPIntranet.Business.AreaProduzione));
-                Point clientPoint = dgvFasiCiclo.PointToClient(new Point(e.X, e.Y));
-                DataGridView.HitTestInfo info = dgvFasiCiclo.HitTest(clientPoint.X, clientPoint.Y);
-                if (info.RowIndex < 0 || info.RowIndex > dgvFasiCiclo.Rows.Count) return;
-                dgvFasiCiclo.Rows[info.RowIndex].Cells[AreaProduzione.Index].Value = item.ToString();
-
-                int idFaseDistinta = (int)dgvFasiCiclo.Rows[info.RowIndex].Cells[IdFase.Index].Value;
-                string anagrafica = (string)dgvFasiCiclo.Rows[info.RowIndex].Cells[Anagrafica.Index].Value;
-
-                aggiornaNodoAlbero(idFaseDistinta, item.ToString(), anagrafica);
-            }
-
-        }
-
         private void btnSalvaDiba_Click(object sender, EventArgs e)
         {
             try
@@ -437,7 +418,7 @@ namespace DisegnaDiBa
         {
             int columnIndex = dgvFasiCiclo.CurrentCell.ColumnIndex;
 
-            if (columnIndex == AreaProduzione.Index)
+            if (columnIndex == clmAreaProduzioneFaseCiclo.Index)
             {
                 TextBox tb = e.Control as TextBox;
                 {
@@ -446,7 +427,7 @@ namespace DisegnaDiBa
                     tb.AutoCompleteSource = AutoCompleteSource.CustomSource;
                 }
             }
-            if (columnIndex == Task.Index)
+            if (columnIndex == clmTaskFaseCiclo.Index)
             {
                 TextBox tb = e.Control as TextBox;
                 {
@@ -455,33 +436,15 @@ namespace DisegnaDiBa
                     tb.AutoCompleteSource = AutoCompleteSource.CustomSource;
                 }
             }
-            if (columnIndex == Anagrafica.Index)
-            {
-                TextBox tb = e.Control as TextBox;
-                {
-                    tb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                    tb.AutoCompleteCustomSource = _autoItems;
-                    tb.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                }
-            }
         }
 
-
-        private void dgvNodi_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-            int idFaseDiba = (int)dgvFasiCiclo.Rows[e.RowIndex].Cells[IdFase.Index].Value;
-            string anagrafica = (string)dgvFasiCiclo.Rows[e.RowIndex].Cells[Anagrafica.Index].Value;
-            string areaProduzione = (string)dgvFasiCiclo.Rows[e.RowIndex].Cells[AreaProduzione.Index].Value;
-
-            aggiornaNodoAlbero(idFaseDiba, areaProduzione, anagrafica);
-        }
 
         private void tvDiBa_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Node.Tag == null) return;
 
             Componente componente = (Componente)e.Node.Tag;
+            _idComponenteSelezionato = componente.IdComponente;
 
             foreach (DataGridViewRow riga in dgvComponenti.Rows)
             {
@@ -491,6 +454,7 @@ namespace DisegnaDiBa
                 else
                     riga.DefaultCellStyle.BackColor = Color.White;
             }
+            PopolaGrigliaFasi(componente);
         }
 
         private void dgvComponenti_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -499,10 +463,14 @@ namespace DisegnaDiBa
             if (tvDiBa.Nodes.Count <= 0) return;
 
             int idComponente = (int)dgvComponenti.Rows[e.RowIndex].Cells[clmIdComponente.Index].Value;
-            cambiacoloreNodo(idComponente, Color.Yellow);
+            cambiaColoreNodo(idComponente, Color.Yellow);
+
+            Componente componenteTrovato;
+            if (_distinta.TrovaComponente(idComponente, out componenteTrovato))
+                PopolaGrigliaFasi(componenteTrovato);
         }
 
-        private void cambiacoloreNodo(int idComponente, Color colore)
+        private void cambiaColoreNodo(int idComponente, Color colore)
         {
             TreeNode nodoTrovato;
             if (trovaNodo(tvDiBa.Nodes[0], idComponente, out nodoTrovato))
@@ -517,7 +485,9 @@ namespace DisegnaDiBa
             if (tvDiBa.Nodes.Count <= 0) return;
 
             int idComponente = (int)dgvComponenti.Rows[e.RowIndex].Cells[clmIdComponente.Index].Value;
-            cambiacoloreNodo(idComponente, Color.Transparent);
+            _idComponenteSelezionato = idComponente;
+
+            cambiaColoreNodo(idComponente, Color.Transparent);
         }
 
         private void dgvComponenti_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -530,5 +500,57 @@ namespace DisegnaDiBa
             aggiornaNodoAlbero(idComponente, descrizione, anagrafica);
         }
 
+        private void dgvComponenti_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            string anagrafica = (string)dgvComponenti.Rows[e.RowIndex].Cells[clmAnagraficaComponente.Index].Value;
+            dgvComponenti.Rows[e.RowIndex].Cells[clmAnagraficaComponente.Index].Value = anagrafica.ToUpper();
+            string descrizione = (string)dgvComponenti.Rows[e.RowIndex].Cells[clmDescrizioneComponente.Index].Value;
+            dgvComponenti.Rows[e.RowIndex].Cells[clmDescrizioneComponente.Index].Value = descrizione.ToUpper();
+            string collegamento = (string)dgvComponenti.Rows[e.RowIndex].Cells[clmCollegamentoDibaComponente.Index].Value;
+            dgvComponenti.Rows[e.RowIndex].Cells[clmCollegamentoDibaComponente.Index].Value = collegamento.ToUpper();
+            string UM = (string)dgvComponenti.Rows[e.RowIndex].Cells[clmUMQuantitaComponente.Index].Value;
+            dgvComponenti.Rows[e.RowIndex].Cells[clmUMQuantitaComponente.Index].Value = UM.ToUpper();
+
+        }
+
+        private void dgvFasiCiclo_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+
+            if (!_newrow) return;
+            if (e.RowIndex == 0) return;
+
+            Componente componenteTrovato;
+            _distinta.TrovaComponente(_idComponenteSelezionato, out componenteTrovato);
+
+            int operazione = 10;
+            if (componenteTrovato != null && componenteTrovato.FasiCiclo.Count > 0)
+                operazione = componenteTrovato.FasiCiclo.Max(x => x.Operazione) + 10;
+
+            DataGridViewRow row = dgvFasiCiclo.Rows[e.RowIndex - 1];
+
+            row.Cells[clmIDFaseCiclo.Index].Value = estraiIndiceFaseCiclo();
+            row.Cells[clmIdDibaFaseCiclo.Index].Value = _distinta.IdDiba;
+            row.Cells[clmIdComponenteFaseCiclo.Index].Value = _idComponenteSelezionato;
+            row.Cells[clmOperazioneFaseCiclo.Index].Value = operazione;
+            row.Cells[clmAreaProduzioneFaseCiclo.Index].Value = string.Empty;
+            row.Cells[clmTaskFaseCiclo.Index].Value = string.Empty;
+            row.Cells[clmSchedaProcessoFaseCiclo.Index].Value = string.Empty;
+            row.Cells[clmCollegamentoCicloFaseCiclo.Index].Value = string.Empty;
+            row.Cells[clmPeriodoFaseCiclo.Index].Value = 1;
+            row.Cells[clmSetupFaseCiclo.Index].Value = 0;
+            row.Cells[clmPezziOrariFaseCiclo.Index].Value = 0;
+            row.Cells[clmAttesaFaseCiclo.Index].Value = 0;
+            row.Cells[clmMovimentazioneFaseCiclo.Index].Value = 0;
+            row.Cells[clmErroreFaseCiclo.Index].Value = string.Empty;
+            _newrow = false;
+        }
+
+        private void dgvFasiCiclo_NewRowNeeded(object sender, DataGridViewRowEventArgs e)
+        {
+            _newrow = true;
+        }
     }
 }
+

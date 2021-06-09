@@ -31,7 +31,19 @@ namespace MPIntranet.Business
             ArticoliDS.DIBARow riga = ds.DIBA.Where(x => x.IDDIBA == idDiba).FirstOrDefault();
             return CreaDistintaBase(riga);
         }
-
+        public bool TrovaComponente(int IdCompenente, out Componente componenteTrovato)
+        {
+            componenteTrovato = null;
+            foreach (Componente componente in Componenti)
+            {
+                if(componente.IdComponente==IdCompenente)
+                {
+                    componenteTrovato = componente;
+                    return true;
+                }
+            }
+            return false;
+        }
         public static List<DistintaBase> EstraiListaDistinteBase(int idArticolo)
         {
             ArticoliDS ds = new ArticoliDS();
@@ -66,6 +78,7 @@ namespace MPIntranet.Business
             distinta.DataModifica = riga.DATAMODIFICA;
             distinta.UtenteModifica = riga.UTENTEMODIFICA;
             distinta.Fasi = FaseDistinta.EstraiListaFaseDistinta(riga.IDDIBA);
+            distinta.Componenti = Componente.EstraiListaComponenti(riga.IDDIBA);
             return distinta;
         }
 
