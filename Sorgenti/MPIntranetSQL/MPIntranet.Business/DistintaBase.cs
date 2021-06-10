@@ -128,7 +128,7 @@ namespace MPIntranet.Business
         public bool VerificaPerSalvataggio()
         {
             bool esito = true;
-            esito = Componente.VerificaListaComponentiPerSalvataggio(Componenti);
+            esito = Componente.VerificaListaPerSalvataggio(Componenti);
 
             return esito;
         }

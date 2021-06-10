@@ -106,14 +106,15 @@ namespace MPIntranet.Business
         public static void SalvaListaFaseCiclo(List<FaseCiclo> fasiCiclo, string utente, ArticoliDS ds)
         {
             if (fasiCiclo.Count() == 0) return;
+            int idComponente = fasiCiclo[0].IdComponente;
 
             int idDiba = fasiCiclo[0].IdDiba;
             using (ArticoliBusiness bArticolo = new ArticoliBusiness())
             {
                 bArticolo.GetFASICICLO(ds, idDiba, false);
 
-                List<int> idFasiCicloAttive = fasiCiclo.Select(x => x.IdComponente).ToList();
-                List<int> idFasiCicloDaCancellare = ds.FASICICLO.Where(x => !idFasiCicloAttive.Contains(x.IDFASECICLO)).Select(x => x.IDFASECICLO).ToList();
+                List<int> idFasiCicloAttive = fasiCiclo.Select(x => x.IdFaseCiclo).ToList();
+                List<int> idFasiCicloDaCancellare = ds.FASICICLO.Where(x => !idFasiCicloAttive.Contains(x.IDFASECICLO) && x.IDCOMPONENTE == idComponente).Select(x => x.IDFASECICLO).ToList();
                 foreach (int idFaseCicloDaCancellare in idFasiCicloDaCancellare)
                 {
                     ArticoliDS.FASICICLORow faseCicloDaCancellare = ds.FASICICLO.Where(x => x.RowState != System.Data.DataRowState.Deleted && x.IDFASECICLO == idFaseCicloDaCancellare).FirstOrDefault();
@@ -124,7 +125,7 @@ namespace MPIntranet.Business
 
                 foreach (FaseCiclo faseCiclo in fasiCiclo)
                 {
-                    ArticoliDS.FASICICLORow rigaFaseCiclo = ds.FASICICLO.Where(x => x.RowState != System.Data.DataRowState.Deleted && x.IDFASECICLO == faseCiclo.IdFaseCiclo).FirstOrDefault();
+                    ArticoliDS.FASICICLORow rigaFaseCiclo = ds.FASICICLO.Where(x => x.RowState != System.Data.DataRowState.Deleted && x.IDFASECICLO == faseCiclo.IdFaseCiclo && x.IDCOMPONENTE == idComponente).FirstOrDefault();
 
                     if (rigaFaseCiclo == null)
                     {
@@ -167,7 +168,6 @@ namespace MPIntranet.Business
                         rigaFaseCiclo.UTENTEMODIFICA = utente;
                     }
                 }
-                bArticolo.UpdateTable(ds.FASICICLO.TableName, ds);
             }
 
         }

@@ -77,7 +77,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.tvDiBa.Location = new System.Drawing.Point(3, 50);
             this.tvDiBa.Name = "tvDiBa";
-            this.tvDiBa.Size = new System.Drawing.Size(646, 396);
+            this.tvDiBa.Size = new System.Drawing.Size(684, 396);
             this.tvDiBa.TabIndex = 1;
             this.tvDiBa.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvDiBa_NodeMouseClick);
             // 
@@ -102,9 +102,9 @@
             this.clmSetupFaseCiclo,
             this.clmAttesaFaseCiclo,
             this.clmMovimentazioneFaseCiclo});
-            this.dgvFasiCiclo.Location = new System.Drawing.Point(676, 50);
+            this.dgvFasiCiclo.Location = new System.Drawing.Point(711, 50);
             this.dgvFasiCiclo.Name = "dgvFasiCiclo";
-            this.dgvFasiCiclo.Size = new System.Drawing.Size(995, 870);
+            this.dgvFasiCiclo.Size = new System.Drawing.Size(960, 870);
             this.dgvFasiCiclo.TabIndex = 5;
             this.dgvFasiCiclo.VirtualMode = true;
             this.dgvFasiCiclo.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvNodi_EditingControlShowing);
@@ -333,7 +333,7 @@
             this.clmUMQuantitaComponente});
             this.dgvComponenti.Location = new System.Drawing.Point(3, 485);
             this.dgvComponenti.Name = "dgvComponenti";
-            this.dgvComponenti.Size = new System.Drawing.Size(646, 435);
+            this.dgvComponenti.Size = new System.Drawing.Size(684, 435);
             this.dgvComponenti.TabIndex = 21;
             this.dgvComponenti.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvComponenti_CellEndEdit);
             this.dgvComponenti.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvComponenti_CellValueChanged);

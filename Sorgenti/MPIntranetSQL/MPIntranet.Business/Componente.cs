@@ -83,8 +83,9 @@ namespace MPIntranet.Business
             componente.UtenteModifica = UtenteModifica;
             componente.FasiCiclo = new List<FaseCiclo>();
 
+            if (FasiCiclo == null) FasiCiclo = new List<FaseCiclo>();
             foreach (FaseCiclo fc in FasiCiclo)
-                componente.FasiCiclo.Add(fc.Copia(idFaseCiclo-=10,idComponente)); 
+                componente.FasiCiclo.Add(fc.Copia(idFaseCiclo -= 10, idComponente));
 
             return componente;
         }
@@ -144,15 +145,17 @@ namespace MPIntranet.Business
                         rigaComponente.DATAMODIFICA = DateTime.Now;
                         rigaComponente.UTENTEMODIFICA = utente;
                     }
-
-                    DataRow[] root = ds.COMPONENTI.Where(x => x.IsIDPADRENull()).ToArray();
-                    DataRow[] altriNodi = ds.COMPONENTI.Where(x => !x.IsIDPADRENull()).OrderByDescending(x => x.IDPADRE).ToArray();
-
-
-                    bArticolo.UpdateComponentiTable(ds.COMPONENTI.TableName, root);
-                    bArticolo.UpdateComponentiTable(ds.COMPONENTI.TableName, altriNodi);
                     FaseCiclo.SalvaListaFaseCiclo(componente.FasiCiclo, utente, ds);
                 }
+                DataRow[] root = ds.COMPONENTI.Where(x => x.IsIDPADRENull()).ToArray();
+                DataRow[] altriNodi = ds.COMPONENTI.Where(x => !x.IsIDPADRENull()).OrderByDescending(x => x.IDPADRE).ToArray();
+
+
+                bArticolo.UpdateComponentiTable(ds.COMPONENTI.TableName, root);
+                bArticolo.UpdateComponentiTable(ds.COMPONENTI.TableName, altriNodi);
+
+                bArticolo.UpdateTable(ds.FASICICLO.TableName, ds);
+
             }
 
         }
@@ -165,7 +168,7 @@ namespace MPIntranet.Business
                 return string.Format("{0} {1} ({2})", IdComponente, Descrizione, Anagrafica).Trim();
         }
 
-        public static bool VerificaListaComponentiPerSalvataggio(List<Componente> componenti)
+        public static bool VerificaListaPerSalvataggio(List<Componente> componenti)
         {
             bool esito = true;
             foreach (Componente componente in componenti)

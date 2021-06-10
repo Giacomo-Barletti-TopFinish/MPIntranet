@@ -96,32 +96,44 @@ namespace DisegnaDiBa
 
         private void btnNuovaDistinta_Click(object sender, EventArgs e)
         {
-            if (_articolo == null)
+            try
             {
-                MessageBox.Show("Nessun articolo selezioanto", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
+                if (_articolo == null)
+                {
+                    MessageBox.Show("Nessun articolo selezioanto", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                NuovaDistintaFrm form = new NuovaDistintaFrm(_articolo, _utenteConnesso);
+                form.ShowDialog();
+                int idDIba = form.IDDIBA_OUT;
+                if (idDIba == ElementiVuoti.DistintaBase)
+                {
+                    MessageBox.Show("Errore in fase di creazione della distinta", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                _distinta = DistintaBase.EstraiDistintaBase(idDIba);
+                if (_distinta == null)
+                {
+                    MessageBox.Show("Errore distinta base nulla", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                Cursor.Current = Cursors.WaitCursor;
+                popolaCampi();
+
+                creaAlbero();
+                PopolaGrigliaComponenti();
+                PopolaGrigliaFasi(_distinta.Componenti[0]);
             }
-            NuovaDistintaFrm form = new NuovaDistintaFrm(_articolo, _utenteConnesso);
-            form.ShowDialog();
-            int idDIba = form.IDDIBA_OUT;
-            if (idDIba == ElementiVuoti.DistintaBase)
+            catch (Exception ex)
             {
-                MessageBox.Show("Errore in fase di creazione della distinta", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                MostraEccezione(ex, "Errore in verifica cicli");
             }
-
-            _distinta = DistintaBase.EstraiDistintaBase(idDIba);
-            if (_distinta == null)
+            finally
             {
-                MessageBox.Show("Errore distinta base nulla", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                Cursor.Current = Cursors.Default;
             }
-
-            popolaCampi();
-
-            creaAlbero();
-            PopolaGrigliaComponenti();
-            PopolaGrigliaFasi(_distinta.Componenti[0]);
         }
         private void aggiornaNodoAlbero(int IdComponente, string descrizione, string anagrafica)
         {
@@ -236,7 +248,10 @@ namespace DisegnaDiBa
                 PopolaGrigliaComponenti();
                 PopolaGrigliaFasi(null);
             }
-            catch { }
+            catch (Exception ex)
+            {
+                MostraEccezione(ex, "Errore in verifica cicli");
+            }
             finally
             {
                 Cursor.Current = Cursors.Default;
@@ -255,13 +270,20 @@ namespace DisegnaDiBa
 
         private void CopiaRamoClick(object sender, EventArgs e)
         {
-            TreeNode tn = tvDiBa.SelectedNode;
-            if (tn == null) return;
-            if (tn.Tag == null) return;
-            ComponentiDaCopiare = new List<Componente>();
+            try
+            {
+                TreeNode tn = tvDiBa.SelectedNode;
+                if (tn == null) return;
+                if (tn.Tag == null) return;
+                ComponentiDaCopiare = new List<Componente>();
 
-            Componente componenteSelezionato = (Componente)tn.Tag;
-            copiaComponenteRicorsivo(componenteSelezionato, 0);
+                Componente componenteSelezionato = (Componente)tn.Tag;
+                copiaComponenteRicorsivo(componenteSelezionato, 0);
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione(ex, "Errore in verifica cicli");
+            }
         }
         private void copiaComponenteRicorsivo(Componente componenteSelezionato, int idPadre)
         {
@@ -275,17 +297,25 @@ namespace DisegnaDiBa
         }
         private void IncollaRamoClick(object sender, EventArgs e)
         {
-            if (ComponentiDaCopiare == null) return;
+            try
+            {
+                if (ComponentiDaCopiare == null) return;
 
-            TreeNode tn = tvDiBa.SelectedNode;
-            if (tn == null) return;
-            if (tn.Tag == null) return;
+                TreeNode tn = tvDiBa.SelectedNode;
+                if (tn == null) return;
+                if (tn.Tag == null) return;
 
-            Componente componenteSelezionato = (Componente)tn.Tag;
-            Componente componenteIniziale = ComponentiDaCopiare.Where(x => x.IdPadre == 0).FirstOrDefault();
-            incollaFaseDistintaRicorsiva(componenteIniziale, componenteSelezionato.IdComponente, tn);
-            PopolaGrigliaComponenti();
-            tn.ExpandAll();
+                Componente componenteSelezionato = (Componente)tn.Tag;
+                Componente componenteIniziale = ComponentiDaCopiare.Where(x => x.IdPadre == 0).FirstOrDefault();
+                incollaFaseDistintaRicorsiva(componenteIniziale, componenteSelezionato.IdComponente, tn);
+                PopolaGrigliaComponenti();
+                tn.ExpandAll();
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione(ex, "Errore in verifica cicli");
+            }
+
         }
         private void incollaFaseDistintaRicorsiva(Componente componenteIniziale, int idPadre, TreeNode nodoPadre)
         {
@@ -385,7 +415,10 @@ namespace DisegnaDiBa
         private void PopolaGrigliaFasi(Componente componente)
         {
             if (componente == null)
+            {
                 dgvFasiCiclo.DataSource = null;
+                return;
+            }
             dgvFasiCiclo.AutoGenerateColumns = false;
             if (componente.FasiCiclo == null) componente.FasiCiclo = new List<FaseCiclo>();
 
@@ -409,6 +442,7 @@ namespace DisegnaDiBa
         {
             try
             {
+                Cursor.Current = Cursors.WaitCursor;
                 if (_distinta == null) return;
                 if (_distinta.VerificaPerSalvataggio())
                 {
@@ -477,17 +511,24 @@ namespace DisegnaDiBa
 
         private void dgvComponenti_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return;
-            if (tvDiBa.Nodes.Count <= 0) return;
+            try
+            {
+                if (e.RowIndex < 0) return;
+                if (tvDiBa.Nodes.Count <= 0) return;
 
-            int idComponente = (int)dgvComponenti.Rows[e.RowIndex].Cells[clmIdComponente.Index].Value;
-            cambiaColoreNodo(idComponente, Color.Yellow);
+                int idComponente = (int)dgvComponenti.Rows[e.RowIndex].Cells[clmIdComponente.Index].Value;
+                cambiaColoreNodo(idComponente, Color.Yellow);
 
-            Componente componenteTrovato;
-            if (_distinta.TrovaComponente(idComponente, out componenteTrovato))
-                PopolaGrigliaFasi(componenteTrovato);
+                Componente componenteTrovato;
+                if (_distinta.TrovaComponente(idComponente, out componenteTrovato))
+                    PopolaGrigliaFasi(componenteTrovato);
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione(ex, "Errore in verifica cicli");
+            }
+
         }
-
         private void cambiaColoreNodo(int idComponente, Color colore)
         {
             TreeNode nodoTrovato;
@@ -510,63 +551,89 @@ namespace DisegnaDiBa
 
         private void dgvComponenti_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return;
-            int idComponente = (int)dgvComponenti.Rows[e.RowIndex].Cells[clmIdComponente.Index].Value;
-            string anagrafica = (string)dgvComponenti.Rows[e.RowIndex].Cells[clmAnagraficaComponente.Index].Value;
-            string descrizione = (string)dgvComponenti.Rows[e.RowIndex].Cells[clmDescrizioneComponente.Index].Value;
+            try
+            {
+                if (e.RowIndex < 0) return;
+                int idComponente = (int)dgvComponenti.Rows[e.RowIndex].Cells[clmIdComponente.Index].Value;
+                string anagrafica = (string)dgvComponenti.Rows[e.RowIndex].Cells[clmAnagraficaComponente.Index].Value;
+                string descrizione = (string)dgvComponenti.Rows[e.RowIndex].Cells[clmDescrizioneComponente.Index].Value;
 
-            aggiornaNodoAlbero(idComponente, descrizione, anagrafica);
+                aggiornaNodoAlbero(idComponente, descrizione, anagrafica);
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione(ex, "Errore in verifica cicli");
+            }
+
         }
 
         private void dgvComponenti_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return;
-
-            string anagrafica = (string)dgvComponenti.Rows[e.RowIndex].Cells[clmAnagraficaComponente.Index].Value;
-            dgvComponenti.Rows[e.RowIndex].Cells[clmAnagraficaComponente.Index].Value = anagrafica.ToUpper();
-            string descrizione = (string)dgvComponenti.Rows[e.RowIndex].Cells[clmDescrizioneComponente.Index].Value;
-            dgvComponenti.Rows[e.RowIndex].Cells[clmDescrizioneComponente.Index].Value = descrizione.ToUpper();
-            string collegamento = (string)dgvComponenti.Rows[e.RowIndex].Cells[clmCollegamentoDibaComponente.Index].Value;
-            dgvComponenti.Rows[e.RowIndex].Cells[clmCollegamentoDibaComponente.Index].Value = collegamento.ToUpper();
-            string UM = (string)dgvComponenti.Rows[e.RowIndex].Cells[clmUMQuantitaComponente.Index].Value;
-            dgvComponenti.Rows[e.RowIndex].Cells[clmUMQuantitaComponente.Index].Value = UM.ToUpper();
-
+            try
+            {
+                if (e.RowIndex < 0) return;
+                if (!string.IsNullOrEmpty((string)dgvComponenti.Rows[e.RowIndex].Cells[clmAnagraficaComponente.Index].Value))
+                {
+                    string anagrafica = (string)dgvComponenti.Rows[e.RowIndex].Cells[clmAnagraficaComponente.Index].Value;
+                    dgvComponenti.Rows[e.RowIndex].Cells[clmAnagraficaComponente.Index].Value = anagrafica.ToUpper();
+                }
+                if (!string.IsNullOrEmpty((string)dgvComponenti.Rows[e.RowIndex].Cells[clmDescrizioneComponente.Index].Value))
+                {
+                    string descrizione = (string)dgvComponenti.Rows[e.RowIndex].Cells[clmDescrizioneComponente.Index].Value;
+                    dgvComponenti.Rows[e.RowIndex].Cells[clmDescrizioneComponente.Index].Value = descrizione.ToUpper();
+                }
+                if (!string.IsNullOrEmpty((string)dgvComponenti.Rows[e.RowIndex].Cells[clmUMQuantitaComponente.Index].Value))
+                {
+                    string UM = (string)dgvComponenti.Rows[e.RowIndex].Cells[clmUMQuantitaComponente.Index].Value;
+                    dgvComponenti.Rows[e.RowIndex].Cells[clmUMQuantitaComponente.Index].Value = UM.ToUpper();
+                }
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione(ex, "Errore in verifica cicli");
+            }
         }
 
         private void dgvFasiCiclo_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-
-            if (!_newrow) return;
-            if (e.RowIndex == 0) return;
-
-            Componente componenteTrovato;
-            _distinta.TrovaComponente(_idComponenteSelezionato, out componenteTrovato);
-
-            int operazione = 10;
-            int idFaseCiclo = -1;
-            if (componenteTrovato != null && componenteTrovato.FasiCiclo.Count > 0)
+            try
             {
-                operazione = componenteTrovato.FasiCiclo.Max(x => x.Operazione) + 10;
-                int min = componenteTrovato.FasiCiclo.Min(x => x.IdFaseCiclo);
-                idFaseCiclo = min < 0 ? min - 1 : -1;
-            }
-            DataGridViewRow row = dgvFasiCiclo.Rows[e.RowIndex - 1];
+                if (!_newrow) return;
+                if (e.RowIndex == 0) return;
 
-            row.Cells[clmIDFaseCiclo.Index].Value = idFaseCiclo;
-            row.Cells[clmIdDibaFaseCiclo.Index].Value = _distinta.IdDiba;
-            row.Cells[clmIdComponenteFaseCiclo.Index].Value = _idComponenteSelezionato;
-            row.Cells[clmOperazioneFaseCiclo.Index].Value = operazione;
-            row.Cells[clmAreaProduzioneFaseCiclo.Index].Value = string.Empty;
-            row.Cells[clmTaskFaseCiclo.Index].Value = string.Empty;
-            row.Cells[clmSchedaProcessoFaseCiclo.Index].Value = string.Empty;
-            row.Cells[clmCollegamentoCicloFaseCiclo.Index].Value = string.Empty;
-            row.Cells[clmPeriodoFaseCiclo.Index].Value = 1;
-            row.Cells[clmSetupFaseCiclo.Index].Value = 0;
-            row.Cells[clmPezziOrariFaseCiclo.Index].Value = 0;
-            row.Cells[clmAttesaFaseCiclo.Index].Value = 0;
-            row.Cells[clmMovimentazioneFaseCiclo.Index].Value = 0;
-            row.Cells[clmErroreFaseCiclo.Index].Value = string.Empty;
-            _newrow = false;
+                Componente componenteTrovato;
+                _distinta.TrovaComponente(_idComponenteSelezionato, out componenteTrovato);
+
+                int operazione = 10;
+                int idFaseCiclo = -1;
+                if (componenteTrovato != null && componenteTrovato.FasiCiclo.Count > 0)
+                {
+                    operazione = componenteTrovato.FasiCiclo.Max(x => x.Operazione) + 10;
+                    int min = componenteTrovato.FasiCiclo.Min(x => x.IdFaseCiclo);
+                    idFaseCiclo = min < 0 ? min - 1 : -1;
+                }
+                DataGridViewRow row = dgvFasiCiclo.Rows[e.RowIndex - 1];
+
+                row.Cells[clmIDFaseCiclo.Index].Value = idFaseCiclo;
+                row.Cells[clmIdDibaFaseCiclo.Index].Value = _distinta.IdDiba;
+                row.Cells[clmIdComponenteFaseCiclo.Index].Value = _idComponenteSelezionato;
+                row.Cells[clmOperazioneFaseCiclo.Index].Value = operazione;
+                row.Cells[clmAreaProduzioneFaseCiclo.Index].Value = string.Empty;
+                row.Cells[clmTaskFaseCiclo.Index].Value = string.Empty;
+                row.Cells[clmSchedaProcessoFaseCiclo.Index].Value = string.Empty;
+                row.Cells[clmCollegamentoCicloFaseCiclo.Index].Value = string.Empty;
+                row.Cells[clmPeriodoFaseCiclo.Index].Value = 1;
+                row.Cells[clmSetupFaseCiclo.Index].Value = 0;
+                row.Cells[clmPezziOrariFaseCiclo.Index].Value = 0;
+                row.Cells[clmAttesaFaseCiclo.Index].Value = 0;
+                row.Cells[clmMovimentazioneFaseCiclo.Index].Value = 0;
+                row.Cells[clmErroreFaseCiclo.Index].Value = string.Empty;
+                _newrow = false;
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione(ex, "Errore in verifica cicli");
+            }
         }
 
         private void dgvFasiCiclo_NewRowNeeded(object sender, DataGridViewRowEventArgs e)
@@ -576,7 +643,7 @@ namespace DisegnaDiBa
 
         private void dgvComponenti_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            if (dgvFasiCiclo.CurrentCell.ColumnIndex == clmAnagraficaComponente.Index)
+            if (dgvComponenti.CurrentCell.ColumnIndex == clmAnagraficaComponente.Index)
             {
                 TextBox tb = e.Control as TextBox;
                 {
