@@ -16,6 +16,10 @@ namespace MPIntranet.Business
         public string Descrizione { get; set; }
         public int IdComponente { get; set; }
         public int Operazione { get; set; }
+        public string Anagrafica { get; set; }
+        public string CollegamentoDiBa { get; set; }
+        public string UMQuantita { get; set; }
+        public double Quantita { get; set; }
         public string AreaProduzione { get; set; }
         public string Task { get; set; }
         public string SchedaProcesso { get; set; }
@@ -61,6 +65,10 @@ namespace MPIntranet.Business
             faseCiclo.IdFaseCiclo = nuovaIdFaseCiclo;
             faseCiclo.IdComponente = nuovoIdCOmponente;
             faseCiclo.Descrizione = Descrizione;
+            faseCiclo.Anagrafica = Anagrafica;
+            faseCiclo.CollegamentoDiBa = CollegamentoDiBa;
+            faseCiclo.Quantita = Quantita;
+            faseCiclo.UMQuantita = UMQuantita;
             faseCiclo.Operazione = Operazione;
             faseCiclo.AreaProduzione = AreaProduzione;
             faseCiclo.Task = Task;
@@ -87,6 +95,10 @@ namespace MPIntranet.Business
             faseCiclo.IdComponente = riga.IDCOMPONENTE;
             faseCiclo.Descrizione = riga.IsDESCRIZIONENull() ? string.Empty : riga.DESCRIZIONE;
             faseCiclo.Operazione = riga.OPERAZIONE;
+            faseCiclo.Anagrafica = riga.IsANAGRAFICANull() ? string.Empty : riga.ANAGRAFICA;
+            faseCiclo.CollegamentoDiBa = riga.IsCOLLEGAMENTODIBANull() ? string.Empty : riga.COLLEGAMENTODIBA;
+            faseCiclo.Quantita = riga.IsQUANTITANull() ? 0 : riga.QUANTITA;
+            faseCiclo.UMQuantita = riga.IsUMQUANTITANull() ? string.Empty : riga.UMQUANTITA;
             faseCiclo.AreaProduzione = riga.IsAREAPRODUZIONENull() ? string.Empty : riga.AREAPRODUZIONE;
             faseCiclo.Task = riga.IsTASKNull() ? string.Empty : riga.TASK;
             faseCiclo.SchedaProcesso = riga.IsSCHEDAPROCESSONull() ? string.Empty : riga.SCHEDAPROCESSO;
@@ -111,8 +123,6 @@ namespace MPIntranet.Business
             int idDiba = fasiCiclo[0].IdDiba;
             using (ArticoliBusiness bArticolo = new ArticoliBusiness())
             {
-                bArticolo.GetFASICICLO(ds, idDiba, false);
-
                 List<int> idFasiCicloAttive = fasiCiclo.Select(x => x.IdFaseCiclo).ToList();
                 List<int> idFasiCicloDaCancellare = ds.FASICICLO.Where(x => !idFasiCicloAttive.Contains(x.IDFASECICLO) && x.IDCOMPONENTE == idComponente).Select(x => x.IDFASECICLO).ToList();
                 foreach (int idFaseCicloDaCancellare in idFasiCicloDaCancellare)
@@ -133,6 +143,10 @@ namespace MPIntranet.Business
                         rigaFaseCiclo.IDFASECICLO = faseCiclo.IdFaseCiclo;
                         rigaFaseCiclo.IDCOMPONENTE = faseCiclo.IdComponente;
                         rigaFaseCiclo.IDDIBA = faseCiclo.IdDiba;
+                        rigaFaseCiclo.ANAGRAFICA = faseCiclo.Anagrafica;
+                        rigaFaseCiclo.COLLEGAMENTODIBA = faseCiclo.CollegamentoDiBa;
+                        rigaFaseCiclo.QUANTITA = faseCiclo.Quantita;
+                        rigaFaseCiclo.UMQUANTITA = faseCiclo.UMQuantita;
                         rigaFaseCiclo.OPERAZIONE = faseCiclo.Operazione;
                         rigaFaseCiclo.DESCRIZIONE = faseCiclo.Descrizione;
                         rigaFaseCiclo.AREAPRODUZIONE = faseCiclo.AreaProduzione;
@@ -152,6 +166,10 @@ namespace MPIntranet.Business
                     }
                     else
                     {
+                        rigaFaseCiclo.ANAGRAFICA = faseCiclo.Anagrafica;
+                        rigaFaseCiclo.COLLEGAMENTODIBA = faseCiclo.CollegamentoDiBa;
+                        rigaFaseCiclo.QUANTITA = faseCiclo.Quantita;
+                        rigaFaseCiclo.UMQUANTITA = faseCiclo.UMQuantita;
                         rigaFaseCiclo.OPERAZIONE = faseCiclo.Operazione;
                         rigaFaseCiclo.DESCRIZIONE = faseCiclo.Descrizione;
                         rigaFaseCiclo.AREAPRODUZIONE = faseCiclo.AreaProduzione;

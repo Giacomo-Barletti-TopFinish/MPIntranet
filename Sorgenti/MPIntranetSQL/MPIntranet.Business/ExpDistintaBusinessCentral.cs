@@ -9,17 +9,30 @@ namespace MPIntranet.Business
     public class ExpDistintaBusinessCentral
     {
         public string Codice;
-        public List<ComponenteDistintaBusinessCentral> Componenti = new List<ComponenteDistintaBusinessCentral>();
+        public List<ExpComponenteDistintaBusinessCentral> Componenti = new List<ExpComponenteDistintaBusinessCentral>();
         public string Versione = string.Empty;
 
-        public ExpDistintaBusinessCentral(string Codice, List<ComponenteDistintaBusinessCentral> Componenti)
+        public ExpDistintaBusinessCentral(string Codice, List<ExpComponenteDistintaBusinessCentral> Componenti)
         {
             this.Codice = Codice;
             this.Componenti = Componenti;
         }
+        public ExpDistintaBusinessCentral(string Codice)
+        {
+            this.Codice = Codice;
+            this.Componenti = new List<ExpComponenteDistintaBusinessCentral>(); ;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(string.Format("DISTINTA {0}",Codice));
+            Componenti.ForEach(x => sb.AppendLine(x.ToString()));
+            return sb.ToString();
+        }
     }
 
-    public class ComponenteDistintaBusinessCentral
+    public class ExpComponenteDistintaBusinessCentral
     {
         public int ID;
         public string Tipo = "Articolo";
@@ -36,7 +49,7 @@ namespace MPIntranet.Business
         public string ArticoloNeutro = string.Empty;
         public string Formula = string.Empty;
         public string DistintaPadre = string.Empty;
-        public ComponenteDistintaBusinessCentral(string Anagrafica, double Quantita, string Collegamento, string UM, int ID, string DistintaPadre)
+        public ExpComponenteDistintaBusinessCentral(string Anagrafica, double Quantita, string Collegamento, string UM, int ID, string DistintaPadre)
         {
             this.Anagrafica = Anagrafica;
             this.Quantita = Quantita;
@@ -44,6 +57,11 @@ namespace MPIntranet.Business
             this.CodiceUM = UM;
             this.ID = ID;
             this.DistintaPadre = DistintaPadre;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("   -> {0}  {1} {2}", Anagrafica, Quantita.ToString(), CodiceUM);
         }
     }
 }

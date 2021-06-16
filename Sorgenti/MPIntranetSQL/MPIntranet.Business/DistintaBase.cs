@@ -36,7 +36,7 @@ namespace MPIntranet.Business
             componenteTrovato = null;
             foreach (Componente componente in Componenti)
             {
-                if(componente.IdComponente==IdCompenente)
+                if (componente.IdComponente == IdCompenente)
                 {
                     componenteTrovato = componente;
                     return true;
@@ -130,6 +130,77 @@ namespace MPIntranet.Business
             bool esito = true;
             esito = Componente.VerificaListaPerSalvataggio(Componenti);
 
+            return esito;
+        }
+
+        public bool Esporta(List<ExpDistintaBusinessCentral> distinteExport, List<ExpCicloBusinessCentral> cicliExport, out string errori)
+        {
+            errori = string.Empty;
+
+            bool esito = true;
+            Componente articolo = Componenti.Where(x => x.IdPadre == 0).FirstOrDefault();
+            esito = esito && creaListaEsportaRicorsiva(distinteExport, cicliExport, articolo, out errori);
+
+            return esito;
+        }
+
+        private bool creaListaEsportaRicorsiva(List<ExpDistintaBusinessCentral> distinteExport, List<ExpCicloBusinessCentral> cicliExport, Componente articolo, out string errori)
+        {
+            bool esito = true;
+            errori = string.Empty;
+            string errore = string.Empty;
+
+            StringBuilder sb = new StringBuilder();
+            string codiceDistinta = articolo.Anagrafica;
+            ExpDistintaBusinessCentral distinta = new ExpDistintaBusinessCentral(codiceDistinta);
+            ExpCicloBusinessCentral ciclo = new ExpCicloBusinessCentral(codiceDistinta);
+            foreach (FaseCiclo faseCiclo in articolo.FasiCiclo.OrderBy(x => x.Operazione))
+            {
+                if (string.IsNullOrEmpty(faseCiclo.Anagrafica))
+                {
+                    errore = string.Empty;
+                    if (!ciclo.AggiungiFase(faseCiclo, out errore))
+                    {
+                        esito = false;
+                        sb.AppendLine(errore);
+                    }
+                }
+                else
+                {
+                    ExpComponenteDistintaBusinessCentral componente = new ExpComponenteDistintaBusinessCentral(faseCiclo.Anagrafica, faseCiclo.Quantita, faseCiclo.CollegamentoDiBa, faseCiclo.UMQuantita, faseCiclo.IdFaseCiclo, articolo.Anagrafica);
+                    distinta.Componenti.Add(componente);
+                    distinteExport.Add(distinta);
+                    if (ciclo.Fasi.Count > 0)
+                        cicliExport.Add(ciclo);
+                    codiceDistinta = componente.Anagrafica;
+                    distinta = new ExpDistintaBusinessCentral(codiceDistinta);
+                    ciclo = new ExpCicloBusinessCentral(codiceDistinta);
+                    errore = string.Empty;
+
+                    if (!ciclo.AggiungiFase(faseCiclo, out errore))
+                    {
+                        esito = false;
+                        sb.AppendLine(errore);
+                    }
+                }
+            }
+            List<Componente> componentiArticolo = Componenti.Where(x => x.IdPadre == articolo.IdComponente).ToList();
+            foreach (Componente componenteArticolo in componentiArticolo)
+            {
+                ExpComponenteDistintaBusinessCentral componente = new ExpComponenteDistintaBusinessCentral(componenteArticolo.Anagrafica, componenteArticolo.Quantita, componenteArticolo.CollegamentoDiBa, componenteArticolo.UMQuantita, componenteArticolo.IdComponente, codiceDistinta);
+                distinta.Componenti.Add(componente);
+            }
+            distinteExport.Add(distinta);
+            if (ciclo.Fasi.Count > 0)
+                cicliExport.Add(ciclo);
+
+            foreach (Componente componenteArticolo in componentiArticolo)
+            {
+                errore = string.Empty;
+                esito = esito && creaListaEsportaRicorsiva(distinteExport, cicliExport, componenteArticolo, out errore);
+                sb.AppendLine(errore);
+            }
+            errori = sb.ToString();
             return esito;
         }
     }

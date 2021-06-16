@@ -9919,6 +9919,14 @@ namespace MPIntranet.Entities {
             
             private global::System.Data.DataColumn columnOPERAZIONE;
             
+            private global::System.Data.DataColumn columnANAGRAFICA;
+            
+            private global::System.Data.DataColumn columnCOLLEGAMENTODIBA;
+            
+            private global::System.Data.DataColumn columnQUANTITA;
+            
+            private global::System.Data.DataColumn columnUMQUANTITA;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public FASICICLODataTable() {
@@ -10090,6 +10098,38 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn ANAGRAFICAColumn {
+                get {
+                    return this.columnANAGRAFICA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn COLLEGAMENTODIBAColumn {
+                get {
+                    return this.columnCOLLEGAMENTODIBA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn QUANTITAColumn {
+                get {
+                    return this.columnQUANTITA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn UMQUANTITAColumn {
+                get {
+                    return this.columnUMQUANTITA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -10141,7 +10181,11 @@ namespace MPIntranet.Entities {
                         bool CANCELLATO, 
                         System.DateTime DATAMODIFICA, 
                         string UTENTEMODIFICA, 
-                        int OPERAZIONE) {
+                        int OPERAZIONE, 
+                        string ANAGRAFICA, 
+                        string COLLEGAMENTODIBA, 
+                        double QUANTITA, 
+                        string UMQUANTITA) {
                 FASICICLORow rowFASICICLORow = ((FASICICLORow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -10160,7 +10204,11 @@ namespace MPIntranet.Entities {
                         CANCELLATO,
                         DATAMODIFICA,
                         UTENTEMODIFICA,
-                        OPERAZIONE};
+                        OPERAZIONE,
+                        ANAGRAFICA,
+                        COLLEGAMENTODIBA,
+                        QUANTITA,
+                        UMQUANTITA};
                 rowFASICICLORow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowFASICICLORow);
                 return rowFASICICLORow;
@@ -10207,6 +10255,10 @@ namespace MPIntranet.Entities {
                 this.columnDATAMODIFICA = base.Columns["DATAMODIFICA"];
                 this.columnUTENTEMODIFICA = base.Columns["UTENTEMODIFICA"];
                 this.columnOPERAZIONE = base.Columns["OPERAZIONE"];
+                this.columnANAGRAFICA = base.Columns["ANAGRAFICA"];
+                this.columnCOLLEGAMENTODIBA = base.Columns["COLLEGAMENTODIBA"];
+                this.columnQUANTITA = base.Columns["QUANTITA"];
+                this.columnUMQUANTITA = base.Columns["UMQUANTITA"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10246,6 +10298,14 @@ namespace MPIntranet.Entities {
                 base.Columns.Add(this.columnUTENTEMODIFICA);
                 this.columnOPERAZIONE = new global::System.Data.DataColumn("OPERAZIONE", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnOPERAZIONE);
+                this.columnANAGRAFICA = new global::System.Data.DataColumn("ANAGRAFICA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnANAGRAFICA);
+                this.columnCOLLEGAMENTODIBA = new global::System.Data.DataColumn("COLLEGAMENTODIBA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCOLLEGAMENTODIBA);
+                this.columnQUANTITA = new global::System.Data.DataColumn("QUANTITA", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnQUANTITA);
+                this.columnUMQUANTITA = new global::System.Data.DataColumn("UMQUANTITA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUMQUANTITA);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnIDFASECICLO}, true));
                 this.columnIDFASECICLO.AutoIncrement = true;
@@ -15327,6 +15387,70 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string ANAGRAFICA {
+                get {
+                    try {
+                        return ((string)(this[this.tableFASICICLO.ANAGRAFICAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ANAGRAFICA\' in table \'FASICICLO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableFASICICLO.ANAGRAFICAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string COLLEGAMENTODIBA {
+                get {
+                    try {
+                        return ((string)(this[this.tableFASICICLO.COLLEGAMENTODIBAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'COLLEGAMENTODIBA\' in table \'FASICICLO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableFASICICLO.COLLEGAMENTODIBAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public double QUANTITA {
+                get {
+                    try {
+                        return ((double)(this[this.tableFASICICLO.QUANTITAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'QUANTITA\' in table \'FASICICLO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableFASICICLO.QUANTITAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string UMQUANTITA {
+                get {
+                    try {
+                        return ((string)(this[this.tableFASICICLO.UMQUANTITAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'UMQUANTITA\' in table \'FASICICLO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableFASICICLO.UMQUANTITAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsDESCRIZIONENull() {
                 return this.IsNull(this.tableFASICICLO.DESCRIZIONEColumn);
             }
@@ -15443,6 +15567,54 @@ namespace MPIntranet.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetMOVIMENTAZIONENull() {
                 this[this.tableFASICICLO.MOVIMENTAZIONEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsANAGRAFICANull() {
+                return this.IsNull(this.tableFASICICLO.ANAGRAFICAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetANAGRAFICANull() {
+                this[this.tableFASICICLO.ANAGRAFICAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsCOLLEGAMENTODIBANull() {
+                return this.IsNull(this.tableFASICICLO.COLLEGAMENTODIBAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetCOLLEGAMENTODIBANull() {
+                this[this.tableFASICICLO.COLLEGAMENTODIBAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsQUANTITANull() {
+                return this.IsNull(this.tableFASICICLO.QUANTITAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetQUANTITANull() {
+                this[this.tableFASICICLO.QUANTITAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsUMQUANTITANull() {
+                return this.IsNull(this.tableFASICICLO.UMQUANTITAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetUMQUANTITANull() {
+                this[this.tableFASICICLO.UMQUANTITAColumn] = global::System.Convert.DBNull;
             }
         }
         

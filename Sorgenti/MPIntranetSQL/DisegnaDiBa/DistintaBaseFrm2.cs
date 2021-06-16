@@ -40,6 +40,11 @@ namespace DisegnaDiBa
             indiceComponenti--;
             return indiceComponenti;
         }
+        private int estraiIndiceFasiCiclo()
+        {
+            indiceFaseCiclo--;
+            return indiceFaseCiclo;
+        }
         public DistintaBaseFrm2()
         {
             InitializeComponent();
@@ -213,7 +218,7 @@ namespace DisegnaDiBa
             Componente componente = new Componente();
             componente.IdComponente = estraiIndiceComponenti();
             componente.IdDiba = _distinta.IdDiba;
-
+            componente.CollegamentoDiBa = ExpCicloBusinessCentral.CodiceStandard;
             if (componentePadre != null) componente.IdPadre = componentePadre.IdComponente;
             componente.Quantita = 1;
             componente.UMQuantita = "NR";
@@ -488,6 +493,16 @@ namespace DisegnaDiBa
                     tb.AutoCompleteSource = AutoCompleteSource.CustomSource;
                 }
             }
+            if (columnIndex == clmAnagraficaFaseCiclo.Index)
+            {
+                TextBox tb = e.Control as TextBox;
+                {
+                    tb.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                    tb.AutoCompleteCustomSource = _autoItems;
+                    tb.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                }
+            }
+
         }
 
 
@@ -610,7 +625,7 @@ namespace DisegnaDiBa
                 {
                     operazione = componenteTrovato.FasiCiclo.Max(x => x.Operazione) + 10;
                     int min = componenteTrovato.FasiCiclo.Min(x => x.IdFaseCiclo);
-                    idFaseCiclo = min < 0 ? min - 1 : -1;
+                    idFaseCiclo = estraiIndiceFasiCiclo();
                 }
                 DataGridViewRow row = dgvFasiCiclo.Rows[e.RowIndex - 1];
 
@@ -653,6 +668,42 @@ namespace DisegnaDiBa
                 }
             }
         }
+
+
+        private void btnEsporta_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                List<ExpDistintaBusinessCentral> distinteExport = new List<ExpDistintaBusinessCentral>();
+                List<ExpCicloBusinessCentral> cicliExport = new List<ExpCicloBusinessCentral>();
+                string errori;
+                if (_distinta == null)
+                {
+                    MessageBox.Show("Nessuna distinta selezionata", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (_distinta.Esporta(distinteExport, cicliExport, out errori))
+                {
+                    EsportaDiBaFrm form = new EsportaDiBaFrm(distinteExport, cicliExport);
+                    form.ShowDialog();
+                }
+                else
+                {
+                    string messagio = "VERIFICARE I SEGUENTI ERRORI" + Environment.NewLine + errori;
+                    MessageBox.Show(messagio, "ERRORI", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione(ex, "Errore in verifica cicli");
+            }
+
+        }
+
     }
 }
 

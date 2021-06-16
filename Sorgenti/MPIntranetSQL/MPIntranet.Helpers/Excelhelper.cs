@@ -169,7 +169,7 @@ namespace MPIntranet.Helpers
 
                 foreach (ExpCicloBusinessCentral c in cicli)
                 {
-                    foreach (FaseCicloBusinessCentral f in c.Fasi)
+                    foreach (ExpFaseCicloBusinessCentral f in c.Fasi)
                     {
                         Row rowTestata = new Row();
 
@@ -324,7 +324,7 @@ namespace MPIntranet.Helpers
                 foreach (ExpDistintaBusinessCentral d in distinte)
                 {
                     int numeroRiga = 1000;
-                    foreach (ComponenteDistintaBusinessCentral c in d.Componenti)
+                    foreach (ExpComponenteDistintaBusinessCentral c in d.Componenti)
                     {
                         Row row = new Row();
                         row.Append(ConstructCell(d.Codice, CellValues.String, 1));

@@ -98,7 +98,8 @@ namespace MPIntranet.Business
             ArticoliDS ds = new ArticoliDS();
             using (ArticoliBusiness bArticolo = new ArticoliBusiness())
             {
-                bArticolo.GetCOMPONENTI(ds, idDiba, false);
+                bArticolo.GetCOMPONENTI(ds, idDiba, true);
+                bArticolo.GetFASICICLO(ds, idDiba, true);
 
                 List<int> idComponentiAttivi = componenti.Select(x => x.IdComponente).ToList();
                 List<int> idComponentiDaCancellare = ds.COMPONENTI.Where(x => !idComponentiAttivi.Contains(x.IDCOMPONENTE)).Select(x => x.IDCOMPONENTE).ToList();
@@ -199,6 +200,12 @@ namespace MPIntranet.Business
                     esito = false;
                     componente.Errore = "Codice diba non valido ";
                 }
+                if (string.IsNullOrEmpty(componente.CollegamentoDiBa))
+                {
+                    esito = false;
+                    componente.CollegamentoDiBa = ExpCicloBusinessCentral.CodiceStandard;
+                }
+
             }
             return esito;
         }

@@ -34,11 +34,11 @@
             this.distinteRVLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuovaDistintaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.apriEsistenteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.businessCentralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.finestreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.disponiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cascataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.organizzaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.businessCentralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preventiviMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,6 +97,14 @@
             this.apriEsistenteToolStripMenuItem.Text = "Apri ...";
             this.apriEsistenteToolStripMenuItem.Click += new System.EventHandler(this.apriEsistenteToolStripMenuItem_Click);
             // 
+            // businessCentralToolStripMenuItem
+            // 
+            this.businessCentralToolStripMenuItem.Name = "businessCentralToolStripMenuItem";
+            this.businessCentralToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.businessCentralToolStripMenuItem.Text = "Business Central...";
+            this.businessCentralToolStripMenuItem.Visible = false;
+            this.businessCentralToolStripMenuItem.Click += new System.EventHandler(this.businessCentralToolStripMenuItem_Click);
+            // 
             // finestreToolStripMenuItem
             // 
             this.finestreToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -127,13 +135,6 @@
             this.organizzaToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.organizzaToolStripMenuItem.Text = "Organizza orizzontale";
             this.organizzaToolStripMenuItem.Click += new System.EventHandler(this.organizzaToolStripMenuItem_Click);
-            // 
-            // businessCentralToolStripMenuItem
-            // 
-            this.businessCentralToolStripMenuItem.Name = "businessCentralToolStripMenuItem";
-            this.businessCentralToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.businessCentralToolStripMenuItem.Text = "Business Central...";
-            this.businessCentralToolStripMenuItem.Click += new System.EventHandler(this.businessCentralToolStripMenuItem_Click);
             // 
             // MainForm
             // 

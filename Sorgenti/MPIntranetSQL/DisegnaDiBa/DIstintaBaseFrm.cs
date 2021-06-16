@@ -641,7 +641,7 @@ namespace DisegnaDiBa
 
                 while (fasiFiglie.Count > 0)
                 {
-                    List<ComponenteDistintaBusinessCentral> componenti = new List<ComponenteDistintaBusinessCentral>();
+                    List<ExpComponenteDistintaBusinessCentral> componenti = new List<ExpComponenteDistintaBusinessCentral>();
                     bool esitoFiglio = true;
                     if (fasiFiglie.Count > 1)
                     {
@@ -662,7 +662,7 @@ namespace DisegnaDiBa
                                 esito = false;
 
                             }
-                            componenti.Add(new ComponenteDistintaBusinessCentral(figlio.Anagrafica, figlio.Quantita, figlio.CollegamentoDiba, figlio.UMQuantita, figlio.IdFaseDiba, fase.Anagrafica));
+                            componenti.Add(new ExpComponenteDistintaBusinessCentral(figlio.Anagrafica, figlio.Quantita, figlio.CollegamentoDiba, figlio.UMQuantita, figlio.IdFaseDiba, fase.Anagrafica));
 
                         }
                         if (esitoFiglio)
@@ -676,7 +676,7 @@ namespace DisegnaDiBa
                     {
                         if (!string.IsNullOrEmpty(fasiFiglie[0].Anagrafica))
                         {
-                            componenti.Add(new ComponenteDistintaBusinessCentral(fasiFiglie[0].Anagrafica, fasiFiglie[0].Quantita, fasiFiglie[0].CollegamentoDiba, fasiFiglie[0].UMQuantita, fasiFiglie[0].IdFaseDiba, fase.Anagrafica));
+                            componenti.Add(new ExpComponenteDistintaBusinessCentral(fasiFiglie[0].Anagrafica, fasiFiglie[0].Quantita, fasiFiglie[0].CollegamentoDiba, fasiFiglie[0].UMQuantita, fasiFiglie[0].IdFaseDiba, fase.Anagrafica));
                             distinte.Add(new ExpDistintaBusinessCentral(fase.Anagrafica, componenti));
                             fasiFiglie = new List<FaseDistinta>();
                         }

@@ -37,6 +37,7 @@
             this.clmErroreFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmIdDibaFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmOperazioneFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmAnagraficaFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmAreaProduzioneFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmTaskFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmSchedaProcessoFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,6 +68,7 @@
             this.clmCollegamentoDibaComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmQuantitaComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmUMQuantitaComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnEsporta = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFasiCiclo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvComponenti)).BeginInit();
             this.SuspendLayout();
@@ -93,6 +95,7 @@
             this.clmErroreFaseCiclo,
             this.clmIdDibaFaseCiclo,
             this.clmOperazioneFaseCiclo,
+            this.clmAnagraficaFaseCiclo,
             this.clmAreaProduzioneFaseCiclo,
             this.clmTaskFaseCiclo,
             this.clmSchedaProcessoFaseCiclo,
@@ -152,6 +155,12 @@
             this.clmOperazioneFaseCiclo.HeaderText = "Operazione";
             this.clmOperazioneFaseCiclo.Name = "clmOperazioneFaseCiclo";
             this.clmOperazioneFaseCiclo.Width = 50;
+            // 
+            // clmAnagraficaFaseCiclo
+            // 
+            this.clmAnagraficaFaseCiclo.DataPropertyName = "Anagrafica";
+            this.clmAnagraficaFaseCiclo.HeaderText = "Anagrafica";
+            this.clmAnagraficaFaseCiclo.Name = "clmAnagraficaFaseCiclo";
             // 
             // clmAreaProduzioneFaseCiclo
             // 
@@ -237,26 +246,26 @@
             // 
             // btnCercaDiBa
             // 
-            this.btnCercaDiBa.Location = new System.Drawing.Point(283, 10);
+            this.btnCercaDiBa.Location = new System.Drawing.Point(273, 11);
             this.btnCercaDiBa.Name = "btnCercaDiBa";
             this.btnCercaDiBa.Size = new System.Drawing.Size(94, 27);
             this.btnCercaDiBa.TabIndex = 8;
-            this.btnCercaDiBa.Text = "Cerca DiBa";
+            this.btnCercaDiBa.Text = "Apri DiBa";
             this.btnCercaDiBa.UseVisualStyleBackColor = true;
             this.btnCercaDiBa.Click += new System.EventHandler(this.btnCercaDiBa_Click);
             // 
             // txtTipoDiba
             // 
-            this.txtTipoDiba.Location = new System.Drawing.Point(676, 11);
+            this.txtTipoDiba.Location = new System.Drawing.Point(738, 12);
             this.txtTipoDiba.Name = "txtTipoDiba";
             this.txtTipoDiba.ReadOnly = true;
-            this.txtTipoDiba.Size = new System.Drawing.Size(279, 20);
+            this.txtTipoDiba.Size = new System.Drawing.Size(244, 20);
             this.txtTipoDiba.TabIndex = 10;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(633, 15);
+            this.label2.Location = new System.Drawing.Point(704, 17);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(28, 13);
             this.label2.TabIndex = 9;
@@ -264,7 +273,7 @@
             // 
             // txtDescrizioneDiba
             // 
-            this.txtDescrizioneDiba.Location = new System.Drawing.Point(1183, 11);
+            this.txtDescrizioneDiba.Location = new System.Drawing.Point(1201, 13);
             this.txtDescrizioneDiba.Name = "txtDescrizioneDiba";
             this.txtDescrizioneDiba.ReadOnly = true;
             this.txtDescrizioneDiba.Size = new System.Drawing.Size(470, 20);
@@ -273,7 +282,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1116, 15);
+            this.label3.Location = new System.Drawing.Point(1134, 17);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(62, 13);
             this.label3.TabIndex = 11;
@@ -281,7 +290,7 @@
             // 
             // txtVersioneDiba
             // 
-            this.txtVersioneDiba.Location = new System.Drawing.Point(1032, 11);
+            this.txtVersioneDiba.Location = new System.Drawing.Point(1050, 13);
             this.txtVersioneDiba.Name = "txtVersioneDiba";
             this.txtVersioneDiba.ReadOnly = true;
             this.txtVersioneDiba.Size = new System.Drawing.Size(73, 20);
@@ -290,7 +299,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(970, 15);
+            this.label4.Location = new System.Drawing.Point(988, 17);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(48, 13);
             this.label4.TabIndex = 13;
@@ -298,7 +307,7 @@
             // 
             // btnNuovaDistinta
             // 
-            this.btnNuovaDistinta.Location = new System.Drawing.Point(408, 10);
+            this.btnNuovaDistinta.Location = new System.Drawing.Point(384, 11);
             this.btnNuovaDistinta.Name = "btnNuovaDistinta";
             this.btnNuovaDistinta.Size = new System.Drawing.Size(94, 27);
             this.btnNuovaDistinta.TabIndex = 15;
@@ -308,7 +317,7 @@
             // 
             // btnSalvaDiba
             // 
-            this.btnSalvaDiba.Location = new System.Drawing.Point(533, 10);
+            this.btnSalvaDiba.Location = new System.Drawing.Point(495, 11);
             this.btnSalvaDiba.Name = "btnSalvaDiba";
             this.btnSalvaDiba.Size = new System.Drawing.Size(94, 27);
             this.btnSalvaDiba.TabIndex = 19;
@@ -415,11 +424,22 @@
             this.clmUMQuantitaComponente.Name = "clmUMQuantitaComponente";
             this.clmUMQuantitaComponente.Width = 70;
             // 
+            // btnEsporta
+            // 
+            this.btnEsporta.Location = new System.Drawing.Point(606, 11);
+            this.btnEsporta.Name = "btnEsporta";
+            this.btnEsporta.Size = new System.Drawing.Size(94, 27);
+            this.btnEsporta.TabIndex = 22;
+            this.btnEsporta.Text = "Esporta";
+            this.btnEsporta.UseVisualStyleBackColor = true;
+            this.btnEsporta.Click += new System.EventHandler(this.btnEsporta_Click);
+            // 
             // DistintaBaseFrm2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1694, 932);
+            this.Controls.Add(this.btnEsporta);
             this.Controls.Add(this.dgvFasiCiclo);
             this.Controls.Add(this.dgvComponenti);
             this.Controls.Add(this.btnSalvaDiba);
@@ -474,6 +494,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clmErroreFaseCiclo;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmIdDibaFaseCiclo;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmOperazioneFaseCiclo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmAnagraficaFaseCiclo;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmAreaProduzioneFaseCiclo;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmTaskFaseCiclo;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmSchedaProcessoFaseCiclo;
@@ -483,5 +504,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clmSetupFaseCiclo;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmAttesaFaseCiclo;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmMovimentazioneFaseCiclo;
+        private System.Windows.Forms.Button btnEsporta;
     }
 }
