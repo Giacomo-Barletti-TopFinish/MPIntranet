@@ -636,6 +636,7 @@ namespace DisegnaDiBa
                 row.Cells[clmAreaProduzioneFaseCiclo.Index].Value = string.Empty;
                 row.Cells[clmTaskFaseCiclo.Index].Value = string.Empty;
                 row.Cells[clmSchedaProcessoFaseCiclo.Index].Value = string.Empty;
+                row.Cells[clmSchedaProcessoFaseCiclo.Index].Value = string.Empty;
                 row.Cells[clmCollegamentoCicloFaseCiclo.Index].Value = string.Empty;
                 row.Cells[clmPeriodoFaseCiclo.Index].Value = 1;
                 row.Cells[clmSetupFaseCiclo.Index].Value = 0;
@@ -643,6 +644,11 @@ namespace DisegnaDiBa
                 row.Cells[clmAttesaFaseCiclo.Index].Value = 0;
                 row.Cells[clmMovimentazioneFaseCiclo.Index].Value = 0;
                 row.Cells[clmErroreFaseCiclo.Index].Value = string.Empty;
+
+                row.Cells[clmQuantitaFaseCiclo.Index].Value = 1;
+                row.Cells[clmUMQuantitaFaseCiclo.Index].Value = "NR";
+                row.Cells[clmCollegamentoDiBAFaseCiclo.Index].Value = ExpCicloBusinessCentral.CodiceStandard;
+
                 _newrow = false;
             }
             catch (Exception ex)
@@ -704,6 +710,34 @@ namespace DisegnaDiBa
 
         }
 
+        private void dgvFasiCiclo_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex < 0) return;
+
+                convertiContenutoMaiuscolo(dgvFasiCiclo, clmAnagraficaFaseCiclo, e.RowIndex);
+                convertiContenutoMaiuscolo(dgvFasiCiclo, clmCollegamentoDiBAFaseCiclo, e.RowIndex);
+                convertiContenutoMaiuscolo(dgvFasiCiclo, clmCollegamentoCicloFaseCiclo, e.RowIndex);
+                convertiContenutoMaiuscolo(dgvFasiCiclo, clmUMQuantitaFaseCiclo, e.RowIndex);
+                convertiContenutoMaiuscolo(dgvFasiCiclo, clmAreaProduzioneFaseCiclo, e.RowIndex);
+                convertiContenutoMaiuscolo(dgvFasiCiclo, clmTaskFaseCiclo, e.RowIndex);
+                convertiContenutoMaiuscolo(dgvFasiCiclo, clmSchedaProcessoFaseCiclo, e.RowIndex);
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione(ex, "Errore in verifica cicli");
+            }
+        }
+
+        private void convertiContenutoMaiuscolo(DataGridView dgv, DataGridViewTextBoxColumn clm, int indiceRiga)
+        {
+            if (!string.IsNullOrEmpty((string)dgv.Rows[indiceRiga].Cells[clm.Index].Value))
+            {
+                string testo = (string)dgv.Rows[indiceRiga].Cells[clm.Index].Value;
+                dgv.Rows[indiceRiga].Cells[clm.Index].Value = testo.ToUpper();
+            }
+        }
     }
 }
 

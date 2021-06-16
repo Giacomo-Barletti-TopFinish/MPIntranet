@@ -143,16 +143,16 @@ namespace MPIntranet.Business
                         rigaFaseCiclo.IDFASECICLO = faseCiclo.IdFaseCiclo;
                         rigaFaseCiclo.IDCOMPONENTE = faseCiclo.IdComponente;
                         rigaFaseCiclo.IDDIBA = faseCiclo.IdDiba;
-                        rigaFaseCiclo.ANAGRAFICA = faseCiclo.Anagrafica;
-                        rigaFaseCiclo.COLLEGAMENTODIBA = faseCiclo.CollegamentoDiBa;
+                        rigaFaseCiclo.ANAGRAFICA = faseCiclo.Anagrafica.ToUpper();
+                        rigaFaseCiclo.COLLEGAMENTODIBA = faseCiclo.CollegamentoDiBa.ToUpper();
                         rigaFaseCiclo.QUANTITA = faseCiclo.Quantita;
-                        rigaFaseCiclo.UMQUANTITA = faseCiclo.UMQuantita;
+                        rigaFaseCiclo.UMQUANTITA = faseCiclo.UMQuantita.ToUpper();
                         rigaFaseCiclo.OPERAZIONE = faseCiclo.Operazione;
-                        rigaFaseCiclo.DESCRIZIONE = faseCiclo.Descrizione;
-                        rigaFaseCiclo.AREAPRODUZIONE = faseCiclo.AreaProduzione;
-                        rigaFaseCiclo.TASK = faseCiclo.Task;
-                        rigaFaseCiclo.SCHEDAPROCESSO = faseCiclo.SchedaProcesso;
-                        rigaFaseCiclo.COLLEGAMENTOCICLO = faseCiclo.CollegamentoCiclo;
+                        rigaFaseCiclo.DESCRIZIONE = faseCiclo.Descrizione.ToUpper();
+                        rigaFaseCiclo.AREAPRODUZIONE = faseCiclo.AreaProduzione.ToUpper();
+                        rigaFaseCiclo.TASK = faseCiclo.Task.ToUpper();
+                        rigaFaseCiclo.SCHEDAPROCESSO = faseCiclo.SchedaProcesso.ToUpper();
+                        rigaFaseCiclo.COLLEGAMENTOCICLO = faseCiclo.CollegamentoCiclo.ToUpper();
                         rigaFaseCiclo.PEZZIPERIODO = faseCiclo.PezziPeriodo;
                         rigaFaseCiclo.PERIODO = faseCiclo.Periodo;
                         rigaFaseCiclo.SETUP = faseCiclo.Setup;
@@ -166,16 +166,16 @@ namespace MPIntranet.Business
                     }
                     else
                     {
-                        rigaFaseCiclo.ANAGRAFICA = faseCiclo.Anagrafica;
-                        rigaFaseCiclo.COLLEGAMENTODIBA = faseCiclo.CollegamentoDiBa;
+                        rigaFaseCiclo.ANAGRAFICA = faseCiclo.Anagrafica.ToUpper();
+                        rigaFaseCiclo.COLLEGAMENTODIBA = faseCiclo.CollegamentoDiBa.ToUpper();
                         rigaFaseCiclo.QUANTITA = faseCiclo.Quantita;
-                        rigaFaseCiclo.UMQUANTITA = faseCiclo.UMQuantita;
+                        rigaFaseCiclo.UMQUANTITA = faseCiclo.UMQuantita.ToUpper();
                         rigaFaseCiclo.OPERAZIONE = faseCiclo.Operazione;
-                        rigaFaseCiclo.DESCRIZIONE = faseCiclo.Descrizione;
-                        rigaFaseCiclo.AREAPRODUZIONE = faseCiclo.AreaProduzione;
-                        rigaFaseCiclo.TASK = faseCiclo.Task;
-                        rigaFaseCiclo.SCHEDAPROCESSO = faseCiclo.SchedaProcesso;
-                        rigaFaseCiclo.COLLEGAMENTOCICLO = faseCiclo.CollegamentoCiclo;
+                        rigaFaseCiclo.DESCRIZIONE = faseCiclo.Descrizione.ToUpper();
+                        rigaFaseCiclo.AREAPRODUZIONE = faseCiclo.AreaProduzione.ToUpper();
+                        rigaFaseCiclo.TASK = faseCiclo.Task.ToUpper();
+                        rigaFaseCiclo.SCHEDAPROCESSO = faseCiclo.SchedaProcesso.ToUpper();
+                        rigaFaseCiclo.COLLEGAMENTOCICLO = faseCiclo.CollegamentoCiclo.ToUpper();
                         rigaFaseCiclo.PEZZIPERIODO = faseCiclo.PezziPeriodo;
                         rigaFaseCiclo.PERIODO = faseCiclo.Periodo;
                         rigaFaseCiclo.SETUP = faseCiclo.Setup;
