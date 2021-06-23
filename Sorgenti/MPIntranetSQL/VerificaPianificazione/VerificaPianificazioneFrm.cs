@@ -52,8 +52,8 @@ namespace VerificaPianificazione
                 Avanzamento avanzamento = (Avanzamento)riga.Cells[clmAvanzamento.Name].Value;
                 if (avanzamento == Avanzamento.InRitardo)
                     riga.DefaultCellStyle.ForeColor = Color.Red;
-                if (avanzamento == Avanzamento.InRitardo)
-                    riga.DefaultCellStyle.ForeColor = Color.Yellow;
+                if (avanzamento == Avanzamento.RitardoCiclo)
+                    riga.DefaultCellStyle.ForeColor = Color.Orange;
                 decimal quantita = (decimal)riga.Cells[clmQuantita.Name].Value;
                 decimal quantitaFinita = (decimal)riga.Cells[clmQuantitaFinita.Name].Value;
                 if (quantita == quantitaFinita)
