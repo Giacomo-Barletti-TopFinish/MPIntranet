@@ -56,6 +56,11 @@
       <DependentUpon>DocumentiDS.xsd</DependentUpon>
     </Compile>
     <Compile Include="ElementiVuoti.cs" />
+    <Compile Include="OrdiniProduzioneDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrdiniProduzioneDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -67,6 +72,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SecurityDS.xsd</DependentUpon>
     </Compile>
+    <Compile Include="StatoOrdiniProduzione.cs" />
     <Compile Include="TabelleEsterne.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +98,17 @@
     </None>
     <None Include="DocumentiDS.xss">
       <DependentUpon>DocumentiDS.xsd</DependentUpon>
+    </None>
+    <None Include="OrdiniProduzioneDS.xsc">
+      <DependentUpon>OrdiniProduzioneDS.xsd</DependentUpon>
+    </None>
+    <None Include="OrdiniProduzioneDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OrdiniProduzioneDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="OrdiniProduzioneDS.xss">
+      <DependentUpon>OrdiniProduzioneDS.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

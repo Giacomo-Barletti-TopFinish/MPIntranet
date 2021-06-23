@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPIntranet.Common", "MPIntr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisegnaDiBa", "DisegnaDiBa\DisegnaDiBa.csproj", "{9DA2985A-AAD1-4C0D-BEAD-251438C93AF7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerificaPianificazione", "VerificaPianificazione\VerificaPianificazione.csproj", "{F5C49B87-B3C8-4BFC-8D2B-EDDBB2D5E8C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{9DA2985A-AAD1-4C0D-BEAD-251438C93AF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DA2985A-AAD1-4C0D-BEAD-251438C93AF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DA2985A-AAD1-4C0D-BEAD-251438C93AF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5C49B87-B3C8-4BFC-8D2B-EDDBB2D5E8C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5C49B87-B3C8-4BFC-8D2B-EDDBB2D5E8C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5C49B87-B3C8-4BFC-8D2B-EDDBB2D5E8C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5C49B87-B3C8-4BFC-8D2B-EDDBB2D5E8C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

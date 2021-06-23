@@ -12,7 +12,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-  CREATE VIEW [dbo].[Task] as   SELECT * FROM [TEST].[dbo].[MetalPlus_WS$Standard Task$437dbf0e-84ff-417a-965d-ed2bb9650972]
+  CREATE VIEW [dbo].[Task] as   SELECT * FROM [TEST].[dbo].[MetalPlus_WS$Standard Task$437dbf0e-84ff-417a-965d-ed2bb9650972] WITH (NOLOCK)
 GO
 
 USE [MPI]
@@ -27,7 +27,7 @@ GO
 
 
 create view [dbo].[AreeProduzione] as 
-select * from [TEST].[dbo].[MetalPlus_WS$Work Center$437dbf0e-84ff-417a-965d-ed2bb9650972]
+select * from [TEST].[dbo].[MetalPlus_WS$Work Center$437dbf0e-84ff-417a-965d-ed2bb9650972] WITH (NOLOCK)
 GO
 
 USE [MPI]
@@ -41,21 +41,36 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 create view [dbo].[Items] as
-select * from [TEST].[dbo].[MetalPlus_WS$Item$437dbf0e-84ff-417a-965d-ed2bb9650972]
+select * from [TEST].[dbo].[MetalPlus_WS$Item$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
 GO
 
 create view [dbo].[CicliBCTestata] as
-SELECT * FROM [TEST].[dbo].[MetalPlus_WS$Routing Header$437dbf0e-84ff-417a-965d-ed2bb9650972]
+SELECT * FROM [TEST].[dbo].[MetalPlus_WS$Routing Header$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
 go
 
 create view [dbo].[CicliBCDettaglio] as
-SELECT * FROM [TEST].[dbo].[MetalPlus_WS$Routing Line$437dbf0e-84ff-417a-965d-ed2bb9650972]
+SELECT * FROM [TEST].[dbo].[MetalPlus_WS$Routing Line$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
 go
 
 
 create view [dbo].[DistinteBCTestata] as
-SELECT * FROM [TEST].[dbo].[MetalPlus_WS$Production BOM Header$437dbf0e-84ff-417a-965d-ed2bb9650972]
+SELECT * FROM [TEST].[dbo].[MetalPlus_WS$Production BOM Header$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
 go
 
 create view [dbo].[DistinteBCDettaglio] as
-SELECT * FROM  [TEST].[dbo].[MetalPlus_WS$Production BOM Line$437dbf0e-84ff-417a-965d-ed2bb9650972]go
+SELECT * FROM  [TEST].[dbo].[MetalPlus_WS$Production BOM Line$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
+go
+
+CREATE VIEW [DBO].[ArticoliOrdiniProduzione] as
+select * from [TEST].[dbo].[MetalPlus_WS$Prod_ Order Line$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
+
+go
+CREATE VIEW [DBO].[ComponentiOrdiniProduzione] as
+select * from [TEST].[dbo].[MetalPlus_WS$Prod_ Order Component$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
+
+go
+CREATE VIEW [DBO].[FasiOrdiniProduzione] as
+select * from [TEST].[dbo].[MetalPlus_WS$Prod_ Order Routing Line$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
+go
+CREATE VIEW [DBO].[VersamentiFasiOrdiniProduzione] as
+select * from [TEST].[dbo].[MetalPlus_WS$Capacity Ledger Entry$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
