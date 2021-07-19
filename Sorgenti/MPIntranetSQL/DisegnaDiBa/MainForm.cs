@@ -1,4 +1,5 @@
-﻿using MPIntranet.Business;
+﻿using log4net;
+using MPIntranet.Business;
 using MPIntranet.Common;
 using System;
 using System.Collections.Generic;
@@ -95,6 +96,26 @@ namespace DisegnaDiBa
             {
                 base.MostraEccezione(ex, "Errore in apertura finestra distinta base");
             }
+        }
+
+        private void taskAreaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                CollegamentoTaskAreaFrm form = new CollegamentoTaskAreaFrm();
+                form.MdiParent = this;
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                base.MostraEccezione(ex, "Errore in apertura finestra task - area produzione");
+            }
+
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
         }
     }
 }

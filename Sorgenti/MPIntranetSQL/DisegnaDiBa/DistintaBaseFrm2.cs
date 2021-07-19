@@ -53,6 +53,9 @@ namespace DisegnaDiBa
 
         private void DistintaBaseFrm_Load(object sender, EventArgs e)
         {
+            tmrSalvataggio.Interval = 10 * 60 * 1000;
+            avviaTimerAutoSalvataggio();
+
             NuovoArticoloFrm nForm = new NuovoArticoloFrm();
             nForm.Utente = _utenteConnesso;
             nForm.ShowDialog();
@@ -723,11 +726,25 @@ namespace DisegnaDiBa
                 convertiContenutoMaiuscolo(dgvFasiCiclo, clmAreaProduzioneFaseCiclo, e.RowIndex);
                 convertiContenutoMaiuscolo(dgvFasiCiclo, clmTaskFaseCiclo, e.RowIndex);
                 convertiContenutoMaiuscolo(dgvFasiCiclo, clmSchedaProcessoFaseCiclo, e.RowIndex);
+
+                if (e.ColumnIndex == clmOperazioneFaseCiclo.Index) riordinaFasiCiclo();
+
             }
             catch (Exception ex)
             {
                 MostraEccezione(ex, "Errore in verifica cicli");
             }
+        }
+
+        private void riordinaFasiCiclo()
+        {
+            Componente componenteTrovato;
+            if (_distinta.TrovaComponente(_idComponenteSelezionato, out componenteTrovato))
+            {
+                componenteTrovato.FasiCiclo = componenteTrovato.FasiCiclo.OrderByDescending(x => x.Operazione).ToList();
+                PopolaGrigliaFasi(componenteTrovato);
+            }
+
         }
 
         private void convertiContenutoMaiuscolo(DataGridView dgv, DataGridViewTextBoxColumn clm, int indiceRiga)
@@ -737,6 +754,29 @@ namespace DisegnaDiBa
                 string testo = (string)dgv.Rows[indiceRiga].Cells[clm.Index].Value;
                 dgv.Rows[indiceRiga].Cells[clm.Index].Value = testo.ToUpper();
             }
+        }
+
+        private void tmrSalvataggio_Tick(object sender, EventArgs e)
+        {
+            if (_distinta == null) return;
+            if (_articolo == null) return;
+
+            if (mnuFileSalvataggioAutomatico.Checked)
+                btnSalvaDiba_Click(null, null);
+        }
+
+        private void avviaTimerAutoSalvataggio()
+        {
+            if (mnuFileSalvataggioAutomatico.Checked)
+                tmrSalvataggio.Start();
+            else
+                tmrSalvataggio.Stop();
+        }
+
+        private void mnuFileSalvataggioAutomatico_Click(object sender, EventArgs e)
+        {
+            mnuFileSalvataggioAutomatico.Checked = !mnuFileSalvataggioAutomatico.Checked;
+            avviaTimerAutoSalvataggio();
         }
     }
 }

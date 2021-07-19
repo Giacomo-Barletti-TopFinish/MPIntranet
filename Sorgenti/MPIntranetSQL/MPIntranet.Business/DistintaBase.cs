@@ -154,7 +154,7 @@ namespace MPIntranet.Business
             string codiceDistinta = articolo.Anagrafica;
             ExpDistintaBusinessCentral distinta = new ExpDistintaBusinessCentral(codiceDistinta);
             ExpCicloBusinessCentral ciclo = new ExpCicloBusinessCentral(codiceDistinta);
-            foreach (FaseCiclo faseCiclo in articolo.FasiCiclo.OrderBy(x => x.Operazione))
+            foreach (FaseCiclo faseCiclo in articolo.FasiCiclo.OrderByDescending(x => x.Operazione))
             {
                 if (string.IsNullOrEmpty(faseCiclo.Anagrafica))
                 {

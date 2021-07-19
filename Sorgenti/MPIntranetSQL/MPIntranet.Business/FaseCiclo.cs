@@ -50,7 +50,7 @@ namespace MPIntranet.Business
         public static List<FaseCiclo> EstraiListaFaseCiclo(Componente componente, ArticoliDS ds)
         {
             List<FaseCiclo> fasiCiclo = new List<FaseCiclo>();
-            foreach (ArticoliDS.FASICICLORow riga in ds.FASICICLO.Where(x => x.IDCOMPONENTE == componente.IdComponente))
+            foreach (ArticoliDS.FASICICLORow riga in ds.FASICICLO.Where(x => x.IDCOMPONENTE == componente.IdComponente).OrderByDescending(x=>x.OPERAZIONE))
             {
                 FaseCiclo faseCiclo = CreaFaseCiclo(riga);
                 fasiCiclo.Add(faseCiclo);

@@ -32,6 +32,8 @@ namespace DisegnaDiBa
                 DistintaSelezionata = distinte[0];
                 DialogResult = DialogResult.OK;
             }
+            if (distinte.Count == 0)
+                return;
 
             BindingList<DistintaBase> bl = new BindingList<DistintaBase>(distinte);
             BindingSource bs = new BindingSource(bl, null);

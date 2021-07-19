@@ -24,8 +24,8 @@
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\srv-webservices\Publish\MPIIntranet\DisegnaDiBa\</InstallUrl>
-    <MinimumRequiredVersion>1.0.1.3</MinimumRequiredVersion>
-    <ApplicationRevision>3</ApplicationRevision>
+    <MinimumRequiredVersion>1.0.1.5</MinimumRequiredVersion>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -63,8 +63,13 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -76,6 +81,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CollegamentoTaskAreaFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CollegamentoTaskAreaFrm.Designer.cs">
+      <DependentUpon>CollegamentoTaskAreaFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DistintaBaseFrm2.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,6 +180,7 @@
       <DependentUpon>SelezionaDistintaFrm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="DisegnaDiBa_TemporaryKey.pfx" />
+    <None Include="packages.config" />
     <None Include="Properties\DataSources\MPIntranet.Business.Articolo.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -181,7 +193,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MPIntranet.Business\MPIntranet.Business.csproj">

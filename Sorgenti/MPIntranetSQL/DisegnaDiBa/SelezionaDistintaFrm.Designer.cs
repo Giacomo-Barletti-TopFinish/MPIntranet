@@ -37,6 +37,8 @@
             // 
             // dgvDistinte
             // 
+            this.dgvDistinte.AllowUserToAddRows = false;
+            this.dgvDistinte.AllowUserToDeleteRows = false;
             this.dgvDistinte.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDistinte.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.TipoDistinta,
@@ -45,6 +47,7 @@
             this.dgvDistinte.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDistinte.Location = new System.Drawing.Point(0, 0);
             this.dgvDistinte.Name = "dgvDistinte";
+            this.dgvDistinte.ReadOnly = true;
             this.dgvDistinte.Size = new System.Drawing.Size(471, 225);
             this.dgvDistinte.TabIndex = 0;
             this.dgvDistinte.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDistinte_CellDoubleClick);
