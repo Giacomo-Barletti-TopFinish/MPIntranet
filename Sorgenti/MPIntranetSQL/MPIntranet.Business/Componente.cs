@@ -203,7 +203,7 @@ namespace MPIntranet.Business
                 if (string.IsNullOrEmpty(componente.CollegamentoDiBa))
                 {
                     esito = false;
-                    componente.CollegamentoDiBa = ExpCicloBusinessCentral.CodiceStandard;
+                    componente.CollegamentoDiBa = ExpCicloBusinessCentral.CodiceCollegamentoStandard;
                 }
 
             }

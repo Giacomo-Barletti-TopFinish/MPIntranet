@@ -50,7 +50,7 @@ namespace MPIntranet.Business
         public static List<FaseCiclo> EstraiListaFaseCiclo(Componente componente, ArticoliDS ds)
         {
             List<FaseCiclo> fasiCiclo = new List<FaseCiclo>();
-            foreach (ArticoliDS.FASICICLORow riga in ds.FASICICLO.Where(x => x.IDCOMPONENTE == componente.IdComponente).OrderByDescending(x=>x.OPERAZIONE))
+            foreach (ArticoliDS.FASICICLORow riga in ds.FASICICLO.Where(x => x.IDCOMPONENTE == componente.IdComponente).OrderByDescending(x => x.OPERAZIONE))
             {
                 FaseCiclo faseCiclo = CreaFaseCiclo(riga);
                 fasiCiclo.Add(faseCiclo);
@@ -143,12 +143,13 @@ namespace MPIntranet.Business
                         rigaFaseCiclo.IDFASECICLO = faseCiclo.IdFaseCiclo;
                         rigaFaseCiclo.IDCOMPONENTE = faseCiclo.IdComponente;
                         rigaFaseCiclo.IDDIBA = faseCiclo.IdDiba;
-                        rigaFaseCiclo.ANAGRAFICA = faseCiclo.Anagrafica.ToUpper();
+                        if (!string.IsNullOrEmpty(faseCiclo.Anagrafica))
+                            rigaFaseCiclo.ANAGRAFICA = faseCiclo.Anagrafica.ToUpper();
                         rigaFaseCiclo.COLLEGAMENTODIBA = faseCiclo.CollegamentoDiBa.ToUpper();
                         rigaFaseCiclo.QUANTITA = faseCiclo.Quantita;
                         rigaFaseCiclo.UMQUANTITA = faseCiclo.UMQuantita.ToUpper();
                         rigaFaseCiclo.OPERAZIONE = faseCiclo.Operazione;
-                        rigaFaseCiclo.DESCRIZIONE = faseCiclo.Descrizione.ToUpper();
+                        rigaFaseCiclo.DESCRIZIONE = string.IsNullOrEmpty(faseCiclo.Descrizione) ? string.Empty : faseCiclo.Descrizione.ToUpper();
                         rigaFaseCiclo.AREAPRODUZIONE = faseCiclo.AreaProduzione.ToUpper();
                         rigaFaseCiclo.TASK = faseCiclo.Task.ToUpper();
                         rigaFaseCiclo.SCHEDAPROCESSO = faseCiclo.SchedaProcesso.ToUpper();
@@ -167,7 +168,7 @@ namespace MPIntranet.Business
                     else
                     {
                         rigaFaseCiclo.ANAGRAFICA = faseCiclo.Anagrafica.ToUpper();
-                        rigaFaseCiclo.COLLEGAMENTODIBA = faseCiclo.CollegamentoDiBa.ToUpper();
+                        rigaFaseCiclo.COLLEGAMENTODIBA = (string.IsNullOrEmpty(faseCiclo.CollegamentoDiBa)) ? string.Empty : faseCiclo.CollegamentoDiBa.ToUpper();
                         rigaFaseCiclo.QUANTITA = faseCiclo.Quantita;
                         rigaFaseCiclo.UMQUANTITA = faseCiclo.UMQuantita.ToUpper();
                         rigaFaseCiclo.OPERAZIONE = faseCiclo.Operazione;
@@ -175,7 +176,7 @@ namespace MPIntranet.Business
                         rigaFaseCiclo.AREAPRODUZIONE = faseCiclo.AreaProduzione.ToUpper();
                         rigaFaseCiclo.TASK = faseCiclo.Task.ToUpper();
                         rigaFaseCiclo.SCHEDAPROCESSO = faseCiclo.SchedaProcesso.ToUpper();
-                        rigaFaseCiclo.COLLEGAMENTOCICLO = faseCiclo.CollegamentoCiclo.ToUpper();
+                        rigaFaseCiclo.COLLEGAMENTOCICLO = (string.IsNullOrEmpty(faseCiclo.CollegamentoCiclo)) ? string.Empty : faseCiclo.CollegamentoCiclo.ToUpper();
                         rigaFaseCiclo.PEZZIPERIODO = faseCiclo.PezziPeriodo;
                         rigaFaseCiclo.PERIODO = faseCiclo.Periodo;
                         rigaFaseCiclo.SETUP = faseCiclo.Setup;

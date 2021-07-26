@@ -24,8 +24,8 @@
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\srv-webservices\Publish\MPIIntranet\DisegnaDiBa\</InstallUrl>
-    <MinimumRequiredVersion>1.0.1.5</MinimumRequiredVersion>
-    <ApplicationRevision>5</ApplicationRevision>
+    <MinimumRequiredVersion>1.0.1.7</MinimumRequiredVersion>
+    <ApplicationRevision>7</ApplicationRevision>
     <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -143,6 +143,9 @@
     <Compile Include="SelezionaDistintaFrm.Designer.cs">
       <DependentUpon>SelezionaDistintaFrm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CollegamentoTaskAreaFrm.resx">
+      <DependentUpon>CollegamentoTaskAreaFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DistintaBaseFrm2.resx">
       <DependentUpon>DistintaBaseFrm2.cs</DependentUpon>
     </EmbeddedResource>

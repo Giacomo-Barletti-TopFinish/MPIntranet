@@ -28,7 +28,7 @@ namespace DisegnaDiBa
         private AutoCompleteStringCollection _autoItems = new AutoCompleteStringCollection();
         private int _idComponenteSelezionato;
         private bool _newrow = false;
-
+        private List<TaskArea> _taskAreaProduzione = new List<TaskArea>();
         protected List<Componente> ComponentiDaCopiare
         {
             get { return (MdiParent as MainForm).ComponentiDaCopiare; }
@@ -73,6 +73,8 @@ namespace DisegnaDiBa
 
                 if (_articolo != null)
                     txtArticolo.Text = _articolo.ToString();
+
+                _taskAreaProduzione = TaskArea.EstraiListaTaskArea(true);
             }
             finally
             {
@@ -221,7 +223,7 @@ namespace DisegnaDiBa
             Componente componente = new Componente();
             componente.IdComponente = estraiIndiceComponenti();
             componente.IdDiba = _distinta.IdDiba;
-            componente.CollegamentoDiBa = ExpCicloBusinessCentral.CodiceStandard;
+            componente.CollegamentoDiBa = ExpCicloBusinessCentral.CodiceCollegamentoStandard;
             if (componentePadre != null) componente.IdPadre = componentePadre.IdComponente;
             componente.Quantita = 1;
             componente.UMQuantita = "NR";
@@ -650,7 +652,7 @@ namespace DisegnaDiBa
 
                 row.Cells[clmQuantitaFaseCiclo.Index].Value = 1;
                 row.Cells[clmUMQuantitaFaseCiclo.Index].Value = "NR";
-                row.Cells[clmCollegamentoDiBAFaseCiclo.Index].Value = ExpCicloBusinessCentral.CodiceStandard;
+                //                row.Cells[clmCollegamentoDiBAFaseCiclo.Index].Value = ExpCicloBusinessCentral.CodiceStandard;
 
                 _newrow = false;
             }
@@ -729,6 +731,42 @@ namespace DisegnaDiBa
 
                 if (e.ColumnIndex == clmOperazioneFaseCiclo.Index) riordinaFasiCiclo();
 
+                if (e.ColumnIndex == clmAnagraficaFaseCiclo.Index)
+                {
+                    if (!string.IsNullOrEmpty(dgvFasiCiclo.Rows[e.RowIndex].Cells[clmAnagraficaFaseCiclo.Index].Value as string) &&
+                        string.IsNullOrEmpty(dgvFasiCiclo.Rows[e.RowIndex].Cells[clmCollegamentoDiBAFaseCiclo.Index].Value as string))
+                        dgvFasiCiclo.Rows[e.RowIndex].Cells[clmCollegamentoDiBAFaseCiclo.Index].Value = ExpCicloBusinessCentral.CodiceCollegamentoStandard;
+                }
+
+
+                if (e.ColumnIndex == clmTaskFaseCiclo.Index)
+                {
+                    if (string.IsNullOrEmpty(dgvFasiCiclo.Rows[e.RowIndex].Cells[clmAreaProduzioneFaseCiclo.Index].Value as string) &&
+                        !string.IsNullOrEmpty(dgvFasiCiclo.Rows[e.RowIndex].Cells[clmTaskFaseCiclo.Index].Value as string))
+                    {
+                        string task = (string)dgvFasiCiclo.Rows[e.RowIndex].Cells[clmTaskFaseCiclo.Index].Value;
+                        TaskArea taskArea = _taskAreaProduzione.Where(x => x.Task == task).FirstOrDefault();
+                        if (taskArea != null)
+                        {
+                            dgvFasiCiclo.Rows[e.RowIndex].Cells[clmAreaProduzioneFaseCiclo.Index].Value = taskArea.AreaProduzione;
+                            if (dgvFasiCiclo.Rows[e.RowIndex].Cells[clmPezziOrariFaseCiclo.Index].Value == null)
+                            {
+                                dgvFasiCiclo.Rows[e.RowIndex].Cells[clmPezziOrariFaseCiclo.Index].Value = taskArea.PezziPeriodo;
+                                dgvFasiCiclo.Rows[e.RowIndex].Cells[clmPeriodoFaseCiclo.Index].Value = taskArea.Periodo;
+                            }
+                            else
+                            {
+                                double pezzi = (double)dgvFasiCiclo.Rows[e.RowIndex].Cells[clmPezziOrariFaseCiclo.Index].Value;
+                                if (pezzi == 0)
+                                {
+                                    dgvFasiCiclo.Rows[e.RowIndex].Cells[clmPezziOrariFaseCiclo.Index].Value = taskArea.PezziPeriodo;
+                                    dgvFasiCiclo.Rows[e.RowIndex].Cells[clmPeriodoFaseCiclo.Index].Value = taskArea.Periodo;
+                                }
+                            }
+
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {

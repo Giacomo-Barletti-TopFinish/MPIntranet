@@ -98,6 +98,12 @@ namespace MPIntranet.DataAccess.Articoli
         }
 
         [DataContext]
+        public void FillTaskArea(ArticoliDS ds, bool soloNonCancellati)
+        {
+            ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
+            a.FillTaskArea(ds, soloNonCancellati);
+        }
+        [DataContext]
         public void FillTipiDistinta(ArticoliDS ds, bool soloNonCancellati)
         {
             ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);

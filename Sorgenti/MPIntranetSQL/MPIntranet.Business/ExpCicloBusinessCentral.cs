@@ -8,7 +8,7 @@ namespace MPIntranet.Business
 {
     public class ExpCicloBusinessCentral
     {
-        public static string CodiceStandard = "IMPORT";
+        public static string CodiceCollegamentoStandard = "IMPORT";
         public string Codice;
         public List<ExpFaseCicloBusinessCentral> Fasi;
         public ExpCicloBusinessCentral(string Codice)
@@ -115,13 +115,24 @@ namespace MPIntranet.Business
                 ExpFaseCicloBusinessCentral f = new ExpFaseCicloBusinessCentral();
                 f.Operazione = faseCiclo.Operazione;
                 f.AreaProduzione = faseCiclo.AreaProduzione;
-                if (string.IsNullOrEmpty(f.AreaProduzione))
+                if(string.IsNullOrEmpty(faseCiclo.Anagrafica))
                 {
-                    sb.AppendLine(string.Format("Fase {0} Area di produzione nulla", faseCiclo.IdFaseCiclo));
-                    faseCiclo.Errore = "Area produzione non valorizzata ";
-                    esito = false;
+                    if (string.IsNullOrEmpty(faseCiclo.AreaProduzione))
+                    {
+                        sb.AppendLine(string.Format("Fase {0} Area di produzione nulla", faseCiclo.IdFaseCiclo));
+                        faseCiclo.Errore = "Area produzione non valorizzata ";
+                        esito = false;
+                    }
+                    if (string.IsNullOrEmpty(faseCiclo.Task))
+                    {
+                        sb.AppendLine(string.Format("Fase {0} task non valorizzato", faseCiclo.IdFaseCiclo));
+                        faseCiclo.Errore += " task non valorizzato ";
+                        esito = false;
+                    }
+
                 }
-                f.TempoLavorazione = faseCiclo.Periodo;
+
+                f.TempoLavorazione = (faseCiclo.Periodo == 0) ? 0 : faseCiclo.PezziPeriodo / faseCiclo.Periodo;
                 if (f.TempoLavorazione <= 0)
                 {
                     sb.AppendLine(string.Format("Fase {0} tempo lavorazione nullo", faseCiclo.IdFaseCiclo));
@@ -132,12 +143,6 @@ namespace MPIntranet.Business
                 f.Collegamento = faseCiclo.CollegamentoCiclo;
                 f.DimensioneLotto = faseCiclo.PezziPeriodo;
                 f.Task = faseCiclo.Task;
-                if (string.IsNullOrEmpty(f.Task))
-                {
-                    sb.AppendLine(string.Format("Fase {0} task non valorizzato", faseCiclo.IdFaseCiclo));
-                    faseCiclo.Errore += " task non valorizzato ";
-                    esito = false;
-                }
                 f.Commenti = new List<string>();
                 if (esito)
                     Fasi.Add(f);

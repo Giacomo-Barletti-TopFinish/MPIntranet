@@ -121,6 +121,18 @@ namespace MPIntranet.DataAccess.Articoli
             }
         }
 
+        public void FillTaskArea(ArticoliDS ds, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM TASKAREA ";
+            if (soloNonCancellati)
+                select += "WHERE CANCELLATO = 0 ORDER BY TASK";
+
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.TASKAREA);
+            }
+        }
+
         public void FillTipiDistinta(ArticoliDS ds, bool soloNonCancellati)
         {
             string select = @"SELECT * FROM TIPIDIBA ";
