@@ -35,6 +35,7 @@ namespace MPIntranet.Business
             using (ArticoliBusiness bArticolo = new ArticoliBusiness())
             {
                 bArticolo.GetCicliBCTestata(ds, codiceCiclo);
+                bArticolo.GetCicliBCCommenti(ds, codiceCiclo);
 
                 ArticoliDS.CicliBCTestataRow testata = ds.CicliBCTestata.Where(x => x.No_ == codiceCiclo).FirstOrDefault();
                 if (testata == null) return fasiCiclo;
@@ -44,18 +45,17 @@ namespace MPIntranet.Business
 
                 foreach (ArticoliDS.CicliBCDettaglioRow riga in ds.CicliBCDettaglio)
                 {
-                    FaseCicloBC faseCiclo = CreaFaseCiclo(riga, codiceCiclo);
+                    FaseCicloBC faseCiclo = CreaFaseCiclo(riga, codiceCiclo, ds);
                     fasiCiclo.Add(faseCiclo);
                 }
             }
             return fasiCiclo;
         }
 
-      
-       
-        private static FaseCicloBC CreaFaseCiclo(ArticoliDS.CicliBCDettaglioRow riga, string codiceCiclo)
-        {
 
+
+        private static FaseCicloBC CreaFaseCiclo(ArticoliDS.CicliBCDettaglioRow riga, string codiceCiclo, ArticoliDS ds)
+        {
             if (riga == null) return null;
             FaseCicloBC faseCiclo = new FaseCicloBC();
             faseCiclo.IdComponente = codiceCiclo;
@@ -75,6 +75,26 @@ namespace MPIntranet.Business
             faseCiclo.Movimentazione = riga.Move_Time;
             faseCiclo.Errore = string.Empty;
             faseCiclo.Nota = string.Empty;
+
+            List<ArticoliDS.CicliBCCommentiRow> commenti = ds.CicliBCCommenti.Where(x => x.Routing_No_ == codiceCiclo && x.Operation_No_ == riga.Operation_No_).ToList();
+            string nota = string.Empty;
+            foreach (ArticoliDS.CicliBCCommentiRow commento in commenti)
+                nota += commento;
+
+            nota = nota.Trim();
+            int posizione = nota.IndexOf(FaseCiclo.EtichettaSchedaProcesso);
+            if (posizione > -1)
+            {
+                nota = nota.Substring(posizione + FaseCiclo.EtichettaSchedaProcesso.Length + 1);
+                string[] str = nota.Split(' ');
+                if (str.Count() > 0)
+                {
+                    faseCiclo.SchedaProcesso = str[0];
+                    nota = nota.Replace(str[0], string.Empty).Trim();
+                }
+            }
+            faseCiclo.Nota = nota.Trim();
+
             return faseCiclo;
         }
 

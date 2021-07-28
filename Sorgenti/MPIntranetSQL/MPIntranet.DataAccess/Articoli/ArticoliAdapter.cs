@@ -332,6 +332,17 @@ namespace MPIntranet.DataAccess.Articoli
             }
         }
 
+        public void GetCicliBCCommenti(ArticoliDS ds, string codiceTestata)
+        {
+            string select = @"select * from CicliBCCommenti where [Routing No_] =  $P<TESTATA> order by [Operation No_] asc";
+            ParamSet ps = new ParamSet();
+            ps.AddParam("TESTATA", DbType.String, codiceTestata);
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.CicliBCCommenti);
+            }
+        }
+
         public void GetCOMPONENTI(ArticoliDS ds, int idDiba, bool soloNonCancellati)
         {
             string select = @"select * from COMPONENTI where [IDDIBA] =  $P<IDDIBA> ";

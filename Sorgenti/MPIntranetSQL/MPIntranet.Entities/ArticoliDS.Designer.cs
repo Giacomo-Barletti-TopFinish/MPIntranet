@@ -54,6 +54,8 @@ namespace MPIntranet.Entities {
         
         private TASKAREADataTable tableTASKAREA;
         
+        private CicliBCCommentiDataTable tableCicliBCCommenti;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -126,6 +128,9 @@ namespace MPIntranet.Entities {
                 }
                 if ((ds.Tables["TASKAREA"] != null)) {
                     base.Tables.Add(new TASKAREADataTable(ds.Tables["TASKAREA"]));
+                }
+                if ((ds.Tables["CicliBCCommenti"] != null)) {
+                    base.Tables.Add(new CicliBCCommentiDataTable(ds.Tables["CicliBCCommenti"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -297,6 +302,16 @@ namespace MPIntranet.Entities {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public CicliBCCommentiDataTable CicliBCCommenti {
+            get {
+                return this.tableCicliBCCommenti;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -406,6 +421,9 @@ namespace MPIntranet.Entities {
                 }
                 if ((ds.Tables["TASKAREA"] != null)) {
                     base.Tables.Add(new TASKAREADataTable(ds.Tables["TASKAREA"]));
+                }
+                if ((ds.Tables["CicliBCCommenti"] != null)) {
+                    base.Tables.Add(new CicliBCCommentiDataTable(ds.Tables["CicliBCCommenti"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -530,6 +548,12 @@ namespace MPIntranet.Entities {
                     this.tableTASKAREA.InitVars();
                 }
             }
+            this.tableCicliBCCommenti = ((CicliBCCommentiDataTable)(base.Tables["CicliBCCommenti"]));
+            if ((initTable == true)) {
+                if ((this.tableCicliBCCommenti != null)) {
+                    this.tableCicliBCCommenti.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -570,6 +594,8 @@ namespace MPIntranet.Entities {
             base.Tables.Add(this.tableFASICICLO);
             this.tableTASKAREA = new TASKAREADataTable();
             base.Tables.Add(this.tableTASKAREA);
+            this.tableCicliBCCommenti = new CicliBCCommentiDataTable();
+            base.Tables.Add(this.tableCicliBCCommenti);
             global::System.Data.ForeignKeyConstraint fkc;
             fkc = new global::System.Data.ForeignKeyConstraint("FK_202", new global::System.Data.DataColumn[] {
                         this.tableFASIDIBA.IDFASEDIBAColumn}, new global::System.Data.DataColumn[] {
@@ -686,6 +712,12 @@ namespace MPIntranet.Entities {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        private bool ShouldSerializeCicliBCCommenti() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
@@ -783,6 +815,9 @@ namespace MPIntranet.Entities {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public delegate void TASKAREARowChangeEventHandler(object sender, TASKAREARowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public delegate void CicliBCCommentiRowChangeEventHandler(object sender, CicliBCCommentiRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -10869,6 +10904,464 @@ namespace MPIntranet.Entities {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class CicliBCCommentiDataTable : global::System.Data.TypedTableBase<CicliBCCommentiRow> {
+            
+            private global::System.Data.DataColumn columntimestamp;
+            
+            private global::System.Data.DataColumn columnRouting_No_;
+            
+            private global::System.Data.DataColumn columnVersion_Code;
+            
+            private global::System.Data.DataColumn columnOperation_No_;
+            
+            private global::System.Data.DataColumn columnLine_No_;
+            
+            private global::System.Data.DataColumn columnDate;
+            
+            private global::System.Data.DataColumn columnComment;
+            
+            private global::System.Data.DataColumn columnCode;
+            
+            private global::System.Data.DataColumn _column_systemId;
+            
+            private global::System.Data.DataColumn _column_systemCreatedAt;
+            
+            private global::System.Data.DataColumn _column_systemCreatedBy;
+            
+            private global::System.Data.DataColumn _column_systemModifiedAt;
+            
+            private global::System.Data.DataColumn _column_systemModifiedBy;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public CicliBCCommentiDataTable() {
+                this.TableName = "CicliBCCommenti";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal CicliBCCommentiDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected CicliBCCommentiDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn timestampColumn {
+                get {
+                    return this.columntimestamp;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Routing_No_Column {
+                get {
+                    return this.columnRouting_No_;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Version_CodeColumn {
+                get {
+                    return this.columnVersion_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Operation_No_Column {
+                get {
+                    return this.columnOperation_No_;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn Line_No_Column {
+                get {
+                    return this.columnLine_No_;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DateColumn {
+                get {
+                    return this.columnDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CommentColumn {
+                get {
+                    return this.columnComment;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CodeColumn {
+                get {
+                    return this.columnCode;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn @__systemIdColumn {
+                get {
+                    return this._column_systemId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn @__systemCreatedAtColumn {
+                get {
+                    return this._column_systemCreatedAt;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn @__systemCreatedByColumn {
+                get {
+                    return this._column_systemCreatedBy;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn @__systemModifiedAtColumn {
+                get {
+                    return this._column_systemModifiedAt;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn @__systemModifiedByColumn {
+                get {
+                    return this._column_systemModifiedBy;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public CicliBCCommentiRow this[int index] {
+                get {
+                    return ((CicliBCCommentiRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event CicliBCCommentiRowChangeEventHandler CicliBCCommentiRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event CicliBCCommentiRowChangeEventHandler CicliBCCommentiRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event CicliBCCommentiRowChangeEventHandler CicliBCCommentiRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event CicliBCCommentiRowChangeEventHandler CicliBCCommentiRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void AddCicliBCCommentiRow(CicliBCCommentiRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public CicliBCCommentiRow AddCicliBCCommentiRow(byte[] timestamp, string Routing_No_, string Version_Code, string Operation_No_, int Line_No_, System.DateTime Date, string Comment, string Code, System.Guid @__systemId, System.DateTime @__systemCreatedAt, System.Guid @__systemCreatedBy, System.DateTime @__systemModifiedAt, System.Guid @__systemModifiedBy) {
+                CicliBCCommentiRow rowCicliBCCommentiRow = ((CicliBCCommentiRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        timestamp,
+                        Routing_No_,
+                        Version_Code,
+                        Operation_No_,
+                        Line_No_,
+                        Date,
+                        Comment,
+                        Code,
+                        @__systemId,
+                        @__systemCreatedAt,
+                        @__systemCreatedBy,
+                        @__systemModifiedAt,
+                        @__systemModifiedBy};
+                rowCicliBCCommentiRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowCicliBCCommentiRow);
+                return rowCicliBCCommentiRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public CicliBCCommentiRow FindByRouting_No_Version_CodeOperation_No_Line_No_(string Routing_No_, string Version_Code, string Operation_No_, int Line_No_) {
+                return ((CicliBCCommentiRow)(this.Rows.Find(new object[] {
+                            Routing_No_,
+                            Version_Code,
+                            Operation_No_,
+                            Line_No_})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                CicliBCCommentiDataTable cln = ((CicliBCCommentiDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new CicliBCCommentiDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal void InitVars() {
+                this.columntimestamp = base.Columns["timestamp"];
+                this.columnRouting_No_ = base.Columns["Routing No_"];
+                this.columnVersion_Code = base.Columns["Version Code"];
+                this.columnOperation_No_ = base.Columns["Operation No_"];
+                this.columnLine_No_ = base.Columns["Line No_"];
+                this.columnDate = base.Columns["Date"];
+                this.columnComment = base.Columns["Comment"];
+                this.columnCode = base.Columns["Code"];
+                this._column_systemId = base.Columns["$systemId"];
+                this._column_systemCreatedAt = base.Columns["$systemCreatedAt"];
+                this._column_systemCreatedBy = base.Columns["$systemCreatedBy"];
+                this._column_systemModifiedAt = base.Columns["$systemModifiedAt"];
+                this._column_systemModifiedBy = base.Columns["$systemModifiedBy"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            private void InitClass() {
+                this.columntimestamp = new global::System.Data.DataColumn("timestamp", typeof(byte[]), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntimestamp);
+                this.columnRouting_No_ = new global::System.Data.DataColumn("Routing No_", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRouting_No_);
+                this.columnVersion_Code = new global::System.Data.DataColumn("Version Code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnVersion_Code);
+                this.columnOperation_No_ = new global::System.Data.DataColumn("Operation No_", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOperation_No_);
+                this.columnLine_No_ = new global::System.Data.DataColumn("Line No_", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLine_No_);
+                this.columnDate = new global::System.Data.DataColumn("Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDate);
+                this.columnComment = new global::System.Data.DataColumn("Comment", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnComment);
+                this.columnCode = new global::System.Data.DataColumn("Code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCode);
+                this._column_systemId = new global::System.Data.DataColumn("$systemId", typeof(global::System.Guid), null, global::System.Data.MappingType.Element);
+                this._column_systemId.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_column_systemId");
+                this._column_systemId.ExtendedProperties.Add("Generator_UserColumnName", "$systemId");
+                base.Columns.Add(this._column_systemId);
+                this._column_systemCreatedAt = new global::System.Data.DataColumn("$systemCreatedAt", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                this._column_systemCreatedAt.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_column_systemCreatedAt");
+                this._column_systemCreatedAt.ExtendedProperties.Add("Generator_UserColumnName", "$systemCreatedAt");
+                base.Columns.Add(this._column_systemCreatedAt);
+                this._column_systemCreatedBy = new global::System.Data.DataColumn("$systemCreatedBy", typeof(global::System.Guid), null, global::System.Data.MappingType.Element);
+                this._column_systemCreatedBy.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_column_systemCreatedBy");
+                this._column_systemCreatedBy.ExtendedProperties.Add("Generator_UserColumnName", "$systemCreatedBy");
+                base.Columns.Add(this._column_systemCreatedBy);
+                this._column_systemModifiedAt = new global::System.Data.DataColumn("$systemModifiedAt", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                this._column_systemModifiedAt.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_column_systemModifiedAt");
+                this._column_systemModifiedAt.ExtendedProperties.Add("Generator_UserColumnName", "$systemModifiedAt");
+                base.Columns.Add(this._column_systemModifiedAt);
+                this._column_systemModifiedBy = new global::System.Data.DataColumn("$systemModifiedBy", typeof(global::System.Guid), null, global::System.Data.MappingType.Element);
+                this._column_systemModifiedBy.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_column_systemModifiedBy");
+                this._column_systemModifiedBy.ExtendedProperties.Add("Generator_UserColumnName", "$systemModifiedBy");
+                base.Columns.Add(this._column_systemModifiedBy);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnRouting_No_,
+                                this.columnVersion_Code,
+                                this.columnOperation_No_,
+                                this.columnLine_No_}, true));
+                this.columntimestamp.ReadOnly = true;
+                this.columnRouting_No_.AllowDBNull = false;
+                this.columnRouting_No_.MaxLength = 20;
+                this.columnVersion_Code.AllowDBNull = false;
+                this.columnVersion_Code.MaxLength = 20;
+                this.columnOperation_No_.AllowDBNull = false;
+                this.columnOperation_No_.MaxLength = 10;
+                this.columnLine_No_.AllowDBNull = false;
+                this.columnDate.AllowDBNull = false;
+                this.columnComment.AllowDBNull = false;
+                this.columnComment.MaxLength = 80;
+                this.columnCode.AllowDBNull = false;
+                this.columnCode.MaxLength = 10;
+                this._column_systemId.AllowDBNull = false;
+                this._column_systemCreatedAt.AllowDBNull = false;
+                this._column_systemCreatedBy.AllowDBNull = false;
+                this._column_systemModifiedAt.AllowDBNull = false;
+                this._column_systemModifiedBy.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public CicliBCCommentiRow NewCicliBCCommentiRow() {
+                return ((CicliBCCommentiRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new CicliBCCommentiRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(CicliBCCommentiRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.CicliBCCommentiRowChanged != null)) {
+                    this.CicliBCCommentiRowChanged(this, new CicliBCCommentiRowChangeEvent(((CicliBCCommentiRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.CicliBCCommentiRowChanging != null)) {
+                    this.CicliBCCommentiRowChanging(this, new CicliBCCommentiRowChangeEvent(((CicliBCCommentiRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.CicliBCCommentiRowDeleted != null)) {
+                    this.CicliBCCommentiRowDeleted(this, new CicliBCCommentiRowChangeEvent(((CicliBCCommentiRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.CicliBCCommentiRowDeleting != null)) {
+                    this.CicliBCCommentiRowDeleting(this, new CicliBCCommentiRowChangeEvent(((CicliBCCommentiRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void RemoveCicliBCCommentiRow(CicliBCCommentiRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                ArticoliDS ds = new ArticoliDS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "CicliBCCommentiDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class ARTICOLIRow : global::System.Data.DataRow {
@@ -16234,6 +16727,181 @@ namespace MPIntranet.Entities {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class CicliBCCommentiRow : global::System.Data.DataRow {
+            
+            private CicliBCCommentiDataTable tableCicliBCCommenti;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal CicliBCCommentiRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableCicliBCCommenti = ((CicliBCCommentiDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public byte[] timestamp {
+                get {
+                    try {
+                        return ((byte[])(this[this.tableCicliBCCommenti.timestampColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'timestamp\' in table \'CicliBCCommenti\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCicliBCCommenti.timestampColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Routing_No_ {
+                get {
+                    return ((string)(this[this.tableCicliBCCommenti.Routing_No_Column]));
+                }
+                set {
+                    this[this.tableCicliBCCommenti.Routing_No_Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Version_Code {
+                get {
+                    return ((string)(this[this.tableCicliBCCommenti.Version_CodeColumn]));
+                }
+                set {
+                    this[this.tableCicliBCCommenti.Version_CodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Operation_No_ {
+                get {
+                    return ((string)(this[this.tableCicliBCCommenti.Operation_No_Column]));
+                }
+                set {
+                    this[this.tableCicliBCCommenti.Operation_No_Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int Line_No_ {
+                get {
+                    return ((int)(this[this.tableCicliBCCommenti.Line_No_Column]));
+                }
+                set {
+                    this[this.tableCicliBCCommenti.Line_No_Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime Date {
+                get {
+                    return ((global::System.DateTime)(this[this.tableCicliBCCommenti.DateColumn]));
+                }
+                set {
+                    this[this.tableCicliBCCommenti.DateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Comment {
+                get {
+                    return ((string)(this[this.tableCicliBCCommenti.CommentColumn]));
+                }
+                set {
+                    this[this.tableCicliBCCommenti.CommentColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Code {
+                get {
+                    return ((string)(this[this.tableCicliBCCommenti.CodeColumn]));
+                }
+                set {
+                    this[this.tableCicliBCCommenti.CodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.Guid @__systemId {
+                get {
+                    return ((global::System.Guid)(this[this.tableCicliBCCommenti.@__systemIdColumn]));
+                }
+                set {
+                    this[this.tableCicliBCCommenti.@__systemIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime @__systemCreatedAt {
+                get {
+                    return ((global::System.DateTime)(this[this.tableCicliBCCommenti.@__systemCreatedAtColumn]));
+                }
+                set {
+                    this[this.tableCicliBCCommenti.@__systemCreatedAtColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.Guid @__systemCreatedBy {
+                get {
+                    return ((global::System.Guid)(this[this.tableCicliBCCommenti.@__systemCreatedByColumn]));
+                }
+                set {
+                    this[this.tableCicliBCCommenti.@__systemCreatedByColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime @__systemModifiedAt {
+                get {
+                    return ((global::System.DateTime)(this[this.tableCicliBCCommenti.@__systemModifiedAtColumn]));
+                }
+                set {
+                    this[this.tableCicliBCCommenti.@__systemModifiedAtColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.Guid @__systemModifiedBy {
+                get {
+                    return ((global::System.Guid)(this[this.tableCicliBCCommenti.@__systemModifiedByColumn]));
+                }
+                set {
+                    this[this.tableCicliBCCommenti.@__systemModifiedByColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IstimestampNull() {
+                return this.IsNull(this.tableCicliBCCommenti.timestampColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SettimestampNull() {
+                this[this.tableCicliBCCommenti.timestampColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -16729,6 +17397,40 @@ namespace MPIntranet.Entities {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public TASKAREARow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public class CicliBCCommentiRowChangeEvent : global::System.EventArgs {
+            
+            private CicliBCCommentiRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public CicliBCCommentiRowChangeEvent(CicliBCCommentiRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public CicliBCCommentiRow Row {
                 get {
                     return this.eventRow;
                 }

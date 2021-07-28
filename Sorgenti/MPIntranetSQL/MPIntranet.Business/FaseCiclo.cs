@@ -32,6 +32,7 @@ namespace MPIntranet.Business
         public string Errore { get; set; }
         public string Nota { get; set; }
 
+        public static string EtichettaSchedaProcesso = "#SP:";
         public static List<FaseCiclo> EstraiListaFaseCiclo(int idDiba)
         {
             ArticoliDS ds = new ArticoliDS();

@@ -52,6 +52,9 @@ create view [dbo].[CicliBCDettaglio] as
 SELECT * FROM [TEST].[dbo].[MetalPlus_WS$Routing Line$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
 go
 
+create view [dbo].[CicliBCCommenti] as
+SELECT * FROM [TEST].[dbo].[MetalPlus_WS$Routing Comment Line$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
+go
 
 create view [dbo].[DistinteBCTestata] as
 SELECT * FROM [TEST].[dbo].[MetalPlus_WS$Production BOM Header$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)

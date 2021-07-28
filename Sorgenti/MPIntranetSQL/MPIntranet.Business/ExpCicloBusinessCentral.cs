@@ -115,7 +115,7 @@ namespace MPIntranet.Business
                 ExpFaseCicloBusinessCentral f = new ExpFaseCicloBusinessCentral();
                 f.Operazione = faseCiclo.Operazione;
                 f.AreaProduzione = faseCiclo.AreaProduzione;
-                if(string.IsNullOrEmpty(faseCiclo.Anagrafica))
+                if (string.IsNullOrEmpty(faseCiclo.Anagrafica))
                 {
                     if (string.IsNullOrEmpty(faseCiclo.AreaProduzione))
                     {
@@ -144,10 +144,14 @@ namespace MPIntranet.Business
                 f.DimensioneLotto = faseCiclo.PezziPeriodo;
                 f.Task = faseCiclo.Task;
                 f.Commenti = new List<string>();
-                
-                if(!string.IsNullOrEmpty(faseCiclo.Nota))
+                string commento = string.Empty; ;
+                if (!string.IsNullOrEmpty(faseCiclo.SchedaProcesso))
+                    commento = string.Format("{0} {1} ", FaseCiclo.EtichettaSchedaProcesso, faseCiclo.SchedaProcesso);
+                commento = commento + " " + faseCiclo.Nota;
+
+                if (!string.IsNullOrEmpty(commento))
                 {
-                    f.Commenti = SeparaStringa(faseCiclo.Nota, 80);
+                    f.Commenti = SeparaStringa(commento.Trim(), 80);
                 }
                 if (esito)
                     Fasi.Add(f);
@@ -193,7 +197,7 @@ namespace MPIntranet.Business
             return stringhe;
         }
     }
-  
+
     public class ExpFaseCicloBusinessCentral
     {
         public int ID;

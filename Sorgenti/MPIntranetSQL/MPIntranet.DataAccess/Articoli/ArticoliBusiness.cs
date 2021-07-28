@@ -21,6 +21,12 @@ namespace MPIntranet.DataAccess.Articoli
         }
 
         [DataContext]
+        public void GetCicliBCCommenti(ArticoliDS ds, string codiceTestata)
+        {
+            ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
+            a.GetCicliBCCommenti(ds, codiceTestata);
+        }
+        [DataContext]
         public void GetCicliBCTestata(ArticoliDS ds, string codiceTestata)
         {
             ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
