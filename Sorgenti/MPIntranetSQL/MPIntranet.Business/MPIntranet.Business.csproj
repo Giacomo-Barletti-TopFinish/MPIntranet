@@ -48,6 +48,7 @@
     <Compile Include="Brand.cs" />
     <Compile Include="BusinessBase.cs" />
     <Compile Include="Componente.cs" />
+    <Compile Include="ComponenteBC.cs" />
     <Compile Include="DistintaBC.cs" />
     <Compile Include="ExpCicloBusinessCentral.cs" />
     <Compile Include="Configurazioni.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="ExpDistintaBusinessCentral.cs" />
     <Compile Include="Documento.cs" />
     <Compile Include="FaseCiclo.cs" />
+    <Compile Include="FaseCicloBC.cs" />
     <Compile Include="FaseDistinta.cs" />
     <Compile Include="FaseOrdineProduzione.cs" />
     <Compile Include="OrdineProduzione.cs" />

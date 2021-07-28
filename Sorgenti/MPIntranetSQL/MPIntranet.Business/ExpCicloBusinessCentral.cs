@@ -144,6 +144,11 @@ namespace MPIntranet.Business
                 f.DimensioneLotto = faseCiclo.PezziPeriodo;
                 f.Task = faseCiclo.Task;
                 f.Commenti = new List<string>();
+                
+                if(!string.IsNullOrEmpty(faseCiclo.Nota))
+                {
+                    f.Commenti = SeparaStringa(faseCiclo.Nota, 80);
+                }
                 if (esito)
                     Fasi.Add(f);
                 errori = sb.ToString();
@@ -159,8 +164,36 @@ namespace MPIntranet.Business
             Fasi.ForEach(x => sb.AppendLine(x.ToString()));
             return sb.ToString();
         }
-    }
+        private List<string> SeparaStringa(string stringa, int lunghezzaMassima)
+        {
+            List<string> stringhe = new List<string>();
 
+            string stringaModificata = stringa.Replace("+", " + ");
+            stringaModificata = stringaModificata.Replace("-", " - ");
+            stringaModificata = stringaModificata.Replace("  ", " ");
+
+            string[] str = stringaModificata.Split(' ');
+            string stringaComposta = string.Empty;
+            for (int i = 0; i < str.Length; i++)
+            {
+                if ((stringaComposta.Length + str[i].Length + 1) < lunghezzaMassima)
+                {
+                    stringaComposta = stringaComposta + " " + str[i];
+                }
+                else
+                {
+                    stringhe.Add(stringaComposta);
+                    stringaComposta = str[i];
+                }
+                if (i == str.Length - 1)
+                {
+                    stringhe.Add(stringaComposta);
+                }
+            }
+            return stringhe;
+        }
+    }
+  
     public class ExpFaseCicloBusinessCentral
     {
         public int ID;

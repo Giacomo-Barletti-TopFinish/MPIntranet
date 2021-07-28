@@ -32,7 +32,6 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.distinteRVLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nuovaDistintaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.apriEsistenteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.businessCentralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.taskAreaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,6 +39,8 @@
             this.disponiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cascataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.organizzaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.businessCentralToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.apriBusinessCentralMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preventiviMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,6 +50,7 @@
             this.preventiviMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.distinteRVLToolStripMenuItem,
+            this.businessCentralToolStripMenuItem1,
             this.finestreToolStripMenuItem});
             this.preventiviMenu.Location = new System.Drawing.Point(0, 0);
             this.preventiviMenu.MdiWindowListItem = this.finestreToolStripMenuItem;
@@ -76,21 +78,12 @@
             // distinteRVLToolStripMenuItem
             // 
             this.distinteRVLToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.nuovaDistintaToolStripMenuItem,
             this.apriEsistenteToolStripMenuItem,
             this.businessCentralToolStripMenuItem,
             this.taskAreaToolStripMenuItem});
             this.distinteRVLToolStripMenuItem.Name = "distinteRVLToolStripMenuItem";
             this.distinteRVLToolStripMenuItem.Size = new System.Drawing.Size(95, 21);
             this.distinteRVLToolStripMenuItem.Text = "Distinte base";
-            // 
-            // nuovaDistintaToolStripMenuItem
-            // 
-            this.nuovaDistintaToolStripMenuItem.Name = "nuovaDistintaToolStripMenuItem";
-            this.nuovaDistintaToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.nuovaDistintaToolStripMenuItem.Text = "Nuova...";
-            this.nuovaDistintaToolStripMenuItem.Visible = false;
-            this.nuovaDistintaToolStripMenuItem.Click += new System.EventHandler(this.nuovaDistintaToolStripMenuItem_Click);
             // 
             // apriEsistenteToolStripMenuItem
             // 
@@ -145,6 +138,21 @@
             this.organizzaToolStripMenuItem.Text = "Organizza orizzontale";
             this.organizzaToolStripMenuItem.Click += new System.EventHandler(this.organizzaToolStripMenuItem_Click);
             // 
+            // businessCentralToolStripMenuItem1
+            // 
+            this.businessCentralToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.apriBusinessCentralMenuItem});
+            this.businessCentralToolStripMenuItem1.Name = "businessCentralToolStripMenuItem1";
+            this.businessCentralToolStripMenuItem1.Size = new System.Drawing.Size(112, 21);
+            this.businessCentralToolStripMenuItem1.Text = "Business central";
+            // 
+            // apriBusinessCentralMenuItem
+            // 
+            this.apriBusinessCentralMenuItem.Name = "apriBusinessCentralMenuItem";
+            this.apriBusinessCentralMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.apriBusinessCentralMenuItem.Text = "Apri...";
+            this.apriBusinessCentralMenuItem.Click += new System.EventHandler(this.apriBusinessCentralMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -168,7 +176,6 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem distinteRVLToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem nuovaDistintaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem finestreToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem disponiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cascataToolStripMenuItem;
@@ -176,6 +183,8 @@
         private System.Windows.Forms.ToolStripMenuItem apriEsistenteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem businessCentralToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem taskAreaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem businessCentralToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem apriBusinessCentralMenuItem;
     }
 }
 

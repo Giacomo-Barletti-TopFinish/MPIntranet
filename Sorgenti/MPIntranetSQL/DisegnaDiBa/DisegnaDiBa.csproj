@@ -24,8 +24,8 @@
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\srv-webservices\Publish\MPIIntranet\DisegnaDiBa\</InstallUrl>
-    <MinimumRequiredVersion>1.0.1.7</MinimumRequiredVersion>
-    <ApplicationRevision>7</ApplicationRevision>
+    <MinimumRequiredVersion>1.0.1.8</MinimumRequiredVersion>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -93,12 +93,6 @@
     <Compile Include="DistintaBaseFrm2.Designer.cs">
       <DependentUpon>DistintaBaseFrm2.cs</DependentUpon>
     </Compile>
-    <Compile Include="DistintaBaseFrm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DistintaBaseFrm.Designer.cs">
-      <DependentUpon>DistintaBaseFrm.cs</DependentUpon>
-    </Compile>
     <Compile Include="DistintaBusinessCentralFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,9 +142,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DistintaBaseFrm2.resx">
       <DependentUpon>DistintaBaseFrm2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DIstintaBaseFrm.resx">
-      <DependentUpon>DistintaBaseFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DistintaBusinessCentralFrm.resx">
       <DependentUpon>DistintaBusinessCentralFrm.cs</DependentUpon>

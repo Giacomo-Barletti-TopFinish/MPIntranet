@@ -19,7 +19,7 @@
     <Shape ID="DesignTable:DistinteBCDettaglio" ZOrder="8" X="1435" Y="415" Height="304" Width="181" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="300" />
     <Shape ID="DesignTable:DistinteBCTestata" ZOrder="11" X="1657" Y="417" Height="304" Width="169" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="301" />
     <Shape ID="DesignTable:COMPONENTI" ZOrder="3" X="693" Y="440" Height="238" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="234" />
-    <Shape ID="DesignTable:FASICICLO" ZOrder="6" X="1235" Y="413" Height="429" Width="153" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="425" />
+    <Shape ID="DesignTable:FASICICLO" ZOrder="6" X="1235" Y="280" Height="562" Width="153" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="558" />
     <Shape ID="DesignTable:TASKAREA" ZOrder="2" X="932" Y="538" Height="181" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="177" />
   </Shapes>
   <Connectors>

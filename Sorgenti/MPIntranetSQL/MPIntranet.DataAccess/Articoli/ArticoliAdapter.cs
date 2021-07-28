@@ -290,9 +290,9 @@ namespace MPIntranet.DataAccess.Articoli
 
         public void GetDistinteBCTestata(ArticoliDS ds, string codiceTestata)
         {
-            string select = @"select * from DistinteBCTestata where No_ = $P<TESTATA>";
             ParamSet ps = new ParamSet();
-            ps.AddParam("TESTATA", DbType.String, codiceTestata);
+            string select = @"select * from DistinteBCTestata where 1=1";
+            AddConditionAndParam(ref select, "[No_]", "TESTATA", codiceTestata, ps, true);
             using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
                 da.Fill(ds.DistinteBCTestata);

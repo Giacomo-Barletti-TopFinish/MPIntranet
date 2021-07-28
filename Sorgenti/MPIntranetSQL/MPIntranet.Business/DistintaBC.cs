@@ -15,7 +15,7 @@ namespace MPIntranet.Business
         public string Descrizione2 { get; set; }
         public string UnitaMisura { get; set; }
         public int Stato { get; set; }
-        public List<FaseDistinta> Fasi { get; set; }
+        public List<ComponenteBC> Componenti { get; set; }
 
         public static DistintaBC EstraiDistintaBase(string idDiba)
         {
@@ -54,11 +54,39 @@ namespace MPIntranet.Business
             distinta.UnitaMisura = riga.Unit_of_Measure_Code;
             distinta.Stato = riga.Status;
 
-            distinta.Fasi = new List<FaseDistinta>();
+            distinta.Componenti = new List<ComponenteBC>();
             return distinta;
         }
+        public void CaricaDistintaCompleta()
+        {
+            Componenti.Add(ComponenteBC.CreaComponente(Codice, Descrizione));
+            aggiungiComponenteBC(Componenti, Codice);
+        }
 
-        private List<FaseDistinta> estraiListaFasi(string codiceTestata,int idFaseDistinta, int idPadre)
+        private void aggiungiComponenteBC(List<ComponenteBC> Componenti, string codiceDistinta)
+        {
+            ArticoliDS ds = new ArticoliDS();
+            using (ArticoliBusiness bArticoli = new ArticoliBusiness())
+            {
+                bArticoli.GetDistinteBCTestata(ds, codiceDistinta);
+                List<ArticoliDS.DistinteBCTestataRow> testata = ds.DistinteBCTestata.Where(x => x.No_ == codiceDistinta).ToList();
+
+                if (testata == null) return;
+                bArticoli.GetDistinteBCDettaglio(ds, codiceDistinta);
+
+                List<ArticoliDS.DistinteBCDettaglioRow> dettagli = ds.DistinteBCDettaglio.Where(x => x.Production_BOM_No_ == codiceDistinta).ToList();
+                if (dettagli.Count > 0)
+                {
+                    foreach (ArticoliDS.DistinteBCDettaglioRow dettaglio in dettagli)
+                    {
+                        ComponenteBC componente = ComponenteBC.CreaComponente(dettaglio);
+                        Componenti.Add(componente);
+                        aggiungiComponenteBC(Componenti, componente.Anagrafica);
+                    }
+                }
+            }
+        }
+        private List<FaseDistinta> estraiListaFasi(string codiceTestata, int idFaseDistinta, int idPadre)
         {
             ArticoliDS ds = new ArticoliDS();
             List<FaseDistinta> fasi = new List<FaseDistinta>();
@@ -68,7 +96,7 @@ namespace MPIntranet.Business
                 bArticoli.GetDistinteBCTestata(ds, codiceTestata);
                 bArticoli.GetDistinteBCDettaglio(ds, codiceTestata);
                 bArticoli.GetCicliBCTestata(ds, codiceTestata);
-                bArticoli.GetDistinteBCDettaglio(ds, codiceTestata);
+                bArticoli.GetCicliBCDettaglio(ds, codiceTestata);
                 ArticoliDS.DistinteBCTestataRow testata = ds.DistinteBCTestata.Where(x => x.No_ == codiceTestata).FirstOrDefault();
                 List<ArticoliDS.CicliBCDettaglioRow> cicli = ds.CicliBCDettaglio.Where(x => x.Routing_No_ == codiceTestata).ToList();
 
@@ -90,7 +118,7 @@ namespace MPIntranet.Business
                 }
                 List<ArticoliDS.DistinteBCDettaglioRow> componenti = ds.DistinteBCDettaglio.Where(x => x.Production_BOM_No_ == codiceTestata).ToList();
 
-                foreach(ArticoliDS.DistinteBCDettaglioRow componente in componenti)
+                foreach (ArticoliDS.DistinteBCDettaglioRow componente in componenti)
                 {
                     fasi.AddRange(estraiListaFasi(componente.No_, idFaseDistinta, idPadre));
                 }

@@ -29,36 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DistintaBaseFrm2));
             this.tvDiBa = new System.Windows.Forms.TreeView();
             this.dgvFasiCiclo = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtArticolo = new System.Windows.Forms.TextBox();
-            this.btnCercaDiBa = new System.Windows.Forms.Button();
-            this.txtTipoDiba = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtDescrizioneDiba = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtVersioneDiba = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btnNuovaDistinta = new System.Windows.Forms.Button();
-            this.btnSalvaDiba = new System.Windows.Forms.Button();
-            this.dgvComponenti = new System.Windows.Forms.DataGridView();
-            this.clmIdComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmIdPadreComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmErroreComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmIdDibaComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmDescrizioneComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmAnagraficaComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmCollegamentoDibaComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmQuantitaComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmUMQuantitaComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnEsporta = new System.Windows.Forms.Button();
-            this.tmrSalvataggio = new System.Windows.Forms.Timer(this.components);
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFileSalvataggioAutomatico = new System.Windows.Forms.ToolStripMenuItem();
             this.clmIDFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmIdComponenteFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmErroreFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -77,9 +52,38 @@
             this.clmSetupFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmAttesaFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmMovimentazioneFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmNotaFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtArticolo = new System.Windows.Forms.TextBox();
+            this.txtTipoDiba = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtDescrizioneDiba = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtVersioneDiba = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.dgvComponenti = new System.Windows.Forms.DataGridView();
+            this.clmIdComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmIdPadreComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmErroreComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmIdDibaComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmDescrizioneComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmAnagraficaComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmCollegamentoDibaComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmQuantitaComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmUMQuantitaComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tmrSalvataggio = new System.Windows.Forms.Timer(this.components);
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolAutosalvataggio = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolApriDiBa = new System.Windows.Forms.ToolStripButton();
+            this.toolNuovaDiBa = new System.Windows.Forms.ToolStripButton();
+            this.toolSalvaDiba = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolEsporta = new System.Windows.Forms.ToolStripButton();
+            this.toolCollegamento = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFasiCiclo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvComponenti)).BeginInit();
-            this.menuStrip1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tvDiBa
@@ -116,7 +120,8 @@
             this.clmCollegamentoCicloFaseCiclo,
             this.clmSetupFaseCiclo,
             this.clmAttesaFaseCiclo,
-            this.clmMovimentazioneFaseCiclo});
+            this.clmMovimentazioneFaseCiclo,
+            this.clmNotaFaseCiclo});
             this.dgvFasiCiclo.Location = new System.Drawing.Point(707, 73);
             this.dgvFasiCiclo.Name = "dgvFasiCiclo";
             this.dgvFasiCiclo.Size = new System.Drawing.Size(960, 869);
@@ -126,248 +131,6 @@
             this.dgvFasiCiclo.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvNodi_EditingControlShowing);
             this.dgvFasiCiclo.NewRowNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvFasiCiclo_NewRowNeeded);
             this.dgvFasiCiclo.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvFasiCiclo_RowsAdded);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 40);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 15);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Articolo";
-            // 
-            // txtArticolo
-            // 
-            this.txtArticolo.Location = new System.Drawing.Point(64, 37);
-            this.txtArticolo.Name = "txtArticolo";
-            this.txtArticolo.ReadOnly = true;
-            this.txtArticolo.Size = new System.Drawing.Size(204, 20);
-            this.txtArticolo.TabIndex = 6;
-            // 
-            // btnCercaDiBa
-            // 
-            this.btnCercaDiBa.Location = new System.Drawing.Point(273, 35);
-            this.btnCercaDiBa.Name = "btnCercaDiBa";
-            this.btnCercaDiBa.Size = new System.Drawing.Size(94, 27);
-            this.btnCercaDiBa.TabIndex = 8;
-            this.btnCercaDiBa.Text = "Apri DiBa";
-            this.btnCercaDiBa.UseVisualStyleBackColor = true;
-            this.btnCercaDiBa.Click += new System.EventHandler(this.btnCercaDiBa_Click);
-            // 
-            // txtTipoDiba
-            // 
-            this.txtTipoDiba.Location = new System.Drawing.Point(738, 36);
-            this.txtTipoDiba.Name = "txtTipoDiba";
-            this.txtTipoDiba.ReadOnly = true;
-            this.txtTipoDiba.Size = new System.Drawing.Size(244, 20);
-            this.txtTipoDiba.TabIndex = 10;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(704, 41);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(28, 13);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Tipo";
-            // 
-            // txtDescrizioneDiba
-            // 
-            this.txtDescrizioneDiba.Location = new System.Drawing.Point(1201, 37);
-            this.txtDescrizioneDiba.Name = "txtDescrizioneDiba";
-            this.txtDescrizioneDiba.ReadOnly = true;
-            this.txtDescrizioneDiba.Size = new System.Drawing.Size(470, 20);
-            this.txtDescrizioneDiba.TabIndex = 12;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1134, 41);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(62, 13);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "Descrizione";
-            // 
-            // txtVersioneDiba
-            // 
-            this.txtVersioneDiba.Location = new System.Drawing.Point(1050, 37);
-            this.txtVersioneDiba.Name = "txtVersioneDiba";
-            this.txtVersioneDiba.ReadOnly = true;
-            this.txtVersioneDiba.Size = new System.Drawing.Size(73, 20);
-            this.txtVersioneDiba.TabIndex = 14;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(988, 41);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(48, 13);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "Versione";
-            // 
-            // btnNuovaDistinta
-            // 
-            this.btnNuovaDistinta.Location = new System.Drawing.Point(384, 35);
-            this.btnNuovaDistinta.Name = "btnNuovaDistinta";
-            this.btnNuovaDistinta.Size = new System.Drawing.Size(94, 27);
-            this.btnNuovaDistinta.TabIndex = 15;
-            this.btnNuovaDistinta.Text = "Nuova DiBa";
-            this.btnNuovaDistinta.UseVisualStyleBackColor = true;
-            this.btnNuovaDistinta.Click += new System.EventHandler(this.btnNuovaDistinta_Click);
-            // 
-            // btnSalvaDiba
-            // 
-            this.btnSalvaDiba.Location = new System.Drawing.Point(495, 35);
-            this.btnSalvaDiba.Name = "btnSalvaDiba";
-            this.btnSalvaDiba.Size = new System.Drawing.Size(94, 27);
-            this.btnSalvaDiba.TabIndex = 19;
-            this.btnSalvaDiba.Text = "Salva DiBa";
-            this.btnSalvaDiba.UseVisualStyleBackColor = true;
-            this.btnSalvaDiba.Click += new System.EventHandler(this.btnSalvaDiba_Click);
-            // 
-            // dgvComponenti
-            // 
-            this.dgvComponenti.AllowUserToAddRows = false;
-            this.dgvComponenti.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dgvComponenti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvComponenti.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clmIdComponente,
-            this.clmIdPadreComponente,
-            this.clmErroreComponente,
-            this.clmIdDibaComponente,
-            this.clmDescrizioneComponente,
-            this.clmAnagraficaComponente,
-            this.clmCollegamentoDibaComponente,
-            this.clmQuantitaComponente,
-            this.clmUMQuantitaComponente});
-            this.dgvComponenti.Location = new System.Drawing.Point(3, 507);
-            this.dgvComponenti.Name = "dgvComponenti";
-            this.dgvComponenti.Size = new System.Drawing.Size(684, 435);
-            this.dgvComponenti.TabIndex = 21;
-            this.dgvComponenti.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvComponenti_CellEndEdit);
-            this.dgvComponenti.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvComponenti_CellValueChanged);
-            this.dgvComponenti.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvComponenti_EditingControlShowing);
-            this.dgvComponenti.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvComponenti_RowEnter);
-            this.dgvComponenti.RowLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvComponenti_RowLeave);
-            // 
-            // clmIdComponente
-            // 
-            this.clmIdComponente.DataPropertyName = "IdComponente";
-            this.clmIdComponente.FillWeight = 50F;
-            this.clmIdComponente.HeaderText = "ID";
-            this.clmIdComponente.Name = "clmIdComponente";
-            this.clmIdComponente.Width = 50;
-            // 
-            // clmIdPadreComponente
-            // 
-            this.clmIdPadreComponente.DataPropertyName = "IdPadre";
-            this.clmIdPadreComponente.FillWeight = 50F;
-            this.clmIdPadreComponente.HeaderText = "IdPadre";
-            this.clmIdPadreComponente.Name = "clmIdPadreComponente";
-            this.clmIdPadreComponente.Width = 50;
-            // 
-            // clmErroreComponente
-            // 
-            this.clmErroreComponente.DataPropertyName = "Errore";
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Red;
-            this.clmErroreComponente.DefaultCellStyle = dataGridViewCellStyle2;
-            this.clmErroreComponente.HeaderText = "Errore";
-            this.clmErroreComponente.Name = "clmErroreComponente";
-            this.clmErroreComponente.ReadOnly = true;
-            // 
-            // clmIdDibaComponente
-            // 
-            this.clmIdDibaComponente.DataPropertyName = "IdDiba";
-            this.clmIdDibaComponente.HeaderText = "IdDiba";
-            this.clmIdDibaComponente.Name = "clmIdDibaComponente";
-            this.clmIdDibaComponente.Visible = false;
-            // 
-            // clmDescrizioneComponente
-            // 
-            this.clmDescrizioneComponente.DataPropertyName = "Descrizione";
-            this.clmDescrizioneComponente.FillWeight = 150F;
-            this.clmDescrizioneComponente.HeaderText = "Descrizione";
-            this.clmDescrizioneComponente.MaxInputLength = 50;
-            this.clmDescrizioneComponente.Name = "clmDescrizioneComponente";
-            this.clmDescrizioneComponente.Width = 150;
-            // 
-            // clmAnagraficaComponente
-            // 
-            this.clmAnagraficaComponente.DataPropertyName = "Anagrafica";
-            this.clmAnagraficaComponente.FillWeight = 130F;
-            this.clmAnagraficaComponente.HeaderText = "Anagrafica";
-            this.clmAnagraficaComponente.MaxInputLength = 20;
-            this.clmAnagraficaComponente.Name = "clmAnagraficaComponente";
-            this.clmAnagraficaComponente.Width = 130;
-            // 
-            // clmCollegamentoDibaComponente
-            // 
-            this.clmCollegamentoDibaComponente.DataPropertyName = "CollegamentoDiba";
-            this.clmCollegamentoDibaComponente.HeaderText = "CollegamentoDiba";
-            this.clmCollegamentoDibaComponente.MaxInputLength = 20;
-            this.clmCollegamentoDibaComponente.Name = "clmCollegamentoDibaComponente";
-            // 
-            // clmQuantitaComponente
-            // 
-            this.clmQuantitaComponente.DataPropertyName = "Quantita";
-            this.clmQuantitaComponente.FillWeight = 60F;
-            this.clmQuantitaComponente.HeaderText = "Quantita";
-            this.clmQuantitaComponente.Name = "clmQuantitaComponente";
-            this.clmQuantitaComponente.Width = 60;
-            // 
-            // clmUMQuantitaComponente
-            // 
-            this.clmUMQuantitaComponente.DataPropertyName = "UMQuantita";
-            this.clmUMQuantitaComponente.FillWeight = 70F;
-            this.clmUMQuantitaComponente.HeaderText = "UMQuantita";
-            this.clmUMQuantitaComponente.MaxInputLength = 10;
-            this.clmUMQuantitaComponente.Name = "clmUMQuantitaComponente";
-            this.clmUMQuantitaComponente.Width = 70;
-            // 
-            // btnEsporta
-            // 
-            this.btnEsporta.Location = new System.Drawing.Point(606, 35);
-            this.btnEsporta.Name = "btnEsporta";
-            this.btnEsporta.Size = new System.Drawing.Size(94, 27);
-            this.btnEsporta.TabIndex = 22;
-            this.btnEsporta.Text = "Esporta";
-            this.btnEsporta.UseVisualStyleBackColor = true;
-            this.btnEsporta.Click += new System.EventHandler(this.btnEsporta_Click);
-            // 
-            // tmrSalvataggio
-            // 
-            this.tmrSalvataggio.Interval = 600000;
-            this.tmrSalvataggio.Tick += new System.EventHandler(this.tmrSalvataggio_Tick);
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.MdiWindowListItem = this.fileToolStripMenuItem;
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1694, 24);
-            this.menuStrip1.TabIndex = 23;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuFileSalvataggioAutomatico});
-            this.fileToolStripMenuItem.MergeAction = System.Windows.Forms.MergeAction.MatchOnly;
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
-            // 
-            // mnuFileSalvataggioAutomatico
-            // 
-            this.mnuFileSalvataggioAutomatico.Checked = true;
-            this.mnuFileSalvataggioAutomatico.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.mnuFileSalvataggioAutomatico.Name = "mnuFileSalvataggioAutomatico";
-            this.mnuFileSalvataggioAutomatico.Size = new System.Drawing.Size(199, 22);
-            this.mnuFileSalvataggioAutomatico.Text = "Salvataggio automatico";
-            this.mnuFileSalvataggioAutomatico.Click += new System.EventHandler(this.mnuFileSalvataggioAutomatico_Click);
             // 
             // clmIDFaseCiclo
             // 
@@ -390,8 +153,8 @@
             // clmErroreFaseCiclo
             // 
             this.clmErroreFaseCiclo.DataPropertyName = "Errore";
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Red;
-            this.clmErroreFaseCiclo.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Red;
+            this.clmErroreFaseCiclo.DefaultCellStyle = dataGridViewCellStyle3;
             this.clmErroreFaseCiclo.FillWeight = 130F;
             this.clmErroreFaseCiclo.HeaderText = "Errore";
             this.clmErroreFaseCiclo.Name = "clmErroreFaseCiclo";
@@ -507,35 +270,301 @@
             this.clmMovimentazioneFaseCiclo.HeaderText = "Movimentazione";
             this.clmMovimentazioneFaseCiclo.Name = "clmMovimentazioneFaseCiclo";
             // 
+            // clmNotaFaseCiclo
+            // 
+            this.clmNotaFaseCiclo.DataPropertyName = "Nota";
+            this.clmNotaFaseCiclo.FillWeight = 200F;
+            this.clmNotaFaseCiclo.HeaderText = "Nota";
+            this.clmNotaFaseCiclo.MaxInputLength = 150;
+            this.clmNotaFaseCiclo.Name = "clmNotaFaseCiclo";
+            this.clmNotaFaseCiclo.Width = 200;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(6, 40);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(47, 15);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Articolo";
+            // 
+            // txtArticolo
+            // 
+            this.txtArticolo.Location = new System.Drawing.Point(64, 37);
+            this.txtArticolo.Name = "txtArticolo";
+            this.txtArticolo.ReadOnly = true;
+            this.txtArticolo.Size = new System.Drawing.Size(204, 20);
+            this.txtArticolo.TabIndex = 6;
+            // 
+            // txtTipoDiba
+            // 
+            this.txtTipoDiba.Location = new System.Drawing.Point(315, 36);
+            this.txtTipoDiba.Name = "txtTipoDiba";
+            this.txtTipoDiba.ReadOnly = true;
+            this.txtTipoDiba.Size = new System.Drawing.Size(244, 20);
+            this.txtTipoDiba.TabIndex = 10;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(281, 41);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(28, 13);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Tipo";
+            // 
+            // txtDescrizioneDiba
+            // 
+            this.txtDescrizioneDiba.Location = new System.Drawing.Point(778, 37);
+            this.txtDescrizioneDiba.Name = "txtDescrizioneDiba";
+            this.txtDescrizioneDiba.ReadOnly = true;
+            this.txtDescrizioneDiba.Size = new System.Drawing.Size(470, 20);
+            this.txtDescrizioneDiba.TabIndex = 12;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(711, 41);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(62, 13);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Descrizione";
+            // 
+            // txtVersioneDiba
+            // 
+            this.txtVersioneDiba.Location = new System.Drawing.Point(627, 37);
+            this.txtVersioneDiba.Name = "txtVersioneDiba";
+            this.txtVersioneDiba.ReadOnly = true;
+            this.txtVersioneDiba.Size = new System.Drawing.Size(73, 20);
+            this.txtVersioneDiba.TabIndex = 14;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(565, 41);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(48, 13);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Versione";
+            // 
+            // dgvComponenti
+            // 
+            this.dgvComponenti.AllowUserToAddRows = false;
+            this.dgvComponenti.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dgvComponenti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvComponenti.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.clmIdComponente,
+            this.clmIdPadreComponente,
+            this.clmErroreComponente,
+            this.clmIdDibaComponente,
+            this.clmDescrizioneComponente,
+            this.clmAnagraficaComponente,
+            this.clmCollegamentoDibaComponente,
+            this.clmQuantitaComponente,
+            this.clmUMQuantitaComponente});
+            this.dgvComponenti.Location = new System.Drawing.Point(3, 507);
+            this.dgvComponenti.Name = "dgvComponenti";
+            this.dgvComponenti.Size = new System.Drawing.Size(684, 435);
+            this.dgvComponenti.TabIndex = 21;
+            this.dgvComponenti.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvComponenti_CellEndEdit);
+            this.dgvComponenti.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvComponenti_CellValueChanged);
+            this.dgvComponenti.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvComponenti_EditingControlShowing);
+            this.dgvComponenti.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvComponenti_RowEnter);
+            this.dgvComponenti.RowLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvComponenti_RowLeave);
+            // 
+            // clmIdComponente
+            // 
+            this.clmIdComponente.DataPropertyName = "IdComponente";
+            this.clmIdComponente.FillWeight = 50F;
+            this.clmIdComponente.HeaderText = "ID";
+            this.clmIdComponente.Name = "clmIdComponente";
+            this.clmIdComponente.Width = 50;
+            // 
+            // clmIdPadreComponente
+            // 
+            this.clmIdPadreComponente.DataPropertyName = "IdPadre";
+            this.clmIdPadreComponente.FillWeight = 50F;
+            this.clmIdPadreComponente.HeaderText = "IdPadre";
+            this.clmIdPadreComponente.Name = "clmIdPadreComponente";
+            this.clmIdPadreComponente.Width = 50;
+            // 
+            // clmErroreComponente
+            // 
+            this.clmErroreComponente.DataPropertyName = "Errore";
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Red;
+            this.clmErroreComponente.DefaultCellStyle = dataGridViewCellStyle4;
+            this.clmErroreComponente.HeaderText = "Errore";
+            this.clmErroreComponente.Name = "clmErroreComponente";
+            this.clmErroreComponente.ReadOnly = true;
+            // 
+            // clmIdDibaComponente
+            // 
+            this.clmIdDibaComponente.DataPropertyName = "IdDiba";
+            this.clmIdDibaComponente.HeaderText = "IdDiba";
+            this.clmIdDibaComponente.Name = "clmIdDibaComponente";
+            this.clmIdDibaComponente.Visible = false;
+            // 
+            // clmDescrizioneComponente
+            // 
+            this.clmDescrizioneComponente.DataPropertyName = "Descrizione";
+            this.clmDescrizioneComponente.FillWeight = 150F;
+            this.clmDescrizioneComponente.HeaderText = "Descrizione";
+            this.clmDescrizioneComponente.MaxInputLength = 50;
+            this.clmDescrizioneComponente.Name = "clmDescrizioneComponente";
+            this.clmDescrizioneComponente.Width = 150;
+            // 
+            // clmAnagraficaComponente
+            // 
+            this.clmAnagraficaComponente.DataPropertyName = "Anagrafica";
+            this.clmAnagraficaComponente.FillWeight = 130F;
+            this.clmAnagraficaComponente.HeaderText = "Anagrafica";
+            this.clmAnagraficaComponente.MaxInputLength = 20;
+            this.clmAnagraficaComponente.Name = "clmAnagraficaComponente";
+            this.clmAnagraficaComponente.Width = 130;
+            // 
+            // clmCollegamentoDibaComponente
+            // 
+            this.clmCollegamentoDibaComponente.DataPropertyName = "CollegamentoDiba";
+            this.clmCollegamentoDibaComponente.HeaderText = "CollegamentoDiba";
+            this.clmCollegamentoDibaComponente.MaxInputLength = 20;
+            this.clmCollegamentoDibaComponente.Name = "clmCollegamentoDibaComponente";
+            // 
+            // clmQuantitaComponente
+            // 
+            this.clmQuantitaComponente.DataPropertyName = "Quantita";
+            this.clmQuantitaComponente.FillWeight = 60F;
+            this.clmQuantitaComponente.HeaderText = "Quantita";
+            this.clmQuantitaComponente.Name = "clmQuantitaComponente";
+            this.clmQuantitaComponente.Width = 60;
+            // 
+            // clmUMQuantitaComponente
+            // 
+            this.clmUMQuantitaComponente.DataPropertyName = "UMQuantita";
+            this.clmUMQuantitaComponente.FillWeight = 70F;
+            this.clmUMQuantitaComponente.HeaderText = "UMQuantita";
+            this.clmUMQuantitaComponente.MaxInputLength = 10;
+            this.clmUMQuantitaComponente.Name = "clmUMQuantitaComponente";
+            this.clmUMQuantitaComponente.Width = 70;
+            // 
+            // tmrSalvataggio
+            // 
+            this.tmrSalvataggio.Interval = 600000;
+            this.tmrSalvataggio.Tick += new System.EventHandler(this.tmrSalvataggio_Tick);
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolAutosalvataggio,
+            this.toolStripSeparator1,
+            this.toolApriDiBa,
+            this.toolNuovaDiBa,
+            this.toolSalvaDiba,
+            this.toolStripSeparator2,
+            this.toolCollegamento,
+            this.toolEsporta});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(1694, 25);
+            this.toolStrip1.TabIndex = 24;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolAutosalvataggio
+            // 
+            this.toolAutosalvataggio.Checked = true;
+            this.toolAutosalvataggio.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.toolAutosalvataggio.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolAutosalvataggio.Image = ((System.Drawing.Image)(resources.GetObject("toolAutosalvataggio.Image")));
+            this.toolAutosalvataggio.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolAutosalvataggio.Name = "toolAutosalvataggio";
+            this.toolAutosalvataggio.Size = new System.Drawing.Size(97, 22);
+            this.toolAutosalvataggio.Text = "Autosalvataggio";
+            this.toolAutosalvataggio.Click += new System.EventHandler(this.toolAutosalvataggio_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolApriDiBa
+            // 
+            this.toolApriDiBa.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolApriDiBa.Image = ((System.Drawing.Image)(resources.GetObject("toolApriDiBa.Image")));
+            this.toolApriDiBa.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolApriDiBa.Name = "toolApriDiBa";
+            this.toolApriDiBa.Size = new System.Drawing.Size(60, 22);
+            this.toolApriDiBa.Text = "Apri DiBa";
+            this.toolApriDiBa.Click += new System.EventHandler(this.btnCercaDiBa_Click);
+            // 
+            // toolNuovaDiBa
+            // 
+            this.toolNuovaDiBa.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolNuovaDiBa.Image = ((System.Drawing.Image)(resources.GetObject("toolNuovaDiBa.Image")));
+            this.toolNuovaDiBa.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolNuovaDiBa.Name = "toolNuovaDiBa";
+            this.toolNuovaDiBa.Size = new System.Drawing.Size(73, 22);
+            this.toolNuovaDiBa.Text = "Nuova DiBa";
+            this.toolNuovaDiBa.Click += new System.EventHandler(this.btnNuovaDistinta_Click);
+            // 
+            // toolSalvaDiba
+            // 
+            this.toolSalvaDiba.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolSalvaDiba.Image = ((System.Drawing.Image)(resources.GetObject("toolSalvaDiba.Image")));
+            this.toolSalvaDiba.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolSalvaDiba.Name = "toolSalvaDiba";
+            this.toolSalvaDiba.Size = new System.Drawing.Size(65, 22);
+            this.toolSalvaDiba.Text = "Salva DiBa";
+            this.toolSalvaDiba.Click += new System.EventHandler(this.btnSalvaDiba_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolEsporta
+            // 
+            this.toolEsporta.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolEsporta.Image = ((System.Drawing.Image)(resources.GetObject("toolEsporta.Image")));
+            this.toolEsporta.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolEsporta.Name = "toolEsporta";
+            this.toolEsporta.Size = new System.Drawing.Size(50, 22);
+            this.toolEsporta.Text = "Esporta";
+            this.toolEsporta.Click += new System.EventHandler(this.btnEsporta_Click);
+            // 
+            // toolCollegamento
+            // 
+            this.toolCollegamento.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolCollegamento.Image = ((System.Drawing.Image)(resources.GetObject("toolCollegamento.Image")));
+            this.toolCollegamento.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolCollegamento.Name = "toolCollegamento";
+            this.toolCollegamento.Size = new System.Drawing.Size(113, 22);
+            this.toolCollegamento.Text = "CollegamentoCiclo";
+            this.toolCollegamento.Click += new System.EventHandler(this.toolCollegamento_Click);
+            // 
             // DistintaBaseFrm2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1694, 954);
-            this.Controls.Add(this.btnEsporta);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.dgvFasiCiclo);
             this.Controls.Add(this.dgvComponenti);
-            this.Controls.Add(this.btnSalvaDiba);
-            this.Controls.Add(this.btnNuovaDistinta);
             this.Controls.Add(this.txtVersioneDiba);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtDescrizioneDiba);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtTipoDiba);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnCercaDiBa);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtArticolo);
             this.Controls.Add(this.tvDiBa);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "DistintaBaseFrm2";
             this.Text = "DIstintaBaseFrm";
             this.Load += new System.EventHandler(this.DistintaBaseFrm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFasiCiclo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvComponenti)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -547,15 +576,12 @@
         private System.Windows.Forms.DataGridView dgvFasiCiclo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtArticolo;
-        private System.Windows.Forms.Button btnCercaDiBa;
         private System.Windows.Forms.TextBox txtTipoDiba;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtDescrizioneDiba;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtVersioneDiba;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button btnNuovaDistinta;
-        private System.Windows.Forms.Button btnSalvaDiba;
         private System.Windows.Forms.DataGridView dgvComponenti;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmIdComponente;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmIdPadreComponente;
@@ -566,11 +592,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clmCollegamentoDibaComponente;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmQuantitaComponente;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmUMQuantitaComponente;
-        private System.Windows.Forms.Button btnEsporta;
         private System.Windows.Forms.Timer tmrSalvataggio;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mnuFileSalvataggioAutomatico;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmIDFaseCiclo;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmIdComponenteFaseCiclo;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmErroreFaseCiclo;
@@ -589,5 +611,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clmSetupFaseCiclo;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmAttesaFaseCiclo;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmMovimentazioneFaseCiclo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmNotaFaseCiclo;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton toolAutosalvataggio;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton toolApriDiBa;
+        private System.Windows.Forms.ToolStripButton toolNuovaDiBa;
+        private System.Windows.Forms.ToolStripButton toolSalvaDiba;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton toolEsporta;
+        private System.Windows.Forms.ToolStripButton toolCollegamento;
     }
 }

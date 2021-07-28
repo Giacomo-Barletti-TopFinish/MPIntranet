@@ -55,6 +55,7 @@ namespace DisegnaDiBa
         {
             tmrSalvataggio.Interval = 10 * 60 * 1000;
             avviaTimerAutoSalvataggio();
+            impostaColorePulsanteAutosave();
 
             NuovoArticoloFrm nForm = new NuovoArticoloFrm();
             nForm.Utente = _utenteConnesso;
@@ -799,22 +800,60 @@ namespace DisegnaDiBa
             if (_distinta == null) return;
             if (_articolo == null) return;
 
-            if (mnuFileSalvataggioAutomatico.Checked)
+            if (toolAutosalvataggio.Checked)
                 btnSalvaDiba_Click(null, null);
         }
 
         private void avviaTimerAutoSalvataggio()
         {
-            if (mnuFileSalvataggioAutomatico.Checked)
+            if (toolAutosalvataggio.Checked)
                 tmrSalvataggio.Start();
             else
                 tmrSalvataggio.Stop();
         }
 
-        private void mnuFileSalvataggioAutomatico_Click(object sender, EventArgs e)
+
+        private void impostaColorePulsanteAutosave()
         {
-            mnuFileSalvataggioAutomatico.Checked = !mnuFileSalvataggioAutomatico.Checked;
+            if (toolAutosalvataggio.Checked)
+                toolAutosalvataggio.Font = new Font(this.Font, FontStyle.Bold);
+            else
+                toolAutosalvataggio.Font = new Font(this.Font, FontStyle.Regular);
+        }
+        private void toolAutosalvataggio_Click(object sender, EventArgs e)
+        {
+            toolAutosalvataggio.Checked = !toolAutosalvataggio.Checked;
+            impostaColorePulsanteAutosave();
             avviaTimerAutoSalvataggio();
+        }
+
+        private void toolCollegamento_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Questa operazione resettera tutte le impostazioni manuali fatte ai codici di collegamento. Vuoi procedere ?", "ATTENZIONE", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                try
+                {
+                    Cursor.Current = Cursors.WaitCursor;
+                    string errori;
+                    if (_distinta.CorreggiCollegamentoDibaCiclo(out errori))
+                        MessageBox.Show("Operazione completata", "INFORMAZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else
+                    {
+                        string msg = "Operazione terminata con errori: ";
+                        msg = msg + Environment.NewLine;
+                        msg = msg + errori;
+                        MessageBox.Show(msg, "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MostraEccezione(ex, "Errore in verifica cicli");
+                }
+                finally
+                {
+                    Cursor.Current = Cursors.Default;
+                }
+            }
         }
     }
 }

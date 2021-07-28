@@ -203,5 +203,75 @@ namespace MPIntranet.Business
             errori = sb.ToString();
             return esito;
         }
+
+        public bool CorreggiCollegamentoDibaCiclo(out string errori)
+        {
+            errori = string.Empty;
+            Componente articolo = Componenti.Where(x => x.IdPadre == 0).FirstOrDefault();
+            articolo.CollegamentoDiBa = string.Empty;
+            bool esito = verificaCodiceCollegamentoRicorsivo(articolo, out errori);
+            return esito;
+        }
+
+        private bool verificaCodiceCollegamentoRicorsivo(Componente articolo, out string errori)
+        {
+            errori = string.Empty;
+            StringBuilder sbErrori = new StringBuilder();
+
+            bool esito = true;
+            List<Componente> componentiFigli = Componenti.Where(x => x.IdPadre == articolo.IdComponente).ToList();
+            componentiFigli.ForEach(x => x.CollegamentoDiBa = ExpCicloBusinessCentral.CodiceCollegamentoStandard);
+            List<FaseCiclo> fasi = articolo.FasiCiclo.OrderBy(x => x.Operazione).ToList();
+            if (componentiFigli.Count > 0)
+            {
+                if (fasi.Count > 0)
+                {
+                    fasi[0].CollegamentoCiclo = ExpCicloBusinessCentral.CodiceCollegamentoStandard;
+                    fasi[0].Errore = string.Empty;
+                    if (!string.IsNullOrEmpty(fasi[0].Anagrafica))
+                    {
+                        string msg = string.Format("La fase {0} dell'articolo {1} non dovrebbe avere alcuna anagrafica valorizzata. Verificare codice collegamento ciclo.", fasi[0].IdFaseCiclo, articolo.IdComponente);
+                        sbErrori.AppendLine(msg);
+                        esito = false;
+                        fasi[0].Errore = msg;
+                    }
+                }
+                foreach (Componente figlio in componentiFigli)
+                {
+                    errori = string.Empty;
+                    esito = esito && verificaCodiceCollegamentoRicorsivo(figlio, out errori);
+                    sbErrori.AppendLine(errori);
+                }
+            }
+            bool trovataAnagrafica = false;
+            foreach (FaseCiclo fase in fasi)
+            {
+                fase.Errore = string.Empty;
+                fase.CollegamentoCiclo = string.Empty;
+                fase.CollegamentoDiBa = string.Empty;
+
+                if (trovataAnagrafica)
+                {
+                    fase.CollegamentoCiclo = ExpCicloBusinessCentral.CodiceCollegamentoStandard;
+                    trovataAnagrafica = false;
+                }
+                if (!string.IsNullOrEmpty(fase.Anagrafica))
+                {
+                    trovataAnagrafica = true;
+                    fase.CollegamentoDiBa = ExpCicloBusinessCentral.CodiceCollegamentoStandard;
+                }
+            }
+
+            if (fasi.Count > 0 && !string.IsNullOrEmpty(fasi[fasi.Count - 1].Anagrafica))
+            {
+                string msg = string.Format("La fase {0} dell'articolo {1} non dovrebbe avere alcuna anagrafica valorizzata. Verificare codice collegamento ciclo e diba.", fasi[fasi.Count - 1].IdFaseCiclo, articolo.IdComponente);
+                sbErrori.AppendLine(msg);
+                esito = false;
+                fasi[fasi.Count - 1].Errore = msg;
+            }
+
+            errori = sbErrori.ToString();
+            return esito;
+        }
     }
 }

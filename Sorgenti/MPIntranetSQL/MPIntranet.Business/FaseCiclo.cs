@@ -30,6 +30,7 @@ namespace MPIntranet.Business
         public double Attesa { get; set; }
         public double Movimentazione { get; set; }
         public string Errore { get; set; }
+        public string Nota { get; set; }
 
         public static List<FaseCiclo> EstraiListaFaseCiclo(int idDiba)
         {
@@ -83,6 +84,7 @@ namespace MPIntranet.Business
             faseCiclo.Cancellato = Cancellato;
             faseCiclo.DataModifica = DataModifica;
             faseCiclo.UtenteModifica = UtenteModifica;
+            faseCiclo.Nota = Nota;
             return faseCiclo;
         }
         private static FaseCiclo CreaFaseCiclo(ArticoliDS.FASICICLORow riga)
@@ -112,6 +114,7 @@ namespace MPIntranet.Business
             faseCiclo.Cancellato = riga.CANCELLATO;
             faseCiclo.DataModifica = riga.DATAMODIFICA;
             faseCiclo.UtenteModifica = riga.UTENTEMODIFICA;
+            faseCiclo.Nota = riga.IsNOTANull() ? string.Empty : riga.NOTA;
             return faseCiclo;
         }
 
@@ -162,6 +165,7 @@ namespace MPIntranet.Business
                         rigaFaseCiclo.CANCELLATO = false;
                         rigaFaseCiclo.DATAMODIFICA = DateTime.Now;
                         rigaFaseCiclo.UTENTEMODIFICA = utente;
+                        rigaFaseCiclo.NOTA = string.IsNullOrEmpty(faseCiclo.Nota) ? string.Empty : faseCiclo.Nota.ToUpper();
 
                         ds.FASICICLO.AddFASICICLORow(rigaFaseCiclo);
                     }
@@ -185,6 +189,7 @@ namespace MPIntranet.Business
                         rigaFaseCiclo.CANCELLATO = false;
                         rigaFaseCiclo.DATAMODIFICA = DateTime.Now;
                         rigaFaseCiclo.UTENTEMODIFICA = utente;
+                        rigaFaseCiclo.NOTA = string.IsNullOrEmpty(faseCiclo.Nota) ? string.Empty : faseCiclo.Nota.ToUpper();
                     }
                 }
             }

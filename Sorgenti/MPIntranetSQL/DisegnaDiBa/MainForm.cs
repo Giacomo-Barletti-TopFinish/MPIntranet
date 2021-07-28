@@ -53,27 +53,11 @@ namespace DisegnaDiBa
             LayoutMdi(MdiLayout.TileHorizontal);
         }
 
-        private void nuovaDistintaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-
-                DistintaBaseFrm form = new DistintaBaseFrm();
-                form.MdiParent = this;
-                form.Show();
-            }
-            catch (Exception ex)
-            {
-                base.MostraEccezione(ex, "Errore in apertura finestra distinta base");
-            }
-        }
-
         private void apriEsistenteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
                 DistintaBaseFrm2 form = new DistintaBaseFrm2();
-//                DistintaBaseFrm form = new DistintaBaseFrm();
                 form.MdiParent = this;
                 form.Show();
             }
@@ -88,7 +72,7 @@ namespace DisegnaDiBa
             try
             {
 
-                DistintaBaseFrm form = new DistintaBaseFrm();
+                DistintaBusinessCentralFrm form = new DistintaBusinessCentralFrm();
                 form.MdiParent = this;
                 form.Show();
             }
@@ -116,6 +100,20 @@ namespace DisegnaDiBa
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+        }
+
+        private void apriBusinessCentralMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DistintaBusinessCentralFrm form = new DistintaBusinessCentralFrm();
+                form.MdiParent = this;
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                base.MostraEccezione(ex, "Errore in apertura finestra distinte business central");
+            }
         }
     }
 }

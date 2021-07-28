@@ -13,22 +13,23 @@ namespace DisegnaDiBa
 {
     public partial class SelezionaDistintaBCFrm : Form
     {
-        private Articolo _articolo;
+        private string _articolo;
         public DistintaBC DistintaSelezionata;
         private List<DistintaBC> distinte;
-        public SelezionaDistintaBCFrm(Articolo articolo)
+        public SelezionaDistintaBCFrm(string articolo)
         {
             InitializeComponent();
             _articolo = articolo;
+            dgvDistinte.AutoGenerateColumns = false;
         }
 
         private void SelezionaDistintaFrm_Load(object sender, EventArgs e)
         {
-            if(_articolo==null)
+            if (string.IsNullOrEmpty(_articolo))
                 this.Close();
 
             Text = string.Format("Cerca distinte BC per l'articolo {0}", _articolo.ToString());
-            distinte = DistintaBC.EstraiListaDistinteBase(_articolo.Anagrafica);
+            distinte = DistintaBC.EstraiListaDistinteBase(_articolo);
 
             if (distinte.Count == 1)
             {

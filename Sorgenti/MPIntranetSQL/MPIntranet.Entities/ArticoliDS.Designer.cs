@@ -9962,6 +9962,8 @@ namespace MPIntranet.Entities {
             
             private global::System.Data.DataColumn columnUMQUANTITA;
             
+            private global::System.Data.DataColumn columnNOTA;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public FASICICLODataTable() {
@@ -10165,6 +10167,14 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn NOTAColumn {
+                get {
+                    return this.columnNOTA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -10220,7 +10230,8 @@ namespace MPIntranet.Entities {
                         string ANAGRAFICA, 
                         string COLLEGAMENTODIBA, 
                         double QUANTITA, 
-                        string UMQUANTITA) {
+                        string UMQUANTITA, 
+                        string NOTA) {
                 FASICICLORow rowFASICICLORow = ((FASICICLORow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -10243,7 +10254,8 @@ namespace MPIntranet.Entities {
                         ANAGRAFICA,
                         COLLEGAMENTODIBA,
                         QUANTITA,
-                        UMQUANTITA};
+                        UMQUANTITA,
+                        NOTA};
                 rowFASICICLORow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowFASICICLORow);
                 return rowFASICICLORow;
@@ -10294,6 +10306,7 @@ namespace MPIntranet.Entities {
                 this.columnCOLLEGAMENTODIBA = base.Columns["COLLEGAMENTODIBA"];
                 this.columnQUANTITA = base.Columns["QUANTITA"];
                 this.columnUMQUANTITA = base.Columns["UMQUANTITA"];
+                this.columnNOTA = base.Columns["NOTA"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10341,6 +10354,8 @@ namespace MPIntranet.Entities {
                 base.Columns.Add(this.columnQUANTITA);
                 this.columnUMQUANTITA = new global::System.Data.DataColumn("UMQUANTITA", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUMQUANTITA);
+                this.columnNOTA = new global::System.Data.DataColumn("NOTA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNOTA);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnIDFASECICLO}, true));
                 this.columnIDFASECICLO.AutoIncrement = true;
@@ -15852,6 +15867,22 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string NOTA {
+                get {
+                    try {
+                        return ((string)(this[this.tableFASICICLO.NOTAColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NOTA\' in table \'FASICICLO\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableFASICICLO.NOTAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsDESCRIZIONENull() {
                 return this.IsNull(this.tableFASICICLO.DESCRIZIONEColumn);
             }
@@ -16016,6 +16047,18 @@ namespace MPIntranet.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetUMQUANTITANull() {
                 this[this.tableFASICICLO.UMQUANTITAColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsNOTANull() {
+                return this.IsNull(this.tableFASICICLO.NOTAColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetNOTANull() {
+                this[this.tableFASICICLO.NOTAColumn] = global::System.Convert.DBNull;
             }
         }
         
