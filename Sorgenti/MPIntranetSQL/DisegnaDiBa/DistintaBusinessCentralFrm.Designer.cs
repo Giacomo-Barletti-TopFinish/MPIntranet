@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCercaDiBa = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtArticolo = new System.Windows.Forms.TextBox();
@@ -149,8 +149,8 @@
             // clmErroreFaseCiclo
             // 
             this.clmErroreFaseCiclo.DataPropertyName = "Errore";
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Red;
-            this.clmErroreFaseCiclo.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Red;
+            this.clmErroreFaseCiclo.DefaultCellStyle = dataGridViewCellStyle3;
             this.clmErroreFaseCiclo.FillWeight = 130F;
             this.clmErroreFaseCiclo.HeaderText = "Errore";
             this.clmErroreFaseCiclo.Name = "clmErroreFaseCiclo";
@@ -294,6 +294,8 @@
             this.dgvComponenti.Name = "dgvComponenti";
             this.dgvComponenti.Size = new System.Drawing.Size(684, 435);
             this.dgvComponenti.TabIndex = 27;
+            this.dgvComponenti.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvComponenti_RowEnter);
+            this.dgvComponenti.RowLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvComponenti_RowLeave);
             // 
             // clmIdComponente
             // 
@@ -314,8 +316,8 @@
             // clmErroreComponente
             // 
             this.clmErroreComponente.DataPropertyName = "Errore";
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Red;
-            this.clmErroreComponente.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Red;
+            this.clmErroreComponente.DefaultCellStyle = dataGridViewCellStyle4;
             this.clmErroreComponente.HeaderText = "Errore";
             this.clmErroreComponente.Name = "clmErroreComponente";
             this.clmErroreComponente.ReadOnly = true;
@@ -377,6 +379,7 @@
             this.tvDiBa.Name = "tvDiBa";
             this.tvDiBa.Size = new System.Drawing.Size(684, 395);
             this.tvDiBa.TabIndex = 25;
+            this.tvDiBa.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvDiBa_NodeMouseClick);
             // 
             // DistintaBusinessCentralFrm
             // 

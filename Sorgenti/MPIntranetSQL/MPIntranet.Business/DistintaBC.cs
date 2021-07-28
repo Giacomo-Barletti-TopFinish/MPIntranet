@@ -127,7 +127,19 @@ namespace MPIntranet.Business
 
             return fasi;
         }
-
+        public bool TrovaComponente(string Anagrafica, out ComponenteBC componenteTrovato)
+        {
+            componenteTrovato = null;
+            foreach (ComponenteBC componente in Componenti)
+            {
+                if (componente.Anagrafica == Anagrafica)
+                {
+                    componenteTrovato = componente;
+                    return true;
+                }
+            }
+            return false;
+        }
 
     }
 

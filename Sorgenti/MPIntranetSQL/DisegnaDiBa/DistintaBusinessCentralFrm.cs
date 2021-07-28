@@ -23,8 +23,6 @@ namespace DisegnaDiBa
         private AutoCompleteStringCollection _autoAreeProduzione = new AutoCompleteStringCollection();
         private AutoCompleteStringCollection _autoTask = new AutoCompleteStringCollection();
         private AutoCompleteStringCollection _autoItems = new AutoCompleteStringCollection();
-        private int _idComponenteSelezionato;
-        private bool _newrow = false;
         private List<TaskArea> _taskAreaProduzione = new List<TaskArea>();
 
         protected List<Componente> ComponentiDaCopiare
@@ -70,7 +68,6 @@ namespace DisegnaDiBa
 
                 creaAlbero();
                 PopolaGrigliaComponenti();
-//                PopolaGrigliaFasi(null);
             }
             catch { }
             finally
@@ -155,6 +152,81 @@ namespace DisegnaDiBa
             sourceComponenti = new BindingSource(bindingList, null);
             dgvComponenti.DataSource = sourceComponenti;
             dgvComponenti.Update();
+        }
+
+        private void tvDiBa_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Node.Tag == null) return;
+
+            ComponenteBC componente = (ComponenteBC)e.Node.Tag;
+
+            foreach (DataGridViewRow riga in dgvComponenti.Rows)
+            {
+                string anagrafica = (string)riga.Cells[clmAnagraficaComponente.Index].Value;
+                if (anagrafica == componente.Anagrafica)
+                    riga.DefaultCellStyle.BackColor = Color.Yellow;
+                else
+                    riga.DefaultCellStyle.BackColor = Color.White;
+            }
+            PopolaGrigliaFasi(componente);
+        }
+
+        private void dgvComponenti_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex < 0) return;
+                if (tvDiBa.Nodes.Count <= 0) return;
+
+                string anagrafica = (string)dgvComponenti.Rows[e.RowIndex].Cells[clmAnagraficaComponente.Index].Value;
+                cambiaColoreNodo(anagrafica, Color.Yellow);
+
+                ComponenteBC componenteTrovato;
+                if (_distinta.TrovaComponente(anagrafica, out componenteTrovato))
+                    PopolaGrigliaFasi(componenteTrovato);
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione(ex, "Errore in verifica cicli");
+            }
+
+        }
+        private void cambiaColoreNodo(string idComponente, Color colore)
+        {
+            TreeNode nodoTrovato;
+            if (trovaNodo(tvDiBa.Nodes[0], idComponente, out nodoTrovato))
+            {
+                nodoTrovato.BackColor = colore;
+            }
+        }
+
+        private void dgvComponenti_RowLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            if (tvDiBa.Nodes.Count <= 0) return;
+
+            string anagrafica = (string)dgvComponenti.Rows[e.RowIndex].Cells[clmAnagraficaComponente.Index].Value;
+            cambiaColoreNodo(anagrafica, Color.Transparent);
+        }
+        private bool trovaNodo(TreeNode nodoPadre, string anagrafica, out TreeNode nodoTrovato)
+        {
+            nodoTrovato = null;
+            if (nodoPadre.Tag == null) return false;
+            ComponenteBC componente = (ComponenteBC)nodoPadre.Tag;
+            if (componente == null) return false;
+            if (componente.Anagrafica == anagrafica)
+            {
+                nodoTrovato = nodoPadre;
+                return true;
+            }
+
+            foreach (TreeNode n in nodoPadre.Nodes)
+            {
+                bool esito = trovaNodo(n, anagrafica, out nodoTrovato);
+                if (esito) return true;
+            }
+
+            return false;
         }
     }
 }
