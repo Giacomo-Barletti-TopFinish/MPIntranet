@@ -26,6 +26,7 @@ namespace DisegnaDiBa
         {
             Text = string.Format("Cerca distinte base per l'articolo {0}", _articolo.ToString());
             distinte = DistintaBase.EstraiListaDistinteBase(_articolo.IdArticolo);
+            dgvDistinte.AutoGenerateColumns = false;
 
             if (distinte.Count == 1)
             {

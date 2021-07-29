@@ -69,7 +69,10 @@ namespace DisegnaDiBa
                 creaAlbero();
                 PopolaGrigliaComponenti();
             }
-            catch { }
+            catch (Exception ex)
+            {
+                MostraEccezione(ex, "Errore in cerca diba");
+            }
             finally
             {
                 Cursor.Current = Cursors.Default;
@@ -115,7 +118,7 @@ namespace DisegnaDiBa
             return nodo;
         }
 
-        private void aggiungiNodoEsistente(string  codice, TreeNode nodoPadre)
+        private void aggiungiNodoEsistente(string codice, TreeNode nodoPadre)
         {
             foreach (ComponenteBC componente in _distinta.Componenti.Where(x => x.IdPadre == codice))
             {
@@ -227,6 +230,52 @@ namespace DisegnaDiBa
             }
 
             return false;
+        }
+
+        private void btnSalvaDiBa_Click(object sender, EventArgs e)
+        {
+            if (_distinta == null)
+            {
+                MessageBox.Show("Nessuna distinta BC attiva. Non c'è niente da salvare.", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            NuovoArticoloFrm nForm = new NuovoArticoloFrm();
+            nForm.Utente = _utenteConnesso;
+            nForm.ShowDialog();
+            int _idArticolo = nForm.IDArticolo;
+            if (_idArticolo == ElementiVuoti.Articolo)
+                return;
+
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                Articolo articolo = Articolo.EstraiArticolo(_idArticolo);
+
+                if (articolo != null)
+                {
+                    NuovaDistintaFrm form = new NuovaDistintaFrm(articolo, _utenteConnesso);
+                    form.ShowDialog();
+                    int idDIba = form.IDDIBA_OUT;
+                    if (idDIba == ElementiVuoti.DistintaBase)
+                    {
+                        MessageBox.Show("Errore in fase di creazione della distinta", "ERRORE", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    DistintaBase distintaBase = DistintaBase.EstraiDistintaBase(idDIba);
+                    distintaBase.CreaDaDistintaBC(_distinta, idDIba, _utenteConnesso);
+                    distintaBase.Salva(_utenteConnesso);
+                }
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione(ex, "Errore in salva DiBa");
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
         }
     }
 }

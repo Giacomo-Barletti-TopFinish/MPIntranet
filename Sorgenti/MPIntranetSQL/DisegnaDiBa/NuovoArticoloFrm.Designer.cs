@@ -279,7 +279,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "NuovoArticoloFrm";
-            this.Text = "Nuovo articolo";
+            this.Text = "Trova articolo";
             this.Load += new System.EventHandler(this.NuovoArticoloFrm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticoli)).EndInit();
             this.ResumeLayout(false);

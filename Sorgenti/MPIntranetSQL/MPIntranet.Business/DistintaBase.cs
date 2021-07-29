@@ -21,6 +21,24 @@ namespace MPIntranet.Business
 
         public List<Componente> Componenti { get; set; }
 
+        public void CreaDaDistintaBC(DistintaBC distintaBC, int idDiba, string utente)
+        {
+            int idComponente = 0;
+            int idPadre = 0;
+            creaDaDistintaBCRicorsiva(distintaBC, string.Empty, 0, idDiba, utente, ref idComponente);
+
+        }
+        private void creaDaDistintaBCRicorsiva(DistintaBC distintaBC, string anagraficaPadre, int idPadre, int idDiba, string utente, ref int idComponente)
+        {
+            foreach (ComponenteBC componenteBC in distintaBC.Componenti.Where(x => x.IdPadre == anagraficaPadre))
+            {
+                idComponente--;
+                Componente componente = Componente.CreaComponente(componenteBC, idDiba, idComponente, idPadre, utente);
+                Componenti.Add(componente);
+                foreach (ComponenteBC figlio in distintaBC.Componenti.Where(x => x.IdPadre == componenteBC.Anagrafica))
+                    creaDaDistintaBCRicorsiva(distintaBC, componenteBC.Anagrafica, idPadre, idDiba, utente, ref idComponente);
+            }
+        }
         public static DistintaBase EstraiDistintaBase(int idDiba)
         {
             ArticoliDS ds = new ArticoliDS();

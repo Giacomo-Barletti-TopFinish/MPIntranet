@@ -59,6 +59,20 @@ namespace MPIntranet.Business
             }
             return fasiCiclo;
         }
+        public static List<FaseCiclo> EstraiListaFaseCiclo(ComponenteBC componenteBC, Componente componente)
+        {
+            List<FaseCiclo> fasiCiclo = new List<FaseCiclo>();
+            int idFaseCiclo = componente.IdComponente * 1000;
+            if (idFaseCiclo > 0) idFaseCiclo = idFaseCiclo * -1;
+
+            foreach (FaseCicloBC faseBC in componenteBC.FasiCiclo)
+            {
+                idFaseCiclo--;
+                FaseCiclo faseCiclo = CreaFaseCiclo(faseBC, componente, idFaseCiclo);
+                fasiCiclo.Add(faseCiclo);
+            }
+            return fasiCiclo;
+        }
         public FaseCiclo Copia(int nuovaIdFaseCiclo, int nuovoIdCOmponente)
         {
             FaseCiclo faseCiclo = new FaseCiclo();
@@ -118,7 +132,36 @@ namespace MPIntranet.Business
             faseCiclo.Nota = riga.IsNOTANull() ? string.Empty : riga.NOTA;
             return faseCiclo;
         }
+        private static FaseCiclo CreaFaseCiclo(FaseCicloBC faseCicloBC, Componente componente, int idFaseCiclo)
+        {
 
+            if (faseCicloBC == null) return null;
+            FaseCiclo faseCiclo = new FaseCiclo();
+            faseCiclo.IdDiba = componente.IdDiba;
+            faseCiclo.IdFaseCiclo = idFaseCiclo;
+            faseCiclo.IdComponente = componente.IdComponente;
+            faseCiclo.Descrizione = faseCicloBC.Descrizione;
+            faseCiclo.Operazione = Int32.Parse(faseCicloBC.Operazione);
+            faseCiclo.Anagrafica = string.Empty;
+            faseCiclo.CollegamentoDiBa = string.Empty;
+            faseCiclo.Quantita = 0;
+            faseCiclo.UMQuantita = string.Empty;
+            faseCiclo.AreaProduzione = faseCicloBC.AreaProduzione;
+            faseCiclo.Task = faseCicloBC.Task;
+            faseCiclo.SchedaProcesso = faseCicloBC.SchedaProcesso;
+            faseCiclo.CollegamentoCiclo = faseCicloBC.CollegamentoCiclo;
+            faseCiclo.PezziPeriodo = (double)faseCicloBC.PezziPeriodo;
+            faseCiclo.Periodo = (double)faseCicloBC.Periodo;
+            faseCiclo.Setup = (double)faseCicloBC.Setup;
+            faseCiclo.Attesa = (double)faseCicloBC.Attesa;
+            faseCiclo.Movimentazione = (double)faseCicloBC.Movimentazione;
+            faseCiclo.Errore = string.Empty;
+            faseCiclo.Cancellato = false;
+            faseCiclo.DataModifica = DateTime.Now;
+            faseCiclo.UtenteModifica = componente.UtenteModifica;
+            faseCiclo.Nota = faseCicloBC.Nota;
+            return faseCiclo;
+        }
         public static void SalvaListaFaseCiclo(List<FaseCiclo> fasiCiclo, string utente, ArticoliDS ds)
         {
             if (fasiCiclo.Count() == 0) return;

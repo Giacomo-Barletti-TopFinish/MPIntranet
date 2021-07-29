@@ -65,6 +65,31 @@ namespace MPIntranet.Business
             return componente;
         }
 
+        public static Componente CreaComponente(ComponenteBC componenteBC, int idDiba, int idComponente, int idPadre, string utente)
+        {
+
+            if (componenteBC == null) return null;
+            Componente componente = new Componente();
+            componente.IdDiba = idDiba;
+            componente.IdComponente = idComponente;
+            componente.IdPadre = idPadre;
+            componente.Anagrafica = componenteBC.Anagrafica;
+            componente.Descrizione = componenteBC.Descrizione;
+            componente.CollegamentoDiBa = componenteBC.CollegamentoDiBa;
+            componente.UMQuantita = componenteBC.UMQuantita;
+            componente.Quantita = (double)componenteBC.Quantita;
+
+            componente.Errore = string.Empty;
+            componente.FasiCiclo = new List<FaseCiclo>();
+
+            componente.Cancellato = false;
+            componente.DataModifica = DateTime.Now;
+            componente.UtenteModifica = utente;
+
+            componente.FasiCiclo = FaseCiclo.EstraiListaFaseCiclo(componenteBC, componente);
+
+            return componente;
+        }
         public Componente Copia(int idComponente, int idPadre)
         {
             int idFaseCiclo = 0;
