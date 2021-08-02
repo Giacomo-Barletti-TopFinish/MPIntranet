@@ -75,9 +75,15 @@ namespace MPIntranet.Business
         }
         public FaseCiclo Copia(int nuovaIdFaseCiclo, int nuovoIdCOmponente)
         {
+
+            return Copia(nuovaIdFaseCiclo, nuovoIdCOmponente, IdDiba);
+        }
+
+        public FaseCiclo Copia(int nuovaIdFaseCiclo, int nuovoIdCOmponente, int idDiba)
+        {
             FaseCiclo faseCiclo = new FaseCiclo();
 
-            faseCiclo.IdDiba = IdDiba;
+            faseCiclo.IdDiba = idDiba;
             faseCiclo.IdFaseCiclo = nuovaIdFaseCiclo;
             faseCiclo.IdComponente = nuovoIdCOmponente;
             faseCiclo.Descrizione = Descrizione;
@@ -186,6 +192,7 @@ namespace MPIntranet.Business
 
                     if (rigaFaseCiclo == null)
                     {
+                        if (faseCiclo.IdComponente == 0 && faseCiclo.IdFaseCiclo == 0) return;
                         rigaFaseCiclo = ds.FASICICLO.NewFASICICLORow();
                         rigaFaseCiclo.IDFASECICLO = faseCiclo.IdFaseCiclo;
                         rigaFaseCiclo.IDCOMPONENTE = faseCiclo.IdComponente;
@@ -215,7 +222,7 @@ namespace MPIntranet.Business
                     }
                     else
                     {
-                        rigaFaseCiclo.ANAGRAFICA = faseCiclo.Anagrafica.ToUpper();
+                        rigaFaseCiclo.ANAGRAFICA = (string.IsNullOrEmpty(faseCiclo.Anagrafica))?string.Empty: faseCiclo.Anagrafica.ToUpper();
                         rigaFaseCiclo.COLLEGAMENTODIBA = (string.IsNullOrEmpty(faseCiclo.CollegamentoDiBa)) ? string.Empty : faseCiclo.CollegamentoDiBa.ToUpper();
                         rigaFaseCiclo.QUANTITA = faseCiclo.Quantita;
                         rigaFaseCiclo.UMQUANTITA = faseCiclo.UMQuantita.ToUpper();

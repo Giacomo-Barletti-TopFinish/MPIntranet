@@ -64,6 +64,14 @@ namespace DisegnaDiBa
                 Cursor.Current = Cursors.WaitCursor;
                 _distinta = form.DistintaSelezionata;
 
+                if (_distinta == null)
+                {
+                    MessageBox.Show("Nessuna distinta BC selezionata.", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                this.Text = string.Format("{0} {1}", txtArticolo.Text, _distinta.ToString());
+
                 _distinta.CaricaDistintaCompleta();
 
                 creaAlbero();

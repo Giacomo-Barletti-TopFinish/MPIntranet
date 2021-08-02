@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DistintaBaseFrm2));
             this.tvDiBa = new System.Windows.Forms.TreeView();
             this.dgvFasiCiclo = new System.Windows.Forms.DataGridView();
@@ -79,8 +79,11 @@
             this.toolNuovaDiBa = new System.Windows.Forms.ToolStripButton();
             this.toolSalvaDiba = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolEsporta = new System.Windows.Forms.ToolStripButton();
             this.toolCollegamento = new System.Windows.Forms.ToolStripButton();
+            this.toolCreaDiBaProduzione = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolEsporta = new System.Windows.Forms.ToolStripButton();
+            this.txtCodiceEsteso = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFasiCiclo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvComponenti)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -128,6 +131,7 @@
             this.dgvFasiCiclo.TabIndex = 5;
             this.dgvFasiCiclo.VirtualMode = true;
             this.dgvFasiCiclo.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFasiCiclo_CellEndEdit);
+            this.dgvFasiCiclo.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvFasiCiclo_DataError);
             this.dgvFasiCiclo.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvNodi_EditingControlShowing);
             this.dgvFasiCiclo.NewRowNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.dgvFasiCiclo_NewRowNeeded);
             this.dgvFasiCiclo.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvFasiCiclo_RowsAdded);
@@ -153,8 +157,8 @@
             // clmErroreFaseCiclo
             // 
             this.clmErroreFaseCiclo.DataPropertyName = "Errore";
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Red;
-            this.clmErroreFaseCiclo.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Red;
+            this.clmErroreFaseCiclo.DefaultCellStyle = dataGridViewCellStyle1;
             this.clmErroreFaseCiclo.FillWeight = 130F;
             this.clmErroreFaseCiclo.HeaderText = "Errore";
             this.clmErroreFaseCiclo.Name = "clmErroreFaseCiclo";
@@ -283,7 +287,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 40);
+            this.label1.Location = new System.Drawing.Point(6, 38);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(47, 15);
             this.label1.TabIndex = 7;
@@ -291,7 +295,7 @@
             // 
             // txtArticolo
             // 
-            this.txtArticolo.Location = new System.Drawing.Point(64, 37);
+            this.txtArticolo.Location = new System.Drawing.Point(64, 35);
             this.txtArticolo.Name = "txtArticolo";
             this.txtArticolo.ReadOnly = true;
             this.txtArticolo.Size = new System.Drawing.Size(204, 20);
@@ -299,7 +303,7 @@
             // 
             // txtTipoDiba
             // 
-            this.txtTipoDiba.Location = new System.Drawing.Point(315, 36);
+            this.txtTipoDiba.Location = new System.Drawing.Point(558, 35);
             this.txtTipoDiba.Name = "txtTipoDiba";
             this.txtTipoDiba.ReadOnly = true;
             this.txtTipoDiba.Size = new System.Drawing.Size(244, 20);
@@ -308,7 +312,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(281, 41);
+            this.label2.Location = new System.Drawing.Point(524, 39);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(28, 13);
             this.label2.TabIndex = 9;
@@ -316,7 +320,7 @@
             // 
             // txtDescrizioneDiba
             // 
-            this.txtDescrizioneDiba.Location = new System.Drawing.Point(778, 37);
+            this.txtDescrizioneDiba.Location = new System.Drawing.Point(1021, 35);
             this.txtDescrizioneDiba.Name = "txtDescrizioneDiba";
             this.txtDescrizioneDiba.ReadOnly = true;
             this.txtDescrizioneDiba.Size = new System.Drawing.Size(470, 20);
@@ -325,7 +329,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(711, 41);
+            this.label3.Location = new System.Drawing.Point(954, 39);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(62, 13);
             this.label3.TabIndex = 11;
@@ -333,7 +337,7 @@
             // 
             // txtVersioneDiba
             // 
-            this.txtVersioneDiba.Location = new System.Drawing.Point(627, 37);
+            this.txtVersioneDiba.Location = new System.Drawing.Point(870, 35);
             this.txtVersioneDiba.Name = "txtVersioneDiba";
             this.txtVersioneDiba.ReadOnly = true;
             this.txtVersioneDiba.Size = new System.Drawing.Size(73, 20);
@@ -342,7 +346,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(565, 41);
+            this.label4.Location = new System.Drawing.Point(808, 39);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(48, 13);
             this.label4.TabIndex = 13;
@@ -392,8 +396,8 @@
             // clmErroreComponente
             // 
             this.clmErroreComponente.DataPropertyName = "Errore";
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Red;
-            this.clmErroreComponente.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Red;
+            this.clmErroreComponente.DefaultCellStyle = dataGridViewCellStyle2;
             this.clmErroreComponente.HeaderText = "Errore";
             this.clmErroreComponente.Name = "clmErroreComponente";
             this.clmErroreComponente.ReadOnly = true;
@@ -462,6 +466,8 @@
             this.toolSalvaDiba,
             this.toolStripSeparator2,
             this.toolCollegamento,
+            this.toolCreaDiBaProduzione,
+            this.toolStripSeparator3,
             this.toolEsporta});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -521,6 +527,31 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
+            // toolCollegamento
+            // 
+            this.toolCollegamento.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolCollegamento.Image = ((System.Drawing.Image)(resources.GetObject("toolCollegamento.Image")));
+            this.toolCollegamento.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolCollegamento.Name = "toolCollegamento";
+            this.toolCollegamento.Size = new System.Drawing.Size(169, 22);
+            this.toolCollegamento.Text = "Imposta Codici Collegamento";
+            this.toolCollegamento.Click += new System.EventHandler(this.toolCollegamento_Click);
+            // 
+            // toolCreaDiBaProduzione
+            // 
+            this.toolCreaDiBaProduzione.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolCreaDiBaProduzione.Image = ((System.Drawing.Image)(resources.GetObject("toolCreaDiBaProduzione.Image")));
+            this.toolCreaDiBaProduzione.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolCreaDiBaProduzione.Name = "toolCreaDiBaProduzione";
+            this.toolCreaDiBaProduzione.Size = new System.Drawing.Size(125, 22);
+            this.toolCreaDiBaProduzione.Text = "Crea DiBa Produzione";
+            this.toolCreaDiBaProduzione.Click += new System.EventHandler(this.toolCreaDiBaProduzione_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolEsporta
             // 
             this.toolEsporta.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -531,21 +562,20 @@
             this.toolEsporta.Text = "Esporta";
             this.toolEsporta.Click += new System.EventHandler(this.btnEsporta_Click);
             // 
-            // toolCollegamento
+            // txtCodiceEsteso
             // 
-            this.toolCollegamento.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolCollegamento.Image = ((System.Drawing.Image)(resources.GetObject("toolCollegamento.Image")));
-            this.toolCollegamento.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolCollegamento.Name = "toolCollegamento";
-            this.toolCollegamento.Size = new System.Drawing.Size(113, 22);
-            this.toolCollegamento.Text = "CollegamentoCiclo";
-            this.toolCollegamento.Click += new System.EventHandler(this.toolCollegamento_Click);
+            this.txtCodiceEsteso.Location = new System.Drawing.Point(274, 35);
+            this.txtCodiceEsteso.Name = "txtCodiceEsteso";
+            this.txtCodiceEsteso.ReadOnly = true;
+            this.txtCodiceEsteso.Size = new System.Drawing.Size(204, 20);
+            this.txtCodiceEsteso.TabIndex = 25;
             // 
             // DistintaBaseFrm2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1694, 954);
+            this.Controls.Add(this.txtCodiceEsteso);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.dgvFasiCiclo);
             this.Controls.Add(this.dgvComponenti);
@@ -621,5 +651,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton toolEsporta;
         private System.Windows.Forms.ToolStripButton toolCollegamento;
+        private System.Windows.Forms.ToolStripButton toolCreaDiBaProduzione;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.TextBox txtCodiceEsteso;
     }
 }

@@ -36,7 +36,7 @@ namespace MPIntranet.Business
                 Componente componente = Componente.CreaComponente(componenteBC, idDiba, idComponente, idPadre, utente);
                 Componenti.Add(componente);
                 foreach (ComponenteBC figlio in distintaBC.Componenti.Where(x => x.IdPadre == componenteBC.Anagrafica))
-                    creaDaDistintaBCRicorsiva(distintaBC, componenteBC.Anagrafica, idPadre, idDiba, utente, ref idComponente);
+                    creaDaDistintaBCRicorsiva(distintaBC, componenteBC.Anagrafica, componente.IdComponente, idDiba, utente, ref idComponente);
             }
         }
         public static DistintaBase EstraiDistintaBase(int idDiba)
@@ -100,6 +100,44 @@ namespace MPIntranet.Business
             return distinta;
         }
 
+        public void Copia(DistintaBase distintaDestinazione, string utente)
+        {
+            int idComponente = 0;
+            int idPadre = 0;
+            copiaDistintaRicorsiva(distintaDestinazione, 0, utente, ref idComponente);
+
+        }
+        private void copiaDistintaRicorsiva(DistintaBase distintaDestinazione, int idPadre, string utente, ref int idComponente)
+        {
+            foreach (Componente componenteOrigine in Componenti.Where(x => x.IdPadre == idPadre))
+            {
+                idComponente--;
+                Componente componenteNuovo = componenteOrigine.Copia(idComponente, idPadre, distintaDestinazione.IdDiba);
+                distintaDestinazione.Componenti.Add(componenteNuovo);
+
+                foreach (Componente figlioOrigine in Componenti.Where(x => x.IdPadre == componenteOrigine.IdComponente))
+                    copiaDistintaRicorsiva(distintaDestinazione, componenteOrigine.IdComponente, utente, ref idComponente);
+            }
+        }
+        public void ConvertiAnagraficaInProduzione()
+        {
+            foreach (Componente componente in Componenti)
+            {
+                componente.Anagrafica = convertiAnagraficaProduzione(componente.Anagrafica);
+
+                foreach (FaseCiclo fase in componente.FasiCiclo)
+                    fase.Anagrafica = convertiAnagraficaProduzione(fase.Anagrafica);
+            }
+        }
+        private string convertiAnagraficaProduzione(string anagraficaDaConvertire)
+        {
+            if (!string.IsNullOrEmpty(anagraficaDaConvertire) && anagraficaDaConvertire.Length > 2)
+            {
+                if (anagraficaDaConvertire[1] == '-')
+                    return "A" + anagraficaDaConvertire.Remove(0, 1);
+            }
+            return anagraficaDaConvertire;
+        }
         public static string CreaDistinta(int idArticolo, int idTipoDistinta, int versione, string descrizione, bool standard, string account, out int idDiba)
         {
             idDiba = ElementiVuoti.DistintaBase;

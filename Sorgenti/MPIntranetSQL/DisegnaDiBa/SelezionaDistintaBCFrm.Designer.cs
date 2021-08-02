@@ -37,6 +37,8 @@
             // 
             // dgvDistinte
             // 
+            this.dgvDistinte.AllowUserToAddRows = false;
+            this.dgvDistinte.AllowUserToDeleteRows = false;
             this.dgvDistinte.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDistinte.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Codice,
@@ -45,6 +47,7 @@
             this.dgvDistinte.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDistinte.Location = new System.Drawing.Point(0, 0);
             this.dgvDistinte.Name = "dgvDistinte";
+            this.dgvDistinte.ReadOnly = true;
             this.dgvDistinte.Size = new System.Drawing.Size(620, 331);
             this.dgvDistinte.TabIndex = 0;
             this.dgvDistinte.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDistinte_CellDoubleClick);
@@ -55,6 +58,7 @@
             this.Codice.FillWeight = 130F;
             this.Codice.HeaderText = "Codice";
             this.Codice.Name = "Codice";
+            this.Codice.ReadOnly = true;
             this.Codice.Width = 130;
             // 
             // Descrizione

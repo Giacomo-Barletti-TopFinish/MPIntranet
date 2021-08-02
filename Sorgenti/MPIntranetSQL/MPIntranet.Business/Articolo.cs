@@ -34,7 +34,14 @@ namespace MPIntranet.Business
             List<Articolo> lista = EstraiListaArticoli(anagrafica, false);
             return lista.Where(x => x.Anagrafica == anagrafica).FirstOrDefault();
         }
-
+        public string CodiceClienteEsteso
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(CodiceCliente)) return Brand.Descrizione;
+                return string.Format("{0} - {1}", Brand.Descrizione, CodiceCliente);
+            }
+        }
         public static List<Articolo> EstraiListaArticoli(bool soloNonCancellati)
         {
             ArticoliDS ds = new ArticoliDS();

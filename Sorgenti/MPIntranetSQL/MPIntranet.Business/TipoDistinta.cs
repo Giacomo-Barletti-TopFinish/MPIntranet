@@ -13,7 +13,7 @@ namespace MPIntranet.Business
     {
         public int IdTipoDiBa { get; set; }
         public string TipoDiba { get; set; }
-
+        public static string TipoProduzione = "PRODUZIONE";
 
         public static TipoDistinta EstraiTipoDistinta(int idTipoDIstinta)
         {

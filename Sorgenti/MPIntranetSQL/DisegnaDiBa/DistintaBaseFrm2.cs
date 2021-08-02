@@ -17,6 +17,7 @@ namespace DisegnaDiBa
 {
     public partial class DistintaBaseFrm2 : MPIChildForm
     {
+        private string separatoreAutocomplete = " ## ";
         private Articolo _articolo;
         private DistintaBase _distinta;
         private int indiceComponenti = 0;
@@ -29,6 +30,8 @@ namespace DisegnaDiBa
         private int _idComponenteSelezionato;
         private bool _newrow = false;
         private List<TaskArea> _taskAreaProduzione = new List<TaskArea>();
+        private List<Item> _items;
+
         protected List<Componente> ComponentiDaCopiare
         {
             get { return (MdiParent as MainForm).ComponentiDaCopiare; }
@@ -62,7 +65,11 @@ namespace DisegnaDiBa
             nForm.ShowDialog();
             int _idArticolo = nForm.IDArticolo;
             if (_idArticolo == ElementiVuoti.Articolo)
+            {
+                MessageBox.Show("Nessun articolo selezionato", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                this.BeginInvoke(new MethodInvoker(this.Close));
                 return;
+            }
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
@@ -73,8 +80,10 @@ namespace DisegnaDiBa
                 _articolo = Articolo.EstraiArticolo(_idArticolo);
 
                 if (_articolo != null)
+                {
                     txtArticolo.Text = _articolo.ToString();
-
+                    txtCodiceEsteso.Text = _articolo.CodiceClienteEsteso;
+                }
                 _taskAreaProduzione = TaskArea.EstraiListaTaskArea(true);
             }
             finally
@@ -92,9 +101,9 @@ namespace DisegnaDiBa
         }
         private void caricaItems()
         {
-            List<Item> items = Item.EstraiListaItems();
+            _items = Item.EstraiListaItems();
 
-            string[] etichette = items.Select(x => x.Anagrafica).ToArray();
+            string[] etichette = _items.Select(x => x.Anagrafica + separatoreAutocomplete + x.Descrizione).ToArray();
             _autoItems.AddRange(etichette);
         }
         private void caricaTask()
@@ -241,6 +250,11 @@ namespace DisegnaDiBa
             txtDescrizioneDiba.Text = _distinta.Descrizione;
             txtVersioneDiba.Text = _distinta.Versione.ToString();
             txtTipoDiba.Text = _distinta.TipoDistinta.TipoDiba;
+
+            toolCreaDiBaProduzione.Enabled = true;
+            if (_distinta.TipoDistinta.TipoDiba == TipoDistinta.TipoProduzione)
+                toolCreaDiBaProduzione.Enabled = false;
+
         }
 
         private void btnCercaDiBa_Click(object sender, EventArgs e)
@@ -480,6 +494,11 @@ namespace DisegnaDiBa
         private void dgvNodi_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             int columnIndex = dgvFasiCiclo.CurrentCell.ColumnIndex;
+
+            TextBox tb1 = e.Control as TextBox;
+            {
+                tb1.AutoCompleteCustomSource = null;
+            }
 
             if (columnIndex == clmAreaProduzioneFaseCiclo.Index)
             {
@@ -734,6 +753,19 @@ namespace DisegnaDiBa
 
                 if (e.ColumnIndex == clmAnagraficaFaseCiclo.Index)
                 {
+                    string anagrafica = (dgvFasiCiclo.Rows[e.RowIndex].Cells[clmAnagraficaFaseCiclo.Index].Value as string);
+                    if (string.IsNullOrEmpty(anagrafica)) return;
+                    int posizione = anagrafica.IndexOf(separatoreAutocomplete);
+                    if (posizione >= 19)
+                    {
+                        anagrafica = anagrafica.Substring(0, posizione);
+                        dgvFasiCiclo.Rows[e.RowIndex].Cells[clmAnagraficaFaseCiclo.Index].Value = anagrafica;
+                    }
+
+                    Item item = _items.Where(x => x.Anagrafica == anagrafica).FirstOrDefault();
+                    if (item != null) dgvFasiCiclo.Rows[e.RowIndex].Cells[clmUMQuantitaFaseCiclo.Index].Value = item.UM;
+
+
                     if (!string.IsNullOrEmpty(dgvFasiCiclo.Rows[e.RowIndex].Cells[clmAnagraficaFaseCiclo.Index].Value as string) &&
                         string.IsNullOrEmpty(dgvFasiCiclo.Rows[e.RowIndex].Cells[clmCollegamentoDiBAFaseCiclo.Index].Value as string))
                         dgvFasiCiclo.Rows[e.RowIndex].Cells[clmCollegamentoDiBAFaseCiclo.Index].Value = ExpCicloBusinessCentral.CodiceCollegamentoStandard;
@@ -777,6 +809,7 @@ namespace DisegnaDiBa
 
         private void riordinaFasiCiclo()
         {
+
             Componente componenteTrovato;
             if (_distinta.TrovaComponente(_idComponenteSelezionato, out componenteTrovato))
             {
@@ -854,6 +887,56 @@ namespace DisegnaDiBa
                     Cursor.Current = Cursors.Default;
                 }
             }
+        }
+
+        private void toolCreaDiBaProduzione_Click(object sender, EventArgs e)
+        {
+            if (_distinta.TipoDistinta.TipoDiba == TipoDistinta.TipoProduzione)
+            {
+                MessageBox.Show("La distinta è già una distinta di produzione", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                int idDiba = ElementiVuoti.DistintaBase;
+                int IdTipoDiBa = TipoDistinta.EstraiListaTipoDistinta(true).Where(x => x.TipoDiba == TipoDistinta.TipoProduzione).Select(x => x.IdTipoDiBa).FirstOrDefault();
+                DistintaBase.CreaDistinta(_articolo.IdArticolo, IdTipoDiBa, 1, _distinta.Descrizione, false, _utenteConnesso, out idDiba);
+
+                if (idDiba == ElementiVuoti.DistintaBase)
+                {
+                    MessageBox.Show("ERRORE NELLA CREAZIONE DELLA DISTINTA", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+                DistintaBase nuovaDistinta = DistintaBase.EstraiDistintaBase(idDiba);
+                _distinta.Copia(nuovaDistinta, _utenteConnesso);
+                nuovaDistinta.ConvertiAnagraficaInProduzione();
+                _distinta = nuovaDistinta;
+                popolaCampi();
+                creaAlbero();
+                PopolaGrigliaComponenti();
+                PopolaGrigliaFasi(null);
+                MessageBox.Show("Operazione completata con successo", "INFORMAZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione(ex, "Errore in crea diba produzione");
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void dgvFasiCiclo_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            MessageBox.Show(this, "Formato del dato sbagliato", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            e.ThrowException = false;
+            e.Cancel = false;
+
         }
     }
 }

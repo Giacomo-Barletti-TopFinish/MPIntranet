@@ -92,9 +92,13 @@ namespace MPIntranet.Business
         }
         public Componente Copia(int idComponente, int idPadre)
         {
+            return Copia(idComponente, idPadre, IdDiba);
+        }
+        public Componente Copia(int idComponente, int idPadre, int idDiba)
+        {
             int idFaseCiclo = 0;
             Componente componente = new Componente();
-            componente.IdDiba = IdDiba;
+            componente.IdDiba = idDiba;
             componente.IdComponente = idComponente;
             componente.IdPadre = idPadre;
             componente.Anagrafica = Anagrafica;
@@ -110,11 +114,10 @@ namespace MPIntranet.Business
 
             if (FasiCiclo == null) FasiCiclo = new List<FaseCiclo>();
             foreach (FaseCiclo fc in FasiCiclo)
-                componente.FasiCiclo.Add(fc.Copia(idFaseCiclo -= 10, idComponente));
+                componente.FasiCiclo.Add(fc.Copia(idFaseCiclo -= 10, idComponente, idDiba));
 
             return componente;
         }
-
         public static void SalvaListaComponenti(List<Componente> componenti, string utente)
         {
             if (componenti.Count() == 0) return;
@@ -148,8 +151,8 @@ namespace MPIntranet.Business
                             rigaComponente.IDPADRE = componente.IdPadre;
                         rigaComponente.IDDIBA = componente.IdDiba;
                         rigaComponente.DESCRIZIONE = componente.Descrizione.ToUpper();
-                        rigaComponente.ANAGRAFICA = componente.Anagrafica.ToUpper();
-                        rigaComponente.COLLEGAMENTODIBA = componente.CollegamentoDiBa.ToUpper();
+                        rigaComponente.ANAGRAFICA = (string.IsNullOrEmpty(componente.Anagrafica))?string.Empty:componente.Anagrafica.ToUpper();
+                        rigaComponente.COLLEGAMENTODIBA = (string.IsNullOrEmpty(componente.CollegamentoDiBa)) ? string.Empty : componente.CollegamentoDiBa.ToUpper(); 
                         rigaComponente.QUANTITA = componente.Quantita;
                         rigaComponente.UMQUANTITA = componente.UMQuantita.ToUpper();
                         rigaComponente.CANCELLATO = false;
@@ -163,8 +166,8 @@ namespace MPIntranet.Business
                         if (componente.IdPadre != 0)
                             rigaComponente.IDPADRE = componente.IdPadre;
                         rigaComponente.DESCRIZIONE = componente.Descrizione.ToUpper();
-                        rigaComponente.ANAGRAFICA = componente.Anagrafica.ToUpper();
-                        rigaComponente.COLLEGAMENTODIBA = componente.CollegamentoDiBa.ToUpper();
+                        rigaComponente.ANAGRAFICA = (string.IsNullOrEmpty(componente.Anagrafica)) ? string.Empty : componente.Anagrafica.ToUpper();
+                        rigaComponente.COLLEGAMENTODIBA = (string.IsNullOrEmpty(componente.CollegamentoDiBa)) ? string.Empty : componente.CollegamentoDiBa.ToUpper();
                         rigaComponente.QUANTITA = componente.Quantita;
                         rigaComponente.UMQUANTITA = componente.UMQuantita.ToUpper();
                         rigaComponente.CANCELLATO = false;

@@ -38,12 +38,18 @@ namespace DisegnaDiBa
 
         private void btnCreaArticolo_Click(object sender, EventArgs e)
         {
-            convertiTesto();
+            convertiTestoInMaiuscolo();
             lblMessage.Text = string.Empty;
             string messaggio = string.Empty; ;
             if (string.IsNullOrEmpty(txtDescrizione.Text))
             {
                 lblMessage.Text = "La descrizione è obbligatoria";
+                return;
+            }
+
+            if (string.IsNullOrEmpty(txtCodiceCliente.Text))
+            {
+                lblMessage.Text = "Il codice cliente è obbligatorio";
                 return;
             }
 
@@ -76,7 +82,7 @@ namespace DisegnaDiBa
             DialogResult = DialogResult.OK;
         }
 
-        private void convertiTesto()
+        private void convertiTestoInMaiuscolo()
         {
             txtAnagrafica.Text = txtAnagrafica.Text.ToUpper();
             txtDescrizione.Text = txtDescrizione.Text.ToUpper();
@@ -88,14 +94,23 @@ namespace DisegnaDiBa
         private void btnTrovaArticolo_Click(object sender, EventArgs e)
         {
             lblMessage.Text = string.Empty;
-            convertiTesto();
-            if (ddlBrands.SelectedIndex == -1)
+            convertiTestoInMaiuscolo();
+
+            if (string.IsNullOrEmpty(txtAnagrafica.Text) && ddlBrands.SelectedIndex == -1 && string.IsNullOrEmpty(txtCodiceCliente.Text))
             {
-                lblMessage.Text = "Selezionare un brand";
+                lblMessage.Text = "Indicare almeno il brand oppure il codice cliente";
                 return;
             }
-            Brand brand = (Brand)ddlBrands.SelectedItem;
-            articoli = Articolo.TrovaArticoli(txtAnagrafica.Text, txtDescrizione.Text, brand.IdBrand, txtCodiceCliente.Text, txtColore.Text);
+
+            int idBrand = ElementiVuoti.Brand;
+            if (ddlBrands.SelectedIndex != -1)
+            {
+                //                lblMessage.Text = "Selezionare un brand";
+                //                return;
+                Brand brand = (Brand)ddlBrands.SelectedItem;
+                idBrand = brand.IdBrand;
+            }
+            articoli = Articolo.TrovaArticoli(txtAnagrafica.Text, txtDescrizione.Text, idBrand, txtCodiceCliente.Text, txtColore.Text);
             BindingList<Articolo> bl = new BindingList<Articolo>(articoli);
             BindingSource bs = new BindingSource(bl, null);
             dgvArticoli.DataSource = bs;
