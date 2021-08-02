@@ -30,8 +30,6 @@ create view [dbo].[AreeProduzione] as
 select * from [TEST].[dbo].[MetalPlus_WS$Work Center$437dbf0e-84ff-417a-965d-ed2bb9650972] WITH (NOLOCK)
 GO
 
-USE [MPI]
-GO
 
 /****** Object:  View [dbo].[Items]    Script Date: 25/05/2021 15:54:47 ******/
 SET ANSI_NULLS ON
@@ -77,3 +75,55 @@ select * from [TEST].[dbo].[MetalPlus_WS$Prod_ Order Routing Line$437dbf0e-84ff-
 go
 CREATE VIEW [DBO].[VersamentiFasiOrdiniProduzione] as
 select * from [TEST].[dbo].[MetalPlus_WS$Capacity Ledger Entry$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
+
+GO
+USE [MPI]
+GO
+
+
+
+
+create OR ALTER view [dbo].[Items] as
+select * from [PROD].[dbo].[METALPLUS$Item$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
+GO
+
+
+
+
+
+
+
+
+create view [dbo].[CicliBCTestata] as
+SELECT * FROM [PROD].[dbo].[METALPLUS$Routing Header$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
+go
+
+create view [dbo].[CicliBCDettaglio] as
+SELECT * FROM [PROD].[dbo].[MetalPlus$Routing Line$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
+go
+
+create view [dbo].[CicliBCCommenti] as
+SELECT * FROM [PROD].[dbo].[MetalPlus$Routing Comment Line$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
+go
+
+create view [dbo].[DistinteBCTestata] as
+SELECT * FROM [PROD].[dbo].[MetalPlus$Production BOM Header$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
+go
+
+create view [dbo].[DistinteBCDettaglio] as
+SELECT * FROM  [PROD].[dbo].[MetalPlus$Production BOM Line$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
+go
+
+CREATE VIEW [DBO].[ArticoliOrdiniProduzione] as
+select * from [PROD].[dbo].[MetalPlus$Prod_ Order Line$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
+
+go
+CREATE VIEW [DBO].[ComponentiOrdiniProduzione] as
+select * from [PROD].[dbo].[MetalPlus$Prod_ Order Component$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
+
+go
+CREATE VIEW [DBO].[FasiOrdiniProduzione] as
+select * from [PROD].[dbo].[MetalPlus$Prod_ Order Routing Line$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
+go
+CREATE VIEW [DBO].[VersamentiFasiOrdiniProduzione] as
+select * from [PROD].[dbo].[MetalPlus$Capacity Ledger Entry$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
