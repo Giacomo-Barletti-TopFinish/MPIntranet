@@ -40,16 +40,7 @@ namespace MPIntranet.DataAccess.Articoli
             }
         }
 
-        public void FillFASIDIBA(ArticoliDS ds, int idDiba)
-        {
-            string select = @"SELECT * FROM FASIDIBA WHERE IDDIBA = $P<IDDIBA> AND CANCELLATO = 0 ";
-            ParamSet ps = new ParamSet();
-            ps.AddParam("IDDIBA", DbType.Int32, idDiba);
-            using (DbDataAdapter da = BuildDataAdapter(select, ps))
-            {
-                da.Fill(ds.FASIDIBA);
-            }
-        }
+     
 
         public void FillDistintaBase(ArticoliDS ds, int idArticolo, bool soloNonCancellati)
         {
@@ -247,43 +238,6 @@ namespace MPIntranet.DataAccess.Articoli
                 finally
                 {
                     dt.IDDIBAColumn.ReadOnly = isIdentityReadOnly;
-                }
-            }
-        }
-
-        public void UpdateFaseDistintaBaseTable(string tablename,DataRow[] drs)
-        {
-            string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);
-
-            using (DbDataAdapter a = BuildDataAdapter(query))
-            {
-                InstallRowUpdatedHandler(a, UpdateFaseDistintaBaseHander);
-                a.ContinueUpdateOnError = false;
-                DbCommandBuilder cmd = BuildCommandBuilder(a);
-                a.AcceptChangesDuringFill = true;
-                a.UpdateCommand = cmd.GetUpdateCommand();
-                a.DeleteCommand = cmd.GetDeleteCommand();
-                a.InsertCommand = cmd.GetInsertCommand();
-
-                a.Update(drs);
-            }
-        }
-        private void UpdateFaseDistintaBaseHander(object sender, RowUpdatedEventArgs e)
-        {
-            if ((e.Status == UpdateStatus.Continue) && (e.StatementType == StatementType.Insert))
-            {
-                ArticoliDS.FASIDIBARow row = (ArticoliDS.FASIDIBARow)e.Row;
-                ArticoliDS.FASIDIBADataTable dt = row.Table as ArticoliDS.FASIDIBADataTable;
-
-                bool isIdentityReadOnly = dt.IDDIBAColumn.ReadOnly;
-                dt.IDFASEDIBAColumn.ReadOnly = false;
-                try
-                {
-                    row.IDFASEDIBA = (int)RetrievePostUpdateID<decimal>(e.Command, row);
-                }
-                finally
-                {
-                    dt.IDFASEDIBAColumn.ReadOnly = isIdentityReadOnly;
                 }
             }
         }

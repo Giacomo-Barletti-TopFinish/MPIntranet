@@ -60,12 +60,7 @@ namespace MPIntranet.DataAccess.Articoli
             ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
             a.GetDistintaBase(ds, idDiba);
         }
-        [DataContext]
-        public void FillFASIDIBA(ArticoliDS ds, int idDiba)
-        {
-            ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
-            a.FillFASIDIBA(ds, idDiba);
-        }
+     
         [DataContext]
         public void FillDistintaBase(ArticoliDS ds, int idArticolo, bool soloNonCancellati)
         {
@@ -157,12 +152,6 @@ namespace MPIntranet.DataAccess.Articoli
         {
             ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
             a.UpdateDistintaBaseTable(ds);
-        }
-        [DataContext(true)]
-        public void UpdateFaseDistintaBaseTable(string tablename, DataRow[] drs)
-        {
-            ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
-            a.UpdateFaseDistintaBaseTable(tablename, drs);
         }
         [DataContext(true)]
         public void UpdateComponentiTable(string tablename, DataRow[] drs)

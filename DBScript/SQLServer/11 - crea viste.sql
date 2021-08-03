@@ -80,19 +80,9 @@ GO
 USE [MPI]
 GO
 
-
-
-
 create OR ALTER view [dbo].[Items] as
 select * from [PROD].[dbo].[METALPLUS$Item$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
 GO
-
-
-
-
-
-
-
 
 create view [dbo].[CicliBCTestata] as
 SELECT * FROM [PROD].[dbo].[METALPLUS$Routing Header$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)

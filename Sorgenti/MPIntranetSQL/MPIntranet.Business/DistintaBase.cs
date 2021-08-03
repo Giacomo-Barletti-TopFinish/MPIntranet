@@ -17,7 +17,6 @@ namespace MPIntranet.Business
         public Articolo Articolo { get; set; }
         public string Descrizione { get; set; }
         public bool Standard { get; set; }
-        public List<FaseDistinta> Fasi { get; set; }
 
         public List<Componente> Componenti { get; set; }
 
@@ -90,12 +89,10 @@ namespace MPIntranet.Business
             distinta.Standard = riga.STANDARD;
 
             distinta.Componenti = new List<Componente>();
-            distinta.Fasi = new List<FaseDistinta>();
 
             distinta.Cancellato = riga.CANCELLATO;
             distinta.DataModifica = riga.DATAMODIFICA;
             distinta.UtenteModifica = riga.UTENTEMODIFICA;
-            distinta.Fasi = FaseDistinta.EstraiListaFaseDistinta(riga.IDDIBA);
             distinta.Componenti = Componente.EstraiListaComponenti(riga.IDDIBA);
             return distinta;
         }
@@ -165,14 +162,6 @@ namespace MPIntranet.Business
                 idDiba = dibaNuova.IDDIBA;
             }
             return "Distinta creata correttamente";
-        }
-
-        public void SalvaListaFasiDistinta(string utente)
-        {
-            if (Fasi.Count() == 0) return;
-            int idDiba = Fasi[0].IdDiba;
-
-            FaseDistinta.SalvaListaFasiDistinta(Fasi, utente);
         }
 
         public void Salva(string utente)

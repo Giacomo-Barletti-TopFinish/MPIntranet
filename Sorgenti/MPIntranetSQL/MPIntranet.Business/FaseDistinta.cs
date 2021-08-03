@@ -61,50 +61,50 @@ namespace MPIntranet.Business
             return faseCopiata;
         }
 
-        public static List<FaseDistinta> EstraiListaFaseDistinta(int idDiba)
-        {
-            ArticoliDS ds = new ArticoliDS();
-            using (ArticoliBusiness bArticolo = new ArticoliBusiness())
-            {
-                bArticolo.FillFASIDIBA(ds, idDiba);
-            }
+        //public static List<FaseDistinta> EstraiListaFaseDistinta(int idDiba)
+        //{
+        //    ArticoliDS ds = new ArticoliDS();
+        //    using (ArticoliBusiness bArticolo = new ArticoliBusiness())
+        //    {
+        //        bArticolo.FillFASIDIBA(ds, idDiba);
+        //    }
 
-            List<FaseDistinta> fasi = new List<FaseDistinta>();
-            foreach (ArticoliDS.FASIDIBARow riga in ds.FASIDIBA)
-            {
-                FaseDistinta faseDistinta = CreaFaseDistinta(riga, idDiba);
-                fasi.Add(faseDistinta);
-            }
-            return fasi;
-        }
+        //    List<FaseDistinta> fasi = new List<FaseDistinta>();
+        //    foreach (ArticoliDS.FASIDIBARow riga in ds.FASIDIBA)
+        //    {
+        //        FaseDistinta faseDistinta = CreaFaseDistinta(riga, idDiba);
+        //        fasi.Add(faseDistinta);
+        //    }
+        //    return fasi;
+        //}
 
-        private static FaseDistinta CreaFaseDistinta(ArticoliDS.FASIDIBARow riga, int idDiba)
-        {
-            if (riga == null) return null;
-            FaseDistinta fase = new FaseDistinta(idDiba);
-            fase.IdFaseDiba = riga.IDFASEDIBA;
-            fase.IdPadre = riga.IsIDPADRENull() ? 0 : riga.IDPADRE;
-            fase.IdDiba = riga.IDDIBA;
-            fase.Descrizione = riga.DESCRIZIONE;
-            fase.Anagrafica = riga.ANAGRAFICA;
-            fase.AreaProduzione = riga.AREAPRODUZIONE;
-            fase.Task = riga.TASK;
-            fase.SchedaProcesso = riga.IsSCHEDAPROCESSONull() ? string.Empty : riga.SCHEDAPROCESSO;
-            fase.CollegamentoCiclo = riga.IsCOLLEGAMENTOCICLONull() ? string.Empty : riga.COLLEGAMENTOCICLO;
-            fase.CollegamentoDiba = riga.IsCOLLEGAMENTODIBANull() ? string.Empty : riga.COLLEGAMENTODIBA;
-            fase.Quantita = riga.QUANTITA;
-            fase.PezziOrari = riga.IsPEZZIPERIODONull() ? 0 : riga.PEZZIPERIODO;
-            fase.Periodo = riga.IsPERIODONull() ? 0 : riga.PERIODO;
-            fase.UMQuantita = riga.IsUMQUANTITANull() ? string.Empty : riga.UMQUANTITA;
-            fase.Setup = riga.IsSETUPNull() ? 0 : riga.SETUP;
-            fase.Attesa = riga.IsATTESANull() ? 0 : riga.ATTESA;
-            fase.Movimentazione = riga.IsMOVIMENTAZIONENull() ? 0 : riga.MOVIMENTAZIONE;
-            fase.Cancellato = riga.CANCELLATO;
-            fase.DataModifica = riga.DATAMODIFICA;
-            fase.UtenteModifica = riga.UTENTEMODIFICA;
+        //private static FaseDistinta CreaFaseDistinta(ArticoliDS.FASIDIBARow riga, int idDiba)
+        //{
+        //    if (riga == null) return null;
+        //    FaseDistinta fase = new FaseDistinta(idDiba);
+        //    fase.IdFaseDiba = riga.IDFASEDIBA;
+        //    fase.IdPadre = riga.IsIDPADRENull() ? 0 : riga.IDPADRE;
+        //    fase.IdDiba = riga.IDDIBA;
+        //    fase.Descrizione = riga.DESCRIZIONE;
+        //    fase.Anagrafica = riga.ANAGRAFICA;
+        //    fase.AreaProduzione = riga.AREAPRODUZIONE;
+        //    fase.Task = riga.TASK;
+        //    fase.SchedaProcesso = riga.IsSCHEDAPROCESSONull() ? string.Empty : riga.SCHEDAPROCESSO;
+        //    fase.CollegamentoCiclo = riga.IsCOLLEGAMENTOCICLONull() ? string.Empty : riga.COLLEGAMENTOCICLO;
+        //    fase.CollegamentoDiba = riga.IsCOLLEGAMENTODIBANull() ? string.Empty : riga.COLLEGAMENTODIBA;
+        //    fase.Quantita = riga.QUANTITA;
+        //    fase.PezziOrari = riga.IsPEZZIPERIODONull() ? 0 : riga.PEZZIPERIODO;
+        //    fase.Periodo = riga.IsPERIODONull() ? 0 : riga.PERIODO;
+        //    fase.UMQuantita = riga.IsUMQUANTITANull() ? string.Empty : riga.UMQUANTITA;
+        //    fase.Setup = riga.IsSETUPNull() ? 0 : riga.SETUP;
+        //    fase.Attesa = riga.IsATTESANull() ? 0 : riga.ATTESA;
+        //    fase.Movimentazione = riga.IsMOVIMENTAZIONENull() ? 0 : riga.MOVIMENTAZIONE;
+        //    fase.Cancellato = riga.CANCELLATO;
+        //    fase.DataModifica = riga.DATAMODIFICA;
+        //    fase.UtenteModifica = riga.UTENTEMODIFICA;
 
-            return fase;
-        }
+        //    return fase;
+        //}
 
         public static FaseDistinta CreaFaseDistinta(ArticoliDS.DistinteBCTestataRow riga, ArticoliDS.CicliBCDettaglioRow ciclo, int idFaseDiba, int idPadre)
         {
@@ -187,89 +187,6 @@ namespace MPIntranet.Business
 
             return fase;
         }
-        public static void SalvaListaFasiDistinta(List<FaseDistinta> fasi, string utente)
-        {
-            if (fasi.Count() == 0) return;
-
-            int idDiba = fasi[0].IdDiba;
-            ArticoliDS ds = new ArticoliDS();
-            using (ArticoliBusiness bArticolo = new ArticoliBusiness())
-            {
-                bArticolo.FillFASIDIBA(ds, idDiba);
-
-                List<int> idFaseGriglia = fasi.Select(x => x.IdFaseDiba).ToList();
-                List<int> idFasiDaCencellare = ds.FASIDIBA.Where(x => !idFaseGriglia.Contains(x.IDFASEDIBA)).Select(x => x.IDFASEDIBA).ToList();
-                foreach (int idFaseDaCancellare in idFasiDaCencellare)
-                {
-                    ArticoliDS.FASIDIBARow faseDaCancellare = ds.FASIDIBA.Where(x => x.RowState != System.Data.DataRowState.Deleted && x.IDFASEDIBA == idFaseDaCancellare).FirstOrDefault();
-                    faseDaCancellare.CANCELLATO = true;
-                    faseDaCancellare.UTENTEMODIFICA = utente;
-                    faseDaCancellare.DATAMODIFICA = DateTime.Now;
-                }
-
-                foreach (FaseDistinta fd in fasi.OrderByDescending(x => x.IdPadre))
-                {
-                    ArticoliDS.FASIDIBARow faseDistinta = ds.FASIDIBA.Where(x => x.RowState != System.Data.DataRowState.Deleted && x.IDFASEDIBA == fd.IdFaseDiba).FirstOrDefault();
-
-                    if (faseDistinta == null || fd.IdFaseDiba < 0)
-                    {
-                        faseDistinta = ds.FASIDIBA.NewFASIDIBARow();
-                        faseDistinta.IDFASEDIBA = fd.IdFaseDiba;
-                        if (fd.IdPadre != 0)
-                            faseDistinta.IDPADRE = fd.IdPadre;
-                        faseDistinta.IDDIBA = fd.IdDiba;
-                        faseDistinta.DESCRIZIONE = fd.Descrizione;
-                        faseDistinta.ANAGRAFICA = fd.Anagrafica;
-                        faseDistinta.AREAPRODUZIONE = fd.AreaProduzione;
-                        faseDistinta.TASK = fd.Task;
-                        faseDistinta.SCHEDAPROCESSO = fd.SchedaProcesso;
-                        faseDistinta.COLLEGAMENTOCICLO = fd.CollegamentoCiclo;
-                        faseDistinta.COLLEGAMENTODIBA = fd.CollegamentoDiba;
-                        faseDistinta.QUANTITA = fd.Quantita;
-                        faseDistinta.PEZZIPERIODO = fd.PezziOrari;
-                        faseDistinta.PERIODO = fd.Periodo;
-                        faseDistinta.UMQUANTITA = fd.UMQuantita;
-                        faseDistinta.SETUP = fd.Setup;
-                        faseDistinta.ATTESA = fd.Attesa;
-                        faseDistinta.MOVIMENTAZIONE = fd.Movimentazione;
-                        faseDistinta.CANCELLATO = false;
-                        faseDistinta.DATAMODIFICA = DateTime.Now;
-                        faseDistinta.UTENTEMODIFICA = utente;
-
-                        ds.FASIDIBA.AddFASIDIBARow(faseDistinta);
-                    }
-                    else
-                    {
-                        if (fd.IdPadre != 0)
-                            faseDistinta.IDPADRE = fd.IdPadre;
-                        faseDistinta.DESCRIZIONE = fd.Descrizione;
-                        faseDistinta.ANAGRAFICA = fd.Anagrafica;
-                        faseDistinta.AREAPRODUZIONE = fd.AreaProduzione;
-                        faseDistinta.TASK = fd.Task;
-                        faseDistinta.SCHEDAPROCESSO = fd.SchedaProcesso;
-                        faseDistinta.COLLEGAMENTOCICLO = fd.CollegamentoCiclo;
-                        faseDistinta.COLLEGAMENTODIBA = fd.CollegamentoDiba;
-                        faseDistinta.QUANTITA = fd.Quantita;
-                        faseDistinta.PEZZIPERIODO = fd.PezziOrari;
-                        faseDistinta.PERIODO = fd.Periodo;
-                        faseDistinta.UMQUANTITA = fd.UMQuantita;
-                        faseDistinta.SETUP = fd.Setup;
-                        faseDistinta.ATTESA = fd.Attesa;
-                        faseDistinta.MOVIMENTAZIONE = fd.Movimentazione;
-                        faseDistinta.CANCELLATO = false;
-                        faseDistinta.DATAMODIFICA = DateTime.Now;
-                        faseDistinta.UTENTEMODIFICA = utente;
-                    }
-
-                }
-                DataRow[] drs = ds.FASIDIBA.OrderBy(x => x.IDFASEDIBA).ToArray();
-
-
-                bArticolo.UpdateFaseDistintaBaseTable(ds.FASIDIBA.TableName, drs);
-            }
-
-        }
-
 
     }
 }

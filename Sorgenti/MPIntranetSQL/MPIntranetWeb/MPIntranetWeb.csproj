@@ -136,6 +136,7 @@
     <Compile Include="Controllers\DocumentiController.cs" />
     <Compile Include="Controllers\ErrorPageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SchedeProcessoController.cs" />
     <Compile Include="DocumentoCaricatoModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -417,6 +418,7 @@
     <Content Include="Views\Articolo\CaricaArticoliModel.cshtml" />
     <Content Include="Views\Articolo\Scheda.cshtml" />
     <Content Include="Views\Documenti\CaricaDocumenti.cshtml" />
+    <Content Include="Views\SchedeProcesso\SPControlli.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

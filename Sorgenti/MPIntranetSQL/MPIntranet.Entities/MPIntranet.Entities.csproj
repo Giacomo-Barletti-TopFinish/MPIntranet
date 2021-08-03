@@ -67,6 +67,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="SchedeProcessoDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SchedeProcessoDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="SecurityDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -113,6 +118,17 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="SchedeProcessoDS.xsc">
+      <DependentUpon>SchedeProcessoDS.xsd</DependentUpon>
+    </None>
+    <None Include="SchedeProcessoDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SchedeProcessoDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="SchedeProcessoDS.xss">
+      <DependentUpon>SchedeProcessoDS.xsd</DependentUpon>
     </None>
     <None Include="SecurityDS.xsc">
       <DependentUpon>SecurityDS.xsd</DependentUpon>
