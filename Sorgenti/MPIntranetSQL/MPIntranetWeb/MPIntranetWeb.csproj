@@ -450,6 +450,10 @@
       <Project>{055D9B2D-98FD-417E-AB6A-970203561B5C}</Project>
       <Name>MPIntranet.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MPIntranet.Helpers\MPIntranet.Helpers.csproj">
+      <Project>{95B32CAE-042B-4BF3-984E-617B9397C8CE}</Project>
+      <Name>MPIntranet.Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MPIntranet.Models\MPIntranet.Models.csproj">
       <Project>{fecd5686-e3f2-4eff-ba4d-88a23a4ea08a}</Project>
       <Name>MPIntranet.Models</Name>

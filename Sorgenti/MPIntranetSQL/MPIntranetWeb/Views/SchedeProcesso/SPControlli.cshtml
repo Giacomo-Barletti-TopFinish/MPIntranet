@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-1">
                 @Html.Label("Codice")
                 @Html.TextBox("txtCodiceElemento", null, new { @class = "form-control input-sm ", @id = "txtCodiceElemento", @maxlength = "12" })
             </div>
@@ -48,12 +48,29 @@
                 @Html.TextBox("txtDescrizioneElemento", null, new { @class = "form-control input-sm ", @id = "txtDescrizioneElemento", @maxlength = "50" })
             </div>
             <div class="col-md-2" style="padding-top:20px">
-                <input type="button" onclick="SelezionaTutto()" class="btn btn-primary" value="Aggiungi" />
+                <input type="button" onclick="AggiungiElemento()" class="btn btn-primary" value="Aggiungi" />
             </div>
         </div>
-        <div class="row">
+        <div class="row col-lg-5">
             <div id="divListaElementi" class="content-searchSPC">
+                <table id="grigliaValori" class="table table-condensed table-hover">
+                    <thead>
+                        <tr>
+                            <th width="20%">Codice</th>
+                            <th width="50%">Descrizione</th>
+                            <th width="10%">Sequenza</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
             </div>
+        </div>
+        <div class="row col-lg-12">
+            <div class="col-md-2" style="padding-top:20px">
+                <input type="button" onclick="SalvaControllo()" class="btn btn-primary" value="Salva" />
+            </div>
+
         </div>
     }
 </div>
@@ -61,57 +78,128 @@
 <script language="javascript" type="text/javascript">
     $(function ()
     {
+        $("#ddlSPControlli").change(function ()
+        {
+
+            var selectedText = $(this).find("option:selected").text();
+            var idControllo = $(this).val();
+             var url = '@Url.Action("GetSPControllo", "SchedeProcesso")';
+            $.ajax({
+                url: url,
+                data: { IdSPControllo: idControllo},
+                cache: false,
+                type: "POST",
+                success: function (data)
+                {
+                    
+                    $('#txtCodice').val(data.Codice);
+                    $('#txtDescrizione').val(data.Descrizione);
+                    $('#ddlTipoControllo').val(data.Tipo);
+                    for (i = 0; i < data.Elementi.length; i++) {
+                        aggiungiRiga(data.Elementi[i].IdSPElementoLista, data.Elementi[i].Codice, data.Elementi[i].Descrizione, data.Elementi[i].Sequenza)
+                    }
+                    
+                },
+                error: function (response)
+                {
+                    svuotaCampi();
+                }
+            });
+        });
     });
 
+    function AggiungiElemento() {
+        var codice = $('#txtCodiceElemento').val();
+        var descrizione = $('#txtDescrizioneElemento').val();
 
-
-    function AggiungiNuovo()
-    {
-        debugger;
-        var idBrand = $('#ddlBrand').val();
-        var anagrafica = $('#txtAnagrafica').val();
-        var descrizione= $('#txtDescrizione').val();
-        var codiceCliente = $('#txtCodiceCliente').val();
-        var codiceColore = $('#txtCodiceColore').val();
+        codice = codice.toUpperCase();
+        descrizione = descrizione.toUpperCase();
+        $('#txtCodiceElemento').val(codice);
+        $('#txtDescrizioneElemento').val(descrizione);
 
         var esito = true;
         var messaggio = '';
-
-        if (idBrand =='-1' )
-        {
-            esito=false;
-            messaggio += MESSAGGIO_PUNTINO + " " + "Brand" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
-        }
 
         if (descrizione == '') {
             esito = false;
             messaggio += MESSAGGIO_PUNTINO + " " + "Descrizione" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
         }
+        if (codice == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Codice" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
 
-        if (codiceColore == null || codiceColore == '') codiceColore = '';
-        if (anagrafica == null || anagrafica == '') anagrafica = '';
-        if (codiceCliente == null || codiceCliente == '') codiceCliente = '';
+        $('#lblMessage').html(messaggio);
+        if (!esito) return;
+        $('#txtCodiceElemento').val('');
+        $('#txtDescrizioneElemento').val('');
 
+        aggiungiRiga(-1, codice, descrizione,'');
+
+    }
+
+    function aggiungiRiga(idelemento, codice, descrizione, sequenza) {
+        tr = "<tr>";
+
+        tr += '<input type="hidden" value ="' + idelemento + '" class="hdElemento" />';
+
+        tr += "<td width='20 %'>" + codice + "</td><td width='50 %'>" + descrizione + "</td><td width='10 %'><input type='text' id='sequenza' value='"+sequenza+"'/><td><td></td>";
+        tr += "</tr>";
+        $('#grigliaValori').append(tr);
+    }
+
+    function SalvaControllo()
+    {
+        var idControllo = $('#ddlSPControlli').val();
+        var codice = $('#txtCodice').val();
+        var descrizione = $('#txtDescrizione').val();
+        var tipo = $('#ddlTipoControllo').val();
+
+        codice = codice.toUpperCase();
+        descrizione = descrizione.toUpperCase();
+        $('#txtCodice').val(codice);
+        $('#txtDescrizione').val(descrizione);
+
+        var esito = true;
+        var messaggio = '';
+
+        if (idControllo == null) idControllo = -1;
+
+        if (descrizione == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Descrizione" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+        if (codice == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Codice" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+        if (tipo == '' || tipo == '-1') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Tipo controllo" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        var data = getTabellaValori();
+        if (tipo == '@MPIntranet.Business.SchedeProcesso.TipoSPControllo.LISTA' && data.length == 0) messaggio += MESSAGGIO_PUNTINO + " " + "inserire i valori nella tabella" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        var lista = JSON.stringify(data);
         $('#lblMessage').html(messaggio);
         if(!esito) return;
 
-
-        var url = '@Url.Action("SalvaArticolo", "Articolo")';
+        var url = '@Url.Action("AggiornaControllo", "SchedeProcesso")';
         $.ajax({
             url: url,
             data: {
-                idBrand: idBrand,
-                anagrafica: anagrafica,
-                descrizione: descrizione,
-                codiceCliente: codiceCliente,
-                codiceColore: codiceColore
+                IdSPControllo: idControllo,
+                Codice: codice,
+                Descrizione: descrizione,
+                Tipo: tipo,
+                Lista:lista
             },
             cache: false,
             type: "POST",
             success: function (data)
             {
                 $('#lblMessage').html(data);
-                if (data == 'Articolo creato correttamente')
+                if (data == 'Controllo salvato correttamente')
                     svuotaCampi();
             },
             error: function (response)
@@ -123,13 +211,35 @@
         });
     }
 
+    function getTabellaValori() {
+        
+        var data = [];
+        var trs = $('#grigliaValori >tbody >tr');
+        for (i = 0; i < trs.length; i++) {
+            var tr = trs[i];
+            var idElemento = $(".hdElemento", tr).val();
+
+            var td = $(tr).find('td')[0];
+            var codice = $(td).text().trim();
+
+            td = $(tr).find('td')[1];
+            var descrizione = $(td).text().trim();
+
+            td = $(tr).find('td')[2];
+            var sequenza = $($(td).children()[0]).val().trim();
+
+            var dato = { 'IDElemento': idElemento, 'Codice': codice, 'Descrizione': descrizione, 'Sequenza': sequenza };
+            data.push(dato);
+        }
+        return data;
+    }
+
     function svuotaCampi() {
 
-        $('#ddlBrand').val('');
-        $('#txtAnagrafica').val('');
+        $('#ddlSPControlli').val('-1');
+        $('#txtCodice').val('');
         $('#txtDescrizione').val('');
-        $('#txtCodiceCliente').val('');
-        $('#txtCodiceColore').val('');
+        $('#ddlTipoControllo').val('');
     }
 
 </script>

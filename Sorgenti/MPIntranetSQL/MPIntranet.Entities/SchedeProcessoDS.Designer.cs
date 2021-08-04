@@ -336,6 +336,14 @@ namespace MPIntranet.Entities {
             base.Tables.Add(this.tableSPSCHEDE);
             this.tableSPVALORISCHEDE = new SPVALORISCHEDEDataTable();
             base.Tables.Add(this.tableSPVALORISCHEDE);
+            global::System.Data.ForeignKeyConstraint fkc;
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_SPCONTROLLI_SPELEMENTILISTA", new global::System.Data.DataColumn[] {
+                        this.tableSPCONTROLLI.IDSPCONTROLLOColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSPELEMENTILISTA.IDSPCONTROLLOColumn});
+            this.tableSPELEMENTILISTA.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.None;
+            fkc.UpdateRule = global::System.Data.Rule.Cascade;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

@@ -1,6 +1,8 @@
 ﻿using MPIntranet.Business.SchedeProcesso;
 using MPIntranet.Entities;
+using MPIntranet.Helpers;
 using MPIntranet.Models.Common;
+using MPIntranet.Models.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,11 +22,16 @@ namespace MPIntranetWeb.Controllers
             return View();
         }
 
+        public ActionResult GetSPControllo(int IdSPControllo)
+        {
+            return Json(SPControllo.EstraiSPControllo(IdSPControllo));
+        }
+
         private List<MPIntranetListItem> CreaListaSPControlli()
         {
             List<SPControllo> controlli = SPControllo.EstraiListaSPControlli(true);
             List<MPIntranetListItem> controlliTiems = controlli.Select(x => new MPIntranetListItem(x.Descrizione, x.IdSPControllo.ToString())).ToList();
-            controlliTiems.Insert(0, new MPIntranetListItem(string.Empty, ElementiVuoti.SPControllo.ToString()));
+            controlliTiems.Insert(0, new MPIntranetListItem(" -- CREA NUOVO CONTROLLO -- ", ElementiVuoti.SPControllo.ToString()));
 
             return controlliTiems;
         }
@@ -41,6 +48,19 @@ namespace MPIntranetWeb.Controllers
             tipoControlli.Insert(0, new MPIntranetListItem(string.Empty, ElementiVuoti.TipoSPControllo.ToString()));
 
             return tipoControlli;
+        }
+
+        public ActionResult AggiornaControllo(int IdSPControllo, string Codice, string Descrizione, string Tipo, string Lista)
+        {
+            Codice = Codice.ToUpper();
+            Descrizione = Descrizione.ToUpper();
+            Tipo = Tipo.ToUpper();
+
+
+            ElementoLista[] elementiLista = JSonSerializer.Deserialize<ElementoLista[]>(Lista);
+
+            string messaggio = SPControllo.SalvaControllo(IdSPControllo, Codice, Descrizione, Tipo, 0, 0, 0, elementiLista, ConnectedUser);
+            return Content(messaggio);
         }
     }
 }

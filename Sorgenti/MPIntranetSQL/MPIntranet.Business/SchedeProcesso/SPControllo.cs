@@ -1,6 +1,7 @@
 ﻿using MPIntranet.DataAccess.SchedeProcesso;
 using MPIntranet.Entities;
 using MPIntranet.Models;
+using MPIntranet.Models.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,7 @@ namespace MPIntranet.Business.SchedeProcesso
         public double Massimo { get; set; }
         public double Default { get; set; }
 
+        public List<SPElementoLista> Elementi = new List<SPElementoLista>();
 
         public static List<SPControllo> EstraiListaSPControlli(bool soloNonCancellati)
         {
@@ -41,14 +43,14 @@ namespace MPIntranet.Business.SchedeProcesso
             List<SPControllo> controlli = new List<SPControllo>();
             foreach (SchedeProcessoDS.SPCONTROLLIRow riga in ds.SPCONTROLLI)
             {
-                SPControllo controllo = CreaControllo(riga);
+                SPControllo controllo = CreaControllo(riga,ds);
                 controlli.Add(controllo);
             }
             return controlli;
 
         }
 
-        private static SPControllo CreaControllo(SchedeProcessoDS.SPCONTROLLIRow riga)
+        private static SPControllo CreaControllo(SchedeProcessoDS.SPCONTROLLIRow riga,SchedeProcessoDS ds)
         {
             if (riga == null) return null;
             SPControllo controllo = new SPControllo();
@@ -65,6 +67,8 @@ namespace MPIntranet.Business.SchedeProcesso
             controllo.Descrizione = riga.DESCRIZIONE;
             controllo.UtenteModifica = riga.UTENTEMODIFICA;
 
+            controllo.Elementi = SPElementoLista.EstraiListaSPElementiLista(riga.IDSPCONTROLLO, true, ds);
+
             return controllo;
         }
 
@@ -79,7 +83,7 @@ namespace MPIntranet.Business.SchedeProcesso
             return lista.Where(x => x.IdSPControllo == idControllo).FirstOrDefault();
         }
 
-        public static string SalvaControllo(int idControllo, string codice, string descrizione, string Tipo, double Minimo, double Massimo, double Default, string codiceCliente, string codiceColore, string account)
+        public static string SalvaControllo(int idControllo, string codice, string descrizione, string tipo, double minimo, double massimo, double Default, ElementoLista[] lista, string account)
         {
 
             SchedeProcessoDS ds = new SchedeProcessoDS();
@@ -91,10 +95,11 @@ namespace MPIntranet.Business.SchedeProcesso
 
                 if (riga != null)
                 {
-                    riga.CODICE = codice;
-                    riga.DESCRIZIONE = descrizione;
-                    riga.MINIMO = Minimo;
-                    riga.MASSIMO = Massimo;
+                    riga.CODICE = codice.ToUpper();
+                    riga.DESCRIZIONE = descrizione.ToUpper();
+                    riga.TIPO = tipo.ToUpper();
+                    riga.MINIMO = minimo;
+                    riga.MASSIMO = massimo;
                     riga.DEFAULT = Default;
                     riga.DATAMODIFICA = DateTime.Now;
                     riga.UTENTEMODIFICA = account;
@@ -102,18 +107,33 @@ namespace MPIntranet.Business.SchedeProcesso
                 else
                 {
                     riga = ds.SPCONTROLLI.NewSPCONTROLLIRow();
-                    riga.CODICE = codice;
-                    riga.DESCRIZIONE = descrizione;
-                    riga.MINIMO = Minimo;
-                    riga.MASSIMO = Massimo;
+                    riga.CODICE = codice.ToUpper();
+                    riga.DESCRIZIONE = descrizione.ToUpper();
+                    riga.MINIMO = minimo;
+                    riga.TIPO = tipo.ToUpper();
+                    riga.MASSIMO = massimo;
                     riga.DEFAULT = Default;
                     riga.CANCELLATO = false;
                     riga.DATAMODIFICA = DateTime.Now;
-                    riga.UTENTEMODIFICA = account;
+                    riga.UTENTEMODIFICA = account.ToUpper();
                     ds.SPCONTROLLI.AddSPCONTROLLIRow(riga);
                 }
 
-                bScheda.UpdateTable(ds.SPCONTROLLI.TableName, ds);
+                if (tipo == TipoSPControllo.LISTA)
+                {
+                    foreach (ElementoLista elemento in lista)
+                    {
+                        int sequenza = 1;
+                        if (!string.IsNullOrEmpty(elemento.Sequenza))
+                            Int32.TryParse(elemento.Sequenza, out sequenza);
+                        SPElementoLista.SalvaElemento(elemento.IDElemento, riga.IDSPCONTROLLO, elemento.Codice, elemento.Descrizione, sequenza, account,ds);
+                    }
+                }
+
+                bScheda.UpdateTableSPControlli(ds);
+                bScheda.UpdateTable(ds.SPELEMENTILISTA.TableName, ds);
+
+
             }
             return "Controllo creato correttamente";
         }

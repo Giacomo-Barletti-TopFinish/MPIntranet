@@ -59,19 +59,21 @@ namespace DisegnaDiBa
                 esito = true;
                 sb.AppendLine("La descrizione è obbligatoria");
             }
-            if (ddlTipoDistinta.SelectedIndex==-1)
+            if (ddlTipoDistinta.SelectedIndex == -1)
             {
                 esito = true;
                 sb.AppendLine("Indicare il tipo di distinta");
             }
 
-            if(esito)
+            if (esito)
             {
                 lblMessage.Text = sb.ToString();
                 return;
             }
             TipoDistinta tipoDistinta = (TipoDistinta)ddlTipoDistinta.SelectedItem;
-            int versione = Int32.Parse(txtVersione.Text);
+            int versione = 1;
+            if (!Int32.TryParse(txtVersione.Text, out versione)) versione = 1;
+
             int idDiba = ElementiVuoti.DistintaBase;
             DistintaBase.CreaDistinta(Articolo.IdArticolo, tipoDistinta.IdTipoDiBa, versione, txtDescrizione.Text, false, Utente, out idDiba);
             IDDIBA_OUT = idDiba;
