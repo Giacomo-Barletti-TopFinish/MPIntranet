@@ -59,7 +59,7 @@
             <xs:sequence>
               <xs:element name="IDSPELEMENTO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnIDSPELEMENTO" msprop:Generator_ColumnPropNameInRow="IDSPELEMENTO" msprop:Generator_ColumnPropNameInTable="IDSPELEMENTOColumn" msprop:Generator_UserColumnName="IDSPELEMENTO" type="xs:int" />
               <xs:element name="IDSPMASTER" msprop:Generator_ColumnVarNameInTable="columnIDSPMASTER" msprop:Generator_ColumnPropNameInRow="IDSPMASTER" msprop:Generator_ColumnPropNameInTable="IDSPMASTERColumn" msprop:Generator_UserColumnName="IDSPMASTER" type="xs:int" />
-              <xs:element name="IDSPCONTROLLO" msprop:Generator_ColumnVarNameInTable="columnIDSPCONTROLLO" msprop:Generator_ColumnPropNameInRow="IDSPCONTROLLO" msprop:Generator_ColumnPropNameInTable="IDSPCONTROLLOColumn" msprop:Generator_UserColumnName="IDSPCONTROLLO" type="xs:int" />
+              <xs:element name="IDSPCONTROLLO" msprop:Generator_ColumnVarNameInTable="columnIDSPCONTROLLO" msprop:Generator_ColumnPropNameInRow="IDSPCONTROLLO" msprop:Generator_ColumnPropNameInTable="IDSPCONTROLLOColumn" msprop:Generator_UserColumnName="IDSPCONTROLLO" type="xs:int" minOccurs="0" />
               <xs:element name="SEQUENZA" msprop:Generator_ColumnVarNameInTable="columnSEQUENZA" msprop:Generator_ColumnPropNameInRow="SEQUENZA" msprop:Generator_ColumnPropNameInTable="SEQUENZAColumn" msprop:Generator_UserColumnName="SEQUENZA" type="xs:int" />
               <xs:element name="OBBLIGATORIO" msprop:Generator_ColumnVarNameInTable="columnOBBLIGATORIO" msprop:Generator_ColumnPropNameInRow="OBBLIGATORIO" msprop:Generator_ColumnPropNameInTable="OBBLIGATORIOColumn" msprop:Generator_UserColumnName="OBBLIGATORIO" type="xs:boolean" minOccurs="0" />
               <xs:element name="TIPOELEMENTO" msprop:Generator_ColumnVarNameInTable="columnTIPOELEMENTO" msprop:Generator_ColumnPropNameInRow="TIPOELEMENTO" msprop:Generator_ColumnPropNameInTable="TIPOELEMENTOColumn" msprop:Generator_UserColumnName="TIPOELEMENTO">
@@ -302,6 +302,10 @@
     <xs:keyref name="FK_SPCONTROLLI_SPELEMENTILISTA" refer="Constraint1" msdata:ConstraintOnly="true" msdata:DeleteRule="None">
       <xs:selector xpath=".//mstns:SPELEMENTILISTA" />
       <xs:field xpath="mstns:IDSPCONTROLLO" />
+    </xs:keyref>
+    <xs:keyref name="FK_SPMASTERS_SPELEMENTI" refer="SPMASTERS_Constraint1" msdata:ConstraintOnly="true" msdata:DeleteRule="None">
+      <xs:selector xpath=".//mstns:SPELEMENTI" />
+      <xs:field xpath="mstns:IDSPMASTER" />
     </xs:keyref>
   </xs:element>
 </xs:schema>

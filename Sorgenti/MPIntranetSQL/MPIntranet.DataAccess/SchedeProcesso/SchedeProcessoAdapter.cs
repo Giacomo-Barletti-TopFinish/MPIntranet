@@ -16,6 +16,19 @@ namespace MPIntranet.DataAccess.SchedeProcesso
         base(connection, transaction)
         { }
 
+        public void FillSPMaster(SchedeProcessoDS ds, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM SPMASTERS ";
+            if (soloNonCancellati)
+                select += "WHERE CANCELLATO = 0 ";
+
+            select += "ORDER BY CODICE";
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.SPMASTERS);
+            }
+        }
+
         public void FillSPControlli(SchedeProcessoDS ds, bool soloNonCancellati)
         {
             string select = @"SELECT * FROM SPCONTROLLI ";
@@ -28,7 +41,6 @@ namespace MPIntranet.DataAccess.SchedeProcesso
                 da.Fill(ds.SPCONTROLLI);
             }
         }
-
         public void GetControllo(SchedeProcessoDS ds, int idSPControllo)
         {
             string select = @"SELECT * FROM SPCONTROLLI WHERE IDSPCONTROLLO = $P<IDCONTROLLO>";
@@ -42,6 +54,48 @@ namespace MPIntranet.DataAccess.SchedeProcesso
             }
         }
 
+        public void GetSPMaster(SchedeProcessoDS ds, int idSPMaster)
+        {
+            string select = @"SELECT * FROM SPMASTERS WHERE IDSPMASTER = $P<IDSPMASTER>";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDSPMASTER", DbType.Int32, idSPMaster);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.SPMASTERS);
+            }
+        }
+
+        public void FillElementi(SchedeProcessoDS ds, int idSPMaster, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM SPELEMENTI WHERE IDSPMASTER = $P<IDSPMASTER>";
+            if (soloNonCancellati)
+                select += " AND CANCELLATO = 0 ";
+
+            select += " ORDER BY SEQUENZA";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDSPMASTER", DbType.Int32, idSPMaster);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.SPELEMENTI);
+            }
+        }
+
+        public void GetElemento(SchedeProcessoDS ds, int idSPElemento)
+        {
+            string select = @"SELECT * FROM SPELEMENTI WHERE IDSPELEMENTO = $P<IDSPELEMENTO>";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDSPELEMENTO", DbType.Int32, idSPElemento);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.SPELEMENTI);
+            }
+        }
         public void FillElementiLista(SchedeProcessoDS ds, int idSPControllo, bool soloNonCancellati)
         {
             string select = @"SELECT * FROM SPELEMENTILISTA WHERE IDSPCONTROLLO = $P<IDCONTROLLO>";
@@ -98,10 +152,49 @@ namespace MPIntranet.DataAccess.SchedeProcesso
                 }
             }
         }
+        public void UpdateTableSPMaster(SchedeProcessoDS ds)
+        {
+
+            string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", ds.SPMASTERS.TableName);
+
+            using (DbDataAdapter a = BuildDataAdapter(query))
+            {
+                InstallRowUpdatedHandler(a, UpdateSPMasterHander);
+
+                a.ContinueUpdateOnError = false;
+                DataTable dt = ds.SPMASTERS;
+                DbCommandBuilder cmd = BuildCommandBuilder(a);
+                a.AcceptChangesDuringFill = true;
+                a.UpdateCommand = cmd.GetUpdateCommand();
+                a.DeleteCommand = cmd.GetDeleteCommand();
+                a.InsertCommand = cmd.GetInsertCommand();
+
+                a.Update(dt);
+            }
+        }
+
+        private void UpdateSPMasterHander(object sender, RowUpdatedEventArgs e)
+        {
+            if ((e.Status == UpdateStatus.Continue) && (e.StatementType == StatementType.Insert))
+            {
+                SchedeProcessoDS.SPMASTERSRow row = (SchedeProcessoDS.SPMASTERSRow)e.Row;
+                SchedeProcessoDS.SPMASTERSDataTable dt = row.Table as SchedeProcessoDS.SPMASTERSDataTable;
+
+                bool isIdentityReadOnly = dt.IDSPMASTERColumn.ReadOnly;
+                dt.IDSPMASTERColumn.ReadOnly = false;
+                try
+                {
+                    row.IDSPMASTER = (int)RetrievePostUpdateID<decimal>(e.Command, row);
+                }
+                finally
+                {
+                    dt.IDSPMASTERColumn.ReadOnly = isIdentityReadOnly;
+                }
+            }
+        }
 
 
-
-        public void UpdateTableSPControlli( SchedeProcessoDS ds)
+        public void UpdateTableSPControlli(SchedeProcessoDS ds)
         {
 
             string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", ds.SPCONTROLLI.TableName);
@@ -112,13 +205,13 @@ namespace MPIntranet.DataAccess.SchedeProcesso
 
                 a.ContinueUpdateOnError = false;
                 DataTable dt = ds.SPCONTROLLI;
-                    DbCommandBuilder cmd = BuildCommandBuilder(a);
-                    a.AcceptChangesDuringFill = true;
-                    a.UpdateCommand = cmd.GetUpdateCommand();
-                    a.DeleteCommand = cmd.GetDeleteCommand();
-                    a.InsertCommand = cmd.GetInsertCommand();
+                DbCommandBuilder cmd = BuildCommandBuilder(a);
+                a.AcceptChangesDuringFill = true;
+                a.UpdateCommand = cmd.GetUpdateCommand();
+                a.DeleteCommand = cmd.GetDeleteCommand();
+                a.InsertCommand = cmd.GetInsertCommand();
 
-                    a.Update(dt);
+                a.Update(dt);
             }
         }
 

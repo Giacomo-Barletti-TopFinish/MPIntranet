@@ -13,25 +13,39 @@ namespace MPIntranetWeb.Controllers
 {
     public class SchedeProcessoController : ControllerBase
     {
+        public ActionResult SPMaster()
+        {
+            List<SPMasters> masters = SPMasters.EstraiListaSPMaster(true);
+            List<MPIntranetListItem> mItems = masters.Select(x => new MPIntranetListItem(x.Descrizione, x.IdSPMaster.ToString())).ToList();
+            mItems.Insert(0, new MPIntranetListItem(" -- CREA NUOVO MASTER -- ", ElementiVuoti.SPMaster.ToString()));
+            ViewData.Add("ddlSPMasters", mItems);
+
+            List<MPIntranetListItem> controlliItems = CreaListaSPControlli(" -- SELEZIONA UN CONTROLLO -- ");
+            ViewData.Add("ddlSPControlli", controlliItems);
+
+            return View();
+        }
         public ActionResult SPControlli()
         {
-            List<MPIntranetListItem> controlliItems = CreaListaSPControlli();
+            List<MPIntranetListItem> controlliItems = CreaListaSPControlli(" -- CREA NUOVO CONTROLLO -- ");
             ViewData.Add("ddlSPControlli", controlliItems);
             List<MPIntranetListItem> tipiControllo = CreaListaTipoControllo();
             ViewData.Add("ddlTipoControllo", tipiControllo);
             return View();
         }
-
         public ActionResult GetSPControllo(int IdSPControllo)
         {
             return Json(SPControllo.EstraiSPControllo(IdSPControllo));
         }
-
-        private List<MPIntranetListItem> CreaListaSPControlli()
+        public ActionResult GetSPMaster(int IdSPMaster)
+        {
+            return Json(SPMasters.EstraiSPMaster(IdSPMaster));
+        }
+        private List<MPIntranetListItem> CreaListaSPControlli(string etichetta)
         {
             List<SPControllo> controlli = SPControllo.EstraiListaSPControlli(true);
-            List<MPIntranetListItem> controlliTiems = controlli.Select(x => new MPIntranetListItem(x.Descrizione, x.IdSPControllo.ToString())).ToList();
-            controlliTiems.Insert(0, new MPIntranetListItem(" -- CREA NUOVO CONTROLLO -- ", ElementiVuoti.SPControllo.ToString()));
+            List<MPIntranetListItem> controlliTiems = controlli.Select(x => new MPIntranetListItem(x.ToString(), x.IdSPControllo.ToString())).ToList();
+            controlliTiems.Insert(0, new MPIntranetListItem(etichetta, ElementiVuoti.SPControllo.ToString()));
 
             return controlliTiems;
         }
@@ -60,6 +74,19 @@ namespace MPIntranetWeb.Controllers
             ElementoLista[] elementiLista = JSonSerializer.Deserialize<ElementoLista[]>(Lista);
 
             string messaggio = SPControllo.SalvaControllo(IdSPControllo, Codice, Descrizione, Tipo, 0, 0, 0, elementiLista, ConnectedUser);
+            return Content(messaggio);
+        }
+
+        public ActionResult AggiornaMaster(int IdSPMaster, string Codice, string Descrizione, string Task, string AreaProduzione, string Lista)
+        {
+            Codice = Codice.ToUpper();
+            Descrizione = Descrizione.ToUpper();
+            Task = Task.ToUpper();
+            AreaProduzione = AreaProduzione.ToUpper();
+
+            ElementoMaster[] elementiLista = JSonSerializer.Deserialize<ElementoMaster[]>(Lista);
+
+            string messaggio = SPMasters.SalvaMaster(IdSPMaster, Codice, Descrizione, AreaProduzione, Task, elementiLista, ConnectedUser);
             return Content(messaggio);
         }
     }

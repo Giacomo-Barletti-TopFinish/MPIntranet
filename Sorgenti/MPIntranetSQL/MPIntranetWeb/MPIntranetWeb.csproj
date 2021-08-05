@@ -419,6 +419,7 @@
     <Content Include="Views\Articolo\Scheda.cshtml" />
     <Content Include="Views\Documenti\CaricaDocumenti.cshtml" />
     <Content Include="Views\SchedeProcesso\SPControlli.cshtml" />
+    <Content Include="Views\SchedeProcesso\SPMaster.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

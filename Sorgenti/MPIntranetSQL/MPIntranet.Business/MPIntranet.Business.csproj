@@ -64,7 +64,9 @@
     <Compile Include="Item.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SchedeProcesso\SPControllo.cs" />
+    <Compile Include="SchedeProcesso\SPElemento.cs" />
     <Compile Include="SchedeProcesso\SPElementoLista.cs" />
+    <Compile Include="SchedeProcesso\SPMaster.cs" />
     <Compile Include="Task.cs" />
     <Compile Include="TaskArea.cs" />
     <Compile Include="TipoDistinta.cs" />

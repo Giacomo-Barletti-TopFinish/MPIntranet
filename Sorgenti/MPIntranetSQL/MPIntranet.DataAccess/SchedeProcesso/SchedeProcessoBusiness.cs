@@ -20,10 +20,37 @@ namespace MPIntranet.DataAccess.SchedeProcesso
         }
 
         [DataContext]
+        public void FillSPMaster(SchedeProcessoDS ds, bool soloNonCancellati)
+        {
+            SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
+            a.FillSPMaster(ds, soloNonCancellati);
+        }
+
+        [DataContext]
         public void GetControllo(SchedeProcessoDS ds, int idSPControllo)
         {
             SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
             a.GetControllo(ds, idSPControllo);
+        }
+
+        [DataContext]
+        public void GetSPMaster(SchedeProcessoDS ds, int idSPMaster)
+        {
+            SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
+            a.GetSPMaster(ds, idSPMaster);
+        }
+
+        [DataContext]
+        public void GetElemento(SchedeProcessoDS ds, int idSPElemento)
+        {
+            SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
+            a.GetElemento(ds, idSPElemento);
+        }
+        [DataContext]
+        public void FillElementi(SchedeProcessoDS ds, int idSPMaster, bool soloNonCancellati)
+        {
+            SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
+            a.FillElementi(ds, idSPMaster, soloNonCancellati);
         }
 
         [DataContext]
@@ -49,6 +76,12 @@ namespace MPIntranet.DataAccess.SchedeProcesso
         {
             SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
             a.UpdateTableSPControlli(ds);
+        }
+        [DataContext(true)]
+        public void UpdateTableSPMaster(SchedeProcessoDS ds)
+        {
+            SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
+            a.UpdateTableSPMaster(ds);
         }
     }
 }

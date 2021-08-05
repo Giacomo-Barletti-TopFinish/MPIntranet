@@ -337,6 +337,13 @@ namespace MPIntranet.Entities {
             this.tableSPVALORISCHEDE = new SPVALORISCHEDEDataTable();
             base.Tables.Add(this.tableSPVALORISCHEDE);
             global::System.Data.ForeignKeyConstraint fkc;
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_SPMASTERS_SPELEMENTI", new global::System.Data.DataColumn[] {
+                        this.tableSPMASTERS.IDSPMASTERColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSPELEMENTI.IDSPMASTERColumn});
+            this.tableSPELEMENTI.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.None;
+            fkc.UpdateRule = global::System.Data.Rule.Cascade;
             fkc = new global::System.Data.ForeignKeyConstraint("FK_SPCONTROLLI_SPELEMENTILISTA", new global::System.Data.DataColumn[] {
                         this.tableSPCONTROLLI.IDSPCONTROLLOColumn}, new global::System.Data.DataColumn[] {
                         this.tableSPELEMENTILISTA.IDSPCONTROLLOColumn});
@@ -1116,7 +1123,6 @@ namespace MPIntranet.Entities {
                 this.columnIDSPELEMENTO.ReadOnly = true;
                 this.columnIDSPELEMENTO.Unique = true;
                 this.columnIDSPMASTER.AllowDBNull = false;
-                this.columnIDSPCONTROLLO.AllowDBNull = false;
                 this.columnSEQUENZA.AllowDBNull = false;
                 this.columnTIPOELEMENTO.AllowDBNull = false;
                 this.columnTIPOELEMENTO.MaxLength = 12;
@@ -3082,7 +3088,12 @@ namespace MPIntranet.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public int IDSPCONTROLLO {
                 get {
-                    return ((int)(this[this.tableSPELEMENTI.IDSPCONTROLLOColumn]));
+                    try {
+                        return ((int)(this[this.tableSPELEMENTI.IDSPCONTROLLOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDSPCONTROLLO\' in table \'SPELEMENTI\' is DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableSPELEMENTI.IDSPCONTROLLOColumn] = value;
@@ -3174,6 +3185,18 @@ namespace MPIntranet.Entities {
                 set {
                     this[this.tableSPELEMENTI.UTENTEMODIFICAColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsIDSPCONTROLLONull() {
+                return this.IsNull(this.tableSPELEMENTI.IDSPCONTROLLOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetIDSPCONTROLLONull() {
+                this[this.tableSPELEMENTI.IDSPCONTROLLOColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
