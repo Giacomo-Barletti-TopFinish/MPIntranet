@@ -35,12 +35,12 @@
         <div class="row">
             <div class="col-md-2">
                 @Html.Label("Area produzione")
-                @Html.TextBox("txtAreaProduzione", null, new { @class = "form-control input-sm ", @id = "txtAreaProduzione", @maxlength = "20" })
+                @Html.DropDownList("ddlAreaProduzione", new SelectList(@ViewData["ddlAreaProduzione"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlAreaProduzione" })
 
             </div>
             <div class="col-md-4">
                 @Html.Label("Task")
-                @Html.TextBox("txtTask", null, new { @class = "form-control input-sm ", @id = "txtTask", @maxlength = "10" })
+                @Html.DropDownList("ddlTasks", Enumerable.Empty<SelectListItem>(), new { @class = "form-control input-sm", @id = "ddlTasks" })
             </div>
         </div>
         <div class="row">
@@ -103,8 +103,8 @@
                 {                   
                     $('#txtCodice').val(data.Codice);
                     $('#txtDescrizione').val(data.Descrizione);
-                    $('#txtTask').val(data.Task);
-                    $('#txtAreaProduzione').val(data.AreaProduzione);
+                    $('#ddlAreaProduzione').val(data.AreaProduzione);
+                    getTasks(data.AreaProduzione, data.Task);
 
                     for (i = 0; i < data.Elementi.length; i++) {
 
@@ -119,7 +119,40 @@
             });
         });
 
+        $(function () {
+
+            $("#ddlAreaProduzione").change(function () {
+                var selectedText = $(this).find("option:selected").text();
+                var selectedValue = $(this).val();
+                getTasks(selectedValue,'');
+            });
+        });
     });
+
+    function getTasks(AreaProduzione,selectedValue) {
+          var url = '@Url.Action("GetTasks", "SchedeProcesso")';
+                var procemessage = "<option value='0'> Attendere...</option>";
+                $('#ddlTasks').html(procemessage).show();
+                $.ajax({
+                    url: url,
+                    data: { AreaProduzione: AreaProduzione},
+                    cache: false,
+                    type: "POST",
+                    success: function (data) {
+                        var markup = '';
+                        for (var x = 0; x < data.length; x++) {
+                            markup += '<option value="' + data[x].Value + '">' + data[x].Text + '</option>';
+                        }
+                        $('#ddlTasks').html(markup).show();
+                        $('#ddlTasks').val(selectedValue);
+                    },
+                    error: function (response) {
+                        document.open();
+                        document.write(response.responseText);
+                        document.close();
+                    }
+                });
+    }
 
     function CancellaElemento(elemento) {
         $(elemento).closest('tr').remove();
@@ -205,17 +238,13 @@
         var idMaster = $('#ddlSPMasters').val();
         var codice = $('#txtCodice').val();
         var descrizione = $('#txtDescrizione').val();
-        var task = $('#txtTask').val();
-        var areaProduzione = $('#txtAreaProduzione').val();
+        var task = $('#ddlTasks').val();
+        var areaProduzione = $('#ddlAreaProduzione').val();
 
         codice = codice.toUpperCase();
         descrizione = descrizione.toUpperCase();
-        task = task.toUpperCase();
-        areaProduzione = areaProduzione.toUpperCase();
         $('#txtCodice').val(codice);
         $('#txtDescrizione').val(descrizione);
-        $('#txtTask').val(task);
-        $('#txtAreaProduzione').val(areaProduzione);
 
         var esito = true;
         var messaggio = '';
@@ -304,8 +333,8 @@
 
         $('#txtCodice').val('');
         $('#txtDescrizione').val('');
-        $('#txtTask').val('');
-        $('#txtAreaProduzione').val('');
+        $('#ddlTasks').val('');
+        $('#ddlAreaProduzione').val('');
         $('#grigliaValori >tbody').children().remove();
 
     }

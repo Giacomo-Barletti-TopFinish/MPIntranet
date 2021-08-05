@@ -1,4 +1,5 @@
-﻿using MPIntranet.Business.SchedeProcesso;
+﻿using MPIntranet.Business;
+using MPIntranet.Business.SchedeProcesso;
 using MPIntranet.Entities;
 using MPIntranet.Helpers;
 using MPIntranet.Models.Common;
@@ -23,6 +24,12 @@ namespace MPIntranetWeb.Controllers
             List<MPIntranetListItem> controlliItems = CreaListaSPControlli(" -- SELEZIONA UN CONTROLLO -- ");
             ViewData.Add("ddlSPControlli", controlliItems);
 
+            List<TaskArea> tasks = TaskArea.EstraiListaTaskArea(true);
+            List<string> AreaProduzione = tasks.OrderBy(x => x.AreaProduzione).Select(x => x.AreaProduzione.Trim()).Distinct().ToList();
+            List<MPIntranetListItem> areeProduzione = AreaProduzione.Select(x => new MPIntranetListItem(x, x)).ToList();
+            areeProduzione.Insert(0, new MPIntranetListItem(string.Empty, string.Empty));
+            ViewData.Add("ddlAreaProduzione", areeProduzione);
+
             return View();
         }
         public ActionResult SPControlli()
@@ -36,6 +43,14 @@ namespace MPIntranetWeb.Controllers
         public ActionResult GetSPControllo(int IdSPControllo)
         {
             return Json(SPControllo.EstraiSPControllo(IdSPControllo));
+        }
+
+        public ActionResult GetTasks(string AreaProduzione)
+        {
+            List<TaskArea> tasks = TaskArea.EstraiListaTaskArea(true);
+            List<string> t = tasks.Where(x => x.AreaProduzione == AreaProduzione).OrderBy(x => x.Task).Select(x => x.Task.Trim()).Distinct().ToList();
+            List<MPIntranetListItem> ts = t.Select(x => new MPIntranetListItem(x, x)).ToList();
+            return Json(ts);
         }
         public ActionResult GetSPMaster(int IdSPMaster)
         {

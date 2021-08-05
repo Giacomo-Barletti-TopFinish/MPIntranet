@@ -80,6 +80,7 @@ namespace MPIntranet.Business.SchedeProcesso
             using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
             {
                 bScheda.GetSPMaster(ds, idMaster);
+                bScheda.FillElementi(ds, idMaster, true);
 
                 SchedeProcessoDS.SPMASTERSRow riga = ds.SPMASTERS.Where(x => x.IDSPMASTER == idMaster).FirstOrDefault();
 
@@ -103,6 +104,20 @@ namespace MPIntranet.Business.SchedeProcesso
                     riga.DATAMODIFICA = DateTime.Now;
                     riga.UTENTEMODIFICA = account.ToUpper();
                     ds.SPMASTERS.AddSPMASTERSRow(riga);
+                }
+
+                if(idMaster>0)
+                {
+                    List<int> listaIdElementi = elementiLista.Where(x => x.IDElemento > 0).Select(x => x.IDElemento).Distinct().ToList();
+                    foreach (SchedeProcessoDS.SPELEMENTIRow elemento in ds.SPELEMENTI)
+                    {
+                        if (!listaIdElementi.Contains(elemento.IDSPELEMENTO))
+                        {
+                            elemento.CANCELLATO = true;
+                            elemento.DATAMODIFICA = DateTime.Now;
+                            elemento.UTENTEMODIFICA = account;
+                        }
+                    }
                 }
 
                 int sequenza = 0;

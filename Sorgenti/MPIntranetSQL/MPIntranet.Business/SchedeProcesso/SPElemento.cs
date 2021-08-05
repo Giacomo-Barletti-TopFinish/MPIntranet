@@ -73,7 +73,9 @@ namespace MPIntranet.Business.SchedeProcesso
         {
             using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
             {
-                bScheda.GetElemento(ds, idElemento);
+
+                if (!ds.SPELEMENTI.Any(x => x.IDSPELEMENTO == idElemento))
+                    bScheda.GetElemento(ds, idElemento);
 
                 SchedeProcessoDS.SPELEMENTIRow riga = ds.SPELEMENTI.Where(x => x.IDSPELEMENTO == idElemento).FirstOrDefault();
                 if (idElemento < 0 && riga != null)
