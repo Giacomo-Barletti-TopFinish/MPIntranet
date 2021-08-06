@@ -79,7 +79,7 @@ namespace MPIntranet.Business
             List<ArticoliDS.CicliBCCommentiRow> commenti = ds.CicliBCCommenti.Where(x => x.Routing_No_ == codiceCiclo && x.Operation_No_ == riga.Operation_No_).ToList();
             string nota = string.Empty;
             foreach (ArticoliDS.CicliBCCommentiRow commento in commenti)
-                nota += commento;
+                nota += commento.Comment;
 
             nota = nota.Trim();
             int posizione = nota.IndexOf(FaseCiclo.EtichettaSchedaProcesso);

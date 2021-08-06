@@ -20,6 +20,24 @@ namespace MPIntranet.Business
 
         public List<Componente> Componenti { get; set; }
 
+        public void Cancella(string utente)
+        {
+            ArticoliDS ds = new ArticoliDS();
+            using (ArticoliBusiness bArticolo = new ArticoliBusiness())
+            {
+                bArticolo.GetDistintaBase(ds, IdDiba);
+                ArticoliDS.DIBARow riga = ds.DIBA.Where(x => x.IDDIBA == IdDiba).FirstOrDefault();
+                if (riga != null)
+                {
+                    riga.CANCELLATO = true;
+                    riga.UTENTEMODIFICA = utente;
+                    riga.DATAMODIFICA = DateTime.Now;
+
+                }
+                bArticolo.UpdateTable(ds.DIBA.TableName, ds);
+            }
+        }
+
         public void CreaDaDistintaBC(DistintaBC distintaBC, int idDiba, string utente)
         {
             int idComponente = 0;

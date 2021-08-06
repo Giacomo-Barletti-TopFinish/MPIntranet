@@ -151,10 +151,10 @@ namespace MPIntranet.Business
                             rigaComponente.IDPADRE = componente.IdPadre;
                         rigaComponente.IDDIBA = componente.IdDiba;
                         rigaComponente.DESCRIZIONE = componente.Descrizione.ToUpper();
-                        rigaComponente.ANAGRAFICA = (string.IsNullOrEmpty(componente.Anagrafica))?string.Empty:componente.Anagrafica.ToUpper();
-                        rigaComponente.COLLEGAMENTODIBA = (string.IsNullOrEmpty(componente.CollegamentoDiBa)) ? string.Empty : componente.CollegamentoDiBa.ToUpper(); 
+                        rigaComponente.ANAGRAFICA = (string.IsNullOrEmpty(componente.Anagrafica)) ? string.Empty : componente.Anagrafica.ToUpper();
+                        rigaComponente.COLLEGAMENTODIBA = (string.IsNullOrEmpty(componente.CollegamentoDiBa)) ? string.Empty : componente.CollegamentoDiBa.ToUpper();
                         rigaComponente.QUANTITA = componente.Quantita;
-                        rigaComponente.UMQUANTITA = componente.UMQuantita.ToUpper();
+                        rigaComponente.UMQUANTITA = (string.IsNullOrEmpty(componente.UMQuantita)) ? string.Empty : componente.UMQuantita.ToUpper();
                         rigaComponente.CANCELLATO = false;
                         rigaComponente.DATAMODIFICA = DateTime.Now;
                         rigaComponente.UTENTEMODIFICA = utente;
@@ -169,7 +169,7 @@ namespace MPIntranet.Business
                         rigaComponente.ANAGRAFICA = (string.IsNullOrEmpty(componente.Anagrafica)) ? string.Empty : componente.Anagrafica.ToUpper();
                         rigaComponente.COLLEGAMENTODIBA = (string.IsNullOrEmpty(componente.CollegamentoDiBa)) ? string.Empty : componente.CollegamentoDiBa.ToUpper();
                         rigaComponente.QUANTITA = componente.Quantita;
-                        rigaComponente.UMQUANTITA = componente.UMQuantita.ToUpper();
+                        rigaComponente.UMQUANTITA = (string.IsNullOrEmpty(componente.UMQuantita)) ? string.Empty : componente.UMQuantita.ToUpper();
                         rigaComponente.CANCELLATO = false;
                         rigaComponente.DATAMODIFICA = DateTime.Now;
                         rigaComponente.UTENTEMODIFICA = utente;

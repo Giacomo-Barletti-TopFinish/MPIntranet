@@ -14,6 +14,18 @@ namespace MPIntranetWeb.Controllers
 {
     public class SchedeProcessoController : ControllerBase
     {
+        public ActionResult SchedaProcesso()
+        {
+
+            List<TaskArea> tasks = TaskArea.EstraiListaTaskArea(true);
+            List<string> AreaProduzione = tasks.OrderBy(x => x.AreaProduzione).Select(x => x.AreaProduzione.Trim()).Distinct().ToList();
+            List<MPIntranetListItem> areeProduzione = AreaProduzione.Select(x => new MPIntranetListItem(x, x)).ToList();
+            areeProduzione.Insert(0, new MPIntranetListItem(string.Empty, string.Empty));
+            ViewData.Add("ddlAreaProduzione", areeProduzione);
+
+            return View();
+        }
+
         public ActionResult SPMaster()
         {
             List<SPMasters> masters = SPMasters.EstraiListaSPMaster(true);
@@ -52,6 +64,14 @@ namespace MPIntranetWeb.Controllers
             List<MPIntranetListItem> ts = t.Select(x => new MPIntranetListItem(x, x)).ToList();
             return Json(ts);
         }
+
+        public ActionResult GetMaster(string AreaProduzione, string Task)
+        {
+            List<SPMasters> masters = SPMasters.EstraiListaSPMaster(AreaProduzione, Task, true);
+            List<MPIntranetListItem> mItems = masters.Select(x => new MPIntranetListItem(x.Descrizione, x.IdSPMaster.ToString())).ToList();
+            return Json(mItems);
+        }
+
         public ActionResult GetSPMaster(int IdSPMaster)
         {
             return Json(SPMasters.EstraiSPMaster(IdSPMaster));

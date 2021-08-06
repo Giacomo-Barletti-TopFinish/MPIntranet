@@ -1,0 +1,342 @@
+﻿@using MPIntranet.Models.Common
+@{
+    ViewBag.Title = "Schede Processo - Master";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+
+
+<div class="content-top">
+    <h2>Schede Processo - Master</h2>
+</div>
+<div class="content-scheda">
+    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(43))
+    {
+        <div class="row ">
+            <div class="col-md-3">
+                @Html.Label("Masters")
+                @Html.DropDownList("ddlSPMasters", new SelectList(@ViewData["ddlSPMasters"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlSPMasters" })
+            </div>
+        </div>
+        <div class="row">
+            <label class="text-red input-sm" id="lblMessage"></label>
+            <br />
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                @Html.Label("Codice")
+                @Html.TextBox("txtCodice", null, new { @class = "form-control input-sm ", @id = "txtCodice", @maxlength = "12" })
+
+            </div>
+            <div class="col-md-4">
+                @Html.Label("Descrizione")
+                @Html.TextBox("txtDescrizione", null, new { @class = "form-control input-sm ", @id = "txtDescrizione", @maxlength = "50" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                @Html.Label("Area produzione")
+                @Html.DropDownList("ddlAreaProduzione", new SelectList(@ViewData["ddlAreaProduzione"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlAreaProduzione" })
+
+            </div>
+            <div class="col-md-4">
+                @Html.Label("Task")
+                @Html.DropDownList("ddlTasks", Enumerable.Empty<SelectListItem>(), new { @class = "form-control input-sm", @id = "ddlTasks" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                @Html.Label("Controlli")
+                @Html.DropDownList("ddlSPControlli", new SelectList(@ViewData["ddlSPControlli"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlSPControlli" })
+            </div>
+            <div class="col-md-2" style="padding-top:20px">
+                <input type="button" onclick="AggiungiControllo()" class="btn btn-primary" value="Aggiungi controllo" />
+            </div>
+            <div class="col-md-3">
+                @Html.Label("Sezione")
+                @Html.TextBox("txtSezione", null, new { @class = "form-control input-sm ", @id = "txtSezione", @maxlength = "25" })
+            </div>
+            <div class="col-md-2" style="padding-top:20px">
+                <input type="button" onclick="AggiungiSezione()" class="btn btn-primary" value="Aggiungi sezione" />
+            </div>
+        </div>
+        <div class="row col-lg-8">
+            <div id="divListaElementi" class="content-searchSPC">
+                <table id="grigliaValori" class="table table-condensed table-hover">
+                    <thead>
+                        <tr>
+                            <th width="40%">Elemento</th>
+                            <th width="10%">Tipo</th>
+                            <th width="10%">Obbligatorio</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row col-lg-12">
+            <div class="col-md-2" style="padding-top:20px">
+                <input type="button" onclick="SalvaMaster()" class="btn btn-primary" value="Salva" />
+            </div>
+
+        </div>
+    }
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+        $("#ddlSPMasters").change(function ()
+        {
+
+            var selectedText = $(this).find("option:selected").text();
+            var idMaster = $(this).val();
+             var url = '@Url.Action("GetSPMaster", "SchedeProcesso")';
+            $.ajax({
+                url: url,
+                data: { IdSPMaster: idMaster},
+                cache: false,
+                type: "POST",
+                success: function (data)
+                {
+                    $('#txtCodice').val(data.Codice);
+                    $('#txtDescrizione').val(data.Descrizione);
+                    $('#ddlAreaProduzione').val(data.AreaProduzione);
+                    getTasks(data.AreaProduzione, data.Task);
+
+                    for (i = 0; i < data.Elementi.length; i++) {
+
+                        aggiungiRiga(data.Elementi[i].IdSPElemento, data.Elementi[i].IdSPControllo, data.Elementi[i].Testo, data.Elementi[i].Tipo, data.Elementi[i].Obbligatorio);
+                    }
+
+                },
+                error: function (response)
+                {
+                    svuotaCampi();
+                }
+            });
+        });
+
+        $(function () {
+
+            $("#ddlAreaProduzione").change(function () {
+                var selectedText = $(this).find("option:selected").text();
+                var selectedValue = $(this).val();
+                getTasks(selectedValue,'');
+            });
+        });
+    });
+
+    function getTasks(AreaProduzione,selectedValue) {
+          var url = '@Url.Action("GetTasks", "SchedeProcesso")';
+                var procemessage = "<option value='0'> Attendere...</option>";
+                $('#ddlTasks').html(procemessage).show();
+                $.ajax({
+                    url: url,
+                    data: { AreaProduzione: AreaProduzione},
+                    cache: false,
+                    type: "POST",
+                    success: function (data) {
+                        var markup = '';
+                        for (var x = 0; x < data.length; x++) {
+                            markup += '<option value="' + data[x].Value + '">' + data[x].Text + '</option>';
+                        }
+                        $('#ddlTasks').html(markup).show();
+                        $('#ddlTasks').val(selectedValue);
+                    },
+                    error: function (response) {
+                        document.open();
+                        document.write(response.responseText);
+                        document.close();
+                    }
+                });
+    }
+
+    function CancellaElemento(elemento) {
+        $(elemento).closest('tr').remove();
+    }
+
+    function CambioSequenzaElemento(elemento, direzione) {
+
+        var row = $(elemento).closest('tr');
+        var numeroRighe = $('#grigliaValori tr').length;
+        var index = $("tr").index(row);
+
+        if (direzione < 0) {
+            if (index == 1) return;
+            row.insertBefore(row.prev());
+        } else {
+            if (index == numeroRighe - 1) return;
+            row.insertAfter(row.next());
+        }
+    }
+
+    function AggiungiControllo() {
+
+        var idControllo = $('#ddlSPControlli').val();
+        var selectedText = $('#ddlSPControlli').find("option:selected").text();
+
+        var esito = true;
+        var messaggio = '';
+
+        if (idControllo == null || idControllo == -1 || idControllo == '') {
+            esito = false;
+            messaggio += "Selezionare un controllo" + "</br>";
+        }
+
+        $('#lblMessage').html(messaggio);
+        if (!esito) return;
+
+
+        aggiungiRiga(-1, idControllo, selectedText, '@MPIntranet.Business.SchedeProcesso.TipoSPElemento.CONTROLLO',false);
+
+    }
+
+    function AggiungiSezione() {
+
+        var sezione = $('#txtSezione').val();
+        sezione = sezione.toUpperCase();
+        $('#txtSezione').val(sezione);
+
+        var esito = true;
+        var messaggio = '';
+
+        if (sezione == null || sezione == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Sezione" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";        }
+
+        $('#lblMessage').html(messaggio);
+        if (!esito) return;
+
+
+        aggiungiRiga(-1, -1,sezione, '@MPIntranet.Business.SchedeProcesso.TipoSPElemento.SESSIONE',false);
+
+    }
+    function aggiungiRiga(idelemento, idcontrollo, testo, tipo, obbligatorio) {
+
+        tr = "<tr>";
+        tr += '<input type="hidden" value ="' + idelemento +'" class="hdElemento" />';
+        tr += '<input type="hidden" value ="' + idcontrollo + '" class="hdControllo" />';
+
+        tr += "<td width='40%'>" + testo + "</td><td width='10%'>" + tipo + "</td>";
+
+        tr += obbligatorio == true ? "<td width='10%'><input type='checkbox' id='checkbox' checked/></td>" : "<td width='10%'><input type='checkbox' id='checkbox' /></td>";
+
+        tr += '<td> <a onclick="CambioSequenzaElemento(this,+1, )" title="Sposta in basso"><i class="fa fa-fw fa-arrow-down"></i></a></td>';
+        tr += '<td><a onclick="CambioSequenzaElemento(this,-1)" title="Sposta in alto"><i class="fa fa-fw fa-arrow-up"></i></a></td>';
+
+
+        tr += '<td><a title="Cancella" onClick="CancellaElemento(this)"><i class="fa fa-fw fa-remove"></i></a></td>';
+        tr += "</tr>";
+        $('#grigliaValori').append(tr);
+    }
+
+    function SalvaMaster()
+    {
+        var idMaster = $('#ddlSPMasters').val();
+        var codice = $('#txtCodice').val();
+        var descrizione = $('#txtDescrizione').val();
+        var task = $('#ddlTasks').val();
+        var areaProduzione = $('#ddlAreaProduzione').val();
+
+        codice = codice.toUpperCase();
+        descrizione = descrizione.toUpperCase();
+        $('#txtCodice').val(codice);
+        $('#txtDescrizione').val(descrizione);
+
+        var esito = true;
+        var messaggio = '';
+
+        if (idMaster == null) idMaster = -1;
+
+        if (descrizione == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Descrizione" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+        if (codice == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Codice" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+        if (task == '' ) {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Task" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+        if (areaProduzione == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Area produzione" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+
+        var data = getTabellaValori();
+        if (data.length == 0) messaggio += MESSAGGIO_PUNTINO + " " + "la tabella dei controlli" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        var lista = JSON.stringify(data);
+        $('#lblMessage').html(messaggio);
+        if(!esito) return;
+
+        var url = '@Url.Action("AggiornaMaster", "SchedeProcesso")';
+        $.ajax({
+            url: url,
+            data: {
+                IdSPMaster: idMaster,
+                Codice: codice,
+                Descrizione: descrizione,
+                Task: task,
+                AreaProduzione: areaProduzione,
+                Lista:lista
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#lblMessage').html(data);
+                if (data == 'Controllo salvato correttamente')
+                    svuotaCampi();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function getTabellaValori() {
+
+        var data = [];
+        var trs = $('#grigliaValori >tbody >tr');
+        for (i = 0; i < trs.length; i++) {
+            var tr = trs[i];
+            var idElemento = $(".hdElemento", tr).val();
+            var idControllo = $(".hdControllo", tr).val();
+
+            var td = $(tr).find('td')[0];
+            var testo = $(td).text().trim();
+
+            td = $(tr).find('td')[1];
+            var tipo = $(td).text().trim();
+
+            var chk = $(tr).find('td')[2];
+            var obbligatorio = $($(chk).children()[0]).prop('checked');
+
+
+            var dato = { 'IDElemento': idElemento, 'IDControllo': idControllo, 'Testo': testo, 'Tipo': tipo, 'Obbligatorio': obbligatorio };
+            data.push(dato);
+        }
+        return data;
+    }
+
+    function svuotaCampi() {
+
+        $('#ddlSPMasters').val('-1');
+
+        $('#txtCodice').val('');
+        $('#txtDescrizione').val('');
+        $('#ddlTasks').val('');
+        $('#ddlAreaProduzione').val('');
+        $('#grigliaValori >tbody').children().remove();
+
+    }
+
+</script>

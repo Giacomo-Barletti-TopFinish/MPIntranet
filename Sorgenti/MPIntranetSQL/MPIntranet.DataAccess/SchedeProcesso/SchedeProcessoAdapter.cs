@@ -28,7 +28,23 @@ namespace MPIntranet.DataAccess.SchedeProcesso
                 da.Fill(ds.SPMASTERS);
             }
         }
+        public void FillSPMaster(string areaProduzione, string task, SchedeProcessoDS ds, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM SPMASTERS WHERE AREAPRODUZIONE=$P<AREAPRODUZIONE> AND TASK=$P<TASK> ";
+            if (soloNonCancellati)
+                select += "AND CANCELLATO = 0 ";
 
+            select += "ORDER BY CODICE";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("AREAPRODUZIONE", DbType.String, areaProduzione);
+            ps.AddParam("TASK", DbType.String, task);
+
+            using (DbDataAdapter da = BuildDataAdapter(select,ps))
+            {
+                da.Fill(ds.SPMASTERS);
+            }
+        }
         public void FillSPControlli(SchedeProcessoDS ds, bool soloNonCancellati)
         {
             string select = @"SELECT * FROM SPCONTROLLI ";

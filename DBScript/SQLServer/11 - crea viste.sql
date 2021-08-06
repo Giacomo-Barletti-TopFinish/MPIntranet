@@ -84,23 +84,23 @@ create OR ALTER view [dbo].[Items] as
 select * from [PROD].[dbo].[METALPLUS$Item$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
 GO
 
-create view [dbo].[CicliBCTestata] as
+create or alter view [dbo].[CicliBCTestata] as
 SELECT * FROM [PROD].[dbo].[METALPLUS$Routing Header$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
 go
 
-create view [dbo].[CicliBCDettaglio] as
+create or alter view [dbo].[CicliBCDettaglio] as
 SELECT * FROM [PROD].[dbo].[MetalPlus$Routing Line$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
 go
 
-create view [dbo].[CicliBCCommenti] as
+create or alter view [dbo].[CicliBCCommenti] as
 SELECT * FROM [PROD].[dbo].[MetalPlus$Routing Comment Line$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
 go
 
-create view [dbo].[DistinteBCTestata] as
+create or alter view [dbo].[DistinteBCTestata] as
 SELECT * FROM [PROD].[dbo].[MetalPlus$Production BOM Header$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
 go
 
-create view [dbo].[DistinteBCDettaglio] as
+create or alter view [dbo].[DistinteBCDettaglio] as
 SELECT * FROM  [PROD].[dbo].[MetalPlus$Production BOM Line$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
 go
 

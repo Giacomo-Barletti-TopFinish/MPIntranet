@@ -420,6 +420,7 @@
     <Content Include="Views\Documenti\CaricaDocumenti.cshtml" />
     <Content Include="Views\SchedeProcesso\SPControlli.cshtml" />
     <Content Include="Views\SchedeProcesso\SPMaster.cshtml" />
+    <Content Include="Views\SchedeProcesso\SchedaProcesso.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

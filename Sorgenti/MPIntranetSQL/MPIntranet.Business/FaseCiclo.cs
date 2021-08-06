@@ -198,16 +198,16 @@ namespace MPIntranet.Business
                         rigaFaseCiclo.IDCOMPONENTE = faseCiclo.IdComponente;
                         rigaFaseCiclo.IDDIBA = faseCiclo.IdDiba;
                         if (!string.IsNullOrEmpty(faseCiclo.Anagrafica))
-                            rigaFaseCiclo.ANAGRAFICA = faseCiclo.Anagrafica.ToUpper();
-                        rigaFaseCiclo.COLLEGAMENTODIBA = faseCiclo.CollegamentoDiBa.ToUpper();
+                            rigaFaseCiclo.ANAGRAFICA = string.IsNullOrEmpty(faseCiclo.Anagrafica) ? string.Empty : faseCiclo.Anagrafica.ToUpper();
+                        rigaFaseCiclo.COLLEGAMENTODIBA = string.IsNullOrEmpty(faseCiclo.CollegamentoDiBa) ? string.Empty : faseCiclo.CollegamentoDiBa.ToUpper();
                         rigaFaseCiclo.QUANTITA = faseCiclo.Quantita;
-                        rigaFaseCiclo.UMQUANTITA = faseCiclo.UMQuantita.ToUpper();
+                        rigaFaseCiclo.UMQUANTITA = string.IsNullOrEmpty(faseCiclo.UMQuantita) ? string.Empty : faseCiclo.UMQuantita.ToUpper();
                         rigaFaseCiclo.OPERAZIONE = faseCiclo.Operazione;
                         rigaFaseCiclo.DESCRIZIONE = string.IsNullOrEmpty(faseCiclo.Descrizione) ? string.Empty : faseCiclo.Descrizione.ToUpper();
-                        rigaFaseCiclo.AREAPRODUZIONE = faseCiclo.AreaProduzione.ToUpper();
-                        rigaFaseCiclo.TASK = faseCiclo.Task.ToUpper();
-                        rigaFaseCiclo.SCHEDAPROCESSO = faseCiclo.SchedaProcesso.ToUpper();
-                        rigaFaseCiclo.COLLEGAMENTOCICLO = faseCiclo.CollegamentoCiclo.ToUpper();
+                        rigaFaseCiclo.AREAPRODUZIONE = string.IsNullOrEmpty(faseCiclo.AreaProduzione) ? string.Empty : faseCiclo.AreaProduzione.ToUpper();
+                        rigaFaseCiclo.TASK = string.IsNullOrEmpty(faseCiclo.Task) ? string.Empty : faseCiclo.Task.ToUpper();
+                        rigaFaseCiclo.SCHEDAPROCESSO = string.IsNullOrEmpty(faseCiclo.SchedaProcesso) ? string.Empty : faseCiclo.SchedaProcesso.ToUpper();
+                        rigaFaseCiclo.COLLEGAMENTOCICLO = string.IsNullOrEmpty(faseCiclo.CollegamentoCiclo) ? string.Empty : faseCiclo.CollegamentoCiclo.ToUpper();
                         rigaFaseCiclo.PEZZIPERIODO = faseCiclo.PezziPeriodo;
                         rigaFaseCiclo.PERIODO = faseCiclo.Periodo;
                         rigaFaseCiclo.SETUP = faseCiclo.Setup;
@@ -222,16 +222,17 @@ namespace MPIntranet.Business
                     }
                     else
                     {
-                        rigaFaseCiclo.ANAGRAFICA = (string.IsNullOrEmpty(faseCiclo.Anagrafica))?string.Empty: faseCiclo.Anagrafica.ToUpper();
-                        rigaFaseCiclo.COLLEGAMENTODIBA = (string.IsNullOrEmpty(faseCiclo.CollegamentoDiBa)) ? string.Empty : faseCiclo.CollegamentoDiBa.ToUpper();
+                        if (!string.IsNullOrEmpty(faseCiclo.Anagrafica))
+                            rigaFaseCiclo.ANAGRAFICA = string.IsNullOrEmpty(faseCiclo.Anagrafica) ? string.Empty : faseCiclo.Anagrafica.ToUpper();
+                        rigaFaseCiclo.COLLEGAMENTODIBA = string.IsNullOrEmpty(faseCiclo.CollegamentoDiBa) ? string.Empty : faseCiclo.CollegamentoDiBa.ToUpper();
                         rigaFaseCiclo.QUANTITA = faseCiclo.Quantita;
-                        rigaFaseCiclo.UMQUANTITA = faseCiclo.UMQuantita.ToUpper();
+                        rigaFaseCiclo.UMQUANTITA = string.IsNullOrEmpty(faseCiclo.UMQuantita) ? string.Empty : faseCiclo.UMQuantita.ToUpper();
                         rigaFaseCiclo.OPERAZIONE = faseCiclo.Operazione;
-                        rigaFaseCiclo.DESCRIZIONE = faseCiclo.Descrizione.ToUpper();
-                        rigaFaseCiclo.AREAPRODUZIONE = faseCiclo.AreaProduzione.ToUpper();
-                        rigaFaseCiclo.TASK = faseCiclo.Task.ToUpper();
-                        rigaFaseCiclo.SCHEDAPROCESSO = faseCiclo.SchedaProcesso.ToUpper();
-                        rigaFaseCiclo.COLLEGAMENTOCICLO = (string.IsNullOrEmpty(faseCiclo.CollegamentoCiclo)) ? string.Empty : faseCiclo.CollegamentoCiclo.ToUpper();
+                        rigaFaseCiclo.DESCRIZIONE = string.IsNullOrEmpty(faseCiclo.Descrizione) ? string.Empty : faseCiclo.Descrizione.ToUpper();
+                        rigaFaseCiclo.AREAPRODUZIONE = string.IsNullOrEmpty(faseCiclo.AreaProduzione) ? string.Empty : faseCiclo.AreaProduzione.ToUpper();
+                        rigaFaseCiclo.TASK = string.IsNullOrEmpty(faseCiclo.Task) ? string.Empty : faseCiclo.Task.ToUpper();
+                        rigaFaseCiclo.SCHEDAPROCESSO = string.IsNullOrEmpty(faseCiclo.SchedaProcesso) ? string.Empty : faseCiclo.SchedaProcesso.ToUpper();
+                        rigaFaseCiclo.COLLEGAMENTOCICLO = string.IsNullOrEmpty(faseCiclo.CollegamentoCiclo) ? string.Empty : faseCiclo.CollegamentoCiclo.ToUpper();
                         rigaFaseCiclo.PEZZIPERIODO = faseCiclo.PezziPeriodo;
                         rigaFaseCiclo.PERIODO = faseCiclo.Periodo;
                         rigaFaseCiclo.SETUP = faseCiclo.Setup;

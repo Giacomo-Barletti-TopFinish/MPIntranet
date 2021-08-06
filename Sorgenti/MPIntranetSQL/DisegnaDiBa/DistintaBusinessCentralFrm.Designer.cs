@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCercaDiBa = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtArticolo = new System.Windows.Forms.TextBox();
@@ -54,8 +54,9 @@
             this.clmMovimentazioneFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmNotaFaseCiclo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvComponenti = new System.Windows.Forms.DataGridView();
+            this.tvDiBa = new System.Windows.Forms.TreeView();
+            this.btnSalvaDiBa = new System.Windows.Forms.Button();
             this.clmIdComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clmIdPadreComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmErroreComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmIdDibaComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmDescrizioneComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,8 +64,7 @@
             this.clmCollegamentoDibaComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmQuantitaComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmUMQuantitaComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tvDiBa = new System.Windows.Forms.TreeView();
-            this.btnSalvaDiBa = new System.Windows.Forms.Button();
+            this.clmIdPadreComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFasiCiclo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvComponenti)).BeginInit();
             this.SuspendLayout();
@@ -99,8 +99,7 @@
             // 
             // dgvFasiCiclo
             // 
-            this.dgvFasiCiclo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.dgvFasiCiclo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvFasiCiclo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFasiCiclo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -123,9 +122,9 @@
             this.clmAttesaFaseCiclo,
             this.clmMovimentazioneFaseCiclo,
             this.clmNotaFaseCiclo});
-            this.dgvFasiCiclo.Location = new System.Drawing.Point(719, 52);
+            this.dgvFasiCiclo.Location = new System.Drawing.Point(15, 461);
             this.dgvFasiCiclo.Name = "dgvFasiCiclo";
-            this.dgvFasiCiclo.Size = new System.Drawing.Size(960, 869);
+            this.dgvFasiCiclo.Size = new System.Drawing.Size(1667, 464);
             this.dgvFasiCiclo.TabIndex = 26;
             this.dgvFasiCiclo.VirtualMode = true;
             // 
@@ -151,8 +150,8 @@
             // clmErroreFaseCiclo
             // 
             this.clmErroreFaseCiclo.DataPropertyName = "Errore";
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Red;
-            this.clmErroreFaseCiclo.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Red;
+            this.clmErroreFaseCiclo.DefaultCellStyle = dataGridViewCellStyle5;
             this.clmErroreFaseCiclo.FillWeight = 130F;
             this.clmErroreFaseCiclo.HeaderText = "Errore";
             this.clmErroreFaseCiclo.Name = "clmErroreFaseCiclo";
@@ -282,24 +281,45 @@
             // dgvComponenti
             // 
             this.dgvComponenti.AllowUserToAddRows = false;
-            this.dgvComponenti.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dgvComponenti.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvComponenti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvComponenti.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.clmIdComponente,
-            this.clmIdPadreComponente,
             this.clmErroreComponente,
             this.clmIdDibaComponente,
             this.clmDescrizioneComponente,
             this.clmAnagraficaComponente,
             this.clmCollegamentoDibaComponente,
             this.clmQuantitaComponente,
-            this.clmUMQuantitaComponente});
-            this.dgvComponenti.Location = new System.Drawing.Point(15, 486);
+            this.clmUMQuantitaComponente,
+            this.clmIdPadreComponente});
+            this.dgvComponenti.Location = new System.Drawing.Point(719, 16);
             this.dgvComponenti.Name = "dgvComponenti";
-            this.dgvComponenti.Size = new System.Drawing.Size(684, 435);
+            this.dgvComponenti.Size = new System.Drawing.Size(963, 435);
             this.dgvComponenti.TabIndex = 27;
             this.dgvComponenti.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvComponenti_RowEnter);
             this.dgvComponenti.RowLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvComponenti_RowLeave);
+            // 
+            // tvDiBa
+            // 
+            this.tvDiBa.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.tvDiBa.Location = new System.Drawing.Point(15, 52);
+            this.tvDiBa.Name = "tvDiBa";
+            this.tvDiBa.Size = new System.Drawing.Size(684, 395);
+            this.tvDiBa.TabIndex = 25;
+            this.tvDiBa.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvDiBa_NodeMouseClick);
+            // 
+            // btnSalvaDiBa
+            // 
+            this.btnSalvaDiBa.Location = new System.Drawing.Point(424, 13);
+            this.btnSalvaDiBa.Name = "btnSalvaDiBa";
+            this.btnSalvaDiBa.Size = new System.Drawing.Size(94, 27);
+            this.btnSalvaDiBa.TabIndex = 28;
+            this.btnSalvaDiBa.Text = "Salva DiBa";
+            this.btnSalvaDiBa.UseVisualStyleBackColor = true;
+            this.btnSalvaDiBa.Click += new System.EventHandler(this.btnSalvaDiBa_Click);
             // 
             // clmIdComponente
             // 
@@ -307,21 +327,14 @@
             this.clmIdComponente.FillWeight = 50F;
             this.clmIdComponente.HeaderText = "ID";
             this.clmIdComponente.Name = "clmIdComponente";
+            this.clmIdComponente.Visible = false;
             this.clmIdComponente.Width = 50;
-            // 
-            // clmIdPadreComponente
-            // 
-            this.clmIdPadreComponente.DataPropertyName = "IdPadre";
-            this.clmIdPadreComponente.FillWeight = 50F;
-            this.clmIdPadreComponente.HeaderText = "IdPadre";
-            this.clmIdPadreComponente.Name = "clmIdPadreComponente";
-            this.clmIdPadreComponente.Width = 50;
             // 
             // clmErroreComponente
             // 
             this.clmErroreComponente.DataPropertyName = "Errore";
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Red;
-            this.clmErroreComponente.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Red;
+            this.clmErroreComponente.DefaultCellStyle = dataGridViewCellStyle6;
             this.clmErroreComponente.HeaderText = "Errore";
             this.clmErroreComponente.Name = "clmErroreComponente";
             this.clmErroreComponente.ReadOnly = true;
@@ -375,25 +388,13 @@
             this.clmUMQuantitaComponente.Name = "clmUMQuantitaComponente";
             this.clmUMQuantitaComponente.Width = 70;
             // 
-            // tvDiBa
+            // clmIdPadreComponente
             // 
-            this.tvDiBa.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.tvDiBa.Location = new System.Drawing.Point(15, 52);
-            this.tvDiBa.Name = "tvDiBa";
-            this.tvDiBa.Size = new System.Drawing.Size(684, 395);
-            this.tvDiBa.TabIndex = 25;
-            this.tvDiBa.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvDiBa_NodeMouseClick);
-            // 
-            // btnSalvaDiBa
-            // 
-            this.btnSalvaDiBa.Location = new System.Drawing.Point(424, 13);
-            this.btnSalvaDiBa.Name = "btnSalvaDiBa";
-            this.btnSalvaDiBa.Size = new System.Drawing.Size(94, 27);
-            this.btnSalvaDiBa.TabIndex = 28;
-            this.btnSalvaDiBa.Text = "Salva DiBa";
-            this.btnSalvaDiBa.UseVisualStyleBackColor = true;
-            this.btnSalvaDiBa.Click += new System.EventHandler(this.btnSalvaDiBa_Click);
+            this.clmIdPadreComponente.DataPropertyName = "IdPadre";
+            this.clmIdPadreComponente.FillWeight = 50F;
+            this.clmIdPadreComponente.HeaderText = "IdPadre";
+            this.clmIdPadreComponente.Name = "clmIdPadreComponente";
+            this.clmIdPadreComponente.Width = 50;
             // 
             // DistintaBusinessCentralFrm
             // 
@@ -423,15 +424,6 @@
         private System.Windows.Forms.TextBox txtArticolo;
         private System.Windows.Forms.DataGridView dgvFasiCiclo;
         private System.Windows.Forms.DataGridView dgvComponenti;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmIdComponente;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmIdPadreComponente;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmErroreComponente;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmIdDibaComponente;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmDescrizioneComponente;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmAnagraficaComponente;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmCollegamentoDibaComponente;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmQuantitaComponente;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clmUMQuantitaComponente;
         private System.Windows.Forms.TreeView tvDiBa;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmIDFaseCiclo;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmIdComponenteFaseCiclo;
@@ -453,5 +445,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clmMovimentazioneFaseCiclo;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmNotaFaseCiclo;
         private System.Windows.Forms.Button btnSalvaDiBa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmIdComponente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmErroreComponente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmIdDibaComponente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmDescrizioneComponente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmAnagraficaComponente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmCollegamentoDibaComponente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmQuantitaComponente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmUMQuantitaComponente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmIdPadreComponente;
     }
 }

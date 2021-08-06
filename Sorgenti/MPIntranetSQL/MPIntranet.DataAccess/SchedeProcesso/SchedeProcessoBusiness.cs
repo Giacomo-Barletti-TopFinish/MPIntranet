@@ -25,6 +25,12 @@ namespace MPIntranet.DataAccess.SchedeProcesso
             SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
             a.FillSPMaster(ds, soloNonCancellati);
         }
+        [DataContext]
+        public void FillSPMaster(string areaProduzione, string task, SchedeProcessoDS ds, bool soloNonCancellati)
+        {
+            SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
+            a.FillSPMaster(areaProduzione, task, ds, soloNonCancellati);
+        }
 
         [DataContext]
         public void GetControllo(SchedeProcessoDS ds, int idSPControllo)

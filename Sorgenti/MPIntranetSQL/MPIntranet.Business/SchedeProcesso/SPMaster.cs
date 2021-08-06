@@ -43,6 +43,25 @@ namespace MPIntranet.Business.SchedeProcesso
             return masters;
 
         }
+
+        public static List<SPMasters> EstraiListaSPMaster(string areaProduzione, string task, bool soloNonCancellati)
+        {
+            SchedeProcessoDS ds = new SchedeProcessoDS();
+            using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
+            {
+                bScheda.FillSPMaster(areaProduzione, task, ds, soloNonCancellati);
+            }
+
+            List<SPMasters> masters = new List<SPMasters>();
+            foreach (SchedeProcessoDS.SPMASTERSRow riga in ds.SPMASTERS)
+            {
+                SPMasters master = CreaMaster(riga, ds);
+                masters.Add(master);
+            }
+            return masters;
+
+        }
+
         public override string ToString()
         {
             return Codice + " - " + Descrizione;
@@ -106,7 +125,7 @@ namespace MPIntranet.Business.SchedeProcesso
                     ds.SPMASTERS.AddSPMASTERSRow(riga);
                 }
 
-                if(idMaster>0)
+                if (idMaster > 0)
                 {
                     List<int> listaIdElementi = elementiLista.Where(x => x.IDElemento > 0).Select(x => x.IDElemento).Distinct().ToList();
                     foreach (SchedeProcessoDS.SPELEMENTIRow elemento in ds.SPELEMENTI)

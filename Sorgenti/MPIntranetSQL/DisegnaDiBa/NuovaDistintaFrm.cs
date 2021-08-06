@@ -39,13 +39,7 @@ namespace DisegnaDiBa
             List<DistintaBase> distinte = DistintaBase.EstraiListaDistinteBase(Articolo.IdArticolo);
 
             distinte = distinte.Where(x => x.TipoDistinta.IdTipoDiBa == tipoDistinta.IdTipoDiBa).ToList();
-            if (distinte.Count > 0)
-            {
-                int versione = distinte.Max(x => x.Versione);
-                txtVersione.Text = (versione++).ToString();
-            }
-            else
-                txtVersione.Text = "1";
+            txtVersione.Text = (distinte.Count() + 1).ToString();
         }
 
         private void btnCreaDistinta_Click(object sender, EventArgs e)

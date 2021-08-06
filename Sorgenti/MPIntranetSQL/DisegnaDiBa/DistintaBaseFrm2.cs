@@ -192,8 +192,8 @@ namespace DisegnaDiBa
 
         private void creaAlbero()
         {
-            if (_distinta == null) return;
             tvDiBa.Nodes.Clear();
+            if (_distinta == null) return;
             if (_distinta.Componenti.Count() == 0)
                 tvDiBa.Nodes.Add(creaNodo(null));
             else
@@ -245,6 +245,11 @@ namespace DisegnaDiBa
         }
         private void popolaCampi()
         {
+
+            txtDescrizioneDiba.Text = string.Empty;
+            txtVersioneDiba.Text = string.Empty;
+            txtTipoDiba.Text = string.Empty;
+
             if (_distinta == null) return;
             this.Text = string.Format("{0} {1} {2}", _distinta.Articolo.ToString(), _distinta.TipoDistinta, _distinta.Versione);
             txtDescrizioneDiba.Text = _distinta.Descrizione;
@@ -268,6 +273,10 @@ namespace DisegnaDiBa
             {
                 Cursor.Current = Cursors.WaitCursor;
                 _distinta = form.DistintaSelezionata;
+
+                if (_distinta == null)
+                    MessageBox.Show("Nessuna distinta selezionata", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
                 popolaCampi();
                 creaAlbero();
                 PopolaGrigliaComponenti();
@@ -455,7 +464,12 @@ namespace DisegnaDiBa
 
         private void PopolaGrigliaComponenti()
         {
-            if (_distinta == null) return;
+            if (_distinta == null)
+            {
+                dgvComponenti.DataSource = null;
+                dgvComponenti.Update();
+                return;
+            }
             dgvComponenti.AutoGenerateColumns = false;
             BindingList<Componente> bindingList = new BindingList<Componente>(_distinta.Componenti);
             sourceComponenti = new BindingSource(bindingList, null);
@@ -582,7 +596,7 @@ namespace DisegnaDiBa
         {
             if (e.RowIndex < 0) return;
             if (tvDiBa.Nodes.Count <= 0) return;
-
+            if (dgvComponenti.Rows[e.RowIndex].Cells[clmIdComponente.Index].Value == null) return;
             int idComponente = (int)dgvComponenti.Rows[e.RowIndex].Cells[clmIdComponente.Index].Value;
             _idComponenteSelezionato = idComponente;
 
@@ -615,7 +629,15 @@ namespace DisegnaDiBa
                 if (!string.IsNullOrEmpty((string)dgvComponenti.Rows[e.RowIndex].Cells[clmAnagraficaComponente.Index].Value))
                 {
                     string anagrafica = (string)dgvComponenti.Rows[e.RowIndex].Cells[clmAnagraficaComponente.Index].Value;
-                    dgvComponenti.Rows[e.RowIndex].Cells[clmAnagraficaComponente.Index].Value = anagrafica.ToUpper();
+                    anagrafica = anagrafica.ToUpper();
+                    if (string.IsNullOrEmpty(anagrafica)) return;
+                    int posizione = anagrafica.IndexOf(separatoreAutocomplete);
+                    anagrafica = anagrafica.Substring(0, posizione);
+                    dgvComponenti.Rows[e.RowIndex].Cells[clmAnagraficaComponente.Index].Value = anagrafica;
+
+                    Item item = _items.Where(x => x.Anagrafica == anagrafica).FirstOrDefault();
+                    if (item != null) dgvComponenti.Rows[e.RowIndex].Cells[clmUMQuantitaComponente.Index].Value = item.UM;
+
                 }
                 if (!string.IsNullOrEmpty((string)dgvComponenti.Rows[e.RowIndex].Cells[clmDescrizioneComponente.Index].Value))
                 {
@@ -756,11 +778,8 @@ namespace DisegnaDiBa
                     string anagrafica = (dgvFasiCiclo.Rows[e.RowIndex].Cells[clmAnagraficaFaseCiclo.Index].Value as string);
                     if (string.IsNullOrEmpty(anagrafica)) return;
                     int posizione = anagrafica.IndexOf(separatoreAutocomplete);
-                    if (posizione >= 19)
-                    {
                         anagrafica = anagrafica.Substring(0, posizione);
                         dgvFasiCiclo.Rows[e.RowIndex].Cells[clmAnagraficaFaseCiclo.Index].Value = anagrafica;
-                    }
 
                     Item item = _items.Where(x => x.Anagrafica == anagrafica).FirstOrDefault();
                     if (item != null) dgvFasiCiclo.Rows[e.RowIndex].Cells[clmUMQuantitaFaseCiclo.Index].Value = item.UM;
@@ -936,6 +955,19 @@ namespace DisegnaDiBa
             MessageBox.Show(this, "Formato del dato sbagliato", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             e.ThrowException = false;
             e.Cancel = false;
+
+        }
+
+        private void toolCancellaDiBa_Click(object sender, EventArgs e)
+        {
+            if (_distinta == null) return;
+            _distinta.Cancella(_utenteConnesso);
+            _distinta = null;
+            popolaCampi();
+            creaAlbero();
+            PopolaGrigliaComponenti();
+            PopolaGrigliaFasi(null);
+
 
         }
     }
