@@ -7,7 +7,7 @@
     <div class="row">
         @if (elemento.Tipo == TipoSPElemento.SESSIONE)
         {
-            <h3>@elemento.Testo</h3>
+            <h3 style="background-color:lightgray">@elemento.Testo</h3>
         }
         else
         {
@@ -22,14 +22,30 @@
                     }
                 case TipoSPControllo.DATA:
                     {
+                        <div class="col-lg-3"><label>@elemento.Controllo.Descrizione</label></div>
+                        <div class="col-lg-6"><input type="date" id="@elemento.IdSPElemento.ToString()" /></div>
                         break;
                     }
                 case TipoSPControllo.LISTA:
                     {
+
+                        <div class="col-lg-3"><label>@elemento.Controllo.Descrizione</label></div>
+                        <div class="col-lg-6">
+                            <select id="@elemento.IdSPElemento.ToString()">
+                                <option value=""></option>
+                                @foreach (SPElementoLista listItem in elemento.Controllo.Elementi)
+                                {
+                                    <option value="@listItem.Codice">@listItem.Descrizione</option>
+                                }
+                            </select>
+                        </div>
                         break;
                     }
                 case TipoSPControllo.NUMERO:
                     {
+                        <div class="col-lg-3"><label>@elemento.Controllo.Descrizione</label></div>
+                        <div class="col-lg-6"><input type="number" id="@elemento.IdSPElemento.ToString()" /></div>
+
                         break;
                     }
                 case TipoSPControllo.TESTO:

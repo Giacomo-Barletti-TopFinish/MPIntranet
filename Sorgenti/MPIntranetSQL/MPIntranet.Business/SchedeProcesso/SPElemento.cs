@@ -96,6 +96,7 @@ namespace MPIntranet.Business.SchedeProcesso
                     riga.TIPOELEMENTO = tipo;
                     if (tipo == TipoSPElemento.CONTROLLO)
                         riga.IDSPCONTROLLO = idControllo;
+                    riga.TESTO = testo;
                     riga.SEQUENZA = sequenza;
                     riga.DATAMODIFICA = DateTime.Now;
                     riga.UTENTEMODIFICA = account;
@@ -106,6 +107,7 @@ namespace MPIntranet.Business.SchedeProcesso
                     riga.IDSPMASTER = idSPMaster;
                     riga.IDSPELEMENTO = idElemento;
                     riga.OBBLIGATORIO = obbligatorio;
+                    riga.TESTO = testo;
                     riga.TIPOELEMENTO = tipo;
                     if (tipo == TipoSPElemento.CONTROLLO)
                         riga.IDSPCONTROLLO = idControllo;

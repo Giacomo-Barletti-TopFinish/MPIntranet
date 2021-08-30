@@ -54,7 +54,13 @@
                 </div>
             </div>
             <div class="col-lg-3">
-                <img style="height:auto; max-height:320px; max-width:100%; display: block; margin: auto;" src="">
+                <div class="row col-lg-12">
+                    <img style="height:auto; max-height:320px; max-width:100%; display: block; margin: auto;" src="">
+                </div>
+                <div class="row">
+                    <input type="file" id="files" name="files" />
+                    <input type="button" id="Upload" value="Upload" class="btn btn-primary" />
+                </div>
             </div>
         </div>
         <div class="row">
@@ -93,6 +99,40 @@
             var selectedValue = $(this).val();
             var task = $('#ddlTasks').val();
             getSchedaProcesso(selectedValue);
+        });
+
+        $('#Upload').click(function () {
+
+            var fileUpload = $("#files").get(0);
+            var files = fileUpload.files;
+
+            // Create  a FormData object
+            var fileData = new FormData();
+
+            // if there are multiple files , loop through each files
+            for (var i = 0; i < files.length; i++) {
+                fileData.append(files[i].name, files[i]);
+            }
+
+            // Adding more keys/values here if need
+            fileData.append('Test', "Test Object values");
+
+            var url = '@Url.Action("UploadFile", "SchedeProcesso")';
+
+            $.ajax({
+                url: url,
+                type: "POST", //as we will be posting files and other method POST is used
+                processData: false, //remember to set processData and ContentType to false, otherwise you may get an error
+                contentType: false,
+                data: fileData,
+                success: function (result) {
+                    alert(result);
+                },
+                error: function (err) {
+                    alert(err.statusText);
+                }
+            });
+
         });
     });
 

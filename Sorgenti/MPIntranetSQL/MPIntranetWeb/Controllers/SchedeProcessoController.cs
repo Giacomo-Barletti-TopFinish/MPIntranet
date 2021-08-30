@@ -6,6 +6,7 @@ using MPIntranet.Models.Common;
 using MPIntranet.Models.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -78,6 +79,32 @@ namespace MPIntranetWeb.Controllers
             return PartialView("SchedaProcessoPartial", spMaster);
         }
 
+        public ActionResult UploadFile()
+        {
+            if (Request.Files.Count > 0)
+            {
+                var files = Request.Files;
+                string st = Request.Form[0];
+                //iterating through multiple file collection   
+                foreach (string str in files)
+                {
+                    HttpPostedFileBase file = Request.Files[str] as HttpPostedFileBase;
+                    //Checking file is available to save.  
+                    if (file != null)
+                    {
+                        var InputFileName = Path.GetFileName(file.FileName);
+                        byte[] data = new byte[file.InputStream.Length];
+                        file.InputStream.Read(data, 0, file.ContentLength);
+                    }
+
+                }
+                return Json("File Uploaded Successfully!");
+            }
+            else
+            {
+                return Json("No files to upload");
+            }
+        }
         public ActionResult GetSPMaster(int IdSPMaster)
         {
             return Json(SPMasters.EstraiSPMaster(IdSPMaster));
@@ -114,7 +141,7 @@ namespace MPIntranetWeb.Controllers
 
             ElementoLista[] elementiLista = JSonSerializer.Deserialize<ElementoLista[]>(Lista);
 
-            string messaggio = SPControllo.SalvaControllo(IdSPControllo, Codice, Descrizione, Tipo, 0, 0, 0, elementiLista, ConnectedUser);
+            string messaggio = SPControllo.SalvaControllo(IdSPControllo, Codice, Descrizione, Tipo, 0, 0, 0, elementiLista, ConnectedUser.ToUpper());
             return Content(messaggio);
         }
 
@@ -127,7 +154,7 @@ namespace MPIntranetWeb.Controllers
 
             ElementoMaster[] elementiLista = JSonSerializer.Deserialize<ElementoMaster[]>(Lista);
 
-            string messaggio = SPMasters.SalvaMaster(IdSPMaster, Codice, Descrizione, AreaProduzione, Task, elementiLista, ConnectedUser);
+            string messaggio = SPMasters.SalvaMaster(IdSPMaster, Codice, Descrizione, AreaProduzione, Task, elementiLista, ConnectedUser.ToUpper());
             return Content(messaggio);
         }
     }
