@@ -421,6 +421,7 @@
     <Content Include="Views\SchedeProcesso\SPControlli.cshtml" />
     <Content Include="Views\SchedeProcesso\SPMaster.cshtml" />
     <Content Include="Views\SchedeProcesso\SchedaProcesso.cshtml" />
+    <Content Include="Views\SchedeProcesso\SchedaProcessoPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

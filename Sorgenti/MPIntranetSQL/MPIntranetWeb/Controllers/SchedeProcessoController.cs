@@ -72,6 +72,12 @@ namespace MPIntranetWeb.Controllers
             return Json(mItems);
         }
 
+        public ActionResult GetSchedaProcesso(int Master)
+        {
+            SPMasters spMaster = SPMasters.EstraiSPMaster(Master);
+            return PartialView("SchedaProcessoPartial", spMaster);
+        }
+
         public ActionResult GetSPMaster(int IdSPMaster)
         {
             return Json(SPMasters.EstraiSPMaster(IdSPMaster));

@@ -1,0 +1,46 @@
+﻿@using MPIntranet.Business.SchedeProcesso
+@model SPMasters
+
+<div>
+    @foreach (SPElemento elemento in Model.Elementi)
+    {
+    <div class="row">
+        @if (elemento.Tipo == TipoSPElemento.SESSIONE)
+        {
+            <h3>@elemento.Testo</h3>
+        }
+        else
+        {
+            switch (elemento.Controllo.Tipo)
+            {
+                case TipoSPControllo.CHECKBOX:
+                    {
+                        <div class="col-lg-3"><label>@elemento.Controllo.Descrizione</label></div>
+                        <div class="col-lg-6"><input type="checkbox" id="@elemento.IdSPElemento.ToString()" /></div>
+
+                        break;
+                    }
+                case TipoSPControllo.DATA:
+                    {
+                        break;
+                    }
+                case TipoSPControllo.LISTA:
+                    {
+                        break;
+                    }
+                case TipoSPControllo.NUMERO:
+                    {
+                        break;
+                    }
+                case TipoSPControllo.TESTO:
+                    {
+                        <div class="col-lg-3"><label>@elemento.Controllo.Descrizione</label></div>
+                        <div class="col-lg-6"><input type="text" id="@elemento.IdSPElemento.ToString()" /></div>
+                        break;
+                    }
+
+            }
+        }
+    </div>
+    }
+    </div>

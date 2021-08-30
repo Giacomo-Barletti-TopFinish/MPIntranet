@@ -13,11 +13,11 @@ namespace MPIntranet.Business.SchedeProcesso
 
     public class TipoSPControllo
     {
-        public static readonly string NUMERO = "NUMERO";
-        public static readonly string TESTO = "TESTO";
-        public static readonly string DATA = "DATA";
-        public static readonly string CHECKBOX = "CHECKBOX";
-        public static readonly string LISTA = "LISTA";
+        public const string NUMERO = "NUMERO";
+        public const string TESTO = "TESTO";
+        public const string DATA = "DATA";
+        public const string CHECKBOX = "CHECKBOX";
+        public const string LISTA = "LISTA";
     }
 
     public class SPControllo : BaseModel
@@ -43,14 +43,14 @@ namespace MPIntranet.Business.SchedeProcesso
             List<SPControllo> controlli = new List<SPControllo>();
             foreach (SchedeProcessoDS.SPCONTROLLIRow riga in ds.SPCONTROLLI)
             {
-                SPControllo controllo = CreaControllo(riga,ds);
+                SPControllo controllo = CreaControllo(riga, ds);
                 controlli.Add(controllo);
             }
             return controlli;
 
         }
 
-        private static SPControllo CreaControllo(SchedeProcessoDS.SPCONTROLLIRow riga,SchedeProcessoDS ds)
+        private static SPControllo CreaControllo(SchedeProcessoDS.SPCONTROLLIRow riga, SchedeProcessoDS ds)
         {
             if (riga == null) return null;
             SPControllo controllo = new SPControllo();
@@ -126,7 +126,7 @@ namespace MPIntranet.Business.SchedeProcesso
                         int sequenza = 1;
                         if (!string.IsNullOrEmpty(elemento.Sequenza))
                             Int32.TryParse(elemento.Sequenza, out sequenza);
-                        SPElementoLista.SalvaElemento(elemento.IDElemento, riga.IDSPCONTROLLO, elemento.Codice, elemento.Descrizione, sequenza, account,ds);
+                        SPElementoLista.SalvaElemento(elemento.IDElemento, riga.IDSPCONTROLLO, elemento.Codice, elemento.Descrizione, sequenza, account, ds);
                     }
                 }
 

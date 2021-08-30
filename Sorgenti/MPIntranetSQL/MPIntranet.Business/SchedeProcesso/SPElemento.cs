@@ -19,6 +19,7 @@ namespace MPIntranet.Business.SchedeProcesso
         public string Tipo { get; set; }
         public int Sequenza { get; set; }
         public bool Obbligatorio { get; set; }
+        public SPControllo Controllo { get; set; }
 
 
         public static List<SPElemento> EstraiListaSPElementi(int IdSPMaster, bool soloNonCancellati, SchedeProcessoDS ds)
@@ -41,20 +42,23 @@ namespace MPIntranet.Business.SchedeProcesso
         private static SPElemento CreaElemento(SchedeProcessoDS.SPELEMENTIRow riga)
         {
             if (riga == null) return null;
-            SPElemento controllo = new SPElemento();
-            controllo.IdSPElemento = riga.IDSPELEMENTO;
-            controllo.IdSPControllo = riga.IsIDSPCONTROLLONull() ? -1 : riga.IDSPCONTROLLO;
-            controllo.IdSPMaster = riga.IDSPMASTER;
-            controllo.Testo = riga.IsTESTONull() ? string.Empty : riga.TESTO;
-            controllo.Tipo = riga.TIPOELEMENTO;
-            controllo.Sequenza = riga.SEQUENZA;
-            controllo.Obbligatorio = riga.IsOBBLIGATORIONull() ? false : riga.OBBLIGATORIO;
+            SPElemento elemento = new SPElemento();
+            elemento.IdSPElemento = riga.IDSPELEMENTO;
+            elemento.IdSPControllo = riga.IsIDSPCONTROLLONull() ? -1 : riga.IDSPCONTROLLO;
+            elemento.IdSPMaster = riga.IDSPMASTER;
+            elemento.Testo = riga.IsTESTONull() ? string.Empty : riga.TESTO;
+            elemento.Tipo = riga.TIPOELEMENTO;
+            elemento.Sequenza = riga.SEQUENZA;
+            elemento.Obbligatorio = riga.IsOBBLIGATORIONull() ? false : riga.OBBLIGATORIO;
 
-            controllo.Cancellato = riga.CANCELLATO;
-            controllo.DataModifica = riga.DATAMODIFICA;
-            controllo.UtenteModifica = riga.UTENTEMODIFICA;
+            elemento.Cancellato = riga.CANCELLATO;
+            elemento.DataModifica = riga.DATAMODIFICA;
+            elemento.UtenteModifica = riga.UTENTEMODIFICA;
 
-            return controllo;
+            if (elemento.Tipo == TipoSPElemento.CONTROLLO)
+                elemento.Controllo = SPControllo.EstraiSPControllo(elemento.IdSPControllo);
+
+            return elemento;
         }
 
         public override string ToString()
