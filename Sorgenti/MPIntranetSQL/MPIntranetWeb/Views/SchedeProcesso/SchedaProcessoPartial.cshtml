@@ -16,21 +16,21 @@
                 case TipoSPControllo.CHECKBOX:
                     {
                         <div class="col-lg-3"><label>@elemento.Controllo.Descrizione</label></div>
-                        <div class="col-lg-6"><input type="checkbox" id="@elemento.IdSPElemento.ToString()" /></div>
+                        <div class="col-lg-4"><input type="checkbox" id="@elemento.IdSPElemento.ToString()" /></div>
 
                         break;
                     }
                 case TipoSPControllo.DATA:
                     {
                         <div class="col-lg-3"><label>@elemento.Controllo.Descrizione</label></div>
-                        <div class="col-lg-6"><input type="date" id="@elemento.IdSPElemento.ToString()" /></div>
+                        <div class="col-lg-4"><input type="date" id="@elemento.IdSPElemento.ToString()" /></div>
                         break;
                     }
                 case TipoSPControllo.LISTA:
                     {
 
                         <div class="col-lg-3"><label>@elemento.Controllo.Descrizione</label></div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-4">
                             <select id="@elemento.IdSPElemento.ToString()">
                                 <option value=""></option>
                                 @foreach (SPElementoLista listItem in elemento.Controllo.Elementi)
@@ -44,14 +44,14 @@
                 case TipoSPControllo.NUMERO:
                     {
                         <div class="col-lg-3"><label>@elemento.Controllo.Descrizione</label></div>
-                        <div class="col-lg-6"><input type="number" id="@elemento.IdSPElemento.ToString()" /></div>
+                        <div class="col-lg-4"><input type="number" id="@elemento.IdSPElemento.ToString()" /></div>
 
                         break;
                     }
                 case TipoSPControllo.TESTO:
                     {
                         <div class="col-lg-3"><label>@elemento.Controllo.Descrizione</label></div>
-                        <div class="col-lg-6"><input type="text" id="@elemento.IdSPElemento.ToString()" /></div>
+                        <div class="col-lg-4"><input type="text" id="@elemento.IdSPElemento.ToString()" /></div>
                         break;
                     }
 

@@ -75,6 +75,9 @@ namespace MPIntranet.Business.SchedeProcesso
 
         public static void SalvaElemento(int idElemento, int idControllo, int idSPMaster, string testo, string tipo, bool obbligatorio, int sequenza, string account, SchedeProcessoDS ds)
         {
+
+            if (testo.Length > 25) testo = testo.Substring(0, 25);
+
             using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
             {
 
