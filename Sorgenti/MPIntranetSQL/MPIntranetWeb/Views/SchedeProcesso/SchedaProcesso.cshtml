@@ -33,7 +33,7 @@
                 <div class="row">
                     <div class="col-md-3">
                         @Html.Label("Brand")
-                        @Html.TextBox("txtBrand", null, new { @class = "form-control input-sm ", @id = "txtBrand", @maxlength = "12" })
+                        @Html.DropDownList("ddlBrand", new SelectList(@ViewData["ddlBrand"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlBrand" })
                     </div>
 
                     <div class="col-md-2">
@@ -72,7 +72,7 @@
 
         <div class="row col-lg-12">
             <div class="col-md-2" style="padding-top:20px">
-                <input type="button" onclick="SalvaMaster()" class="btn btn-primary" value="Salva" />
+                <input type="button" onclick="SalvaScheda()" class="btn btn-primary" value="Salva" />
             </div>
 
         </div>
@@ -202,97 +202,26 @@
                     }
                 });
     }
-    function CancellaElemento(elemento) {
-        $(elemento).closest('tr').remove();
-    }
-
-    function CambioSequenzaElemento(elemento, direzione) {
-
-        var row = $(elemento).closest('tr');
-        var numeroRighe = $('#grigliaValori tr').length;
-        var index = $("tr").index(row);
-
-        if (direzione < 0) {
-            if (index == 1) return;
-            row.insertBefore(row.prev());
-        } else {
-            if (index == numeroRighe - 1) return;
-            row.insertAfter(row.next());
-        }
-    }
-
-    function AggiungiControllo() {
-
-        var idControllo = $('#ddlSPControlli').val();
-        var selectedText = $('#ddlSPControlli').find("option:selected").text();
-
-        var esito = true;
-        var messaggio = '';
-
-        if (idControllo == null || idControllo == -1 || idControllo == '') {
-            esito = false;
-            messaggio += "Selezionare un controllo" + "</br>";
-        }
-
-        $('#lblMessage').html(messaggio);
-        if (!esito) return;
-
-
-        aggiungiRiga(-1, idControllo, selectedText, '@MPIntranet.Business.SchedeProcesso.TipoSPElemento.CONTROLLO',false);
-
-    }
-
-    function AggiungiSezione() {
-
-        var sezione = $('#txtSezione').val();
-        sezione = sezione.toUpperCase();
-        $('#txtSezione').val(sezione);
-
-        var esito = true;
-        var messaggio = '';
-
-        if (sezione == null || sezione == '') {
-            esito = false;
-            messaggio += MESSAGGIO_PUNTINO + " " + "Sezione" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";        }
-
-        $('#lblMessage').html(messaggio);
-        if (!esito) return;
-
-
-        aggiungiRiga(-1, -1,sezione, '@MPIntranet.Business.SchedeProcesso.TipoSPElemento.SESSIONE',false);
-
-    }
-    function aggiungiRiga(idelemento, idcontrollo, testo, tipo, obbligatorio) {
-
-        tr = "<tr>";
-        tr += '<input type="hidden" value ="' + idelemento +'" class="hdElemento" />';
-        tr += '<input type="hidden" value ="' + idcontrollo + '" class="hdControllo" />';
-
-        tr += "<td width='40%'>" + testo + "</td><td width='10%'>" + tipo + "</td>";
-
-        tr += obbligatorio == true ? "<td width='10%'><input type='checkbox' id='checkbox' checked/></td>" : "<td width='10%'><input type='checkbox' id='checkbox' /></td>";
-
-        tr += '<td> <a onclick="CambioSequenzaElemento(this,+1, )" title="Sposta in basso"><i class="fa fa-fw fa-arrow-down"></i></a></td>';
-        tr += '<td><a onclick="CambioSequenzaElemento(this,-1)" title="Sposta in alto"><i class="fa fa-fw fa-arrow-up"></i></a></td>';
-
-
-        tr += '<td><a title="Cancella" onClick="CancellaElemento(this)"><i class="fa fa-fw fa-remove"></i></a></td>';
-        tr += "</tr>";
-        $('#grigliaValori').append(tr);
-    }
-
-    function SalvaMaster()
+   
+    function SalvaScheda()
     {
+        debugger;
         var idMaster = $('#ddlSPMasters').val();
         var codice = $('#txtCodice').val();
         var descrizione = $('#txtDescrizione').val();
         var task = $('#ddlTasks').val();
         var areaProduzione = $('#ddlAreaProduzione').val();
+        var idSPScheda = -1;
+
+        var brand = $('#ddlBrand').val();
+        var anagrafica = $('#txtAnagrafica').val();
 
         codice = codice.toUpperCase();
         descrizione = descrizione.toUpperCase();
+        anagrafica = anagrafica.toUpperCase();
         $('#txtCodice').val(codice);
         $('#txtDescrizione').val(descrizione);
+        $('#txtAnagrafica').val(anagrafica);
 
         var esito = true;
         var messaggio = '';
@@ -315,23 +244,35 @@
             esito = false;
             messaggio += MESSAGGIO_PUNTINO + " " + "Area produzione" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
         }
+        if (idMaster == -1) {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Master" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+        if (brand == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Brand" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
+        if (anagrafica == '') {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "Anagrafica" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
+        }
 
-        var data = getTabellaValori();
-        if (data.length == 0) messaggio += MESSAGGIO_PUNTINO + " " + "la tabella dei controlli" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
-        var lista = JSON.stringify(data);
         $('#lblMessage').html(messaggio);
         if(!esito) return;
 
-        var url = '@Url.Action("AggiornaMaster", "SchedeProcesso")';
+
+        var url = '@Url.Action("AggiornaSchedaProcesso", "SchedeProcesso")';
         $.ajax({
             url: url,
             data: {
+                IdSPScheda:idSPScheda,
                 IdSPMaster: idMaster,
                 Codice: codice,
                 Descrizione: descrizione,
                 Task: task,
                 AreaProduzione: areaProduzione,
-                Lista:lista
+                Brand: brand,
+                Anagrafica: anagrafica
             },
             cache: false,
             type: "POST",
@@ -350,41 +291,7 @@
         });
     }
 
-    function getTabellaValori() {
-
-        var data = [];
-        var trs = $('#grigliaValori >tbody >tr');
-        for (i = 0; i < trs.length; i++) {
-            var tr = trs[i];
-            var idElemento = $(".hdElemento", tr).val();
-            var idControllo = $(".hdControllo", tr).val();
-
-            var td = $(tr).find('td')[0];
-            var testo = $(td).text().trim();
-
-            td = $(tr).find('td')[1];
-            var tipo = $(td).text().trim();
-
-            var chk = $(tr).find('td')[2];
-            var obbligatorio = $($(chk).children()[0]).prop('checked');
-
-
-            var dato = { 'IDElemento': idElemento, 'IDControllo': idControllo, 'Testo': testo, 'Tipo': tipo, 'Obbligatorio': obbligatorio };
-            data.push(dato);
-        }
-        return data;
-    }
-
-    function svuotaCampi() {
-
-        $('#ddlSPMasters').val('-1');
-
-        $('#txtCodice').val('');
-        $('#txtDescrizione').val('');
-        $('#ddlTasks').val('');
-        $('#ddlAreaProduzione').val('');
-        $('#grigliaValori >tbody').children().remove();
-
-    }
+  
+   
 
 </script>

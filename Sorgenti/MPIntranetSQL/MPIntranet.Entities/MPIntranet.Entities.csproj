@@ -67,6 +67,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="SchedeProcessoDS.cs">
+      <DependentUpon>SchedeProcessoDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="SchedeProcessoDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

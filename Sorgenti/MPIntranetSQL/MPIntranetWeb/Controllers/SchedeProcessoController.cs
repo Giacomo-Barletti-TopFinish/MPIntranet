@@ -24,6 +24,12 @@ namespace MPIntranetWeb.Controllers
             areeProduzione.Insert(0, new MPIntranetListItem(string.Empty, string.Empty));
             ViewData.Add("ddlAreaProduzione", areeProduzione);
 
+
+            List<Brand> listaBrands = Brand.EstraiListaBrand(true);
+            List<MPIntranetListItem> brands = listaBrands.Select(x => new MPIntranetListItem(x.Descrizione, x.IdBrand.ToString())).ToList();
+            brands.Insert(0, new MPIntranetListItem(string.Empty, ElementiVuoti.Brand.ToString()));
+            ViewData.Add("ddlBrand", brands);
+
             return View();
         }
 
@@ -157,5 +163,18 @@ namespace MPIntranetWeb.Controllers
             string messaggio = SPMasters.SalvaMaster(IdSPMaster, Codice, Descrizione, AreaProduzione, Task, elementiLista, ConnectedUser.ToUpper());
             return Content(messaggio);
         }
+        public ActionResult AggiornaSchedaProcesso(int IdSPScheda, int IdSPMaster, string Codice, string Descrizione, string Task, string AreaProduzione, int Brand, string Anagrafica)
+        {
+            Codice = Codice.ToUpper();
+            Descrizione = Descrizione.ToUpper();
+            Task = Task.ToUpper();
+            AreaProduzione = AreaProduzione.ToUpper();
+            Anagrafica = Anagrafica.ToUpper();
+
+            string messaggio = SpScheda.SalvaScheda(IdSPScheda, IdSPMaster, Anagrafica, Brand, Codice, Descrizione, AreaProduzione, Task, ConnectedUser.ToUpper());
+            return Content(messaggio);
+
+        }
+
     }
 }

@@ -40,11 +40,54 @@ namespace MPIntranet.DataAccess.SchedeProcesso
             ps.AddParam("AREAPRODUZIONE", DbType.String, areaProduzione);
             ps.AddParam("TASK", DbType.String, task);
 
-            using (DbDataAdapter da = BuildDataAdapter(select,ps))
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
                 da.Fill(ds.SPMASTERS);
             }
         }
+        public void FillSPScheda(SchedeProcessoDS ds, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM SPSCHEDE ";
+            if (soloNonCancellati)
+                select += "WHERE CANCELLATO = 0 ";
+
+            select += "ORDER BY CODICE";
+            using (DbDataAdapter da = BuildDataAdapter(select))
+            {
+                da.Fill(ds.SPSCHEDE);
+            }
+        }
+
+        public void FillSPScheda(string IDSPMaster, SchedeProcessoDS ds, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM SPSCHEDE WHERE IDSPMASTER=$P<IDSPMASTER> ";
+            if (soloNonCancellati)
+                select += "AND CANCELLATO = 0 ";
+
+            select += "ORDER BY CODICE";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDSPMASTER", DbType.String, IDSPMaster);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.SPSCHEDE);
+            }
+        }
+
+        public void GetSPScheda(int IDScheda, SchedeProcessoDS ds)
+        {
+            string select = @"SELECT * FROM SPSCHEDE WHERE IDSPSCHEDA=$P<IDSPSCHEDA> ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDSPSCHEDA", DbType.Int32, IDScheda);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.SPSCHEDE);
+            }
+        }
+
         public void FillSPControlli(SchedeProcessoDS ds, bool soloNonCancellati)
         {
             string select = @"SELECT * FROM SPCONTROLLI ";
@@ -168,6 +211,47 @@ namespace MPIntranet.DataAccess.SchedeProcesso
                 }
             }
         }
+
+        public void UpdateTableSPScheda(SchedeProcessoDS ds)
+        {
+            string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", ds.SPSCHEDE.TableName);
+
+            using (DbDataAdapter a = BuildDataAdapter(query))
+            {
+                InstallRowUpdatedHandler(a, UpdateSPSchedaHander);
+
+                a.ContinueUpdateOnError = false;
+                DataTable dt = ds.SPSCHEDE;
+                DbCommandBuilder cmd = BuildCommandBuilder(a);
+                a.AcceptChangesDuringFill = true;
+                a.UpdateCommand = cmd.GetUpdateCommand();
+                a.DeleteCommand = cmd.GetDeleteCommand();
+                a.InsertCommand = cmd.GetInsertCommand();
+
+                a.Update(dt);
+            }
+        }
+
+        private void UpdateSPSchedaHander(object sender, RowUpdatedEventArgs e)
+        {
+            if ((e.Status == UpdateStatus.Continue) && (e.StatementType == StatementType.Insert))
+            {
+                SchedeProcessoDS.SPSCHEDERow row = (SchedeProcessoDS.SPSCHEDERow)e.Row;
+                SchedeProcessoDS.SPSCHEDEDataTable dt = row.Table as SchedeProcessoDS.SPSCHEDEDataTable;
+
+                bool isIdentityReadOnly = dt.IDSPSCHEDAColumn.ReadOnly;
+                dt.IDSPSCHEDAColumn.ReadOnly = false;
+                try
+                {
+                    row.IDSPSCHEDA = (int)RetrievePostUpdateID<decimal>(e.Command, row);
+                }
+                finally
+                {
+                    dt.IDSPSCHEDAColumn.ReadOnly = isIdentityReadOnly;
+                }
+            }
+        }
+
         public void UpdateTableSPMaster(SchedeProcessoDS ds)
         {
 
