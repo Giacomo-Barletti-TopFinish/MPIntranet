@@ -14,23 +14,6 @@
         <div class="row">
             <div class="col-lg-9">
                 <div class="row">
-                    <div class="col-md-4">
-                        @Html.Label("Area produzione")
-                        @Html.DropDownList("ddlAreaProduzione", new SelectList(@ViewData["ddlAreaProduzione"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlAreaProduzione" })
-                    </div>
-
-                    <div class="col-md-3">
-                        @Html.Label("Task")
-                        @Html.DropDownList("ddlTasks", Enumerable.Empty<SelectListItem>(), new { @class = "form-control input-sm", @id = "ddlTasks" })
-                    </div>
-
-                    <div class="col-md-4">
-                        @Html.Label("Master")
-                        @Html.DropDownList("ddlSPMasters", Enumerable.Empty<SelectListItem>(), new { @class = "form-control input-sm", @id = "ddlSPMasters" })
-                    </div>
-
-                </div>
-                <div class="row">
                     <div class="col-md-3">
                         @Html.Label("Brand")
                         @Html.DropDownList("ddlBrand", new SelectList(@ViewData["ddlBrand"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlBrand" })
@@ -49,8 +32,25 @@
                         @Html.TextBox("txtDescrizione", null, new { @class = "form-control input-sm ", @id = "txtDescrizione", @maxlength = "12" })
                     </div>
                     <div class="col-md-1" style="padding-top:20px">
-                        <input type="button" onclick="SalvaMaster()" class="btn btn-primary" value="Trova" />
+                        <input type="button" onclick="TrovaScheda()" class="btn btn-primary" value="Trova" />
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        @Html.Label("Area produzione")
+                        @Html.DropDownList("ddlAreaProduzione", new SelectList(@ViewData["ddlAreaProduzione"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlAreaProduzione" })
+                    </div>
+
+                    <div class="col-md-3">
+                        @Html.Label("Task")
+                        @Html.DropDownList("ddlTasks", Enumerable.Empty<SelectListItem>(), new { @class = "form-control input-sm", @id = "ddlTasks" })
+                    </div>
+
+                    <div class="col-md-4">
+                        @Html.Label("Master")
+                        @Html.DropDownList("ddlSPMasters", Enumerable.Empty<SelectListItem>(), new { @class = "form-control input-sm", @id = "ddlSPMasters" })
+                    </div>
+
                 </div>
             </div>
             <div class="col-lg-3">
@@ -106,23 +106,21 @@
             var fileUpload = $("#files").get(0);
             var files = fileUpload.files;
 
-            // Create  a FormData object
             var fileData = new FormData();
 
-            // if there are multiple files , loop through each files
             for (var i = 0; i < files.length; i++) {
                 fileData.append(files[i].name, files[i]);
             }
 
-            // Adding more keys/values here if need
+            // eventuali chiavi aggiunte vanno inserite qui... le ritrovi nel controller come elementi della form
             fileData.append('Test', "Test Object values");
 
             var url = '@Url.Action("UploadFile", "SchedeProcesso")';
 
             $.ajax({
                 url: url,
-                type: "POST", //as we will be posting files and other method POST is used
-                processData: false, //remember to set processData and ContentType to false, otherwise you may get an error
+                type: "POST",
+                processData: false,
                 contentType: false,
                 data: fileData,
                 success: function (result) {
@@ -318,7 +316,6 @@
     }
 
     function verificaColtrolliObbligatori() {
-        debugger;
         var esito = true;
         var controlli = $('.OBBLIGO');
         for (i = 0; i < controlli.length; i++) {
@@ -332,4 +329,42 @@
         return esito;
     }
 
+    function TrovaScheda() {
+
+        var codice = $('#txtCodice').val();
+        var descrizione = $('#txtDescrizione').val();
+        var brand = $('#ddlBrand').val();
+        var anagrafica = $('#txtAnagrafica').val();
+
+        codice = codice.toUpperCase();
+        descrizione = descrizione.toUpperCase();
+        anagrafica = anagrafica.toUpperCase();
+        $('#txtCodice').val(codice);
+        $('#txtDescrizione').val(descrizione);
+        $('#txtAnagrafica').val(anagrafica);
+
+
+           var url = '@Url.Action("TrovaScheda", "SchedeProcesso")';
+        $.ajax({
+            url: url,
+            data: {
+                Codice: codice,
+                Descrizione: descrizione,
+                Brand: brand,
+                Anagrafica: anagrafica
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divRisultati').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
 </script>

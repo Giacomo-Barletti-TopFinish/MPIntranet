@@ -33,7 +33,7 @@ namespace MPIntranetWeb.Controllers
 
         public ActionResult SPMaster()
         {
-            List<SPMasters> masters = SPMasters.EstraiListaSPMaster(true);
+            List<SPMaster> masters = MPIntranet.Business.SchedeProcesso.SPMaster.EstraiListaSPMaster(true);
             List<MPIntranetListItem> mItems = masters.Select(x => new MPIntranetListItem(x.Descrizione, x.IdSPMaster.ToString())).ToList();
             mItems.Insert(0, new MPIntranetListItem(" -- CREA NUOVO MASTER -- ", ElementiVuoti.SPMaster.ToString()));
             ViewData.Add("ddlSPMasters", mItems);
@@ -72,14 +72,14 @@ namespace MPIntranetWeb.Controllers
 
         public ActionResult GetMaster(string AreaProduzione, string Task)
         {
-            List<SPMasters> masters = SPMasters.EstraiListaSPMaster(AreaProduzione, Task, true);
+            List<SPMaster> masters = MPIntranet.Business.SchedeProcesso.SPMaster.EstraiListaSPMaster(AreaProduzione, Task, true);
             List<MPIntranetListItem> mItems = masters.Select(x => new MPIntranetListItem(x.Descrizione, x.IdSPMaster.ToString())).ToList();
             return Json(mItems);
         }
 
         public ActionResult GetSchedaProcesso(int Master)
         {
-            SPMasters spMaster = SPMasters.EstraiSPMaster(Master);
+            SPMaster spMaster = MPIntranet.Business.SchedeProcesso.SPMaster.EstraiSPMaster(Master);
             return PartialView("SchedaProcessoPartial", spMaster);
         }
 
@@ -111,7 +111,7 @@ namespace MPIntranetWeb.Controllers
         }
         public ActionResult GetSPMaster(int IdSPMaster)
         {
-            return Json(SPMasters.EstraiSPMaster(IdSPMaster));
+            return Json(MPIntranet.Business.SchedeProcesso.SPMaster.EstraiSPMaster(IdSPMaster));
         }
         private List<MPIntranetListItem> CreaListaSPControlli(string etichetta)
         {
@@ -158,7 +158,7 @@ namespace MPIntranetWeb.Controllers
 
             ElementoMaster[] elementiLista = JSonSerializer.Deserialize<ElementoMaster[]>(Lista);
 
-            string messaggio = SPMasters.SalvaMaster(IdSPMaster, Codice, Descrizione, AreaProduzione, Task, elementiLista, ConnectedUser.ToUpper());
+            string messaggio = MPIntranet.Business.SchedeProcesso.SPMaster.SalvaMaster(IdSPMaster, Codice, Descrizione, AreaProduzione, Task, elementiLista, ConnectedUser.ToUpper());
             return Content(messaggio);
         }
         public ActionResult AggiornaSchedaProcesso(int IdSPScheda, int IdSPMaster, string Codice, string Descrizione, string Task, string AreaProduzione, int Brand, string Anagrafica, string Controlli)
@@ -176,5 +176,17 @@ namespace MPIntranetWeb.Controllers
 
         }
 
+        public ActionResult TrovaScheda(string Codice, string Descrizione, int Brand, string Anagrafica)
+        {
+            List<SpScheda> schede = SpScheda.TrovaSchede(Codice, Descrizione, Brand, Anagrafica);
+
+            return PartialView("MostraSchedeTrovatePartial", schede);
+        }
+        public ActionResult EstraiScheda(int IdSPScheda)
+        {
+            SpScheda scheda = SpScheda.EstraiSPScheda(IdSPScheda);
+            SPMaster spMaster = MPIntranet.Business.SchedeProcesso.SPMaster.EstraiSPMaster(scheda.Master.IdSPMaster);
+            return PartialView("SchedaProcessoPartial", spMaster);
+        }
     }
 }

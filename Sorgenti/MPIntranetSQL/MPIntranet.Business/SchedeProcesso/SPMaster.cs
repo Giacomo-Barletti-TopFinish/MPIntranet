@@ -15,7 +15,7 @@ namespace MPIntranet.Business.SchedeProcesso
         public const string SESSIONE = "SESSIONE";
         public const string CONTROLLO = "CONTROLLO";
     }
-    public class SPMasters : BaseModel
+    public class SPMaster : BaseModel
     {
         public int IdSPMaster { get; set; }
         public string Codice { get; set; }
@@ -26,7 +26,7 @@ namespace MPIntranet.Business.SchedeProcesso
         public List<SPElemento> Elementi = new List<SPElemento>();
 
 
-        public static List<SPMasters> EstraiListaSPMaster(bool soloNonCancellati)
+        public static List<SPMaster> EstraiListaSPMaster(bool soloNonCancellati)
         {
             SchedeProcessoDS ds = new SchedeProcessoDS();
             using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
@@ -34,17 +34,17 @@ namespace MPIntranet.Business.SchedeProcesso
                 bScheda.FillSPMaster(ds, soloNonCancellati);
             }
 
-            List<SPMasters> masters = new List<SPMasters>();
+            List<SPMaster> masters = new List<SPMaster>();
             foreach (SchedeProcessoDS.SPMASTERSRow riga in ds.SPMASTERS)
             {
-                SPMasters master = CreaMaster(riga, ds);
+                SPMaster master = CreaMaster(riga, ds);
                 masters.Add(master);
             }
             return masters;
 
         }
 
-        public static List<SPMasters> EstraiListaSPMaster(string areaProduzione, string task, bool soloNonCancellati)
+        public static List<SPMaster> EstraiListaSPMaster(string areaProduzione, string task, bool soloNonCancellati)
         {
             SchedeProcessoDS ds = new SchedeProcessoDS();
             using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
@@ -52,10 +52,10 @@ namespace MPIntranet.Business.SchedeProcesso
                 bScheda.FillSPMaster(areaProduzione, task, ds, soloNonCancellati);
             }
 
-            List<SPMasters> masters = new List<SPMasters>();
+            List<SPMaster> masters = new List<SPMaster>();
             foreach (SchedeProcessoDS.SPMASTERSRow riga in ds.SPMASTERS)
             {
-                SPMasters master = CreaMaster(riga, ds);
+                SPMaster master = CreaMaster(riga, ds);
                 masters.Add(master);
             }
             return masters;
@@ -67,10 +67,10 @@ namespace MPIntranet.Business.SchedeProcesso
             return Codice + " - " + Descrizione;
         }
 
-        private static SPMasters CreaMaster(SchedeProcessoDS.SPMASTERSRow riga, SchedeProcessoDS ds)
+        private static SPMaster CreaMaster(SchedeProcessoDS.SPMASTERSRow riga, SchedeProcessoDS ds)
         {
             if (riga == null) return null;
-            SPMasters controllo = new SPMasters();
+            SPMaster controllo = new SPMaster();
             controllo.IdSPMaster = riga.IDSPMASTER;
             controllo.Codice = riga.CODICE;
             controllo.Descrizione = riga.DESCRIZIONE;
@@ -86,9 +86,9 @@ namespace MPIntranet.Business.SchedeProcesso
 
             return controllo;
         }
-        public static SPMasters EstraiSPMaster(int idMaster)
+        public static SPMaster EstraiSPMaster(int idMaster)
         {
-            List<SPMasters> lista = EstraiListaSPMaster(false);
+            List<SPMaster> lista = EstraiListaSPMaster(false);
             return lista.Where(x => x.IdSPMaster == idMaster).FirstOrDefault();
         }
 

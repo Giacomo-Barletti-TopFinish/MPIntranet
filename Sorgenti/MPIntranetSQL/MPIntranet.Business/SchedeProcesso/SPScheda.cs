@@ -13,15 +13,13 @@ namespace MPIntranet.Business.SchedeProcesso
     public class SpScheda : BaseModel
     {
         public int IdSPScheda { get; set; }
-        public int IdSPMaster { get; set; }
         public string Codice { get; set; }
         public string Descrizione { get; set; }
         public string Anagrafica { get; set; }
-        public int IdBrand { get; set; }
         public string AreaProduzione { get; set; }
         public string Task { get; set; }
-
-
+        public Brand Brand { get; set; }
+        public SPMaster Master { get; set; }
 
         public static List<SpScheda> EstraiListaSPScheda(bool soloNonCancellati)
         {
@@ -40,7 +38,23 @@ namespace MPIntranet.Business.SchedeProcesso
             return schedas;
 
         }
-        public static List<SpScheda> EstraiListaScheda(string IDSPMaster, bool soloNonCancellati)
+        public static List<SpScheda> TrovaSchede(string Codice, string Descrizione, int idBrand, string Anagrafica)
+        {
+            SchedeProcessoDS ds = new SchedeProcessoDS();
+            using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
+            {
+                bScheda.TrovaScheda(Codice, Descrizione, idBrand, Anagrafica, ds, true);
+            }
+            List<SpScheda> schede = new List<SpScheda>();
+            foreach (SchedeProcessoDS.SPSCHEDERow riga in ds.SPSCHEDE)
+            {
+                SpScheda scheda = CreaScheda(riga, ds);
+                schede.Add(scheda);
+            }
+            return schede;
+        }
+
+        public static List<SpScheda> EstraiListaSPScheda(string IDSPMaster, bool soloNonCancellati)
         {
             SchedeProcessoDS ds = new SchedeProcessoDS();
             using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
@@ -63,12 +77,13 @@ namespace MPIntranet.Business.SchedeProcesso
         }
         private static SpScheda CreaScheda(SchedeProcessoDS.SPSCHEDERow riga, SchedeProcessoDS ds)
         {
+
             if (riga == null) return null;
             SpScheda controllo = new SpScheda();
-            controllo.IdSPMaster = riga.IDSPMASTER;
+            controllo.Master = SPMaster.EstraiSPMaster(riga.IDSPMASTER);
             controllo.Codice = riga.CODICE;
             controllo.Descrizione = riga.DESCRIZIONE;
-            controllo.IdBrand = riga.IDBRAND;
+            controllo.Brand = Brand.EstraiBrand(riga.IDBRAND);
             controllo.Anagrafica = riga.ANAGRAFICA;
             controllo.AreaProduzione = riga.AREAPRODUZIONE;
             controllo.Task = riga.TASK;
