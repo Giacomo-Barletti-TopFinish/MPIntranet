@@ -88,7 +88,7 @@
             var areaProduzione = $('#ddlAreaProduzione').val();
             getMaster(areaProduzione,selectedValue,'');
         });
-        $("#ddlAreaProduzione").change(function () {    
+        $("#ddlAreaProduzione").change(function () {
             var selectedText = $(this).find("option:selected").text();
             var selectedValue = $(this).val();
             var task = $('#ddlTasks').val();
@@ -143,7 +143,7 @@
                     data: { Master: master},
                     cache: false,
                     type: "POST",
-                    success: function (data) {                      
+                    success: function (data) {
                         $('#divRisultati').html(data).show();
                     },
                     error: function (response) {
@@ -202,10 +202,9 @@
                     }
                 });
     }
-   
+
     function SalvaScheda()
     {
-        debugger;
         var idMaster = $('#ddlSPMasters').val();
         var codice = $('#txtCodice').val();
         var descrizione = $('#txtDescrizione').val();
@@ -248,7 +247,7 @@
             esito = false;
             messaggio += MESSAGGIO_PUNTINO + " " + "Master" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
         }
-        if (brand == '') {
+        if (brand == '-1') {
             esito = false;
             messaggio += MESSAGGIO_PUNTINO + " " + "Brand" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
         }
@@ -256,11 +255,15 @@
             esito = false;
             messaggio += MESSAGGIO_PUNTINO + " " + "Anagrafica" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
         }
-
+        if (!verificaColtrolliObbligatori()) {
+            esito = false;
+            messaggio += MESSAGGIO_PUNTINO + " " + "I controlli obbligatori devono essere valorizzati </br>";
+        }
         $('#lblMessage').html(messaggio);
         if(!esito) return;
 
-
+        var controlli = getTabellaValori();
+        var lista = JSON.stringify(controlli);
         var url = '@Url.Action("AggiornaSchedaProcesso", "SchedeProcesso")';
         $.ajax({
             url: url,
@@ -272,7 +275,8 @@
                 Task: task,
                 AreaProduzione: areaProduzione,
                 Brand: brand,
-                Anagrafica: anagrafica
+                Anagrafica: anagrafica,
+                Controlli: lista
             },
             cache: false,
             type: "POST",
@@ -291,7 +295,41 @@
         });
     }
 
-  
-   
+    function getTabellaValori() {
+        var data = [];
+        var idValore=-1
+        var controlli = $('.CTRL');
+        for (i = 0; i < controlli.length; i++) {
+            var controllo = controlli[i];
+            var type = $(controllo).prop('type');
+            var valore = '';
+            if (type == 'checkbox')
+                valore = $(controllo).prop('checked');
+            else
+                valore = $(controllo).val();
+
+            var id = $(controllo).prop('id');
+
+            var dato = {
+                'IDElemento': id, 'Valore': valore, 'IDValore':idValore};
+            data.push(dato);
+        }
+        return data;
+    }
+
+    function verificaColtrolliObbligatori() {
+        debugger;
+        var esito = true;
+        var controlli = $('.OBBLIGO');
+        for (i = 0; i < controlli.length; i++) {
+            var controllo = controlli[i];
+            var type = $(controllo).prop('type');
+            if (type != 'checkbox') {
+                var valore = $(controllo).val();
+                if (valore == '' || valore == null) esito = false;
+            }
+        }
+        return esito;
+    }
 
 </script>

@@ -68,6 +68,7 @@
     <Compile Include="SchedeProcesso\SPElemento.cs" />
     <Compile Include="SchedeProcesso\SPElementoLista.cs" />
     <Compile Include="SchedeProcesso\SPMaster.cs" />
+    <Compile Include="SchedeProcesso\SPValoreScheda.cs" />
     <Compile Include="Task.cs" />
     <Compile Include="TaskArea.cs" />
     <Compile Include="TipoDistinta.cs" />

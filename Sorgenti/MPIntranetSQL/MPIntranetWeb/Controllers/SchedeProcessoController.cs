@@ -17,10 +17,8 @@ namespace MPIntranetWeb.Controllers
     {
         public ActionResult SchedaProcesso()
         {
-
-            List<TaskArea> tasks = TaskArea.EstraiListaTaskArea(true);
-            List<string> AreaProduzione = tasks.OrderBy(x => x.AreaProduzione).Select(x => x.AreaProduzione.Trim()).Distinct().ToList();
-            List<MPIntranetListItem> areeProduzione = AreaProduzione.Select(x => new MPIntranetListItem(x, x)).ToList();
+            List<AreaProduzione> aree = MPIntranet.Business.AreaProduzione.EstraiListaAreeProduzione();
+            List<MPIntranetListItem> areeProduzione = aree.Select(x => new MPIntranetListItem(x.ToString(), x.Codice)).ToList();
             areeProduzione.Insert(0, new MPIntranetListItem(string.Empty, string.Empty));
             ViewData.Add("ddlAreaProduzione", areeProduzione);
 
@@ -163,7 +161,7 @@ namespace MPIntranetWeb.Controllers
             string messaggio = SPMasters.SalvaMaster(IdSPMaster, Codice, Descrizione, AreaProduzione, Task, elementiLista, ConnectedUser.ToUpper());
             return Content(messaggio);
         }
-        public ActionResult AggiornaSchedaProcesso(int IdSPScheda, int IdSPMaster, string Codice, string Descrizione, string Task, string AreaProduzione, int Brand, string Anagrafica)
+        public ActionResult AggiornaSchedaProcesso(int IdSPScheda, int IdSPMaster, string Codice, string Descrizione, string Task, string AreaProduzione, int Brand, string Anagrafica, string Controlli)
         {
             Codice = Codice.ToUpper();
             Descrizione = Descrizione.ToUpper();
@@ -171,7 +169,9 @@ namespace MPIntranetWeb.Controllers
             AreaProduzione = AreaProduzione.ToUpper();
             Anagrafica = Anagrafica.ToUpper();
 
-            string messaggio = SpScheda.SalvaScheda(IdSPScheda, IdSPMaster, Anagrafica, Brand, Codice, Descrizione, AreaProduzione, Task, ConnectedUser.ToUpper());
+            ElementoScheda[] elementiScheda = JSonSerializer.Deserialize<ElementoScheda[]>(Controlli);
+
+            string messaggio = SpScheda.SalvaScheda(IdSPScheda, IdSPMaster, Anagrafica, Brand, Codice, Descrizione, AreaProduzione, Task, elementiScheda.ToList(), ConnectedUser.ToUpper());
             return Content(messaggio);
 
         }

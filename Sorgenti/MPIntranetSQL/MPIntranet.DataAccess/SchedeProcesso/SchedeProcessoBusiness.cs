@@ -32,6 +32,12 @@ namespace MPIntranet.DataAccess.SchedeProcesso
             a.FillSPMaster(areaProduzione, task, ds, soloNonCancellati);
         }
         [DataContext]
+        public void FillValoriSchede(SchedeProcessoDS ds, int idSPScheda, bool soloNonCancellati)
+        {
+            SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
+            a.FillValoriSchede(ds, idSPScheda, soloNonCancellati);
+        }
+        [DataContext]
         public void FillSPScheda(SchedeProcessoDS ds, bool soloNonCancellati)
         {
             SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
@@ -71,6 +77,12 @@ namespace MPIntranet.DataAccess.SchedeProcesso
             a.GetElemento(ds, idSPElemento);
         }
         [DataContext]
+        public void GetValoreScheda(SchedeProcessoDS ds, int idSPValoreScheda)
+        {
+            SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
+            a.GetValoreScheda(ds, idSPValoreScheda);
+        }
+        [DataContext]
         public void FillElementi(SchedeProcessoDS ds, int idSPMaster, bool soloNonCancellati)
         {
             SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
@@ -94,7 +106,7 @@ namespace MPIntranet.DataAccess.SchedeProcesso
         public void GetSPScheda(SchedeProcessoDS ds, int idScheda)
         {
             SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
-            a.GetSPScheda(idScheda,ds);
+            a.GetSPScheda(idScheda, ds);
         }
 
         [DataContext(true)]

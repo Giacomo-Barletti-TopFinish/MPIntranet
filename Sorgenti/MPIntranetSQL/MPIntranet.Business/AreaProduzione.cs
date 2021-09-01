@@ -10,7 +10,7 @@ namespace MPIntranet.Business
 {
     public class AreaProduzione
     {
-        public string Codice{ get; set; }
+        public string Codice { get; set; }
         public string Descrizione { get; set; }
 
         public static List<AreaProduzione> EstraiListaAreeProduzione()
@@ -21,7 +21,7 @@ namespace MPIntranet.Business
                 bArticolo.FillAreeProduzione(ds);
             }
 
-            List<AreaProduzione> areeProduzione= new List<AreaProduzione>();
+            List<AreaProduzione> areeProduzione = new List<AreaProduzione>();
             foreach (ArticoliDS.AreeProduzioneRow riga in ds.AreeProduzione)
             {
                 AreaProduzione areaProduzione = CreaTask(riga);
@@ -41,7 +41,7 @@ namespace MPIntranet.Business
 
         public override string ToString()
         {
-            return Codice;
+            return string.Format("{0} - {1}", Codice, Descrizione);
         }
     }
 }

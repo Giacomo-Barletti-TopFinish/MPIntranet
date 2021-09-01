@@ -12,8 +12,8 @@ namespace MPIntranet.Business.SchedeProcesso
 {
     public class TipoSPElemento
     {
-        public static readonly string SESSIONE = "SESSIONE";
-        public static readonly string CONTROLLO = "CONTROLLO";
+        public const string SESSIONE = "SESSIONE";
+        public const string CONTROLLO = "CONTROLLO";
     }
     public class SPMasters : BaseModel
     {

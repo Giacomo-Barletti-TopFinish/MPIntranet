@@ -143,6 +143,20 @@ namespace MPIntranet.DataAccess.SchedeProcesso
             }
         }
 
+        public void FillValoriSchede(SchedeProcessoDS ds, int idSPScheda, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM SPVALORISCHEDE WHERE IDSPSCHEDA = $P<IDSPSCHEDA>";
+            if (soloNonCancellati)
+                select += " AND CANCELLATO = 0 ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDSPSCHEDA", DbType.Int32, idSPScheda);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.SPVALORISCHEDE);
+            }
+        }
         public void GetElemento(SchedeProcessoDS ds, int idSPElemento)
         {
             string select = @"SELECT * FROM SPELEMENTI WHERE IDSPELEMENTO = $P<IDSPELEMENTO>";
@@ -153,6 +167,18 @@ namespace MPIntranet.DataAccess.SchedeProcesso
             using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
                 da.Fill(ds.SPELEMENTI);
+            }
+        }
+        public void GetValoreScheda(SchedeProcessoDS ds, int idSPValoreScheda)
+        {
+            string select = @"SELECT * FROM SPVALORISCHEDE WHERE IDSPVALORESCHEDA = $P<IDSPVALORESCHEDA>";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDSPVALORESCHEDA", DbType.Int32, idSPValoreScheda);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.SPVALORISCHEDE);
             }
         }
         public void FillElementiLista(SchedeProcessoDS ds, int idSPControllo, bool soloNonCancellati)

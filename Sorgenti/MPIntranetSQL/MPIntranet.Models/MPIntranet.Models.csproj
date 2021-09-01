@@ -45,7 +45,8 @@
   <ItemGroup>
     <Compile Include="BaseModel.cs" />
     <Compile Include="Common\MPIntranetListItem.cs" />
-    <Compile Include="Json\ElementiLista.cs" />
+    <Compile Include="Json\ElementoLista.cs" />
+    <Compile Include="Json\ElementoScheda.cs" />
     <Compile Include="Json\ElementoMaster.cs" />
     <Compile Include="Json\SalvaProcessoJson.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

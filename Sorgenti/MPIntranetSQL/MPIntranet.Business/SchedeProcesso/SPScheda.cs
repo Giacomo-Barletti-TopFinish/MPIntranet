@@ -90,16 +90,16 @@ namespace MPIntranet.Business.SchedeProcesso
             return CreaScheda(ds.SPSCHEDE.Where(x => x.IDSPSCHEDA == idScheda).FirstOrDefault(), ds);
         }
 
-        public static string SalvaScheda(int idScheda, int IdSPMaster, string anagrafica, int IdBrand, string codice, string descrizione, string areaProduzione, string task, string account)
+        public static string SalvaScheda(int idScheda, int IdSPMaster, string anagrafica, int IdBrand, string codice, string descrizione, string areaProduzione, string task, List<ElementoScheda> controlli, string account)
         {
 
             SchedeProcessoDS ds = new SchedeProcessoDS();
             using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
             {
                 bScheda.GetSPScheda(ds, idScheda);
+                bScheda.FillValoriSchede(ds, idScheda, true);
 
                 SchedeProcessoDS.SPSCHEDERow riga = ds.SPSCHEDE.Where(x => x.IDSPMASTER == idScheda).FirstOrDefault();
-
 
                 if (riga != null)
                 {
@@ -126,8 +126,27 @@ namespace MPIntranet.Business.SchedeProcesso
                     ds.SPSCHEDE.AddSPSCHEDERow(riga);
                 }
 
-                bScheda.UpdateTableSPScheda(ds);
+                if (idScheda > 0)
+                {
+                    List<int> listaIdValori = controlli.Where(x => x.IDElemento > 0).Select(x => x.IDElemento).Distinct().ToList();
+                    foreach (SchedeProcessoDS.SPVALORISCHEDERow elemento in ds.SPVALORISCHEDE)
+                    {
+                        if (!listaIdValori.Contains(elemento.IDSPELEMENTO))
+                        {
+                            elemento.CANCELLATO = true;
+                            elemento.DATAMODIFICA = DateTime.Now;
+                            elemento.UTENTEMODIFICA = account;
+                        }
+                    }
+                }
 
+                int sequenza = 0;
+                foreach (ElementoScheda controllo in controlli)
+                    SPValoreScheda.SalvaValoreScheda(controllo.IDValore, controllo.IDElemento, riga.IDSPSCHEDA, controllo.Valore, account, ds);
+
+
+                bScheda.UpdateTableSPScheda(ds);
+                bScheda.UpdateTable(ds.SPVALORISCHEDE.TableName, ds);
                 return "Scheda creata correttamente";
             }
         }

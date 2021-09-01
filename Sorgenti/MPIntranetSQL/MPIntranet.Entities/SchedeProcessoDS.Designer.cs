@@ -351,6 +351,13 @@ namespace MPIntranet.Entities {
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.None;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_SPSCHEDE_SPVALORISCHEDE", new global::System.Data.DataColumn[] {
+                        this.tableSPSCHEDE.IDSPSCHEDAColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSPVALORISCHEDE.IDSPSCHEDAColumn});
+            this.tableSPVALORISCHEDE.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.None;
+            fkc.UpdateRule = global::System.Data.Rule.Cascade;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2457,7 +2464,7 @@ namespace MPIntranet.Entities {
             
             private global::System.Data.DataColumn columnIDSPSCHEDA;
             
-            private global::System.Data.DataColumn columnIDSPCONTROLLO;
+            private global::System.Data.DataColumn columnIDSPELEMENTO;
             
             private global::System.Data.DataColumn columnCODICE;
             
@@ -2528,9 +2535,9 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn IDSPCONTROLLOColumn {
+            public global::System.Data.DataColumn IDSPELEMENTOColumn {
                 get {
-                    return this.columnIDSPCONTROLLO;
+                    return this.columnIDSPELEMENTO;
                 }
             }
             
@@ -2643,12 +2650,12 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public SPVALORISCHEDERow AddSPVALORISCHEDERow(int IDSPSCHEDA, int IDSPCONTROLLO, string CODICE, string DESCRIZIONE, string TIPO, double VALOREN, string VALORET, System.DateTime VALORED, bool CANCELLATO, System.DateTime DATAMODIFICA, string UTENTEMODIFICA) {
+            public SPVALORISCHEDERow AddSPVALORISCHEDERow(int IDSPSCHEDA, int IDSPELEMENTO, string CODICE, string DESCRIZIONE, string TIPO, double VALOREN, string VALORET, System.DateTime VALORED, bool CANCELLATO, System.DateTime DATAMODIFICA, string UTENTEMODIFICA) {
                 SPVALORISCHEDERow rowSPVALORISCHEDERow = ((SPVALORISCHEDERow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         IDSPSCHEDA,
-                        IDSPCONTROLLO,
+                        IDSPELEMENTO,
                         CODICE,
                         DESCRIZIONE,
                         TIPO,
@@ -2689,7 +2696,7 @@ namespace MPIntranet.Entities {
             internal void InitVars() {
                 this.columnIDSPVALORESCHEDA = base.Columns["IDSPVALORESCHEDA"];
                 this.columnIDSPSCHEDA = base.Columns["IDSPSCHEDA"];
-                this.columnIDSPCONTROLLO = base.Columns["IDSPCONTROLLO"];
+                this.columnIDSPELEMENTO = base.Columns["IDSPELEMENTO"];
                 this.columnCODICE = base.Columns["CODICE"];
                 this.columnDESCRIZIONE = base.Columns["DESCRIZIONE"];
                 this.columnTIPO = base.Columns["TIPO"];
@@ -2708,8 +2715,8 @@ namespace MPIntranet.Entities {
                 base.Columns.Add(this.columnIDSPVALORESCHEDA);
                 this.columnIDSPSCHEDA = new global::System.Data.DataColumn("IDSPSCHEDA", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIDSPSCHEDA);
-                this.columnIDSPCONTROLLO = new global::System.Data.DataColumn("IDSPCONTROLLO", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnIDSPCONTROLLO);
+                this.columnIDSPELEMENTO = new global::System.Data.DataColumn("IDSPELEMENTO", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDSPELEMENTO);
                 this.columnCODICE = new global::System.Data.DataColumn("CODICE", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCODICE);
                 this.columnDESCRIZIONE = new global::System.Data.DataColumn("DESCRIZIONE", typeof(string), null, global::System.Data.MappingType.Element);
@@ -2737,7 +2744,7 @@ namespace MPIntranet.Entities {
                 this.columnIDSPVALORESCHEDA.ReadOnly = true;
                 this.columnIDSPVALORESCHEDA.Unique = true;
                 this.columnIDSPSCHEDA.AllowDBNull = false;
-                this.columnIDSPCONTROLLO.AllowDBNull = false;
+                this.columnIDSPELEMENTO.AllowDBNull = false;
                 this.columnCODICE.MaxLength = 12;
                 this.columnDESCRIZIONE.MaxLength = 50;
                 this.columnTIPO.MaxLength = 12;
@@ -3660,12 +3667,12 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int IDSPCONTROLLO {
+            public int IDSPELEMENTO {
                 get {
-                    return ((int)(this[this.tableSPVALORISCHEDE.IDSPCONTROLLOColumn]));
+                    return ((int)(this[this.tableSPVALORISCHEDE.IDSPELEMENTOColumn]));
                 }
                 set {
-                    this[this.tableSPVALORISCHEDE.IDSPCONTROLLOColumn] = value;
+                    this[this.tableSPVALORISCHEDE.IDSPELEMENTOColumn] = value;
                 }
             }
             
