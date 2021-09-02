@@ -18,16 +18,16 @@ namespace MPIntranet.Business
 
         public static Brand EstraiBrand(int idBrand)
         {
-            List<Brand> lista = EstraiListaBrand(false);
+            List<Brand> lista = EstraiListaBrand();
             return lista.Where(x => x.IdBrand == idBrand).FirstOrDefault();
         }
 
-        public static List<Brand> EstraiListaBrand(bool soloNonCancellati)
+        public static List<Brand> EstraiListaBrand()
         {
             ArticoliDS ds = new ArticoliDS();
             using (ArticoliBusiness bArticolo = new ArticoliBusiness())
             {
-                bArticolo.FillBrand(ds, soloNonCancellati);
+                bArticolo.FillBrand(ds);
             }
 
             List<Brand> brands = new List<Brand>();

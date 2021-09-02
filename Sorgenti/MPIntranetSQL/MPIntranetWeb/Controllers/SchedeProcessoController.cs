@@ -23,7 +23,7 @@ namespace MPIntranetWeb.Controllers
             ViewData.Add("ddlAreaProduzione", areeProduzione);
 
 
-            List<Brand> listaBrands = Brand.EstraiListaBrand(true);
+            List<Brand> listaBrands = Brand.EstraiListaBrand();
             List<MPIntranetListItem> brands = listaBrands.Select(x => new MPIntranetListItem(x.Descrizione, x.IdBrand.ToString())).ToList();
             brands.Insert(0, new MPIntranetListItem(string.Empty, ElementiVuoti.Brand.ToString()));
             ViewData.Add("ddlBrand", brands);

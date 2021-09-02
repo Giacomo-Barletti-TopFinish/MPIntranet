@@ -92,10 +92,10 @@ namespace MPIntranet.DataAccess.Articoli
             a.FillAreeProduzione(ds);
         }
         [DataContext]
-        public void FillBrand(ArticoliDS ds, bool soloNonCancellati)
+        public void FillBrand(ArticoliDS ds)
         {
             ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
-            a.FillBrand(ds, soloNonCancellati);
+            a.FillBrand(ds);
         }
 
         [DataContext]

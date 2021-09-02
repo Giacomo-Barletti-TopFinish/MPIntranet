@@ -32,7 +32,7 @@ namespace DisegnaDiBa
 
         private void caricaBrand()
         {
-            List<Brand> brands = MPIntranet.Business.Brand.EstraiListaBrand(true);
+            List<Brand> brands = MPIntranet.Business.Brand.EstraiListaBrand();
             ddlBrands.Items.AddRange(brands.ToArray());
         }
 

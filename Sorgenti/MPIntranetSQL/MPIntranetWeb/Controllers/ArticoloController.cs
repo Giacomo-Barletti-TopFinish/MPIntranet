@@ -30,7 +30,7 @@ namespace MPIntranetWeb.Controllers
 
         private List<MPIntranetListItem> CreaListaBrand()
         {
-            List<Brand> brands = Brand.EstraiListaBrand(true);
+            List<Brand> brands = Brand.EstraiListaBrand();
             List<MPIntranetListItem> brandsItems = brands.Select(x => new MPIntranetListItem(x.Descrizione, x.IdBrand.ToString())).ToList();
             brandsItems.Insert(0, new MPIntranetListItem(string.Empty, ElementiVuoti.Brand.ToString()));
 

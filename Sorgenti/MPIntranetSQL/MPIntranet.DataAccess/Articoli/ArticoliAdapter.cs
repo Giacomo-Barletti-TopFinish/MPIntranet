@@ -98,11 +98,9 @@ namespace MPIntranet.DataAccess.Articoli
             }
         }
 
-        public void FillBrand(ArticoliDS ds, bool soloNonCancellati)
+        public void FillBrand(ArticoliDS ds)
         {
             string select = @"SELECT * FROM BRANDS ";
-            if (soloNonCancellati)
-                select += "WHERE CANCELLATO = 0 ";
 
             select += " ORDER BY DESCRIZIONE ";
 
