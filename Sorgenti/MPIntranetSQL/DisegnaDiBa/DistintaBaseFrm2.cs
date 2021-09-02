@@ -415,10 +415,22 @@ namespace DisegnaDiBa
         }
         private void RimuoviElementoSingoloClick(object sender, EventArgs e)
         {
+
             TreeNode tn = tvDiBa.SelectedNode;
             if (tn == null) return;
             TreeNode padre = tn.Parent;
             if (padre == null) return;
+
+
+            if (tn.Tag != null)
+            {
+                Componente componente = (Componente)tn.Tag;
+                if (componente.FasiCiclo.Count > 0)
+                {
+                    if (MessageBox.Show("Il nodo contiene delle fasi, vuoi cancellare il nodo ?", "ATTENZIONE", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No) return;
+                }
+            }
+
 
             if (tn.Nodes.Count > 0)
             {
@@ -632,6 +644,7 @@ namespace DisegnaDiBa
                     anagrafica = anagrafica.ToUpper();
                     if (string.IsNullOrEmpty(anagrafica)) return;
                     int posizione = anagrafica.IndexOf(separatoreAutocomplete);
+                    if(posizione<0)return;
                     anagrafica = anagrafica.Substring(0, posizione);
                     dgvComponenti.Rows[e.RowIndex].Cells[clmAnagraficaComponente.Index].Value = anagrafica;
 
@@ -711,7 +724,8 @@ namespace DisegnaDiBa
 
         private void dgvComponenti_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            if (dgvComponenti.CurrentCell.ColumnIndex == clmAnagraficaComponente.Index)
+            int columnIndex = dgvComponenti.CurrentCell.ColumnIndex;
+            if (columnIndex == clmAnagraficaComponente.Index)
             {
                 TextBox tb = e.Control as TextBox;
                 {
@@ -775,11 +789,12 @@ namespace DisegnaDiBa
 
                 if (e.ColumnIndex == clmAnagraficaFaseCiclo.Index)
                 {
-                    string anagrafica = (dgvFasiCiclo.Rows[e.RowIndex].Cells[clmAnagraficaFaseCiclo.Index].Value as string);
+                        string anagrafica = (dgvFasiCiclo.Rows[e.RowIndex].Cells[clmAnagraficaFaseCiclo.Index].Value as string);
                     if (string.IsNullOrEmpty(anagrafica)) return;
                     int posizione = anagrafica.IndexOf(separatoreAutocomplete);
-                        anagrafica = anagrafica.Substring(0, posizione);
-                        dgvFasiCiclo.Rows[e.RowIndex].Cells[clmAnagraficaFaseCiclo.Index].Value = anagrafica;
+                    if (posizione < 0) return;
+                    anagrafica = anagrafica.Substring(0, posizione);
+                    dgvFasiCiclo.Rows[e.RowIndex].Cells[clmAnagraficaFaseCiclo.Index].Value = anagrafica;
 
                     Item item = _items.Where(x => x.Anagrafica == anagrafica).FirstOrDefault();
                     if (item != null) dgvFasiCiclo.Rows[e.RowIndex].Cells[clmUMQuantitaFaseCiclo.Index].Value = item.UM;

@@ -131,8 +131,9 @@ namespace MPIntranet.Business
                     }
 
                 }
-
-                f.TempoLavorazione = (faseCiclo.Periodo == 0) ? 0 : faseCiclo.PezziPeriodo / faseCiclo.Periodo;
+                
+//                f.TempoLavorazione = (faseCiclo.Periodo == 0) ? 0 : faseCiclo.PezziPeriodo / faseCiclo.Periodo;
+                f.TempoLavorazione = faseCiclo.Periodo;
                 if (f.TempoLavorazione <= 0 && !string.IsNullOrEmpty(faseCiclo.AreaProduzione) && !string.IsNullOrEmpty(faseCiclo.Task) )
                 {
                     sb.AppendLine(string.Format("Fase {0} tempo lavorazione nullo", faseCiclo.IdFaseCiclo));

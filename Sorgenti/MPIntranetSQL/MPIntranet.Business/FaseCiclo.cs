@@ -221,9 +221,8 @@ namespace MPIntranet.Business
                         ds.FASICICLO.AddFASICICLORow(rigaFaseCiclo);
                     }
                     else
-                    {
-                        if (!string.IsNullOrEmpty(faseCiclo.Anagrafica))
-                            rigaFaseCiclo.ANAGRAFICA = string.IsNullOrEmpty(faseCiclo.Anagrafica) ? string.Empty : faseCiclo.Anagrafica.ToUpper();
+                    {                       
+                        rigaFaseCiclo.ANAGRAFICA = string.IsNullOrEmpty(faseCiclo.Anagrafica) ? string.Empty : faseCiclo.Anagrafica.ToUpper();
                         rigaFaseCiclo.COLLEGAMENTODIBA = string.IsNullOrEmpty(faseCiclo.CollegamentoDiBa) ? string.Empty : faseCiclo.CollegamentoDiBa.ToUpper();
                         rigaFaseCiclo.QUANTITA = faseCiclo.Quantita;
                         rigaFaseCiclo.UMQUANTITA = string.IsNullOrEmpty(faseCiclo.UMQuantita) ? string.Empty : faseCiclo.UMQuantita.ToUpper();
