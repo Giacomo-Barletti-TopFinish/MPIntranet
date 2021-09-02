@@ -1,8 +1,8 @@
 ﻿@using MPIntranet.Business.SchedeProcesso
-@model SPMaster
+@model SpScheda
 
 <div>
-    @foreach (SPElemento elemento in Model.Elementi)
+    @foreach (SPElemento elemento in Model.Master.Elementi)
     {
     <div class="row">
         @if (elemento.Tipo == TipoSPElemento.SESSIONE)

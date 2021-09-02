@@ -12,6 +12,7 @@ namespace MPIntranet.Business.SchedeProcesso
 {
     public class SpScheda : BaseModel
     {
+
         public int IdSPScheda { get; set; }
         public string Codice { get; set; }
         public string Descrizione { get; set; }
@@ -21,6 +22,7 @@ namespace MPIntranet.Business.SchedeProcesso
         public Brand Brand { get; set; }
         public SPMaster Master { get; set; }
 
+        public List<SPValoreScheda> ValoriScheda { get; set; }
         public static List<SpScheda> EstraiListaSPScheda(bool soloNonCancellati)
         {
             SchedeProcessoDS ds = new SchedeProcessoDS();
@@ -80,6 +82,7 @@ namespace MPIntranet.Business.SchedeProcesso
 
             if (riga == null) return null;
             SpScheda controllo = new SpScheda();
+            controllo.IdSPScheda = riga.IDSPSCHEDA;
             controllo.Master = SPMaster.EstraiSPMaster(riga.IDSPMASTER);
             controllo.Codice = riga.CODICE;
             controllo.Descrizione = riga.DESCRIZIONE;
@@ -89,11 +92,27 @@ namespace MPIntranet.Business.SchedeProcesso
             controllo.Task = riga.TASK;
             controllo.Cancellato = riga.CANCELLATO;
             controllo.DataModifica = riga.DATAMODIFICA;
-            controllo.Descrizione = riga.DESCRIZIONE;
             controllo.UtenteModifica = riga.UTENTEMODIFICA;
-
+            controllo.ValoriScheda = SPValoreScheda.EstraiListaSPValoreScheda(riga.IDSPSCHEDA, true, ds);
+            
             return controllo;
         }
+        public static SpScheda CreaSchedaVuota(int idSPMaster)
+        {
+            SpScheda controllo = new SpScheda();
+            controllo.IdSPScheda = ElementiVuoti.SPScheda;
+            controllo.Master = SPMaster.EstraiSPMaster(idSPMaster);
+            controllo.Codice = string.Empty;
+            controllo.Descrizione = string.Empty;
+            controllo.Brand = Brand.CreaBrandVuoto();
+            controllo.Anagrafica = string.Empty;
+            controllo.AreaProduzione = string.Empty;
+            controllo.Task = string.Empty;
+            controllo.ValoriScheda = new List<SPValoreScheda>();
+            return controllo;
+        }
+
+         
 
         public static SpScheda EstraiSPScheda(int idScheda)
         {
@@ -164,6 +183,7 @@ namespace MPIntranet.Business.SchedeProcesso
                 bScheda.UpdateTable(ds.SPVALORISCHEDE.TableName, ds);
                 return "Scheda creata correttamente";
             }
+
         }
     }
 }

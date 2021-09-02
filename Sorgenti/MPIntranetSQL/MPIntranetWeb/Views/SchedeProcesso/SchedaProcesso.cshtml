@@ -83,21 +83,25 @@
     $(function ()
     {
         $("#ddlTasks").change(function () {
+
             var selectedText = $(this).find("option:selected").text();
             var selectedValue = $(this).val();
             var areaProduzione = $('#ddlAreaProduzione').val();
+            $('#divRisultati').html('').show();
             getMaster(areaProduzione,selectedValue,'');
         });
+
         $("#ddlAreaProduzione").change(function () {
             var selectedText = $(this).find("option:selected").text();
             var selectedValue = $(this).val();
             var task = $('#ddlTasks').val();
+
+            $('#divRisultati').html('').show();
             getTasks(selectedValue, task,'');
         });
         $("#ddlSPMasters").change(function () {
             var selectedText = $(this).find("option:selected").text();
             var selectedValue = $(this).val();
-            var task = $('#ddlTasks').val();
             getSchedaProcesso(selectedValue);
         });
 

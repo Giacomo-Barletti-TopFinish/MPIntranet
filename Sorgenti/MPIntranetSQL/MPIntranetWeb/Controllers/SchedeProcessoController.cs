@@ -46,7 +46,6 @@ namespace MPIntranetWeb.Controllers
             List<MPIntranetListItem> areeProduzione = AreaProduzione.Select(x => new MPIntranetListItem(x, x)).ToList();
             areeProduzione.Insert(0, new MPIntranetListItem(string.Empty, string.Empty));
             ViewData.Add("ddlAreaProduzione", areeProduzione);
-
             return View();
         }
         public ActionResult SPControlli()
@@ -79,8 +78,8 @@ namespace MPIntranetWeb.Controllers
 
         public ActionResult GetSchedaProcesso(int Master)
         {
-            SPMaster spMaster = MPIntranet.Business.SchedeProcesso.SPMaster.EstraiSPMaster(Master);
-            return PartialView("SchedaProcessoPartial", spMaster);
+            SpScheda scheda = SpScheda.CreaSchedaVuota(Master);
+            return PartialView("SchedaProcessoPartial", scheda);
         }
 
         public ActionResult UploadFile()
@@ -175,6 +174,9 @@ namespace MPIntranetWeb.Controllers
             return Content(messaggio);
 
         }
+
+       
+
 
         public ActionResult TrovaScheda(string Codice, string Descrizione, int Brand, string Anagrafica)
         {

@@ -50,6 +50,14 @@ namespace MPIntranet.Business
             return brand;
         }
 
+        public static Brand CreaBrandVuoto()
+        {
+            Brand brand = new Brand();
+            brand.IdBrand = ElementiVuoti.Brand;
+            brand.Descrizione = string.Empty;
+            return brand;
+        }
+
         public override string ToString()
         {
             return Descrizione;

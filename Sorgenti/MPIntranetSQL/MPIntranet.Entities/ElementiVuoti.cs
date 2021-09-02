@@ -15,6 +15,7 @@ namespace MPIntranet.Entities
         public const int SPControllo = -1;
         public const int TipoSPControllo = -1;
         public const int SPMaster= -1;
+        public const int SPScheda = -1;
     }
 
     public static class Reparti
