@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 
 namespace MPIntranet.Business
 {
-    public class Brand : BaseModel
+    public class Brand 
     {
 
         public int IdBrand { get; set; }
         public string Descrizione { get; set; }
+        public string Codice { get; set; }
 
         public static Brand EstraiBrand(int idBrand)
         {
@@ -43,10 +44,8 @@ namespace MPIntranet.Business
             if (riga == null) return null;
             Brand brand = new Brand();
             brand.IdBrand = riga.IDBRAND;
-            brand.Cancellato = riga.CANCELLATO;
-            brand.DataModifica = riga.DATAMODIFICA;
             brand.Descrizione = riga.DESCRIZIONE;
-            brand.UtenteModifica = riga.UTENTEMODIFICA;
+            brand.Codice= riga.CODICE;
             return brand;
         }
 
