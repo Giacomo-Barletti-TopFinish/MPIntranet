@@ -175,9 +175,6 @@ namespace MPIntranetWeb.Controllers
 
         }
 
-       
-
-
         public ActionResult TrovaScheda(string Codice, string Descrizione, int Brand, string Anagrafica)
         {
             List<SpScheda> schede = SpScheda.TrovaSchede(Codice, Descrizione, Brand, Anagrafica);
@@ -187,8 +184,8 @@ namespace MPIntranetWeb.Controllers
         public ActionResult EstraiScheda(int IdSPScheda)
         {
             SpScheda scheda = SpScheda.EstraiSPScheda(IdSPScheda);
-            SPMaster spMaster = MPIntranet.Business.SchedeProcesso.SPMaster.EstraiSPMaster(scheda.Master.IdSPMaster);
-            return PartialView("SchedaProcessoPartial", spMaster);
+//            SPMaster spMaster = MPIntranet.Business.SchedeProcesso.SPMaster.EstraiSPMaster(scheda.Master.IdSPMaster);
+            return PartialView("SchedaProcessoPartial", scheda);
         }
     }
 }

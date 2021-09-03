@@ -307,6 +307,8 @@
             var valore = '';
             if (type == 'checkbox')
                 valore = $(controllo).prop('checked');
+            else if (type == 'select')
+                valore = $(controllo).find("option:selected").text();
             else
                 valore = $(controllo).val();
 
@@ -362,6 +364,42 @@
             success: function (data)
             {
                 $('#divRisultati').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+     function EstraiScheda(idSPScheda) {
+           var url = '@Url.Action("EstraiScheda", "SchedeProcesso")';
+        $.ajax({
+            url: url,
+            data: {
+                IdSPScheda: idSPScheda
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                debugger;
+                $('#divRisultati').html(data).show();
+
+                $('#txtCodice').val($('#hdCodice').val());
+                $('#txtDescrizione').val($('#hdDescrizione').val());
+                $('#txtAnagrafica').val($('#hdAnagrafica').val());
+                $('#ddlBrand').val($('#hdBrand').val());
+
+                var task = $('#hdTask').val();
+                var area = $('#hdAreaProduzione').val();
+                var master = $('#hdIdSPMaster').val();
+                $('#ddlAreaProduzione').val(area);
+                getTasks(area, task);
+                getMaster(area, task, master);
+
             },
             error: function (response)
             {

@@ -23,7 +23,7 @@ namespace MPIntranet.Business.SchedeProcesso
         {
             using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
             {
-                bScheda.FillElementi(ds, IdSPScheda, soloNonCancellati);
+                bScheda.FillValoriSchede(ds, IdSPScheda, soloNonCancellati);
             }
 
             List<SPValoreScheda> valori = new List<SPValoreScheda>();

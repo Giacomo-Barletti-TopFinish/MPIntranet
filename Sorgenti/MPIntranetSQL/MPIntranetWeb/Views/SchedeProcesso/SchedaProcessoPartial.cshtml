@@ -2,6 +2,15 @@
 @model SpScheda
 
 <div>
+    @Html.Hidden("hdIDScheda", Model.IdSPScheda)
+    @Html.Hidden("hdAnagrafica", Model.Anagrafica)
+    @Html.Hidden("hdCodice", Model.Codice)
+    @Html.Hidden("hdDescrizione", Model.Descrizione)
+    @Html.Hidden("hdBrand", Model.Brand.IdBrand)
+    @Html.Hidden("hdAreaProduzione", Model.Master.AreaProduzione)
+    @Html.Hidden("hdTask", Model.Master.Task)
+    @Html.Hidden("hdIdSPMaster", Model.Master.IdSPMaster)
+
     @foreach (SPElemento elemento in Model.Master.Elementi)
     {
     <div class="row">
@@ -12,19 +21,32 @@
         else
         {
             string classe = "CTRL";
+            string valoreElemento = string.Empty;
             if (elemento.Obbligatorio) { classe = "CTRL OBBLIGO"; }
+            SPValoreScheda valore = Model.ValoriScheda.Where(x => x.IdSPElemento == elemento.IdSPElemento).FirstOrDefault();
+            if (valore != null)
+            {
+                valoreElemento = valore.Valore;
+            }
             <div class="col-lg-3"><label>@elemento.Controllo.Descrizione</label></div>
             switch (elemento.Controllo.Tipo)
             {
                 case TipoSPControllo.CHECKBOX:
                     {
-                        <div class="col-lg-2"><input class="@classe" style="border:solid 1px #000  " type="checkbox" id="@elemento.IdSPElemento.ToString()" /></div>
+                        if (valoreElemento == "true")
+                        {
+                            <div class="col-lg-2"><input class="@classe" style="border:solid 1px #000  " type="checkbox" id="@elemento.IdSPElemento.ToString()" checked /></div>
+                        }
+                        else
+                        {
+                            <div class="col-lg-2"><input class="@classe" style="border:solid 1px #000  " type="checkbox" id="@elemento.IdSPElemento.ToString()" /></div>
+                        }
 
                         break;
                     }
                 case TipoSPControllo.DATA:
                     {
-                        <div class="col-lg-2"><input class="@classe" type="date" id="@elemento.IdSPElemento.ToString()" /></div>
+                        <div class="col-lg-2"><input class="@classe" type="date" value="@valoreElemento" id="@elemento.IdSPElemento.ToString()" /></div>
                         break;
                     }
                 case TipoSPControllo.LISTA:
@@ -34,7 +56,14 @@
                                 <option value=""></option>
                                 @foreach (SPElementoLista listItem in elemento.Controllo.Elementi)
                                 {
-                                    <option value="@listItem.Codice">@listItem.Descrizione</option>
+                                    if (@listItem.Descrizione == valoreElemento)
+                                    {
+                                        <option value="@listItem.Codice" selected>@listItem.Descrizione</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@listItem.Codice">@listItem.Descrizione</option>
+                                    }
                                 }
                             </select>
                         </div>
@@ -42,12 +71,12 @@
                     }
                 case TipoSPControllo.NUMERO:
                     {
-                        <div class="col-lg-2"><input class="@classe" type="number" id="@elemento.IdSPElemento.ToString()" /></div>
+                        <div class="col-lg-2"><input class="@classe" type="number" value="@valoreElemento" id="@elemento.IdSPElemento.ToString()" /></div>
                         break;
                     }
                 case TipoSPControllo.TESTO:
                     {
-                        <div class="col-lg-2"><input class="@classe" type="text" id="@elemento.IdSPElemento.ToString()" /></div>
+                        <div class="col-lg-2"><input class="@classe" type="text" value="@valoreElemento" id="@elemento.IdSPElemento.ToString()" /></div>
                         break;
                     }
             }
