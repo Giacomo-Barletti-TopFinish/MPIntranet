@@ -133,7 +133,7 @@ namespace MPIntranet.Business.SchedeProcesso
                 bScheda.GetSPScheda(ds, idScheda);
                 bScheda.FillValoriSchede(ds, idScheda, true);
 
-                SchedeProcessoDS.SPSCHEDERow riga = ds.SPSCHEDE.Where(x => x.IDSPMASTER == idScheda).FirstOrDefault();
+                SchedeProcessoDS.SPSCHEDERow riga = ds.SPSCHEDE.Where(x => x.IDSPSCHEDA == idScheda).FirstOrDefault();
 
                 if (riga != null)
                 {

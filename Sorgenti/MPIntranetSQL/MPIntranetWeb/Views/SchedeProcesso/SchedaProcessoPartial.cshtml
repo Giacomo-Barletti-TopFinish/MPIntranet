@@ -35,24 +35,24 @@
                     {
                         if (valoreElemento == "true")
                         {
-                            <div class="col-lg-2"><input class="@classe" style="border:solid 1px #000  " type="checkbox" id="@elemento.IdSPElemento.ToString()" checked /></div>
+                            <div class="col-lg-2"><input class="@classe" style="border:solid 1px #000" idvalore="@valore.IdSPValoreScheda" type="checkbox" id="@elemento.IdSPElemento.ToString()" checked /></div>
                         }
                         else
                         {
-                            <div class="col-lg-2"><input class="@classe" style="border:solid 1px #000  " type="checkbox" id="@elemento.IdSPElemento.ToString()" /></div>
+                            <div class="col-lg-2"><input class="@classe" style="border:solid 1px #000" idvalore="@valore.IdSPValoreScheda" type="checkbox" id="@elemento.IdSPElemento.ToString()" /></div>
                         }
 
                         break;
                     }
                 case TipoSPControllo.DATA:
                     {
-                        <div class="col-lg-2"><input class="@classe" type="date" value="@valoreElemento" id="@elemento.IdSPElemento.ToString()" /></div>
+                        <div class="col-lg-2"><input class="@classe" type="date" idvalore="@valore.IdSPValoreScheda" value="@valoreElemento" id="@elemento.IdSPElemento.ToString()" /></div>
                         break;
                     }
                 case TipoSPControllo.LISTA:
                     {
                         <div class="col-lg-2">
-                            <select class="CTRL" id="@elemento.IdSPElemento.ToString()">
+                            <select class="CTRL" idvalore="@valore.IdSPValoreScheda" id="@elemento.IdSPElemento.ToString()">
                                 <option value=""></option>
                                 @foreach (SPElementoLista listItem in elemento.Controllo.Elementi)
                                 {
@@ -71,12 +71,12 @@
                     }
                 case TipoSPControllo.NUMERO:
                     {
-                        <div class="col-lg-2"><input class="@classe" type="number" value="@valoreElemento" id="@elemento.IdSPElemento.ToString()" /></div>
+                        <div class="col-lg-2"><input class="@classe" idvalore="@valore.IdSPValoreScheda" type="number" value="@valoreElemento" id="@elemento.IdSPElemento.ToString()" /></div>
                         break;
                     }
                 case TipoSPControllo.TESTO:
                     {
-                        <div class="col-lg-2"><input class="@classe" type="text" value="@valoreElemento" id="@elemento.IdSPElemento.ToString()" /></div>
+                        <div class="col-lg-2"><input class="@classe" idvalore="@valore.IdSPValoreScheda" type="text" value="@valoreElemento" id="@elemento.IdSPElemento.ToString()" /></div>
                         break;
                     }
             }

@@ -64,7 +64,7 @@ namespace MPIntranet.Business.SchedeProcesso
             SalvaValoreScheda(idValoreScheda, idElemento, idSPScheda, valore, account, ds);
         }
 
-        public static void SalvaValoreScheda(int idValoreScheda, int idControllo, int idSPScheda, string valore, string account, SchedeProcessoDS ds)
+        public static void SalvaValoreScheda(int idValoreScheda, int idElemento, int idSPScheda, string valore, string account, SchedeProcessoDS ds)
         {
 
             using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
@@ -93,7 +93,7 @@ namespace MPIntranet.Business.SchedeProcesso
                 {
                     riga = ds.SPVALORISCHEDE.NewSPVALORISCHEDERow();
                     riga.IDSPSCHEDA= idSPScheda;
-                    riga.IDSPELEMENTO= idControllo;
+                    riga.IDSPELEMENTO= idElemento;
                     riga.VALORET = valore.ToUpper();
 
                     riga.CANCELLATO = false;

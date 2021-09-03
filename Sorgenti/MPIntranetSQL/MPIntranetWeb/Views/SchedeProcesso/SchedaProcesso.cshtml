@@ -212,7 +212,7 @@
         var descrizione = $('#txtDescrizione').val();
         var task = $('#ddlTasks').val();
         var areaProduzione = $('#ddlAreaProduzione').val();
-        var idSPScheda = -1;
+        var idSPScheda = $('#hdIDScheda').val();
 
         var brand = $('#ddlBrand').val();
         var anagrafica = $('#txtAnagrafica').val();
@@ -299,15 +299,17 @@
 
     function getTabellaValori() {
         var data = [];
-        var idValore=-1
         var controlli = $('.CTRL');
         for (i = 0; i < controlli.length; i++) {
             var controllo = controlli[i];
+            var idValore = $(controllo).attr('idvalore');
+            if (idValore == '' || idValore == null) idValore = -1;
+            debugger;
             var type = $(controllo).prop('type');
             var valore = '';
             if (type == 'checkbox')
                 valore = $(controllo).prop('checked');
-            else if (type == 'select')
+            else if (type == 'select-one')
                 valore = $(controllo).find("option:selected").text();
             else
                 valore = $(controllo).val();
@@ -385,7 +387,6 @@
             type: "POST",
             success: function (data)
             {
-                debugger;
                 $('#divRisultati').html(data).show();
 
                 $('#txtCodice').val($('#hdCodice').val());
