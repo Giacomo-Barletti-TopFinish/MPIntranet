@@ -1,0 +1,126 @@
+﻿@using MPIntranet.Models.Common
+@{
+    ViewBag.Title = "Schede Processo";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+
+
+<div class="content-top">
+    <h2>Schede Processo</h2>
+</div>
+<div class="content-scheda">
+    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(47))
+    {
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="row">
+                    <div class="col-md-3">
+                        @Html.Label("Brand")
+                        @Html.DropDownList("ddlBrand", new SelectList(@ViewData["ddlBrand"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlBrand" })
+                    </div>
+
+                    <div class="col-md-2">
+                        @Html.Label("Anagrafica")
+                        @Html.TextBox("txtAnagrafica", null, new { @class = "form-control input-sm ", @id = "txtAnagrafica", @maxlength = "12" })
+                    </div>
+                    <div class="col-md-2">
+                        @Html.Label("Codice")
+                        @Html.TextBox("txtCodice", null, new { @class = "form-control input-sm ", @id = "txtCodice", @maxlength = "12" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.Label("Descrizione")
+                        @Html.TextBox("txtDescrizione", null, new { @class = "form-control input-sm ", @id = "txtDescrizione", @maxlength = "12" })
+                    </div>
+                    <div class="col-md-1" style="padding-top:20px">
+                        <input type="button" onclick="TrovaScheda()" class="btn btn-primary" value="Trova" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="row col-lg-12">
+                    <img style="height:auto; max-height:320px; max-width:100%; display: block; margin: auto;" src="">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label class="text-red input-sm" id="lblMessage"></label>
+            <br />
+        </div>
+        <div id="divRisultati"></div>
+    }
+</div>
+
+<script language="javascript" type="text/javascript">
+    $(function ()
+    {
+
+    });
+
+
+    function TrovaScheda() {
+
+        var codice = $('#txtCodice').val();
+        var descrizione = $('#txtDescrizione').val();
+        var brand = $('#ddlBrand').val();
+        var anagrafica = $('#txtAnagrafica').val();
+
+        codice = codice.toUpperCase();
+        descrizione = descrizione.toUpperCase();
+        anagrafica = anagrafica.toUpperCase();
+        $('#txtCodice').val(codice);
+        $('#txtDescrizione').val(descrizione);
+        $('#txtAnagrafica').val(anagrafica);
+
+
+           var url = '@Url.Action("TrovaScheda", "SchedeProcesso")';
+        $.ajax({
+            url: url,
+            data: {
+                Codice: codice,
+                Descrizione: descrizione,
+                Brand: brand,
+                Anagrafica: anagrafica
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divRisultati').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+     function EstraiScheda(idSPScheda) {
+           var url = '@Url.Action("MostraScheda", "SchedeProcesso")';
+        $.ajax({
+            url: url,
+            data: {
+                IdSPScheda: idSPScheda
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divRisultati').html(data).show();
+                if (data == "SCHEDA NON TROVATA") return;
+                $('#txtCodice').val($('#hdCodice').val());
+                $('#txtDescrizione').val($('#hdDescrizione').val());
+                $('#txtAnagrafica').val($('#hdAnagrafica').val());
+                $('#ddlBrand').val($('#hdBrand').val());
+
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+</script>

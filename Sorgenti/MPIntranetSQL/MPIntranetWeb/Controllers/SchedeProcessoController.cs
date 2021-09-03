@@ -184,8 +184,30 @@ namespace MPIntranetWeb.Controllers
         public ActionResult EstraiScheda(int IdSPScheda)
         {
             SpScheda scheda = SpScheda.EstraiSPScheda(IdSPScheda);
-//            SPMaster spMaster = MPIntranet.Business.SchedeProcesso.SPMaster.EstraiSPMaster(scheda.Master.IdSPMaster);
             return PartialView("SchedaProcessoPartial", scheda);
+        }
+
+        public ActionResult LeggiScheda()
+        {
+            List<AreaProduzione> aree = MPIntranet.Business.AreaProduzione.EstraiListaAreeProduzione();
+            List<MPIntranetListItem> areeProduzione = aree.Select(x => new MPIntranetListItem(x.ToString(), x.Codice)).ToList();
+            areeProduzione.Insert(0, new MPIntranetListItem(string.Empty, string.Empty));
+            ViewData.Add("ddlAreaProduzione", areeProduzione);
+
+
+            List<Brand> listaBrands = Brand.EstraiListaBrand();
+            List<MPIntranetListItem> brands = listaBrands.Select(x => new MPIntranetListItem(x.Descrizione, x.IdBrand.ToString())).ToList();
+            brands.Insert(0, new MPIntranetListItem(string.Empty, ElementiVuoti.Brand.ToString()));
+            ViewData.Add("ddlBrand", brands);
+
+            return View();
+        }
+
+        public ActionResult MostraScheda(int IdSPScheda)
+        {
+            SpScheda scheda = SpScheda.EstraiSPScheda(IdSPScheda);
+            if (scheda.ValoriScheda.Count == 0) return Content("SCHEDA NON TROVATA");
+            return PartialView("MostraSchedaPartial", scheda);
         }
     }
 }

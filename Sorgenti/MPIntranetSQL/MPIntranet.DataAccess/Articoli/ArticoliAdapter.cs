@@ -311,11 +311,13 @@ namespace MPIntranet.DataAccess.Articoli
 
         public void GetFASICICLO(ArticoliDS ds, int idDiba, bool soloNonCancellati)
         {
-            string select = @"select * from FASICICLO where [IDDIBA] =  $P<IDDIBA> ";
+            string select = @"select fa.* from FASICICLO fa
+            inner join COMPONENTI co on co.IDCOMPONENTE=fa.IDCOMPONENTE and co.CANCELLATO = 0 
+            where FA.[IDDIBA] =  $P<IDDIBA> ";
             if (soloNonCancellati)
-                select += "AND CANCELLATO = 0 ";
+                select += "AND FA.CANCELLATO = 0";
 
-            select += " ORDER BY IDCOMPONENTE,OPERAZIONE ";
+            select += " ORDER BY FA.IDCOMPONENTE,FA.OPERAZIONE ";
 
             ParamSet ps = new ParamSet();
             ps.AddParam("IDDIBA", DbType.Int32, idDiba);

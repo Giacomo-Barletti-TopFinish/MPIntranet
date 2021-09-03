@@ -1,6 +1,6 @@
 ﻿@using MPIntranet.Models.Common
 @{
-    ViewBag.Title = "Schede Processo - Master";
+    ViewBag.Title = "Schede Processo";
     Layout = "~/Views/Shared/_LayoutApplication.cshtml";
 }
 
@@ -304,7 +304,6 @@
             var controllo = controlli[i];
             var idValore = $(controllo).attr('idvalore');
             if (idValore == '' || idValore == null) idValore = -1;
-            debugger;
             var type = $(controllo).prop('type');
             var valore = '';
             if (type == 'checkbox')
