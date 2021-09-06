@@ -499,7 +499,10 @@ namespace DisegnaDiBa
                 {
                     _distinta.Salva(_utenteConnesso);
                     _distinta = DistintaBase.EstraiDistintaBase(_distinta.IdDiba);
+
                     creaAlbero();
+                    PopolaGrigliaComponenti();
+                    PopolaGrigliaFasi(null);
                 }
                 else
                 {
