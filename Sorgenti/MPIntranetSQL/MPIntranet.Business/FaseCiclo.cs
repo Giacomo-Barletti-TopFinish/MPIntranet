@@ -79,13 +79,13 @@ namespace MPIntranet.Business
             return Copia(nuovaIdFaseCiclo, nuovoIdCOmponente, IdDiba);
         }
 
-        public FaseCiclo Copia(int nuovaIdFaseCiclo, int nuovoIdCOmponente, int idDiba)
+        public FaseCiclo Copia(int nuovaIdFaseCiclo, int nuovoIdComponente, int idDiba)
         {
             FaseCiclo faseCiclo = new FaseCiclo();
 
             faseCiclo.IdDiba = idDiba;
             faseCiclo.IdFaseCiclo = nuovaIdFaseCiclo;
-            faseCiclo.IdComponente = nuovoIdCOmponente;
+            faseCiclo.IdComponente = nuovoIdComponente;
             faseCiclo.Descrizione = Descrizione;
             faseCiclo.Anagrafica = Anagrafica;
             faseCiclo.CollegamentoDiBa = CollegamentoDiBa;
@@ -168,6 +168,72 @@ namespace MPIntranet.Business
             faseCiclo.Nota = faseCicloBC.Nota;
             return faseCiclo;
         }
+
+        private static void SalvaFaseCiclo(FaseCiclo faseCiclo, string utente, ArticoliDS ds)
+        {
+            ArticoliDS.FASICICLORow rigaFaseCiclo = ds.FASICICLO.Where(x => x.RowState != System.Data.DataRowState.Deleted && x.IDFASECICLO == faseCiclo.IdFaseCiclo).FirstOrDefault();
+            if (faseCiclo.IdFaseCiclo < 0 && rigaFaseCiclo != null)
+            {
+                while (rigaFaseCiclo != null)
+                {
+                    faseCiclo.IdFaseCiclo--;
+                    rigaFaseCiclo = ds.FASICICLO.Where(x => x.IDFASECICLO == faseCiclo.IdFaseCiclo).FirstOrDefault();
+                }
+            }
+            if (rigaFaseCiclo == null)
+            {
+                if (faseCiclo.IdComponente == 0 && faseCiclo.IdFaseCiclo == 0) return;
+                rigaFaseCiclo = ds.FASICICLO.NewFASICICLORow();
+                rigaFaseCiclo.IDFASECICLO = faseCiclo.IdFaseCiclo;
+                rigaFaseCiclo.IDCOMPONENTE = faseCiclo.IdComponente;
+                rigaFaseCiclo.IDDIBA = faseCiclo.IdDiba;
+                if (!string.IsNullOrEmpty(faseCiclo.Anagrafica))
+                    rigaFaseCiclo.ANAGRAFICA = string.IsNullOrEmpty(faseCiclo.Anagrafica) ? string.Empty : faseCiclo.Anagrafica.ToUpper();
+                rigaFaseCiclo.COLLEGAMENTODIBA = string.IsNullOrEmpty(faseCiclo.CollegamentoDiBa) ? string.Empty : faseCiclo.CollegamentoDiBa.ToUpper();
+                rigaFaseCiclo.QUANTITA = faseCiclo.Quantita;
+                rigaFaseCiclo.UMQUANTITA = string.IsNullOrEmpty(faseCiclo.UMQuantita) ? string.Empty : faseCiclo.UMQuantita.ToUpper();
+                rigaFaseCiclo.OPERAZIONE = faseCiclo.Operazione;
+                rigaFaseCiclo.DESCRIZIONE = string.IsNullOrEmpty(faseCiclo.Descrizione) ? string.Empty : faseCiclo.Descrizione.ToUpper();
+                rigaFaseCiclo.AREAPRODUZIONE = string.IsNullOrEmpty(faseCiclo.AreaProduzione) ? string.Empty : faseCiclo.AreaProduzione.ToUpper();
+                rigaFaseCiclo.TASK = string.IsNullOrEmpty(faseCiclo.Task) ? string.Empty : faseCiclo.Task.ToUpper();
+                rigaFaseCiclo.SCHEDAPROCESSO = string.IsNullOrEmpty(faseCiclo.SchedaProcesso) ? string.Empty : faseCiclo.SchedaProcesso.ToUpper();
+                rigaFaseCiclo.COLLEGAMENTOCICLO = string.IsNullOrEmpty(faseCiclo.CollegamentoCiclo) ? string.Empty : faseCiclo.CollegamentoCiclo.ToUpper();
+                rigaFaseCiclo.PEZZIPERIODO = faseCiclo.PezziPeriodo;
+                rigaFaseCiclo.PERIODO = faseCiclo.Periodo;
+                rigaFaseCiclo.SETUP = faseCiclo.Setup;
+                rigaFaseCiclo.ATTESA = faseCiclo.Attesa;
+                rigaFaseCiclo.MOVIMENTAZIONE = faseCiclo.Movimentazione;
+                rigaFaseCiclo.CANCELLATO = false;
+                rigaFaseCiclo.DATAMODIFICA = DateTime.Now;
+                rigaFaseCiclo.UTENTEMODIFICA = utente;
+                rigaFaseCiclo.NOTA = string.IsNullOrEmpty(faseCiclo.Nota) ? string.Empty : faseCiclo.Nota.ToUpper();
+
+                ds.FASICICLO.AddFASICICLORow(rigaFaseCiclo);
+            }
+            else
+            {
+                rigaFaseCiclo.ANAGRAFICA = string.IsNullOrEmpty(faseCiclo.Anagrafica) ? string.Empty : faseCiclo.Anagrafica.ToUpper();
+                rigaFaseCiclo.COLLEGAMENTODIBA = string.IsNullOrEmpty(faseCiclo.CollegamentoDiBa) ? string.Empty : faseCiclo.CollegamentoDiBa.ToUpper();
+                rigaFaseCiclo.QUANTITA = faseCiclo.Quantita;
+                rigaFaseCiclo.UMQUANTITA = string.IsNullOrEmpty(faseCiclo.UMQuantita) ? string.Empty : faseCiclo.UMQuantita.ToUpper();
+                rigaFaseCiclo.OPERAZIONE = faseCiclo.Operazione;
+                rigaFaseCiclo.DESCRIZIONE = string.IsNullOrEmpty(faseCiclo.Descrizione) ? string.Empty : faseCiclo.Descrizione.ToUpper();
+                rigaFaseCiclo.AREAPRODUZIONE = string.IsNullOrEmpty(faseCiclo.AreaProduzione) ? string.Empty : faseCiclo.AreaProduzione.ToUpper();
+                rigaFaseCiclo.TASK = string.IsNullOrEmpty(faseCiclo.Task) ? string.Empty : faseCiclo.Task.ToUpper();
+                rigaFaseCiclo.SCHEDAPROCESSO = string.IsNullOrEmpty(faseCiclo.SchedaProcesso) ? string.Empty : faseCiclo.SchedaProcesso.ToUpper();
+                rigaFaseCiclo.COLLEGAMENTOCICLO = string.IsNullOrEmpty(faseCiclo.CollegamentoCiclo) ? string.Empty : faseCiclo.CollegamentoCiclo.ToUpper();
+                rigaFaseCiclo.PEZZIPERIODO = faseCiclo.PezziPeriodo;
+                rigaFaseCiclo.PERIODO = faseCiclo.Periodo;
+                rigaFaseCiclo.SETUP = faseCiclo.Setup;
+                rigaFaseCiclo.ATTESA = faseCiclo.Attesa;
+                rigaFaseCiclo.MOVIMENTAZIONE = faseCiclo.Movimentazione;
+                rigaFaseCiclo.CANCELLATO = false;
+                rigaFaseCiclo.DATAMODIFICA = DateTime.Now;
+                rigaFaseCiclo.UTENTEMODIFICA = utente;
+                rigaFaseCiclo.NOTA = string.IsNullOrEmpty(faseCiclo.Nota) ? string.Empty : faseCiclo.Nota.ToUpper();
+            }
+        }
+
         public static void SalvaListaFaseCiclo(List<FaseCiclo> fasiCiclo, string utente, ArticoliDS ds)
         {
             if (fasiCiclo.Count() == 0) return;
@@ -187,62 +253,7 @@ namespace MPIntranet.Business
                 }
 
                 foreach (FaseCiclo faseCiclo in fasiCiclo)
-                {
-                    ArticoliDS.FASICICLORow rigaFaseCiclo = ds.FASICICLO.Where(x => x.RowState != System.Data.DataRowState.Deleted && x.IDFASECICLO == faseCiclo.IdFaseCiclo && x.IDCOMPONENTE == idComponente).FirstOrDefault();
-
-                    if (rigaFaseCiclo == null)
-                    {
-                        if (faseCiclo.IdComponente == 0 && faseCiclo.IdFaseCiclo == 0) return;
-                        rigaFaseCiclo = ds.FASICICLO.NewFASICICLORow();
-                        rigaFaseCiclo.IDFASECICLO = faseCiclo.IdFaseCiclo;
-                        rigaFaseCiclo.IDCOMPONENTE = faseCiclo.IdComponente;
-                        rigaFaseCiclo.IDDIBA = faseCiclo.IdDiba;
-                        if (!string.IsNullOrEmpty(faseCiclo.Anagrafica))
-                            rigaFaseCiclo.ANAGRAFICA = string.IsNullOrEmpty(faseCiclo.Anagrafica) ? string.Empty : faseCiclo.Anagrafica.ToUpper();
-                        rigaFaseCiclo.COLLEGAMENTODIBA = string.IsNullOrEmpty(faseCiclo.CollegamentoDiBa) ? string.Empty : faseCiclo.CollegamentoDiBa.ToUpper();
-                        rigaFaseCiclo.QUANTITA = faseCiclo.Quantita;
-                        rigaFaseCiclo.UMQUANTITA = string.IsNullOrEmpty(faseCiclo.UMQuantita) ? string.Empty : faseCiclo.UMQuantita.ToUpper();
-                        rigaFaseCiclo.OPERAZIONE = faseCiclo.Operazione;
-                        rigaFaseCiclo.DESCRIZIONE = string.IsNullOrEmpty(faseCiclo.Descrizione) ? string.Empty : faseCiclo.Descrizione.ToUpper();
-                        rigaFaseCiclo.AREAPRODUZIONE = string.IsNullOrEmpty(faseCiclo.AreaProduzione) ? string.Empty : faseCiclo.AreaProduzione.ToUpper();
-                        rigaFaseCiclo.TASK = string.IsNullOrEmpty(faseCiclo.Task) ? string.Empty : faseCiclo.Task.ToUpper();
-                        rigaFaseCiclo.SCHEDAPROCESSO = string.IsNullOrEmpty(faseCiclo.SchedaProcesso) ? string.Empty : faseCiclo.SchedaProcesso.ToUpper();
-                        rigaFaseCiclo.COLLEGAMENTOCICLO = string.IsNullOrEmpty(faseCiclo.CollegamentoCiclo) ? string.Empty : faseCiclo.CollegamentoCiclo.ToUpper();
-                        rigaFaseCiclo.PEZZIPERIODO = faseCiclo.PezziPeriodo;
-                        rigaFaseCiclo.PERIODO = faseCiclo.Periodo;
-                        rigaFaseCiclo.SETUP = faseCiclo.Setup;
-                        rigaFaseCiclo.ATTESA = faseCiclo.Attesa;
-                        rigaFaseCiclo.MOVIMENTAZIONE = faseCiclo.Movimentazione;
-                        rigaFaseCiclo.CANCELLATO = false;
-                        rigaFaseCiclo.DATAMODIFICA = DateTime.Now;
-                        rigaFaseCiclo.UTENTEMODIFICA = utente;
-                        rigaFaseCiclo.NOTA = string.IsNullOrEmpty(faseCiclo.Nota) ? string.Empty : faseCiclo.Nota.ToUpper();
-
-                        ds.FASICICLO.AddFASICICLORow(rigaFaseCiclo);
-                    }
-                    else
-                    {                       
-                        rigaFaseCiclo.ANAGRAFICA = string.IsNullOrEmpty(faseCiclo.Anagrafica) ? string.Empty : faseCiclo.Anagrafica.ToUpper();
-                        rigaFaseCiclo.COLLEGAMENTODIBA = string.IsNullOrEmpty(faseCiclo.CollegamentoDiBa) ? string.Empty : faseCiclo.CollegamentoDiBa.ToUpper();
-                        rigaFaseCiclo.QUANTITA = faseCiclo.Quantita;
-                        rigaFaseCiclo.UMQUANTITA = string.IsNullOrEmpty(faseCiclo.UMQuantita) ? string.Empty : faseCiclo.UMQuantita.ToUpper();
-                        rigaFaseCiclo.OPERAZIONE = faseCiclo.Operazione;
-                        rigaFaseCiclo.DESCRIZIONE = string.IsNullOrEmpty(faseCiclo.Descrizione) ? string.Empty : faseCiclo.Descrizione.ToUpper();
-                        rigaFaseCiclo.AREAPRODUZIONE = string.IsNullOrEmpty(faseCiclo.AreaProduzione) ? string.Empty : faseCiclo.AreaProduzione.ToUpper();
-                        rigaFaseCiclo.TASK = string.IsNullOrEmpty(faseCiclo.Task) ? string.Empty : faseCiclo.Task.ToUpper();
-                        rigaFaseCiclo.SCHEDAPROCESSO = string.IsNullOrEmpty(faseCiclo.SchedaProcesso) ? string.Empty : faseCiclo.SchedaProcesso.ToUpper();
-                        rigaFaseCiclo.COLLEGAMENTOCICLO = string.IsNullOrEmpty(faseCiclo.CollegamentoCiclo) ? string.Empty : faseCiclo.CollegamentoCiclo.ToUpper();
-                        rigaFaseCiclo.PEZZIPERIODO = faseCiclo.PezziPeriodo;
-                        rigaFaseCiclo.PERIODO = faseCiclo.Periodo;
-                        rigaFaseCiclo.SETUP = faseCiclo.Setup;
-                        rigaFaseCiclo.ATTESA = faseCiclo.Attesa;
-                        rigaFaseCiclo.MOVIMENTAZIONE = faseCiclo.Movimentazione;
-                        rigaFaseCiclo.CANCELLATO = false;
-                        rigaFaseCiclo.DATAMODIFICA = DateTime.Now;
-                        rigaFaseCiclo.UTENTEMODIFICA = utente;
-                        rigaFaseCiclo.NOTA = string.IsNullOrEmpty(faseCiclo.Nota) ? string.Empty : faseCiclo.Nota.ToUpper();
-                    }
-                }
+                    SalvaFaseCiclo(faseCiclo, utente, ds);
             }
 
         }
