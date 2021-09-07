@@ -102,7 +102,7 @@ namespace DisegnaDiBa
                 TreeNode radice = new TreeNode(etichettaNodo);
                 radice.Tag = componenteBase;
                 tvDiBa.Nodes.Add(radice);
-                aggiungiNodoEsistente(componenteBase.Anagrafica, radice);
+                aggiungiNodoEsistente(componenteBase.Anagrafica, radice, componenteBase.IdComponente);
             }
             tvDiBa.ExpandAll();
         }
@@ -126,16 +126,16 @@ namespace DisegnaDiBa
             return nodo;
         }
 
-        private void aggiungiNodoEsistente(string codice, TreeNode nodoPadre)
+        private void aggiungiNodoEsistente(string codice, TreeNode nodoPadre, int IdComponentePadre)
         {
-            foreach (ComponenteBC componente in _distinta.Componenti.Where(x => x.IdPadre == codice))
+            foreach (ComponenteBC componente in _distinta.Componenti.Where(x => x.IdComponentePadre == IdComponentePadre))
             {
                 string etichettaNodo = componente.CreaEtichetta();
                 TreeNode nodoFiglio = new TreeNode(etichettaNodo);
                 nodoFiglio.Tag = componente;
                 nodoPadre.Nodes.Add(nodoFiglio);
 
-                aggiungiNodoEsistente(componente.Anagrafica, nodoFiglio);
+                aggiungiNodoEsistente(componente.Anagrafica, nodoFiglio, componente.IdComponente);
             }
         }
 
@@ -174,7 +174,10 @@ namespace DisegnaDiBa
             foreach (DataGridViewRow riga in dgvComponenti.Rows)
             {
                 string anagrafica = (string)riga.Cells[clmAnagraficaComponente.Index].Value;
-                if (anagrafica == componente.Anagrafica)
+                int idComponente = (int)riga.Cells[clmIdComponenteComponente.Index].Value;
+
+                //                if (anagrafica == componente.Anagrafica)
+                if (idComponente == componente.IdComponente)
                     riga.DefaultCellStyle.BackColor = Color.Yellow;
                 else
                     riga.DefaultCellStyle.BackColor = Color.White;

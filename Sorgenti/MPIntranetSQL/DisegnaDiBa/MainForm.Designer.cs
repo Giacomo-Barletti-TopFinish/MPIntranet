@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.preventiviMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -35,12 +36,12 @@
             this.apriEsistenteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.businessCentralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.taskAreaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.businessCentralToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.apriBusinessCentralMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.finestreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.disponiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cascataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.organizzaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.businessCentralToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.apriBusinessCentralMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preventiviMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -107,6 +108,21 @@
             this.taskAreaToolStripMenuItem.Text = "Task - Area";
             this.taskAreaToolStripMenuItem.Click += new System.EventHandler(this.taskAreaToolStripMenuItem_Click);
             // 
+            // businessCentralToolStripMenuItem1
+            // 
+            this.businessCentralToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.apriBusinessCentralMenuItem});
+            this.businessCentralToolStripMenuItem1.Name = "businessCentralToolStripMenuItem1";
+            this.businessCentralToolStripMenuItem1.Size = new System.Drawing.Size(112, 21);
+            this.businessCentralToolStripMenuItem1.Text = "Business central";
+            // 
+            // apriBusinessCentralMenuItem
+            // 
+            this.apriBusinessCentralMenuItem.Name = "apriBusinessCentralMenuItem";
+            this.apriBusinessCentralMenuItem.Size = new System.Drawing.Size(109, 22);
+            this.apriBusinessCentralMenuItem.Text = "Apri...";
+            this.apriBusinessCentralMenuItem.Click += new System.EventHandler(this.apriBusinessCentralMenuItem_Click);
+            // 
             // finestreToolStripMenuItem
             // 
             this.finestreToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -138,27 +154,13 @@
             this.organizzaToolStripMenuItem.Text = "Organizza orizzontale";
             this.organizzaToolStripMenuItem.Click += new System.EventHandler(this.organizzaToolStripMenuItem_Click);
             // 
-            // businessCentralToolStripMenuItem1
-            // 
-            this.businessCentralToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.apriBusinessCentralMenuItem});
-            this.businessCentralToolStripMenuItem1.Name = "businessCentralToolStripMenuItem1";
-            this.businessCentralToolStripMenuItem1.Size = new System.Drawing.Size(112, 21);
-            this.businessCentralToolStripMenuItem1.Text = "Business central";
-            // 
-            // apriBusinessCentralMenuItem
-            // 
-            this.apriBusinessCentralMenuItem.Name = "apriBusinessCentralMenuItem";
-            this.apriBusinessCentralMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.apriBusinessCentralMenuItem.Text = "Apri...";
-            this.apriBusinessCentralMenuItem.Click += new System.EventHandler(this.apriBusinessCentralMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1452, 808);
             this.Controls.Add(this.preventiviMenu);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.Name = "MainForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);

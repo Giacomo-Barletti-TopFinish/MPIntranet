@@ -169,13 +169,14 @@ namespace MPIntranet.Helpers
 
                 foreach (ExpCicloBusinessCentral c in cicli)
                 {
-                    foreach (ExpFaseCicloBusinessCentral f in c.Fasi)
+                    int operazione = 0;
+                    foreach (ExpFaseCicloBusinessCentral f in c.Fasi.OrderBy(x=>x.Operazione).ToList())
                     {
                         Row rowTestata = new Row();
-
+                        operazione += 10;
                         rowTestata.Append(ConstructCell(c.Codice, CellValues.String, 1));
                         rowTestata.Append(ConstructCell(f.Versione, CellValues.String, 1));
-                        rowTestata.Append(ConstructCell(f.Operazione.ToString(), CellValues.String, 1));
+                        rowTestata.Append(ConstructCell(operazione.ToString(), CellValues.String, 1));
                         rowTestata.Append(ConstructCell(f.Tipo, CellValues.String, 1));
                         rowTestata.Append(ConstructCell(f.AreaProduzione, CellValues.String, 1));
                         rowTestata.Append(ConstructCell(f.TempoSetup.ToString(), CellValues.String, 1));

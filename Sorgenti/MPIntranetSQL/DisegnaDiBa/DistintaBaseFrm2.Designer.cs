@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DistintaBaseFrm2));
             this.tvDiBa = new System.Windows.Forms.TreeView();
             this.dgvFasiCiclo = new System.Windows.Forms.DataGridView();
@@ -78,13 +78,14 @@
             this.toolApriDiBa = new System.Windows.Forms.ToolStripButton();
             this.toolNuovaDiBa = new System.Windows.Forms.ToolStripButton();
             this.toolSalvaDiba = new System.Windows.Forms.ToolStripButton();
+            this.toolCancellaDiBa = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolCollegamento = new System.Windows.Forms.ToolStripButton();
             this.toolCreaDiBaProduzione = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolEsporta = new System.Windows.Forms.ToolStripButton();
             this.txtCodiceEsteso = new System.Windows.Forms.TextBox();
-            this.toolCancellaDiBa = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFasiCiclo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvComponenti)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -157,8 +158,8 @@
             // clmErroreFaseCiclo
             // 
             this.clmErroreFaseCiclo.DataPropertyName = "Errore";
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Red;
-            this.clmErroreFaseCiclo.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Red;
+            this.clmErroreFaseCiclo.DefaultCellStyle = dataGridViewCellStyle1;
             this.clmErroreFaseCiclo.FillWeight = 130F;
             this.clmErroreFaseCiclo.HeaderText = "Errore";
             this.clmErroreFaseCiclo.Name = "clmErroreFaseCiclo";
@@ -397,8 +398,8 @@
             // clmErroreComponente
             // 
             this.clmErroreComponente.DataPropertyName = "Errore";
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Red;
-            this.clmErroreComponente.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Red;
+            this.clmErroreComponente.DefaultCellStyle = dataGridViewCellStyle2;
             this.clmErroreComponente.HeaderText = "Errore";
             this.clmErroreComponente.Name = "clmErroreComponente";
             this.clmErroreComponente.ReadOnly = true;
@@ -465,6 +466,7 @@
             this.toolApriDiBa,
             this.toolNuovaDiBa,
             this.toolSalvaDiba,
+            this.toolStripSeparator4,
             this.toolCancellaDiBa,
             this.toolStripSeparator2,
             this.toolCollegamento,
@@ -524,6 +526,16 @@
             this.toolSalvaDiba.Text = "Salva DiBa";
             this.toolSalvaDiba.Click += new System.EventHandler(this.btnSalvaDiba_Click);
             // 
+            // toolCancellaDiBa
+            // 
+            this.toolCancellaDiBa.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolCancellaDiBa.Image = ((System.Drawing.Image)(resources.GetObject("toolCancellaDiBa.Image")));
+            this.toolCancellaDiBa.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolCancellaDiBa.Name = "toolCancellaDiBa";
+            this.toolCancellaDiBa.Size = new System.Drawing.Size(83, 22);
+            this.toolCancellaDiBa.Text = "Cancella DiBa";
+            this.toolCancellaDiBa.Click += new System.EventHandler(this.toolCancellaDiBa_Click);
+            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -572,15 +584,10 @@
             this.txtCodiceEsteso.Size = new System.Drawing.Size(204, 20);
             this.txtCodiceEsteso.TabIndex = 25;
             // 
-            // toolCancellaDiBa
+            // toolStripSeparator4
             // 
-            this.toolCancellaDiBa.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolCancellaDiBa.Image = ((System.Drawing.Image)(resources.GetObject("toolCancellaDiBa.Image")));
-            this.toolCancellaDiBa.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolCancellaDiBa.Name = "toolCancellaDiBa";
-            this.toolCancellaDiBa.Size = new System.Drawing.Size(83, 22);
-            this.toolCancellaDiBa.Text = "Cancella DiBa";
-            this.toolCancellaDiBa.Click += new System.EventHandler(this.toolCancellaDiBa_Click);
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
             // DistintaBaseFrm2
             // 
@@ -600,6 +607,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtArticolo);
             this.Controls.Add(this.tvDiBa);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DistintaBaseFrm2";
             this.Text = "DIstintaBaseFrm";
             this.Load += new System.EventHandler(this.DistintaBaseFrm_Load);
@@ -667,5 +675,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.TextBox txtCodiceEsteso;
         private System.Windows.Forms.ToolStripButton toolCancellaDiBa;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     }
 }

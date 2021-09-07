@@ -118,6 +118,8 @@ namespace DisegnaDiBa
         {
             try
             {
+                _newrow = false;
+
                 if (_articolo == null)
                 {
                     MessageBox.Show("Nessun articolo selezioanto", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -264,6 +266,8 @@ namespace DisegnaDiBa
 
         private void btnCercaDiBa_Click(object sender, EventArgs e)
         {
+            _newrow = false;
+
             this.Text = string.Empty;
             if (_articolo == null) return;
 
@@ -467,7 +471,7 @@ namespace DisegnaDiBa
             }
             dgvFasiCiclo.AutoGenerateColumns = false;
             if (componente.FasiCiclo == null) componente.FasiCiclo = new List<FaseCiclo>();
-
+            componente.FasiCiclo = componente.FasiCiclo.OrderByDescending(x => x.Operazione).ToList();
             BindingList<FaseCiclo> bindingList = new BindingList<FaseCiclo>(componente.FasiCiclo);
             sourceFasiCicli = new BindingSource(bindingList, null);
             dgvFasiCiclo.DataSource = sourceFasiCicli;
@@ -493,6 +497,8 @@ namespace DisegnaDiBa
         {
             try
             {
+                _newrow = false;
+
                 Cursor.Current = Cursors.WaitCursor;
                 if (_distinta == null) return;
                 if (_distinta.VerificaPerSalvataggio())
@@ -562,6 +568,7 @@ namespace DisegnaDiBa
 
         private void tvDiBa_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
+            _newrow = false;
             if (e.Node.Tag == null) return;
 
             Componente componente = (Componente)e.Node.Tag;
@@ -647,7 +654,7 @@ namespace DisegnaDiBa
                     anagrafica = anagrafica.ToUpper();
                     if (string.IsNullOrEmpty(anagrafica)) return;
                     int posizione = anagrafica.IndexOf(separatoreAutocomplete);
-                    if(posizione<0)return;
+                    if (posizione < 0) return;
                     anagrafica = anagrafica.Substring(0, posizione);
                     dgvComponenti.Rows[e.RowIndex].Cells[clmAnagraficaComponente.Index].Value = anagrafica;
 
@@ -792,7 +799,7 @@ namespace DisegnaDiBa
 
                 if (e.ColumnIndex == clmAnagraficaFaseCiclo.Index)
                 {
-                        string anagrafica = (dgvFasiCiclo.Rows[e.RowIndex].Cells[clmAnagraficaFaseCiclo.Index].Value as string);
+                    string anagrafica = (dgvFasiCiclo.Rows[e.RowIndex].Cells[clmAnagraficaFaseCiclo.Index].Value as string);
                     if (string.IsNullOrEmpty(anagrafica)) return;
                     int posizione = anagrafica.IndexOf(separatoreAutocomplete);
                     if (posizione < 0) return;
@@ -979,14 +986,15 @@ namespace DisegnaDiBa
         private void toolCancellaDiBa_Click(object sender, EventArgs e)
         {
             if (_distinta == null) return;
-            _distinta.Cancella(_utenteConnesso);
-            _distinta = null;
-            popolaCampi();
-            creaAlbero();
-            PopolaGrigliaComponenti();
-            PopolaGrigliaFasi(null);
-
-
+            if (MessageBox.Show("Sei sicuro di voler cancellare la distinta ?", "ATTENZIONE", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            {
+                _distinta.Cancella(_utenteConnesso);
+                _distinta = null;
+                popolaCampi();
+                creaAlbero();
+                PopolaGrigliaComponenti();
+                PopolaGrigliaFasi(null);
+            }
         }
     }
 }

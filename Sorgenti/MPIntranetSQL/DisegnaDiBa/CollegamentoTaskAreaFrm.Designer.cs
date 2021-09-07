@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CollegamentoTaskAreaFrm));
             this.dgvTaskArea = new System.Windows.Forms.DataGridView();
             this.clmIdTaskArea = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmTask = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -123,6 +124,7 @@
             this.ClientSize = new System.Drawing.Size(604, 421);
             this.Controls.Add(this.btnSalvaModifiche);
             this.Controls.Add(this.dgvTaskArea);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CollegamentoTaskAreaFrm";

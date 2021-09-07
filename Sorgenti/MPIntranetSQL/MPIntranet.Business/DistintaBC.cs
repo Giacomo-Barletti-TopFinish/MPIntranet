@@ -16,7 +16,7 @@ namespace MPIntranet.Business
         public string UnitaMisura { get; set; }
         public int Stato { get; set; }
         public List<ComponenteBC> Componenti { get; set; }
-
+        private int idComponente = 0;
         public static DistintaBC EstraiDistintaBase(string idDiba)
         {
             ArticoliDS ds = new ArticoliDS();
@@ -59,11 +59,12 @@ namespace MPIntranet.Business
         }
         public void CaricaDistintaCompleta()
         {
-            Componenti.Add(ComponenteBC.CreaComponente(Codice, Descrizione));
-            aggiungiComponenteBC(Componenti, Codice);
+            idComponente++;
+            Componenti.Add(ComponenteBC.CreaComponente(idComponente, Codice, Descrizione, 0));
+            aggiungiComponenteBC(Componenti, Codice, idComponente);
         }
 
-        private void aggiungiComponenteBC(List<ComponenteBC> Componenti, string codiceDistinta)
+        private void aggiungiComponenteBC(List<ComponenteBC> Componenti, string codiceDistinta, int IdComponentePadre)
         {
             ArticoliDS ds = new ArticoliDS();
             using (ArticoliBusiness bArticoli = new ArticoliBusiness())
@@ -79,9 +80,10 @@ namespace MPIntranet.Business
                 {
                     foreach (ArticoliDS.DistinteBCDettaglioRow dettaglio in dettagli)
                     {
-                        ComponenteBC componente = ComponenteBC.CreaComponente(dettaglio);
+                        idComponente++;
+                        ComponenteBC componente = ComponenteBC.CreaComponente(dettaglio, idComponente, IdComponentePadre);
                         Componenti.Add(componente);
-                        aggiungiComponenteBC(Componenti, componente.Anagrafica);
+                        aggiungiComponenteBC(Componenti, componente.Anagrafica, idComponente);
                     }
                 }
             }

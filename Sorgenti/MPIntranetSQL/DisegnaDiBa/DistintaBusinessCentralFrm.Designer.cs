@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DistintaBusinessCentralFrm));
             this.btnCercaDiBa = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtArticolo = new System.Windows.Forms.TextBox();
@@ -61,6 +62,7 @@
             this.clmIdDibaComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmDescrizioneComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmAnagraficaComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clmIdComponenteComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmCollegamentoDibaComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmQuantitaComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clmUMQuantitaComponente = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -150,8 +152,8 @@
             // clmErroreFaseCiclo
             // 
             this.clmErroreFaseCiclo.DataPropertyName = "Errore";
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Red;
-            this.clmErroreFaseCiclo.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Red;
+            this.clmErroreFaseCiclo.DefaultCellStyle = dataGridViewCellStyle1;
             this.clmErroreFaseCiclo.FillWeight = 130F;
             this.clmErroreFaseCiclo.HeaderText = "Errore";
             this.clmErroreFaseCiclo.Name = "clmErroreFaseCiclo";
@@ -290,6 +292,7 @@
             this.clmIdDibaComponente,
             this.clmDescrizioneComponente,
             this.clmAnagraficaComponente,
+            this.clmIdComponenteComponente,
             this.clmCollegamentoDibaComponente,
             this.clmQuantitaComponente,
             this.clmUMQuantitaComponente,
@@ -333,8 +336,8 @@
             // clmErroreComponente
             // 
             this.clmErroreComponente.DataPropertyName = "Errore";
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Red;
-            this.clmErroreComponente.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Red;
+            this.clmErroreComponente.DefaultCellStyle = dataGridViewCellStyle2;
             this.clmErroreComponente.HeaderText = "Errore";
             this.clmErroreComponente.Name = "clmErroreComponente";
             this.clmErroreComponente.ReadOnly = true;
@@ -364,6 +367,13 @@
             this.clmAnagraficaComponente.Name = "clmAnagraficaComponente";
             this.clmAnagraficaComponente.Width = 130;
             // 
+            // clmIdComponenteComponente
+            // 
+            this.clmIdComponenteComponente.DataPropertyName = "IdComponente";
+            this.clmIdComponenteComponente.HeaderText = "IdComponente";
+            this.clmIdComponenteComponente.Name = "clmIdComponenteComponente";
+            this.clmIdComponenteComponente.Visible = false;
+            // 
             // clmCollegamentoDibaComponente
             // 
             this.clmCollegamentoDibaComponente.DataPropertyName = "CollegamentoDiba";
@@ -391,10 +401,10 @@
             // clmIdPadreComponente
             // 
             this.clmIdPadreComponente.DataPropertyName = "IdPadre";
-            this.clmIdPadreComponente.FillWeight = 50F;
+            this.clmIdPadreComponente.FillWeight = 130F;
             this.clmIdPadreComponente.HeaderText = "IdPadre";
             this.clmIdPadreComponente.Name = "clmIdPadreComponente";
-            this.clmIdPadreComponente.Width = 50;
+            this.clmIdPadreComponente.Width = 130;
             // 
             // DistintaBusinessCentralFrm
             // 
@@ -408,6 +418,7 @@
             this.Controls.Add(this.btnCercaDiBa);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtArticolo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DistintaBusinessCentralFrm";
             this.Text = "DistintaBusinessCentralFrm";
             this.Load += new System.EventHandler(this.DistintaBusinessCentralFrm_Load);
@@ -450,6 +461,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clmIdDibaComponente;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmDescrizioneComponente;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmAnagraficaComponente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clmIdComponenteComponente;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmCollegamentoDibaComponente;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmQuantitaComponente;
         private System.Windows.Forms.DataGridViewTextBoxColumn clmUMQuantitaComponente;

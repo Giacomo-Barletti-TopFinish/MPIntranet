@@ -10,6 +10,7 @@ namespace MPIntranet.Business
 {
     public class ComponenteBC
     {
+        public int IdComponente { get; set; }
         public string IdPadre { get; set; }
         public string Anagrafica { get; set; }
         public string Errore { get; set; }
@@ -18,12 +19,14 @@ namespace MPIntranet.Business
         public string UMQuantita { get; set; }
         public decimal Quantita { get; set; }
         public List<FaseCicloBC> FasiCiclo { get; set; }
-
-        public static ComponenteBC CreaComponente(ArticoliDS.DistinteBCDettaglioRow riga)
+        public int IdComponentePadre { get; set; } 
+        public static ComponenteBC CreaComponente(ArticoliDS.DistinteBCDettaglioRow riga, int idComponente, int IdCompoentePadre)
         {
 
             if (riga == null) return null;
             ComponenteBC componente = new ComponenteBC();
+            componente.IdComponente = idComponente;
+            componente.IdComponentePadre = IdCompoentePadre;
             componente.IdPadre = riga.Production_BOM_No_;
             componente.Anagrafica = riga.No_;
             componente.Descrizione = riga.Description;
@@ -40,10 +43,12 @@ namespace MPIntranet.Business
             return componente;
         }
 
-        public static ComponenteBC CreaComponente(string anagrafica, string descrizione)
+        public static ComponenteBC CreaComponente(int idComponente ,string anagrafica, string descrizione, int IdCompoentePadre)
         {
 
             ComponenteBC componente = new ComponenteBC();
+            componente.IdComponente = idComponente;
+            componente.IdComponentePadre = IdCompoentePadre;
             componente.IdPadre = string.Empty;
             componente.Anagrafica = anagrafica;
             componente.Descrizione = descrizione;
