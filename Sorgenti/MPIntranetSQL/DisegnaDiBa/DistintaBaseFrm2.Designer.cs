@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DistintaBaseFrm2));
             this.tvDiBa = new System.Windows.Forms.TreeView();
             this.dgvFasiCiclo = new System.Windows.Forms.DataGridView();
@@ -78,6 +78,7 @@
             this.toolApriDiBa = new System.Windows.Forms.ToolStripButton();
             this.toolNuovaDiBa = new System.Windows.Forms.ToolStripButton();
             this.toolSalvaDiba = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolCancellaDiBa = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolCollegamento = new System.Windows.Forms.ToolStripButton();
@@ -85,7 +86,6 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolEsporta = new System.Windows.Forms.ToolStripButton();
             this.txtCodiceEsteso = new System.Windows.Forms.TextBox();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFasiCiclo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvComponenti)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -93,8 +93,6 @@
             // 
             // tvDiBa
             // 
-            this.tvDiBa.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
             this.tvDiBa.Location = new System.Drawing.Point(3, 73);
             this.tvDiBa.Name = "tvDiBa";
             this.tvDiBa.Size = new System.Drawing.Size(684, 395);
@@ -103,7 +101,7 @@
             // 
             // dgvFasiCiclo
             // 
-            this.dgvFasiCiclo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.dgvFasiCiclo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvFasiCiclo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFasiCiclo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -158,8 +156,8 @@
             // clmErroreFaseCiclo
             // 
             this.clmErroreFaseCiclo.DataPropertyName = "Errore";
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Red;
-            this.clmErroreFaseCiclo.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Red;
+            this.clmErroreFaseCiclo.DefaultCellStyle = dataGridViewCellStyle9;
             this.clmErroreFaseCiclo.FillWeight = 130F;
             this.clmErroreFaseCiclo.HeaderText = "Errore";
             this.clmErroreFaseCiclo.Name = "clmErroreFaseCiclo";
@@ -398,8 +396,8 @@
             // clmErroreComponente
             // 
             this.clmErroreComponente.DataPropertyName = "Errore";
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Red;
-            this.clmErroreComponente.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Red;
+            this.clmErroreComponente.DefaultCellStyle = dataGridViewCellStyle10;
             this.clmErroreComponente.HeaderText = "Errore";
             this.clmErroreComponente.Name = "clmErroreComponente";
             this.clmErroreComponente.ReadOnly = true;
@@ -526,6 +524,11 @@
             this.toolSalvaDiba.Text = "Salva DiBa";
             this.toolSalvaDiba.Click += new System.EventHandler(this.btnSalvaDiba_Click);
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolCancellaDiBa
             // 
             this.toolCancellaDiBa.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -584,15 +587,11 @@
             this.txtCodiceEsteso.Size = new System.Drawing.Size(204, 20);
             this.txtCodiceEsteso.TabIndex = 25;
             // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-            // 
             // DistintaBaseFrm2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1694, 954);
             this.Controls.Add(this.txtCodiceEsteso);
             this.Controls.Add(this.toolStrip1);

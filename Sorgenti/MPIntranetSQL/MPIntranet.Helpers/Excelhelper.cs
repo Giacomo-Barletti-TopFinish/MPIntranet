@@ -206,7 +206,7 @@ namespace MPIntranet.Helpers
                                 Row rowDettaglio = new Row();
                                 rowDettaglio.Append(ConstructCell(c.Codice, CellValues.String, 1));
                                 rowDettaglio.Append(ConstructCell(string.Empty, CellValues.String, 1));
-                                rowDettaglio.Append(ConstructCell(f.Operazione.ToString(), CellValues.String, 1));
+                                rowDettaglio.Append(ConstructCell(operazione.ToString(), CellValues.String, 1));
                                 rowDettaglio.Append(ConstructCell(numeroRiga.ToString(), CellValues.String, 1));
                                 rowDettaglio.Append(ConstructCell(DateTime.Today.ToShortDateString(), CellValues.String, 1));
                                 rowDettaglio.Append(ConstructCell(elemento, CellValues.String, 1));

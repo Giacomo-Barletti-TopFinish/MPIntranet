@@ -193,6 +193,7 @@ namespace MPIntranet.DataAccess.Articoli
                 }
                 catch (DBConcurrencyException ex)
                 {
+                    throw;
 
                 }
                 catch
@@ -341,19 +342,27 @@ namespace MPIntranet.DataAccess.Articoli
         }
         public void UpdateComponentiTable(string tablename, DataRow[] drs)
         {
-            string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);
-
-            using (DbDataAdapter a = BuildDataAdapter(query))
+            try
             {
-                InstallRowUpdatedHandler(a, UpdateComponentiHander);
-                a.ContinueUpdateOnError = false;
-                DbCommandBuilder cmd = BuildCommandBuilder(a);
-                a.AcceptChangesDuringFill = true;
-                a.UpdateCommand = cmd.GetUpdateCommand();
-                a.DeleteCommand = cmd.GetDeleteCommand();
-                a.InsertCommand = cmd.GetInsertCommand();
+                string query = string.Format(CultureInfo.InvariantCulture, "SELECT * FROM {0}", tablename);
 
-                a.Update(drs);
+                using (DbDataAdapter a = BuildDataAdapter(query))
+                {
+                    InstallRowUpdatedHandler(a, UpdateComponentiHander);
+                    a.ContinueUpdateOnError = false;
+                    DbCommandBuilder cmd = BuildCommandBuilder(a);
+                    a.AcceptChangesDuringFill = true;
+                    a.UpdateCommand = cmd.GetUpdateCommand();
+                    a.DeleteCommand = cmd.GetDeleteCommand();
+                    a.InsertCommand = cmd.GetInsertCommand();
+
+                    a.Update(drs);
+                }
+
+            }
+            catch(Exception ex)
+            {
+                throw ex;
             }
         }
         private void UpdateComponentiHander(object sender, RowUpdatedEventArgs e)
@@ -368,6 +377,10 @@ namespace MPIntranet.DataAccess.Articoli
                 try
                 {
                     row.IDCOMPONENTE = (int)RetrievePostUpdateID<decimal>(e.Command, row);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
                 }
                 finally
                 {

@@ -4,7 +4,7 @@ drop view brands
 go
 CREATE VIEW BRANDS as
 select CASE WHEN ISNUMERIC(acronym) = 1 THEN CAST(acronym AS INT) ELSE -1 END IDBRAND,
-Code CODICE, [Description] DESCRIZIONE from [PROD].[dbo].[METALPLUS$EOS028 CFG Charac_ Value$0fb12c8a-6c9e-407f-bb0e-9fee792ee665]
+Code CODICE, [Description] DESCRIZIONE from [PROD].[dbo].[METALPLUS$EOS028 CFG Charac_ Value$0fb12c8a-6c9e-407f-bb0e-9fee792ee665] WITH (NOLOCK)
 where [Characteristic Code] = 'TBRAND'
 
 USE MPI
@@ -13,7 +13,7 @@ drop view brands
 GO
 CREATE VIEW BRANDS as
 select CASE WHEN ISNUMERIC(acronym) = 1 THEN CAST(acronym AS INT) ELSE -1 END IDBRAND,
-Code CODICE, [Description] DESCRIZIONE from [PROD].[dbo].[METALPLUS$EOS028 CFG Charac_ Value$0fb12c8a-6c9e-407f-bb0e-9fee792ee665]
+Code CODICE, [Description] DESCRIZIONE from [PROD].[dbo].[METALPLUS$EOS028 CFG Charac_ Value$0fb12c8a-6c9e-407f-bb0e-9fee792ee665] WITH (NOLOCK)
 where [Characteristic Code] = 'TBRAND'
 
 

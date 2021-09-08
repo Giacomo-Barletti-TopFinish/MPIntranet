@@ -285,6 +285,14 @@ namespace MPIntranet.Business
             List<Componente> componentiFigli = Componenti.Where(x => x.IdPadre == articolo.IdComponente).ToList();
             componentiFigli.ForEach(x => x.CollegamentoDiBa = ExpCicloBusinessCentral.CodiceCollegamentoStandard);
             List<FaseCiclo> fasi = articolo.FasiCiclo.OrderBy(x => x.Operazione).ToList();
+
+            foreach (FaseCiclo fase in fasi)
+            {
+                fase.Errore = string.Empty;
+                fase.CollegamentoCiclo = string.Empty;
+                fase.CollegamentoDiBa = string.Empty;
+            }
+
             if (componentiFigli.Count > 0)
             {
                 if (fasi.Count > 0)
@@ -299,6 +307,13 @@ namespace MPIntranet.Business
                         fasi[0].Errore = msg;
                     }
                 }
+                else
+                {
+                    string msg = string.Format("Il componente {0} ha dei componenti ma non ha alcuna fase in cui registrarne il consumo. Impossibile registrare il collegamento ciclo.", articolo.IdComponente);
+                    sbErrori.AppendLine(msg);
+                    esito = false;
+                    fasi[0].Errore = msg;
+                }
                 foreach (Componente figlio in componentiFigli)
                 {
                     errori = string.Empty;
@@ -309,10 +324,6 @@ namespace MPIntranet.Business
             bool trovataAnagrafica = false;
             foreach (FaseCiclo fase in fasi)
             {
-                fase.Errore = string.Empty;
-                fase.CollegamentoCiclo = string.Empty;
-                fase.CollegamentoDiBa = string.Empty;
-
                 if (trovataAnagrafica)
                 {
                     fase.CollegamentoCiclo = ExpCicloBusinessCentral.CodiceCollegamentoStandard;

@@ -144,9 +144,7 @@ namespace DisegnaDiBa
                 Cursor.Current = Cursors.WaitCursor;
                 popolaCampi();
 
-                creaAlbero();
-                PopolaGrigliaComponenti();
-                PopolaGrigliaFasi(_distinta.Componenti[0]);
+                Aggiorna();
             }
             catch (Exception ex)
             {
@@ -156,6 +154,13 @@ namespace DisegnaDiBa
             {
                 Cursor.Current = Cursors.Default;
             }
+        }
+
+        private void Aggiorna()
+        {
+            creaAlbero();
+            PopolaGrigliaComponenti();
+            PopolaGrigliaFasi(null);
         }
         private void aggiornaNodoAlbero(int IdComponente, string descrizione, string anagrafica)
         {
@@ -282,9 +287,7 @@ namespace DisegnaDiBa
                     MessageBox.Show("Nessuna distinta selezionata", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 popolaCampi();
-                creaAlbero();
-                PopolaGrigliaComponenti();
-                PopolaGrigliaFasi(null);
+                Aggiorna();
             }
             catch (Exception ex)
             {
@@ -359,7 +362,7 @@ namespace DisegnaDiBa
         {
             if (componenteIniziale == null) return;
 
-            Componente componenteInizialeCopiato = componenteIniziale.Copia(estraiIndiceComponenti(), idPadre);
+            Componente componenteInizialeCopiato = componenteIniziale.Copia(estraiIndiceComponenti(), idPadre, _distinta.IdDiba);
 
             TreeNode nodoFiglio = new TreeNode(componenteInizialeCopiato.CreaEtichetta());
             nodoFiglio.Tag = componenteInizialeCopiato;
@@ -506,9 +509,7 @@ namespace DisegnaDiBa
                     _distinta.Salva(_utenteConnesso);
                     _distinta = DistintaBase.EstraiDistintaBase(_distinta.IdDiba);
 
-                    creaAlbero();
-                    PopolaGrigliaComponenti();
-                    PopolaGrigliaFasi(null);
+                    Aggiorna();
                 }
                 else
                 {
@@ -928,6 +929,7 @@ namespace DisegnaDiBa
                 }
                 finally
                 {
+                    Aggiorna();
                     Cursor.Current = Cursors.Default;
                 }
             }
@@ -959,9 +961,7 @@ namespace DisegnaDiBa
                 nuovaDistinta.ConvertiAnagraficaInProduzione();
                 _distinta = nuovaDistinta;
                 popolaCampi();
-                creaAlbero();
-                PopolaGrigliaComponenti();
-                PopolaGrigliaFasi(null);
+                Aggiorna();
                 MessageBox.Show("Operazione completata con successo", "INFORMAZIONE", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
@@ -991,9 +991,7 @@ namespace DisegnaDiBa
                 _distinta.Cancella(_utenteConnesso);
                 _distinta = null;
                 popolaCampi();
-                creaAlbero();
-                PopolaGrigliaComponenti();
-                PopolaGrigliaFasi(null);
+                Aggiorna ();
             }
         }
     }
