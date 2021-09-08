@@ -176,7 +176,7 @@ namespace MPIntranet.Helpers
                         operazione += 10;
                         rowTestata.Append(ConstructCell(c.Codice, CellValues.String, 1));
                         rowTestata.Append(ConstructCell(f.Versione, CellValues.String, 1));
-                        rowTestata.Append(ConstructCell(operazione.ToString(), CellValues.String, 1));
+                        rowTestata.Append(ConstructCell(operazione.ToString().PadLeft(4,'0'), CellValues.String, 1));
                         rowTestata.Append(ConstructCell(f.Tipo, CellValues.String, 1));
                         rowTestata.Append(ConstructCell(f.AreaProduzione, CellValues.String, 1));
                         rowTestata.Append(ConstructCell(f.TempoSetup.ToString(), CellValues.String, 1));
@@ -206,7 +206,7 @@ namespace MPIntranet.Helpers
                                 Row rowDettaglio = new Row();
                                 rowDettaglio.Append(ConstructCell(c.Codice, CellValues.String, 1));
                                 rowDettaglio.Append(ConstructCell(string.Empty, CellValues.String, 1));
-                                rowDettaglio.Append(ConstructCell(operazione.ToString(), CellValues.String, 1));
+                                rowDettaglio.Append(ConstructCell(operazione.ToString().PadLeft(4, '0'), CellValues.String, 1));
                                 rowDettaglio.Append(ConstructCell(numeroRiga.ToString(), CellValues.String, 1));
                                 rowDettaglio.Append(ConstructCell(DateTime.Today.ToShortDateString(), CellValues.String, 1));
                                 rowDettaglio.Append(ConstructCell(elemento, CellValues.String, 1));
