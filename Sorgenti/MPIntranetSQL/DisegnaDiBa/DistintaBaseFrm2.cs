@@ -353,8 +353,8 @@ namespace DisegnaDiBa
                     tn.Remove();
                     _distinta.Componenti.Remove(componenteSelezionato);
                     idPadre = 0;
+                    tn = null;
                 }
-                tn = null;
                 Componente componenteIniziale = ComponentiDaCopiare.Where(x => x.IdPadre == 0).FirstOrDefault();
                 incollaFaseDistintaRicorsiva(componenteIniziale, idPadre, tn);
                 PopolaGrigliaComponenti();
@@ -960,7 +960,13 @@ namespace DisegnaDiBa
                 Cursor.Current = Cursors.WaitCursor;
                 int idDiba = ElementiVuoti.DistintaBase;
                 int IdTipoDiBa = TipoDistinta.EstraiListaTipoDistinta(true).Where(x => x.TipoDiba == TipoDistinta.TipoProduzione).Select(x => x.IdTipoDiBa).FirstOrDefault();
-                DistintaBase.CreaDistinta(_articolo.IdArticolo, IdTipoDiBa, 1, _distinta.Descrizione, false, _utenteConnesso, out idDiba);
+
+                List<DistintaBase> distinte = DistintaBase.EstraiListaDistinteBase(_articolo.IdArticolo);
+
+                distinte = distinte.Where(x => x.TipoDistinta.IdTipoDiBa == IdTipoDiBa).ToList();
+                int versione= distinte.Count() + 1;
+
+                DistintaBase.CreaDistinta(_articolo.IdArticolo, IdTipoDiBa, versione, _distinta.Descrizione, false, _utenteConnesso, out idDiba);
 
                 if (idDiba == ElementiVuoti.DistintaBase)
                 {

@@ -119,20 +119,25 @@ namespace MPIntranet.Business
         {
             int idComponente = 0;
             int idPadre = 0;
-            copiaDistintaRicorsiva(distintaDestinazione, 0, utente, ref idComponente);
 
-        }
-        private void copiaDistintaRicorsiva(DistintaBase distintaDestinazione, int idPadre, string utente, ref int idComponente)
-        {
-            foreach (Componente componenteOrigine in Componenti.Where(x => x.IdPadre == idPadre))
+            foreach (Componente componenteOrigine in Componenti.Where(x => x.IdPadre == 0))
             {
                 idComponente--;
                 Componente componenteNuovo = componenteOrigine.Copia(idComponente, idPadre, distintaDestinazione.IdDiba);
                 distintaDestinazione.Componenti.Add(componenteNuovo);
 
                 foreach (Componente figlioOrigine in Componenti.Where(x => x.IdPadre == componenteOrigine.IdComponente))
-                    copiaDistintaRicorsiva(distintaDestinazione, componenteOrigine.IdComponente, utente, ref idComponente);
+                    copiaDistintaRicorsiva(distintaDestinazione, figlioOrigine, componenteNuovo.IdComponente, utente, ref idComponente);
             }
+        }
+        private void copiaDistintaRicorsiva(DistintaBase distintaDestinazione, Componente componenteOrigine, int idPadre, string utente, ref int idComponente)
+        {
+            idComponente--;
+            Componente componenteNuovo = componenteOrigine.Copia(idComponente, idPadre, distintaDestinazione.IdDiba);
+            distintaDestinazione.Componenti.Add(componenteNuovo);
+
+            foreach (Componente figlioOrigine in Componenti.Where(x => x.IdPadre == componenteOrigine.IdComponente))
+                copiaDistintaRicorsiva(distintaDestinazione, figlioOrigine, componenteNuovo.IdComponente, utente, ref idComponente);
         }
         public void ConvertiAnagraficaInProduzione()
         {
@@ -189,7 +194,7 @@ namespace MPIntranet.Business
             {
                 bArticolo.GetDistintaBase(ds, IdDiba);
                 ArticoliDS.DIBARow diba = ds.DIBA.Where(x => x.IDDIBA == IdDiba).FirstOrDefault();
-                if(diba!=null)
+                if (diba != null)
                 {
                     diba.DESCRIZIONE = Descrizione;
                     bArticolo.UpdateTable(ds.DIBA.TableName, ds);
