@@ -503,6 +503,7 @@ namespace DisegnaDiBa
                 _newrow = false;
 
                 Cursor.Current = Cursors.WaitCursor;
+                _distinta.Descrizione = (txtDescrizioneDiba.Text.Length > 50) ? txtDescrizioneDiba.Text.Substring(0, 50) : txtDescrizioneDiba.Text;
                 if (_distinta == null) return;
                 if (_distinta.VerificaPerSalvataggio())
                 {
@@ -920,7 +921,7 @@ namespace DisegnaDiBa
                         string msg = "Operazione terminata con errori: ";
                         msg = msg + Environment.NewLine;
                         msg = msg + errori;
-                        MessageBox.Show(msg, "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(msg.Trim(), "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)
@@ -991,7 +992,7 @@ namespace DisegnaDiBa
                 _distinta.Cancella(_utenteConnesso);
                 _distinta = null;
                 popolaCampi();
-                Aggiorna ();
+                Aggiorna();
             }
         }
     }

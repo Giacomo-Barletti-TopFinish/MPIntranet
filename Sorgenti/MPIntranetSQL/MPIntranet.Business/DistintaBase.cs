@@ -184,6 +184,18 @@ namespace MPIntranet.Business
 
         public void Salva(string utente)
         {
+            ArticoliDS ds = new ArticoliDS();
+            using (ArticoliBusiness bArticolo = new ArticoliBusiness())
+            {
+                bArticolo.GetDistintaBase(ds, IdDiba);
+                ArticoliDS.DIBARow diba = ds.DIBA.Where(x => x.IDDIBA == IdDiba).FirstOrDefault();
+                if(diba!=null)
+                {
+                    diba.DESCRIZIONE = Descrizione;
+                    bArticolo.UpdateTable(ds.DIBA.TableName, ds);
+                }
+            }
+
             if (Componenti.Count() == 0) return;
 
             Componente.SalvaListaComponenti(Componenti, utente);
@@ -317,7 +329,8 @@ namespace MPIntranet.Business
                 foreach (Componente figlio in componentiFigli)
                 {
                     errori = string.Empty;
-                    esito = esito && verificaCodiceCollegamentoRicorsivo(figlio, out errori);
+                    bool verifica = verificaCodiceCollegamentoRicorsivo(figlio, out errori);
+                    esito = esito && verifica;
                     sbErrori.AppendLine(errori);
                 }
             }

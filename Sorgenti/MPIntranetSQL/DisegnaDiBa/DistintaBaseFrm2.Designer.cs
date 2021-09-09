@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DistintaBaseFrm2));
             this.tvDiBa = new System.Windows.Forms.TreeView();
             this.dgvFasiCiclo = new System.Windows.Forms.DataGridView();
@@ -156,8 +156,8 @@
             // clmErroreFaseCiclo
             // 
             this.clmErroreFaseCiclo.DataPropertyName = "Errore";
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Red;
-            this.clmErroreFaseCiclo.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Red;
+            this.clmErroreFaseCiclo.DefaultCellStyle = dataGridViewCellStyle5;
             this.clmErroreFaseCiclo.FillWeight = 130F;
             this.clmErroreFaseCiclo.HeaderText = "Errore";
             this.clmErroreFaseCiclo.Name = "clmErroreFaseCiclo";
@@ -320,8 +320,8 @@
             // txtDescrizioneDiba
             // 
             this.txtDescrizioneDiba.Location = new System.Drawing.Point(1021, 35);
+            this.txtDescrizioneDiba.MaxLength = 50;
             this.txtDescrizioneDiba.Name = "txtDescrizioneDiba";
-            this.txtDescrizioneDiba.ReadOnly = true;
             this.txtDescrizioneDiba.Size = new System.Drawing.Size(470, 20);
             this.txtDescrizioneDiba.TabIndex = 12;
             // 
@@ -396,8 +396,8 @@
             // clmErroreComponente
             // 
             this.clmErroreComponente.DataPropertyName = "Errore";
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Red;
-            this.clmErroreComponente.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Red;
+            this.clmErroreComponente.DefaultCellStyle = dataGridViewCellStyle6;
             this.clmErroreComponente.HeaderText = "Errore";
             this.clmErroreComponente.Name = "clmErroreComponente";
             this.clmErroreComponente.ReadOnly = true;
@@ -584,7 +584,7 @@
             this.txtCodiceEsteso.Location = new System.Drawing.Point(274, 35);
             this.txtCodiceEsteso.Name = "txtCodiceEsteso";
             this.txtCodiceEsteso.ReadOnly = true;
-            this.txtCodiceEsteso.Size = new System.Drawing.Size(204, 20);
+            this.txtCodiceEsteso.Size = new System.Drawing.Size(229, 20);
             this.txtCodiceEsteso.TabIndex = 25;
             // 
             // DistintaBaseFrm2

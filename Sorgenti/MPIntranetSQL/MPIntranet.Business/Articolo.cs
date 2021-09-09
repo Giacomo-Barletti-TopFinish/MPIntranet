@@ -39,7 +39,7 @@ namespace MPIntranet.Business
             get
             {
                 if (string.IsNullOrEmpty(CodiceCliente)) return Brand.Descrizione;
-                return string.Format("{0} - {1}", Brand.Descrizione, CodiceCliente);
+                return string.Format("{0} - {1}", Brand.Descrizione.Trim(), CodiceCliente.Trim());
             }
         }
         public static List<Articolo> EstraiListaArticoli(bool soloNonCancellati)
