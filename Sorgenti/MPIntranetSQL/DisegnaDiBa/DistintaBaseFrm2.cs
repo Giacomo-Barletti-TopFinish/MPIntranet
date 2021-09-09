@@ -347,8 +347,16 @@ namespace DisegnaDiBa
                 if (tn.Tag == null) return;
 
                 Componente componenteSelezionato = (Componente)tn.Tag;
+                int idPadre = componenteSelezionato.IdPadre;
+                if (tn.Index == 0)
+                {
+                    tn.Remove();
+                    _distinta.Componenti.Remove(componenteSelezionato);
+                    idPadre = 0;
+                }
+                tn = null;
                 Componente componenteIniziale = ComponentiDaCopiare.Where(x => x.IdPadre == 0).FirstOrDefault();
-                incollaFaseDistintaRicorsiva(componenteIniziale, componenteSelezionato.IdComponente, tn);
+                incollaFaseDistintaRicorsiva(componenteIniziale, idPadre, tn);
                 PopolaGrigliaComponenti();
                 tvDiBa.ExpandAll();
             }
@@ -366,7 +374,10 @@ namespace DisegnaDiBa
 
             TreeNode nodoFiglio = new TreeNode(componenteInizialeCopiato.CreaEtichetta());
             nodoFiglio.Tag = componenteInizialeCopiato;
-            nodoPadre.Nodes.Add(nodoFiglio);
+            if (nodoPadre == null)
+                tvDiBa.Nodes.Add(nodoFiglio);
+            else
+                nodoPadre.Nodes.Add(nodoFiglio);
             _distinta.Componenti.Add(componenteInizialeCopiato);
             foreach (Componente figlio in ComponentiDaCopiare.Where(x => x.IdPadre == componenteIniziale.IdComponente))
             {
