@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DistintaBaseFrm2));
             this.tvDiBa = new System.Windows.Forms.TreeView();
             this.dgvFasiCiclo = new System.Windows.Forms.DataGridView();
@@ -95,7 +95,7 @@
             // 
             this.tvDiBa.Location = new System.Drawing.Point(3, 73);
             this.tvDiBa.Name = "tvDiBa";
-            this.tvDiBa.Size = new System.Drawing.Size(684, 395);
+            this.tvDiBa.Size = new System.Drawing.Size(684, 383);
             this.tvDiBa.TabIndex = 1;
             this.tvDiBa.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvDiBa_NodeMouseClick);
             // 
@@ -124,9 +124,9 @@
             this.clmAttesaFaseCiclo,
             this.clmMovimentazioneFaseCiclo,
             this.clmNotaFaseCiclo});
-            this.dgvFasiCiclo.Location = new System.Drawing.Point(3, 490);
+            this.dgvFasiCiclo.Location = new System.Drawing.Point(3, 471);
             this.dgvFasiCiclo.Name = "dgvFasiCiclo";
-            this.dgvFasiCiclo.Size = new System.Drawing.Size(1672, 450);
+            this.dgvFasiCiclo.Size = new System.Drawing.Size(1672, 469);
             this.dgvFasiCiclo.TabIndex = 5;
             this.dgvFasiCiclo.VirtualMode = true;
             this.dgvFasiCiclo.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFasiCiclo_CellEndEdit);
@@ -156,8 +156,8 @@
             // clmErroreFaseCiclo
             // 
             this.clmErroreFaseCiclo.DataPropertyName = "Errore";
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Red;
-            this.clmErroreFaseCiclo.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Red;
+            this.clmErroreFaseCiclo.DefaultCellStyle = dataGridViewCellStyle1;
             this.clmErroreFaseCiclo.FillWeight = 130F;
             this.clmErroreFaseCiclo.HeaderText = "Errore";
             this.clmErroreFaseCiclo.Name = "clmErroreFaseCiclo";
@@ -369,7 +369,7 @@
             this.clmUMQuantitaComponente});
             this.dgvComponenti.Location = new System.Drawing.Point(716, 73);
             this.dgvComponenti.Name = "dgvComponenti";
-            this.dgvComponenti.Size = new System.Drawing.Size(959, 395);
+            this.dgvComponenti.Size = new System.Drawing.Size(959, 383);
             this.dgvComponenti.TabIndex = 21;
             this.dgvComponenti.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvComponenti_CellEndEdit);
             this.dgvComponenti.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvComponenti_CellValueChanged);
@@ -396,8 +396,8 @@
             // clmErroreComponente
             // 
             this.clmErroreComponente.DataPropertyName = "Errore";
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Red;
-            this.clmErroreComponente.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Red;
+            this.clmErroreComponente.DefaultCellStyle = dataGridViewCellStyle2;
             this.clmErroreComponente.HeaderText = "Errore";
             this.clmErroreComponente.Name = "clmErroreComponente";
             this.clmErroreComponente.ReadOnly = true;

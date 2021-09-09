@@ -51,6 +51,13 @@ namespace DisegnaDiBa
         private void organizzaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LayoutMdi(MdiLayout.TileHorizontal);
+            foreach (Form f in MdiChildren)
+            {
+                if (f is MPIChildForm)
+                {
+                    (f as MPIChildForm).ResetAutoScrollPosition();
+                }
+            }
         }
 
         private void apriEsistenteToolStripMenuItem_Click(object sender, EventArgs e)

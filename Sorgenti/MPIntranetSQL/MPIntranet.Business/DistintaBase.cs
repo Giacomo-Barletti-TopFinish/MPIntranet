@@ -311,13 +311,13 @@ namespace MPIntranet.Business
                 {
                     fasi[0].CollegamentoCiclo = ExpCicloBusinessCentral.CodiceCollegamentoStandard;
                     fasi[0].Errore = string.Empty;
-                    if (!string.IsNullOrEmpty(fasi[0].Anagrafica))
-                    {
-                        string msg = string.Format("La fase {0} dell'articolo {1} non dovrebbe avere alcuna anagrafica valorizzata. Verificare codice collegamento ciclo.", fasi[0].IdFaseCiclo, articolo.IdComponente);
-                        sbErrori.AppendLine(msg);
-                        esito = false;
-                        fasi[0].Errore = msg;
-                    }
+                    //if (!string.IsNullOrEmpty(fasi[0].Anagrafica))
+                    //{
+                    //    string msg = string.Format("La fase {0} dell'articolo {1} non dovrebbe avere alcuna anagrafica valorizzata. Verificare codice collegamento ciclo.", fasi[0].IdFaseCiclo, articolo.IdComponente);
+                    //    sbErrori.AppendLine(msg);
+                    //    esito = false;
+                    //    fasi[0].Errore = msg;
+                    //}
                 }
                 else
                 {

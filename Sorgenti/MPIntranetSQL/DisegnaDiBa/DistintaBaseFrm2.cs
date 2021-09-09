@@ -350,7 +350,7 @@ namespace DisegnaDiBa
                 Componente componenteIniziale = ComponentiDaCopiare.Where(x => x.IdPadre == 0).FirstOrDefault();
                 incollaFaseDistintaRicorsiva(componenteIniziale, componenteSelezionato.IdComponente, tn);
                 PopolaGrigliaComponenti();
-                tn.ExpandAll();
+                tvDiBa.ExpandAll();
             }
             catch (Exception ex)
             {

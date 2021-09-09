@@ -18,6 +18,10 @@ namespace MPIntranet.Common
             InitializeComponent();
         }
 
+        public void ResetAutoScrollPosition()
+        {
+            this.AutoScrollPosition = new Point(0, 0);
+        }
         protected string _utenteConnesso { get { return (MdiParent as MPIBaseForm).Contesto.Utente.DisplayName; } }
         protected ContestoBase Contesto { get { return (MdiParent as MPIBaseForm).Contesto; } }
 
