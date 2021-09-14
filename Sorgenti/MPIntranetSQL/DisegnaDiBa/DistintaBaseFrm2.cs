@@ -347,7 +347,7 @@ namespace DisegnaDiBa
                 if (tn.Tag == null) return;
 
                 Componente componenteSelezionato = (Componente)tn.Tag;
-                int idPadre = componenteSelezionato.IdPadre;
+                int idPadre = componenteSelezionato.IdComponente;
                 if (tn.Index == 0)
                 {
                     tn.Remove();
