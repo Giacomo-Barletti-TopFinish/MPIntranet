@@ -306,7 +306,8 @@ namespace DisegnaDiBa
             cm.MenuItems.Add("Aggiungi nodo sotto", new EventHandler(AggiungiNodoSottoClick));
             cm.MenuItems.Add("Rimuovi nodo", new EventHandler(RimuoviElementoSingoloClick));
             cm.MenuItems.Add("Copia ramo", new EventHandler(CopiaRamoClick));
-            cm.MenuItems.Add("Incolla ramo", new EventHandler(IncollaRamoClick)); tvDiBa.ContextMenu = cm;
+            cm.MenuItems.Add("Sostituisci articolo finito", new EventHandler(SostituisciRamoClick)); tvDiBa.ContextMenu = cm;
+            cm.MenuItems.Add("Appendi ramo", new EventHandler(AppendiRamoClick)); tvDiBa.ContextMenu = cm;
         }
 
         private void CopiaRamoClick(object sender, EventArgs e)
@@ -336,7 +337,7 @@ namespace DisegnaDiBa
                 copiaComponenteRicorsivo(componenteFiglio, componenteCopiato.IdComponente);
             }
         }
-        private void IncollaRamoClick(object sender, EventArgs e)
+        private void AppendiRamoClick(object sender, EventArgs e)
         {
             try
             {
@@ -348,13 +349,50 @@ namespace DisegnaDiBa
 
                 Componente componenteSelezionato = (Componente)tn.Tag;
                 int idPadre = componenteSelezionato.IdComponente;
-                if (tn.Index == 0)
+                //if (tn.Index == 0)
+                //{
+                //    tn.Remove();
+                //    _distinta.Componenti.Remove(componenteSelezionato);
+                //    idPadre = 0;
+                //    tn = null;
+                //}
+                Componente componenteIniziale = ComponentiDaCopiare.Where(x => x.IdPadre == 0).FirstOrDefault();
+                incollaFaseDistintaRicorsiva(componenteIniziale, idPadre, tn);
+                PopolaGrigliaComponenti();
+                tvDiBa.ExpandAll();
+            }
+            catch (Exception ex)
+            {
+                MostraEccezione(ex, "Errore in verifica cicli");
+            }
+
+        }
+        private void SostituisciRamoClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ComponentiDaCopiare == null) return;
+
+                TreeNode tn = tvDiBa.Nodes[0];
+                if (tn == null) return;
+
+                if (tn.Nodes.Count > 0)
                 {
-                    tn.Remove();
-                    _distinta.Componenti.Remove(componenteSelezionato);
-                    idPadre = 0;
-                    tn = null;
+                    if (MessageBox.Show("Il nodo contiene dei componenti, vuoi cancellare il nodo ?", "ATTENZIONE", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No) return;
                 }
+                if (tn.Tag != null)
+                {
+                    Componente componente = (Componente)tn.Tag;
+                    if (componente.FasiCiclo.Count > 0)
+                    {
+                        if (MessageBox.Show("Il nodo contiene delle fasi, vuoi cancellare il nodo ?", "ATTENZIONE", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No) return;
+                    }
+                }
+
+                _distinta.Componenti = new List<Componente>();
+                tn.Remove();
+                int idPadre = 0;
+                tn = null;
                 Componente componenteIniziale = ComponentiDaCopiare.Where(x => x.IdPadre == 0).FirstOrDefault();
                 incollaFaseDistintaRicorsiva(componenteIniziale, idPadre, tn);
                 PopolaGrigliaComponenti();
@@ -964,7 +1002,7 @@ namespace DisegnaDiBa
                 List<DistintaBase> distinte = DistintaBase.EstraiListaDistinteBase(_articolo.IdArticolo);
 
                 distinte = distinte.Where(x => x.TipoDistinta.IdTipoDiBa == IdTipoDiBa).ToList();
-                int versione= distinte.Count() + 1;
+                int versione = distinte.Count() + 1;
 
                 DistintaBase.CreaDistinta(_articolo.IdArticolo, IdTipoDiBa, versione, _distinta.Descrizione, false, _utenteConnesso, out idDiba);
 
