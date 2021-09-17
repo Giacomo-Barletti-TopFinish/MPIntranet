@@ -23,6 +23,11 @@ namespace MPIntranet.Business
         public double Quantita { get; set; }
         public List<FaseCiclo> FasiCiclo { get; set; }
 
+        public bool VerificaCodiciOperazione()
+        {
+            return (FasiCiclo.Count() == FasiCiclo.Select(x => x.Operazione).Distinct().Count());
+        }
+
         public static List<Componente> EstraiListaComponenti(int idDiba)
         {
             ArticoliDS ds = new ArticoliDS();

@@ -234,6 +234,14 @@ namespace MPIntranet.Business
             string codiceDistinta = articolo.Anagrafica;
             ExpDistintaBusinessCentral distinta = new ExpDistintaBusinessCentral(codiceDistinta);
             ExpCicloBusinessCentral ciclo = new ExpCicloBusinessCentral(codiceDistinta);
+
+            if (!articolo.VerificaCodiciOperazione())
+            {
+                string msg = string.Format("Il componente {0} ha dei componenti ma non ha alcuna fase in cui registrarne il consumo. Impossibile registrare il collegamento ciclo.", articolo.IdComponente);
+                sb.AppendLine(msg);
+                esito = false;
+            }
+
             foreach (FaseCiclo faseCiclo in articolo.FasiCiclo.OrderByDescending(x => x.Operazione))
             {
                 if (string.IsNullOrEmpty(faseCiclo.Anagrafica))
@@ -303,6 +311,14 @@ namespace MPIntranet.Business
             componentiFigli.ForEach(x => x.CollegamentoDiBa = ExpCicloBusinessCentral.CodiceCollegamentoStandard);
             List<FaseCiclo> fasi = articolo.FasiCiclo.OrderBy(x => x.Operazione).ToList();
 
+            if(!articolo.VerificaCodiciOperazione())
+            {
+                string msg = string.Format("Verificare i codici operazione per le fasi del componente {0}.", articolo.IdComponente);
+                sbErrori.AppendLine(msg);
+                esito = false;
+                fasi[0].Errore = msg;
+            }
+
             foreach (FaseCiclo fase in fasi)
             {
                 fase.Errore = string.Empty;
@@ -336,7 +352,7 @@ namespace MPIntranet.Business
                     errori = string.Empty;
                     bool verifica = verificaCodiceCollegamentoRicorsivo(figlio, out errori);
                     esito = esito && verifica;
-                    sbErrori.AppendLine(errori);
+                    sbErrori.AppendLine(errori.Trim());
                 }
             }
             bool trovataAnagrafica = false;

@@ -48,7 +48,6 @@ namespace MPIntranet.Business
             }
             return fasiCiclo;
         }
-
         public static List<FaseCiclo> EstraiListaFaseCiclo(Componente componente, ArticoliDS ds)
         {
             List<FaseCiclo> fasiCiclo = new List<FaseCiclo>();

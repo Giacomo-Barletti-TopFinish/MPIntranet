@@ -968,9 +968,10 @@ namespace DisegnaDiBa
                     else
                     {
                         string msg = "Operazione terminata con errori: ";
-                        msg = msg + Environment.NewLine;
-                        msg = msg + errori;
-                        MessageBox.Show(msg.Trim(), "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        msg = msg + Environment.NewLine+Environment.NewLine;
+                        msg = msg + errori.Trim();
+                        msg = msg.Trim();
+                        MessageBox.Show(msg, "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)

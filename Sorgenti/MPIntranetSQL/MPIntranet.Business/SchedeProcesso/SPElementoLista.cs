@@ -108,7 +108,6 @@ namespace MPIntranet.Business.SchedeProcesso
                     ds.SPELEMENTILISTA.AddSPELEMENTILISTARow(riga);
                 }
 
-                bScheda.UpdateTable(ds.SPELEMENTILISTA.TableName, ds);
             }
         }
         public static void SalvaElemento(int idElemento, int idControllo,string codice, string descrizione, int sequenza, string account)
