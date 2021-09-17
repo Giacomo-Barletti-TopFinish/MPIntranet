@@ -90,7 +90,7 @@
     {
         $("#ddlSPMasters").change(function ()
         {
-
+            $('#grigliaValori >tbody').children().remove();
             var selectedText = $(this).find("option:selected").text();
             var idMaster = $(this).val();
              var url = '@Url.Action("GetSPMaster", "SchedeProcesso")';
@@ -190,7 +190,7 @@
         if (!esito) return;
 
 
-        aggiungiRiga(-1, idControllo, selectedText, '@MPIntranet.Business.SchedeProcesso.TipoSPElemento.CONTROLLO',false);
+        aggiungiRiga(-1, idControllo, selectedText, '@MPIntranet.Business.SchedeProcesso.TipoSPElemento.CONTROLLO',true);
 
     }
 

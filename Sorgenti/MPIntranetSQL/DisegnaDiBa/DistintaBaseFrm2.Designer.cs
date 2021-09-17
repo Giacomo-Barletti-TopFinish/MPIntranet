@@ -479,9 +479,8 @@
             // 
             // toolAutosalvataggio
             // 
-            this.toolAutosalvataggio.Checked = true;
-            this.toolAutosalvataggio.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolAutosalvataggio.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolAutosalvataggio.Enabled = false;
             this.toolAutosalvataggio.Image = ((System.Drawing.Image)(resources.GetObject("toolAutosalvataggio.Image")));
             this.toolAutosalvataggio.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolAutosalvataggio.Name = "toolAutosalvataggio";
