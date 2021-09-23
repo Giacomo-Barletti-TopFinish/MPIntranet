@@ -18,6 +18,7 @@ namespace MPIntranet.Business.SchedeProcesso
         public string Descrizione { get; set; }
         public String Tipo { get; set; }
         public string Valore { get; set; }
+        public string ImmagineSRC { get; set; }
 
         public static List<SPValoreScheda> EstraiListaSPValoreScheda(int IdSPScheda, bool soloNonCancellati, SchedeProcessoDS ds)
         {
@@ -51,6 +52,7 @@ namespace MPIntranet.Business.SchedeProcesso
             if (!riga.IsVALORENNull()) valore = riga.VALOREN.ToString();
 
             elemento.Valore = valore;
+            elemento.ImmagineSRC = riga.IsIMMAGINESRCNull() ? string.Empty : riga.IMMAGINESRC;
 
             elemento.Cancellato = riga.CANCELLATO;
             elemento.DataModifica = riga.DATAMODIFICA;
@@ -58,13 +60,13 @@ namespace MPIntranet.Business.SchedeProcesso
 
             return elemento;
         }
-        public static void SalvaValoreScheda(int idValoreScheda, int idElemento, int idSPScheda, string valore, string account)
+        public static void SalvaValoreScheda(int idValoreScheda, int idElemento, int idSPScheda, string valore, string immagineSRC, string account)
         {
             SchedeProcessoDS ds = new SchedeProcessoDS();
-            SalvaValoreScheda(idValoreScheda, idElemento, idSPScheda, valore, account, ds);
+            SalvaValoreScheda(idValoreScheda, idElemento, idSPScheda, valore, account, immagineSRC, ds);
         }
 
-        public static void SalvaValoreScheda(int idValoreScheda, int idElemento, int idSPScheda, string valore, string account, SchedeProcessoDS ds)
+        public static void SalvaValoreScheda(int idValoreScheda, int idElemento, int idSPScheda, string valore, string immagineSRC, string account, SchedeProcessoDS ds)
         {
 
             using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
@@ -86,15 +88,17 @@ namespace MPIntranet.Business.SchedeProcesso
                 {
 
                     riga.VALORET = valore.ToUpper();
+                    riga.IMMAGINESRC = immagineSRC;
                     riga.DATAMODIFICA = DateTime.Now;
                     riga.UTENTEMODIFICA = account;
                 }
                 else
                 {
                     riga = ds.SPVALORISCHEDE.NewSPVALORISCHEDERow();
-                    riga.IDSPSCHEDA= idSPScheda;
-                    riga.IDSPELEMENTO= idElemento;
+                    riga.IDSPSCHEDA = idSPScheda;
+                    riga.IDSPELEMENTO = idElemento;
                     riga.VALORET = valore.ToUpper();
+                    riga.IMMAGINESRC = immagineSRC;
 
                     riga.CANCELLATO = false;
                     riga.DATAMODIFICA = DateTime.Now;

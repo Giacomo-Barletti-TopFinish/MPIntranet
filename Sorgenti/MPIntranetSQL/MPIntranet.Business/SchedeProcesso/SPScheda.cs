@@ -94,7 +94,7 @@ namespace MPIntranet.Business.SchedeProcesso
             controllo.DataModifica = riga.DATAMODIFICA;
             controllo.UtenteModifica = riga.UTENTEMODIFICA;
             controllo.ValoriScheda = SPValoreScheda.EstraiListaSPValoreScheda(riga.IDSPSCHEDA, true, ds);
-            
+
             return controllo;
         }
         public static SpScheda CreaSchedaVuota(int idSPMaster)
@@ -112,7 +112,7 @@ namespace MPIntranet.Business.SchedeProcesso
             return controllo;
         }
 
-         
+
 
         public static SpScheda EstraiSPScheda(int idScheda)
         {
@@ -176,8 +176,11 @@ namespace MPIntranet.Business.SchedeProcesso
 
                 int sequenza = 0;
                 foreach (ElementoScheda controllo in controlli)
-                    SPValoreScheda.SalvaValoreScheda(controllo.IDValore, controllo.IDElemento, riga.IDSPSCHEDA, controllo.Valore, account, ds);
-
+                {
+                    if (!string.IsNullOrEmpty(controllo.Filename))
+                        controllo.Valore = (controllo.Filename.Length > 30) ? controllo.Filename.Substring(0, 30) : controllo.Filename;
+                    SPValoreScheda.SalvaValoreScheda(controllo.IDValore, controllo.IDElemento, riga.IDSPSCHEDA, controllo.Valore, controllo.Filedata, account, ds);
+                }
 
                 bScheda.UpdateTableSPScheda(ds);
                 bScheda.UpdateTable(ds.SPVALORISCHEDE.TableName, ds);

@@ -77,6 +77,12 @@ namespace MPIntranet.DataAccess.SchedeProcesso
         }
 
         [DataContext]
+        public int GetMaxIDSPMaster()
+        {
+            SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
+            return a.GetMaxIDSPMaster();
+        }
+        [DataContext]
         public void GetElemento(SchedeProcessoDS ds, int idSPElemento)
         {
             SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);

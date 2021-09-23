@@ -147,6 +147,16 @@ namespace MPIntranet.DataAccess.SchedeProcesso
             }
         }
 
+        public int GetMaxIDSPMaster()
+        {
+            string select = @"SELECT MAX(IDSPMASTER) FROM SPMASTERS ";
+
+            using (DbCommand co = BuildCommand(select))
+            {
+                object o = co.ExecuteScalar();
+                return (int)o;
+            }
+        }
         public void FillElementi(SchedeProcessoDS ds, int idSPMaster, bool soloNonCancellati)
         {
             string select = @"SELECT * FROM SPELEMENTI WHERE IDSPMASTER = $P<IDSPMASTER>";

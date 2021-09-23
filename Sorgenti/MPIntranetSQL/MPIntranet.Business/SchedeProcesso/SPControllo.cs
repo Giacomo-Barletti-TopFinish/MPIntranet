@@ -18,6 +18,7 @@ namespace MPIntranet.Business.SchedeProcesso
         public const string DATA = "DATA";
         public const string CHECKBOX = "CHECKBOX";
         public const string LISTA = "LISTA";
+        public const string IMMAGINE = "IMMAGINE";
     }
 
     public class SPControllo : BaseModel

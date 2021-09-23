@@ -13,9 +13,13 @@ namespace MPIntranet.Models.Json
         [DataMember(Name = "IDValore")]
         public int IDValore { get; set; }
         [DataMember(Name = "IDElemento")]
-        public int IDElemento{ get; set; }
+        public int IDElemento { get; set; }
         [DataMember(Name = "Valore")]
         public string Valore { get; set; }
+        [DataMember(Name = "Filename")]
+        public string Filename { get; set; }
+        [DataMember(Name = "Filedata")]
+        public string Filedata { get; set; }
 
     }
 }

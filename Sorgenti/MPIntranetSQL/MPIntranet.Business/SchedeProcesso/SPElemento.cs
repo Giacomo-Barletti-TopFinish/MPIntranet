@@ -21,11 +21,11 @@ namespace MPIntranet.Business.SchedeProcesso
         public bool Obbligatorio { get; set; }
         public SPControllo Controllo { get; set; }
 
-
         public static List<SPElemento> EstraiListaSPElementi(int IdSPMaster, bool soloNonCancellati, SchedeProcessoDS ds)
         {
             using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
             {
+                ds.SPELEMENTI.Clear();
                 bScheda.FillElementi(ds, IdSPMaster, soloNonCancellati);
             }
 

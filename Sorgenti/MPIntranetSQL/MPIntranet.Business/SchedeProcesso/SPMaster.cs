@@ -88,7 +88,7 @@ namespace MPIntranet.Business.SchedeProcesso
         }
         public static SPMaster EstraiSPMaster(int idMaster)
         {
-            List<SPMaster> lista = EstraiListaSPMaster(false);
+            List<SPMaster> lista = EstraiListaSPMaster(true);
             return lista.Where(x => x.IdSPMaster == idMaster).FirstOrDefault();
         }
 
@@ -102,6 +102,12 @@ namespace MPIntranet.Business.SchedeProcesso
                 bScheda.FillElementi(ds, idMaster, true);
 
                 SchedeProcessoDS.SPMASTERSRow riga = ds.SPMASTERS.Where(x => x.IDSPMASTER == idMaster).FirstOrDefault();
+
+                if (string.IsNullOrEmpty(codice))
+                {
+                    int maxIDSPMasyer = bScheda.GetMaxIDSPMaster()+1;
+                    codice = "MA" + maxIDSPMasyer.ToString().PadLeft(ds.SPMASTERS.CODICEColumn.MaxLength - 2, '0');
+                }
 
                 if (riga != null)
                 {

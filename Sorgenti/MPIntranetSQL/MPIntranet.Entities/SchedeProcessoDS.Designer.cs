@@ -2484,6 +2484,8 @@ namespace MPIntranet.Entities {
             
             private global::System.Data.DataColumn columnUTENTEMODIFICA;
             
+            private global::System.Data.DataColumn columnIMMAGINESRC;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public SPVALORISCHEDEDataTable() {
@@ -2615,6 +2617,14 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IMMAGINESRCColumn {
+                get {
+                    return this.columnIMMAGINESRC;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2650,7 +2660,7 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public SPVALORISCHEDERow AddSPVALORISCHEDERow(int IDSPSCHEDA, int IDSPELEMENTO, string CODICE, string DESCRIZIONE, string TIPO, double VALOREN, string VALORET, System.DateTime VALORED, bool CANCELLATO, System.DateTime DATAMODIFICA, string UTENTEMODIFICA) {
+            public SPVALORISCHEDERow AddSPVALORISCHEDERow(int IDSPSCHEDA, int IDSPELEMENTO, string CODICE, string DESCRIZIONE, string TIPO, double VALOREN, string VALORET, System.DateTime VALORED, bool CANCELLATO, System.DateTime DATAMODIFICA, string UTENTEMODIFICA, string IMMAGINESRC) {
                 SPVALORISCHEDERow rowSPVALORISCHEDERow = ((SPVALORISCHEDERow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -2664,7 +2674,8 @@ namespace MPIntranet.Entities {
                         VALORED,
                         CANCELLATO,
                         DATAMODIFICA,
-                        UTENTEMODIFICA};
+                        UTENTEMODIFICA,
+                        IMMAGINESRC};
                 rowSPVALORISCHEDERow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSPVALORISCHEDERow);
                 return rowSPVALORISCHEDERow;
@@ -2706,6 +2717,7 @@ namespace MPIntranet.Entities {
                 this.columnCANCELLATO = base.Columns["CANCELLATO"];
                 this.columnDATAMODIFICA = base.Columns["DATAMODIFICA"];
                 this.columnUTENTEMODIFICA = base.Columns["UTENTEMODIFICA"];
+                this.columnIMMAGINESRC = base.Columns["IMMAGINESRC"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2735,6 +2747,8 @@ namespace MPIntranet.Entities {
                 base.Columns.Add(this.columnDATAMODIFICA);
                 this.columnUTENTEMODIFICA = new global::System.Data.DataColumn("UTENTEMODIFICA", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUTENTEMODIFICA);
+                this.columnIMMAGINESRC = new global::System.Data.DataColumn("IMMAGINESRC", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIMMAGINESRC);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnIDSPVALORESCHEDA}, true));
                 this.columnIDSPVALORESCHEDA.AutoIncrement = true;
@@ -2753,6 +2767,7 @@ namespace MPIntranet.Entities {
                 this.columnDATAMODIFICA.AllowDBNull = false;
                 this.columnUTENTEMODIFICA.AllowDBNull = false;
                 this.columnUTENTEMODIFICA.MaxLength = 50;
+                this.columnIMMAGINESRC.MaxLength = 2147483647;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3807,6 +3822,22 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string IMMAGINESRC {
+                get {
+                    try {
+                        return ((string)(this[this.tableSPVALORISCHEDE.IMMAGINESRCColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IMMAGINESRC\' in table \'SPVALORISCHEDE\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSPVALORISCHEDE.IMMAGINESRCColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsCODICENull() {
                 return this.IsNull(this.tableSPVALORISCHEDE.CODICEColumn);
             }
@@ -3875,6 +3906,18 @@ namespace MPIntranet.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetVALOREDNull() {
                 this[this.tableSPVALORISCHEDE.VALOREDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsIMMAGINESRCNull() {
+                return this.IsNull(this.tableSPVALORISCHEDE.IMMAGINESRCColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetIMMAGINESRCNull() {
+                this[this.tableSPVALORISCHEDE.IMMAGINESRCColumn] = global::System.Convert.DBNull;
             }
         }
         

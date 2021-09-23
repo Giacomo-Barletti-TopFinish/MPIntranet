@@ -129,6 +129,7 @@ namespace MPIntranetWeb.Controllers
             tipoControlli.Add(new MPIntranetListItem(TipoSPControllo.LISTA, TipoSPControllo.LISTA));
             tipoControlli.Add(new MPIntranetListItem(TipoSPControllo.NUMERO, TipoSPControllo.NUMERO));
             tipoControlli.Add(new MPIntranetListItem(TipoSPControllo.TESTO, TipoSPControllo.TESTO));
+            tipoControlli.Add(new MPIntranetListItem(TipoSPControllo.IMMAGINE, TipoSPControllo.IMMAGINE));
 
             tipoControlli.Insert(0, new MPIntranetListItem(string.Empty, ElementiVuoti.TipoSPControllo.ToString()));
 

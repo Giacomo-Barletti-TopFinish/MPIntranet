@@ -136,6 +136,8 @@
             });
 
         });
+
+
     });
 
      function getSchedaProcesso(master) {
@@ -298,6 +300,7 @@
     }
 
     function getTabellaValori() {
+
         var data = [];
         var controlli = $('.CTRL');
         for (i = 0; i < controlli.length; i++) {
@@ -314,13 +317,28 @@
                 valore = $(controllo).val();
 
             var id = $(controllo).prop('id');
+            var filename = '';
+            var filedata = null;
+            if (type == 'file') {
+                debugger;
+                valore = '';
+                var fileUpload = $(controllo).get(0);
+                var files = fileUpload.files;
+                valore = '';
+                if (files.length>0) {
+                    filename = files[0].name;
+                    var idImmagineSelezionata = '#IMG_' + id;
+                    filedata = $(idImmagineSelezionata).attr("src");
+                }
+            }
 
             var dato = {
-                'IDElemento': id, 'Valore': valore, 'IDValore':idValore};
+                'IDElemento': id, 'Valore': valore, 'IDValore': idValore, 'Filename': filename, 'Filedata': filedata };
             data.push(dato);
         }
         return data;
     }
+
 
     function verificaColtrolliObbligatori() {
         var esito = true;
