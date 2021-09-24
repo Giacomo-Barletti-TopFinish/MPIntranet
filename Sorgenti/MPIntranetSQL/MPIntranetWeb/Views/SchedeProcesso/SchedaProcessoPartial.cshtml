@@ -29,6 +29,10 @@
                 if (valore != null)
                 {
                     valoreElemento = valore.Valore;
+                    if (elemento.Tipo == TipoSPControllo.IMMAGINE)
+                    {
+                        valoreElemento = "C:\\fakepath\\" + valoreElemento;
+                    }
                     immagineSRC = valore.ImmagineSRC;
                     IdSPValoreScheda = valore.IdSPValoreScheda;
                 }
