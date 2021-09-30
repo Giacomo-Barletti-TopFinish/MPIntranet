@@ -67,6 +67,13 @@ namespace MPIntranet.WS
             return componenti;
         }
 
+        public List<RigheDIBA> EstraiComponenti(string NoComponente, string NoDistinta, string versioneDistinta)
+        {
+            if (_nav == null) return null;
+
+            List<RigheDIBA> componenti = _nav.RigheDIBA.Where(x => x.No == NoComponente && x.Production_BOM_No == NoDistinta && x.Version_Code == versioneDistinta).ToList();
+            return componenti;
+        }
 
 
         public void CambiaStatoDB(string No, string stato)
@@ -80,12 +87,173 @@ namespace MPIntranet.WS
         public void CambiaDescrizioneDB(string No, string descrizione)
         {
             TestataDIBA testata = EstraiTestataDIBA(No);
-            testata.Description= descrizione;
+            testata.Description = descrizione;
             _nav.UpdateObject(testata);
             Salva();
         }
-       
 
+        public void AggiungiComponente(string NoDistinta, string versioneDistinta, int numeroRiga, string tipo, string No, string descrizione, string UM,
+            decimal quantitaPer, string collegamento, decimal scarto, decimal arrotondamento)
+        {
+            RigheDIBA componente = new RigheDIBA();
+
+            componente.Production_BOM_No = NoDistinta;
+            componente.Version_Code = versioneDistinta;
+            componente.Line_No = numeroRiga;
+            componente.Type = tipo;
+            componente.No = No;
+            componente.Description = descrizione;
+            componente.Unit_of_Measure_Code = UM;
+            componente.Quantity_per = quantitaPer;
+            componente.Routing_Link_Code = collegamento;
+            componente.Scrap_Percent = scarto;
+            componente.MTP_Precious_Quantity = arrotondamento;
+            _nav.AddToRigheDIBA(componente);
+            Salva();
+        }
+
+
+        public void RimuoviComponente(string NoDistinta, string versioneDistinta, int numeroRiga, string No)
+        {
+            List<RigheDIBA> componenti = EstraiComponenti(No, NoDistinta, versioneDistinta);
+            componenti = componenti.Where(x => x.Line_No == numeroRiga).ToList();
+
+            foreach (RigheDIBA r in componenti)
+                _nav.DeleteObject(r);
+
+            Salva();
+        }
+
+        public void ModificaComponente(string NoDistinta, string versioneDistinta, int numeroRiga, string No, string descrizione,
+       decimal quantitaPer, string collegamento, decimal scarto, decimal arrotondamento)
+        {
+
+            List<RigheDIBA> componenti = EstraiComponenti(No, NoDistinta, versioneDistinta);
+            componenti = componenti.Where(x => x.Line_No == numeroRiga).ToList();
+            if (componenti.Count == 1)
+            {
+                RigheDIBA componente = componenti[0];
+
+                componente.Production_BOM_No = NoDistinta;
+                componente.Version_Code = versioneDistinta;
+                componente.Line_No = numeroRiga;
+                componente.No = No;
+                componente.Description = descrizione;
+                componente.Quantity_per = quantitaPer;
+                componente.Routing_Link_Code = collegamento;
+                componente.Scrap_Percent = scarto;
+                componente.MTP_Precious_Quantity = arrotondamento;
+                _nav.UpdateObject(componente);
+                Salva();
+            }
+
+        }
+
+        public Cicli EstraiTestataCiclo(string NoCiclo)
+        {
+            if (_nav == null) return null;
+
+            Cicli t = _nav.Cicli.Where(x => x.No == NoCiclo).FirstOrDefault();
+            return t;
+        }
+
+        public List<RigheCICLO> EstraiRigheCICLO(string NoCiclo)
+        {
+            if (_nav == null) return null;
+            //       List<RigheCICLO> righe = _nav.RigheCICLO.ToList();
+            List<RigheCICLO> righe = _nav.RigheCICLO.Where(x => x.Routing_No == NoCiclo).ToList();
+            return righe;
+        }
+        public void CambiaStatoCiclo(string NoCiclo, string stato)
+        {
+            Cicli testata = EstraiTestataCiclo(NoCiclo);
+            testata.Status = stato;
+            _nav.UpdateObject(testata);
+            Salva();
+        }
+        public void CambiaDescrizioneCiclo(string NoCiclo, string descrizione)
+        {
+            Cicli c = EstraiTestataCiclo(NoCiclo);
+            c.Description = descrizione;
+            _nav.UpdateObject(c);
+            Salva();
+        }
+        public void AggiungiFase(string NoCiclo, string versioneCiclo, string operazione, string tipo, string areaProduzione, string task, decimal setup, string UMSetup,
+         decimal lavorazione, string UMLavorazione, decimal attesa, string UMAttesa, decimal spostamento, string UMSpostamento,
+      decimal dimensioneLotto, string collegamento, string codiczione, string logica, string caratteristica)
+        {
+            RigheCICLO fase = new RigheCICLO();
+
+            fase.Lot_Size = dimensioneLotto;
+            fase.Move_Time = spostamento;
+            fase.Move_Time_Unit_of_Meas_Code = UMSpostamento;
+            fase.No = areaProduzione;
+            fase.Operation_No = operazione;
+            fase.Routing_No = NoCiclo;
+            fase.Run_Time = lavorazione;
+            fase.Run_Time_Unit_of_Meas_Code = UMLavorazione;
+            fase.Setup_Time = setup;
+            fase.Setup_Time_Unit_of_Meas_Code = UMSetup;
+            fase.Standard_Task_Code = task;
+            fase.Type = tipo;
+            fase.Version_Code = versioneCiclo;
+            fase.Wait_Time = attesa;
+            fase.Wait_Time_Unit_of_Meas_Code = UMAttesa;
+
+            _nav.AddToRigheCICLO(fase);
+            Salva();
+        }
+
+        public void RimuoviFase(string NoCIclo, string versioneCiclo, string operazione)
+        {
+            List<RigheCICLO> componenti = EstraiRigheCICLO(NoCIclo);
+            componenti = componenti.Where(x => x.Operation_No == operazione).ToList();
+
+            foreach (RigheCICLO r in componenti)
+                _nav.DeleteObject(r);
+
+            Salva();
+        }
+
+        public void ModificaFase(string NoCiclo, string versioneCiclo, string operazione, string tipo, string areaProduzione, string task, decimal setup, string UMSetup,
+       decimal lavorazione, string UMLavorazione, decimal attesa, string UMAttesa, decimal spostamento, string UMSpostamento,
+    decimal dimensioneLotto, string collegamento, string codiczione, string logica, string caratteristica)
+        {
+            List<RigheCICLO> fasi = EstraiRigheCICLO(NoCiclo);
+            fasi = fasi.Where(x => x.Version_Code == versioneCiclo && x.Operation_No == operazione).ToList();
+            if (fasi.Count == 1)
+            {
+
+                RigheCICLO fase = fasi[0];
+
+                fase.Lot_Size = dimensioneLotto;
+                fase.Move_Time = spostamento;
+                fase.Move_Time_Unit_of_Meas_Code = UMSpostamento;
+                fase.No = areaProduzione;
+                fase.Operation_No = operazione;
+                fase.Routing_No = NoCiclo;
+                fase.Run_Time = lavorazione;
+                fase.Run_Time_Unit_of_Meas_Code = UMLavorazione;
+                fase.Setup_Time = setup;
+                fase.Setup_Time_Unit_of_Meas_Code = UMSetup;
+                fase.Standard_Task_Code = task;
+                fase.Type = tipo;
+                fase.Version_Code = versioneCiclo;
+                fase.Wait_Time = attesa;
+                fase.Wait_Time_Unit_of_Meas_Code = UMAttesa;
+
+                _nav.UpdateObject(fase);
+                Salva();
+            }
+        }
+
+        public List<CommentiFasi> EstraiCommenti(string NoCiclo, string versioneCiclo)
+        {
+            if (_nav == null) return null;
+
+            List<CommentiFasi> t = _nav.CommentiFasi.Where(x => x.Routing_No == NoCiclo && x.Version_Code == versioneCiclo).ToList();
+            return t;
+        }
     }
 
 }

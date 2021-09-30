@@ -726,6 +726,266 @@
         </Property>
         <Annotation Term="NAV.LabelId" String="AccountantPortalUserTasks" />
       </EntityType>
+      <EntityType Name="Cicli">
+        <Key>
+          <PropertyRef Name="No" />
+        </Key>
+        <Property Name="No" Type="Edm.String" Nullable="false" MaxLength="20">
+          <Annotation Term="NAV.LabelId" String="Nr." />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEditOnCreate" Bool="true" />
+        </Property>
+        <Property Name="Description" Type="Edm.String" MaxLength="100">
+          <Annotation Term="NAV.LabelId" String="Descrizione" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Type" Type="Edm.String">
+          <Annotation Term="NAV.LabelId" String="Tipo" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Status" Type="Edm.String">
+          <Annotation Term="NAV.LabelId" String="Stato" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Search_Description" Type="Edm.String" MaxLength="100">
+          <Annotation Term="NAV.LabelId" String="Descrizione ricerca" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Version_Nos" Type="Edm.String" MaxLength="20">
+          <Annotation Term="NAV.LabelId" String="Nr. versioni" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="ActiveVersionCode" Type="Edm.String">
+          <Annotation Term="NAV.LabelId" String="Versione attiva" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEdit" Bool="false" />
+        </Property>
+        <Property Name="Last_Date_Modified" Type="Edm.Date">
+          <Annotation Term="NAV.LabelId" String="Data ultima modifica" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Date</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEdit" Bool="false" />
+        </Property>
+        <NavigationProperty Name="CicliRoutingLine" Type="Collection(NAV.CicliRoutingLine)" Partner="Cicli" ContainsTarget="true">
+          <ReferentialConstraint Property="No" ReferencedProperty="Routing_No" />
+        </NavigationProperty>
+        <Annotation Term="NAV.LabelId" String="Cicli" />
+      </EntityType>
+      <EntityType Name="CicliRoutingLine">
+        <Key>
+          <PropertyRef Name="Routing_No" />
+          <PropertyRef Name="Version_Code" />
+          <PropertyRef Name="Operation_No" />
+        </Key>
+        <Property Name="Routing_No" Type="Edm.String" Nullable="false" MaxLength="20">
+          <Annotation Term="NAV.LabelId" String="Routing_No" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEditOnCreate" Bool="true" />
+        </Property>
+        <Property Name="Version_Code" Type="Edm.String" Nullable="false" MaxLength="20">
+          <Annotation Term="NAV.LabelId" String="Version_Code" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEditOnCreate" Bool="true" />
+        </Property>
+        <Property Name="Operation_No" Type="Edm.String" Nullable="false" MaxLength="10">
+          <Annotation Term="NAV.LabelId" String="Nr. operazione" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEditOnCreate" Bool="true" />
+        </Property>
+        <Property Name="Previous_Operation_No" Type="Edm.String" MaxLength="30">
+          <Annotation Term="NAV.LabelId" String="Nr. operazione precedente" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Next_Operation_No" Type="Edm.String" MaxLength="30">
+          <Annotation Term="NAV.LabelId" String="Nr. operazione successivo" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Type" Type="Edm.String">
+          <Annotation Term="NAV.LabelId" String="Tipo" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="No" Type="Edm.String" MaxLength="20">
+          <Annotation Term="NAV.LabelId" String="Nr." />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Standard_Task_Code" Type="Edm.String" MaxLength="10">
+          <Annotation Term="NAV.LabelId" String="Cod. task standard" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Routing_Link_Code" Type="Edm.String" MaxLength="10">
+          <Annotation Term="NAV.LabelId" String="Cod. collegamento tra ciclo e distinta base" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Description" Type="Edm.String" MaxLength="100">
+          <Annotation Term="NAV.LabelId" String="Descrizione" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Setup_Time" Type="Edm.Decimal" Scale="Variable">
+          <Annotation Term="NAV.LabelId" String="Tempo di setup" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Real</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Setup_Time_Unit_of_Meas_Code" Type="Edm.String" MaxLength="10">
+          <Annotation Term="NAV.LabelId" String="Cod. unità mis. tempo di setup" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Run_Time" Type="Edm.Decimal" Scale="Variable">
+          <Annotation Term="NAV.LabelId" String="Tempo lavorazione" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Real</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Run_Time_Unit_of_Meas_Code" Type="Edm.String" MaxLength="10">
+          <Annotation Term="NAV.LabelId" String="Cod. unità mis. tempo lavoraz." />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Wait_Time" Type="Edm.Decimal" Scale="Variable">
+          <Annotation Term="NAV.LabelId" String="Tempo attesa" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Real</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Wait_Time_Unit_of_Meas_Code" Type="Edm.String" MaxLength="10">
+          <Annotation Term="NAV.LabelId" String="Cod. unità mis. tempo attesa" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Move_Time" Type="Edm.Decimal" Scale="Variable">
+          <Annotation Term="NAV.LabelId" String="Tempo spostamento" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Real</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Move_Time_Unit_of_Meas_Code" Type="Edm.String" MaxLength="10">
+          <Annotation Term="NAV.LabelId" String="Cod. unità mis. tempo spostamento" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Fixed_Scrap_Quantity" Type="Edm.Decimal" Scale="Variable">
+          <Annotation Term="NAV.LabelId" String="Quantità scarto fissa" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Real</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Scrap_Factor_Percent" Type="Edm.Decimal" Scale="Variable">
+          <Annotation Term="NAV.LabelId" String="% fattore scarto" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Real</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Minimum_Process_Time" Type="Edm.Decimal" Scale="Variable">
+          <Annotation Term="NAV.LabelId" String="Tempo minimo processo" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Real</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Maximum_Process_Time" Type="Edm.Decimal" Scale="Variable">
+          <Annotation Term="NAV.LabelId" String="Tempo massimo processo" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Real</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Concurrent_Capacities" Type="Edm.Decimal" Scale="Variable">
+          <Annotation Term="NAV.LabelId" String="Capacità simultanee" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Real</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Send_Ahead_Quantity" Type="Edm.Decimal" Scale="Variable">
+          <Annotation Term="NAV.LabelId" String="Quantità send-ahead" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Real</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Unit_Cost_per" Type="Edm.Decimal" Scale="Variable">
+          <Annotation Term="NAV.LabelId" String="Costo unitario per" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Real</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Lot_Size" Type="Edm.Decimal" Scale="Variable">
+          <Annotation Term="NAV.LabelId" String="Dimensione lotto" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Real</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="WIP_Item" Type="Edm.Boolean">
+          <Annotation Term="NAV.LabelId" String="Articolo WIP" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Bool</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="EOSCharacteristicCode" Type="Edm.String" MaxLength="10">
+          <Annotation Term="NAV.LabelId" String="Codice caratteristica" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="EOSRoutingRuleCode" Type="Edm.String" MaxLength="20">
+          <Annotation Term="NAV.LabelId" String="Codice condizione" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="EOSProcLogicCode" Type="Edm.String" MaxLength="10">
+          <Annotation Term="NAV.LabelId" String="Codice logiche lavorazione" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <NavigationProperty Name="Cicli" Type="NAV.Cicli" Partner="CicliRoutingLine" ContainsTarget="true">
+          <ReferentialConstraint Property="Routing_No" ReferencedProperty="No" />
+        </NavigationProperty>
+        <NavigationProperty Name="Routing_No_Link" Type="Collection(NAV.TestataCICLO)" ContainsTarget="true">
+          <ReferentialConstraint Property="Routing_No" ReferencedProperty="No" />
+        </NavigationProperty>
+        <NavigationProperty Name="Routing_Link_Code_Link" Type="Collection(NAV.LinkCICLO)" ContainsTarget="true">
+          <ReferentialConstraint Property="Routing_Link_Code" ReferencedProperty="Code" />
+        </NavigationProperty>
+        <Annotation Term="NAV.LabelId" String="CicliRoutingLine" />
+      </EntityType>
       <EntityType Name="CommentiCICLO">
         <Key>
           <PropertyRef Name="Table_Name" />
@@ -772,6 +1032,58 @@
           </Annotation>
         </Property>
         <Annotation Term="NAV.LabelId" String="CommentiCICLO" />
+      </EntityType>
+      <EntityType Name="CommentiFasi">
+        <Key>
+          <PropertyRef Name="Routing_No" />
+          <PropertyRef Name="Version_Code" />
+          <PropertyRef Name="Operation_No" />
+          <PropertyRef Name="Line_No" />
+        </Key>
+        <Property Name="Routing_No" Type="Edm.String" Nullable="false" MaxLength="20">
+          <Annotation Term="NAV.LabelId" String="Routing_No" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEditOnCreate" Bool="true" />
+        </Property>
+        <Property Name="Version_Code" Type="Edm.String" Nullable="false" MaxLength="20">
+          <Annotation Term="NAV.LabelId" String="Version_Code" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEditOnCreate" Bool="true" />
+        </Property>
+        <Property Name="Operation_No" Type="Edm.String" Nullable="false" MaxLength="10">
+          <Annotation Term="NAV.LabelId" String="Operation_No" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEditOnCreate" Bool="true" />
+        </Property>
+        <Property Name="Line_No" Type="Edm.Int32" Nullable="false">
+          <Annotation Term="NAV.LabelId" String="Line_No" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Int</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEditOnCreate" Bool="true" />
+        </Property>
+        <Property Name="Date" Type="Edm.Date">
+          <Annotation Term="NAV.LabelId" String="Data" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Date</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Comment" Type="Edm.String" MaxLength="80">
+          <Annotation Term="NAV.LabelId" String="Commento" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <NavigationProperty Name="Routing_No_Link" Type="Collection(NAV.TestataCICLO)" ContainsTarget="true">
+          <ReferentialConstraint Property="Routing_No" ReferencedProperty="No" />
+        </NavigationProperty>
+        <Annotation Term="NAV.LabelId" String="CommentiFasi" />
       </EntityType>
       <EntityType Name="LinkCICLO">
         <Key>
@@ -27677,7 +27989,10 @@
         <NavigationProperty Name="AccountantPortalActivityCues" Type="Collection(NAV.AccountantPortalActivityCues)" ContainsTarget="true" />
         <NavigationProperty Name="AccountantPortalFinanceCues" Type="Collection(NAV.AccountantPortalFinanceCues)" ContainsTarget="true" />
         <NavigationProperty Name="AccountantPortalUserTasks" Type="Collection(NAV.AccountantPortalUserTasks)" ContainsTarget="true" />
+        <NavigationProperty Name="Cicli" Type="Collection(NAV.Cicli)" ContainsTarget="true" />
+        <NavigationProperty Name="CicliRoutingLine" Type="Collection(NAV.CicliRoutingLine)" ContainsTarget="true" />
         <NavigationProperty Name="CommentiCICLO" Type="Collection(NAV.CommentiCICLO)" ContainsTarget="true" />
+        <NavigationProperty Name="CommentiFasi" Type="Collection(NAV.CommentiFasi)" ContainsTarget="true" />
         <NavigationProperty Name="LinkCICLO" Type="Collection(NAV.LinkCICLO)" ContainsTarget="true" />
         <NavigationProperty Name="powerbifinance" Type="Collection(NAV.powerbifinance)" ContainsTarget="true" />
         <NavigationProperty Name="RigheCICLO" Type="Collection(NAV.RigheCICLO)" ContainsTarget="true" />
@@ -27958,7 +28273,73 @@
             </Record>
           </Annotation>
         </EntitySet>
+        <EntitySet Name="Cicli" EntityType="NAV.Cicli">
+          <Annotation Term="Org.OData.Capabilities.V1.ChangeTracking">
+            <Record>
+              <PropertyValue Property="Supported" Bool="false" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.DeleteRestrictions">
+            <Record>
+              <PropertyValue Property="Deletable" Bool="true" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.InsertRestrictions">
+            <Record>
+              <PropertyValue Property="Insertable" Bool="true" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.UpdateRestrictions">
+            <Record>
+              <PropertyValue Property="Updatable" Bool="true" />
+            </Record>
+          </Annotation>
+        </EntitySet>
+        <EntitySet Name="CicliRoutingLine" EntityType="NAV.CicliRoutingLine">
+          <Annotation Term="Org.OData.Capabilities.V1.ChangeTracking">
+            <Record>
+              <PropertyValue Property="Supported" Bool="false" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.DeleteRestrictions">
+            <Record>
+              <PropertyValue Property="Deletable" Bool="true" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.InsertRestrictions">
+            <Record>
+              <PropertyValue Property="Insertable" Bool="true" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.UpdateRestrictions">
+            <Record>
+              <PropertyValue Property="Updatable" Bool="true" />
+            </Record>
+          </Annotation>
+        </EntitySet>
         <EntitySet Name="CommentiCICLO" EntityType="NAV.CommentiCICLO">
+          <Annotation Term="Org.OData.Capabilities.V1.ChangeTracking">
+            <Record>
+              <PropertyValue Property="Supported" Bool="false" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.DeleteRestrictions">
+            <Record>
+              <PropertyValue Property="Deletable" Bool="true" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.InsertRestrictions">
+            <Record>
+              <PropertyValue Property="Insertable" Bool="true" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.UpdateRestrictions">
+            <Record>
+              <PropertyValue Property="Updatable" Bool="true" />
+            </Record>
+          </Annotation>
+        </EntitySet>
+        <EntitySet Name="CommentiFasi" EntityType="NAV.CommentiFasi">
           <Annotation Term="Org.OData.Capabilities.V1.ChangeTracking">
             <Record>
               <PropertyValue Property="Supported" Bool="false" />
@@ -29972,6 +30353,15 @@
         <Annotation Term="Org.OData.Core.V1.IsLanguageDependent" Bool="true" />
       </Annotations>
       <Annotations Target="NAV.AccountantPortalUserTasks/Priority">
+        <Annotation Term="Org.OData.Core.V1.IsLanguageDependent" Bool="true" />
+      </Annotations>
+      <Annotations Target="NAV.Cicli/Type">
+        <Annotation Term="Org.OData.Core.V1.IsLanguageDependent" Bool="true" />
+      </Annotations>
+      <Annotations Target="NAV.Cicli/Status">
+        <Annotation Term="Org.OData.Core.V1.IsLanguageDependent" Bool="true" />
+      </Annotations>
+      <Annotations Target="NAV.CicliRoutingLine/Type">
         <Annotation Term="Org.OData.Core.V1.IsLanguageDependent" Bool="true" />
       </Annotations>
       <Annotations Target="NAV.CommentiCICLO/Table_Name">

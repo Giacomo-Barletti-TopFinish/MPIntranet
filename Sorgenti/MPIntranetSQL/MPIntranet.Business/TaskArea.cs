@@ -17,7 +17,10 @@ namespace MPIntranet.Business
         public double PezziPeriodo { get; set; }
         public double Periodo { get; set; }
 
-
+        public override string ToString()
+        {
+            return Task;
+        }
         public static TaskArea EstraiTaskArea(int idTaskArea)
         {
             List<TaskArea> lista = EstraiListaTaskArea(false);
