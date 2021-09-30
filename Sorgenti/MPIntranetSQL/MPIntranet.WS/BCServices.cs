@@ -59,6 +59,15 @@ namespace MPIntranet.WS
             List<RigheDIBA> righe = _nav.RigheDIBA.Where(x => x.Production_BOM_No == No).ToList();
             return righe;
         }
+        public List<RigheDIBA> EstraiComponenti(string NoComponente)
+        {
+            if (_nav == null) return null;
+
+            List<RigheDIBA> componenti = _nav.RigheDIBA.Where(x => x.No == NoComponente).ToList();
+            return componenti;
+        }
+
+
 
         public void CambiaStatoDB(string No, string stato)
         {
@@ -75,5 +84,8 @@ namespace MPIntranet.WS
             _nav.UpdateObject(testata);
             Salva();
         }
+       
+
     }
+
 }

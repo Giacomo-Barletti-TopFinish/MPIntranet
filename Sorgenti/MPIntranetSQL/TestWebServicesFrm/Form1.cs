@@ -54,13 +54,21 @@ namespace TestWebServicesFrm
                 bc.CreaConnessione();
                 List<RigheDIBA> righe = bc.EstraiRigheDIBA(txtDistintaNo.Text);
                 txtMessaggio.Text = string.Format("Trovate {0} righe", righe.Count);
+                List<RigheDIBA> componente = bc.EstraiComponenti(txtNRComponente.Text);
+                txtMessaggio.Text = string.Format("Il componente è ", componente);
 
             }
             catch (Exception ex)
             {
                 txtMessaggio.Text = estraiErrore(ex);
+            
             }
+            
+
+            
         }
+
+
 
         private string estraiErrore(Exception ex)
         {
@@ -71,6 +79,16 @@ namespace TestWebServicesFrm
                 errore = Environment.NewLine + ex.Message;
             }
             return errore;
+        }
+        public string estraiComponenti(Exception cm)
+        {
+            string componente = cm.Message;
+            while (cm.InnerException != null)
+            {
+                cm = cm.InnerException;
+                componente = Environment.NewLine + cm.Message;
+            }
+            return componente;
         }
 
         private void btnDistintaInSviluppo_Click(object sender, EventArgs e)
