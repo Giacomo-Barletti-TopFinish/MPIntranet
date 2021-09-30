@@ -25,7 +25,7 @@ namespace MPIntranet.Business
             StringBuilder sb = new StringBuilder();
             if (faseDistinta != null && string.IsNullOrEmpty(faseDistinta.Anagrafica))
             {
-                ExpFaseCicloBusinessCentral f = new ExpFaseCicloBusinessCentral();
+                ExpFaseCicloBusinessCentral f = new ExpFaseCicloBusinessCentral(Codice);
                 f.Operazione = operazione;
                 f.AreaProduzione = faseDistinta.AreaProduzione;
                 if (string.IsNullOrEmpty(f.AreaProduzione))
@@ -68,7 +68,7 @@ namespace MPIntranet.Business
             StringBuilder sb = new StringBuilder();
             if (faseCiclo != null)//&& string.IsNullOrEmpty(faseCiclo.Anagrafica))
             {
-                ExpFaseCicloBusinessCentral f = new ExpFaseCicloBusinessCentral();
+                ExpFaseCicloBusinessCentral f = new ExpFaseCicloBusinessCentral(Codice);
                 f.Operazione = operazione;
                 operazione += 10;
                 f.AreaProduzione = faseCiclo.AreaProduzione;
@@ -112,7 +112,7 @@ namespace MPIntranet.Business
             StringBuilder sb = new StringBuilder();
             if (faseCiclo != null)//&& string.IsNullOrEmpty(faseCiclo.Anagrafica))
             {
-                ExpFaseCicloBusinessCentral f = new ExpFaseCicloBusinessCentral();
+                ExpFaseCicloBusinessCentral f = new ExpFaseCicloBusinessCentral(Codice);
                 f.Operazione = faseCiclo.Operazione;
                 f.AreaProduzione = faseCiclo.AreaProduzione;
                 if (string.IsNullOrEmpty(faseCiclo.Anagrafica))
@@ -131,10 +131,10 @@ namespace MPIntranet.Business
                     }
 
                 }
-                
-//                f.TempoLavorazione = (faseCiclo.Periodo == 0) ? 0 : faseCiclo.PezziPeriodo / faseCiclo.Periodo;
+
+                //                f.TempoLavorazione = (faseCiclo.Periodo == 0) ? 0 : faseCiclo.PezziPeriodo / faseCiclo.Periodo;
                 f.TempoLavorazione = faseCiclo.Periodo;
-                if (f.TempoLavorazione <= 0 && !string.IsNullOrEmpty(faseCiclo.AreaProduzione) && !string.IsNullOrEmpty(faseCiclo.Task) )
+                if (f.TempoLavorazione <= 0 && !string.IsNullOrEmpty(faseCiclo.AreaProduzione) && !string.IsNullOrEmpty(faseCiclo.Task))
                 {
                     sb.AppendLine(string.Format("Fase {0} tempo lavorazione nullo", faseCiclo.IdFaseCiclo));
                     faseCiclo.Errore += " periodo non valorizzato ";
@@ -197,15 +197,25 @@ namespace MPIntranet.Business
             }
             return stringhe;
         }
+
+        public void RinumeraCodiceOperazione()
+        {
+            int operazione = 10;
+            foreach (ExpFaseCicloBusinessCentral fase in Fasi.OrderBy(x => x.Operazione))
+            {
+                fase.Operazione = operazione;
+                operazione += 10;
+            }
+        }
     }
 
     public class ExpFaseCicloBusinessCentral
     {
-        public int ID;
+        public int ID { get; set; }
         public string Versione = string.Empty;
-        public int Operazione;
+        public int Operazione { get; set; }
         public string Tipo = "Area di produzione";
-        public string AreaProduzione;
+        public string AreaProduzione { get; set; }
         public double TempoSetup = 0;
         public double TempoLavorazione;
         public double TempoAttesa = 0;
@@ -216,12 +226,20 @@ namespace MPIntranet.Business
         public string UMAttesa = "ORE";
         public string UMSpostamento = "ORE";
         public string Collegamento;
-        public string Task;
+        public string Task { get; set; }
         public string Condizione = string.Empty;
         public string Caratteristica = string.Empty;
         public string LogicheLavorazione = string.Empty;
         public List<string> Commenti = new List<string>();
+        public bool Selezionato { get; set; }
+        public string Errore { get; set; }
+        public string CodiceCiclo { get; set; }
+        public string Esito { get; set; }
 
+        public ExpFaseCicloBusinessCentral(string codiceCiclo)
+        {
+            CodiceCiclo = codiceCiclo;
+        }
         public override string ToString()
         {
             return string.Format("   -> {0}  {1} {2}", Operazione, AreaProduzione, Task);

@@ -814,6 +814,9 @@ namespace DisegnaDiBa
 
                 if (_distinta.Esporta(distinteExport, cicliExport, out errori))
                 {
+                    foreach (ExpCicloBusinessCentral ciclo in cicliExport)
+                        ciclo.RinumeraCodiceOperazione();
+
                     EsportaDiBaFrm form = new EsportaDiBaFrm(distinteExport, cicliExport);
                     form.ShowDialog();
                 }

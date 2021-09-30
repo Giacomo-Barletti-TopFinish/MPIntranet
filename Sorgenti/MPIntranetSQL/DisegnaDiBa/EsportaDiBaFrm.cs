@@ -19,6 +19,12 @@ namespace DisegnaDiBa
         private List<ExpDistintaBusinessCentral> _distinteExport = new List<ExpDistintaBusinessCentral>();
         private List<ExpCicloBusinessCentral> _cicliExport = new List<ExpCicloBusinessCentral>();
 
+        private List<ExpComponenteDistintaBusinessCentral> _componentiExport = new List<ExpComponenteDistintaBusinessCentral>();
+        private List<ExpFaseCicloBusinessCentral> _fasiExport = new List<ExpFaseCicloBusinessCentral>();
+
+        private BindingSource sourceFasi;
+        private BindingSource sourceComponenti;
+
         public EsportaDiBaFrm(List<ExpDistintaBusinessCentral> distinteExport, List<ExpCicloBusinessCentral> cicliExport)
         {
             InitializeComponent();
@@ -40,6 +46,46 @@ namespace DisegnaDiBa
             _cicliExport.ForEach(x => sb.AppendLine(x.ToString()));
 
             txtMessaggio.Text = sb.ToString();
+
+            PreparaListaComponentiPerGriglia();
+            PopolaGrigliaComponenti();
+            PopolaGrigliaFasi();
+        }
+
+        private void PreparaListaComponentiPerGriglia()
+        {
+            _distinteExport.ForEach(x => _componentiExport.AddRange(x.Componenti));
+            _cicliExport.ForEach(x => _fasiExport.AddRange(x.Fasi));
+        }
+
+        private void PopolaGrigliaFasi()
+        {
+            if (_fasiExport.Count == 0)
+            {
+                dgvEsportaCicli.DataSource = null;
+                return;
+            }
+            dgvEsportaCicli.AutoGenerateColumns = false;
+
+            BindingList<ExpFaseCicloBusinessCentral> bindingList = new BindingList<ExpFaseCicloBusinessCentral>(_fasiExport);
+            sourceFasi = new BindingSource(bindingList, null);
+            dgvEsportaCicli.DataSource = sourceFasi;
+            dgvEsportaCicli.Update();
+        }
+
+        private void PopolaGrigliaComponenti()
+        {
+            if (_componentiExport.Count == 0)
+            {
+                dgvEsportaDistinte.DataSource = null;
+                return;
+            }
+            dgvEsportaDistinte.AutoGenerateColumns = false;
+
+            BindingList<ExpComponenteDistintaBusinessCentral> bindingList = new BindingList<ExpComponenteDistintaBusinessCentral>(_componentiExport);
+            sourceComponenti = new BindingSource(bindingList, null);
+            dgvEsportaDistinte.DataSource = sourceComponenti;
+            dgvEsportaDistinte.Update();
         }
 
         private void btnTrovaFile_Click(object sender, EventArgs e)
@@ -109,6 +155,27 @@ namespace DisegnaDiBa
                 fs.Close();
                 Cursor.Current = Cursors.Default;
             }
+        }
+
+        private void btnSelezionaTuttoFasi_Click(object sender, EventArgs e)
+        {
+            bool valore = false;
+            if ((sender as Button).Name == btnSelezionaTuttoFasi.Name)
+                valore = true;
+
+            _fasiExport.ForEach(x => x.Selezionato = valore);
+            dgvEsportaCicli.Refresh();
+
+        }
+
+        private void btnSelezionaTuttoComponenti_Click(object sender, EventArgs e)
+        {
+            bool valore = false;
+            if ((sender as Button).Name == btnSelezionaTuttoComponenti.Name)
+                valore = true;
+
+            _componentiExport.ForEach(x => x.Selezionato = valore);
+            dgvEsportaDistinte.Refresh();
         }
     }
 }

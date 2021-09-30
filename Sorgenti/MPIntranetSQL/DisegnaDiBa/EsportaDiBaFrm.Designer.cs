@@ -38,6 +38,29 @@
             this.btnSalvaCicli = new System.Windows.Forms.Button();
             this.btnTrovaFileCicli = new System.Windows.Forms.Button();
             this.txtMessaggio = new System.Windows.Forms.TextBox();
+            this.dgvEsportaDistinte = new System.Windows.Forms.DataGridView();
+            this.dgvEsportaCicli = new System.Windows.Forms.DataGridView();
+            this.btnSelezionaTuttoFasi = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnSelezionaTuttoComponenti = new System.Windows.Forms.Button();
+            this.SelezionaComponentiClm = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.EsitoComponentiClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IDComponentiClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DistintaComponentiClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AnagraficaComponentiClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QuantitaComponentiClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ErroreComponentiClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SelezionatoFaseClm = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.EsitoFaseClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CodiceCicloFaseClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IDFAseClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OperazioneFaseClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AreaProduzioneFaseClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TaskFaseClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ErroreFaseClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEsportaDistinte)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEsportaCicli)).BeginInit();
             this.SuspendLayout();
             // 
             // btnTrovaFileDistinte
@@ -119,14 +142,220 @@
             this.txtMessaggio.Name = "txtMessaggio";
             this.txtMessaggio.ReadOnly = true;
             this.txtMessaggio.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtMessaggio.Size = new System.Drawing.Size(917, 653);
+            this.txtMessaggio.Size = new System.Drawing.Size(508, 679);
             this.txtMessaggio.TabIndex = 8;
+            // 
+            // dgvEsportaDistinte
+            // 
+            this.dgvEsportaDistinte.AllowUserToAddRows = false;
+            this.dgvEsportaDistinte.AllowUserToDeleteRows = false;
+            this.dgvEsportaDistinte.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvEsportaDistinte.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEsportaDistinte.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.SelezionaComponentiClm,
+            this.EsitoComponentiClm,
+            this.IDComponentiClm,
+            this.DistintaComponentiClm,
+            this.AnagraficaComponentiClm,
+            this.QuantitaComponentiClm,
+            this.ErroreComponentiClm});
+            this.dgvEsportaDistinte.Location = new System.Drawing.Point(557, 79);
+            this.dgvEsportaDistinte.Name = "dgvEsportaDistinte";
+            this.dgvEsportaDistinte.Size = new System.Drawing.Size(733, 322);
+            this.dgvEsportaDistinte.TabIndex = 9;
+            // 
+            // dgvEsportaCicli
+            // 
+            this.dgvEsportaCicli.AllowUserToAddRows = false;
+            this.dgvEsportaCicli.AllowUserToDeleteRows = false;
+            this.dgvEsportaCicli.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvEsportaCicli.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEsportaCicli.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.SelezionatoFaseClm,
+            this.EsitoFaseClm,
+            this.CodiceCicloFaseClm,
+            this.IDFAseClm,
+            this.OperazioneFaseClm,
+            this.AreaProduzioneFaseClm,
+            this.TaskFaseClm,
+            this.ErroreFaseClm});
+            this.dgvEsportaCicli.Location = new System.Drawing.Point(557, 434);
+            this.dgvEsportaCicli.Name = "dgvEsportaCicli";
+            this.dgvEsportaCicli.Size = new System.Drawing.Size(733, 322);
+            this.dgvEsportaCicli.TabIndex = 10;
+            // 
+            // btnSelezionaTuttoFasi
+            // 
+            this.btnSelezionaTuttoFasi.Location = new System.Drawing.Point(1033, 406);
+            this.btnSelezionaTuttoFasi.Name = "btnSelezionaTuttoFasi";
+            this.btnSelezionaTuttoFasi.Size = new System.Drawing.Size(123, 23);
+            this.btnSelezionaTuttoFasi.TabIndex = 11;
+            this.btnSelezionaTuttoFasi.Text = "Seleziona tutto";
+            this.btnSelezionaTuttoFasi.UseVisualStyleBackColor = true;
+            this.btnSelezionaTuttoFasi.Click += new System.EventHandler(this.btnSelezionaTuttoFasi_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(1162, 406);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(123, 23);
+            this.button2.TabIndex = 11;
+            this.button2.Text = "Deseleziona tutto";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.btnSelezionaTuttoFasi_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(1162, 48);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(123, 23);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "Deseleziona tutto";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.btnSelezionaTuttoComponenti_Click);
+            // 
+            // btnSelezionaTuttoComponenti
+            // 
+            this.btnSelezionaTuttoComponenti.Location = new System.Drawing.Point(1033, 48);
+            this.btnSelezionaTuttoComponenti.Name = "btnSelezionaTuttoComponenti";
+            this.btnSelezionaTuttoComponenti.Size = new System.Drawing.Size(123, 23);
+            this.btnSelezionaTuttoComponenti.TabIndex = 13;
+            this.btnSelezionaTuttoComponenti.Text = "Seleziona tutto";
+            this.btnSelezionaTuttoComponenti.UseVisualStyleBackColor = true;
+            this.btnSelezionaTuttoComponenti.Click += new System.EventHandler(this.btnSelezionaTuttoComponenti_Click);
+            // 
+            // SelezionaComponentiClm
+            // 
+            this.SelezionaComponentiClm.DataPropertyName = "Selezionato";
+            this.SelezionaComponentiClm.FillWeight = 70F;
+            this.SelezionaComponentiClm.HeaderText = "Seleziona";
+            this.SelezionaComponentiClm.Name = "SelezionaComponentiClm";
+            this.SelezionaComponentiClm.Width = 70;
+            // 
+            // EsitoComponentiClm
+            // 
+            this.EsitoComponentiClm.DataPropertyName = "Esito";
+            this.EsitoComponentiClm.FillWeight = 50F;
+            this.EsitoComponentiClm.HeaderText = "Esito";
+            this.EsitoComponentiClm.Name = "EsitoComponentiClm";
+            this.EsitoComponentiClm.ReadOnly = true;
+            this.EsitoComponentiClm.Width = 50;
+            // 
+            // IDComponentiClm
+            // 
+            this.IDComponentiClm.DataPropertyName = "ID";
+            this.IDComponentiClm.HeaderText = "ID";
+            this.IDComponentiClm.Name = "IDComponentiClm";
+            this.IDComponentiClm.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.IDComponentiClm.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.IDComponentiClm.Visible = false;
+            // 
+            // DistintaComponentiClm
+            // 
+            this.DistintaComponentiClm.DataPropertyName = "DistintaPadre";
+            this.DistintaComponentiClm.FillWeight = 130F;
+            this.DistintaComponentiClm.HeaderText = "Distinta";
+            this.DistintaComponentiClm.Name = "DistintaComponentiClm";
+            this.DistintaComponentiClm.ReadOnly = true;
+            this.DistintaComponentiClm.Width = 130;
+            // 
+            // AnagraficaComponentiClm
+            // 
+            this.AnagraficaComponentiClm.DataPropertyName = "Anagrafica";
+            this.AnagraficaComponentiClm.FillWeight = 130F;
+            this.AnagraficaComponentiClm.HeaderText = "Anagrafica";
+            this.AnagraficaComponentiClm.Name = "AnagraficaComponentiClm";
+            this.AnagraficaComponentiClm.ReadOnly = true;
+            this.AnagraficaComponentiClm.Width = 130;
+            // 
+            // QuantitaComponentiClm
+            // 
+            this.QuantitaComponentiClm.DataPropertyName = "Quantita";
+            this.QuantitaComponentiClm.HeaderText = "Quantita";
+            this.QuantitaComponentiClm.Name = "QuantitaComponentiClm";
+            this.QuantitaComponentiClm.ReadOnly = true;
+            // 
+            // ErroreComponentiClm
+            // 
+            this.ErroreComponentiClm.DataPropertyName = "Errore";
+            this.ErroreComponentiClm.HeaderText = "Errore";
+            this.ErroreComponentiClm.Name = "ErroreComponentiClm";
+            this.ErroreComponentiClm.ReadOnly = true;
+            // 
+            // SelezionatoFaseClm
+            // 
+            this.SelezionatoFaseClm.DataPropertyName = "Selezionato";
+            this.SelezionatoFaseClm.HeaderText = "Seleziona";
+            this.SelezionatoFaseClm.Name = "SelezionatoFaseClm";
+            this.SelezionatoFaseClm.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.SelezionatoFaseClm.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // EsitoFaseClm
+            // 
+            this.EsitoFaseClm.DataPropertyName = "Esito";
+            this.EsitoFaseClm.FillWeight = 50F;
+            this.EsitoFaseClm.HeaderText = "Esito";
+            this.EsitoFaseClm.Name = "EsitoFaseClm";
+            this.EsitoFaseClm.ReadOnly = true;
+            this.EsitoFaseClm.Width = 50;
+            // 
+            // CodiceCicloFaseClm
+            // 
+            this.CodiceCicloFaseClm.DataPropertyName = "CodiceCiclo";
+            this.CodiceCicloFaseClm.FillWeight = 130F;
+            this.CodiceCicloFaseClm.HeaderText = "Ciclo";
+            this.CodiceCicloFaseClm.Name = "CodiceCicloFaseClm";
+            this.CodiceCicloFaseClm.ReadOnly = true;
+            this.CodiceCicloFaseClm.Width = 130;
+            // 
+            // IDFAseClm
+            // 
+            this.IDFAseClm.DataPropertyName = "ID";
+            this.IDFAseClm.HeaderText = "ID";
+            this.IDFAseClm.Name = "IDFAseClm";
+            this.IDFAseClm.Visible = false;
+            // 
+            // OperazioneFaseClm
+            // 
+            this.OperazioneFaseClm.DataPropertyName = "Operazione";
+            this.OperazioneFaseClm.HeaderText = "Operazione";
+            this.OperazioneFaseClm.Name = "OperazioneFaseClm";
+            this.OperazioneFaseClm.ReadOnly = true;
+            // 
+            // AreaProduzioneFaseClm
+            // 
+            this.AreaProduzioneFaseClm.DataPropertyName = "AreaProduzione";
+            this.AreaProduzioneFaseClm.HeaderText = "Area produzione";
+            this.AreaProduzioneFaseClm.Name = "AreaProduzioneFaseClm";
+            this.AreaProduzioneFaseClm.ReadOnly = true;
+            // 
+            // TaskFaseClm
+            // 
+            this.TaskFaseClm.DataPropertyName = "Task";
+            this.TaskFaseClm.HeaderText = "Task";
+            this.TaskFaseClm.Name = "TaskFaseClm";
+            this.TaskFaseClm.ReadOnly = true;
+            // 
+            // ErroreFaseClm
+            // 
+            this.ErroreFaseClm.DataPropertyName = "Errore";
+            this.ErroreFaseClm.HeaderText = "Errore";
+            this.ErroreFaseClm.Name = "ErroreFaseClm";
+            this.ErroreFaseClm.ReadOnly = true;
             // 
             // EsportaDiBaFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(971, 746);
+            this.ClientSize = new System.Drawing.Size(1302, 773);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnSelezionaTuttoComponenti);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnSelezionaTuttoFasi);
+            this.Controls.Add(this.dgvEsportaCicli);
+            this.Controls.Add(this.dgvEsportaDistinte);
             this.Controls.Add(this.txtMessaggio);
             this.Controls.Add(this.txtFileCicli);
             this.Controls.Add(this.label2);
@@ -136,12 +365,15 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSalvaFileDistinte);
             this.Controls.Add(this.btnTrovaFileDistinte);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "EsportaDiBaFrm";
             this.Text = "Esporta distinte ";
             this.Load += new System.EventHandler(this.EsportaDiBaFrm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEsportaDistinte)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEsportaCicli)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,5 +390,26 @@
         private System.Windows.Forms.Button btnSalvaCicli;
         private System.Windows.Forms.Button btnTrovaFileCicli;
         private System.Windows.Forms.TextBox txtMessaggio;
+        private System.Windows.Forms.DataGridView dgvEsportaDistinte;
+        private System.Windows.Forms.DataGridView dgvEsportaCicli;
+        private System.Windows.Forms.Button btnSelezionaTuttoFasi;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSelezionaTuttoComponenti;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn SelezionaComponentiClm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EsitoComponentiClm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDComponentiClm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DistintaComponentiClm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AnagraficaComponentiClm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QuantitaComponentiClm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ErroreComponentiClm;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn SelezionatoFaseClm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EsitoFaseClm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CodiceCicloFaseClm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDFAseClm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OperazioneFaseClm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AreaProduzioneFaseClm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TaskFaseClm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ErroreFaseClm;
     }
 }
