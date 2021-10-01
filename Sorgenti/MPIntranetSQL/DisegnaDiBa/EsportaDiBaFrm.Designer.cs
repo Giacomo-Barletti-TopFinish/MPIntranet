@@ -59,6 +59,11 @@
             this.AreaProduzioneFaseClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TaskFaseClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ErroreFaseClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtEsportazione = new System.Windows.Forms.TextBox();
+            this.pbEsportazione = new System.Windows.Forms.ProgressBar();
+            this.btnAvviaEsportazione = new System.Windows.Forms.Button();
+            this.lblElementi = new System.Windows.Forms.Label();
+            this.lblAvanzamento = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEsportaDistinte)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEsportaCicli)).BeginInit();
             this.SuspendLayout();
@@ -142,7 +147,7 @@
             this.txtMessaggio.Name = "txtMessaggio";
             this.txtMessaggio.ReadOnly = true;
             this.txtMessaggio.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtMessaggio.Size = new System.Drawing.Size(508, 679);
+            this.txtMessaggio.Size = new System.Drawing.Size(313, 679);
             this.txtMessaggio.TabIndex = 8;
             // 
             // dgvEsportaDistinte
@@ -160,9 +165,9 @@
             this.AnagraficaComponentiClm,
             this.QuantitaComponentiClm,
             this.ErroreComponentiClm});
-            this.dgvEsportaDistinte.Location = new System.Drawing.Point(557, 79);
+            this.dgvEsportaDistinte.Location = new System.Drawing.Point(348, 77);
             this.dgvEsportaDistinte.Name = "dgvEsportaDistinte";
-            this.dgvEsportaDistinte.Size = new System.Drawing.Size(733, 322);
+            this.dgvEsportaDistinte.Size = new System.Drawing.Size(624, 322);
             this.dgvEsportaDistinte.TabIndex = 9;
             // 
             // dgvEsportaCicli
@@ -181,14 +186,14 @@
             this.AreaProduzioneFaseClm,
             this.TaskFaseClm,
             this.ErroreFaseClm});
-            this.dgvEsportaCicli.Location = new System.Drawing.Point(557, 434);
+            this.dgvEsportaCicli.Location = new System.Drawing.Point(348, 416);
             this.dgvEsportaCicli.Name = "dgvEsportaCicli";
-            this.dgvEsportaCicli.Size = new System.Drawing.Size(733, 322);
+            this.dgvEsportaCicli.Size = new System.Drawing.Size(627, 322);
             this.dgvEsportaCicli.TabIndex = 10;
             // 
             // btnSelezionaTuttoFasi
             // 
-            this.btnSelezionaTuttoFasi.Location = new System.Drawing.Point(1033, 406);
+            this.btnSelezionaTuttoFasi.Location = new System.Drawing.Point(849, 45);
             this.btnSelezionaTuttoFasi.Name = "btnSelezionaTuttoFasi";
             this.btnSelezionaTuttoFasi.Size = new System.Drawing.Size(123, 23);
             this.btnSelezionaTuttoFasi.TabIndex = 11;
@@ -198,7 +203,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(1162, 406);
+            this.button2.Location = new System.Drawing.Point(978, 45);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(123, 23);
             this.button2.TabIndex = 11;
@@ -208,7 +213,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1162, 48);
+            this.button1.Location = new System.Drawing.Point(978, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(123, 23);
             this.button1.TabIndex = 12;
@@ -218,7 +223,7 @@
             // 
             // btnSelezionaTuttoComponenti
             // 
-            this.btnSelezionaTuttoComponenti.Location = new System.Drawing.Point(1033, 48);
+            this.btnSelezionaTuttoComponenti.Location = new System.Drawing.Point(849, 12);
             this.btnSelezionaTuttoComponenti.Name = "btnSelezionaTuttoComponenti";
             this.btnSelezionaTuttoComponenti.Size = new System.Drawing.Size(123, 23);
             this.btnSelezionaTuttoComponenti.TabIndex = 13;
@@ -232,6 +237,7 @@
             this.SelezionaComponentiClm.FillWeight = 70F;
             this.SelezionaComponentiClm.HeaderText = "Seleziona";
             this.SelezionaComponentiClm.Name = "SelezionaComponentiClm";
+            this.SelezionaComponentiClm.Visible = false;
             this.SelezionaComponentiClm.Width = 70;
             // 
             // EsitoComponentiClm
@@ -291,6 +297,7 @@
             this.SelezionatoFaseClm.Name = "SelezionatoFaseClm";
             this.SelezionatoFaseClm.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.SelezionatoFaseClm.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.SelezionatoFaseClm.Visible = false;
             // 
             // EsitoFaseClm
             // 
@@ -345,11 +352,61 @@
             this.ErroreFaseClm.Name = "ErroreFaseClm";
             this.ErroreFaseClm.ReadOnly = true;
             // 
+            // txtEsportazione
+            // 
+            this.txtEsportazione.Location = new System.Drawing.Point(981, 196);
+            this.txtEsportazione.Multiline = true;
+            this.txtEsportazione.Name = "txtEsportazione";
+            this.txtEsportazione.ReadOnly = true;
+            this.txtEsportazione.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtEsportazione.Size = new System.Drawing.Size(312, 542);
+            this.txtEsportazione.TabIndex = 14;
+            // 
+            // pbEsportazione
+            // 
+            this.pbEsportazione.Location = new System.Drawing.Point(978, 153);
+            this.pbEsportazione.Name = "pbEsportazione";
+            this.pbEsportazione.Size = new System.Drawing.Size(312, 23);
+            this.pbEsportazione.TabIndex = 15;
+            // 
+            // btnAvviaEsportazione
+            // 
+            this.btnAvviaEsportazione.Location = new System.Drawing.Point(978, 82);
+            this.btnAvviaEsportazione.Name = "btnAvviaEsportazione";
+            this.btnAvviaEsportazione.Size = new System.Drawing.Size(312, 37);
+            this.btnAvviaEsportazione.TabIndex = 16;
+            this.btnAvviaEsportazione.Text = "Esporta";
+            this.btnAvviaEsportazione.UseVisualStyleBackColor = true;
+            this.btnAvviaEsportazione.Click += new System.EventHandler(this.btnAvviaEsportazione_Click);
+            // 
+            // lblElementi
+            // 
+            this.lblElementi.AutoSize = true;
+            this.lblElementi.Location = new System.Drawing.Point(1255, 137);
+            this.lblElementi.Name = "lblElementi";
+            this.lblElementi.Size = new System.Drawing.Size(35, 13);
+            this.lblElementi.TabIndex = 17;
+            this.lblElementi.Text = "label3";
+            // 
+            // lblAvanzamento
+            // 
+            this.lblAvanzamento.AutoSize = true;
+            this.lblAvanzamento.Location = new System.Drawing.Point(1117, 137);
+            this.lblAvanzamento.Name = "lblAvanzamento";
+            this.lblAvanzamento.Size = new System.Drawing.Size(35, 13);
+            this.lblAvanzamento.TabIndex = 17;
+            this.lblAvanzamento.Text = "label3";
+            // 
             // EsportaDiBaFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1302, 773);
+            this.Controls.Add(this.lblAvanzamento);
+            this.Controls.Add(this.lblElementi);
+            this.Controls.Add(this.btnAvviaEsportazione);
+            this.Controls.Add(this.pbEsportazione);
+            this.Controls.Add(this.txtEsportazione);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnSelezionaTuttoComponenti);
             this.Controls.Add(this.button2);
@@ -411,5 +468,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn AreaProduzioneFaseClm;
         private System.Windows.Forms.DataGridViewTextBoxColumn TaskFaseClm;
         private System.Windows.Forms.DataGridViewTextBoxColumn ErroreFaseClm;
+        private System.Windows.Forms.TextBox txtEsportazione;
+        private System.Windows.Forms.ProgressBar pbEsportazione;
+        private System.Windows.Forms.Button btnAvviaEsportazione;
+        private System.Windows.Forms.Label lblElementi;
+        private System.Windows.Forms.Label lblAvanzamento;
     }
 }

@@ -453,7 +453,29 @@ namespace TestWebServicesFrm
 
         private void btnModificaCommentoFase_Click(object sender, EventArgs e)
         {
+            txtMessaggio.Text = string.Empty;
+            try
+            {
+                if (string.IsNullOrEmpty(txtNoCiclo.Text))
+                {
+                    txtMessaggio.Text = "Inserire un codice fase";
+                }
 
+                int operazione = (int)nOperazioneFase.Value;
+
+
+                BCServices bc = new BCServices();
+                bc.CreaConnessione();
+                List<CommentiFasi> commenti = bc.EstraiCommenti(txtNoCiclo.Text, txtVersioneCiclo.Text);
+                StringBuilder sb = new StringBuilder();
+
+                commenti.ForEach(x => sb.AppendLine(string.Format("{0} {1} {2} {3}", x.Routing_No, x.Operation_No, x.Line_No, x.Comment)));
+                txtMessaggio.Text = sb.ToString();
+            }
+            catch (Exception ex)
+            {
+                txtMessaggio.Text = estraiErrore(ex);
+            }
         }
 
         private void btnEstraiCommenti_Click(object sender, EventArgs e)

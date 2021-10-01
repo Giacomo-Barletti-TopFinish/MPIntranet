@@ -254,6 +254,68 @@ namespace MPIntranet.WS
             List<CommentiFasi> t = _nav.CommentiFasi.Where(x => x.Routing_No == NoCiclo && x.Version_Code == versioneCiclo).ToList();
             return t;
         }
+
+        public void RimuoviCommento(string NoCiclo, string versioneCiclo, string operazione)
+        {
+            List<CommentiFasi> commenti = _nav.CommentiFasi.Where(x => x.Routing_No == NoCiclo && x.Version_Code == versioneCiclo).ToList();
+            commenti = commenti.Where(x => x.Operation_No == operazione).ToList();
+
+            foreach (CommentiFasi r in commenti)
+                _nav.DeleteObject(r);
+
+            Salva();
+        }
+        public void AggiungiCommento(string NoCiclo, string versioneCiclo, string operazione, string commento)
+        {
+
+            List<string> commenti = SeparaStringa(commento, 80);
+            int lineNumber = 10;
+            foreach(string str in commenti)
+            {
+                CommentiFasi cf = new CommentiFasi();
+                cf.Comment = str;
+                cf.Date = DateTime.Now;
+                cf.Line_No = lineNumber;
+                lineNumber += 10;
+
+                cf.Operation_No = operazione;
+                cf.Routing_No = NoCiclo;
+                cf.Version_Code = versioneCiclo;
+
+                _nav.AddToCommentiFasi(cf);
+            }
+            Salva();
+
+        }
+
+        private List<string> SeparaStringa(string stringa, int lunghezzaMassima)
+        {
+            List<string> stringhe = new List<string>();
+
+            string stringaModificata = stringa.Replace("+", " + ");
+            stringaModificata = stringaModificata.Replace("-", " - ");
+            stringaModificata = stringaModificata.Replace("  ", " ");
+
+            string[] str = stringaModificata.Split(' ');
+            string stringaComposta = string.Empty;
+            for (int i = 0; i < str.Length; i++)
+            {
+                if ((stringaComposta.Length + str[i].Length + 1) < lunghezzaMassima)
+                {
+                    stringaComposta = stringaComposta + " " + str[i];
+                }
+                else
+                {
+                    stringhe.Add(stringaComposta);
+                    stringaComposta = str[i];
+                }
+                if (i == str.Length - 1)
+                {
+                    stringhe.Add(stringaComposta);
+                }
+            }
+            return stringhe;
+        }
     }
 
 }

@@ -1412,7 +1412,7 @@ namespace MPIntranet.Entities {
                 this.columnIDARTICOLO.AllowDBNull = false;
                 this.columnIDTIPODIBA.AllowDBNull = false;
                 this.columnVERSIONE.AllowDBNull = false;
-                this.columnDESCRIZIONE.MaxLength = 50;
+                this.columnDESCRIZIONE.MaxLength = 100;
                 this.columnSTANDARD.AllowDBNull = false;
                 this.columnCANCELLATO.AllowDBNull = false;
                 this.columnDATAMODIFICA.AllowDBNull = false;
@@ -8871,7 +8871,7 @@ namespace MPIntranet.Entities {
                 this.columnIDCOMPONENTE.Unique = true;
                 this.columnIDDIBA.AllowDBNull = false;
                 this.columnDESCRIZIONE.AllowDBNull = false;
-                this.columnDESCRIZIONE.MaxLength = 50;
+                this.columnDESCRIZIONE.MaxLength = 100;
                 this.columnANAGRAFICA.MaxLength = 20;
                 this.columnCOLLEGAMENTODIBA.MaxLength = 20;
                 this.columnUMQUANTITA.MaxLength = 10;
@@ -9457,7 +9457,7 @@ namespace MPIntranet.Entities {
                 this.columnIDFASECICLO.ReadOnly = true;
                 this.columnIDFASECICLO.Unique = true;
                 this.columnIDDIBA.AllowDBNull = false;
-                this.columnDESCRIZIONE.MaxLength = 50;
+                this.columnDESCRIZIONE.MaxLength = 100;
                 this.columnIDCOMPONENTE.AllowDBNull = false;
                 this.columnAREAPRODUZIONE.MaxLength = 20;
                 this.columnTASK.MaxLength = 10;
