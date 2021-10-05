@@ -817,8 +817,15 @@ namespace DisegnaDiBa
                     foreach (ExpCicloBusinessCentral ciclo in cicliExport)
                         ciclo.RinumeraCodiceOperazione();
 
-                    EsportaDiBaFrm form = new EsportaDiBaFrm(distinteExport, cicliExport);
-                    form.ShowDialog();
+                    List<ExpDistintaBusinessCentral> dacancellare = (from ds in distinteExport where ds.Componenti.Count == 0 select ds).ToList();
+                    dacancellare.ForEach(x => distinteExport.Remove(x));
+
+                    string etichettaFinestra = string.Format("Esportazione articolo {0} distinta {1}",_articolo.ToString(),_distinta.ToString());
+                    EsportaDiBaFrm form = new EsportaDiBaFrm(distinteExport, cicliExport,etichettaFinestra);
+
+                    form.MdiParent = this.MdiParent;
+                    form.Show();
+
                 }
                 else
                 {

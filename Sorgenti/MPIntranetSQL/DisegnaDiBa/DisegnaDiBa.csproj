@@ -24,8 +24,8 @@
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\srv-webservices\Publish\MPIIntranet\DisegnaDiBa\</InstallUrl>
-    <MinimumRequiredVersion>2.0.1.3</MinimumRequiredVersion>
-    <ApplicationRevision>3</ApplicationRevision>
+    <MinimumRequiredVersion>2.0.1.4</MinimumRequiredVersion>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>2.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -63,7 +63,7 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\checkbox-tree_39294.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Icon1.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
@@ -274,9 +274,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="checkbox-tree_39294.ico" />
-    <Content Include="Resources\checkbox-tree_39294.ico" />
-    <Content Include="Resources\icona2.bmp" />
     <None Include="Resources\Icon1.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

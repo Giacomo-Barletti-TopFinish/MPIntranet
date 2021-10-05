@@ -218,7 +218,7 @@ namespace MPIntranet.Business
                     esito = false;
                     componente.Errore = "Descrizione obbligatoria ";
                 }
-                else if (componente.Descrizione.Length > 50)
+                else if (componente.Descrizione.Length > 100)
                 {
                     esito = false;
                     componente.Errore = "Descrizione troppo lunga ";

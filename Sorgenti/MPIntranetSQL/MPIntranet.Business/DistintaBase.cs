@@ -52,7 +52,7 @@ namespace MPIntranet.Business
                 idComponente--;
                 Componente componente = Componente.CreaComponente(componenteBC, idDiba, idComponente, idPadre, utente);
                 Componenti.Add(componente);
-                foreach (ComponenteBC figlio in distintaBC.Componenti.Where(x => x.IdPadre == componenteBC.Anagrafica))
+                if(distintaBC.Componenti.Any(x => x.IdPadre == componenteBC.Anagrafica))
                     creaDaDistintaBCRicorsiva(distintaBC, componenteBC.Anagrafica, componente.IdComponente, idDiba, utente, ref idComponente);
             }
         }
@@ -344,8 +344,7 @@ namespace MPIntranet.Business
                 {
                     string msg = string.Format("Il componente {0} ha dei componenti ma non ha alcuna fase in cui registrarne il consumo. Impossibile registrare il collegamento ciclo.", articolo.IdComponente);
                     sbErrori.AppendLine(msg);
-                    esito = false;
-                    fasi[0].Errore = msg;
+                    esito = false;                   
                 }
                 foreach (Componente figlio in componentiFigli)
                 {

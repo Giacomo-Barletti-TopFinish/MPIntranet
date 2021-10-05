@@ -42,8 +42,8 @@
             this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
             this.txtCodiceVersioneDistinta = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.nNRRigaComponente = new System.Windows.Forms.NumericUpDown();
             this.nQuantitaPerCompoente = new System.Windows.Forms.NumericUpDown();
@@ -89,46 +89,50 @@
             this.txtVersioneCiclo = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnEstraiCommenti = new System.Windows.Forms.Button();
+            this.btnModificaCommentoFase = new System.Windows.Forms.Button();
+            this.nDimensioneLottoFase = new System.Windows.Forms.NumericUpDown();
+            this.txtCodiceLogicheFase = new System.Windows.Forms.TextBox();
+            this.txtCodiceCaratteristicaFase = new System.Windows.Forms.TextBox();
+            this.nSpostamentoFase = new System.Windows.Forms.NumericUpDown();
+            this.nAttesaFase = new System.Windows.Forms.NumericUpDown();
+            this.txtCollegmentoFase = new System.Windows.Forms.TextBox();
+            this.ddlTask = new System.Windows.Forms.ComboBox();
+            this.ddlAreaProduzione = new System.Windows.Forms.ComboBox();
             this.nOperazioneFase = new System.Windows.Forms.NumericUpDown();
             this.btnRimuoviFase = new System.Windows.Forms.Button();
             this.btnModificaFase = new System.Windows.Forms.Button();
+            this.nLavorazioneFase = new System.Windows.Forms.NumericUpDown();
             this.btnAggiuntiFase = new System.Windows.Forms.Button();
+            this.nSetupFase = new System.Windows.Forms.NumericUpDown();
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
+            this.txtCommentoFase = new System.Windows.Forms.TextBox();
             this.txtCodiceCondizioneFase = new System.Windows.Forms.TextBox();
+            this.label34 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.txtTipoFase = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.txtUMAttesaFase = new System.Windows.Forms.TextBox();
-            this.label34 = new System.Windows.Forms.Label();
-            this.nSetupFase = new System.Windows.Forms.NumericUpDown();
-            this.label36 = new System.Windows.Forms.Label();
-            this.txtUMSpostamentoFase = new System.Windows.Forms.TextBox();
-            this.label37 = new System.Windows.Forms.Label();
+            this.txtUMLavorazioneFase = new System.Windows.Forms.TextBox();
             this.txtUMSetupFase = new System.Windows.Forms.TextBox();
             this.label33 = new System.Windows.Forms.Label();
-            this.txtUMLavorazioneFase = new System.Windows.Forms.TextBox();
-            this.label35 = new System.Windows.Forms.Label();
-            this.txtCommentoFase = new System.Windows.Forms.TextBox();
-            this.ddlAreaProduzione = new System.Windows.Forms.ComboBox();
-            this.ddlTask = new System.Windows.Forms.ComboBox();
-            this.txtCollegmentoFase = new System.Windows.Forms.TextBox();
-            this.nLavorazioneFase = new System.Windows.Forms.NumericUpDown();
-            this.nAttesaFase = new System.Windows.Forms.NumericUpDown();
-            this.nSpostamentoFase = new System.Windows.Forms.NumericUpDown();
-            this.txtCodiceLogicheFase = new System.Windows.Forms.TextBox();
-            this.txtCodiceCaratteristicaFase = new System.Windows.Forms.TextBox();
-            this.nDimensioneLottoFase = new System.Windows.Forms.NumericUpDown();
-            this.btnModificaCommentoFase = new System.Windows.Forms.Button();
-            this.btnEstraiCommenti = new System.Windows.Forms.Button();
+            this.label37 = new System.Windows.Forms.Label();
+            this.txtUMSpostamentoFase = new System.Windows.Forms.TextBox();
+            this.label36 = new System.Windows.Forms.Label();
+            this.txtUMAttesaFase = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.txtStatoDistinta = new System.Windows.Forms.TextBox();
+            this.label39 = new System.Windows.Forms.Label();
+            this.txtStatoCiclo = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -139,12 +143,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtQuantità)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nOperazioneFase)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nSetupFase)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nLavorazioneFase)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nAttesaFase)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nSpostamentoFase)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nDimensioneLottoFase)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nSpostamentoFase)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nAttesaFase)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nOperazioneFase)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nLavorazioneFase)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nSetupFase)).BeginInit();
             this.SuspendLayout();
             // 
             // txtMessaggio
@@ -232,7 +236,7 @@
             // 
             // btnCambiaDescrizioneDistinta
             // 
-            this.btnCambiaDescrizioneDistinta.Location = new System.Drawing.Point(212, 84);
+            this.btnCambiaDescrizioneDistinta.Location = new System.Drawing.Point(208, 82);
             this.btnCambiaDescrizioneDistinta.Name = "btnCambiaDescrizioneDistinta";
             this.btnCambiaDescrizioneDistinta.Size = new System.Drawing.Size(106, 23);
             this.btnCambiaDescrizioneDistinta.TabIndex = 2;
@@ -252,6 +256,8 @@
             this.groupBox1.Controls.Add(this.numericUpDown5);
             this.groupBox1.Controls.Add(this.btnCambiaDescrizioneDistinta);
             this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.txtStatoDistinta);
+            this.groupBox1.Controls.Add(this.label38);
             this.groupBox1.Controls.Add(this.txtCodiceVersioneDistinta);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label28);
@@ -295,15 +301,6 @@
             this.label3.TabIndex = 1;
             this.label3.Text = "Cod Versione";
             // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(217, 82);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(97, 13);
-            this.label31.TabIndex = 1;
-            this.label31.Text = "Tempo lavorazione";
-            // 
             // label28
             // 
             this.label28.AutoSize = true;
@@ -312,6 +309,15 @@
             this.label28.Size = new System.Drawing.Size(69, 13);
             this.label28.TabIndex = 1;
             this.label28.Text = "Tempo setup";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(217, 82);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(97, 13);
+            this.label31.TabIndex = 1;
+            this.label31.Text = "Tempo lavorazione";
             // 
             // groupBox2
             // 
@@ -675,6 +681,8 @@
             this.groupBox3.Controls.Add(this.btnCambiaDescrizioneCiclo);
             this.groupBox3.Controls.Add(this.label17);
             this.groupBox3.Controls.Add(this.txtVersioneCiclo);
+            this.groupBox3.Controls.Add(this.txtStatoCiclo);
+            this.groupBox3.Controls.Add(this.label39);
             this.groupBox3.Controls.Add(this.label18);
             this.groupBox3.Location = new System.Drawing.Point(12, 305);
             this.groupBox3.Name = "groupBox3";
@@ -832,6 +840,108 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Fasi";
             // 
+            // btnEstraiCommenti
+            // 
+            this.btnEstraiCommenti.Location = new System.Drawing.Point(912, 144);
+            this.btnEstraiCommenti.Name = "btnEstraiCommenti";
+            this.btnEstraiCommenti.Size = new System.Drawing.Size(116, 23);
+            this.btnEstraiCommenti.TabIndex = 24;
+            this.btnEstraiCommenti.Text = "Estrai commenti";
+            this.btnEstraiCommenti.UseVisualStyleBackColor = true;
+            this.btnEstraiCommenti.Click += new System.EventHandler(this.btnEstraiCommenti_Click);
+            // 
+            // btnModificaCommentoFase
+            // 
+            this.btnModificaCommentoFase.Location = new System.Drawing.Point(1034, 143);
+            this.btnModificaCommentoFase.Name = "btnModificaCommentoFase";
+            this.btnModificaCommentoFase.Size = new System.Drawing.Size(116, 23);
+            this.btnModificaCommentoFase.TabIndex = 23;
+            this.btnModificaCommentoFase.Text = "Modifica commento";
+            this.btnModificaCommentoFase.UseVisualStyleBackColor = true;
+            this.btnModificaCommentoFase.Click += new System.EventHandler(this.btnModificaCommentoFase_Click);
+            // 
+            // nDimensioneLottoFase
+            // 
+            this.nDimensioneLottoFase.Location = new System.Drawing.Point(983, 42);
+            this.nDimensioneLottoFase.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.nDimensioneLottoFase.Name = "nDimensioneLottoFase";
+            this.nDimensioneLottoFase.Size = new System.Drawing.Size(170, 20);
+            this.nDimensioneLottoFase.TabIndex = 22;
+            this.nDimensioneLottoFase.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // txtCodiceLogicheFase
+            // 
+            this.txtCodiceLogicheFase.Location = new System.Drawing.Point(983, 99);
+            this.txtCodiceLogicheFase.Name = "txtCodiceLogicheFase";
+            this.txtCodiceLogicheFase.Size = new System.Drawing.Size(170, 20);
+            this.txtCodiceLogicheFase.TabIndex = 20;
+            // 
+            // txtCodiceCaratteristicaFase
+            // 
+            this.txtCodiceCaratteristicaFase.Location = new System.Drawing.Point(788, 99);
+            this.txtCodiceCaratteristicaFase.Name = "txtCodiceCaratteristicaFase";
+            this.txtCodiceCaratteristicaFase.Size = new System.Drawing.Size(170, 20);
+            this.txtCodiceCaratteristicaFase.TabIndex = 21;
+            // 
+            // nSpostamentoFase
+            // 
+            this.nSpostamentoFase.Location = new System.Drawing.Point(596, 99);
+            this.nSpostamentoFase.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.nSpostamentoFase.Name = "nSpostamentoFase";
+            this.nSpostamentoFase.Size = new System.Drawing.Size(72, 20);
+            this.nSpostamentoFase.TabIndex = 19;
+            // 
+            // nAttesaFase
+            // 
+            this.nAttesaFase.Location = new System.Drawing.Point(410, 99);
+            this.nAttesaFase.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.nAttesaFase.Name = "nAttesaFase";
+            this.nAttesaFase.Size = new System.Drawing.Size(72, 20);
+            this.nAttesaFase.TabIndex = 18;
+            // 
+            // txtCollegmentoFase
+            // 
+            this.txtCollegmentoFase.Location = new System.Drawing.Point(788, 43);
+            this.txtCollegmentoFase.Name = "txtCollegmentoFase";
+            this.txtCollegmentoFase.Size = new System.Drawing.Size(170, 20);
+            this.txtCollegmentoFase.TabIndex = 17;
+            this.txtCollegmentoFase.Text = "IMPORT";
+            // 
+            // ddlTask
+            // 
+            this.ddlTask.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlTask.FormattingEnabled = true;
+            this.ddlTask.Location = new System.Drawing.Point(596, 41);
+            this.ddlTask.Name = "ddlTask";
+            this.ddlTask.Size = new System.Drawing.Size(177, 21);
+            this.ddlTask.TabIndex = 16;
+            // 
+            // ddlAreaProduzione
+            // 
+            this.ddlAreaProduzione.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlAreaProduzione.FormattingEnabled = true;
+            this.ddlAreaProduzione.Location = new System.Drawing.Point(410, 41);
+            this.ddlAreaProduzione.Name = "ddlAreaProduzione";
+            this.ddlAreaProduzione.Size = new System.Drawing.Size(170, 21);
+            this.ddlAreaProduzione.TabIndex = 15;
+            this.ddlAreaProduzione.SelectedIndexChanged += new System.EventHandler(this.ddlAreaProduzione_SelectedIndexChanged);
+            // 
             // nOperazioneFase
             // 
             this.nOperazioneFase.Increment = new decimal(new int[] {
@@ -874,6 +984,23 @@
             this.btnModificaFase.UseVisualStyleBackColor = true;
             this.btnModificaFase.Click += new System.EventHandler(this.btnModificaFase_Click);
             // 
+            // nLavorazioneFase
+            // 
+            this.nLavorazioneFase.Location = new System.Drawing.Point(217, 99);
+            this.nLavorazioneFase.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.nLavorazioneFase.Name = "nLavorazioneFase";
+            this.nLavorazioneFase.Size = new System.Drawing.Size(72, 20);
+            this.nLavorazioneFase.TabIndex = 4;
+            this.nLavorazioneFase.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // btnAggiuntiFase
             // 
             this.btnAggiuntiFase.Location = new System.Drawing.Point(596, 143);
@@ -883,6 +1010,18 @@
             this.btnAggiuntiFase.Text = "Aggiungi fase";
             this.btnAggiuntiFase.UseVisualStyleBackColor = true;
             this.btnAggiuntiFase.Click += new System.EventHandler(this.btnAggiuntiFase_Click);
+            // 
+            // nSetupFase
+            // 
+            this.nSetupFase.Location = new System.Drawing.Point(22, 99);
+            this.nSetupFase.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.nSetupFase.Name = "nSetupFase";
+            this.nSetupFase.Size = new System.Drawing.Size(72, 20);
+            this.nSetupFase.TabIndex = 4;
             // 
             // label19
             // 
@@ -911,12 +1050,28 @@
             this.label21.TabIndex = 1;
             this.label21.Text = "Codice collegamento Ciclo/DiBa";
             // 
+            // txtCommentoFase
+            // 
+            this.txtCommentoFase.Location = new System.Drawing.Point(217, 144);
+            this.txtCommentoFase.Name = "txtCommentoFase";
+            this.txtCommentoFase.Size = new System.Drawing.Size(355, 20);
+            this.txtCommentoFase.TabIndex = 12;
+            // 
             // txtCodiceCondizioneFase
             // 
             this.txtCodiceCondizioneFase.Location = new System.Drawing.Point(22, 143);
             this.txtCodiceCondizioneFase.Name = "txtCodiceCondizioneFase";
             this.txtCodiceCondizioneFase.Size = new System.Drawing.Size(170, 20);
             this.txtCodiceCondizioneFase.TabIndex = 12;
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(22, 82);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(69, 13);
+            this.label34.TabIndex = 1;
+            this.label34.Text = "Tempo setup";
             // 
             // label22
             // 
@@ -953,6 +1108,15 @@
             this.label26.Size = new System.Drawing.Size(103, 13);
             this.label26.TabIndex = 1;
             this.label26.Text = "Tempo spostamento";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(217, 127);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(57, 13);
+            this.label35.TabIndex = 1;
+            this.label35.Text = "Commento";
             // 
             // label27
             // 
@@ -998,69 +1162,13 @@
             this.label32.TabIndex = 1;
             this.label32.Text = "Task";
             // 
-            // label24
+            // txtUMLavorazioneFase
             // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(503, 82);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(77, 13);
-            this.label24.TabIndex = 1;
-            this.label24.Text = "Unità di Misura";
-            // 
-            // txtUMAttesaFase
-            // 
-            this.txtUMAttesaFase.Location = new System.Drawing.Point(503, 99);
-            this.txtUMAttesaFase.Name = "txtUMAttesaFase";
-            this.txtUMAttesaFase.Size = new System.Drawing.Size(77, 20);
-            this.txtUMAttesaFase.TabIndex = 5;
-            this.txtUMAttesaFase.Text = "ORE";
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(22, 82);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(69, 13);
-            this.label34.TabIndex = 1;
-            this.label34.Text = "Tempo setup";
-            // 
-            // nSetupFase
-            // 
-            this.nSetupFase.Location = new System.Drawing.Point(22, 99);
-            this.nSetupFase.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.nSetupFase.Name = "nSetupFase";
-            this.nSetupFase.Size = new System.Drawing.Size(72, 20);
-            this.nSetupFase.TabIndex = 4;
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(696, 82);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(77, 13);
-            this.label36.TabIndex = 1;
-            this.label36.Text = "Unità di Misura";
-            // 
-            // txtUMSpostamentoFase
-            // 
-            this.txtUMSpostamentoFase.Location = new System.Drawing.Point(696, 99);
-            this.txtUMSpostamentoFase.Name = "txtUMSpostamentoFase";
-            this.txtUMSpostamentoFase.Size = new System.Drawing.Size(77, 20);
-            this.txtUMSpostamentoFase.TabIndex = 5;
-            this.txtUMSpostamentoFase.Text = "ORE";
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(115, 82);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(77, 13);
-            this.label37.TabIndex = 1;
-            this.label37.Text = "Unità di Misura";
+            this.txtUMLavorazioneFase.Location = new System.Drawing.Point(314, 99);
+            this.txtUMLavorazioneFase.Name = "txtUMLavorazioneFase";
+            this.txtUMLavorazioneFase.Size = new System.Drawing.Size(77, 20);
+            this.txtUMLavorazioneFase.TabIndex = 5;
+            this.txtUMLavorazioneFase.Text = "ORE";
             // 
             // txtUMSetupFase
             // 
@@ -1079,148 +1187,82 @@
             this.label33.TabIndex = 1;
             this.label33.Text = "Unità di Misura";
             // 
-            // txtUMLavorazioneFase
+            // label37
             // 
-            this.txtUMLavorazioneFase.Location = new System.Drawing.Point(314, 99);
-            this.txtUMLavorazioneFase.Name = "txtUMLavorazioneFase";
-            this.txtUMLavorazioneFase.Size = new System.Drawing.Size(77, 20);
-            this.txtUMLavorazioneFase.TabIndex = 5;
-            this.txtUMLavorazioneFase.Text = "ORE";
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(115, 82);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(77, 13);
+            this.label37.TabIndex = 1;
+            this.label37.Text = "Unità di Misura";
             // 
-            // label35
+            // txtUMSpostamentoFase
             // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(217, 127);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(57, 13);
-            this.label35.TabIndex = 1;
-            this.label35.Text = "Commento";
+            this.txtUMSpostamentoFase.Location = new System.Drawing.Point(696, 99);
+            this.txtUMSpostamentoFase.Name = "txtUMSpostamentoFase";
+            this.txtUMSpostamentoFase.Size = new System.Drawing.Size(77, 20);
+            this.txtUMSpostamentoFase.TabIndex = 5;
+            this.txtUMSpostamentoFase.Text = "ORE";
             // 
-            // txtCommentoFase
+            // label36
             // 
-            this.txtCommentoFase.Location = new System.Drawing.Point(217, 144);
-            this.txtCommentoFase.Name = "txtCommentoFase";
-            this.txtCommentoFase.Size = new System.Drawing.Size(355, 20);
-            this.txtCommentoFase.TabIndex = 12;
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(696, 82);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(77, 13);
+            this.label36.TabIndex = 1;
+            this.label36.Text = "Unità di Misura";
             // 
-            // ddlAreaProduzione
+            // txtUMAttesaFase
             // 
-            this.ddlAreaProduzione.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlAreaProduzione.FormattingEnabled = true;
-            this.ddlAreaProduzione.Location = new System.Drawing.Point(410, 41);
-            this.ddlAreaProduzione.Name = "ddlAreaProduzione";
-            this.ddlAreaProduzione.Size = new System.Drawing.Size(170, 21);
-            this.ddlAreaProduzione.TabIndex = 15;
-            this.ddlAreaProduzione.SelectedIndexChanged += new System.EventHandler(this.ddlAreaProduzione_SelectedIndexChanged);
+            this.txtUMAttesaFase.Location = new System.Drawing.Point(503, 99);
+            this.txtUMAttesaFase.Name = "txtUMAttesaFase";
+            this.txtUMAttesaFase.Size = new System.Drawing.Size(77, 20);
+            this.txtUMAttesaFase.TabIndex = 5;
+            this.txtUMAttesaFase.Text = "ORE";
             // 
-            // ddlTask
+            // label24
             // 
-            this.ddlTask.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlTask.FormattingEnabled = true;
-            this.ddlTask.Location = new System.Drawing.Point(596, 41);
-            this.ddlTask.Name = "ddlTask";
-            this.ddlTask.Size = new System.Drawing.Size(177, 21);
-            this.ddlTask.TabIndex = 16;
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(503, 82);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(77, 13);
+            this.label24.TabIndex = 1;
+            this.label24.Text = "Unità di Misura";
             // 
-            // txtCollegmentoFase
+            // label38
             // 
-            this.txtCollegmentoFase.Location = new System.Drawing.Point(788, 43);
-            this.txtCollegmentoFase.Name = "txtCollegmentoFase";
-            this.txtCollegmentoFase.Size = new System.Drawing.Size(170, 20);
-            this.txtCollegmentoFase.TabIndex = 17;
-            this.txtCollegmentoFase.Text = "IMPORT";
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(331, 66);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(32, 13);
+            this.label38.TabIndex = 1;
+            this.label38.Text = "Stato";
             // 
-            // nLavorazioneFase
+            // txtStatoDistinta
             // 
-            this.nLavorazioneFase.Location = new System.Drawing.Point(217, 99);
-            this.nLavorazioneFase.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.nLavorazioneFase.Name = "nLavorazioneFase";
-            this.nLavorazioneFase.Size = new System.Drawing.Size(72, 20);
-            this.nLavorazioneFase.TabIndex = 4;
-            this.nLavorazioneFase.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.txtStatoDistinta.Location = new System.Drawing.Point(331, 83);
+            this.txtStatoDistinta.Name = "txtStatoDistinta";
+            this.txtStatoDistinta.ReadOnly = true;
+            this.txtStatoDistinta.Size = new System.Drawing.Size(170, 20);
+            this.txtStatoDistinta.TabIndex = 0;
             // 
-            // nAttesaFase
+            // label39
             // 
-            this.nAttesaFase.Location = new System.Drawing.Point(410, 99);
-            this.nAttesaFase.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.nAttesaFase.Name = "nAttesaFase";
-            this.nAttesaFase.Size = new System.Drawing.Size(72, 20);
-            this.nAttesaFase.TabIndex = 18;
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(334, 67);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(32, 13);
+            this.label39.TabIndex = 1;
+            this.label39.Text = "Stato";
             // 
-            // nSpostamentoFase
+            // txtStatoCiclo
             // 
-            this.nSpostamentoFase.Location = new System.Drawing.Point(596, 99);
-            this.nSpostamentoFase.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.nSpostamentoFase.Name = "nSpostamentoFase";
-            this.nSpostamentoFase.Size = new System.Drawing.Size(72, 20);
-            this.nSpostamentoFase.TabIndex = 19;
-            // 
-            // txtCodiceLogicheFase
-            // 
-            this.txtCodiceLogicheFase.Location = new System.Drawing.Point(983, 99);
-            this.txtCodiceLogicheFase.Name = "txtCodiceLogicheFase";
-            this.txtCodiceLogicheFase.Size = new System.Drawing.Size(170, 20);
-            this.txtCodiceLogicheFase.TabIndex = 20;
-            // 
-            // txtCodiceCaratteristicaFase
-            // 
-            this.txtCodiceCaratteristicaFase.Location = new System.Drawing.Point(788, 99);
-            this.txtCodiceCaratteristicaFase.Name = "txtCodiceCaratteristicaFase";
-            this.txtCodiceCaratteristicaFase.Size = new System.Drawing.Size(170, 20);
-            this.txtCodiceCaratteristicaFase.TabIndex = 21;
-            // 
-            // nDimensioneLottoFase
-            // 
-            this.nDimensioneLottoFase.Location = new System.Drawing.Point(983, 42);
-            this.nDimensioneLottoFase.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.nDimensioneLottoFase.Name = "nDimensioneLottoFase";
-            this.nDimensioneLottoFase.Size = new System.Drawing.Size(170, 20);
-            this.nDimensioneLottoFase.TabIndex = 22;
-            this.nDimensioneLottoFase.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            // 
-            // btnModificaCommentoFase
-            // 
-            this.btnModificaCommentoFase.Location = new System.Drawing.Point(1034, 143);
-            this.btnModificaCommentoFase.Name = "btnModificaCommentoFase";
-            this.btnModificaCommentoFase.Size = new System.Drawing.Size(116, 23);
-            this.btnModificaCommentoFase.TabIndex = 23;
-            this.btnModificaCommentoFase.Text = "Modifica commento";
-            this.btnModificaCommentoFase.UseVisualStyleBackColor = true;
-            this.btnModificaCommentoFase.Click += new System.EventHandler(this.btnModificaCommentoFase_Click);
-            // 
-            // btnEstraiCommenti
-            // 
-            this.btnEstraiCommenti.Location = new System.Drawing.Point(912, 144);
-            this.btnEstraiCommenti.Name = "btnEstraiCommenti";
-            this.btnEstraiCommenti.Size = new System.Drawing.Size(116, 23);
-            this.btnEstraiCommenti.TabIndex = 24;
-            this.btnEstraiCommenti.Text = "Estrai commenti";
-            this.btnEstraiCommenti.UseVisualStyleBackColor = true;
-            this.btnEstraiCommenti.Click += new System.EventHandler(this.btnEstraiCommenti_Click);
+            this.txtStatoCiclo.Location = new System.Drawing.Point(334, 84);
+            this.txtStatoCiclo.Name = "txtStatoCiclo";
+            this.txtStatoCiclo.ReadOnly = true;
+            this.txtStatoCiclo.Size = new System.Drawing.Size(170, 20);
+            this.txtStatoCiclo.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -1249,12 +1291,12 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nOperazioneFase)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nSetupFase)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nLavorazioneFase)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nAttesaFase)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nSpostamentoFase)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nDimensioneLottoFase)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nSpostamentoFase)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nAttesaFase)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nOperazioneFase)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nLavorazioneFase)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nSetupFase)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1363,6 +1405,10 @@
         private System.Windows.Forms.NumericUpDown nDimensioneLottoFase;
         private System.Windows.Forms.Button btnModificaCommentoFase;
         private System.Windows.Forms.Button btnEstraiCommenti;
+        private System.Windows.Forms.TextBox txtStatoDistinta;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.TextBox txtStatoCiclo;
+        private System.Windows.Forms.Label label39;
     }
 }
 

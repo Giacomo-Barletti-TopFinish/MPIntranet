@@ -8,9 +8,13 @@ namespace MPIntranet.Business
 {
     public class ExpDistintaBusinessCentral
     {
-        public string Codice;
-        public List<ExpComponenteDistintaBusinessCentral> Componenti = new List<ExpComponenteDistintaBusinessCentral>();
+        public string Codice { get; set; }
+    public List<ExpComponenteDistintaBusinessCentral> Componenti = new List<ExpComponenteDistintaBusinessCentral>();
         public string Versione = string.Empty;
+        public bool Selezionato { get; set; }
+        public string Errore { get; set; }
+        public string Esito { get; set; }
+        public string Stato { get; set; }
 
         public ExpDistintaBusinessCentral(string Codice, List<ExpComponenteDistintaBusinessCentral> Componenti)
         {

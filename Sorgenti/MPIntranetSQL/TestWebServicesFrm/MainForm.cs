@@ -35,6 +35,7 @@ namespace TestWebServicesFrm
                 txtDistintaDescrizione.Text = testata.Description;
                 txtCodiceVersioneDistinta.Text = testata.Version_Nos;
                 txtMessaggio.Text = string.Format("{0} {1} {2}", testata.No, testata.Version_Nos, testata.Description);
+                txtStatoDistinta.Text = testata.Status;
 
             }
             catch (Exception ex)
@@ -237,6 +238,7 @@ namespace TestWebServicesFrm
                 txtDescrizioneCiclo.Text = testata.Description;
                 txtVersioneCiclo.Text = testata.Version_Nos;
                 txtMessaggio.Text = string.Format("{0} {1} {2}", testata.No, testata.Version_Nos, testata.Description);
+                txtStatoCiclo.Text = testata.Status;
 
             }
             catch (Exception ex)

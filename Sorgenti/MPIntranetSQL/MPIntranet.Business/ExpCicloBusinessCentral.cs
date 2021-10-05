@@ -9,8 +9,13 @@ namespace MPIntranet.Business
     public class ExpCicloBusinessCentral
     {
         public static string CodiceCollegamentoStandard = "IMPORT";
-        public string Codice;
+        public string Codice { get; set; }
         public List<ExpFaseCicloBusinessCentral> Fasi;
+        public bool Selezionato { get; set; }
+        public string Errore { get; set; }
+        public string Esito { get; set; }
+        public string Stato { get; set; }
+
         public ExpCicloBusinessCentral(string Codice)
         {
             this.Codice = Codice;
@@ -30,14 +35,14 @@ namespace MPIntranet.Business
                 f.AreaProduzione = faseDistinta.AreaProduzione;
                 if (string.IsNullOrEmpty(f.AreaProduzione))
                 {
-                    sb.AppendLine(string.Format("Fase {0} Area di produzione nulla", faseDistinta.IdFaseDiba));
+                    sb.AppendLine(string.Format("Anagrafica {1} - Fase {0} Area di produzione nulla", faseDistinta.IdFaseDiba, faseDistinta.Anagrafica));
                     faseDistinta.Errore = "Area produzione non valorizzata ";
                     esito = false;
                 }
                 f.TempoLavorazione = faseDistinta.Periodo;
                 if (f.TempoLavorazione <= 0)
                 {
-                    sb.AppendLine(string.Format("Fase {0} tempo lavorazione nullo", faseDistinta.IdFaseDiba));
+                    sb.AppendLine(string.Format("Anagrafica {1} - Fase {0} tempo lavorazione nullo", faseDistinta.IdFaseDiba, faseDistinta.Anagrafica));
                     faseDistinta.Errore += " periodo non valorizzato ";
                     esito = false;
                 }
@@ -47,7 +52,7 @@ namespace MPIntranet.Business
                 f.Task = faseDistinta.Task;
                 if (string.IsNullOrEmpty(f.Task))
                 {
-                    sb.AppendLine(string.Format("Fase {0} task non valorizzato", faseDistinta.IdFaseDiba));
+                    sb.AppendLine(string.Format("Anagrafica {1} - Fase {0} task non valorizzato", faseDistinta.IdFaseDiba, faseDistinta.Anagrafica));
                     faseDistinta.Errore += " task non valorizzato ";
                     esito = false;
                 }
@@ -74,14 +79,14 @@ namespace MPIntranet.Business
                 f.AreaProduzione = faseCiclo.AreaProduzione;
                 if (string.IsNullOrEmpty(f.AreaProduzione))
                 {
-                    sb.AppendLine(string.Format("Fase {0} Area di produzione nulla", faseCiclo.IdFaseCiclo));
+                    sb.AppendLine(string.Format("ID Componente {1} - Fase {0} Area di produzione nulla", faseCiclo.IdFaseCiclo, faseCiclo.IdComponente));
                     faseCiclo.Errore = "Area produzione non valorizzata ";
                     esito = false;
                 }
                 f.TempoLavorazione = faseCiclo.Periodo;
                 if (f.TempoLavorazione <= 0)
                 {
-                    sb.AppendLine(string.Format("Fase {0} tempo lavorazione nullo", faseCiclo.IdFaseCiclo));
+                    sb.AppendLine(string.Format("ID Componente {1} - Fase {0} tempo lavorazione nullo", faseCiclo.IdFaseCiclo, faseCiclo.IdComponente));
                     faseCiclo.Errore += " periodo non valorizzato ";
                     esito = false;
                 }
@@ -91,7 +96,7 @@ namespace MPIntranet.Business
                 f.Task = faseCiclo.Task;
                 if (string.IsNullOrEmpty(f.Task))
                 {
-                    sb.AppendLine(string.Format("Fase {0} task non valorizzato", faseCiclo.IdFaseCiclo));
+                    sb.AppendLine(string.Format("ID Componente {1} - Fase {0} task non valorizzato", faseCiclo.IdFaseCiclo, faseCiclo.IdComponente));
                     faseCiclo.Errore += " task non valorizzato ";
                     esito = false;
                 }
@@ -119,13 +124,13 @@ namespace MPIntranet.Business
                 {
                     if (string.IsNullOrEmpty(faseCiclo.AreaProduzione))
                     {
-                        sb.AppendLine(string.Format("Fase {0} Area di produzione nulla", faseCiclo.IdFaseCiclo));
+                        sb.AppendLine(string.Format("ID Componente {1} - Fase {0} Area di produzione nulla", faseCiclo.IdFaseCiclo, faseCiclo.IdComponente));
                         faseCiclo.Errore = "Area produzione non valorizzata ";
                         esito = false;
                     }
                     if (string.IsNullOrEmpty(faseCiclo.Task))
                     {
-                        sb.AppendLine(string.Format("Fase {0} task non valorizzato", faseCiclo.IdFaseCiclo));
+                        sb.AppendLine(string.Format("ID Componente {1} - Fase {0} task non valorizzato", faseCiclo.IdFaseCiclo, faseCiclo.IdComponente));
                         faseCiclo.Errore += " task non valorizzato ";
                         esito = false;
                     }
@@ -136,7 +141,7 @@ namespace MPIntranet.Business
                 f.TempoLavorazione = faseCiclo.Periodo;
                 if (f.TempoLavorazione <= 0 && !string.IsNullOrEmpty(faseCiclo.AreaProduzione) && !string.IsNullOrEmpty(faseCiclo.Task))
                 {
-                    sb.AppendLine(string.Format("Fase {0} tempo lavorazione nullo", faseCiclo.IdFaseCiclo));
+                    sb.AppendLine(string.Format("ID Componente {1} - Fase {0} tempo lavorazione nullo", faseCiclo.IdFaseCiclo, faseCiclo.IdComponente));
                     faseCiclo.Errore += " periodo non valorizzato ";
                     esito = false;
                 }

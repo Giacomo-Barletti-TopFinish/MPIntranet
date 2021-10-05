@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using NAV;
+using Microsoft.OData.Client;
 
 namespace MPIntranet.WS
 {
@@ -14,6 +15,7 @@ namespace MPIntranet.WS
         private string _url = "https://srv-bc.viamattei.metal-plus.it:7148/PROD_WS/ODataV4/Company('METALPLUS')/";
         private string _password = "V0Wz3MIxhXb2OvTv6y81pahROq6pFmqtPk3PTlnOzws=";
         private NAV.NAV _nav;
+        private int timer = 1900;
         public void CreaConnessione()
         {
             Uri uri = new Uri(_url);
@@ -27,6 +29,7 @@ namespace MPIntranet.WS
             {
                 if (_nav == null) return;
                 _nav.SaveChanges();
+                System.Threading.Thread.Sleep(timer);
             }
             catch (Exception ex)
             {
@@ -47,9 +50,15 @@ namespace MPIntranet.WS
         public TestataDIBA EstraiTestataDIBA(string No)
         {
             if (_nav == null) return null;
-
-            TestataDIBA t = _nav.TestataDIBA.Where(x => x.No == No).FirstOrDefault();
-            return t;
+            try
+            {
+                TestataDIBA t = _nav.TestataDIBA.Where(x => x.No == No).FirstOrDefault();
+                return t;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public List<RigheDIBA> EstraiRigheDIBA(string No)
@@ -79,9 +88,12 @@ namespace MPIntranet.WS
         public void CambiaStatoDB(string No, string stato)
         {
             TestataDIBA testata = EstraiTestataDIBA(No);
-            testata.Status = stato;
-            _nav.UpdateObject(testata);
-            Salva();
+            if (testata.Status != stato)
+            {
+                testata.Status = stato;
+                _nav.UpdateObject(testata);
+                Salva();
+            }
         }
 
         public void CambiaDescrizioneDB(string No, string descrizione)
@@ -167,9 +179,12 @@ namespace MPIntranet.WS
         public void CambiaStatoCiclo(string NoCiclo, string stato)
         {
             Cicli testata = EstraiTestataCiclo(NoCiclo);
-            testata.Status = stato;
-            _nav.UpdateObject(testata);
-            Salva();
+            if (testata.Status != stato)
+            {
+                testata.Status = stato;
+                _nav.UpdateObject(testata);
+                Salva();
+            }
         }
         public void CambiaDescrizioneCiclo(string NoCiclo, string descrizione)
         {
@@ -270,7 +285,7 @@ namespace MPIntranet.WS
 
             List<string> commenti = SeparaStringa(commento, 80);
             int lineNumber = 10;
-            foreach(string str in commenti)
+            foreach (string str in commenti)
             {
                 CommentiFasi cf = new CommentiFasi();
                 cf.Comment = str;
