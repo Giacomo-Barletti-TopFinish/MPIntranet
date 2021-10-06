@@ -610,7 +610,7 @@ namespace DisegnaDiBa
                 Cursor.Current = Cursors.WaitCursor;
 
                 string status = Stato.InSviluppo;
-                if ((sender as Button).Name == menuDistinteStatoCertificato.Name)
+                if ((sender as ToolStripMenuItem).Name == menuDistinteStatoCertificato.Name)
                     status = Stato.Certificato;
 
                 BCServices bc = new BCServices();
@@ -647,7 +647,7 @@ namespace DisegnaDiBa
             {
                 Cursor.Current = Cursors.WaitCursor;
                 string status = Stato.InSviluppo;
-                if ((sender as Button).Name == menucicliStatoCertificato.Name)
+                if ((sender as ToolStripMenuItem).Name == menucicliStatoCertificato.Name)
                     status = Stato.Certificato;
 
                 BCServices bc = new BCServices();
@@ -678,6 +678,8 @@ namespace DisegnaDiBa
                 Cursor.Current = Cursors.Default;
             }
         }
+
+       
     }
 
     public class WorkerDTO
