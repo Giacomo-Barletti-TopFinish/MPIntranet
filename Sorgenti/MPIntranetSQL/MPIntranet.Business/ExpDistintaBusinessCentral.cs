@@ -9,7 +9,7 @@ namespace MPIntranet.Business
     public class ExpDistintaBusinessCentral
     {
         public string Codice { get; set; }
-    public List<ExpComponenteDistintaBusinessCentral> Componenti = new List<ExpComponenteDistintaBusinessCentral>();
+        public List<ExpComponenteDistintaBusinessCentral> Componenti = new List<ExpComponenteDistintaBusinessCentral>();
         public string Versione = string.Empty;
         public bool Selezionato { get; set; }
         public string Errore { get; set; }
@@ -30,7 +30,7 @@ namespace MPIntranet.Business
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine(string.Format("DISTINTA {0}",Codice));
+            sb.AppendLine(string.Format("DISTINTA {0}", Codice));
             Componenti.ForEach(x => sb.AppendLine(x.ToString()));
             return sb.ToString();
         }

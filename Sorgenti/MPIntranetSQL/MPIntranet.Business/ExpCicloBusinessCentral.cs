@@ -236,11 +236,19 @@ namespace MPIntranet.Business
         public string Caratteristica = string.Empty;
         public string LogicheLavorazione = string.Empty;
         public List<string> Commenti = new List<string>();
+
         public bool Selezionato { get; set; }
         public string Errore { get; set; }
         public string CodiceCiclo { get; set; }
         public string Esito { get; set; }
 
+        public string CommentiConcatenati()
+        {
+            StringBuilder str = new StringBuilder();
+            foreach (string c in Commenti)
+                str.Append(string.Format("{0} ", c));
+            return str.ToString().Trim();
+        }
         public ExpFaseCicloBusinessCentral(string codiceCiclo)
         {
             CodiceCiclo = codiceCiclo;

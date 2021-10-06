@@ -65,6 +65,8 @@ namespace DisegnaDiBa
             {
                 string str = string.Format("{0} - {1}", DateTime.Now.ToShortTimeString(), messaggio);
                 txtEsportazione.Text = txtEsportazione.Text + Environment.NewLine + str;
+                txtEsportazione.SelectionStart = txtEsportazione.TextLength;
+                txtEsportazione.ScrollToCaret();
             }
         }
 
@@ -105,6 +107,10 @@ namespace DisegnaDiBa
 
             foreach (string ciclo in cicli)
             {
+                worker.ReportProgress(contatore, string.Format(string.Empty, ciclo));
+                worker.ReportProgress(contatore, string.Format("Ciclo {0}", ciclo));
+
+                contatore++;
                 try
                 {
                     Cicli testata = bc.EstraiTestataCiclo(ciclo);
@@ -115,7 +121,17 @@ namespace DisegnaDiBa
                         testata = bc.EstraiTestataCiclo(ciclo);
 
                         if (testata.Status != Stato.InSviluppo)
+                        {
+                            string messaggio = string.Format("Ciclo {0} ignorato perchè in stato {1}", ciclo, testata.Status);
+                            worker.ReportProgress(contatore, messaggio);
+
+                            if (worker.CancellationPending)
+                            {
+                                e.Cancel = true;
+                                return;
+                            }
                             continue;
+                        }
 
                         List<RigheCICLO> righe = bc.EstraiRigheCICLO(ciclo);
                         foreach (RigheCICLO riga in righe)
@@ -128,7 +144,13 @@ namespace DisegnaDiBa
                         {
                             try
                             {
-
+                                f.Errore = string.Empty;
+                                bc.AggiungiFase(ciclo, string.Empty, f.Operazione.ToString(), f.Tipo, f.AreaProduzione, f.Task, (decimal)f.TempoSetup, f.UMSetup,
+                                    (decimal)f.TempoLavorazione, f.UMLavorazione,
+                                    (decimal)f.TempoAttesa, f.UMAttesa, (decimal)f.TempoSpostamento, f.UMSpostamento,
+                                    (decimal)f.DimensioneLotto, f.Collegamento, f.Condizione, f.LogicheLavorazione, f.Caratteristica);
+                                bc.AggiungiCommento(ciclo, string.Empty, f.Operazione.ToString(), f.CommentiConcatenati());
+                                f.Esito = "OK";
                             }
                             catch (Exception ex)
                             {
@@ -139,15 +161,9 @@ namespace DisegnaDiBa
                                 }
                                 worker.ReportProgress(contatore, messaggio);
                             }
-
-                            f.Errore = string.Empty;
-                            bc.AggiungiFase(ciclo, string.Empty, f.Operazione.ToString(), f.Tipo, f.AreaProduzione, f.Task, (decimal)f.TempoSetup, f.UMSetup,
-                                (decimal)f.TempoLavorazione, f.UMLavorazione,
-                                (decimal)f.TempoAttesa, f.UMAttesa, (decimal)f.TempoSpostamento, f.UMSpostamento,
-                                (decimal)f.DimensioneLotto, f.Collegamento, f.Condizione, f.LogicheLavorazione, f.Caratteristica);
-                            f.Commenti.ForEach(x => bc.AggiungiCommento(ciclo, string.Empty, f.Operazione.ToString(), x));
-                            f.Esito = "OK";
                         }
+                        worker.ReportProgress(contatore, string.Format("Ciclo {0} terminato", ciclo));
+
                     }
                     else
                     {
@@ -175,8 +191,6 @@ namespace DisegnaDiBa
                     bc.CreaConnessione();
                 }
 
-                contatore++;
-                worker.ReportProgress(contatore, string.Format("Ciclo {0} terminato", ciclo));
                 if (worker.CancellationPending)
                 {
                     e.Cancel = true;
@@ -192,6 +206,10 @@ namespace DisegnaDiBa
 
             foreach (string distinta in distinte)
             {
+                worker.ReportProgress(contatore, string.Format(string.Empty, distinta));
+                worker.ReportProgress(contatore, string.Format("Distinte {0}", distinta));
+
+                contatore++;
                 try
                 {
                     TestataDIBA testata = bc.EstraiTestataDIBA(distinta);
@@ -200,7 +218,18 @@ namespace DisegnaDiBa
                         bc.CambiaDescrizioneDB(distinta, testata.Description);
                         testata = bc.EstraiTestataDIBA(distinta);
                         if (testata.Status != Stato.InSviluppo)
+                        {
+                            string messaggio = string.Format("Distinta {0} ignorata perchè in stato {1}", distinta, testata.Status);
+                            worker.ReportProgress(contatore, messaggio);
+
+                            if (worker.CancellationPending)
+                            {
+                                e.Cancel = true;
+                                return;
+                            }
                             continue;
+                        }
+
                         List<RigheDIBA> righe = bc.EstraiRigheDIBA(distinta);
                         foreach (RigheDIBA riga in righe)
                             bc.RimuoviComponente(distinta, string.Empty, riga.Line_No, riga.No);
@@ -228,6 +257,7 @@ namespace DisegnaDiBa
                                 worker.ReportProgress(contatore, messaggio);
                             }
                         }
+                        worker.ReportProgress(contatore, string.Format("Distinta {0} terminata", distinta));
                     }
                     else
                     {
@@ -255,9 +285,6 @@ namespace DisegnaDiBa
                     bc.CreaConnessione();
                 }
 
-
-                contatore++;
-                worker.ReportProgress(contatore, string.Format("Distinta {0} terminata", distinta));
                 if (worker.CancellationPending)
                 {
                     e.Cancel = true;
@@ -390,7 +417,7 @@ namespace DisegnaDiBa
                 dgvEsportaDistinte.DataSource = null;
                 return;
             }
-         //   dgvEsportaFasi.AutoGenerateColumns = false;
+            //   dgvEsportaFasi.AutoGenerateColumns = false;
 
             AggiornaStatoDistinte();
 
@@ -573,7 +600,83 @@ namespace DisegnaDiBa
 
         private void btnPulisciMessaggi_Click(object sender, EventArgs e)
         {
-            txtMessaggio.Text = string.Empty;
+            txtEsportazione.Text = string.Empty;
+        }
+
+        private void btnCambiaStatoDistinte_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                string status = Stato.InSviluppo;
+                if ((sender as Button).Name == menuDistinteStatoCertificato.Name)
+                    status = Stato.Certificato;
+
+                BCServices bc = new BCServices();
+                bc.CreaConnessione();
+                txtEsportazione.Text = string.Empty;
+                foreach (ExpDistintaBusinessCentral d in _distinteExport)
+                {
+                    try
+                    {
+                        if (d.Selezionato)
+                        {
+                            bc.CambiaStatoDB(d.Codice, status);
+                            string messaggio = string.Format("Distinta {0} in stato: {1}", d.Codice, status);
+                            AggiornaMessaggio(messaggio);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        string messaggio = string.Format("Distinta {0} errore: {1}", d.Codice, ex.Message);
+                        AggiornaMessaggio(messaggio);
+                    }
+                }
+                PopolaGrigliaDistinte();
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void btnCambiaStatoCicli_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                string status = Stato.InSviluppo;
+                if ((sender as Button).Name == menucicliStatoCertificato.Name)
+                    status = Stato.Certificato;
+
+                BCServices bc = new BCServices();
+                bc.CreaConnessione();
+                txtEsportazione.Text = string.Empty;
+                foreach (ExpCicloBusinessCentral c in _cicliExport)
+                {
+                    try
+                    {
+                        if (c.Selezionato)
+                        {
+                            bc.CambiaStatoCiclo(c.Codice, status);
+                            string messaggio = string.Format("Ciclo {0} in stato: {1}", c.Codice, status);
+                            AggiornaMessaggio(messaggio);
+
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        string messaggio = string.Format("Ciclo {0} errore: {1}", c.Codice, ex.Message);
+                        AggiornaMessaggio(messaggio);
+                    }
+                }
+                PopolaGrigliaCicli();
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
         }
     }
 

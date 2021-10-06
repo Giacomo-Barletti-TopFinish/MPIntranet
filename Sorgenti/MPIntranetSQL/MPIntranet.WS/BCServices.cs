@@ -15,7 +15,7 @@ namespace MPIntranet.WS
         private string _url = "https://srv-bc.viamattei.metal-plus.it:7148/PROD_WS/ODataV4/Company('METALPLUS')/";
         private string _password = "V0Wz3MIxhXb2OvTv6y81pahROq6pFmqtPk3PTlnOzws=";
         private NAV.NAV _nav;
-        private int timer = 1900;
+        private int timer = 1500;
         public void CreaConnessione()
         {
             Uri uri = new Uri(_url);
@@ -88,6 +88,10 @@ namespace MPIntranet.WS
         public void CambiaStatoDB(string No, string stato)
         {
             TestataDIBA testata = EstraiTestataDIBA(No);
+            if(testata==null)
+            {
+                throw new Exception(string.Format("Distinta {0} non trovata",No));
+            }
             if (testata.Status != stato)
             {
                 testata.Status = stato;

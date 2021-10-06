@@ -46,7 +46,7 @@
             this.AnagraficaComponentiClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ErroreComponentiClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvEsportaFasi = new System.Windows.Forms.DataGridView();
-            this.SelezionatoFaseClm = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.SelezionaFaseClm = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.EsitoFaseClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CodiceCicloFaseClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IDFAseClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,27 +62,39 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btnPulisciMessaggi = new System.Windows.Forms.Button();
-            this.dgvEsportaDistinte = new System.Windows.Forms.DataGridView();
-            this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menucicliStatoCertificato = new System.Windows.Forms.ToolStripMenuItem();
             this.dgvEsportaCicli = new System.Windows.Forms.DataGridView();
-            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.selezionaCicliClm = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codiceCicloClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.mettiInSviluppoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuDistinteStatoCertificato = new System.Windows.Forms.ToolStripMenuItem();
+            this.dgvEsportaDistinte = new System.Windows.Forms.DataGridView();
+            this.selezionaDistintaClm = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codiceDistintaClm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnPulisciMessaggi = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEsportaComponenti)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEsportaFasi)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvEsportaDistinte)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.menuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEsportaCicli)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEsportaDistinte)).BeginInit();
             this.SuspendLayout();
             // 
             // btnTrovaFileDistinte
@@ -173,8 +185,6 @@
             // 
             this.dgvEsportaComponenti.AllowUserToAddRows = false;
             this.dgvEsportaComponenti.AllowUserToDeleteRows = false;
-            this.dgvEsportaComponenti.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvEsportaComponenti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEsportaComponenti.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SelezionaComponentiClm,
@@ -183,10 +193,10 @@
             this.DistintaComponentiClm,
             this.AnagraficaComponentiClm,
             this.ErroreComponentiClm});
-            this.dgvEsportaComponenti.Location = new System.Drawing.Point(528, 26);
+            this.dgvEsportaComponenti.Location = new System.Drawing.Point(357, 31);
             this.dgvEsportaComponenti.Name = "dgvEsportaComponenti";
             this.dgvEsportaComponenti.ReadOnly = true;
-            this.dgvEsportaComponenti.Size = new System.Drawing.Size(528, 322);
+            this.dgvEsportaComponenti.Size = new System.Drawing.Size(635, 283);
             this.dgvEsportaComponenti.TabIndex = 9;
             // 
             // SelezionaComponentiClm
@@ -249,12 +259,11 @@
             // 
             this.dgvEsportaFasi.AllowUserToAddRows = false;
             this.dgvEsportaFasi.AllowUserToDeleteRows = false;
-            this.dgvEsportaFasi.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvEsportaFasi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvEsportaFasi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEsportaFasi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.SelezionatoFaseClm,
+            this.SelezionaFaseClm,
             this.EsitoFaseClm,
             this.CodiceCicloFaseClm,
             this.IDFAseClm,
@@ -262,21 +271,21 @@
             this.AreaProduzioneFaseClm,
             this.TaskFaseClm,
             this.ErroreFaseClm});
-            this.dgvEsportaFasi.Location = new System.Drawing.Point(529, 373);
+            this.dgvEsportaFasi.Location = new System.Drawing.Point(357, 34);
             this.dgvEsportaFasi.Name = "dgvEsportaFasi";
             this.dgvEsportaFasi.ReadOnly = true;
-            this.dgvEsportaFasi.Size = new System.Drawing.Size(527, 322);
+            this.dgvEsportaFasi.Size = new System.Drawing.Size(634, 265);
             this.dgvEsportaFasi.TabIndex = 10;
             // 
-            // SelezionatoFaseClm
+            // SelezionaFaseClm
             // 
-            this.SelezionatoFaseClm.DataPropertyName = "Selezionato";
-            this.SelezionatoFaseClm.HeaderText = "Seleziona";
-            this.SelezionatoFaseClm.Name = "SelezionatoFaseClm";
-            this.SelezionatoFaseClm.ReadOnly = true;
-            this.SelezionatoFaseClm.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.SelezionatoFaseClm.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.SelezionatoFaseClm.Visible = false;
+            this.SelezionaFaseClm.DataPropertyName = "Selezionato";
+            this.SelezionaFaseClm.HeaderText = "Seleziona";
+            this.SelezionaFaseClm.Name = "SelezionaFaseClm";
+            this.SelezionaFaseClm.ReadOnly = true;
+            this.SelezionaFaseClm.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.SelezionaFaseClm.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.SelezionaFaseClm.Visible = false;
             // 
             // EsitoFaseClm
             // 
@@ -342,30 +351,31 @@
             // 
             // txtEsportazione
             // 
-            this.txtEsportazione.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.txtEsportazione.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtEsportazione.Location = new System.Drawing.Point(1104, 220);
+            this.txtEsportazione.Location = new System.Drawing.Point(1021, 226);
             this.txtEsportazione.Multiline = true;
             this.txtEsportazione.Name = "txtEsportazione";
             this.txtEsportazione.ReadOnly = true;
             this.txtEsportazione.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtEsportazione.Size = new System.Drawing.Size(249, 481);
+            this.txtEsportazione.Size = new System.Drawing.Size(374, 438);
             this.txtEsportazione.TabIndex = 14;
             // 
             // pbEsportazione
             // 
             this.pbEsportazione.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbEsportazione.Location = new System.Drawing.Point(1102, 159);
+            this.pbEsportazione.Location = new System.Drawing.Point(1021, 136);
             this.pbEsportazione.Name = "pbEsportazione";
-            this.pbEsportazione.Size = new System.Drawing.Size(249, 23);
+            this.pbEsportazione.Size = new System.Drawing.Size(374, 23);
             this.pbEsportazione.TabIndex = 15;
             // 
             // btnAvviaEsportazione
             // 
             this.btnAvviaEsportazione.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAvviaEsportazione.Location = new System.Drawing.Point(1102, 83);
+            this.btnAvviaEsportazione.Location = new System.Drawing.Point(1021, 50);
             this.btnAvviaEsportazione.Name = "btnAvviaEsportazione";
-            this.btnAvviaEsportazione.Size = new System.Drawing.Size(249, 37);
+            this.btnAvviaEsportazione.Size = new System.Drawing.Size(374, 37);
             this.btnAvviaEsportazione.TabIndex = 16;
             this.btnAvviaEsportazione.Text = "Esporta";
             this.btnAvviaEsportazione.UseVisualStyleBackColor = true;
@@ -375,7 +385,7 @@
             // 
             this.lblElementi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblElementi.AutoSize = true;
-            this.lblElementi.Location = new System.Drawing.Point(1316, 143);
+            this.lblElementi.Location = new System.Drawing.Point(1360, 120);
             this.lblElementi.Name = "lblElementi";
             this.lblElementi.Size = new System.Drawing.Size(35, 13);
             this.lblElementi.TabIndex = 17;
@@ -385,7 +395,7 @@
             // 
             this.lblAvanzamento.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAvanzamento.AutoSize = true;
-            this.lblAvanzamento.Location = new System.Drawing.Point(1206, 143);
+            this.lblAvanzamento.Location = new System.Drawing.Point(1188, 120);
             this.lblAvanzamento.Name = "lblAvanzamento";
             this.lblAvanzamento.Size = new System.Drawing.Size(35, 13);
             this.lblAvanzamento.TabIndex = 17;
@@ -399,7 +409,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1413, 779);
+            this.tabControl1.Size = new System.Drawing.Size(1413, 709);
             this.tabControl1.TabIndex = 18;
             // 
             // tabPage1
@@ -416,20 +426,19 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1405, 753);
+            this.tabPage1.Size = new System.Drawing.Size(1405, 683);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "FIle";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
+            this.tabPage2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabPage2.Controls.Add(this.panel2);
+            this.tabPage2.Controls.Add(this.panel1);
             this.tabPage2.Controls.Add(this.btnPulisciMessaggi);
-            this.tabPage2.Controls.Add(this.dgvEsportaDistinte);
-            this.tabPage2.Controls.Add(this.dgvEsportaComponenti);
-            this.tabPage2.Controls.Add(this.dgvEsportaCicli);
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Controls.Add(this.lblAvanzamento);
-            this.tabPage2.Controls.Add(this.dgvEsportaFasi);
             this.tabPage2.Controls.Add(this.lblElementi);
             this.tabPage2.Controls.Add(this.btnAvviaEsportazione);
             this.tabPage2.Controls.Add(this.pbEsportazione);
@@ -437,105 +446,74 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1405, 753);
+            this.tabPage2.Size = new System.Drawing.Size(1405, 683);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Servizi";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // btnPulisciMessaggi
+            // panel2
             // 
-            this.btnPulisciMessaggi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPulisciMessaggi.Location = new System.Drawing.Point(1179, 707);
-            this.btnPulisciMessaggi.Name = "btnPulisciMessaggi";
-            this.btnPulisciMessaggi.Size = new System.Drawing.Size(75, 23);
-            this.btnPulisciMessaggi.TabIndex = 18;
-            this.btnPulisciMessaggi.Text = "Pulisci";
-            this.btnPulisciMessaggi.UseVisualStyleBackColor = true;
-            this.btnPulisciMessaggi.Click += new System.EventHandler(this.btnPulisciMessaggi_Click);
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.menuStrip2);
+            this.panel2.Controls.Add(this.dgvEsportaCicli);
+            this.panel2.Controls.Add(this.dgvEsportaFasi);
+            this.panel2.Location = new System.Drawing.Point(8, 346);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1007, 321);
+            this.panel2.TabIndex = 23;
             // 
-            // dgvEsportaDistinte
+            // menuStrip2
             // 
-            this.dgvEsportaDistinte.AllowUserToAddRows = false;
-            this.dgvEsportaDistinte.AllowUserToDeleteRows = false;
-            this.dgvEsportaDistinte.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEsportaDistinte.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewCheckBoxColumn2,
-            this.dataGridViewTextBoxColumn8,
-            this.dataGridViewTextBoxColumn10,
-            this.dataGridViewTextBoxColumn11,
-            this.dataGridViewTextBoxColumn13});
-            this.dgvEsportaDistinte.Location = new System.Drawing.Point(15, 26);
-            this.dgvEsportaDistinte.Name = "dgvEsportaDistinte";
-            this.dgvEsportaDistinte.Size = new System.Drawing.Size(489, 322);
-            this.dgvEsportaDistinte.TabIndex = 9;
+            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.menucicliStatoCertificato});
+            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip2.Name = "menuStrip2";
+            this.menuStrip2.Size = new System.Drawing.Size(1005, 24);
+            this.menuStrip2.TabIndex = 11;
+            this.menuStrip2.Text = "menuStrip2";
             // 
-            // dataGridViewCheckBoxColumn2
+            // toolStripMenuItem1
             // 
-            this.dataGridViewCheckBoxColumn2.DataPropertyName = "Selezionato";
-            this.dataGridViewCheckBoxColumn2.FillWeight = 60F;
-            this.dataGridViewCheckBoxColumn2.HeaderText = "Seleziona";
-            this.dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
-            this.dataGridViewCheckBoxColumn2.Width = 60;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(108, 20);
+            this.toolStripMenuItem1.Text = "Metti in sviluppo";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.btnCambiaStatoCicli_Click);
             // 
-            // dataGridViewTextBoxColumn8
+            // menucicliStatoCertificato
             // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "Esito";
-            this.dataGridViewTextBoxColumn8.FillWeight = 50F;
-            this.dataGridViewTextBoxColumn8.HeaderText = "Esito";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.Width = 50;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "Codice";
-            this.dataGridViewTextBoxColumn10.FillWeight = 130F;
-            this.dataGridViewTextBoxColumn10.HeaderText = "Distinta";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.Width = 130;
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.DataPropertyName = "Stato";
-            this.dataGridViewTextBoxColumn11.FillWeight = 50F;
-            this.dataGridViewTextBoxColumn11.HeaderText = "Stato";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.Width = 50;
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.DataPropertyName = "Errore";
-            this.dataGridViewTextBoxColumn13.FillWeight = 150F;
-            this.dataGridViewTextBoxColumn13.HeaderText = "Errore";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.Width = 150;
+            this.menucicliStatoCertificato.Name = "menucicliStatoCertificato";
+            this.menucicliStatoCertificato.Size = new System.Drawing.Size(118, 20);
+            this.menucicliStatoCertificato.Text = "Metti in Certificato";
+            this.menucicliStatoCertificato.Click += new System.EventHandler(this.btnCambiaStatoCicli_Click);
             // 
             // dgvEsportaCicli
             // 
             this.dgvEsportaCicli.AllowUserToAddRows = false;
             this.dgvEsportaCicli.AllowUserToDeleteRows = false;
-            this.dgvEsportaCicli.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvEsportaCicli.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEsportaCicli.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewCheckBoxColumn1,
+            this.selezionaCicliClm,
             this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
+            this.codiceCicloClm,
             this.dataGridViewTextBoxColumn6,
             this.dataGridViewTextBoxColumn7});
-            this.dgvEsportaCicli.Location = new System.Drawing.Point(16, 373);
+            this.dgvEsportaCicli.Location = new System.Drawing.Point(11, 34);
             this.dgvEsportaCicli.Name = "dgvEsportaCicli";
-            this.dgvEsportaCicli.Size = new System.Drawing.Size(486, 322);
+            this.dgvEsportaCicli.Size = new System.Drawing.Size(336, 265);
             this.dgvEsportaCicli.TabIndex = 10;
             // 
-            // dataGridViewCheckBoxColumn1
+            // selezionaCicliClm
             // 
-            this.dataGridViewCheckBoxColumn1.DataPropertyName = "Selezionato";
-            this.dataGridViewCheckBoxColumn1.FillWeight = 60F;
-            this.dataGridViewCheckBoxColumn1.HeaderText = "Seleziona";
-            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
-            this.dataGridViewCheckBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewCheckBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.dataGridViewCheckBoxColumn1.Width = 60;
+            this.selezionaCicliClm.DataPropertyName = "Selezionato";
+            this.selezionaCicliClm.FillWeight = 60F;
+            this.selezionaCicliClm.HeaderText = "Seleziona";
+            this.selezionaCicliClm.Name = "selezionaCicliClm";
+            this.selezionaCicliClm.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.selezionaCicliClm.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.selezionaCicliClm.Width = 60;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -544,25 +522,26 @@
             this.dataGridViewTextBoxColumn1.HeaderText = "Esito";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Visible = false;
             this.dataGridViewTextBoxColumn1.Width = 50;
             // 
-            // dataGridViewTextBoxColumn2
+            // codiceCicloClm
             // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Codice";
-            this.dataGridViewTextBoxColumn2.FillWeight = 130F;
-            this.dataGridViewTextBoxColumn2.HeaderText = "Ciclo";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 130;
+            this.codiceCicloClm.DataPropertyName = "Codice";
+            this.codiceCicloClm.FillWeight = 130F;
+            this.codiceCicloClm.HeaderText = "Ciclo";
+            this.codiceCicloClm.Name = "codiceCicloClm";
+            this.codiceCicloClm.ReadOnly = true;
+            this.codiceCicloClm.Width = 130;
             // 
             // dataGridViewTextBoxColumn6
             // 
             this.dataGridViewTextBoxColumn6.DataPropertyName = "Stato";
-            this.dataGridViewTextBoxColumn6.FillWeight = 50F;
+            this.dataGridViewTextBoxColumn6.FillWeight = 70F;
             this.dataGridViewTextBoxColumn6.HeaderText = "Stato";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            this.dataGridViewTextBoxColumn6.Width = 50;
+            this.dataGridViewTextBoxColumn6.Width = 70;
             // 
             // dataGridViewTextBoxColumn7
             // 
@@ -571,13 +550,119 @@
             this.dataGridViewTextBoxColumn7.HeaderText = "Errore";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.dataGridViewTextBoxColumn7.Visible = false;
             this.dataGridViewTextBoxColumn7.Width = 150;
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.menuStrip1);
+            this.panel1.Controls.Add(this.dgvEsportaComponenti);
+            this.panel1.Controls.Add(this.dgvEsportaDistinte);
+            this.panel1.Location = new System.Drawing.Point(8, 8);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1007, 321);
+            this.panel1.TabIndex = 22;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mettiInSviluppoToolStripMenuItem,
+            this.menuDistinteStatoCertificato});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1005, 24);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // mettiInSviluppoToolStripMenuItem
+            // 
+            this.mettiInSviluppoToolStripMenuItem.Name = "mettiInSviluppoToolStripMenuItem";
+            this.mettiInSviluppoToolStripMenuItem.Size = new System.Drawing.Size(108, 20);
+            this.mettiInSviluppoToolStripMenuItem.Text = "Metti in sviluppo";
+            this.mettiInSviluppoToolStripMenuItem.Click += new System.EventHandler(this.btnCambiaStatoDistinte_Click);
+            // 
+            // menuDistinteStatoCertificato
+            // 
+            this.menuDistinteStatoCertificato.Name = "menuDistinteStatoCertificato";
+            this.menuDistinteStatoCertificato.Size = new System.Drawing.Size(118, 20);
+            this.menuDistinteStatoCertificato.Text = "Metti in Certificato";
+            this.menuDistinteStatoCertificato.Click += new System.EventHandler(this.btnCambiaStatoDistinte_Click);
+            // 
+            // dgvEsportaDistinte
+            // 
+            this.dgvEsportaDistinte.AllowUserToAddRows = false;
+            this.dgvEsportaDistinte.AllowUserToDeleteRows = false;
+            this.dgvEsportaDistinte.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEsportaDistinte.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.selezionaDistintaClm,
+            this.dataGridViewTextBoxColumn8,
+            this.codiceDistintaClm,
+            this.dataGridViewTextBoxColumn11,
+            this.dataGridViewTextBoxColumn13});
+            this.dgvEsportaDistinte.Location = new System.Drawing.Point(8, 31);
+            this.dgvEsportaDistinte.Name = "dgvEsportaDistinte";
+            this.dgvEsportaDistinte.Size = new System.Drawing.Size(339, 283);
+            this.dgvEsportaDistinte.TabIndex = 9;
+            // 
+            // selezionaDistintaClm
+            // 
+            this.selezionaDistintaClm.DataPropertyName = "Selezionato";
+            this.selezionaDistintaClm.FillWeight = 60F;
+            this.selezionaDistintaClm.HeaderText = "Seleziona";
+            this.selezionaDistintaClm.Name = "selezionaDistintaClm";
+            this.selezionaDistintaClm.Width = 60;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "Esito";
+            this.dataGridViewTextBoxColumn8.FillWeight = 50F;
+            this.dataGridViewTextBoxColumn8.HeaderText = "Esito";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.Visible = false;
+            this.dataGridViewTextBoxColumn8.Width = 50;
+            // 
+            // codiceDistintaClm
+            // 
+            this.codiceDistintaClm.DataPropertyName = "Codice";
+            this.codiceDistintaClm.FillWeight = 130F;
+            this.codiceDistintaClm.HeaderText = "Distinta";
+            this.codiceDistintaClm.Name = "codiceDistintaClm";
+            this.codiceDistintaClm.Width = 130;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.DataPropertyName = "Stato";
+            this.dataGridViewTextBoxColumn11.FillWeight = 70F;
+            this.dataGridViewTextBoxColumn11.HeaderText = "Stato";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.Width = 70;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "Errore";
+            this.dataGridViewTextBoxColumn13.FillWeight = 150F;
+            this.dataGridViewTextBoxColumn13.HeaderText = "Errore";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.Visible = false;
+            this.dataGridViewTextBoxColumn13.Width = 150;
+            // 
+            // btnPulisciMessaggi
+            // 
+            this.btnPulisciMessaggi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPulisciMessaggi.Location = new System.Drawing.Point(1320, 200);
+            this.btnPulisciMessaggi.Name = "btnPulisciMessaggi";
+            this.btnPulisciMessaggi.Size = new System.Drawing.Size(75, 23);
+            this.btnPulisciMessaggi.TabIndex = 18;
+            this.btnPulisciMessaggi.Text = "Pulisci";
+            this.btnPulisciMessaggi.UseVisualStyleBackColor = true;
+            this.btnPulisciMessaggi.Click += new System.EventHandler(this.btnPulisciMessaggi_Click);
             // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1101, 204);
+            this.label3.Location = new System.Drawing.Point(1027, 210);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 13);
             this.label3.TabIndex = 17;
@@ -587,9 +672,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1413, 779);
+            this.ClientSize = new System.Drawing.Size(1413, 709);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "EsportaDiBaFrm";
             this.Text = "Esporta distinte ";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EsportaDiBaFrm_FormClosing);
@@ -601,8 +687,16 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvEsportaDistinte)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.menuStrip2.ResumeLayout(false);
+            this.menuStrip2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEsportaCicli)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEsportaDistinte)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -630,23 +724,15 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridView dgvEsportaDistinte;
         private System.Windows.Forms.DataGridView dgvEsportaCicli;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewCheckBoxColumn SelezionaComponentiClm;
         private System.Windows.Forms.DataGridViewTextBoxColumn EsitoComponentiClm;
         private System.Windows.Forms.DataGridViewTextBoxColumn IDComponentiClm;
         private System.Windows.Forms.DataGridViewTextBoxColumn DistintaComponentiClm;
         private System.Windows.Forms.DataGridViewTextBoxColumn AnagraficaComponentiClm;
         private System.Windows.Forms.DataGridViewTextBoxColumn ErroreComponentiClm;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn SelezionatoFaseClm;
+        private System.Windows.Forms.Button btnPulisciMessaggi;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn SelezionaFaseClm;
         private System.Windows.Forms.DataGridViewTextBoxColumn EsitoFaseClm;
         private System.Windows.Forms.DataGridViewTextBoxColumn CodiceCicloFaseClm;
         private System.Windows.Forms.DataGridViewTextBoxColumn IDFAseClm;
@@ -654,7 +740,23 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn AreaProduzioneFaseClm;
         private System.Windows.Forms.DataGridViewTextBoxColumn TaskFaseClm;
         private System.Windows.Forms.DataGridViewTextBoxColumn ErroreFaseClm;
-        private System.Windows.Forms.Button btnPulisciMessaggi;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn selezionaDistintaClm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codiceDistintaClm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn selezionaCicliClm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codiceCicloClm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.MenuStrip menuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem menucicliStatoCertificato;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem mettiInSviluppoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuDistinteStatoCertificato;
     }
 }
