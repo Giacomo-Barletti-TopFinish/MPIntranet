@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -28,6 +29,7 @@ namespace TestWebServicesFrm
                 if (string.IsNullOrEmpty(txtDistintaNo.Text))
                 {
                     txtMessaggio.Text = "Inserire un codice distinta";
+                    return;
                 }
                 BCServices bc = new BCServices();
                 bc.CreaConnessione();
@@ -52,6 +54,7 @@ namespace TestWebServicesFrm
                 if (string.IsNullOrEmpty(txtDistintaNo.Text))
                 {
                     txtMessaggio.Text = "Inserire un codice distinta";
+                    return;
                 }
                 BCServices bc = new BCServices();
                 bc.CreaConnessione();
@@ -100,6 +103,7 @@ namespace TestWebServicesFrm
                 if (string.IsNullOrEmpty(txtDistintaNo.Text))
                 {
                     txtMessaggio.Text = "Inserire un codice distinta";
+                    return;
                 }
                 BCServices bc = new BCServices();
                 bc.CreaConnessione();
@@ -121,6 +125,7 @@ namespace TestWebServicesFrm
                 if (string.IsNullOrEmpty(txtDistintaNo.Text))
                 {
                     txtMessaggio.Text = "Inserire un codice distinta";
+                    return;
                 }
                 BCServices bc = new BCServices();
                 bc.CreaConnessione();
@@ -142,6 +147,7 @@ namespace TestWebServicesFrm
                 if (string.IsNullOrEmpty(txtDistintaNo.Text))
                 {
                     txtMessaggio.Text = "Inserire un codice distinta";
+                    return;
                 }
                 BCServices bc = new BCServices();
                 bc.CreaConnessione();
@@ -163,6 +169,7 @@ namespace TestWebServicesFrm
                 if (string.IsNullOrEmpty(txtDistintaNo.Text))
                 {
                     txtMessaggio.Text = "Inserire un codice distinta";
+                    return;
                 }
                 BCServices bc = new BCServices();
                 bc.CreaConnessione();
@@ -186,6 +193,7 @@ namespace TestWebServicesFrm
                 if (string.IsNullOrEmpty(txtDistintaNo.Text))
                 {
                     txtMessaggio.Text = "Inserire un codice distinta";
+                    return;
                 }
                 BCServices bc = new BCServices();
                 bc.CreaConnessione();
@@ -208,6 +216,7 @@ namespace TestWebServicesFrm
                 if (string.IsNullOrEmpty(txtDistintaNo.Text))
                 {
                     txtMessaggio.Text = "Inserire un codice distinta";
+                    return;
                 }
                 BCServices bc = new BCServices();
                 bc.CreaConnessione();
@@ -231,6 +240,7 @@ namespace TestWebServicesFrm
                 if (string.IsNullOrEmpty(txtDistintaNo.Text))
                 {
                     txtMessaggio.Text = "Inserire un codice ciclo";
+                    return;
                 }
                 BCServices bc = new BCServices();
                 bc.CreaConnessione();
@@ -255,6 +265,7 @@ namespace TestWebServicesFrm
                 if (string.IsNullOrEmpty(txtNoCiclo.Text))
                 {
                     txtMessaggio.Text = "Inserire un codice distinta";
+                    return;
                 }
                 BCServices bc = new BCServices();
                 bc.CreaConnessione();
@@ -281,6 +292,7 @@ namespace TestWebServicesFrm
                 if (string.IsNullOrEmpty(txtNoCiclo.Text))
                 {
                     txtMessaggio.Text = "Inserire un codice ciclo";
+                    return;
                 }
                 BCServices bc = new BCServices();
                 bc.CreaConnessione();
@@ -302,6 +314,7 @@ namespace TestWebServicesFrm
                 if (string.IsNullOrEmpty(txtNoCiclo.Text))
                 {
                     txtMessaggio.Text = "Inserire un codice ciclo";
+                    return;
                 }
                 BCServices bc = new BCServices();
                 bc.CreaConnessione();
@@ -323,6 +336,7 @@ namespace TestWebServicesFrm
                 if (string.IsNullOrEmpty(txtNoCiclo.Text))
                 {
                     txtMessaggio.Text = "Inserire un codice ciclo";
+                    return;
                 }
                 BCServices bc = new BCServices();
                 bc.CreaConnessione();
@@ -359,14 +373,17 @@ namespace TestWebServicesFrm
                 if (string.IsNullOrEmpty(txtNoCiclo.Text))
                 {
                     txtMessaggio.Text = "Inserire un codice ciclo";
+                    return;
                 }
                 if (ddlAreaProduzione.SelectedIndex == -1)
                 {
                     txtMessaggio.Text = "Selezionare un area produzione";
+                    return;
                 }
                 if (ddlTask.SelectedIndex == -1)
                 {
                     txtMessaggio.Text = "Selezionare un task";
+                    return;
                 }
                 BCServices bc = new BCServices();
                 bc.CreaConnessione();
@@ -398,6 +415,7 @@ namespace TestWebServicesFrm
                 if (string.IsNullOrEmpty(txtNoCiclo.Text))
                 {
                     txtMessaggio.Text = "Inserire un codice ciclo";
+                    return;
                 }
 
                 int operazione = (int)nOperazioneFase.Value;
@@ -423,14 +441,17 @@ namespace TestWebServicesFrm
                 if (string.IsNullOrEmpty(txtNoCiclo.Text))
                 {
                     txtMessaggio.Text = "Inserire un codice ciclo";
+                    return;
                 }
                 if (ddlAreaProduzione.SelectedIndex == -1)
                 {
                     txtMessaggio.Text = "Selezionare un area produzione";
+                    return;
                 }
                 if (ddlTask.SelectedIndex == -1)
                 {
                     txtMessaggio.Text = "Selezionare un task";
+                    return;
                 }
                 int operazione = (int)nOperazioneFase.Value;
                 AreaProduzione area = (AreaProduzione)ddlAreaProduzione.SelectedItem;
@@ -461,6 +482,7 @@ namespace TestWebServicesFrm
                 if (string.IsNullOrEmpty(txtNoCiclo.Text))
                 {
                     txtMessaggio.Text = "Inserire un codice fase";
+                    return;
                 }
 
                 int operazione = (int)nOperazioneFase.Value;
@@ -488,6 +510,7 @@ namespace TestWebServicesFrm
                 if (string.IsNullOrEmpty(txtNoCiclo.Text))
                 {
                     txtMessaggio.Text = "Inserire un codice ciclo";
+                    return;
                 }
 
                 int operazione = (int)nOperazioneFase.Value;
@@ -498,13 +521,74 @@ namespace TestWebServicesFrm
                 List<CommentiFasi> commenti = bc.EstraiCommenti(txtNoCiclo.Text, txtVersioneCiclo.Text);
                 StringBuilder sb = new StringBuilder();
 
-                commenti.ForEach(x=> sb.AppendLine(string.Format("{0} {1} {2} {3}",x.Routing_No,x.Operation_No,x.Line_No,x.Comment)));
+                commenti.ForEach(x => sb.AppendLine(string.Format("{0} {1} {2} {3}", x.Routing_No, x.Operation_No, x.Line_No, x.Comment)));
                 txtMessaggio.Text = sb.ToString();
             }
             catch (Exception ex)
             {
                 txtMessaggio.Text = estraiErrore(ex);
             }
+        }
+
+        private void btnEstraiAnagrafica_Click(object sender, EventArgs e)
+        {
+            txtMessaggio.Text = string.Empty;
+            try
+            {
+                if (string.IsNullOrEmpty(txtAnagrafica.Text))
+                {
+                    txtMessaggio.Text = "Inserire il codice anagrafica";
+                    return;
+                }
+                BCServices bc = new BCServices();
+                bc.CreaConnessione();
+                Articoli articolo = bc.EstraiArticolo(txtAnagrafica.Text);
+                txtDescrizioneArticolo.Text = articolo.Description;
+                txtMessaggio.Text = string.Format("{0} {1} {2}", articolo.No, articolo.Description, articolo.Description_2);
+
+            }
+            catch (Exception ex)
+            {
+                txtMessaggio.Text = estraiErrore(ex);
+            }
+        }
+
+        private void btnConfrontaAnagrafiche_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtAnagrafica.Text) || string.IsNullOrEmpty(txtAnagraficaDestinazione.Text))
+            {
+                txtMessaggio.Text = "Inserire il codice anagrafica o il codice anagrafica destinazione";
+                return;
+            }
+            BCServices bc = new BCServices();
+            bc.CreaConnessione();
+            Articoli articolo = bc.EstraiArticolo(txtAnagrafica.Text);
+            Articoli articoloDestinazione = bc.EstraiArticolo(txtAnagraficaDestinazione.Text);
+            if(articolo==null )
+            {
+                txtMessaggio.Text = "Articolo non trovato " + txtAnagrafica.Text;
+                return;
+            }
+            if (articoloDestinazione == null)
+            {
+                txtMessaggio.Text = "Articolo non trovato " + txtAnagraficaDestinazione.Text;
+                return;
+            }
+            Type type = articolo.GetType();
+            PropertyInfo[] props = type.GetProperties();
+
+            StringBuilder sb = new StringBuilder();
+            foreach (PropertyInfo pi in props.OrderBy(X=>X.Name))
+            {
+                object valore1 = pi.GetValue(articolo);
+                object valore2 = pi.GetValue(articoloDestinazione);
+                bool uguali = false;
+                if (valore1.ToString() == valore2.ToString()) uguali = true;
+
+                string messaggio = string.Format("{0}  {1}  {2} - {3}", uguali ? "SI" : "NO", pi.Name, valore1.ToString(), valore2.ToString());
+                sb.AppendLine(messaggio);
+            }
+            txtMessaggio.Text = sb.ToString();
         }
     }
 }

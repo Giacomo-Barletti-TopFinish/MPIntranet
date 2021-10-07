@@ -60,7 +60,20 @@ namespace MPIntranet.WS
                 return null;
             }
         }
-
+        public Articoli EstraiArticolo(string Anagrafica)
+        {
+            if (_nav == null) return null;
+            try
+            {
+                Articoli t = _nav.Articoli.Where(x => x.No == Anagrafica).FirstOrDefault();
+                
+                return t;
+            }
+            catch
+            {
+                return null;
+            }
+        }
         public List<RigheDIBA> EstraiRigheDIBA(string No)
         {
             if (_nav == null) return null;
@@ -168,9 +181,15 @@ namespace MPIntranet.WS
         public Cicli EstraiTestataCiclo(string NoCiclo)
         {
             if (_nav == null) return null;
+            try{
+                Cicli t = _nav.Cicli.Where(x => x.No == NoCiclo).FirstOrDefault();
+                return t;
 
-            Cicli t = _nav.Cicli.Where(x => x.No == NoCiclo).FirstOrDefault();
-            return t;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public List<RigheCICLO> EstraiRigheCICLO(string NoCiclo)

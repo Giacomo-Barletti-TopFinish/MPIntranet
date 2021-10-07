@@ -40,6 +40,8 @@
             this.btnCambiaDescrizioneDistinta = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
+            this.txtStatoDistinta = new System.Windows.Forms.TextBox();
+            this.label38 = new System.Windows.Forms.Label();
             this.txtCodiceVersioneDistinta = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
@@ -87,6 +89,8 @@
             this.btnCambiaDescrizioneCiclo = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
             this.txtVersioneCiclo = new System.Windows.Forms.TextBox();
+            this.txtStatoCiclo = new System.Windows.Forms.TextBox();
+            this.label39 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnEstraiCommenti = new System.Windows.Forms.Button();
@@ -129,10 +133,19 @@
             this.label36 = new System.Windows.Forms.Label();
             this.txtUMAttesaFase = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.txtStatoDistinta = new System.Windows.Forms.TextBox();
-            this.label39 = new System.Windows.Forms.Label();
-            this.txtStatoCiclo = new System.Windows.Forms.TextBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btnEstraiAnagrafica = new System.Windows.Forms.Button();
+            this.txtAnagrafica = new System.Windows.Forms.TextBox();
+            this.txtDescrizioneArticolo = new System.Windows.Forms.TextBox();
+            this.lbl = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
+            this.label40 = new System.Windows.Forms.Label();
+            this.txtAnagraficaDestinazione = new System.Windows.Forms.TextBox();
+            this.btnConfrontaAnagrafiche = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -149,16 +162,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.nOperazioneFase)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nLavorazioneFase)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nSetupFase)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtMessaggio
             // 
-            this.txtMessaggio.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtMessaggio.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMessaggio.Location = new System.Drawing.Point(12, 611);
+            this.txtMessaggio.Location = new System.Drawing.Point(12, 625);
             this.txtMessaggio.Multiline = true;
             this.txtMessaggio.Name = "txtMessaggio";
-            this.txtMessaggio.Size = new System.Drawing.Size(840, 193);
+            this.txtMessaggio.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtMessaggio.Size = new System.Drawing.Size(1240, 179);
             this.txtMessaggio.TabIndex = 0;
             // 
             // txtDistintaNo
@@ -261,7 +280,7 @@
             this.groupBox1.Controls.Add(this.txtCodiceVersioneDistinta);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label28);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(6, 8);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1207, 110);
             this.groupBox1.TabIndex = 3;
@@ -284,6 +303,23 @@
             0,
             0,
             0});
+            // 
+            // txtStatoDistinta
+            // 
+            this.txtStatoDistinta.Location = new System.Drawing.Point(331, 83);
+            this.txtStatoDistinta.Name = "txtStatoDistinta";
+            this.txtStatoDistinta.ReadOnly = true;
+            this.txtStatoDistinta.Size = new System.Drawing.Size(170, 20);
+            this.txtStatoDistinta.TabIndex = 0;
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(331, 66);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(32, 13);
+            this.label38.TabIndex = 1;
+            this.label38.Text = "Stato";
             // 
             // txtCodiceVersioneDistinta
             // 
@@ -352,7 +388,7 @@
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.txtDescrizioneComponente);
             this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Location = new System.Drawing.Point(12, 128);
+            this.groupBox2.Location = new System.Drawing.Point(6, 124);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(1207, 171);
             this.groupBox2.TabIndex = 4;
@@ -684,7 +720,7 @@
             this.groupBox3.Controls.Add(this.txtStatoCiclo);
             this.groupBox3.Controls.Add(this.label39);
             this.groupBox3.Controls.Add(this.label18);
-            this.groupBox3.Location = new System.Drawing.Point(12, 305);
+            this.groupBox3.Location = new System.Drawing.Point(6, 301);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(1207, 110);
             this.groupBox3.TabIndex = 4;
@@ -781,6 +817,23 @@
             this.txtVersioneCiclo.Size = new System.Drawing.Size(170, 20);
             this.txtVersioneCiclo.TabIndex = 0;
             // 
+            // txtStatoCiclo
+            // 
+            this.txtStatoCiclo.Location = new System.Drawing.Point(334, 84);
+            this.txtStatoCiclo.Name = "txtStatoCiclo";
+            this.txtStatoCiclo.ReadOnly = true;
+            this.txtStatoCiclo.Size = new System.Drawing.Size(170, 20);
+            this.txtStatoCiclo.TabIndex = 0;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(334, 67);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(32, 13);
+            this.label39.TabIndex = 1;
+            this.label39.Text = "Stato";
+            // 
             // label18
             // 
             this.label18.AutoSize = true;
@@ -833,7 +886,7 @@
             this.groupBox4.Controls.Add(this.label36);
             this.groupBox4.Controls.Add(this.txtUMAttesaFase);
             this.groupBox4.Controls.Add(this.label24);
-            this.groupBox4.Location = new System.Drawing.Point(12, 425);
+            this.groupBox4.Location = new System.Drawing.Point(6, 417);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(1207, 171);
             this.groupBox4.TabIndex = 4;
@@ -1230,49 +1283,144 @@
             this.label24.TabIndex = 1;
             this.label24.Text = "Unità di Misura";
             // 
-            // label38
+            // tabControl1
             // 
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(331, 66);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(32, 13);
-            this.label38.TabIndex = 1;
-            this.label38.Text = "Stato";
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Location = new System.Drawing.Point(12, 2);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1240, 617);
+            this.tabControl1.TabIndex = 5;
             // 
-            // txtStatoDistinta
+            // tabPage1
             // 
-            this.txtStatoDistinta.Location = new System.Drawing.Point(331, 83);
-            this.txtStatoDistinta.Name = "txtStatoDistinta";
-            this.txtStatoDistinta.ReadOnly = true;
-            this.txtStatoDistinta.Size = new System.Drawing.Size(170, 20);
-            this.txtStatoDistinta.TabIndex = 0;
+            this.tabPage1.Controls.Add(this.groupBox1);
+            this.tabPage1.Controls.Add(this.groupBox4);
+            this.tabPage1.Controls.Add(this.groupBox3);
+            this.tabPage1.Controls.Add(this.groupBox2);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1232, 591);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "DiBa";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // label39
+            // tabPage2
             // 
-            this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(334, 67);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(32, 13);
-            this.label39.TabIndex = 1;
-            this.label39.Text = "Stato";
+            this.tabPage2.Controls.Add(this.groupBox5);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1232, 591);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Anagrafica";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // txtStatoCiclo
+            // groupBox5
             // 
-            this.txtStatoCiclo.Location = new System.Drawing.Point(334, 84);
-            this.txtStatoCiclo.Name = "txtStatoCiclo";
-            this.txtStatoCiclo.ReadOnly = true;
-            this.txtStatoCiclo.Size = new System.Drawing.Size(170, 20);
-            this.txtStatoCiclo.TabIndex = 0;
+            this.groupBox5.Controls.Add(this.btnConfrontaAnagrafiche);
+            this.groupBox5.Controls.Add(this.btnEstraiAnagrafica);
+            this.groupBox5.Controls.Add(this.txtAnagraficaDestinazione);
+            this.groupBox5.Controls.Add(this.txtAnagrafica);
+            this.groupBox5.Controls.Add(this.label40);
+            this.groupBox5.Controls.Add(this.txtDescrizioneArticolo);
+            this.groupBox5.Controls.Add(this.lbl);
+            this.groupBox5.Controls.Add(this.button5);
+            this.groupBox5.Controls.Add(this.label41);
+            this.groupBox5.Location = new System.Drawing.Point(6, 6);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(1207, 110);
+            this.groupBox5.TabIndex = 4;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Distinte";
+            // 
+            // btnEstraiAnagrafica
+            // 
+            this.btnEstraiAnagrafica.Location = new System.Drawing.Point(199, 34);
+            this.btnEstraiAnagrafica.Name = "btnEstraiAnagrafica";
+            this.btnEstraiAnagrafica.Size = new System.Drawing.Size(106, 23);
+            this.btnEstraiAnagrafica.TabIndex = 2;
+            this.btnEstraiAnagrafica.Text = "Estrai anagrafica";
+            this.btnEstraiAnagrafica.UseVisualStyleBackColor = true;
+            this.btnEstraiAnagrafica.Click += new System.EventHandler(this.btnEstraiAnagrafica_Click);
+            // 
+            // txtAnagrafica
+            // 
+            this.txtAnagrafica.Location = new System.Drawing.Point(16, 36);
+            this.txtAnagrafica.Name = "txtAnagrafica";
+            this.txtAnagrafica.Size = new System.Drawing.Size(170, 20);
+            this.txtAnagrafica.TabIndex = 0;
+            this.txtAnagrafica.Text = "A-CAM700029FIA84A01 ";
+            // 
+            // txtDescrizioneArticolo
+            // 
+            this.txtDescrizioneArticolo.Location = new System.Drawing.Point(16, 84);
+            this.txtDescrizioneArticolo.Name = "txtDescrizioneArticolo";
+            this.txtDescrizioneArticolo.Size = new System.Drawing.Size(170, 20);
+            this.txtDescrizioneArticolo.TabIndex = 0;
+            // 
+            // lbl
+            // 
+            this.lbl.AutoSize = true;
+            this.lbl.Location = new System.Drawing.Point(14, 19);
+            this.lbl.Name = "lbl";
+            this.lbl.Size = new System.Drawing.Size(58, 13);
+            this.lbl.TabIndex = 1;
+            this.lbl.Text = "Anagrafica";
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(14, 66);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(62, 13);
+            this.label41.TabIndex = 1;
+            this.label41.Text = "Descrizione";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(199, 82);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(106, 23);
+            this.button5.TabIndex = 2;
+            this.button5.Text = "Cambia descrizione";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(341, 19);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(120, 13);
+            this.label40.TabIndex = 1;
+            this.label40.Text = "Anagrafica destinazione";
+            // 
+            // txtAnagraficaDestinazione
+            // 
+            this.txtAnagraficaDestinazione.Location = new System.Drawing.Point(343, 36);
+            this.txtAnagraficaDestinazione.Name = "txtAnagraficaDestinazione";
+            this.txtAnagraficaDestinazione.Size = new System.Drawing.Size(170, 20);
+            this.txtAnagraficaDestinazione.TabIndex = 0;
+            this.txtAnagraficaDestinazione.Text = "R-CAM700029FIA84A01 ";
+            // 
+            // btnConfrontaAnagrafiche
+            // 
+            this.btnConfrontaAnagrafiche.Location = new System.Drawing.Point(522, 34);
+            this.btnConfrontaAnagrafiche.Name = "btnConfrontaAnagrafiche";
+            this.btnConfrontaAnagrafiche.Size = new System.Drawing.Size(106, 23);
+            this.btnConfrontaAnagrafiche.TabIndex = 2;
+            this.btnConfrontaAnagrafiche.Text = "Confronta anagrafiche";
+            this.btnConfrontaAnagrafiche.UseVisualStyleBackColor = true;
+            this.btnConfrontaAnagrafiche.Click += new System.EventHandler(this.btnConfrontaAnagrafiche_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1242, 816);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(1273, 816);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.txtMessaggio);
             this.Name = "MainForm";
             this.Text = "TEST WEB Services";
@@ -1297,6 +1445,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.nOperazioneFase)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nLavorazioneFase)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nSetupFase)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1409,6 +1562,19 @@
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.TextBox txtStatoCiclo;
         private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button btnEstraiAnagrafica;
+        private System.Windows.Forms.TextBox txtAnagrafica;
+        private System.Windows.Forms.TextBox txtDescrizioneArticolo;
+        private System.Windows.Forms.Label lbl;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Button btnConfrontaAnagrafiche;
+        private System.Windows.Forms.TextBox txtAnagraficaDestinazione;
+        private System.Windows.Forms.Label label40;
     }
 }
 
