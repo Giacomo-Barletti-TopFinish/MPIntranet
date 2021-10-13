@@ -60,13 +60,26 @@ namespace MPIntranet.WS
                 return null;
             }
         }
+        public List<Allegati>EstraiAllegati(string Anagrafica)
+        {
+            if (_nav == null) return null;
+            try
+            {
+                List<Allegati> t = _nav.Allegati.Where(x => x.No == Anagrafica).ToList();
+                
+                return t;
+            }
+            catch
+            {
+                return null;
+            }
+        }
         public Articoli EstraiArticolo(string Anagrafica)
         {
             if (_nav == null) return null;
             try
             {
-                Articoli t = _nav.Articoli.Where(x => x.No == Anagrafica).FirstOrDefault();
-                
+                Articoli t = _nav.Articoli.Where(x => x.No == Anagrafica).FirstOrDefault();               
                 return t;
             }
             catch

@@ -590,5 +590,26 @@ namespace TestWebServicesFrm
             }
             txtMessaggio.Text = sb.ToString();
         }
+
+        private void btnEstraiAllegato_Click(object sender, EventArgs e)
+        {
+            txtMessaggio.Text = string.Empty;
+            try
+            {
+                if (string.IsNullOrEmpty(txtAnagrafica.Text))
+                {
+                    txtMessaggio.Text = "Inserire il codice anagrafica";
+                    return;
+                }
+                BCServices bc = new BCServices();
+                bc.CreaConnessione();
+                List<Allegati> allegati= bc.EstraiAllegati(txtAnagrafica.Text);
+
+            }
+            catch (Exception ex)
+            {
+                txtMessaggio.Text = estraiErrore(ex);
+            }
+        }
     }
 }

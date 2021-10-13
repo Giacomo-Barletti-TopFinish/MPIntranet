@@ -146,6 +146,7 @@
             this.label40 = new System.Windows.Forms.Label();
             this.txtAnagraficaDestinazione = new System.Windows.Forms.TextBox();
             this.btnConfrontaAnagrafiche = new System.Windows.Forms.Button();
+            this.btnEstraiAllegato = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -1321,6 +1322,7 @@
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.btnConfrontaAnagrafiche);
+            this.groupBox5.Controls.Add(this.btnEstraiAllegato);
             this.groupBox5.Controls.Add(this.btnEstraiAnagrafica);
             this.groupBox5.Controls.Add(this.txtAnagraficaDestinazione);
             this.groupBox5.Controls.Add(this.txtAnagrafica);
@@ -1334,7 +1336,7 @@
             this.groupBox5.Size = new System.Drawing.Size(1207, 110);
             this.groupBox5.TabIndex = 4;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Distinte";
+            this.groupBox5.Text = "Anagrafiche";
             // 
             // btnEstraiAnagrafica
             // 
@@ -1414,6 +1416,16 @@
             this.btnConfrontaAnagrafiche.Text = "Confronta anagrafiche";
             this.btnConfrontaAnagrafiche.UseVisualStyleBackColor = true;
             this.btnConfrontaAnagrafiche.Click += new System.EventHandler(this.btnConfrontaAnagrafiche_Click);
+            // 
+            // btnEstraiAllegato
+            // 
+            this.btnEstraiAllegato.Location = new System.Drawing.Point(655, 33);
+            this.btnEstraiAllegato.Name = "btnEstraiAllegato";
+            this.btnEstraiAllegato.Size = new System.Drawing.Size(106, 23);
+            this.btnEstraiAllegato.TabIndex = 2;
+            this.btnEstraiAllegato.Text = "Estrai allegato";
+            this.btnEstraiAllegato.UseVisualStyleBackColor = true;
+            this.btnEstraiAllegato.Click += new System.EventHandler(this.btnEstraiAllegato_Click);
             // 
             // MainForm
             // 
@@ -1575,6 +1587,7 @@
         private System.Windows.Forms.Button btnConfrontaAnagrafiche;
         private System.Windows.Forms.TextBox txtAnagraficaDestinazione;
         private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Button btnEstraiAllegato;
     }
 }
 

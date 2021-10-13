@@ -726,6 +726,99 @@
         </Property>
         <Annotation Term="NAV.LabelId" String="AccountantPortalUserTasks" />
       </EntityType>
+      <EntityType Name="Allegati">
+        <Key>
+          <PropertyRef Name="Table_ID" />
+          <PropertyRef Name="No" />
+          <PropertyRef Name="Document_Type" />
+          <PropertyRef Name="Line_No" />
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="Table_ID" Type="Edm.Int32" Nullable="false">
+          <Annotation Term="NAV.LabelId" String="Table_ID" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Int</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEditOnCreate" Bool="true" />
+        </Property>
+        <Property Name="No" Type="Edm.String" Nullable="false" MaxLength="20">
+          <Annotation Term="NAV.LabelId" String="No" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEditOnCreate" Bool="true" />
+        </Property>
+        <Property Name="Document_Type" Type="Edm.String" Nullable="false">
+          <Annotation Term="NAV.LabelId" String="Document_Type" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEditOnCreate" Bool="true" />
+        </Property>
+        <Property Name="Line_No" Type="Edm.Int32" Nullable="false">
+          <Annotation Term="NAV.LabelId" String="Line_No" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Int</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEditOnCreate" Bool="true" />
+        </Property>
+        <Property Name="ID" Type="Edm.Int32" Nullable="false">
+          <Annotation Term="NAV.LabelId" String="ID" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Int</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEdit" Bool="false" />
+          <Annotation Term="NAV.AllowEditOnCreate" Bool="true" />
+        </Property>
+        <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="250">
+          <Annotation Term="NAV.LabelId" String="Allegato" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEdit" Bool="false" />
+          <Annotation Term="NAV.AllowEditOnCreate" Bool="true" />
+        </Property>
+        <Property Name="File_Extension" Type="Edm.String" MaxLength="30">
+          <Annotation Term="NAV.LabelId" String="Estensione file" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEdit" Bool="false" />
+        </Property>
+        <Property Name="File_Type" Type="Edm.String">
+          <Annotation Term="NAV.LabelId" String="Tipo di file" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEdit" Bool="false" />
+        </Property>
+        <Property Name="User" Type="Edm.String" MaxLength="50">
+          <Annotation Term="NAV.LabelId" String="Utente" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEdit" Bool="false" />
+        </Property>
+        <Property Name="Attached_Date" Type="Edm.DateTimeOffset">
+          <Annotation Term="NAV.LabelId" String="Data allegato" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/DateTime</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Document_Flow_Purchase" Type="Edm.Boolean">
+          <Annotation Term="NAV.LabelId" String="Trasferisci a transazione di acquisto" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Bool</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Document_Flow_Sales" Type="Edm.Boolean">
+          <Annotation Term="NAV.LabelId" String="Trasferisci a transazione di vendita" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Bool</EnumMember>
+          </Annotation>
+        </Property>
+        <Annotation Term="NAV.LabelId" String="Allegati" />
+      </EntityType>
       <EntityType Name="Articoli">
         <Key>
           <PropertyRef Name="No" />
@@ -28696,6 +28789,7 @@
         <NavigationProperty Name="AccountantPortalActivityCues" Type="Collection(NAV.AccountantPortalActivityCues)" ContainsTarget="true" />
         <NavigationProperty Name="AccountantPortalFinanceCues" Type="Collection(NAV.AccountantPortalFinanceCues)" ContainsTarget="true" />
         <NavigationProperty Name="AccountantPortalUserTasks" Type="Collection(NAV.AccountantPortalUserTasks)" ContainsTarget="true" />
+        <NavigationProperty Name="Allegati" Type="Collection(NAV.Allegati)" ContainsTarget="true" />
         <NavigationProperty Name="Articoli" Type="Collection(NAV.Articoli)" ContainsTarget="true" />
         <NavigationProperty Name="Cicli" Type="Collection(NAV.Cicli)" ContainsTarget="true" />
         <NavigationProperty Name="CicliRoutingLine" Type="Collection(NAV.CicliRoutingLine)" ContainsTarget="true" />
@@ -28959,6 +29053,28 @@
           </Annotation>
         </EntitySet>
         <EntitySet Name="AccountantPortalUserTasks" EntityType="NAV.AccountantPortalUserTasks">
+          <Annotation Term="Org.OData.Capabilities.V1.ChangeTracking">
+            <Record>
+              <PropertyValue Property="Supported" Bool="false" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.DeleteRestrictions">
+            <Record>
+              <PropertyValue Property="Deletable" Bool="true" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.InsertRestrictions">
+            <Record>
+              <PropertyValue Property="Insertable" Bool="true" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.UpdateRestrictions">
+            <Record>
+              <PropertyValue Property="Updatable" Bool="true" />
+            </Record>
+          </Annotation>
+        </EntitySet>
+        <EntitySet Name="Allegati" EntityType="NAV.Allegati">
           <Annotation Term="Org.OData.Capabilities.V1.ChangeTracking">
             <Record>
               <PropertyValue Property="Supported" Bool="false" />
@@ -31060,6 +31176,12 @@
         <Annotation Term="Org.OData.Core.V1.IsLanguageDependent" Bool="true" />
       </Annotations>
       <Annotations Target="NAV.AccountantPortalUserTasks/Priority">
+        <Annotation Term="Org.OData.Core.V1.IsLanguageDependent" Bool="true" />
+      </Annotations>
+      <Annotations Target="NAV.Allegati/Document_Type">
+        <Annotation Term="Org.OData.Core.V1.IsLanguageDependent" Bool="true" />
+      </Annotations>
+      <Annotations Target="NAV.Allegati/File_Type">
         <Annotation Term="Org.OData.Core.V1.IsLanguageDependent" Bool="true" />
       </Annotations>
       <Annotations Target="NAV.Articoli/Type">
