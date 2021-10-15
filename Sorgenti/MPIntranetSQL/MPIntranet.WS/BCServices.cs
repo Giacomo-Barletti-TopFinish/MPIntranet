@@ -250,7 +250,7 @@ namespace MPIntranet.WS
             fase.Version_Code = versioneCiclo;
             fase.Wait_Time = attesa;
             fase.Wait_Time_Unit_of_Meas_Code = UMAttesa;
-
+            fase.Routing_Link_Code = collegamento;
             _nav.AddToRigheCICLO(fase);
             Salva();
         }
@@ -292,6 +292,7 @@ namespace MPIntranet.WS
                 fase.Version_Code = versioneCiclo;
                 fase.Wait_Time = attesa;
                 fase.Wait_Time_Unit_of_Meas_Code = UMAttesa;
+                fase.Routing_Link_Code = collegamento;
 
                 _nav.UpdateObject(fase);
                 Salva();
