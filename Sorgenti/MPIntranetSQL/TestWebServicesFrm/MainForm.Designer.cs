@@ -134,19 +134,20 @@
             this.txtUMAttesaFase = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.btnEstraiAnagrafica = new System.Windows.Forms.Button();
-            this.txtAnagrafica = new System.Windows.Forms.TextBox();
-            this.txtDescrizioneArticolo = new System.Windows.Forms.TextBox();
-            this.lbl = new System.Windows.Forms.Label();
-            this.label41 = new System.Windows.Forms.Label();
-            this.button5 = new System.Windows.Forms.Button();
-            this.label40 = new System.Windows.Forms.Label();
-            this.txtAnagraficaDestinazione = new System.Windows.Forms.TextBox();
             this.btnConfrontaAnagrafiche = new System.Windows.Forms.Button();
             this.btnEstraiAllegato = new System.Windows.Forms.Button();
+            this.btnEstraiAnagrafica = new System.Windows.Forms.Button();
+            this.txtAnagraficaDestinazione = new System.Windows.Forms.TextBox();
+            this.txtAnagrafica = new System.Windows.Forms.TextBox();
+            this.label40 = new System.Windows.Forms.Label();
+            this.txtDescrizioneArticolo = new System.Windows.Forms.TextBox();
+            this.lbl = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
+            this.label41 = new System.Windows.Forms.Label();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -164,9 +165,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nLavorazioneFase)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nSetupFase)).BeginInit();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtMessaggio
@@ -1288,25 +1289,12 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(12, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1240, 617);
             this.tabControl1.TabIndex = 5;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Controls.Add(this.groupBox4);
-            this.tabPage1.Controls.Add(this.groupBox3);
-            this.tabPage1.Controls.Add(this.groupBox2);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1232, 591);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "DiBa";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
@@ -1338,75 +1326,6 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Anagrafiche";
             // 
-            // btnEstraiAnagrafica
-            // 
-            this.btnEstraiAnagrafica.Location = new System.Drawing.Point(199, 34);
-            this.btnEstraiAnagrafica.Name = "btnEstraiAnagrafica";
-            this.btnEstraiAnagrafica.Size = new System.Drawing.Size(106, 23);
-            this.btnEstraiAnagrafica.TabIndex = 2;
-            this.btnEstraiAnagrafica.Text = "Estrai anagrafica";
-            this.btnEstraiAnagrafica.UseVisualStyleBackColor = true;
-            this.btnEstraiAnagrafica.Click += new System.EventHandler(this.btnEstraiAnagrafica_Click);
-            // 
-            // txtAnagrafica
-            // 
-            this.txtAnagrafica.Location = new System.Drawing.Point(16, 36);
-            this.txtAnagrafica.Name = "txtAnagrafica";
-            this.txtAnagrafica.Size = new System.Drawing.Size(170, 20);
-            this.txtAnagrafica.TabIndex = 0;
-            this.txtAnagrafica.Text = "A-CAM700029FIA84A01 ";
-            // 
-            // txtDescrizioneArticolo
-            // 
-            this.txtDescrizioneArticolo.Location = new System.Drawing.Point(16, 84);
-            this.txtDescrizioneArticolo.Name = "txtDescrizioneArticolo";
-            this.txtDescrizioneArticolo.Size = new System.Drawing.Size(170, 20);
-            this.txtDescrizioneArticolo.TabIndex = 0;
-            // 
-            // lbl
-            // 
-            this.lbl.AutoSize = true;
-            this.lbl.Location = new System.Drawing.Point(14, 19);
-            this.lbl.Name = "lbl";
-            this.lbl.Size = new System.Drawing.Size(58, 13);
-            this.lbl.TabIndex = 1;
-            this.lbl.Text = "Anagrafica";
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(14, 66);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(62, 13);
-            this.label41.TabIndex = 1;
-            this.label41.Text = "Descrizione";
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(199, 82);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(106, 23);
-            this.button5.TabIndex = 2;
-            this.button5.Text = "Cambia descrizione";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(341, 19);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(120, 13);
-            this.label40.TabIndex = 1;
-            this.label40.Text = "Anagrafica destinazione";
-            // 
-            // txtAnagraficaDestinazione
-            // 
-            this.txtAnagraficaDestinazione.Location = new System.Drawing.Point(343, 36);
-            this.txtAnagraficaDestinazione.Name = "txtAnagraficaDestinazione";
-            this.txtAnagraficaDestinazione.Size = new System.Drawing.Size(170, 20);
-            this.txtAnagraficaDestinazione.TabIndex = 0;
-            this.txtAnagraficaDestinazione.Text = "R-CAM700029FIA84A01 ";
-            // 
             // btnConfrontaAnagrafiche
             // 
             this.btnConfrontaAnagrafiche.Location = new System.Drawing.Point(522, 34);
@@ -1426,6 +1345,99 @@
             this.btnEstraiAllegato.Text = "Estrai allegato";
             this.btnEstraiAllegato.UseVisualStyleBackColor = true;
             this.btnEstraiAllegato.Click += new System.EventHandler(this.btnEstraiAllegato_Click);
+            // 
+            // btnEstraiAnagrafica
+            // 
+            this.btnEstraiAnagrafica.Location = new System.Drawing.Point(199, 34);
+            this.btnEstraiAnagrafica.Name = "btnEstraiAnagrafica";
+            this.btnEstraiAnagrafica.Size = new System.Drawing.Size(106, 23);
+            this.btnEstraiAnagrafica.TabIndex = 2;
+            this.btnEstraiAnagrafica.Text = "Estrai anagrafica";
+            this.btnEstraiAnagrafica.UseVisualStyleBackColor = true;
+            this.btnEstraiAnagrafica.Click += new System.EventHandler(this.btnEstraiAnagrafica_Click);
+            // 
+            // txtAnagraficaDestinazione
+            // 
+            this.txtAnagraficaDestinazione.Location = new System.Drawing.Point(343, 36);
+            this.txtAnagraficaDestinazione.Name = "txtAnagraficaDestinazione";
+            this.txtAnagraficaDestinazione.Size = new System.Drawing.Size(170, 20);
+            this.txtAnagraficaDestinazione.TabIndex = 0;
+            this.txtAnagraficaDestinazione.Text = "R-CAM700029FIA84A01 ";
+            // 
+            // txtAnagrafica
+            // 
+            this.txtAnagrafica.Location = new System.Drawing.Point(16, 36);
+            this.txtAnagrafica.Name = "txtAnagrafica";
+            this.txtAnagrafica.Size = new System.Drawing.Size(170, 20);
+            this.txtAnagrafica.TabIndex = 0;
+            this.txtAnagrafica.Text = "A-CAM700029FIA84A01 ";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(341, 19);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(120, 13);
+            this.label40.TabIndex = 1;
+            this.label40.Text = "Anagrafica destinazione";
+            // 
+            // txtDescrizioneArticolo
+            // 
+            this.txtDescrizioneArticolo.Location = new System.Drawing.Point(16, 84);
+            this.txtDescrizioneArticolo.Name = "txtDescrizioneArticolo";
+            this.txtDescrizioneArticolo.Size = new System.Drawing.Size(170, 20);
+            this.txtDescrizioneArticolo.TabIndex = 0;
+            // 
+            // lbl
+            // 
+            this.lbl.AutoSize = true;
+            this.lbl.Location = new System.Drawing.Point(14, 19);
+            this.lbl.Name = "lbl";
+            this.lbl.Size = new System.Drawing.Size(58, 13);
+            this.lbl.TabIndex = 1;
+            this.lbl.Text = "Anagrafica";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(199, 82);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(106, 23);
+            this.button5.TabIndex = 2;
+            this.button5.Text = "Cambia descrizione";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(14, 66);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(62, 13);
+            this.label41.TabIndex = 1;
+            this.label41.Text = "Descrizione";
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.groupBox1);
+            this.tabPage1.Controls.Add(this.groupBox4);
+            this.tabPage1.Controls.Add(this.groupBox3);
+            this.tabPage1.Controls.Add(this.groupBox2);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1232, 591);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "DiBa";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1232, 591);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "ODV";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -1458,10 +1470,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.nLavorazioneFase)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nSetupFase)).EndInit();
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1588,6 +1600,7 @@
         private System.Windows.Forms.TextBox txtAnagraficaDestinazione;
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.Button btnEstraiAllegato;
+        private System.Windows.Forms.TabPage tabPage3;
     }
 }
 
