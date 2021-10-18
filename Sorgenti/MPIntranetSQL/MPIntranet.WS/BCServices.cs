@@ -371,6 +371,46 @@ namespace MPIntranet.WS
             }
             return stringhe;
         }
+        public void CreaOdDP(string Anagrafica, DateTime Due_Date, decimal Quantity, string Location_Code,string Description,string Description2 )
+         
+        {
+            
+           NAV.ODPRilasciato oDP = new ODPRilasciato();
+            oDP.Source_No = Anagrafica;
+            oDP.Due_Date = Due_Date;
+            oDP.Location_Code = Location_Code;
+            oDP.Quantity = Quantity;
+            oDP.Description = Description;
+            oDP.Description_2 = Description2;
+            oDP.Status = "Rilasciato";
+            oDP.No = string.Empty;
+            _nav.AddToODPRilasciato(oDP);
+            Salva();
+        }
+        public List<ODPRilasciato> EstraiOdPRilasciati()
+        {
+            List<ODPRilasciato> odps = _nav.ODPRilasciato.ToList();
+            return odps;
+
+        }
+
+        public ODPRilasciato EstraiOdPRilasciato(string codice)
+        {
+            return _nav.ODPRilasciato.Where(x => x.No == codice).FirstOrDefault();
+
+        }
+
+        public void ModificaDescrizioneOdp(string No, string Description, string Description2)
+
+        {
+
+            NAV.ODPRilasciato oDP = _nav.ODPRilasciato.Where(x => x.No == No).FirstOrDefault();
+            oDP.Description = Description;
+            oDP.Description_2 = Description2;
+            _nav.UpdateObject(oDP);
+            Salva();
+        }
+
     }
 
 }

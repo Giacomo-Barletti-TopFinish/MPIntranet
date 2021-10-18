@@ -611,5 +611,117 @@ namespace TestWebServicesFrm
                 txtMessaggio.Text = estraiErrore(ex);
             }
         }
+
+        private void label42_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label45_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCreaOdP_Click(object sender, EventArgs e)
+        {
+            txtMessaggio.Text = string.Empty;
+            try
+            {
+                if (string.IsNullOrEmpty(txtAnagraficaOdP.Text))
+                {
+                    txtMessaggio.Text = "Inserire un codice Anagrafica";
+                    return;
+                }
+                if (string.IsNullOrEmpty(txtLocationOdP.Text))
+                {
+                    txtMessaggio.Text = "Inserire una ubicazione";
+                    return;
+                }
+
+                BCServices bc = new BCServices();
+                bc.CreaConnessione();
+                bc.CreaOdDP(txtAnagraficaOdP.Text, dtScadenzaOdP.Value, nQuntitàOdP.Value, txtLocationOdP.Text, txtDescrizioneOdP.Text, txtDescrizione2.Text);
+                txtMessaggio.Text = "Ordine Crato Correttamente";
+            }
+            catch (Exception ex)
+            {
+                txtMessaggio.Text = estraiErrore(ex);
+            }
+        }
+
+        private void btnEstraiOdP_Click(object sender, EventArgs e)
+        {
+            txtMessaggio.Text = string.Empty;
+            try
+            {
+
+                BCServices bc = new BCServices();
+                bc.CreaConnessione();
+                List<ODPRilasciato> odps = bc.EstraiOdPRilasciati();
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(string.Format("Trovati {0} odp rilasciati", odps.Count));
+                sb.AppendLine(string.Empty);
+                foreach (ODPRilasciato o in odps)
+                {
+                    sb.AppendLine(string.Format("{0} # {1}", o.No, o.Source_No));
+                }
+                txtMessaggio.Text = sb.ToString();
+            }
+            catch (Exception ex)
+            {
+                txtMessaggio.Text = estraiErrore(ex);
+            }
+        }
+
+        private void btnCambiaDescrizioneOdP_Click(object sender, EventArgs e)
+        {
+            txtMessaggio.Text = string.Empty;
+            try
+            {
+                if (string.IsNullOrEmpty(txtNoOdP.Text))
+                {
+                    txtMessaggio.Text = "Indicare un ODP";
+                    return;
+                }
+                BCServices bc = new BCServices();
+                bc.CreaConnessione();
+                bc.ModificaDescrizioneOdp(txtNoOdP.Text,txtDescrizioneOdP.Text,txtDescrizione2.Text);
+
+                txtDescrizioneOdP.Text = String.Empty;
+                txtDescrizione2.Text = String.Empty;
+
+                txtMessaggio.Text = "Descrizione Cambiata Correttamente";
+            }
+            catch (Exception ex)
+            {
+                txtMessaggio.Text = estraiErrore(ex);
+            }
+        }
+
+        private void btnEstraiSingoloOdp_Click(object sender, EventArgs e)
+        {
+            txtMessaggio.Text = string.Empty;
+            try
+            {
+                if (string.IsNullOrEmpty(txtNoOdP.Text))
+                {
+                    txtMessaggio.Text = "Indicare un ODP";
+                    return;
+                }
+                BCServices bc = new BCServices();
+                bc.CreaConnessione();
+                ODPRilasciato odp = bc.EstraiOdPRilasciato(txtNoOdP.Text);
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(string.Format("{0} # {1} {2}", odp.No, odp.Source_No, odp.Description));
+                txtMessaggio.Text = sb.ToString();
+                txtDescrizioneOdP.Text = odp.Description;
+                txtDescrizione2.Text = odp.Description_2;
+            }
+            catch (Exception ex)
+            {
+                txtMessaggio.Text = estraiErrore(ex);
+            }
+
+        }
     }
 }

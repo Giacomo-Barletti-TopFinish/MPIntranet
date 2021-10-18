@@ -148,6 +148,24 @@
             this.label41 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btnCambiaDescrizioneOdP = new System.Windows.Forms.Button();
+            this.txtNoOdP = new System.Windows.Forms.TextBox();
+            this.label47 = new System.Windows.Forms.Label();
+            this.txtDescrizione2 = new System.Windows.Forms.TextBox();
+            this.label46 = new System.Windows.Forms.Label();
+            this.txtDescrizioneOdP = new System.Windows.Forms.TextBox();
+            this.label43 = new System.Windows.Forms.Label();
+            this.btnEstraiOdP = new System.Windows.Forms.Button();
+            this.btnCreaOdP = new System.Windows.Forms.Button();
+            this.txtLocationOdP = new System.Windows.Forms.TextBox();
+            this.label45 = new System.Windows.Forms.Label();
+            this.nQuntitàOdP = new System.Windows.Forms.NumericUpDown();
+            this.label44 = new System.Windows.Forms.Label();
+            this.dtScadenzaOdP = new System.Windows.Forms.DateTimePicker();
+            this.lblScadenza = new System.Windows.Forms.Label();
+            this.txtAnagraficaOdP = new System.Windows.Forms.TextBox();
+            this.label42 = new System.Windows.Forms.Label();
+            this.btnEstraiSingoloOdp = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -168,6 +186,8 @@
             this.tabPage2.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nQuntitàOdP)).BeginInit();
             this.SuspendLayout();
             // 
             // txtMessaggio
@@ -1431,6 +1451,24 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.btnEstraiSingoloOdp);
+            this.tabPage3.Controls.Add(this.btnCambiaDescrizioneOdP);
+            this.tabPage3.Controls.Add(this.txtNoOdP);
+            this.tabPage3.Controls.Add(this.label47);
+            this.tabPage3.Controls.Add(this.txtDescrizione2);
+            this.tabPage3.Controls.Add(this.label46);
+            this.tabPage3.Controls.Add(this.txtDescrizioneOdP);
+            this.tabPage3.Controls.Add(this.label43);
+            this.tabPage3.Controls.Add(this.btnEstraiOdP);
+            this.tabPage3.Controls.Add(this.btnCreaOdP);
+            this.tabPage3.Controls.Add(this.txtLocationOdP);
+            this.tabPage3.Controls.Add(this.label45);
+            this.tabPage3.Controls.Add(this.nQuntitàOdP);
+            this.tabPage3.Controls.Add(this.label44);
+            this.tabPage3.Controls.Add(this.dtScadenzaOdP);
+            this.tabPage3.Controls.Add(this.lblScadenza);
+            this.tabPage3.Controls.Add(this.txtAnagraficaOdP);
+            this.tabPage3.Controls.Add(this.label42);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -1438,6 +1476,167 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "ODV";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // btnCambiaDescrizioneOdP
+            // 
+            this.btnCambiaDescrizioneOdP.Location = new System.Drawing.Point(728, 137);
+            this.btnCambiaDescrizioneOdP.Name = "btnCambiaDescrizioneOdP";
+            this.btnCambiaDescrizioneOdP.Size = new System.Drawing.Size(75, 23);
+            this.btnCambiaDescrizioneOdP.TabIndex = 16;
+            this.btnCambiaDescrizioneOdP.Text = "Cambia Descrizione";
+            this.btnCambiaDescrizioneOdP.UseVisualStyleBackColor = true;
+            this.btnCambiaDescrizioneOdP.Click += new System.EventHandler(this.btnCambiaDescrizioneOdP_Click);
+            // 
+            // txtNoOdP
+            // 
+            this.txtNoOdP.Location = new System.Drawing.Point(504, 137);
+            this.txtNoOdP.Name = "txtNoOdP";
+            this.txtNoOdP.Size = new System.Drawing.Size(150, 20);
+            this.txtNoOdP.TabIndex = 15;
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(501, 107);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(78, 13);
+            this.label47.TabIndex = 14;
+            this.label47.Text = "Numero Ordine";
+            // 
+            // txtDescrizione2
+            // 
+            this.txtDescrizione2.Location = new System.Drawing.Point(233, 138);
+            this.txtDescrizione2.Name = "txtDescrizione2";
+            this.txtDescrizione2.Size = new System.Drawing.Size(180, 20);
+            this.txtDescrizione2.TabIndex = 13;
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(287, 107);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(71, 13);
+            this.label46.TabIndex = 12;
+            this.label46.Text = "Descrizione 2";
+            // 
+            // txtDescrizioneOdP
+            // 
+            this.txtDescrizioneOdP.Location = new System.Drawing.Point(21, 138);
+            this.txtDescrizioneOdP.Name = "txtDescrizioneOdP";
+            this.txtDescrizioneOdP.Size = new System.Drawing.Size(180, 20);
+            this.txtDescrizioneOdP.TabIndex = 11;
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(48, 107);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(62, 13);
+            this.label43.TabIndex = 10;
+            this.label43.Text = "Descrizione";
+            // 
+            // btnEstraiOdP
+            // 
+            this.btnEstraiOdP.Location = new System.Drawing.Point(1025, 59);
+            this.btnEstraiOdP.Name = "btnEstraiOdP";
+            this.btnEstraiOdP.Size = new System.Drawing.Size(85, 23);
+            this.btnEstraiOdP.TabIndex = 9;
+            this.btnEstraiOdP.Text = "Estrai lista ODP";
+            this.btnEstraiOdP.UseVisualStyleBackColor = true;
+            this.btnEstraiOdP.Click += new System.EventHandler(this.btnEstraiOdP_Click);
+            // 
+            // btnCreaOdP
+            // 
+            this.btnCreaOdP.Location = new System.Drawing.Point(930, 58);
+            this.btnCreaOdP.Name = "btnCreaOdP";
+            this.btnCreaOdP.Size = new System.Drawing.Size(75, 23);
+            this.btnCreaOdP.TabIndex = 8;
+            this.btnCreaOdP.Text = "Crea";
+            this.btnCreaOdP.UseVisualStyleBackColor = true;
+            this.btnCreaOdP.Click += new System.EventHandler(this.btnCreaOdP_Click);
+            // 
+            // txtLocationOdP
+            // 
+            this.txtLocationOdP.Location = new System.Drawing.Point(737, 58);
+            this.txtLocationOdP.Name = "txtLocationOdP";
+            this.txtLocationOdP.Size = new System.Drawing.Size(100, 20);
+            this.txtLocationOdP.TabIndex = 7;
+            this.txtLocationOdP.Text = "MTP";
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(734, 31);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(60, 13);
+            this.label45.TabIndex = 6;
+            this.label45.Text = "Ubicazione";
+            this.label45.Click += new System.EventHandler(this.label45_Click);
+            // 
+            // nQuntitàOdP
+            // 
+            this.nQuntitàOdP.Location = new System.Drawing.Point(547, 58);
+            this.nQuntitàOdP.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.nQuntitàOdP.Name = "nQuntitàOdP";
+            this.nQuntitàOdP.Size = new System.Drawing.Size(120, 20);
+            this.nQuntitàOdP.TabIndex = 5;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(544, 31);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(81, 13);
+            this.label44.TabIndex = 4;
+            this.label44.Text = "Quantità Ordine";
+            // 
+            // dtScadenzaOdP
+            // 
+            this.dtScadenzaOdP.Location = new System.Drawing.Point(239, 54);
+            this.dtScadenzaOdP.Name = "dtScadenzaOdP";
+            this.dtScadenzaOdP.Size = new System.Drawing.Size(200, 20);
+            this.dtScadenzaOdP.TabIndex = 3;
+            // 
+            // lblScadenza
+            // 
+            this.lblScadenza.AutoSize = true;
+            this.lblScadenza.Location = new System.Drawing.Point(287, 31);
+            this.lblScadenza.Name = "lblScadenza";
+            this.lblScadenza.Size = new System.Drawing.Size(81, 13);
+            this.lblScadenza.TabIndex = 2;
+            this.lblScadenza.Text = "Data Scadenza";
+            // 
+            // txtAnagraficaOdP
+            // 
+            this.txtAnagraficaOdP.Location = new System.Drawing.Point(21, 58);
+            this.txtAnagraficaOdP.Name = "txtAnagraficaOdP";
+            this.txtAnagraficaOdP.Size = new System.Drawing.Size(180, 20);
+            this.txtAnagraficaOdP.TabIndex = 1;
+            this.txtAnagraficaOdP.Text = "A-LOG700018FIB14A01";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(48, 31);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(82, 13);
+            this.label42.TabIndex = 0;
+            this.label42.Text = "Anagrafica OdP";
+            this.label42.Click += new System.EventHandler(this.label42_Click);
+            // 
+            // btnEstraiSingoloOdp
+            // 
+            this.btnEstraiSingoloOdp.Location = new System.Drawing.Point(840, 135);
+            this.btnEstraiSingoloOdp.Name = "btnEstraiSingoloOdp";
+            this.btnEstraiSingoloOdp.Size = new System.Drawing.Size(85, 25);
+            this.btnEstraiSingoloOdp.TabIndex = 16;
+            this.btnEstraiSingoloOdp.Text = "Estrai ODP";
+            this.btnEstraiSingoloOdp.UseVisualStyleBackColor = true;
+            this.btnEstraiSingoloOdp.Click += new System.EventHandler(this.btnEstraiSingoloOdp_Click);
             // 
             // MainForm
             // 
@@ -1474,6 +1673,9 @@
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.tabPage1.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nQuntitàOdP)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1601,6 +1803,24 @@
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.Button btnEstraiAllegato;
         private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button btnCreaOdP;
+        private System.Windows.Forms.TextBox txtLocationOdP;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.NumericUpDown nQuntitàOdP;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.DateTimePicker dtScadenzaOdP;
+        private System.Windows.Forms.Label lblScadenza;
+        private System.Windows.Forms.TextBox txtAnagraficaOdP;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Button btnEstraiOdP;
+        private System.Windows.Forms.TextBox txtDescrizione2;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.TextBox txtDescrizioneOdP;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Button btnCambiaDescrizioneOdP;
+        private System.Windows.Forms.TextBox txtNoOdP;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.Button btnEstraiSingoloOdp;
     }
 }
 
