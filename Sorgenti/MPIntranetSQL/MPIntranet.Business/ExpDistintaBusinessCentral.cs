@@ -15,15 +15,18 @@ namespace MPIntranet.Business
         public string Errore { get; set; }
         public string Esito { get; set; }
         public string Stato { get; set; }
+        public string Descrizione { get; set; }
 
-        public ExpDistintaBusinessCentral(string Codice, List<ExpComponenteDistintaBusinessCentral> Componenti)
+        public ExpDistintaBusinessCentral(string Codice, string Descrizione, List<ExpComponenteDistintaBusinessCentral> Componenti)
         {
             this.Codice = Codice;
             this.Componenti = Componenti;
+            this.Descrizione = Descrizione;
         }
-        public ExpDistintaBusinessCentral(string Codice)
+        public ExpDistintaBusinessCentral(string Codice, string Descrizione)
         {
             this.Codice = Codice;
+            this.Descrizione = Descrizione;
             this.Componenti = new List<ExpComponenteDistintaBusinessCentral>(); ;
         }
 
@@ -56,7 +59,7 @@ namespace MPIntranet.Business
         public bool Selezionato { get; set; }
         public string Errore { get; set; }
         public string Esito { get; set; }
-        public ExpComponenteDistintaBusinessCentral(string Anagrafica, double Quantita, string Collegamento, string UM, int ID, string DistintaPadre)
+        public ExpComponenteDistintaBusinessCentral(string Anagrafica, double Quantita, string Collegamento, string UM, int ID, string DistintaPadre, string descrizione)
         {
             this.Anagrafica = Anagrafica;
             this.Quantita = Quantita;
@@ -64,6 +67,7 @@ namespace MPIntranet.Business
             this.CodiceUM = UM;
             this.ID = ID;
             this.DistintaPadre = DistintaPadre;
+            this.Descrizione = descrizione;
         }
 
         public override string ToString()

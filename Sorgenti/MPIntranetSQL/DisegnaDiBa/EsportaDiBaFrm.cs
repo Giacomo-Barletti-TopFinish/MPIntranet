@@ -136,9 +136,10 @@ namespace DisegnaDiBa
                         List<RigheCICLO> righe = bc.EstraiRigheCICLO(ciclo);
                         foreach (RigheCICLO riga in righe)
                         {
-                            bc.RimuoviCommento(ciclo, string.Empty, riga.Operation_No);
-                            bc.RimuoviFase(ciclo, string.Empty, riga.Operation_No);
+                            bc.RimuoviCommento(ciclo, string.Empty, riga.Operation_No, false);
+                            bc.RimuoviFase(ciclo, string.Empty, riga.Operation_No, false);
                         }
+                        bc.Salva();
 
                         foreach (ExpFaseCicloBusinessCentral f in dto.FasiExport.Where(x => x.CodiceCiclo == ciclo).OrderBy(x => x.Operazione))
                         {
@@ -148,7 +149,7 @@ namespace DisegnaDiBa
                                 bc.AggiungiFase(ciclo, string.Empty, f.Operazione.ToString(), f.Tipo, f.AreaProduzione, f.Task, (decimal)f.TempoSetup, f.UMSetup,
                                     (decimal)f.TempoLavorazione, f.UMLavorazione,
                                     (decimal)f.TempoAttesa, f.UMAttesa, (decimal)f.TempoSpostamento, f.UMSpostamento,
-                                    (decimal)f.DimensioneLotto, f.Collegamento, f.Condizione, f.LogicheLavorazione, f.Caratteristica);
+                                    (decimal)f.DimensioneLotto, f.Collegamento, f.Condizione, f.LogicheLavorazione, f.Caratteristica, f.Descrizione);
                                 bc.AggiungiCommento(ciclo, string.Empty, f.Operazione.ToString(), f.CommentiConcatenati());
                                 f.Esito = "OK";
                             }
@@ -232,7 +233,9 @@ namespace DisegnaDiBa
 
                         List<RigheDIBA> righe = bc.EstraiRigheDIBA(distinta);
                         foreach (RigheDIBA riga in righe)
-                            bc.RimuoviComponente(distinta, string.Empty, riga.Line_No, riga.No);
+                            bc.RimuoviComponente(distinta, string.Empty, riga.Line_No, riga.No,false);
+
+                        bc.Salva();
 
                         int numeroRiga = 0;
                         foreach (ExpComponenteDistintaBusinessCentral c in dto.ComponentiExport.Where(x => x.DistintaPadre == distinta))
@@ -679,7 +682,7 @@ namespace DisegnaDiBa
             }
         }
 
-       
+
     }
 
     public class WorkerDTO

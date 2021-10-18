@@ -22,93 +22,93 @@ namespace MPIntranet.Business
             Fasi = new List<ExpFaseCicloBusinessCentral>();
         }
 
-        public bool AggiungiFase(FaseDistinta faseDistinta, int operazione, out string errori)
-        {
-            faseDistinta.Errore = string.Empty;
-            errori = string.Empty;
-            bool esito = true;
-            StringBuilder sb = new StringBuilder();
-            if (faseDistinta != null && string.IsNullOrEmpty(faseDistinta.Anagrafica))
-            {
-                ExpFaseCicloBusinessCentral f = new ExpFaseCicloBusinessCentral(Codice);
-                f.Operazione = operazione;
-                f.AreaProduzione = faseDistinta.AreaProduzione;
-                if (string.IsNullOrEmpty(f.AreaProduzione))
-                {
-                    sb.AppendLine(string.Format("Anagrafica {1} - Fase {0} Area di produzione nulla", faseDistinta.IdFaseDiba, faseDistinta.Anagrafica));
-                    faseDistinta.Errore = "Area produzione non valorizzata ";
-                    esito = false;
-                }
-                f.TempoLavorazione = faseDistinta.Periodo;
-                if (f.TempoLavorazione <= 0)
-                {
-                    sb.AppendLine(string.Format("Anagrafica {1} - Fase {0} tempo lavorazione nullo", faseDistinta.IdFaseDiba, faseDistinta.Anagrafica));
-                    faseDistinta.Errore += " periodo non valorizzato ";
-                    esito = false;
-                }
+        //public bool AggiungiFase(FaseDistinta faseDistinta, int operazione, out string errori)
+        //{
+        //    faseDistinta.Errore = string.Empty;
+        //    errori = string.Empty;
+        //    bool esito = true;
+        //    StringBuilder sb = new StringBuilder();
+        //    if (faseDistinta != null && string.IsNullOrEmpty(faseDistinta.Anagrafica))
+        //    {
+        //        ExpFaseCicloBusinessCentral f = new ExpFaseCicloBusinessCentral(Codice);
+        //        f.Operazione = operazione;
+        //        f.AreaProduzione = faseDistinta.AreaProduzione;
+        //        if (string.IsNullOrEmpty(f.AreaProduzione))
+        //        {
+        //            sb.AppendLine(string.Format("Anagrafica {1} - Fase {0} Area di produzione nulla", faseDistinta.IdFaseDiba, faseDistinta.Anagrafica));
+        //            faseDistinta.Errore = "Area produzione non valorizzata ";
+        //            esito = false;
+        //        }
+        //        f.TempoLavorazione = faseDistinta.Periodo;
+        //        if (f.TempoLavorazione <= 0)
+        //        {
+        //            sb.AppendLine(string.Format("Anagrafica {1} - Fase {0} tempo lavorazione nullo", faseDistinta.IdFaseDiba, faseDistinta.Anagrafica));
+        //            faseDistinta.Errore += " periodo non valorizzato ";
+        //            esito = false;
+        //        }
 
-                f.Collegamento = faseDistinta.CollegamentoCiclo;
-                f.DimensioneLotto = faseDistinta.PezziOrari;
-                f.Task = faseDistinta.Task;
-                if (string.IsNullOrEmpty(f.Task))
-                {
-                    sb.AppendLine(string.Format("Anagrafica {1} - Fase {0} task non valorizzato", faseDistinta.IdFaseDiba, faseDistinta.Anagrafica));
-                    faseDistinta.Errore += " task non valorizzato ";
-                    esito = false;
-                }
-                f.Commenti = new List<string>();
-                if (esito)
-                    Fasi.Add(f);
-                errori = sb.ToString();
-            }
-            else
-                return false;
-            return esito;
-        }
-        public bool AggiungiFase(FaseCiclo faseCiclo, int operazione, out string errori)
-        {
-            faseCiclo.Errore = string.Empty;
-            errori = string.Empty;
-            bool esito = true;
-            StringBuilder sb = new StringBuilder();
-            if (faseCiclo != null)//&& string.IsNullOrEmpty(faseCiclo.Anagrafica))
-            {
-                ExpFaseCicloBusinessCentral f = new ExpFaseCicloBusinessCentral(Codice);
-                f.Operazione = operazione;
-                operazione += 10;
-                f.AreaProduzione = faseCiclo.AreaProduzione;
-                if (string.IsNullOrEmpty(f.AreaProduzione))
-                {
-                    sb.AppendLine(string.Format("ID Componente {1} - Fase {0} Area di produzione nulla", faseCiclo.IdFaseCiclo, faseCiclo.IdComponente));
-                    faseCiclo.Errore = "Area produzione non valorizzata ";
-                    esito = false;
-                }
-                f.TempoLavorazione = faseCiclo.Periodo;
-                if (f.TempoLavorazione <= 0)
-                {
-                    sb.AppendLine(string.Format("ID Componente {1} - Fase {0} tempo lavorazione nullo", faseCiclo.IdFaseCiclo, faseCiclo.IdComponente));
-                    faseCiclo.Errore += " periodo non valorizzato ";
-                    esito = false;
-                }
+        //        f.Collegamento = faseDistinta.CollegamentoCiclo;
+        //        f.DimensioneLotto = faseDistinta.PezziOrari;
+        //        f.Task = faseDistinta.Task;
+        //        if (string.IsNullOrEmpty(f.Task))
+        //        {
+        //            sb.AppendLine(string.Format("Anagrafica {1} - Fase {0} task non valorizzato", faseDistinta.IdFaseDiba, faseDistinta.Anagrafica));
+        //            faseDistinta.Errore += " task non valorizzato ";
+        //            esito = false;
+        //        }
+        //        f.Commenti = new List<string>();
+        //        if (esito)
+        //            Fasi.Add(f);
+        //        errori = sb.ToString();
+        //    }
+        //    else
+        //        return false;
+        //    return esito;
+        //}
+        //public bool AggiungiFase(FaseCiclo faseCiclo, int operazione, out string errori)
+        //{
+        //    faseCiclo.Errore = string.Empty;
+        //    errori = string.Empty;
+        //    bool esito = true;
+        //    StringBuilder sb = new StringBuilder();
+        //    if (faseCiclo != null)//&& string.IsNullOrEmpty(faseCiclo.Anagrafica))
+        //    {
+        //        ExpFaseCicloBusinessCentral f = new ExpFaseCicloBusinessCentral(Codice);
+        //        f.Operazione = operazione;
+        //        operazione += 10;
+        //        f.AreaProduzione = faseCiclo.AreaProduzione;
+        //        if (string.IsNullOrEmpty(f.AreaProduzione))
+        //        {
+        //            sb.AppendLine(string.Format("ID Componente {1} - Fase {0} Area di produzione nulla", faseCiclo.IdFaseCiclo, faseCiclo.IdComponente));
+        //            faseCiclo.Errore = "Area produzione non valorizzata ";
+        //            esito = false;
+        //        }
+        //        f.TempoLavorazione = faseCiclo.Periodo;
+        //        if (f.TempoLavorazione <= 0)
+        //        {
+        //            sb.AppendLine(string.Format("ID Componente {1} - Fase {0} tempo lavorazione nullo", faseCiclo.IdFaseCiclo, faseCiclo.IdComponente));
+        //            faseCiclo.Errore += " periodo non valorizzato ";
+        //            esito = false;
+        //        }
 
-                f.Collegamento = faseCiclo.CollegamentoCiclo;
-                f.DimensioneLotto = faseCiclo.PezziPeriodo;
-                f.Task = faseCiclo.Task;
-                if (string.IsNullOrEmpty(f.Task))
-                {
-                    sb.AppendLine(string.Format("ID Componente {1} - Fase {0} task non valorizzato", faseCiclo.IdFaseCiclo, faseCiclo.IdComponente));
-                    faseCiclo.Errore += " task non valorizzato ";
-                    esito = false;
-                }
-                f.Commenti = new List<string>();
-                if (esito)
-                    Fasi.Add(f);
-                errori = sb.ToString();
-            }
-            else
-                return false;
-            return esito;
-        }
+        //        f.Collegamento = faseCiclo.CollegamentoCiclo;
+        //        f.DimensioneLotto = faseCiclo.PezziPeriodo;
+        //        f.Task = faseCiclo.Task;
+        //        if (string.IsNullOrEmpty(f.Task))
+        //        {
+        //            sb.AppendLine(string.Format("ID Componente {1} - Fase {0} task non valorizzato", faseCiclo.IdFaseCiclo, faseCiclo.IdComponente));
+        //            faseCiclo.Errore += " task non valorizzato ";
+        //            esito = false;
+        //        }
+        //        f.Commenti = new List<string>();
+        //        if (esito)
+        //            Fasi.Add(f);
+        //        errori = sb.ToString();
+        //    }
+        //    else
+        //        return false;
+        //    return esito;
+        //}
         public bool AggiungiFase(FaseCiclo faseCiclo, out string errori)
         {
             faseCiclo.Errore = string.Empty;
@@ -119,6 +119,7 @@ namespace MPIntranet.Business
             {
                 ExpFaseCicloBusinessCentral f = new ExpFaseCicloBusinessCentral(Codice);
                 f.Operazione = faseCiclo.Operazione;
+                f.Descrizione = faseCiclo.Descrizione;
                 f.AreaProduzione = faseCiclo.AreaProduzione;
                 if (string.IsNullOrEmpty(faseCiclo.Anagrafica))
                 {
@@ -236,6 +237,7 @@ namespace MPIntranet.Business
         public string Caratteristica = string.Empty;
         public string LogicheLavorazione = string.Empty;
         public List<string> Commenti = new List<string>();
+        public string Descrizione { get; set; }
 
         public bool Selezionato { get; set; }
         public string Errore { get; set; }

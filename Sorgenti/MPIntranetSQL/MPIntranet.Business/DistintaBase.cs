@@ -52,7 +52,7 @@ namespace MPIntranet.Business
                 idComponente--;
                 Componente componente = Componente.CreaComponente(componenteBC, idDiba, idComponente, idPadre, utente);
                 Componenti.Add(componente);
-                if(distintaBC.Componenti.Any(x => x.IdPadre == componenteBC.Anagrafica))
+                if (distintaBC.Componenti.Any(x => x.IdPadre == componenteBC.Anagrafica))
                     creaDaDistintaBCRicorsiva(distintaBC, componenteBC.Anagrafica, componente.IdComponente, idDiba, utente, ref idComponente);
             }
         }
@@ -232,7 +232,7 @@ namespace MPIntranet.Business
 
             StringBuilder sb = new StringBuilder();
             string codiceDistinta = articolo.Anagrafica;
-            ExpDistintaBusinessCentral distinta = new ExpDistintaBusinessCentral(codiceDistinta);
+            ExpDistintaBusinessCentral distinta = new ExpDistintaBusinessCentral(codiceDistinta, articolo.Descrizione);
             ExpCicloBusinessCentral ciclo = new ExpCicloBusinessCentral(codiceDistinta);
 
             if (!articolo.VerificaCodiciOperazione())
@@ -255,13 +255,13 @@ namespace MPIntranet.Business
                 }
                 else
                 {
-                    ExpComponenteDistintaBusinessCentral componente = new ExpComponenteDistintaBusinessCentral(faseCiclo.Anagrafica, faseCiclo.Quantita, faseCiclo.CollegamentoDiBa, faseCiclo.UMQuantita, faseCiclo.IdFaseCiclo, articolo.Anagrafica);
+                    ExpComponenteDistintaBusinessCentral componente = new ExpComponenteDistintaBusinessCentral(faseCiclo.Anagrafica, faseCiclo.Quantita, faseCiclo.CollegamentoDiBa, faseCiclo.UMQuantita, faseCiclo.IdFaseCiclo, articolo.Anagrafica, faseCiclo.Descrizione);
                     distinta.Componenti.Add(componente);
                     distinteExport.Add(distinta);
                     if (ciclo.Fasi.Count > 0)
                         cicliExport.Add(ciclo);
                     codiceDistinta = componente.Anagrafica;
-                    distinta = new ExpDistintaBusinessCentral(codiceDistinta);
+                    distinta = new ExpDistintaBusinessCentral(codiceDistinta, componente.Descrizione);
                     ciclo = new ExpCicloBusinessCentral(codiceDistinta);
                     errore = string.Empty;
 
@@ -275,7 +275,7 @@ namespace MPIntranet.Business
             List<Componente> componentiArticolo = Componenti.Where(x => x.IdPadre == articolo.IdComponente).ToList();
             foreach (Componente componenteArticolo in componentiArticolo)
             {
-                ExpComponenteDistintaBusinessCentral componente = new ExpComponenteDistintaBusinessCentral(componenteArticolo.Anagrafica, componenteArticolo.Quantita, componenteArticolo.CollegamentoDiBa, componenteArticolo.UMQuantita, componenteArticolo.IdComponente, codiceDistinta);
+                ExpComponenteDistintaBusinessCentral componente = new ExpComponenteDistintaBusinessCentral(componenteArticolo.Anagrafica, componenteArticolo.Quantita, componenteArticolo.CollegamentoDiBa, componenteArticolo.UMQuantita, componenteArticolo.IdComponente, codiceDistinta, componenteArticolo.Descrizione);
                 distinta.Componenti.Add(componente);
             }
             distinteExport.Add(distinta);
@@ -311,7 +311,7 @@ namespace MPIntranet.Business
             componentiFigli.ForEach(x => x.CollegamentoDiBa = ExpCicloBusinessCentral.CodiceCollegamentoStandard);
             List<FaseCiclo> fasi = articolo.FasiCiclo.OrderBy(x => x.Operazione).ToList();
 
-            if(!articolo.VerificaCodiciOperazione())
+            if (!articolo.VerificaCodiciOperazione())
             {
                 string msg = string.Format("Verificare i codici operazione per le fasi del componente {0}.", articolo.IdComponente);
                 sbErrori.AppendLine(msg);
@@ -344,7 +344,7 @@ namespace MPIntranet.Business
                 {
                     string msg = string.Format("Il componente {0} ha dei componenti ma non ha alcuna fase in cui registrarne il consumo. Impossibile registrare il collegamento ciclo.", articolo.IdComponente);
                     sbErrori.AppendLine(msg);
-                    esito = false;                   
+                    esito = false;
                 }
                 foreach (Componente figlio in componentiFigli)
                 {

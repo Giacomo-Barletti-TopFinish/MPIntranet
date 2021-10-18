@@ -29,7 +29,7 @@ namespace MPIntranet.WS
             {
                 if (_nav == null) return;
                 _nav.SaveChanges();
-                System.Threading.Thread.Sleep(timer);
+                System.Threading.Thread.Sleep(timer);               
             }
             catch (Exception ex)
             {
@@ -60,13 +60,13 @@ namespace MPIntranet.WS
                 return null;
             }
         }
-        public List<Allegati>EstraiAllegati(string Anagrafica)
+        public List<Allegati> EstraiAllegati(string Anagrafica)
         {
             if (_nav == null) return null;
             try
             {
                 List<Allegati> t = _nav.Allegati.Where(x => x.No == Anagrafica).ToList();
-                
+
                 return t;
             }
             catch
@@ -79,7 +79,7 @@ namespace MPIntranet.WS
             if (_nav == null) return null;
             try
             {
-                Articoli t = _nav.Articoli.Where(x => x.No == Anagrafica).FirstOrDefault();               
+                Articoli t = _nav.Articoli.Where(x => x.No == Anagrafica).FirstOrDefault();
                 return t;
             }
             catch
@@ -114,9 +114,9 @@ namespace MPIntranet.WS
         public void CambiaStatoDB(string No, string stato)
         {
             TestataDIBA testata = EstraiTestataDIBA(No);
-            if(testata==null)
+            if (testata == null)
             {
-                throw new Exception(string.Format("Distinta {0} non trovata",No));
+                throw new Exception(string.Format("Distinta {0} non trovata", No));
             }
             if (testata.Status != stato)
             {
@@ -155,7 +155,7 @@ namespace MPIntranet.WS
         }
 
 
-        public void RimuoviComponente(string NoDistinta, string versioneDistinta, int numeroRiga, string No)
+        public void RimuoviComponente(string NoDistinta, string versioneDistinta, int numeroRiga, string No, bool conSalvataggio)
         {
             List<RigheDIBA> componenti = EstraiComponenti(No, NoDistinta, versioneDistinta);
             componenti = componenti.Where(x => x.Line_No == numeroRiga).ToList();
@@ -163,7 +163,8 @@ namespace MPIntranet.WS
             foreach (RigheDIBA r in componenti)
                 _nav.DeleteObject(r);
 
-            Salva();
+            if (conSalvataggio)
+                Salva();
         }
 
         public void ModificaComponente(string NoDistinta, string versioneDistinta, int numeroRiga, string No, string descrizione,
@@ -194,7 +195,8 @@ namespace MPIntranet.WS
         public Cicli EstraiTestataCiclo(string NoCiclo)
         {
             if (_nav == null) return null;
-            try{
+            try
+            {
                 Cicli t = _nav.Cicli.Where(x => x.No == NoCiclo).FirstOrDefault();
                 return t;
 
@@ -231,10 +233,10 @@ namespace MPIntranet.WS
         }
         public void AggiungiFase(string NoCiclo, string versioneCiclo, string operazione, string tipo, string areaProduzione, string task, decimal setup, string UMSetup,
          decimal lavorazione, string UMLavorazione, decimal attesa, string UMAttesa, decimal spostamento, string UMSpostamento,
-      decimal dimensioneLotto, string collegamento, string codiczione, string logica, string caratteristica)
+      decimal dimensioneLotto, string collegamento, string condizione, string logica, string caratteristica, string descrizione)
         {
             RigheCICLO fase = new RigheCICLO();
-
+            fase.Description = descrizione;
             fase.Lot_Size = dimensioneLotto;
             fase.Move_Time = spostamento;
             fase.Move_Time_Unit_of_Meas_Code = UMSpostamento;
@@ -255,20 +257,21 @@ namespace MPIntranet.WS
             Salva();
         }
 
-        public void RimuoviFase(string NoCIclo, string versioneCiclo, string operazione)
+        public void RimuoviFase(string NoCiclo, string versioneCiclo, string operazione, bool conSalvataggio)
         {
-            List<RigheCICLO> componenti = EstraiRigheCICLO(NoCIclo);
+            List<RigheCICLO> componenti = EstraiRigheCICLO(NoCiclo);
             componenti = componenti.Where(x => x.Operation_No == operazione).ToList();
 
             foreach (RigheCICLO r in componenti)
                 _nav.DeleteObject(r);
 
-            Salva();
+            if (conSalvataggio)
+                Salva();
         }
 
         public void ModificaFase(string NoCiclo, string versioneCiclo, string operazione, string tipo, string areaProduzione, string task, decimal setup, string UMSetup,
        decimal lavorazione, string UMLavorazione, decimal attesa, string UMAttesa, decimal spostamento, string UMSpostamento,
-    decimal dimensioneLotto, string collegamento, string codiczione, string logica, string caratteristica)
+    decimal dimensioneLotto, string collegamento, string condizione, string logica, string caratteristica, string descrizione)
         {
             List<RigheCICLO> fasi = EstraiRigheCICLO(NoCiclo);
             fasi = fasi.Where(x => x.Version_Code == versioneCiclo && x.Operation_No == operazione).ToList();
@@ -276,7 +279,7 @@ namespace MPIntranet.WS
             {
 
                 RigheCICLO fase = fasi[0];
-
+                fase.Description = descrizione;
                 fase.Lot_Size = dimensioneLotto;
                 fase.Move_Time = spostamento;
                 fase.Move_Time_Unit_of_Meas_Code = UMSpostamento;
@@ -307,15 +310,15 @@ namespace MPIntranet.WS
             return t;
         }
 
-        public void RimuoviCommento(string NoCiclo, string versioneCiclo, string operazione)
+        public void RimuoviCommento(string NoCiclo, string versioneCiclo, string operazione, bool conSalvataggio)
         {
             List<CommentiFasi> commenti = _nav.CommentiFasi.Where(x => x.Routing_No == NoCiclo && x.Version_Code == versioneCiclo).ToList();
             commenti = commenti.Where(x => x.Operation_No == operazione).ToList();
 
             foreach (CommentiFasi r in commenti)
                 _nav.DeleteObject(r);
-
-            Salva();
+            if (conSalvataggio)
+                Salva();
         }
         public void AggiungiCommento(string NoCiclo, string versioneCiclo, string operazione, string commento)
         {

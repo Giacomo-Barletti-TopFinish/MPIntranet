@@ -198,7 +198,7 @@ namespace TestWebServicesFrm
                 BCServices bc = new BCServices();
                 bc.CreaConnessione();
                 bc.CambiaStatoDB(txtDistintaNo.Text, Stato.InSviluppo);
-                bc.RimuoviComponente(txtDistintaNo.Text, txtCodiceVersioneDistinta.Text, (int)nNRRigaComponente.Value, txtNRComponente.Text);
+                bc.RimuoviComponente(txtDistintaNo.Text, txtCodiceVersioneDistinta.Text, (int)nNRRigaComponente.Value, txtNRComponente.Text, true);
                 bc.CambiaStatoDB(txtDistintaNo.Text, Stato.Certificato);
                 txtMessaggio.Text = "Componente rimosso";
             }
@@ -396,7 +396,7 @@ namespace TestWebServicesFrm
                 bc.AggiungiFase(txtNoCiclo.Text, txtVersioneCiclo.Text, operazione.ToString(), txtTipoFase.Text, area.Codice, task.Task, nSetupFase.Value, txtUMSetupFase.Text,
                     nLavorazioneFase.Value, txtUMLavorazioneFase.Text, nAttesaFase.Value, txtUMAttesaFase.Text, nSpostamentoFase.Value, txtUMSpostamentoFase.Text,
                     nDimensioneLottoFase.Value, txtCollegmentoFase.Text,
-                    txtCodiceCondizioneFase.Text, txtCodiceLogicheFase.Text, txtCodiceCaratteristicaFase.Text);
+                    txtCodiceCondizioneFase.Text, txtCodiceLogicheFase.Text, txtCodiceCaratteristicaFase.Text, string.Empty);
 
                 bc.CambiaStatoCiclo(txtNoCiclo.Text, Stato.Certificato);
                 txtMessaggio.Text = "Fase aggiunta";
@@ -423,7 +423,7 @@ namespace TestWebServicesFrm
                 BCServices bc = new BCServices();
                 bc.CreaConnessione();
                 bc.CambiaStatoCiclo(txtNoCiclo.Text, Stato.InSviluppo);
-                bc.RimuoviFase(txtNoCiclo.Text, txtVersioneCiclo.Text, operazione.ToString());
+                bc.RimuoviFase(txtNoCiclo.Text, txtVersioneCiclo.Text, operazione.ToString(), true);
                 bc.CambiaStatoCiclo(txtNoCiclo.Text, Stato.InSviluppo);
                 txtMessaggio.Text = "Fase rimossa";
             }
@@ -464,7 +464,7 @@ namespace TestWebServicesFrm
                     nSetupFase.Value, txtUMSetupFase.Text,
                     nLavorazioneFase.Value, txtUMLavorazioneFase.Text, nAttesaFase.Value, txtUMAttesaFase.Text, nSpostamentoFase.Value, txtUMSpostamentoFase.Text,
                     nDimensioneLottoFase.Value, txtCollegmentoFase.Text,
-                    txtCodiceCondizioneFase.Text, txtCodiceLogicheFase.Text, txtCodiceCaratteristicaFase.Text);
+                    txtCodiceCondizioneFase.Text, txtCodiceLogicheFase.Text, txtCodiceCaratteristicaFase.Text, string.Empty);
                 bc.CambiaStatoCiclo(txtNoCiclo.Text, Stato.Certificato);
                 txtMessaggio.Text = "Fase modificata";
             }
@@ -564,7 +564,7 @@ namespace TestWebServicesFrm
             bc.CreaConnessione();
             Articoli articolo = bc.EstraiArticolo(txtAnagrafica.Text);
             Articoli articoloDestinazione = bc.EstraiArticolo(txtAnagraficaDestinazione.Text);
-            if(articolo==null )
+            if (articolo == null)
             {
                 txtMessaggio.Text = "Articolo non trovato " + txtAnagrafica.Text;
                 return;
@@ -578,7 +578,7 @@ namespace TestWebServicesFrm
             PropertyInfo[] props = type.GetProperties();
 
             StringBuilder sb = new StringBuilder();
-            foreach (PropertyInfo pi in props.OrderBy(X=>X.Name))
+            foreach (PropertyInfo pi in props.OrderBy(X => X.Name))
             {
                 object valore1 = pi.GetValue(articolo);
                 object valore2 = pi.GetValue(articoloDestinazione);
@@ -603,7 +603,7 @@ namespace TestWebServicesFrm
                 }
                 BCServices bc = new BCServices();
                 bc.CreaConnessione();
-                List<Allegati> allegati= bc.EstraiAllegati(txtAnagrafica.Text);
+                List<Allegati> allegati = bc.EstraiAllegati(txtAnagrafica.Text);
 
             }
             catch (Exception ex)
