@@ -611,7 +611,8 @@ namespace DisegnaDiBa
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-
+                (sender as ToolStripMenuItem).Select();
+                lblElementi.Focus();
                 string status = Stato.InSviluppo;
                 if ((sender as ToolStripMenuItem).Name == menuDistinteStatoCertificato.Name)
                     status = Stato.Certificato;
@@ -649,6 +650,7 @@ namespace DisegnaDiBa
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
+                lblElementi.Focus();
                 string status = Stato.InSviluppo;
                 if ((sender as ToolStripMenuItem).Name == menucicliStatoCertificato.Name)
                     status = Stato.Certificato;
