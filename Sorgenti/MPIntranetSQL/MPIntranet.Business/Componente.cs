@@ -179,7 +179,7 @@ namespace MPIntranet.Business
                         rigaComponente.DATAMODIFICA = DateTime.Now;
                         rigaComponente.UTENTEMODIFICA = utente;
                     }
-                    FaseCiclo.SalvaListaFaseCiclo(componente.FasiCiclo, utente, ds);
+                    FaseCiclo.SalvaListaFaseCiclo(componente.FasiCiclo, utente, componente.IdDiba, componente.IdComponente, ds);
                 }
                 DataRow[] root = ds.COMPONENTI.Where(x => x.IsIDPADRENull()).ToArray();
                 DataRow[] altriNodi = ds.COMPONENTI.Where(x => !x.IsIDPADRENull()).OrderByDescending(x => x.IDPADRE).ToArray();

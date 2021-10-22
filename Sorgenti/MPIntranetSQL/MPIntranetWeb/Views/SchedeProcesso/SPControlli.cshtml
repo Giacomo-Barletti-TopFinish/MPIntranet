@@ -50,6 +50,9 @@
             <div class="col-md-2" style="padding-top:20px">
                 <input type="button" onclick="AggiungiElemento()" class="btn btn-primary" value="Aggiungi" />
             </div>
+            <div class="col-md-2" style="padding-top:20px">
+                <input type="button" onclick="SvuotaGriglia()" class="btn btn-primary" value="Svuota lista" />
+            </div>
         </div>
         <div class="row col-lg-5">
             <div id="divListaElementi" class="content-searchSPC">
@@ -78,9 +81,12 @@
 <script language="javascript" type="text/javascript">
     $(function ()
     {
+        $("#ddlTipoControllo").change(function () {
+            SvuotaGriglia();
+        });
         $("#ddlSPControlli").change(function ()
         {
-
+            SvuotaGriglia();
             var selectedText = $(this).find("option:selected").text();
             var idControllo = $(this).val();
              var url = '@Url.Action("GetSPControllo", "SchedeProcesso")';
@@ -107,6 +113,10 @@
             });
         });
     });
+
+    function SvuotaGriglia() {
+        $("#grigliaValori tbody tr").remove();
+    }
 
     function AggiungiElemento() {
         var codice = $('#txtCodiceElemento').val();
@@ -240,6 +250,7 @@
         $('#txtCodice').val('');
         $('#txtDescrizione').val('');
         $('#ddlTipoControllo').val('');
+        SvuotaGriglia();
     }
 
 </script>

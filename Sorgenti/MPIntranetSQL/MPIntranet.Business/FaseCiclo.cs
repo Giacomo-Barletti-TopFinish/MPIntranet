@@ -233,12 +233,12 @@ namespace MPIntranet.Business
             }
         }
 
-        public static void SalvaListaFaseCiclo(List<FaseCiclo> fasiCiclo, string utente, ArticoliDS ds)
+        public static void SalvaListaFaseCiclo(List<FaseCiclo> fasiCiclo, string utente, int idDiba, int idComponente, ArticoliDS ds)
         {
-            if (fasiCiclo.Count() == 0) return;
-            int idComponente = fasiCiclo[0].IdComponente;
+ //           if (fasiCiclo.Count() == 0) return;
+//            int idComponente = fasiCiclo[0].IdComponente;
 
-            int idDiba = fasiCiclo[0].IdDiba;
+ //           int idDiba = fasiCiclo[0].IdDiba;
             using (ArticoliBusiness bArticolo = new ArticoliBusiness())
             {
                 List<int> idFasiCicloAttive = fasiCiclo.Select(x => x.IdFaseCiclo).ToList();
