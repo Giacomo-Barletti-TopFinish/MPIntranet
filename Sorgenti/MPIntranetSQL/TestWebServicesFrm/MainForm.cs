@@ -350,19 +350,30 @@ namespace TestWebServicesFrm
             }
         }
 
+
         private void MainForm_Load(object sender, EventArgs e)
         {
             List<AreaProduzione> aree = MPIntranet.Business.AreaProduzione.EstraiListaAreeProduzione();
             ddlAreaProduzione.Items.AddRange(aree.ToArray());
             estraiAziende();
         }
-
         private void estraiAziende()
         {
             ddlAziende.Items.Clear();
             ddlAziende.Items.Add("METALPLUS");
             ddlAziende.Items.Add("METALPLUS 08092021");
             ddlAziende.Items.Add("METALPLUS_210621");
+        }
+        private void estraiTipoMovimento()
+        {
+            ddlTipoMovimento.Items.Clear();
+            ddlTipoMovimento.Items.Add("Rettifica Positiva");
+            ddlTipoMovimento.Items.Add("Rettifica Negativa");
+        }
+        private void estraiBinCode()
+        {
+            ddlCodCollRegMag.Items.Clear();
+            ddlCodCollRegMag.Items.Add("A1");
         }
 
         private void ddlAreaProduzione_SelectedIndexChanged(object sender, EventArgs e)
@@ -657,6 +668,44 @@ namespace TestWebServicesFrm
                 txtMessaggio.Text = estraiErrore(ex);
             }
         }
+        private void txtRegMag(object sender, EventArgs e)
+        {
+            txtMessaggio.Text = string.Empty;
+            try
+            {
+                if (string.IsNullOrEmpty(txtAnagRegMag.Text))
+                {
+                    txtMessaggio.Text = "Inserire un codice Anagrafica";
+                    return;
+                }
+                if (string.IsNullOrEmpty(txtNrDocRegMag.Text))
+                {
+                    txtMessaggio.Text = "Inserire un numero documento";
+                    return;
+                }
+                /*
+                if (string.IsNullOrEmpty(txtUbiRegMag.Text))
+                {
+                    txtMessaggio.Text = "Inserire un ubicazione";
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(ddlCodCollRegMag.Text))
+                    {
+                    txtMessaggio.Text = "Selezionare una collocazione";
+                    return;
+                    }
+                */
+                BCServices bc = new BCServices();
+                bc.CreaConnessione();
+             //   bc.RegMag(txtAnagRegMag.Text, txtUbiRegMag.Text, ddlCodCollRegMag.Text);
+                txtMessaggio.Text = "Rettifica registrata correttamente";
+            }
+            catch (Exception ex)
+            {
+                txtMessaggio.Text = estraiErrore(ex);
+            }
+        }
 
         private void btnEstraiOdP_Click(object sender, EventArgs e)
         {
@@ -694,11 +743,10 @@ namespace TestWebServicesFrm
                 }
                 BCServices bc = new BCServices();
                 bc.CreaConnessione();
-                bc.ModificaDescrizioneOdp(txtNoOdP.Text,txtDescrizioneOdP.Text,txtDescrizione2.Text);
+                bc.ModificaDescrizioneOdp(txtNoOdP.Text, txtDescrizioneOdP.Text, txtDescrizione2.Text);
 
                 txtDescrizioneOdP.Text = String.Empty;
                 txtDescrizione2.Text = String.Empty;
-
                 txtMessaggio.Text = "Descrizione Cambiata Correttamente";
             }
             catch (Exception ex)
@@ -732,5 +780,27 @@ namespace TestWebServicesFrm
             }
 
         }
+
+        private void btnEstraiMag_Click(object sender, EventArgs e)
+        {
+
+            txtMessaggio.Text = string.Empty;
+            try
+            {
+
+                BCServices bc = new BCServices();
+                bc.CreaConnessione();
+                List<RegMagazzino> maga = bc.EstraiMagazzino();
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(string.Format("Trovate {0} righe di magazzino", maga.Count));
+                sb.AppendLine(string.Empty);
+                txtMessaggio.Text = sb.ToString();
+            }
+            catch (Exception ex)
+            {
+                txtMessaggio.Text = estraiErrore(ex);
+            }
+        }
+
     }
 }

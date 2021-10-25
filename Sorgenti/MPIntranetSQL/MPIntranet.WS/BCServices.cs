@@ -396,6 +396,22 @@ namespace MPIntranet.WS
             _nav.AddToODPRilasciato(oDP);
             Salva();
         }
+        public void RegMag(string Anagrafica, DateTime Due_Date, decimal Quantity, string Location_Code, string Description, string Description2)
+
+        {
+
+            NAV.ODPRilasciato oDP = new ODPRilasciato();
+            oDP.Source_No = Anagrafica;
+            oDP.Due_Date = Due_Date;
+            oDP.Location_Code = Location_Code;
+            oDP.Quantity = Quantity;
+            oDP.Description = Description;
+            oDP.Description_2 = Description2;
+            oDP.Status = "Rilasciato";
+            oDP.No = string.Empty;
+            _nav.AddToODPRilasciato(oDP);
+            Salva();
+        }
         public List<ODPRilasciato> EstraiOdPRilasciati()
         {
             List<ODPRilasciato> odps = _nav.ODPRilasciato.ToList();
@@ -418,6 +434,17 @@ namespace MPIntranet.WS
             oDP.Description_2 = Description2;
             _nav.UpdateObject(oDP);
             Salva();
+        }
+        public List<RegMagazzino> EstraiMagazzino()
+        {
+            if (_nav == null) return null;
+
+
+            List<RegMagazzino> t = _nav.RegMagazzino.ToList();
+            _nav.AddToRegMagazzino(t[0]);
+            Salva();
+            return t;
+
         }
 
     }

@@ -166,9 +166,26 @@
             this.lblScadenza = new System.Windows.Forms.Label();
             this.txtAnagraficaOdP = new System.Windows.Forms.TextBox();
             this.label42 = new System.Windows.Forms.Label();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.btnRegMag = new System.Windows.Forms.Button();
+            this.nQuntitàRegMag = new System.Windows.Forms.NumericUpDown();
+            this.label55 = new System.Windows.Forms.Label();
+            this.ddlCodCollRegMag = new System.Windows.Forms.ComboBox();
+            this.label54 = new System.Windows.Forms.Label();
+            this.txtUbiRegMag = new System.Windows.Forms.TextBox();
+            this.label53 = new System.Windows.Forms.Label();
+            this.txtAnagRegMag = new System.Windows.Forms.TextBox();
+            this.label52 = new System.Windows.Forms.Label();
+            this.txtNrDocRegMag = new System.Windows.Forms.TextBox();
+            this.label51 = new System.Windows.Forms.Label();
+            this.ddlTipoMovimento = new System.Windows.Forms.ComboBox();
+            this.label50 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label49 = new System.Windows.Forms.Label();
             this.label48 = new System.Windows.Forms.Label();
             this.ddlAziende = new System.Windows.Forms.ComboBox();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.dataSet1 = new System.Data.DataSet();
+            this.btnEstraiMag = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -191,6 +208,9 @@
             this.tabPage1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nQuntitàOdP)).BeginInit();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nQuntitàRegMag)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtMessaggio
@@ -1589,7 +1609,7 @@
             // 
             // nQuntitàOdP
             // 
-            this.nQuntitàOdP.Location = new System.Drawing.Point(547, 58);
+            this.nQuntitàOdP.Location = new System.Drawing.Point(504, 54);
             this.nQuntitàOdP.Maximum = new decimal(new int[] {
             500,
             0,
@@ -1602,7 +1622,7 @@
             // label44
             // 
             this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(544, 31);
+            this.label44.Location = new System.Drawing.Point(501, 31);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(81, 13);
             this.label44.TabIndex = 4;
@@ -1642,6 +1662,170 @@
             this.label42.Text = "Anagrafica OdP";
             this.label42.Click += new System.EventHandler(this.label42_Click);
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.btnEstraiMag);
+            this.tabPage4.Controls.Add(this.btnRegMag);
+            this.tabPage4.Controls.Add(this.nQuntitàRegMag);
+            this.tabPage4.Controls.Add(this.label55);
+            this.tabPage4.Controls.Add(this.ddlCodCollRegMag);
+            this.tabPage4.Controls.Add(this.label54);
+            this.tabPage4.Controls.Add(this.txtUbiRegMag);
+            this.tabPage4.Controls.Add(this.label53);
+            this.tabPage4.Controls.Add(this.txtAnagRegMag);
+            this.tabPage4.Controls.Add(this.label52);
+            this.tabPage4.Controls.Add(this.txtNrDocRegMag);
+            this.tabPage4.Controls.Add(this.label51);
+            this.tabPage4.Controls.Add(this.ddlTipoMovimento);
+            this.tabPage4.Controls.Add(this.label50);
+            this.tabPage4.Controls.Add(this.dateTimePicker1);
+            this.tabPage4.Controls.Add(this.label49);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(1232, 559);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Registrazioni magazzino";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // btnRegMag
+            // 
+            this.btnRegMag.Location = new System.Drawing.Point(516, 105);
+            this.btnRegMag.Name = "btnRegMag";
+            this.btnRegMag.Size = new System.Drawing.Size(75, 23);
+            this.btnRegMag.TabIndex = 14;
+            this.btnRegMag.Text = "Esegui ";
+            this.btnRegMag.UseVisualStyleBackColor = true;
+            // 
+            // nQuntitàRegMag
+            // 
+            this.nQuntitàRegMag.Location = new System.Drawing.Point(1080, 47);
+            this.nQuntitàRegMag.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nQuntitàRegMag.Name = "nQuntitàRegMag";
+            this.nQuntitàRegMag.Size = new System.Drawing.Size(120, 20);
+            this.nQuntitàRegMag.TabIndex = 13;
+            this.nQuntitàRegMag.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            // 
+            // label55
+            // 
+            this.label55.AllowDrop = true;
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(1077, 20);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(47, 13);
+            this.label55.TabIndex = 12;
+            this.label55.Text = "Quantità";
+            // 
+            // ddlCodCollRegMag
+            // 
+            this.ddlCodCollRegMag.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlCodCollRegMag.FormattingEnabled = true;
+            this.ddlCodCollRegMag.Location = new System.Drawing.Point(920, 47);
+            this.ddlCodCollRegMag.Name = "ddlCodCollRegMag";
+            this.ddlCodCollRegMag.Size = new System.Drawing.Size(121, 21);
+            this.ddlCodCollRegMag.TabIndex = 11;
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(917, 21);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(67, 13);
+            this.label54.TabIndex = 10;
+            this.label54.Text = "Collocazione";
+            // 
+            // txtUbiRegMag
+            // 
+            this.txtUbiRegMag.Location = new System.Drawing.Point(782, 48);
+            this.txtUbiRegMag.Name = "txtUbiRegMag";
+            this.txtUbiRegMag.Size = new System.Drawing.Size(100, 20);
+            this.txtUbiRegMag.TabIndex = 9;
+            this.txtUbiRegMag.Text = "MTP";
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(779, 21);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(60, 13);
+            this.label53.TabIndex = 8;
+            this.label53.Text = "Ubicazione";
+            // 
+            // txtAnagRegMag
+            // 
+            this.txtAnagRegMag.Location = new System.Drawing.Point(595, 48);
+            this.txtAnagRegMag.Name = "txtAnagRegMag";
+            this.txtAnagRegMag.Size = new System.Drawing.Size(144, 20);
+            this.txtAnagRegMag.TabIndex = 7;
+            this.txtAnagRegMag.Text = "R-CAM700029FIA84A01";
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(592, 20);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(58, 13);
+            this.label52.TabIndex = 6;
+            this.label52.Text = "Anagrafica";
+            // 
+            // txtNrDocRegMag
+            // 
+            this.txtNrDocRegMag.Location = new System.Drawing.Point(445, 49);
+            this.txtNrDocRegMag.Name = "txtNrDocRegMag";
+            this.txtNrDocRegMag.Size = new System.Drawing.Size(100, 20);
+            this.txtNrDocRegMag.TabIndex = 5;
+            this.txtNrDocRegMag.Text = "125896";
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(442, 21);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(76, 13);
+            this.label51.TabIndex = 4;
+            this.label51.Text = "Nr Documento";
+            // 
+            // ddlTipoMovimento
+            // 
+            this.ddlTipoMovimento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlTipoMovimento.FormattingEnabled = true;
+            this.ddlTipoMovimento.Location = new System.Drawing.Point(248, 48);
+            this.ddlTipoMovimento.Name = "ddlTipoMovimento";
+            this.ddlTipoMovimento.Size = new System.Drawing.Size(134, 21);
+            this.ddlTipoMovimento.TabIndex = 3;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(245, 21);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(83, 13);
+            this.label50.TabIndex = 2;
+            this.label50.Text = "Tipo Movimento";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(6, 48);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.TabIndex = 1;
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(6, 21);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(108, 13);
+            this.label49.TabIndex = 0;
+            this.label49.Text = "Data di Registrazione";
+            // 
             // label48
             // 
             this.label48.AutoSize = true;
@@ -1660,14 +1844,19 @@
             this.ddlAziende.Size = new System.Drawing.Size(160, 21);
             this.ddlAziende.TabIndex = 7;
             // 
-            // tabPage4
+            // dataSet1
             // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(1232, 559);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Registrazioni magazzino";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.dataSet1.DataSetName = "NewDataSet";
+            // 
+            // btnEstraiMag
+            // 
+            this.btnEstraiMag.Location = new System.Drawing.Point(720, 105);
+            this.btnEstraiMag.Name = "btnEstraiMag";
+            this.btnEstraiMag.Size = new System.Drawing.Size(75, 23);
+            this.btnEstraiMag.TabIndex = 15;
+            this.btnEstraiMag.Text = "Estrai Lista";
+            this.btnEstraiMag.UseVisualStyleBackColor = true;
+            this.btnEstraiMag.Click += new System.EventHandler(this.btnEstraiMag_Click);
             // 
             // MainForm
             // 
@@ -1709,6 +1898,10 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nQuntitàOdP)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nQuntitàRegMag)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1857,6 +2050,23 @@
         private System.Windows.Forms.Label label48;
         private System.Windows.Forms.ComboBox ddlAziende;
         private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Label label49;
+        private System.Data.DataSet dataSet1;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.TextBox txtUbiRegMag;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.TextBox txtAnagRegMag;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.TextBox txtNrDocRegMag;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.ComboBox ddlTipoMovimento;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Button btnRegMag;
+        private System.Windows.Forms.NumericUpDown nQuntitàRegMag;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.ComboBox ddlCodCollRegMag;
+        private System.Windows.Forms.Button btnEstraiMag;
     }
 }
 
