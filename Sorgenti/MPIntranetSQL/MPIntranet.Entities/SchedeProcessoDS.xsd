@@ -15,7 +15,7 @@
   <xs:element name="SchedeProcessoDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="SchedeProcessoDS" msprop:Generator_UserDSName="SchedeProcessoDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="SPCONTROLLI" msprop:Generator_TableClassName="SPCONTROLLIDataTable" msprop:Generator_TableVarName="tableSPCONTROLLI" msprop:Generator_RowChangedName="SPCONTROLLIRowChanged" msprop:Generator_TablePropName="SPCONTROLLI" msprop:Generator_RowDeletingName="SPCONTROLLIRowDeleting" msprop:Generator_RowChangingName="SPCONTROLLIRowChanging" msprop:Generator_RowEvHandlerName="SPCONTROLLIRowChangeEventHandler" msprop:Generator_RowDeletedName="SPCONTROLLIRowDeleted" msprop:Generator_RowClassName="SPCONTROLLIRow" msprop:Generator_UserTableName="SPCONTROLLI" msprop:Generator_RowEvArgName="SPCONTROLLIRowChangeEvent">
+        <xs:element name="SPCONTROLLI" msprop:Generator_TableClassName="SPCONTROLLIDataTable" msprop:Generator_TableVarName="tableSPCONTROLLI" msprop:Generator_TablePropName="SPCONTROLLI" msprop:Generator_RowDeletingName="SPCONTROLLIRowDeleting" msprop:Generator_RowChangingName="SPCONTROLLIRowChanging" msprop:Generator_RowEvHandlerName="SPCONTROLLIRowChangeEventHandler" msprop:Generator_RowDeletedName="SPCONTROLLIRowDeleted" msprop:Generator_UserTableName="SPCONTROLLI" msprop:Generator_RowChangedName="SPCONTROLLIRowChanged" msprop:Generator_RowEvArgName="SPCONTROLLIRowChangeEvent" msprop:Generator_RowClassName="SPCONTROLLIRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDSPCONTROLLO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnIDSPCONTROLLO" msprop:Generator_ColumnPropNameInRow="IDSPCONTROLLO" msprop:Generator_ColumnPropNameInTable="IDSPCONTROLLOColumn" msprop:Generator_UserColumnName="IDSPCONTROLLO" type="xs:int" />
@@ -55,7 +55,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="SPELEMENTI" msprop:Generator_TableClassName="SPELEMENTIDataTable" msprop:Generator_TableVarName="tableSPELEMENTI" msprop:Generator_RowChangedName="SPELEMENTIRowChanged" msprop:Generator_TablePropName="SPELEMENTI" msprop:Generator_RowDeletingName="SPELEMENTIRowDeleting" msprop:Generator_RowChangingName="SPELEMENTIRowChanging" msprop:Generator_RowEvHandlerName="SPELEMENTIRowChangeEventHandler" msprop:Generator_RowDeletedName="SPELEMENTIRowDeleted" msprop:Generator_RowClassName="SPELEMENTIRow" msprop:Generator_UserTableName="SPELEMENTI" msprop:Generator_RowEvArgName="SPELEMENTIRowChangeEvent">
+        <xs:element name="SPELEMENTI" msprop:Generator_TableClassName="SPELEMENTIDataTable" msprop:Generator_TableVarName="tableSPELEMENTI" msprop:Generator_TablePropName="SPELEMENTI" msprop:Generator_RowDeletingName="SPELEMENTIRowDeleting" msprop:Generator_RowChangingName="SPELEMENTIRowChanging" msprop:Generator_RowEvHandlerName="SPELEMENTIRowChangeEventHandler" msprop:Generator_RowDeletedName="SPELEMENTIRowDeleted" msprop:Generator_UserTableName="SPELEMENTI" msprop:Generator_RowChangedName="SPELEMENTIRowChanged" msprop:Generator_RowEvArgName="SPELEMENTIRowChangeEvent" msprop:Generator_RowClassName="SPELEMENTIRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDSPELEMENTO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnIDSPELEMENTO" msprop:Generator_ColumnPropNameInRow="IDSPELEMENTO" msprop:Generator_ColumnPropNameInTable="IDSPELEMENTOColumn" msprop:Generator_UserColumnName="IDSPELEMENTO" type="xs:int" />
@@ -89,7 +89,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="SPELEMENTILISTA" msprop:Generator_TableClassName="SPELEMENTILISTADataTable" msprop:Generator_TableVarName="tableSPELEMENTILISTA" msprop:Generator_RowChangedName="SPELEMENTILISTARowChanged" msprop:Generator_TablePropName="SPELEMENTILISTA" msprop:Generator_RowDeletingName="SPELEMENTILISTARowDeleting" msprop:Generator_RowChangingName="SPELEMENTILISTARowChanging" msprop:Generator_RowEvHandlerName="SPELEMENTILISTARowChangeEventHandler" msprop:Generator_RowDeletedName="SPELEMENTILISTARowDeleted" msprop:Generator_RowClassName="SPELEMENTILISTARow" msprop:Generator_UserTableName="SPELEMENTILISTA" msprop:Generator_RowEvArgName="SPELEMENTILISTARowChangeEvent">
+        <xs:element name="SPELEMENTILISTA" msprop:Generator_TableClassName="SPELEMENTILISTADataTable" msprop:Generator_TableVarName="tableSPELEMENTILISTA" msprop:Generator_TablePropName="SPELEMENTILISTA" msprop:Generator_RowDeletingName="SPELEMENTILISTARowDeleting" msprop:Generator_RowChangingName="SPELEMENTILISTARowChanging" msprop:Generator_RowEvHandlerName="SPELEMENTILISTARowChangeEventHandler" msprop:Generator_RowDeletedName="SPELEMENTILISTARowDeleted" msprop:Generator_UserTableName="SPELEMENTILISTA" msprop:Generator_RowChangedName="SPELEMENTILISTARowChanged" msprop:Generator_RowEvArgName="SPELEMENTILISTARowChangeEvent" msprop:Generator_RowClassName="SPELEMENTILISTARow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDSPELEMENTOLISTA" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnIDSPELEMENTOLISTA" msprop:Generator_ColumnPropNameInRow="IDSPELEMENTOLISTA" msprop:Generator_ColumnPropNameInTable="IDSPELEMENTOLISTAColumn" msprop:Generator_UserColumnName="IDSPELEMENTOLISTA" type="xs:int" />
@@ -122,7 +122,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="SPMASTERS" msprop:Generator_TableClassName="SPMASTERSDataTable" msprop:Generator_TableVarName="tableSPMASTERS" msprop:Generator_RowChangedName="SPMASTERSRowChanged" msprop:Generator_TablePropName="SPMASTERS" msprop:Generator_RowDeletingName="SPMASTERSRowDeleting" msprop:Generator_RowChangingName="SPMASTERSRowChanging" msprop:Generator_RowEvHandlerName="SPMASTERSRowChangeEventHandler" msprop:Generator_RowDeletedName="SPMASTERSRowDeleted" msprop:Generator_RowClassName="SPMASTERSRow" msprop:Generator_UserTableName="SPMASTERS" msprop:Generator_RowEvArgName="SPMASTERSRowChangeEvent">
+        <xs:element name="SPMASTERS" msprop:Generator_TableClassName="SPMASTERSDataTable" msprop:Generator_TableVarName="tableSPMASTERS" msprop:Generator_TablePropName="SPMASTERS" msprop:Generator_RowDeletingName="SPMASTERSRowDeleting" msprop:Generator_RowChangingName="SPMASTERSRowChanging" msprop:Generator_RowEvHandlerName="SPMASTERSRowChangeEventHandler" msprop:Generator_RowDeletedName="SPMASTERSRowDeleted" msprop:Generator_UserTableName="SPMASTERS" msprop:Generator_RowChangedName="SPMASTERSRowChanged" msprop:Generator_RowEvArgName="SPMASTERSRowChangeEvent" msprop:Generator_RowClassName="SPMASTERSRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDSPMASTER" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnIDSPMASTER" msprop:Generator_ColumnPropNameInRow="IDSPMASTER" msprop:Generator_ColumnPropNameInTable="IDSPMASTERColumn" msprop:Generator_UserColumnName="IDSPMASTER" type="xs:int" />
@@ -166,7 +166,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="SPSCHEDE" msprop:Generator_TableClassName="SPSCHEDEDataTable" msprop:Generator_TableVarName="tableSPSCHEDE" msprop:Generator_RowChangedName="SPSCHEDERowChanged" msprop:Generator_TablePropName="SPSCHEDE" msprop:Generator_RowDeletingName="SPSCHEDERowDeleting" msprop:Generator_RowChangingName="SPSCHEDERowChanging" msprop:Generator_RowEvHandlerName="SPSCHEDERowChangeEventHandler" msprop:Generator_RowDeletedName="SPSCHEDERowDeleted" msprop:Generator_RowClassName="SPSCHEDERow" msprop:Generator_UserTableName="SPSCHEDE" msprop:Generator_RowEvArgName="SPSCHEDERowChangeEvent">
+        <xs:element name="SPSCHEDE" msprop:Generator_TableClassName="SPSCHEDEDataTable" msprop:Generator_TableVarName="tableSPSCHEDE" msprop:Generator_TablePropName="SPSCHEDE" msprop:Generator_RowDeletingName="SPSCHEDERowDeleting" msprop:Generator_RowChangingName="SPSCHEDERowChanging" msprop:Generator_RowEvHandlerName="SPSCHEDERowChangeEventHandler" msprop:Generator_RowDeletedName="SPSCHEDERowDeleted" msprop:Generator_UserTableName="SPSCHEDE" msprop:Generator_RowChangedName="SPSCHEDERowChanged" msprop:Generator_RowEvArgName="SPSCHEDERowChangeEvent" msprop:Generator_RowClassName="SPSCHEDERow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDSPSCHEDA" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnIDSPSCHEDA" msprop:Generator_ColumnPropNameInRow="IDSPSCHEDA" msprop:Generator_ColumnPropNameInTable="IDSPSCHEDAColumn" msprop:Generator_UserColumnName="IDSPSCHEDA" type="xs:int" />
@@ -226,7 +226,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="SPVALORISCHEDE" msprop:Generator_TableClassName="SPVALORISCHEDEDataTable" msprop:Generator_TableVarName="tableSPVALORISCHEDE" msprop:Generator_RowChangedName="SPVALORISCHEDERowChanged" msprop:Generator_TablePropName="SPVALORISCHEDE" msprop:Generator_RowDeletingName="SPVALORISCHEDERowDeleting" msprop:Generator_RowChangingName="SPVALORISCHEDERowChanging" msprop:Generator_RowEvHandlerName="SPVALORISCHEDERowChangeEventHandler" msprop:Generator_RowDeletedName="SPVALORISCHEDERowDeleted" msprop:Generator_RowClassName="SPVALORISCHEDERow" msprop:Generator_UserTableName="SPVALORISCHEDE" msprop:Generator_RowEvArgName="SPVALORISCHEDERowChangeEvent">
+        <xs:element name="SPVALORISCHEDE" msprop:Generator_TableClassName="SPVALORISCHEDEDataTable" msprop:Generator_TableVarName="tableSPVALORISCHEDE" msprop:Generator_TablePropName="SPVALORISCHEDE" msprop:Generator_RowDeletingName="SPVALORISCHEDERowDeleting" msprop:Generator_RowChangingName="SPVALORISCHEDERowChanging" msprop:Generator_RowEvHandlerName="SPVALORISCHEDERowChangeEventHandler" msprop:Generator_RowDeletedName="SPVALORISCHEDERowDeleted" msprop:Generator_UserTableName="SPVALORISCHEDE" msprop:Generator_RowChangedName="SPVALORISCHEDERowChanged" msprop:Generator_RowEvArgName="SPVALORISCHEDERowChangeEvent" msprop:Generator_RowClassName="SPVALORISCHEDERow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="IDSPVALORESCHEDA" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnIDSPVALORESCHEDA" msprop:Generator_ColumnPropNameInRow="IDSPVALORESCHEDA" msprop:Generator_ColumnPropNameInTable="IDSPVALORESCHEDAColumn" msprop:Generator_UserColumnName="IDSPVALORESCHEDA" type="xs:int" />
@@ -257,7 +257,7 @@
               <xs:element name="VALORET" msprop:Generator_ColumnVarNameInTable="columnVALORET" msprop:Generator_ColumnPropNameInRow="VALORET" msprop:Generator_ColumnPropNameInTable="VALORETColumn" msprop:Generator_UserColumnName="VALORET" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="30" />
+                    <xs:maxLength value="60" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>

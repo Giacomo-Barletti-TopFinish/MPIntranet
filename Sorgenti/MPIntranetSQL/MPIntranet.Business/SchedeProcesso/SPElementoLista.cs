@@ -28,7 +28,7 @@ namespace MPIntranet.Business.SchedeProcesso
             }
 
             List<SPElementoLista> controlli = new List<SPElementoLista>();
-            foreach (SchedeProcessoDS.SPELEMENTILISTARow riga in ds.SPELEMENTILISTA)
+            foreach (SchedeProcessoDS.SPELEMENTILISTARow riga in ds.SPELEMENTILISTA.Where(x => x.IDSPCONTROLLO == IdSPControllo))
             {
                 SPElementoLista controelementolo = CreaElementoLista(riga);
                 controlli.Add(controelementolo);
@@ -72,16 +72,16 @@ namespace MPIntranet.Business.SchedeProcesso
             return CreaElementoLista(riga);
         }
 
-        public static void SalvaElemento(int idElemento, int idControllo, string codice, string descrizione, int sequenza, string account,SchedeProcessoDS ds)
+        public static void SalvaElemento(int idElemento, int idControllo, string codice, string descrizione, int sequenza, string account, SchedeProcessoDS ds)
         {
             using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
             {
                 bScheda.GetElementoLista(ds, idElemento);
 
                 SchedeProcessoDS.SPELEMENTILISTARow riga = ds.SPELEMENTILISTA.Where(x => x.IDSPELEMENTOLISTA == idElemento).FirstOrDefault();
-                if(idElemento<0 && riga !=null)
+                if (idElemento < 0 && riga != null)
                 {
-                    while(riga !=null)
+                    while (riga != null)
                     {
                         idElemento--;
                         riga = ds.SPELEMENTILISTA.Where(x => x.IDSPELEMENTOLISTA == idElemento).FirstOrDefault();
@@ -110,7 +110,7 @@ namespace MPIntranet.Business.SchedeProcesso
 
             }
         }
-        public static void SalvaElemento(int idElemento, int idControllo,string codice, string descrizione, int sequenza, string account)
+        public static void SalvaElemento(int idElemento, int idControllo, string codice, string descrizione, int sequenza, string account)
         {
 
             SchedeProcessoDS ds = new SchedeProcessoDS();

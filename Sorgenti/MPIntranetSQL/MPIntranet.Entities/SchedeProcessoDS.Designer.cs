@@ -2762,7 +2762,7 @@ namespace MPIntranet.Entities {
                 this.columnCODICE.MaxLength = 12;
                 this.columnDESCRIZIONE.MaxLength = 50;
                 this.columnTIPO.MaxLength = 12;
-                this.columnVALORET.MaxLength = 30;
+                this.columnVALORET.MaxLength = 60;
                 this.columnCANCELLATO.AllowDBNull = false;
                 this.columnDATAMODIFICA.AllowDBNull = false;
                 this.columnUTENTEMODIFICA.AllowDBNull = false;

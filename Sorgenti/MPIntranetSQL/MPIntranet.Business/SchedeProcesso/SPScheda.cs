@@ -134,10 +134,9 @@ namespace MPIntranet.Business.SchedeProcesso
                 bScheda.FillValoriSchede(ds, idScheda, true);
 
                 SchedeProcessoDS.SPSCHEDERow riga = ds.SPSCHEDE.Where(x => x.IDSPSCHEDA == idScheda).FirstOrDefault();
-
                 if (riga != null)
                 {
-                    riga.CODICE = codice.ToUpper();
+                    //                    riga.CODICE = codice.ToUpper();
                     riga.DESCRIZIONE = descrizione.ToUpper();
                     riga.IDBRAND = IdBrand;
                     riga.ANAGRAFICA = anagrafica.ToUpper();
@@ -147,7 +146,7 @@ namespace MPIntranet.Business.SchedeProcesso
                 else
                 {
                     riga = ds.SPSCHEDE.NewSPSCHEDERow();
-                    riga.CODICE = codice.ToUpper();
+                    riga.CODICE = "SP";// codice.ToUpper();
                     riga.DESCRIZIONE = descrizione.ToUpper();
                     riga.IDSPMASTER = IdSPMaster;
                     riga.AREAPRODUZIONE = areaProduzione.ToUpper();
@@ -184,6 +183,10 @@ namespace MPIntranet.Business.SchedeProcesso
 
                 bScheda.UpdateTableSPScheda(ds);
                 bScheda.UpdateTable(ds.SPVALORISCHEDE.TableName, ds);
+                ds.AcceptChanges();
+                riga.CODICE = string.Format("SP{0}", riga.IDSPSCHEDA.ToString().PadLeft(8, '0'));
+                bScheda.UpdateTableSPScheda(ds);
+                string messaggio = string.Format("Scheda {0} creata correttamente. ID scheda {1}", riga.CODICE, riga.IDSPSCHEDA);
                 return "Scheda creata correttamente";
             }
 
