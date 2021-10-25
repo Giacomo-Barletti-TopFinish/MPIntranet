@@ -354,6 +354,15 @@ namespace TestWebServicesFrm
         {
             List<AreaProduzione> aree = MPIntranet.Business.AreaProduzione.EstraiListaAreeProduzione();
             ddlAreaProduzione.Items.AddRange(aree.ToArray());
+            estraiAziende();
+        }
+
+        private void estraiAziende()
+        {
+            ddlAziende.Items.Clear();
+            ddlAziende.Items.Add("METALPLUS");
+            ddlAziende.Items.Add("METALPLUS 08092021");
+            ddlAziende.Items.Add("METALPLUS_210621");
         }
 
         private void ddlAreaProduzione_SelectedIndexChanged(object sender, EventArgs e)

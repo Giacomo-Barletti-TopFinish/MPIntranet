@@ -2782,6 +2782,12 @@
             <EnumMember>NAV.NavType/String</EnumMember>
           </Annotation>
         </Property>
+        <Property Name="Bin_Code99341" Type="Edm.String" MaxLength="20">
+          <Annotation Term="NAV.LabelId" String="Cod. collocazione" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
         <Property Name="Description_2" Type="Edm.String" MaxLength="50">
           <Annotation Term="NAV.LabelId" String="Descrizione 2" />
           <Annotation Term="NAV.NavType">
@@ -2824,12 +2830,6 @@
             <EnumMember>NAV.NavType/String</EnumMember>
           </Annotation>
           <Annotation Term="NAV.AllowEdit" Bool="false" />
-        </Property>
-        <Property Name="Bin_Code" Type="Edm.String" MaxLength="20">
-          <Annotation Term="NAV.LabelId" String="Cod. collocazione" />
-          <Annotation Term="NAV.NavType">
-            <EnumMember>NAV.NavType/String</EnumMember>
-          </Annotation>
         </Property>
         <Property Name="Starting_Date_Time" Type="Edm.DateTimeOffset">
           <Annotation Term="NAV.LabelId" String="Data-Ora di inizio" />
@@ -3087,6 +3087,272 @@
         </Property>
         <Annotation Term="NAV.LabelId" String="powerbifinance" />
         <Annotation Term="NAV.IsReadOnly" Bool="true" />
+      </EntityType>
+      <EntityType Name="RegMagazzino">
+        <Key>
+          <PropertyRef Name="Journal_Template_Name" />
+          <PropertyRef Name="Journal_Batch_Name" />
+          <PropertyRef Name="Line_No" />
+        </Key>
+        <Property Name="Journal_Template_Name" Type="Edm.String" Nullable="false" MaxLength="10">
+          <Annotation Term="NAV.LabelId" String="Journal_Template_Name" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEditOnCreate" Bool="true" />
+        </Property>
+        <Property Name="Journal_Batch_Name" Type="Edm.String" Nullable="false" MaxLength="10">
+          <Annotation Term="NAV.LabelId" String="Journal_Batch_Name" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEditOnCreate" Bool="true" />
+        </Property>
+        <Property Name="Line_No" Type="Edm.Int32" Nullable="false">
+          <Annotation Term="NAV.LabelId" String="Line_No" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Int</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEditOnCreate" Bool="true" />
+        </Property>
+        <Property Name="Posting_Date" Type="Edm.Date">
+          <Annotation Term="NAV.LabelId" String="Data di registrazione" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Date</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Document_Date" Type="Edm.Date">
+          <Annotation Term="NAV.LabelId" String="Data documento" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Date</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Entry_Type" Type="Edm.String">
+          <Annotation Term="NAV.LabelId" String="Tipo movimento" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Price_Calculation_Method" Type="Edm.String">
+          <Annotation Term="NAV.LabelId" String="Metodo di calcolo dei prezzi" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Document_No" Type="Edm.String" Nullable="false" MaxLength="20">
+          <Annotation Term="NAV.LabelId" String="Nr. documento" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEditOnCreate" Bool="true" />
+        </Property>
+        <Property Name="External_Document_No" Type="Edm.String" MaxLength="35">
+          <Annotation Term="NAV.LabelId" String="Nr. documento esterno" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Item_No" Type="Edm.String" MaxLength="20">
+          <Annotation Term="NAV.LabelId" String="Nr. articolo" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Variant_Code" Type="Edm.String" MaxLength="10">
+          <Annotation Term="NAV.LabelId" String="Cod. variante" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Description" Type="Edm.String" MaxLength="100">
+          <Annotation Term="NAV.LabelId" String="Descrizione" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Location_Code" Type="Edm.String" MaxLength="10">
+          <Annotation Term="NAV.LabelId" String="Cod. ubicazione" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Bin_Code" Type="Edm.String" MaxLength="20">
+          <Annotation Term="NAV.LabelId" String="Cod. collocazione" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="EOS055_Handling_Unit_No" Type="Edm.String" MaxLength="20">
+          <Annotation Term="NAV.LabelId" String="Nr. unità di carico" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="EOS055_Packaging_Material_No" Type="Edm.String" MaxLength="20">
+          <Annotation Term="NAV.LabelId" String="Nr. materiale di imballaggio" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Salespers_Purch_Code" Type="Edm.String" MaxLength="20">
+          <Annotation Term="NAV.LabelId" String="Cod. agente/add. acq." />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Gen_Bus_Posting_Group" Type="Edm.String" MaxLength="20">
+          <Annotation Term="NAV.LabelId" String="Cat. reg. business" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Gen_Prod_Posting_Group" Type="Edm.String" MaxLength="20">
+          <Annotation Term="NAV.LabelId" String="Cat. reg. articolo/servizio" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Quantity" Type="Edm.Decimal" Scale="Variable">
+          <Annotation Term="NAV.LabelId" String="Quantità" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Real</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Unit_of_Measure_Code" Type="Edm.String" MaxLength="10">
+          <Annotation Term="NAV.LabelId" String="Cod. unità di misura" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Unit_Amount" Type="Edm.Decimal" Scale="Variable">
+          <Annotation Term="NAV.LabelId" String="Importo unitario" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Real</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Amount" Type="Edm.Decimal" Scale="Variable">
+          <Annotation Term="NAV.LabelId" String="Importo" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Real</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Discount_Amount" Type="Edm.Decimal" Scale="Variable">
+          <Annotation Term="NAV.LabelId" String="Importo sconti" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Real</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEdit" Bool="false" />
+        </Property>
+        <Property Name="Indirect_Cost_Percent" Type="Edm.Decimal" Scale="Variable">
+          <Annotation Term="NAV.LabelId" String="% costi indiretti" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Real</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Unit_Cost" Type="Edm.Decimal" Scale="Variable">
+          <Annotation Term="NAV.LabelId" String="Costo unitario" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Real</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Applies_to_Entry" Type="Edm.Int32">
+          <Annotation Term="NAV.LabelId" String="Collega-a movimento" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Int</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Applies_from_Entry" Type="Edm.Int32">
+          <Annotation Term="NAV.LabelId" String="Collega-da mov." />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Int</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Transaction_Type" Type="Edm.String" MaxLength="10">
+          <Annotation Term="NAV.LabelId" String="Natura transazione" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Transport_Method" Type="Edm.String" MaxLength="10">
+          <Annotation Term="NAV.LabelId" String="Metodo di trasporto" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Country_Region_Code" Type="Edm.String" MaxLength="10">
+          <Annotation Term="NAV.LabelId" String="Cod. paese" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="EOS05501_Post_Container_Entry" Type="Edm.Boolean">
+          <Annotation Term="NAV.LabelId" String="Registra mov. contenitori" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Bool</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Reason_Code" Type="Edm.String" MaxLength="10">
+          <Annotation Term="NAV.LabelId" String="Causale" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Shortcut_Dimension_1_Code" Type="Edm.String" MaxLength="20">
+          <Annotation Term="NAV.LabelId" String="Cod. colleg. dimen. 1" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Shortcut_Dimension_2_Code" Type="Edm.String" MaxLength="20">
+          <Annotation Term="NAV.LabelId" String="Cod. colleg. dimen. 2" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="ShortcutDimCode3" Type="Edm.String">
+          <Annotation Term="NAV.LabelId" String="ShortcutDimCode3" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="ShortcutDimCode4" Type="Edm.String">
+          <Annotation Term="NAV.LabelId" String="ShortcutDimCode4" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="ShortcutDimCode5" Type="Edm.String">
+          <Annotation Term="NAV.LabelId" String="ShortcutDimCode5" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="ShortcutDimCode6" Type="Edm.String">
+          <Annotation Term="NAV.LabelId" String="ShortcutDimCode6" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="ShortcutDimCode7" Type="Edm.String">
+          <Annotation Term="NAV.LabelId" String="ShortcutDimCode7" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="ShortcutDimCode8" Type="Edm.String">
+          <Annotation Term="NAV.LabelId" String="ShortcutDimCode8" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="ItemDescription" Type="Edm.String">
+          <Annotation Term="NAV.LabelId" String="ItemDescription" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEdit" Bool="false" />
+        </Property>
+        <Annotation Term="NAV.LabelId" String="RegMagazzino" />
       </EntityType>
       <EntityType Name="RigheCICLO">
         <Key>
@@ -29995,6 +30261,7 @@
         <NavigationProperty Name="ODPRilasciato" Type="Collection(NAV.ODPRilasciato)" ContainsTarget="true" />
         <NavigationProperty Name="ODPRilasciatoProdOrderLines" Type="Collection(NAV.ODPRilasciatoProdOrderLines)" ContainsTarget="true" />
         <NavigationProperty Name="powerbifinance" Type="Collection(NAV.powerbifinance)" ContainsTarget="true" />
+        <NavigationProperty Name="RegMagazzino" Type="Collection(NAV.RegMagazzino)" ContainsTarget="true" />
         <NavigationProperty Name="RigheCICLO" Type="Collection(NAV.RigheCICLO)" ContainsTarget="true" />
         <NavigationProperty Name="RigheDIBA" Type="Collection(NAV.RigheDIBA)" ContainsTarget="true" />
         <NavigationProperty Name="RigheODP" Type="Collection(NAV.RigheODP)" ContainsTarget="true" />
@@ -30534,6 +30801,28 @@
           <Annotation Term="Org.OData.Capabilities.V1.UpdateRestrictions">
             <Record>
               <PropertyValue Property="Updatable" Bool="false" />
+            </Record>
+          </Annotation>
+        </EntitySet>
+        <EntitySet Name="RegMagazzino" EntityType="NAV.RegMagazzino">
+          <Annotation Term="Org.OData.Capabilities.V1.ChangeTracking">
+            <Record>
+              <PropertyValue Property="Supported" Bool="false" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.DeleteRestrictions">
+            <Record>
+              <PropertyValue Property="Deletable" Bool="true" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.InsertRestrictions">
+            <Record>
+              <PropertyValue Property="Insertable" Bool="true" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.UpdateRestrictions">
+            <Record>
+              <PropertyValue Property="Updatable" Bool="true" />
             </Record>
           </Annotation>
         </EntitySet>
@@ -32575,6 +32864,12 @@
         <Annotation Term="Org.OData.Core.V1.IsLanguageDependent" Bool="true" />
       </Annotations>
       <Annotations Target="NAV.ODPRilasciatoProdOrderLines/EOS086_Material_Status">
+        <Annotation Term="Org.OData.Core.V1.IsLanguageDependent" Bool="true" />
+      </Annotations>
+      <Annotations Target="NAV.RegMagazzino/Entry_Type">
+        <Annotation Term="Org.OData.Core.V1.IsLanguageDependent" Bool="true" />
+      </Annotations>
+      <Annotations Target="NAV.RegMagazzino/Price_Calculation_Method">
         <Annotation Term="Org.OData.Core.V1.IsLanguageDependent" Bool="true" />
       </Annotations>
       <Annotations Target="NAV.RigheCICLO/Type">

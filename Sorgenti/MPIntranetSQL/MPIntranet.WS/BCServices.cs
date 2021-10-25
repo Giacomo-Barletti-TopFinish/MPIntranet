@@ -23,13 +23,21 @@ namespace MPIntranet.WS
             _nav.Credentials = new NetworkCredential(_user, _password);
         }
 
+        public void CreaConnessione(string azienda)
+        {
+            string url = "https://srv-bc.viamattei.metal-plus.it:7148/PROD_WS/ODataV4/Company('" + azienda + "')/";
+            Uri uri = new Uri(url);
+            _nav = new NAV.NAV(uri);
+            _nav.Credentials = new NetworkCredential(_user, _password);
+        }
+
         public void Salva()
         {
             try
             {
                 if (_nav == null) return;
                 _nav.SaveChanges();
-                System.Threading.Thread.Sleep(timer);               
+                System.Threading.Thread.Sleep(timer);
             }
             catch (Exception ex)
             {
@@ -224,6 +232,7 @@ namespace MPIntranet.WS
                 Salva();
             }
         }
+
         public void CambiaDescrizioneCiclo(string NoCiclo, string descrizione)
         {
             Cicli c = EstraiTestataCiclo(NoCiclo);
@@ -371,11 +380,11 @@ namespace MPIntranet.WS
             }
             return stringhe;
         }
-        public void CreaOdDP(string Anagrafica, DateTime Due_Date, decimal Quantity, string Location_Code,string Description,string Description2 )
-         
+        public void CreaOdDP(string Anagrafica, DateTime Due_Date, decimal Quantity, string Location_Code, string Description, string Description2)
+
         {
-            
-           NAV.ODPRilasciato oDP = new ODPRilasciato();
+
+            NAV.ODPRilasciato oDP = new ODPRilasciato();
             oDP.Source_No = Anagrafica;
             oDP.Due_Date = Due_Date;
             oDP.Location_Code = Location_Code;

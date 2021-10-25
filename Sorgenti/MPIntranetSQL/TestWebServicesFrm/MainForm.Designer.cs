@@ -148,6 +148,7 @@
             this.label41 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btnEstraiSingoloOdp = new System.Windows.Forms.Button();
             this.btnCambiaDescrizioneOdP = new System.Windows.Forms.Button();
             this.txtNoOdP = new System.Windows.Forms.TextBox();
             this.label47 = new System.Windows.Forms.Label();
@@ -165,7 +166,9 @@
             this.lblScadenza = new System.Windows.Forms.Label();
             this.txtAnagraficaOdP = new System.Windows.Forms.TextBox();
             this.label42 = new System.Windows.Forms.Label();
-            this.btnEstraiSingoloOdp = new System.Windows.Forms.Button();
+            this.label48 = new System.Windows.Forms.Label();
+            this.ddlAziende = new System.Windows.Forms.ComboBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -1310,10 +1313,11 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(12, 2);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Location = new System.Drawing.Point(12, 34);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1240, 617);
+            this.tabControl1.Size = new System.Drawing.Size(1240, 585);
             this.tabControl1.TabIndex = 5;
             // 
             // tabPage2
@@ -1322,7 +1326,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1232, 591);
+            this.tabPage2.Size = new System.Drawing.Size(1232, 559);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Anagrafica";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1444,7 +1448,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1232, 591);
+            this.tabPage1.Size = new System.Drawing.Size(1232, 559);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "DiBa";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -1472,10 +1476,20 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1232, 591);
+            this.tabPage3.Size = new System.Drawing.Size(1232, 559);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "ODV";
+            this.tabPage3.Text = "ODP";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // btnEstraiSingoloOdp
+            // 
+            this.btnEstraiSingoloOdp.Location = new System.Drawing.Point(840, 135);
+            this.btnEstraiSingoloOdp.Name = "btnEstraiSingoloOdp";
+            this.btnEstraiSingoloOdp.Size = new System.Drawing.Size(85, 25);
+            this.btnEstraiSingoloOdp.TabIndex = 16;
+            this.btnEstraiSingoloOdp.Text = "Estrai ODP";
+            this.btnEstraiSingoloOdp.UseVisualStyleBackColor = true;
+            this.btnEstraiSingoloOdp.Click += new System.EventHandler(this.btnEstraiSingoloOdp_Click);
             // 
             // btnCambiaDescrizioneOdP
             // 
@@ -1628,21 +1642,40 @@
             this.label42.Text = "Anagrafica OdP";
             this.label42.Click += new System.EventHandler(this.label42_Click);
             // 
-            // btnEstraiSingoloOdp
+            // label48
             // 
-            this.btnEstraiSingoloOdp.Location = new System.Drawing.Point(840, 135);
-            this.btnEstraiSingoloOdp.Name = "btnEstraiSingoloOdp";
-            this.btnEstraiSingoloOdp.Size = new System.Drawing.Size(85, 25);
-            this.btnEstraiSingoloOdp.TabIndex = 16;
-            this.btnEstraiSingoloOdp.Text = "Estrai ODP";
-            this.btnEstraiSingoloOdp.UseVisualStyleBackColor = true;
-            this.btnEstraiSingoloOdp.Click += new System.EventHandler(this.btnEstraiSingoloOdp_Click);
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(19, 9);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(45, 13);
+            this.label48.TabIndex = 6;
+            this.label48.Text = "Azienda";
+            // 
+            // ddlAziende
+            // 
+            this.ddlAziende.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlAziende.FormattingEnabled = true;
+            this.ddlAziende.Location = new System.Drawing.Point(87, 6);
+            this.ddlAziende.Name = "ddlAziende";
+            this.ddlAziende.Size = new System.Drawing.Size(160, 21);
+            this.ddlAziende.TabIndex = 7;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(1232, 559);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Registrazioni magazzino";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1273, 816);
+            this.Controls.Add(this.ddlAziende);
+            this.Controls.Add(this.label48);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.txtMessaggio);
             this.Name = "MainForm";
@@ -1821,6 +1854,9 @@
         private System.Windows.Forms.TextBox txtNoOdP;
         private System.Windows.Forms.Label label47;
         private System.Windows.Forms.Button btnEstraiSingoloOdp;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.ComboBox ddlAziende;
+        private System.Windows.Forms.TabPage tabPage4;
     }
 }
 
