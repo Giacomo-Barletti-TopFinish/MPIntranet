@@ -37,7 +37,10 @@ namespace MPIntranet.Business
                 bArticolo.UpdateTable(ds.DIBA.TableName, ds);
             }
         }
-
+        public override string ToString()
+        {
+            return string.Format("{0} {1} {2}",TipoDistinta.TipoDiba,Versione,Descrizione);
+        }
         public void CreaDaDistintaBC(DistintaBC distintaBC, int idDiba, string utente)
         {
             int idComponente = 0;

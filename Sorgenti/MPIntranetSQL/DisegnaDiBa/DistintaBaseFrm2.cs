@@ -545,6 +545,21 @@ namespace DisegnaDiBa
             dgvComponenti.Update();
         }
 
+        private void correggiDescrizioniFasiCiclo()
+        {
+            List<MPIntranet.Business.Task> tasks = MPIntranet.Business.Task.EstraiListaTask();
+            foreach (Componente c in _distinta.Componenti)
+            {
+                foreach(FaseCiclo f in c.FasiCiclo)
+                {
+                    MPIntranet.Business.Task task = tasks.Where(x => x.Codice == f.Task).FirstOrDefault();
+                    if (task != null && string.IsNullOrEmpty(f.Descrizione))
+                        f.Descrizione = task.Descrizione;
+                }
+            }
+
+        }
+
         private void btnSalvaDiba_Click(object sender, EventArgs e)
         {
             try
@@ -552,6 +567,8 @@ namespace DisegnaDiBa
                 _newrow = false;
 
                 Cursor.Current = Cursors.WaitCursor;
+
+                correggiDescrizioniFasiCiclo();
                 _distinta.Descrizione = (txtDescrizioneDiba.Text.Length > 50) ? txtDescrizioneDiba.Text.Substring(0, 50) : txtDescrizioneDiba.Text;
                 if (_distinta == null) return;
                 if (_distinta.VerificaPerSalvataggio())
@@ -726,7 +743,7 @@ namespace DisegnaDiBa
             }
             catch (Exception ex)
             {
-                MostraEccezione(ex, "Errore in verifica cicli");
+                MostraEccezione(ex, "Errore in modifica cella");
             }
         }
 
@@ -774,7 +791,7 @@ namespace DisegnaDiBa
             }
             catch (Exception ex)
             {
-                MostraEccezione(ex, "Errore in verifica cicli");
+                MostraEccezione(ex, "Errore in aggiungi fase");
             }
         }
 
@@ -803,6 +820,8 @@ namespace DisegnaDiBa
 
             try
             {
+                List<MPIntranet.Business.Task> tasks = MPIntranet.Business.Task.EstraiListaTask();
+
                 List<ExpDistintaBusinessCentral> distinteExport = new List<ExpDistintaBusinessCentral>();
                 List<ExpCicloBusinessCentral> cicliExport = new List<ExpCicloBusinessCentral>();
                 string errori;
@@ -815,7 +834,17 @@ namespace DisegnaDiBa
                 if (_distinta.Esporta(distinteExport, cicliExport, out errori))
                 {
                     foreach (ExpCicloBusinessCentral ciclo in cicliExport)
+                    {
                         ciclo.RinumeraCodiceOperazione();
+                        foreach(ExpFaseCicloBusinessCentral fc in ciclo.Fasi)
+                        {
+                            MPIntranet.Business.Task task = tasks.Where(x => x.Codice == fc.Task).FirstOrDefault();
+                            if(task!=null && string.IsNullOrEmpty(fc.Descrizione))
+                            {
+                                fc.Descrizione = task.Descrizione;
+                            }
+                        }
+                    }
 
                     List<ExpDistintaBusinessCentral> dacancellare = (from ds in distinteExport where ds.Componenti.Count == 0 select ds).ToList();
                     dacancellare.ForEach(x => distinteExport.Remove(x));
@@ -837,7 +866,7 @@ namespace DisegnaDiBa
             }
             catch (Exception ex)
             {
-                MostraEccezione(ex, "Errore in verifica cicli");
+                MostraEccezione(ex, "Errore in esporta distinta");
             }
 
         }
@@ -908,7 +937,7 @@ namespace DisegnaDiBa
             }
             catch (Exception ex)
             {
-                MostraEccezione(ex, "Errore in verifica cicli");
+                MostraEccezione(ex, "Errore in popola griglia fasi");
             }
         }
 

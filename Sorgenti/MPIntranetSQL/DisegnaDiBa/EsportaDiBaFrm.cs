@@ -626,9 +626,22 @@ namespace DisegnaDiBa
                     {
                         if (d.Selezionato)
                         {
-                            bc.CambiaStatoDB(d.Codice, status);
-                            string messaggio = string.Format("Distinta {0} in stato: {1}", d.Codice, status);
-                            AggiornaMessaggio(messaggio);
+
+                            TestataDIBA testata = bc.EstraiTestataDIBA(d.Codice);
+                            if (testata != null)
+                            {
+                                bc.CambiaDescrizioneDB(d.Codice, testata.Description);
+                                testata = bc.EstraiTestataDIBA(d.Codice);
+                                bc.CambiaStatoDB(d.Codice, status);
+                                string messaggio = string.Format("Distinta {0} in stato: {1}", d.Codice, status);
+                                AggiornaMessaggio(messaggio);
+                            }
+                            else
+                            {
+                                string messaggio = string.Format("Distinta {0} non trovata", d.Codice, status);
+                                AggiornaMessaggio(messaggio);
+
+                            }
                         }
                     }
                     catch (Exception ex)

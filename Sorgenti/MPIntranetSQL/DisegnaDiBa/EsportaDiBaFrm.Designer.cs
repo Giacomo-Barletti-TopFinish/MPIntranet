@@ -185,6 +185,7 @@
             // 
             this.dgvEsportaComponenti.AllowUserToAddRows = false;
             this.dgvEsportaComponenti.AllowUserToDeleteRows = false;
+            this.dgvEsportaComponenti.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvEsportaComponenti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEsportaComponenti.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SelezionaComponentiClm,
@@ -260,7 +261,7 @@
             this.dgvEsportaFasi.AllowUserToAddRows = false;
             this.dgvEsportaFasi.AllowUserToDeleteRows = false;
             this.dgvEsportaFasi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvEsportaFasi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEsportaFasi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SelezionaFaseClm,
@@ -351,8 +352,7 @@
             // 
             // txtEsportazione
             // 
-            this.txtEsportazione.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtEsportazione.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtEsportazione.Location = new System.Drawing.Point(1021, 226);
             this.txtEsportazione.Multiline = true;
@@ -453,8 +453,9 @@
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.menuStrip2);
             this.panel2.Controls.Add(this.dgvEsportaCicli);
@@ -493,6 +494,8 @@
             // 
             this.dgvEsportaCicli.AllowUserToAddRows = false;
             this.dgvEsportaCicli.AllowUserToDeleteRows = false;
+            this.dgvEsportaCicli.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvEsportaCicli.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEsportaCicli.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.selezionaCicliClm,
@@ -555,6 +558,8 @@
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.menuStrip1);
             this.panel1.Controls.Add(this.dgvEsportaComponenti);
@@ -593,6 +598,8 @@
             // 
             this.dgvEsportaDistinte.AllowUserToAddRows = false;
             this.dgvEsportaDistinte.AllowUserToDeleteRows = false;
+            this.dgvEsportaDistinte.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvEsportaDistinte.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEsportaDistinte.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.selezionaDistintaClm,

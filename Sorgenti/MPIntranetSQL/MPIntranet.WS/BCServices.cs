@@ -380,21 +380,23 @@ namespace MPIntranet.WS
             }
             return stringhe;
         }
-        public void CreaOdDP(string Anagrafica, DateTime Due_Date, decimal Quantity, string Location_Code, string Description, string Description2)
+        public string CreaOdDPConferato(string Anagrafica, DateTime data, decimal quantita, string ubicazione, string descrizione, string descrizione2)
 
         {
 
-            NAV.ODPRilasciato oDP = new ODPRilasciato();
+            NAV.ODPConfermato oDP = new ODPConfermato();
+
             oDP.Source_No = Anagrafica;
-            oDP.Due_Date = Due_Date;
-            oDP.Location_Code = Location_Code;
-            oDP.Quantity = Quantity;
-            oDP.Description = Description;
-            oDP.Description_2 = Description2;
-            oDP.Status = "Rilasciato";
+            oDP.Due_Date = data;
+            oDP.Location_Code = ubicazione;
+            oDP.Quantity = quantita;
+            oDP.Description = descrizione;
+            oDP.Description_2 = descrizione2;
+            oDP.Status = "Confermato";
             oDP.No = string.Empty;
-            _nav.AddToODPRilasciato(oDP);
+            _nav.AddToODPConfermato(oDP);
             Salva();
+            return oDP.No;
         }
         public void RegMag(string Anagrafica, DateTime Due_Date, decimal Quantity, string Location_Code, string Description, string Description2)
 

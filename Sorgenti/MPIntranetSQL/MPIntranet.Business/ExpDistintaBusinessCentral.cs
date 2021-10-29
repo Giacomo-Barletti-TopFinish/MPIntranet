@@ -27,7 +27,7 @@ namespace MPIntranet.Business
         {
             this.Codice = Codice;
             this.Descrizione = Descrizione;
-            this.Componenti = new List<ExpComponenteDistintaBusinessCentral>(); ;
+            this.Componenti = new List<ExpComponenteDistintaBusinessCentral>(); 
         }
 
         public override string ToString()

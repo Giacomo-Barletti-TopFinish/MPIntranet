@@ -645,6 +645,11 @@ namespace TestWebServicesFrm
         private void btnCreaOdP_Click(object sender, EventArgs e)
         {
             txtMessaggio.Text = string.Empty;
+            if(ddlAziende.SelectedIndex==-1)
+            {
+                txtMessaggio.Text = "Selezionare un'azienda";
+                return;
+            }
             try
             {
                 if (string.IsNullOrEmpty(txtAnagraficaOdP.Text))
@@ -657,10 +662,10 @@ namespace TestWebServicesFrm
                     txtMessaggio.Text = "Inserire una ubicazione";
                     return;
                 }
-
+                string azienda = (string)ddlAziende.SelectedItem;
                 BCServices bc = new BCServices();
-                bc.CreaConnessione();
-                bc.CreaOdDP(txtAnagraficaOdP.Text, dtScadenzaOdP.Value, nQuntitàOdP.Value, txtLocationOdP.Text, txtDescrizioneOdP.Text, txtDescrizione2.Text);
+                bc.CreaConnessione(azienda);
+                bc.CreaOdDPConferato(txtAnagraficaOdP.Text, dtScadenzaOdP.Value, nQuntitàOdP.Value, txtLocationOdP.Text, txtDescrizioneOdP.Text, txtDescrizione2.Text);
                 txtMessaggio.Text = "Ordine Crato Correttamente";
             }
             catch (Exception ex)

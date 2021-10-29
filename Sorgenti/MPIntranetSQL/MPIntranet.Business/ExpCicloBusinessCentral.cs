@@ -151,7 +151,7 @@ namespace MPIntranet.Business
                 f.DimensioneLotto = faseCiclo.PezziPeriodo;
                 f.Task = faseCiclo.Task;
                 f.Commenti = new List<string>();
-                string commento = string.Empty; ;
+                string commento = string.Empty; 
                 if (!string.IsNullOrEmpty(faseCiclo.SchedaProcesso))
                     commento = string.Format("{0} {1} ", FaseCiclo.EtichettaSchedaProcesso, faseCiclo.SchedaProcesso);
                 commento = commento + " " + faseCiclo.Nota;
