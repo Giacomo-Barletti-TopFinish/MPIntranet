@@ -21,8 +21,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPIntranet.Common", "MPIntr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisegnaDiBa", "DisegnaDiBa\DisegnaDiBa.csproj", "{9DA2985A-AAD1-4C0D-BEAD-251438C93AF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerificaPianificazione", "VerificaPianificazione\VerificaPianificazione.csproj", "{F5C49B87-B3C8-4BFC-8D2B-EDDBB2D5E8C9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPIntranet.WS", "MPIntranet.WS\MPIntranet.WS.csproj", "{0BC7BD1F-5435-4332-84FA-89AD5FE60FF6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebServicesFrm", "TestWebServicesFrm\TestWebServicesFrm.csproj", "{E0FAC335-090D-4AC3-B635-2C5FD385247F}"
@@ -69,10 +67,6 @@ Global
 		{9DA2985A-AAD1-4C0D-BEAD-251438C93AF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DA2985A-AAD1-4C0D-BEAD-251438C93AF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DA2985A-AAD1-4C0D-BEAD-251438C93AF7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F5C49B87-B3C8-4BFC-8D2B-EDDBB2D5E8C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F5C49B87-B3C8-4BFC-8D2B-EDDBB2D5E8C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F5C49B87-B3C8-4BFC-8D2B-EDDBB2D5E8C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F5C49B87-B3C8-4BFC-8D2B-EDDBB2D5E8C9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0BC7BD1F-5435-4332-84FA-89AD5FE60FF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0BC7BD1F-5435-4332-84FA-89AD5FE60FF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BC7BD1F-5435-4332-84FA-89AD5FE60FF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
