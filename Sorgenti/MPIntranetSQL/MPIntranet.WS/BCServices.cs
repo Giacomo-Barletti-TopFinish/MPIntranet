@@ -380,7 +380,7 @@ namespace MPIntranet.WS
             }
             return stringhe;
         }
-        public string CreaOdDPConferato(string Anagrafica, DateTime data, decimal quantita, string ubicazione, string descrizione, string descrizione2)
+        public string CreaOdDPConfermato(string Anagrafica, DateTime data, decimal quantita, string ubicazione, string descrizione, string descrizione2)
 
         {
 
@@ -395,6 +395,10 @@ namespace MPIntranet.WS
             oDP.Status = "Confermato";
             oDP.No = string.Empty;
             _nav.AddToODPConfermato(oDP);
+            Salva();
+            oDP.Description = descrizione;
+            oDP.Description_2 = descrizione2;
+            _nav.UpdateObject(oDP);
             Salva();
             return oDP.No;
         }

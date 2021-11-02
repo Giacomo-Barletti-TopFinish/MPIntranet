@@ -665,7 +665,7 @@ namespace TestWebServicesFrm
                 string azienda = (string)ddlAziende.SelectedItem;
                 BCServices bc = new BCServices();
                 bc.CreaConnessione(azienda);
-                bc.CreaOdDPConferato(txtAnagraficaOdP.Text, dtScadenzaOdP.Value, nQuntitàOdP.Value, txtLocationOdP.Text, txtDescrizioneOdP.Text, txtDescrizione2.Text);
+                bc.CreaOdDPConfermato(txtAnagraficaOdP.Text, dtScadenzaOdP.Value, nQuntitàOdP.Value, txtLocationOdP.Text, txtDescrizioneOdP.Text, txtDescrizione2.Text);
                 txtMessaggio.Text = "Ordine Crato Correttamente";
             }
             catch (Exception ex)
