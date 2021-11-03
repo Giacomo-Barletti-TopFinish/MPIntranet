@@ -88,8 +88,18 @@ namespace MPIntranet.Business.SchedeProcesso
         }
         public static SPMaster EstraiSPMaster(int idMaster)
         {
-            List<SPMaster> lista = EstraiListaSPMaster(true);
-            return lista.Where(x => x.IdSPMaster == idMaster).FirstOrDefault();
+
+            SchedeProcessoDS ds = new SchedeProcessoDS();
+            using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
+            {
+                bScheda.GetSPMaster(ds, idMaster);
+            }
+
+            SchedeProcessoDS.SPMASTERSRow riga = ds.SPMASTERS.FirstOrDefault();
+            if (riga == null) return null;
+
+            return CreaMaster(riga, ds);
+
         }
 
         public static string SalvaMaster(int idMaster, string codice, string descrizione, string areaProduzione, string task, ElementoMaster[] elementiLista, string account)

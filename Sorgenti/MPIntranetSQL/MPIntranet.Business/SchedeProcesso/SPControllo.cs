@@ -80,8 +80,16 @@ namespace MPIntranet.Business.SchedeProcesso
 
         public static SPControllo EstraiSPControllo(int idControllo)
         {
-            List<SPControllo> lista = EstraiListaSPControlli(false);
-            return lista.Where(x => x.IdSPControllo == idControllo).FirstOrDefault();
+            SchedeProcessoDS ds = new SchedeProcessoDS();
+            using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
+            {
+                bScheda.GetControllo(ds, idControllo);
+            }
+
+            SchedeProcessoDS.SPCONTROLLIRow riga = ds.SPCONTROLLI.FirstOrDefault();
+            if (riga == null) return null;
+
+            return CreaControllo(riga, ds);
         }
 
         public static string SalvaControllo(int idControllo, string codice, string descrizione, string tipo, double minimo, double massimo, double Default, ElementoLista[] lista, string account)

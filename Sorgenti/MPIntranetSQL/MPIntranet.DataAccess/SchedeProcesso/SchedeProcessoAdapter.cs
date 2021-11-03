@@ -121,6 +121,8 @@ namespace MPIntranet.DataAccess.SchedeProcesso
                 da.Fill(ds.SPCONTROLLI);
             }
         }
+
+     
         public void GetControllo(SchedeProcessoDS ds, int idSPControllo)
         {
             string select = @"SELECT * FROM SPCONTROLLI WHERE IDSPCONTROLLO = $P<IDCONTROLLO>";
