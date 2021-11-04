@@ -21,7 +21,7 @@
 
                     <div class="col-md-2">
                         @Html.Label("Anagrafica")
-                        @Html.TextBox("txtAnagrafica", null, new { @class = "form-control input-sm ", @id = "txtAnagrafica", @maxlength = "12" })
+                        @Html.TextBox("txtAnagrafica", null, new { @class = "form-control input-sm ", @id = "txtAnagrafica", @maxlength = "25" })
                     </div>
                     <div class="col-md-2">
                         @Html.Label("Codice")
@@ -29,7 +29,7 @@
                     </div>
                     <div class="col-md-4">
                         @Html.Label("Descrizione")
-                        @Html.TextBox("txtDescrizione", null, new { @class = "form-control input-sm ", @id = "txtDescrizione", @maxlength = "12" })
+                        @Html.TextBox("txtDescrizione", null, new { @class = "form-control input-sm ", @id = "txtDescrizione", @maxlength = "50" })
                     </div>
                     <div class="col-md-1" style="padding-top:20px">
                         <input type="button" onclick="TrovaScheda()" class="btn btn-primary" value="Trova" />
