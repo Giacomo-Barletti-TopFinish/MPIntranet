@@ -25,10 +25,10 @@
             <input type="text" value="@Model.Master.ToString()" readonly="readonly" />
         </div>
 
-    </div>
+    </div> 
     @foreach (SPElemento elemento in Model.Master.Elementi)
     {
-    <div class="row">
+    <div class="row" style="margin-left:50px;">
         @if (elemento.Tipo == TipoSPElemento.SESSIONE)
         {
             <h3 style="background-color:lightgray">@elemento.Testo</h3>
