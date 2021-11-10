@@ -89,6 +89,17 @@ namespace MPIntranet.DataAccess.Articoli
                 da.Fill(ds.Items);
             }
         }
+        public void GetItem(ArticoliDS ds, string anagrafica)
+        {
+            string select = @"SELECT * FROM Items WHERE No_ = $P<ITEM>";
+            ParamSet ps = new ParamSet();
+            ps.AddParam("ITEM", DbType.String, anagrafica);
+
+            using (DbDataAdapter da = BuildDataAdapter(select,ps))
+            {
+                da.Fill(ds.Items);
+            }
+        }
         public void FillAreeProduzione(ArticoliDS ds)
         {
             string select = @"SELECT * FROM AreeProduzione";

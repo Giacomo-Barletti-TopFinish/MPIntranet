@@ -260,7 +260,7 @@
             esito = false;
             messaggio += MESSAGGIO_PUNTINO + " " + "Anagrafica" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
         }
-        if (!verificaColtrolliObbligatori()) {
+        if (!verificaControlliObbligatori()) {
             esito = false;
             messaggio += MESSAGGIO_PUNTINO + " " + "I controlli obbligatori devono essere valorizzati </br>";
         }
@@ -288,7 +288,7 @@
             success: function (data)
             {
                 $('#lblMessage').html(data);
-                if (data == 'Controllo salvato correttamente')
+                if (data == 'Scheda salvata correttamente')
                     svuotaCampi();
             },
             error: function (response)
@@ -339,7 +339,7 @@
     }
 
 
-    function verificaColtrolliObbligatori() {
+    function verificaControlliObbligatori() {
         var esito = true;
         var controlli = $('.OBBLIGO');
         for (i = 0; i < controlli.length; i++) {

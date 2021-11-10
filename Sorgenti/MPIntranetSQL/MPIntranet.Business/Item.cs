@@ -40,6 +40,16 @@ namespace MPIntranet.Business
             item.UM = riga.Base_Unit_of_Measure;
             return item;
         }
+        public static bool VerificaEsistenzaItem(string anagrafica)
+        {
+            ArticoliDS ds = new ArticoliDS();
+            using (ArticoliBusiness bArticolo = new ArticoliBusiness())
+            {
+                bArticolo.GetItem(ds, anagrafica);
+            }
+
+            return ds.Items.Any(x => x.No_ == anagrafica);
+        }
 
         public override string ToString()
         {

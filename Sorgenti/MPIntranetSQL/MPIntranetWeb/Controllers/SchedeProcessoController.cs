@@ -170,6 +170,8 @@ namespace MPIntranetWeb.Controllers
             Anagrafica = Anagrafica.ToUpper();
 
             ElementoScheda[] elementiScheda = JSonSerializer.Deserialize<ElementoScheda[]>(Controlli);
+            if(!Item.VerificaEsistenzaItem(Anagrafica))
+                return Content("Scheda non salvata - Anagrafica non presente in Business Central");
 
             string messaggio = SpScheda.SalvaScheda(IdSPScheda, IdSPMaster, Anagrafica, Brand, Codice, Descrizione, AreaProduzione, Task, elementiScheda.ToList(), ConnectedUser.ToUpper());
             return Content(messaggio);

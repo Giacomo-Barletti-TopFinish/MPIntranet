@@ -86,6 +86,12 @@ namespace MPIntranet.DataAccess.Articoli
             a.FillItems(ds);
         }
         [DataContext]
+        public void GetItem(ArticoliDS ds, string anagrafica)
+        {
+            ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
+            a.GetItem(ds,anagrafica);
+        }
+        [DataContext]
         public void FillAreeProduzione(ArticoliDS ds)
         {
             ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
