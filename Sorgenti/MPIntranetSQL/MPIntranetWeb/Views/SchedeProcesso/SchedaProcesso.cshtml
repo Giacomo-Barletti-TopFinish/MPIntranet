@@ -14,25 +14,28 @@
         <div class="row">
             <div class="col-lg-9">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         @Html.Label("Brand")
                         @Html.DropDownList("ddlBrand", new SelectList(@ViewData["ddlBrand"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlBrand" })
                     </div>
 
                     <div class="col-md-2">
                         @Html.Label("Anagrafica")
-                        @Html.TextBox("txtAnagrafica", null, new { @class = "form-control input-sm ", @id = "txtAnagrafica", @maxlength = "12" })
+                        @Html.TextBox("txtAnagrafica", null, new { @class = "form-control input-sm ", @id = "txtAnagrafica", @maxlength = "25" })
                     </div>
                     <div class="col-md-2">
                         @Html.Label("Codice")
                         @Html.TextBox("txtCodice", null, new { @class = "form-control input-sm ", @id = "txtCodice", @maxlength = "12" })
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         @Html.Label("Descrizione")
-                        @Html.TextBox("txtDescrizione", null, new { @class = "form-control input-sm ", @id = "txtDescrizione", @maxlength = "12" })
+                        @Html.TextBox("txtDescrizione", null, new { @class = "form-control input-sm ", @id = "txtDescrizione", @maxlength = "50" })
                     </div>
                     <div class="col-md-1" style="padding-top:20px">
                         <input type="button" onclick="TrovaScheda()" class="btn btn-primary" value="Trova" />
+                    </div>
+                    <div class="col-md-1" style="padding-top:20px">
+                        <input type="button" onclick="PulisciRicerca()" class="btn btn-primary" value="Cancella ricerca" />
                     </div>
                 </div>
                 <div class="row">
@@ -432,5 +435,14 @@
                 document.close();
             }
         });
+    }
+    function PulisciRicerca() {
+
+        $('#divRisultati').html('').show();
+
+        $('#ddlBrand').val('@MPIntranet.Entities.ElementiVuoti.Brand');
+        $('#txtAnagrafica').val('');
+        $('#txtCodice').val('');
+        $('#txtDescrizione').val('');
     }
 </script>

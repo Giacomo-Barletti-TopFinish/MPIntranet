@@ -59,15 +59,27 @@ namespace MPIntranet.DataAccess.SchedeProcesso
         }
         public void TrovaScheda(string Codice, string descrizione, int idBrand, string anagrafica, SchedeProcessoDS ds, bool soloNonCancellati)
         {
+
             ParamSet ps = new ParamSet();
 
             string query = @"SELECT * FROM SPSCHEDE ";
             string where = " WHERE 1=1 ";
 
+
             if (soloNonCancellati)
                 where += "AND CANCELLATO = 0 ";
 
-            AddConditionAndParam(ref where, "ANAGRAFICA", "an1", anagrafica.ToUpper(), ps, true);
+
+            if (anagrafica.Length >= 3 && anagrafica.Substring(1, 1) == "-")
+            {
+                string anagraficaFiltro = "_" + anagrafica.Substring(1);
+                where += " AND ANAGRAFICA LIKE '" + anagraficaFiltro + "' ";
+            }
+            else
+            {
+                AddConditionAndParam(ref where, "ANAGRAFICA", "an1", anagrafica.ToUpper(), ps, true);
+            }
+
             AddConditionAndParam(ref where, "DESCRIZIONE", "d1", descrizione.ToUpper(), ps, true);
             AddConditionAndParam(ref where, "CODICE", "co1", Codice.ToUpper(), ps, true);
             if (idBrand > 0)
@@ -122,7 +134,7 @@ namespace MPIntranet.DataAccess.SchedeProcesso
             }
         }
 
-     
+
         public void GetControllo(SchedeProcessoDS ds, int idSPControllo)
         {
             string select = @"SELECT * FROM SPCONTROLLI WHERE IDSPCONTROLLO = $P<IDCONTROLLO>";
