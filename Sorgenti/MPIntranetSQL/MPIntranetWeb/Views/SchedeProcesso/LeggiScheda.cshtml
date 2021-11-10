@@ -50,18 +50,20 @@
             <label class="text-red input-sm" id="lblMessage"></label>
             <br />
         </div>
-        <div id="divRisultati" style="margin-left:50px; overflow-y:auto; overflow-x:hidden; height:500px"></div>
+        <div id="divRisultati" style="margin-left:50px; overflow-y:auto; overflow-x:hidden; height:650px"></div>
     }
 </div>
 
 <script language="javascript" type="text/javascript">
     $(function ()
     {
-
+        var idScheda = @ViewData["IdSPScheda"];
+        if (idScheda != @MPIntranet.Entities.ElementiVuoti.SPScheda) {
+            EstraiScheda(idScheda);
+        }
     });
 
-
-    function TrovaScheda() {
+   function TrovaScheda() {
 
         var codice = $('#txtCodice').val();
         var descrizione = $('#txtDescrizione').val();
@@ -127,10 +129,10 @@
             }
         });
     }
-    
 
 
-   
+
+
     function PulisciRicerca() {
 
         $('#divRisultati').html('').show();

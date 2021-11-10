@@ -50,6 +50,12 @@ namespace MPIntranet.DataAccess.SchedeProcesso
             a.TrovaScheda(Codice, descrizione, idBrand, anagrafica, ds, soloNonCancellati);
         }
         [DataContext]
+        public void TrovaScheda(string AreaProduzione, string Task, string anagrafica, SchedeProcessoDS ds, bool soloNonCancellati)
+        {
+            SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
+            a.TrovaScheda(AreaProduzione,Task, anagrafica, ds, soloNonCancellati);
+        }
+        [DataContext]
         public void GetSPScheda(int IDScheda, SchedeProcessoDS ds)
         {
             SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);

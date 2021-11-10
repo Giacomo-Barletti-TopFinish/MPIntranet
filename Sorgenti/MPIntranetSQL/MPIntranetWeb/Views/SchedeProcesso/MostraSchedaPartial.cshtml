@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-md-4">
             @Html.Label("Area produzione")
-            <input type="text" value="@Model.AreaProduzione.ToString()" readonly="readonly"/>
+            <input type="text" value="@Model.AreaProduzione.ToString()" readonly="readonly" />
         </div>
 
         <div class="col-md-3">
@@ -25,89 +25,105 @@
             <input type="text" value="@Model.Master.ToString()" readonly="readonly" />
         </div>
 
-    </div> 
-    @foreach (SPElemento elemento in Model.Master.Elementi)
-    {
+    </div>
     <div class="row" style="margin-left:50px;">
-        @if (elemento.Tipo == TipoSPElemento.SESSIONE)
+        <h3 style="background-color:lightyellow">SCHEDE ALTERNATIVE</h3>
+        @if ((ViewData["schedeAlternative"] as List<SpScheda>).Count == 0)
         {
-            <h3 style="background-color:lightgray">@elemento.Testo</h3>
+            <text>Nessuna scheda trovata</text>
         }
         else
         {
-            string valoreElemento = string.Empty;
-            string immagineSRC = string.Empty;
-
-            SPValoreScheda valore = Model.ValoriScheda.Where(x => x.IdSPElemento == elemento.IdSPElemento).FirstOrDefault();
-            if (valore != null)
+            foreach (SpScheda schedaAlternativa in ViewData["schedeAlternative"] as List<SpScheda>)
             {
-                valoreElemento = valore.Valore;
-                if (elemento.Controllo.Tipo == TipoSPControllo.IMMAGINE)
-                {
-                    valoreElemento = "C:\\fakepath\\" + valoreElemento;
-                    immagineSRC = valore.ImmagineSRC;
-                }
-            }
-            <div class="col-lg-3"><label>@elemento.Controllo.Descrizione</label></div>
-            switch (elemento.Controllo.Tipo)
-            {
-                case TipoSPControllo.CHECKBOX:
-                    {
-                        if (valoreElemento == "true" || valoreElemento == "TRUE")
-                        {
-                            <div class="col-lg-2"><input disabled="disabled" style="border:solid 1px #000" idvalore="@valore.IdSPValoreScheda" type="checkbox" checked /></div>
-                        }
-                        else
-                        {
-                            <div class="col-lg-2"><input disabled="disabled" style="border:solid 1px #000" idvalore="@valore.IdSPValoreScheda" type="checkbox" /></div>
-                        }
-
-                        break;
-                    }
-                case TipoSPControllo.DATA:
-                    {
-                        <div class="col-lg-2"><input readonly="readonly" type="date" idvalore="@valore.IdSPValoreScheda" value="@valoreElemento" /></div>
-                        break;
-                    }
-                case TipoSPControllo.LISTA:
-                    {
-                        <div class="col-lg-2">
-                            <select class="CTRL" disabled="disabled" idvalore="@valore.IdSPValoreScheda">
-                                <option value=""></option>
-                                @foreach (SPElementoLista listItem in elemento.Controllo.Elementi)
-                                {
-                                    if (@listItem.Descrizione == valoreElemento)
-                                    {
-                                        <option value="@listItem.Codice" selected>@listItem.Descrizione</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@listItem.Codice">@listItem.Descrizione</option>
-                                    }
-                                }
-                            </select>
-                        </div>
-                        break;
-                    }
-                case TipoSPControllo.NUMERO:
-                    {
-                        <div class="col-lg-2"><input readonly="readonly" idvalore="@valore.IdSPValoreScheda" type="number" value="@valoreElemento" /></div>
-                        break;
-                    }
-                case TipoSPControllo.TESTO:
-                    {
-                        <div class="col-lg-2"><input readonly="readonly" idvalore="@valore.IdSPValoreScheda" type="text" value="@valoreElemento" /></div>
-                        break;
-                    }
-                case TipoSPControllo.IMMAGINE:
-                    {
-                        <div id="dvPreview" class="col-lg-2">
-                            <img style="height:auto; max-height:320px; max-width:100%; display: block; margin: auto;" id="IMG_@elemento.IdSPElemento.ToString()" src="@immagineSRC" />
-                        </div>
-                        break;
-                    }
+                @Html.ActionLink(string.Format("{0} - {1}", schedaAlternativa.Anagrafica, schedaAlternativa.Descrizione), "LeggiSchedaAlternativa", "SchedeProcesso", new { IdSPScheda = schedaAlternativa.IdSPScheda }, new { target = "_blank" })<br />
             }
         }
     </div>
+    @foreach (SPElemento elemento in Model.Master.Elementi)
+    {
+        <div class="row" style="margin-left:50px;">
+            @if (elemento.Tipo == TipoSPElemento.SESSIONE)
+            {
+                <h3 style="background-color:lightgray">@elemento.Testo</h3>
+            }
+            else
+            {
+                string valoreElemento = string.Empty;
+                string immagineSRC = string.Empty;
+                int IdSPValoreScheda = MPIntranet.Entities.ElementiVuoti.SPValoreScheda;
+
+                SPValoreScheda valore = Model.ValoriScheda.Where(x => x.IdSPElemento == elemento.IdSPElemento).FirstOrDefault();
+                if (valore != null)
+                {
+                    IdSPValoreScheda = valore.IdSPValoreScheda;
+                    valoreElemento = valore.Valore;
+                    if (elemento.Controllo.Tipo == TipoSPControllo.IMMAGINE)
+                    {
+                        valoreElemento = "C:\\fakepath\\" + valoreElemento;
+                        immagineSRC = valore.ImmagineSRC;
+                    }
+                }
+                <div class="col-lg-3"><label>@elemento.Controllo.Descrizione</label></div>
+                switch (elemento.Controllo.Tipo)
+                {
+                    case TipoSPControllo.CHECKBOX:
+                        {
+                            if (valoreElemento == "true" || valoreElemento == "TRUE")
+                            {
+                                <div class="col-lg-2"><input disabled="disabled" style="border:solid 1px #000" idvalore="@IdSPValoreScheda" type="checkbox" checked /></div>
+                            }
+                            else
+                            {
+                                <div class="col-lg-2"><input disabled="disabled" style="border:solid 1px #000" idvalore="@IdSPValoreScheda" type="checkbox" /></div>
+                            }
+
+                            break;
+                        }
+                    case TipoSPControllo.DATA:
+                        {
+                            <div class="col-lg-2"><input readonly="readonly" type="date" idvalore="@IdSPValoreScheda" value="@valoreElemento" /></div>
+                            break;
+                        }
+                    case TipoSPControllo.LISTA:
+                        {
+                            <div class="col-lg-2">
+                                <select class="CTRL" disabled="disabled" idvalore="@IdSPValoreScheda">
+                                    <option value=""></option>
+                                    @foreach (SPElementoLista listItem in elemento.Controllo.Elementi)
+                                    {
+                                        if (@listItem.Descrizione == valoreElemento)
+                                        {
+                                            <option value="@listItem.Codice" selected>@listItem.Descrizione</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@listItem.Codice">@listItem.Descrizione</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            break;
+                        }
+                    case TipoSPControllo.NUMERO:
+                        {
+                            <div class="col-lg-2"><input readonly="readonly" idvalore="@IdSPValoreScheda" type="number" value="@valoreElemento" /></div>
+                            break;
+                        }
+                    case TipoSPControllo.TESTO:
+                        {
+                            <div class="col-lg-2"><input readonly="readonly" idvalore="@IdSPValoreScheda" type="text" value="@valoreElemento" /></div>
+                            break;
+                        }
+                    case TipoSPControllo.IMMAGINE:
+                        {
+                            <div id="dvPreview" class="col-lg-2">
+                                <img style="height:auto; max-height:320px; max-width:100%; display: block; margin: auto;" id="IMG_@elemento.IdSPElemento.ToString()" src="@immagineSRC" />
+                            </div>
+                            break;
+                        }
+                }
+            }
+        </div>
     }
 </div>

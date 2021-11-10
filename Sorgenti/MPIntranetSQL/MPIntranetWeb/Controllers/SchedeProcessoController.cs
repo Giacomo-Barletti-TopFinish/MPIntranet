@@ -180,7 +180,10 @@ namespace MPIntranetWeb.Controllers
         {
             List<SpScheda> schede = SpScheda.TrovaSchede(Codice, Descrizione, Brand, Anagrafica);
 
-            return PartialView("MostraSchedeTrovatePartial", schede);
+            if (schede.Count == 1)
+                return MostraScheda(schede[0]);
+            else
+                return PartialView("MostraSchedeTrovatePartial", schede);
         }
         public ActionResult EstraiScheda(int IdSPScheda)
         {
@@ -200,15 +203,42 @@ namespace MPIntranetWeb.Controllers
             List<MPIntranetListItem> brands = listaBrands.Select(x => new MPIntranetListItem(x.Descrizione, x.IdBrand.ToString())).ToList();
             brands.Insert(0, new MPIntranetListItem(string.Empty, ElementiVuoti.Brand.ToString()));
             ViewData.Add("ddlBrand", brands);
+            ViewData.Add("IdSPScheda", ElementiVuoti.SPScheda);
 
             return View();
+        }
+
+        public ActionResult LeggiSchedaAlternativa(int IdSPScheda)
+        {
+            List<AreaProduzione> aree = MPIntranet.Business.AreaProduzione.EstraiListaAreeProduzione();
+            List<MPIntranetListItem> areeProduzione = aree.Select(x => new MPIntranetListItem(x.ToString(), x.Codice)).ToList();
+            areeProduzione.Insert(0, new MPIntranetListItem(string.Empty, string.Empty));
+            ViewData.Add("ddlAreaProduzione", areeProduzione);
+
+
+            List<Brand> listaBrands = Brand.EstraiListaBrand();
+            List<MPIntranetListItem> brands = listaBrands.Select(x => new MPIntranetListItem(x.Descrizione, x.IdBrand.ToString())).ToList();
+            brands.Insert(0, new MPIntranetListItem(string.Empty, ElementiVuoti.Brand.ToString()));
+            ViewData.Add("ddlBrand", brands);
+            ViewData.Add("IdSPScheda", IdSPScheda);
+
+            return View("LeggiScheda");
         }
 
         public ActionResult MostraScheda(int IdSPScheda)
         {
             SpScheda scheda = SpScheda.EstraiSPScheda(IdSPScheda);
+            return MostraScheda(scheda);
+        }
+        private ActionResult MostraScheda(SpScheda scheda)
+        {
             if (scheda.ValoriScheda.Count == 0) return Content("SCHEDA NON TROVATA");
+
+            List<SpScheda> schedeAlternative = SpScheda.TrovaSchede(scheda.AreaProduzione, scheda.Task, scheda.Anagrafica);
+            schedeAlternative = schedeAlternative.Where(x => x.Codice != scheda.Codice).ToList();
+            ViewData.Add("schedeAlternative", schedeAlternative);
             return PartialView("MostraSchedaPartial", scheda);
         }
+
     }
 }

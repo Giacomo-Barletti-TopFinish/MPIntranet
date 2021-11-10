@@ -31,14 +31,7 @@ namespace MPIntranet.Business.SchedeProcesso
                 bScheda.FillSPScheda(ds, soloNonCancellati);
             }
 
-            List<SpScheda> schedas = new List<SpScheda>();
-            foreach (SchedeProcessoDS.SPSCHEDERow riga in ds.SPSCHEDE)
-            {
-                SpScheda scheda = CreaScheda(riga, ds);
-                schedas.Add(scheda);
-            }
-            return schedas;
-
+            return creaListaSchede(ds);
         }
         public static List<SpScheda> TrovaSchede(string Codice, string Descrizione, int idBrand, string Anagrafica)
         {
@@ -47,6 +40,11 @@ namespace MPIntranet.Business.SchedeProcesso
             {
                 bScheda.TrovaScheda(Codice, Descrizione, idBrand, Anagrafica, ds, true);
             }
+            return creaListaSchede(ds);
+        }
+
+        private static List<SpScheda> creaListaSchede(SchedeProcessoDS ds)
+        {
             List<SpScheda> schede = new List<SpScheda>();
             foreach (SchedeProcessoDS.SPSCHEDERow riga in ds.SPSCHEDE)
             {
@@ -54,6 +52,16 @@ namespace MPIntranet.Business.SchedeProcesso
                 schede.Add(scheda);
             }
             return schede;
+        }
+
+        public static List<SpScheda> TrovaSchede(string AreaProduzione, string Task, string Anagrafica)
+        {
+            SchedeProcessoDS ds = new SchedeProcessoDS();
+            using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
+            {
+                bScheda.TrovaScheda(AreaProduzione, Task, Anagrafica, ds, true);
+            }
+            return creaListaSchede(ds);
         }
 
         public static List<SpScheda> EstraiListaSPScheda(string IDSPMaster, bool soloNonCancellati)
@@ -64,13 +72,7 @@ namespace MPIntranet.Business.SchedeProcesso
                 bScheda.FillSPScheda(IDSPMaster, ds, soloNonCancellati);
             }
 
-            List<SpScheda> schede = new List<SpScheda>();
-            foreach (SchedeProcessoDS.SPSCHEDERow riga in ds.SPSCHEDE)
-            {
-                SpScheda scheda = CreaScheda(riga, ds);
-                schede.Add(scheda);
-            }
-            return schede;
+            return creaListaSchede(ds);
 
         }
         public override string ToString()

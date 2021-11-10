@@ -91,6 +91,35 @@ namespace MPIntranet.DataAccess.SchedeProcesso
                 da.Fill(ds.SPSCHEDE);
             }
         }
+        public void TrovaScheda(string AreaProduzione, string Task, string anagrafica, SchedeProcessoDS ds, bool soloNonCancellati)
+        {
+            ParamSet ps = new ParamSet();
+
+            string query = @"SELECT * FROM SPSCHEDE ";
+            string where = " WHERE 1=1 ";
+
+            if (soloNonCancellati)
+                where += "AND CANCELLATO = 0 ";
+
+            if (anagrafica.Length >= 3 && anagrafica.Substring(1, 1) == "-")
+            {
+                string anagraficaFiltro = "_" + anagrafica.Substring(1);
+                where += " AND ANAGRAFICA LIKE '" + anagraficaFiltro + "' ";
+            }
+            else
+            {
+                AddConditionAndParam(ref where, "ANAGRAFICA", "an1", anagrafica.ToUpper(), ps, true);
+            }
+
+            AddConditionAndParam(ref where, "AREAPRODUZIONE", "ap1", AreaProduzione.ToUpper(), ps, false);
+            AddConditionAndParam(ref where, "TASK", "task", Task.ToUpper(), ps, false);
+
+            string select = $"{query}{where}";
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.SPSCHEDE);
+            }
+        }
         public void FillSPScheda(string IDSPMaster, SchedeProcessoDS ds, bool soloNonCancellati)
         {
             string select = @"SELECT * FROM SPSCHEDE WHERE IDSPMASTER=$P<IDSPMASTER> ";
