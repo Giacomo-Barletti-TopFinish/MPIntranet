@@ -81,6 +81,7 @@
       <DependentUpon>SecurityDS.xsd</DependentUpon>
     </Compile>
     <Compile Include="StatoOrdiniProduzione.cs" />
+    <Compile Include="StatoSPScheda.cs" />
     <Compile Include="TabelleEsterne.cs" />
   </ItemGroup>
   <ItemGroup>

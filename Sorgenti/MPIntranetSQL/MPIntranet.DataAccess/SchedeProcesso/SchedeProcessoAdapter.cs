@@ -57,7 +57,7 @@ namespace MPIntranet.DataAccess.SchedeProcesso
                 da.Fill(ds.SPSCHEDE);
             }
         }
-        public void TrovaScheda(string Codice, string descrizione, string anagrafica, SchedeProcessoDS ds, bool soloNonCancellati)
+        public void TrovaScheda(string Codice, string descrizione, string anagrafica, SchedeProcessoDS ds, bool soloNonCancellati, bool soloAttive)
         {
 
             ParamSet ps = new ParamSet();
@@ -67,8 +67,10 @@ namespace MPIntranet.DataAccess.SchedeProcesso
 
 
             if (soloNonCancellati)
-                where += "AND CANCELLATO = 0 ";
+                where += " AND CANCELLATO = 0 ";
 
+            if (soloAttive)
+                where += String.Format(" AND STATO = '{0}' ",StatoSPScheda.ATTIVA);
 
             if (anagrafica.Length >= 3 && anagrafica.Substring(1, 1) == "-")
             {
@@ -89,7 +91,7 @@ namespace MPIntranet.DataAccess.SchedeProcesso
                 da.Fill(ds.SPSCHEDE);
             }
         }
-        public void TrovaScheda(string AreaProduzione, string Task, string anagrafica, bool soloNonCancellati, SchedeProcessoDS ds)
+        public void TrovaScheda(string AreaProduzione, string Task, string anagrafica, bool soloNonCancellati, SchedeProcessoDS ds, bool soloAttive)
         {
             ParamSet ps = new ParamSet();
 
@@ -98,6 +100,9 @@ namespace MPIntranet.DataAccess.SchedeProcesso
 
             if (soloNonCancellati)
                 where += "AND CANCELLATO = 0 ";
+
+            if (soloAttive)
+                where += String.Format(" AND STATO = '{0}' ", StatoSPScheda.ATTIVA);
 
             if (anagrafica.Length >= 3 && anagrafica.Substring(1, 1) == "-")
             {

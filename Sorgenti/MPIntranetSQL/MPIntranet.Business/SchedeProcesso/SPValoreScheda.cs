@@ -72,9 +72,9 @@ namespace MPIntranet.Business.SchedeProcesso
             using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
             {
 
-                if (!ds.SPVALORISCHEDE.Any(x => x.IDSPVALORESCHEDA == idValoreScheda))
-                    bScheda.GetValoreScheda(ds, idValoreScheda);
-
+                //         if (!ds.SPVALORISCHEDE.Any(x => x.IDSPVALORESCHEDA == idValoreScheda))
+                //            bScheda.GetValoreScheda(ds, idValoreScheda);
+                idValoreScheda = -1;
                 SchedeProcessoDS.SPVALORISCHEDERow riga = ds.SPVALORISCHEDE.Where(x => x.IDSPVALORESCHEDA == idValoreScheda).FirstOrDefault();
                 if (idValoreScheda < 0 && riga != null)
                 {

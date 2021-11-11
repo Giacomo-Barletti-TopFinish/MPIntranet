@@ -7,19 +7,20 @@
     @Html.Hidden("hdAnagrafica", Model.Anagrafica)
     @Html.Hidden("hdCodice", Model.Codice)
     @Html.Hidden("hdDescrizione", Model.Descrizione)
+    @Html.Hidden("hdVersione", Model.Versione)
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-2">
             @Html.Label("Area produzione")
             <input type="text" value="@Model.AreaProduzione.ToString()" readonly="readonly" />
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-2">
             @Html.Label("Task")
             <input type="text" value="@Model.Task.ToString()" readonly="readonly" />
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-8">
             @Html.Label("Master")
             <input type="text" value="@Model.Master.ToString()" readonly="readonly" />
         </div>

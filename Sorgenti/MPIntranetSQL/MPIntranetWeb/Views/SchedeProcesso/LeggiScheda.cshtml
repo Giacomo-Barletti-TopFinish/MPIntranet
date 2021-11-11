@@ -19,6 +19,10 @@
                         @Html.TextBox("txtCodice", null, new { @class = "form-control input-sm ", @id = "txtCodice", @maxlength = "12" })
                     </div>
                     <div class="col-md-2">
+                        @Html.Label("Versione")
+                        @Html.TextBox("txtVersione", null, new { @class = "form-control input-sm ", @id = "txtVersione", @maxlength = "12" })
+                    </div>
+                    <div class="col-md-2">
                         @Html.Label("Anagrafica")
                         @Html.TextBox("txtAnagrafica", null, new { @class = "form-control input-sm ", @id = "txtAnagrafica", @maxlength = "25" })
                     </div>
@@ -94,8 +98,16 @@
                 if (data == 'Nessuna scheda trovata') {
                     $('#txtCodice').focus();
                     $('#txtCodice').val('');
+                    $('#divRisultati').html('').show();
+                    return;
                 }
                 $('#divRisultati').html(data).show();
+                $('#txtCodice').val($('#hdCodice').val());
+                $('#txtDescrizione').val($('#hdDescrizione').val());
+                $('#txtVersione').val($('#hdVersione').val());
+                $('#txtAnagrafica').val($('#hdAnagrafica').val());
+                $('#txtCodice').focus();
+
             },
             error: function (response)
             {
@@ -121,6 +133,7 @@
                 if (data == "SCHEDA NON TROVATA") return;
                 $('#txtCodice').val($('#hdCodice').val());
                 $('#txtDescrizione').val($('#hdDescrizione').val());
+                $('#txtVersione').val($('#hdVersione').val());
                 $('#txtAnagrafica').val($('#hdAnagrafica').val());
                 $('#txtCodice').focus();
             },
@@ -138,6 +151,7 @@
 
         $('#txtAnagrafica').val('');
         $('#txtCodice').val('');
+        $('#txtVersione').val('');
         $('#txtDescrizione').val('');
         $('#txtCodice').focus();
     }

@@ -164,7 +164,7 @@ namespace MPIntranetWeb.Controllers
             Anagrafica = Anagrafica.ToUpper();
 
             ElementoScheda[] elementiScheda = JSonSerializer.Deserialize<ElementoScheda[]>(Controlli);
-            if(!Item.VerificaEsistenzaItem(Anagrafica))
+            if (!Item.VerificaEsistenzaItem(Anagrafica))
                 return Content("Scheda non salvata - Anagrafica non presente in Business Central");
 
             string messaggio = SpScheda.SalvaScheda(IdSPScheda, IdSPMaster, Anagrafica, Codice, Descrizione, AreaProduzione, Task, elementiScheda.ToList(), ConnectedUser.ToUpper());
@@ -174,7 +174,7 @@ namespace MPIntranetWeb.Controllers
 
         public ActionResult TrovaScheda(string Codice, string Descrizione, string Anagrafica)
         {
-            List<SpScheda> schede = SpScheda.TrovaSchede(Codice, Descrizione, Anagrafica);
+            List<SpScheda> schede = SpScheda.TrovaSchede(Codice, Descrizione, Anagrafica, true);
 
             if (schede.Count == 0)
                 return Content("Nessuna scheda trovata");
@@ -222,7 +222,7 @@ namespace MPIntranetWeb.Controllers
         {
             if (scheda.ValoriScheda.Count == 0) return Content("SCHEDA NON TROVATA");
 
-            List<SpScheda> schedeAlternative = SpScheda.TrovaSchedePerAreaProduzione(scheda.AreaProduzione, scheda.Task, scheda.Anagrafica);
+            List<SpScheda> schedeAlternative = SpScheda.TrovaSchedePerAreaProduzione(scheda.AreaProduzione, scheda.Task, scheda.Anagrafica, true);
             schedeAlternative = schedeAlternative.Where(x => x.Codice != scheda.Codice).ToList();
             ViewData.Add("schedeAlternative", schedeAlternative);
             return PartialView("MostraSchedaPartial", scheda);

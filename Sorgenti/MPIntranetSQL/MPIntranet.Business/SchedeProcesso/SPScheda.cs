@@ -20,6 +20,10 @@ namespace MPIntranet.Business.SchedeProcesso
         public string AreaProduzione { get; set; }
         public string Task { get; set; }
         public SPMaster Master { get; set; }
+
+        public int Versione { get; set; }
+        public string Stato { get; set; }
+
         private CaratteristicheItem _caratteristiche;
         public CaratteristicheItem Caratteristiche
         {
@@ -43,12 +47,12 @@ namespace MPIntranet.Business.SchedeProcesso
 
             return creaListaSchede(ds);
         }
-        public static List<SpScheda> TrovaSchede(string Codice, string Descrizione, string Anagrafica)
+        public static List<SpScheda> TrovaSchede(string Codice, string Descrizione, string Anagrafica,bool soloAttive)
         {
             SchedeProcessoDS ds = new SchedeProcessoDS();
             using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
             {
-                bScheda.TrovaScheda(Codice, Descrizione, Anagrafica, ds, true);
+                bScheda.TrovaScheda(Codice, Descrizione, Anagrafica, ds, true, soloAttive);
             }
             return creaListaSchede(ds);
         }
@@ -64,12 +68,12 @@ namespace MPIntranet.Business.SchedeProcesso
             return schede;
         }
 
-        public static List<SpScheda> TrovaSchedePerAreaProduzione(string AreaProduzione, string Task, string Anagrafica)
+        public static List<SpScheda> TrovaSchedePerAreaProduzione(string AreaProduzione, string Task, string Anagrafica,bool soloAttive)
         {
             SchedeProcessoDS ds = new SchedeProcessoDS();
             using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
             {
-                bScheda.TrovaScheda(AreaProduzione, Task, Anagrafica, true, ds);
+                bScheda.TrovaScheda(AreaProduzione, Task, Anagrafica, true, ds, soloAttive);
             }
             return creaListaSchede(ds);
         }
@@ -105,7 +109,8 @@ namespace MPIntranet.Business.SchedeProcesso
             controllo.DataModifica = riga.DATAMODIFICA;
             controllo.UtenteModifica = riga.UTENTEMODIFICA;
             controllo.ValoriScheda = SPValoreScheda.EstraiListaSPValoreScheda(riga.IDSPSCHEDA, true, ds);
-
+            controllo.Versione = riga.VERSIONE;
+            controllo.Stato = riga.STATO;
             return controllo;
         }
         public static SpScheda CreaSchedaVuota(int idSPMaster)
@@ -119,6 +124,8 @@ namespace MPIntranet.Business.SchedeProcesso
             controllo.AreaProduzione = string.Empty;
             controllo.Task = string.Empty;
             controllo.ValoriScheda = new List<SPValoreScheda>();
+            controllo.Versione = 1;
+            controllo.Stato = string.Empty;
             return controllo;
         }
 
@@ -134,6 +141,7 @@ namespace MPIntranet.Business.SchedeProcesso
             return CreaScheda(ds.SPSCHEDE.Where(x => x.IDSPSCHEDA == idScheda).FirstOrDefault(), ds);
         }
 
+
         public static string SalvaScheda(int idScheda, int IdSPMaster, string anagrafica, string codice, string descrizione, string areaProduzione, string task, List<ElementoScheda> controlli, string account)
         {
 
@@ -141,47 +149,67 @@ namespace MPIntranet.Business.SchedeProcesso
             using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
             {
                 bScheda.GetSPScheda(ds, idScheda);
-                bScheda.FillValoriSchede(ds, idScheda, true);
+                //  bScheda.FillValoriSchede(ds, idScheda, true);
 
-                SchedeProcessoDS.SPSCHEDERow riga = ds.SPSCHEDE.Where(x => x.IDSPSCHEDA == idScheda).FirstOrDefault();
-                if (riga != null)
+                SchedeProcessoDS.SPSCHEDERow schedaPadre = ds.SPSCHEDE.Where(x => x.IDSPSCHEDA == idScheda).FirstOrDefault();
+                int versione = 1;
+                if (schedaPadre != null)
                 {
-                    //                    riga.CODICE = codice.ToUpper();
-                    riga.DESCRIZIONE = descrizione.ToUpper();
-                    riga.ANAGRAFICA = anagrafica.ToUpper();
-                    riga.DATAMODIFICA = DateTime.Now;
-                    riga.UTENTEMODIFICA = account;
+                    versione = schedaPadre.VERSIONE + 1;
+                    schedaPadre.STATO = StatoSPScheda.STORICO;
                 }
-                else
-                {
-                    riga = ds.SPSCHEDE.NewSPSCHEDERow();
-                    riga.CODICE = "SP";// codice.ToUpper();
-                    riga.DESCRIZIONE = descrizione.ToUpper();
-                    riga.IDSPMASTER = IdSPMaster;
-                    riga.AREAPRODUZIONE = areaProduzione.ToUpper();
-                    riga.TASK = task.ToUpper();
-                    riga.ANAGRAFICA = anagrafica.ToUpper();
-                    riga.CANCELLATO = false;
-                    riga.DATAMODIFICA = DateTime.Now;
-                    riga.UTENTEMODIFICA = account.ToUpper();
-                    ds.SPSCHEDE.AddSPSCHEDERow(riga);
-                }
+                //if (riga != null)
+                //{
+                //    //                    riga.CODICE = codice.ToUpper();
+                //    riga.DESCRIZIONE = descrizione.ToUpper();
+                //    riga.ANAGRAFICA = anagrafica.ToUpper();
+                //    riga.DATAMODIFICA = DateTime.Now;
+                //    riga.UTENTEMODIFICA = account;
+                //}
+                //else
+                //{
+                //    riga = ds.SPSCHEDE.NewSPSCHEDERow();
+                //    riga.CODICE = codice.ToUpper();
+                //    riga.DESCRIZIONE = descrizione.ToUpper();
+                //    riga.IDSPMASTER = IdSPMaster;
+                //    riga.AREAPRODUZIONE = areaProduzione.ToUpper();
+                //    riga.TASK = task.ToUpper();
+                //    riga.ANAGRAFICA = anagrafica.ToUpper();
+                //    riga.CANCELLATO = false;
+                //    riga.DATAMODIFICA = DateTime.Now;
+                //    riga.UTENTEMODIFICA = account.ToUpper();
+                //    ds.SPSCHEDE.AddSPSCHEDERow(riga);
+                //}
 
-                if (idScheda > 0)
-                {
-                    List<int> listaIdValori = controlli.Where(x => x.IDElemento > 0).Select(x => x.IDElemento).Distinct().ToList();
-                    foreach (SchedeProcessoDS.SPVALORISCHEDERow elemento in ds.SPVALORISCHEDE)
-                    {
-                        if (!listaIdValori.Contains(elemento.IDSPELEMENTO))
-                        {
-                            elemento.CANCELLATO = true;
-                            elemento.DATAMODIFICA = DateTime.Now;
-                            elemento.UTENTEMODIFICA = account;
-                        }
-                    }
-                }
+                SchedeProcessoDS.SPSCHEDERow riga = ds.SPSCHEDE.NewSPSCHEDERow();
+                riga.CODICE = codice.ToUpper();
+                riga.DESCRIZIONE = descrizione.ToUpper();
+                riga.IDSPMASTER = IdSPMaster;
+                riga.AREAPRODUZIONE = areaProduzione.ToUpper();
+                riga.TASK = task.ToUpper();
+                riga.ANAGRAFICA = anagrafica.ToUpper();
+                riga.VERSIONE = versione;
+                riga.STATO = StatoSPScheda.ATTIVA;
+                riga.CANCELLATO = false;
+                riga.DATAMODIFICA = DateTime.Now;
+                riga.UTENTEMODIFICA = account.ToUpper();
+                ds.SPSCHEDE.AddSPSCHEDERow(riga);
 
-                int sequenza = 0;
+                //if (idScheda > 0)
+                //{
+                //    List<int> listaIdValori = controlli.Where(x => x.IDElemento > 0).Select(x => x.IDElemento).Distinct().ToList();
+                //    foreach (SchedeProcessoDS.SPVALORISCHEDERow elemento in ds.SPVALORISCHEDE)
+                //    {
+                //        if (!listaIdValori.Contains(elemento.IDSPELEMENTO))
+                //        {
+                //            elemento.CANCELLATO = true;
+                //            elemento.DATAMODIFICA = DateTime.Now;
+                //            elemento.UTENTEMODIFICA = account;
+                //        }
+                //    }
+                //}
+
+                //   int sequenza = 0;
                 foreach (ElementoScheda controllo in controlli)
                 {
                     if (!string.IsNullOrEmpty(controllo.Filename))
@@ -192,14 +220,19 @@ namespace MPIntranet.Business.SchedeProcesso
                 bScheda.UpdateTableSPScheda(ds);
                 bScheda.UpdateTable(ds.SPVALORISCHEDE.TableName, ds);
                 ds.AcceptChanges();
-                riga.CODICE = string.Format("SP{0}", riga.IDSPSCHEDA.ToString().PadLeft(8, '0'));
-                bScheda.UpdateTableSPScheda(ds);
+                if (string.IsNullOrEmpty(codice))
+                {
+                    riga.CODICE = string.Format("SP{0}", riga.IDSPSCHEDA.ToString().PadLeft(8, '0'));
+                    bScheda.UpdateTableSPScheda(ds);
+                }
                 string messaggio = string.Format("Scheda {0} creata correttamente. ID scheda {1}", riga.CODICE, riga.IDSPSCHEDA);
                 return "Scheda creata correttamente";
             }
 
         }
     }
+
+  
 }
 
 

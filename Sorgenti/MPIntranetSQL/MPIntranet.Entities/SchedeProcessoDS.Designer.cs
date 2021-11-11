@@ -2049,6 +2049,10 @@ namespace MPIntranet.Entities {
             
             private global::System.Data.DataColumn columnUTENTEMODIFICA;
             
+            private global::System.Data.DataColumn columnVERSIONE;
+            
+            private global::System.Data.DataColumn columnSTATO;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public SPSCHEDEDataTable() {
@@ -2172,6 +2176,22 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn VERSIONEColumn {
+                get {
+                    return this.columnVERSIONE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn STATOColumn {
+                get {
+                    return this.columnSTATO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2207,7 +2227,7 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public SPSCHEDERow AddSPSCHEDERow(int IDSPMASTER, string CODICE, string DESCRIZIONE, string ANAGRAFICA, string AREAPRODUZIONE, string TASK, string FOTO, bool CANCELLATO, System.DateTime DATAMODIFICA, string UTENTEMODIFICA) {
+            public SPSCHEDERow AddSPSCHEDERow(int IDSPMASTER, string CODICE, string DESCRIZIONE, string ANAGRAFICA, string AREAPRODUZIONE, string TASK, string FOTO, bool CANCELLATO, System.DateTime DATAMODIFICA, string UTENTEMODIFICA, int VERSIONE, string STATO) {
                 SPSCHEDERow rowSPSCHEDERow = ((SPSCHEDERow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -2220,7 +2240,9 @@ namespace MPIntranet.Entities {
                         FOTO,
                         CANCELLATO,
                         DATAMODIFICA,
-                        UTENTEMODIFICA};
+                        UTENTEMODIFICA,
+                        VERSIONE,
+                        STATO};
                 rowSPSCHEDERow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSPSCHEDERow);
                 return rowSPSCHEDERow;
@@ -2261,6 +2283,8 @@ namespace MPIntranet.Entities {
                 this.columnCANCELLATO = base.Columns["CANCELLATO"];
                 this.columnDATAMODIFICA = base.Columns["DATAMODIFICA"];
                 this.columnUTENTEMODIFICA = base.Columns["UTENTEMODIFICA"];
+                this.columnVERSIONE = base.Columns["VERSIONE"];
+                this.columnSTATO = base.Columns["STATO"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2288,6 +2312,10 @@ namespace MPIntranet.Entities {
                 base.Columns.Add(this.columnDATAMODIFICA);
                 this.columnUTENTEMODIFICA = new global::System.Data.DataColumn("UTENTEMODIFICA", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUTENTEMODIFICA);
+                this.columnVERSIONE = new global::System.Data.DataColumn("VERSIONE", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnVERSIONE);
+                this.columnSTATO = new global::System.Data.DataColumn("STATO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSTATO);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnIDSPSCHEDA}, true));
                 this.columnIDSPSCHEDA.AutoIncrement = true;
@@ -2312,6 +2340,8 @@ namespace MPIntranet.Entities {
                 this.columnDATAMODIFICA.AllowDBNull = false;
                 this.columnUTENTEMODIFICA.AllowDBNull = false;
                 this.columnUTENTEMODIFICA.MaxLength = 50;
+                this.columnVERSIONE.AllowDBNull = false;
+                this.columnSTATO.MaxLength = 20;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3607,6 +3637,33 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int VERSIONE {
+                get {
+                    return ((int)(this[this.tableSPSCHEDE.VERSIONEColumn]));
+                }
+                set {
+                    this[this.tableSPSCHEDE.VERSIONEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string STATO {
+                get {
+                    try {
+                        return ((string)(this[this.tableSPSCHEDE.STATOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'STATO\' in table \'SPSCHEDE\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSPSCHEDE.STATOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsFOTONull() {
                 return this.IsNull(this.tableSPSCHEDE.FOTOColumn);
             }
@@ -3615,6 +3672,18 @@ namespace MPIntranet.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetFOTONull() {
                 this[this.tableSPSCHEDE.FOTOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsSTATONull() {
+                return this.IsNull(this.tableSPSCHEDE.STATOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetSTATONull() {
+                this[this.tableSPSCHEDE.STATOColumn] = global::System.Convert.DBNull;
             }
         }
         
