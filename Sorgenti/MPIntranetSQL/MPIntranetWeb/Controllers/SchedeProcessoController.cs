@@ -176,6 +176,8 @@ namespace MPIntranetWeb.Controllers
         {
             List<SpScheda> schede = SpScheda.TrovaSchede(Codice, Descrizione, Anagrafica);
 
+            if (schede.Count == 0)
+                return Content("Nessuna scheda trovata");
             if (schede.Count == 1)
                 return MostraScheda(schede[0]);
             else
