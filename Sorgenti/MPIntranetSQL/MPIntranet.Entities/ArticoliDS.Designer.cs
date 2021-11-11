@@ -54,6 +54,8 @@ namespace MPIntranet.Entities {
         
         private BRANDSDataTable tableBRANDS;
         
+        private CARATTERISTICHE_ANAGRAFICADataTable tableCARATTERISTICHE_ANAGRAFICA;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -126,6 +128,9 @@ namespace MPIntranet.Entities {
                 }
                 if ((ds.Tables["BRANDS"] != null)) {
                     base.Tables.Add(new BRANDSDataTable(ds.Tables["BRANDS"]));
+                }
+                if ((ds.Tables["CARATTERISTICHE_ANAGRAFICA"] != null)) {
+                    base.Tables.Add(new CARATTERISTICHE_ANAGRAFICADataTable(ds.Tables["CARATTERISTICHE_ANAGRAFICA"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -297,6 +302,16 @@ namespace MPIntranet.Entities {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public CARATTERISTICHE_ANAGRAFICADataTable CARATTERISTICHE_ANAGRAFICA {
+            get {
+                return this.tableCARATTERISTICHE_ANAGRAFICA;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -406,6 +421,9 @@ namespace MPIntranet.Entities {
                 }
                 if ((ds.Tables["BRANDS"] != null)) {
                     base.Tables.Add(new BRANDSDataTable(ds.Tables["BRANDS"]));
+                }
+                if ((ds.Tables["CARATTERISTICHE_ANAGRAFICA"] != null)) {
+                    base.Tables.Add(new CARATTERISTICHE_ANAGRAFICADataTable(ds.Tables["CARATTERISTICHE_ANAGRAFICA"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -530,6 +548,12 @@ namespace MPIntranet.Entities {
                     this.tableBRANDS.InitVars();
                 }
             }
+            this.tableCARATTERISTICHE_ANAGRAFICA = ((CARATTERISTICHE_ANAGRAFICADataTable)(base.Tables["CARATTERISTICHE_ANAGRAFICA"]));
+            if ((initTable == true)) {
+                if ((this.tableCARATTERISTICHE_ANAGRAFICA != null)) {
+                    this.tableCARATTERISTICHE_ANAGRAFICA.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -570,6 +594,8 @@ namespace MPIntranet.Entities {
             base.Tables.Add(this.tableCicliBCCommenti);
             this.tableBRANDS = new BRANDSDataTable();
             base.Tables.Add(this.tableBRANDS);
+            this.tableCARATTERISTICHE_ANAGRAFICA = new CARATTERISTICHE_ANAGRAFICADataTable();
+            base.Tables.Add(this.tableCARATTERISTICHE_ANAGRAFICA);
             global::System.Data.ForeignKeyConstraint fkc;
             fkc = new global::System.Data.ForeignKeyConstraint("FK_PADRE", new global::System.Data.DataColumn[] {
                         this.tableCOMPONENTI.IDCOMPONENTEColumn}, new global::System.Data.DataColumn[] {
@@ -679,6 +705,12 @@ namespace MPIntranet.Entities {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        private bool ShouldSerializeCARATTERISTICHE_ANAGRAFICA() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
@@ -776,6 +808,9 @@ namespace MPIntranet.Entities {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public delegate void BRANDSRowChangeEventHandler(object sender, BRANDSRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public delegate void CARATTERISTICHE_ANAGRAFICARowChangeEventHandler(object sender, CARATTERISTICHE_ANAGRAFICARowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -10699,6 +10734,334 @@ namespace MPIntranet.Entities {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class CARATTERISTICHE_ANAGRAFICADataTable : global::System.Data.TypedTableBase<CARATTERISTICHE_ANAGRAFICARow> {
+            
+            private global::System.Data.DataColumn columnANAGRAFICA;
+            
+            private global::System.Data.DataColumn columnCARATTERISTICA;
+            
+            private global::System.Data.DataColumn columnDESCARATTERISTICA;
+            
+            private global::System.Data.DataColumn columnSEQUENZA;
+            
+            private global::System.Data.DataColumn columnVALORE;
+            
+            private global::System.Data.DataColumn columnDESVALORE;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public CARATTERISTICHE_ANAGRAFICADataTable() {
+                this.TableName = "CARATTERISTICHE_ANAGRAFICA";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal CARATTERISTICHE_ANAGRAFICADataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected CARATTERISTICHE_ANAGRAFICADataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn ANAGRAFICAColumn {
+                get {
+                    return this.columnANAGRAFICA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CARATTERISTICAColumn {
+                get {
+                    return this.columnCARATTERISTICA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DESCARATTERISTICAColumn {
+                get {
+                    return this.columnDESCARATTERISTICA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn SEQUENZAColumn {
+                get {
+                    return this.columnSEQUENZA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn VALOREColumn {
+                get {
+                    return this.columnVALORE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DESVALOREColumn {
+                get {
+                    return this.columnDESVALORE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public CARATTERISTICHE_ANAGRAFICARow this[int index] {
+                get {
+                    return ((CARATTERISTICHE_ANAGRAFICARow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event CARATTERISTICHE_ANAGRAFICARowChangeEventHandler CARATTERISTICHE_ANAGRAFICARowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event CARATTERISTICHE_ANAGRAFICARowChangeEventHandler CARATTERISTICHE_ANAGRAFICARowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event CARATTERISTICHE_ANAGRAFICARowChangeEventHandler CARATTERISTICHE_ANAGRAFICARowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event CARATTERISTICHE_ANAGRAFICARowChangeEventHandler CARATTERISTICHE_ANAGRAFICARowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void AddCARATTERISTICHE_ANAGRAFICARow(CARATTERISTICHE_ANAGRAFICARow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public CARATTERISTICHE_ANAGRAFICARow AddCARATTERISTICHE_ANAGRAFICARow(string ANAGRAFICA, string CARATTERISTICA, string DESCARATTERISTICA, int SEQUENZA, string VALORE, string DESVALORE) {
+                CARATTERISTICHE_ANAGRAFICARow rowCARATTERISTICHE_ANAGRAFICARow = ((CARATTERISTICHE_ANAGRAFICARow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        ANAGRAFICA,
+                        CARATTERISTICA,
+                        DESCARATTERISTICA,
+                        SEQUENZA,
+                        VALORE,
+                        DESVALORE};
+                rowCARATTERISTICHE_ANAGRAFICARow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowCARATTERISTICHE_ANAGRAFICARow);
+                return rowCARATTERISTICHE_ANAGRAFICARow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                CARATTERISTICHE_ANAGRAFICADataTable cln = ((CARATTERISTICHE_ANAGRAFICADataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new CARATTERISTICHE_ANAGRAFICADataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal void InitVars() {
+                this.columnANAGRAFICA = base.Columns["ANAGRAFICA"];
+                this.columnCARATTERISTICA = base.Columns["CARATTERISTICA"];
+                this.columnDESCARATTERISTICA = base.Columns["DESCARATTERISTICA"];
+                this.columnSEQUENZA = base.Columns["SEQUENZA"];
+                this.columnVALORE = base.Columns["VALORE"];
+                this.columnDESVALORE = base.Columns["DESVALORE"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            private void InitClass() {
+                this.columnANAGRAFICA = new global::System.Data.DataColumn("ANAGRAFICA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnANAGRAFICA);
+                this.columnCARATTERISTICA = new global::System.Data.DataColumn("CARATTERISTICA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCARATTERISTICA);
+                this.columnDESCARATTERISTICA = new global::System.Data.DataColumn("DESCARATTERISTICA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDESCARATTERISTICA);
+                this.columnSEQUENZA = new global::System.Data.DataColumn("SEQUENZA", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSEQUENZA);
+                this.columnVALORE = new global::System.Data.DataColumn("VALORE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnVALORE);
+                this.columnDESVALORE = new global::System.Data.DataColumn("DESVALORE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDESVALORE);
+                this.columnANAGRAFICA.AllowDBNull = false;
+                this.columnANAGRAFICA.MaxLength = 20;
+                this.columnCARATTERISTICA.AllowDBNull = false;
+                this.columnCARATTERISTICA.MaxLength = 10;
+                this.columnDESCARATTERISTICA.AllowDBNull = false;
+                this.columnDESCARATTERISTICA.MaxLength = 100;
+                this.columnSEQUENZA.AllowDBNull = false;
+                this.columnVALORE.AllowDBNull = false;
+                this.columnVALORE.MaxLength = 50;
+                this.columnDESVALORE.AllowDBNull = false;
+                this.columnDESVALORE.MaxLength = 100;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public CARATTERISTICHE_ANAGRAFICARow NewCARATTERISTICHE_ANAGRAFICARow() {
+                return ((CARATTERISTICHE_ANAGRAFICARow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new CARATTERISTICHE_ANAGRAFICARow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(CARATTERISTICHE_ANAGRAFICARow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.CARATTERISTICHE_ANAGRAFICARowChanged != null)) {
+                    this.CARATTERISTICHE_ANAGRAFICARowChanged(this, new CARATTERISTICHE_ANAGRAFICARowChangeEvent(((CARATTERISTICHE_ANAGRAFICARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.CARATTERISTICHE_ANAGRAFICARowChanging != null)) {
+                    this.CARATTERISTICHE_ANAGRAFICARowChanging(this, new CARATTERISTICHE_ANAGRAFICARowChangeEvent(((CARATTERISTICHE_ANAGRAFICARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.CARATTERISTICHE_ANAGRAFICARowDeleted != null)) {
+                    this.CARATTERISTICHE_ANAGRAFICARowDeleted(this, new CARATTERISTICHE_ANAGRAFICARowChangeEvent(((CARATTERISTICHE_ANAGRAFICARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.CARATTERISTICHE_ANAGRAFICARowDeleting != null)) {
+                    this.CARATTERISTICHE_ANAGRAFICARowDeleting(this, new CARATTERISTICHE_ANAGRAFICARowChangeEvent(((CARATTERISTICHE_ANAGRAFICARow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void RemoveCARATTERISTICHE_ANAGRAFICARow(CARATTERISTICHE_ANAGRAFICARow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                ArticoliDS ds = new ArticoliDS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "CARATTERISTICHE_ANAGRAFICADataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class ARTICOLIRow : global::System.Data.DataRow {
@@ -15733,6 +16096,87 @@ namespace MPIntranet.Entities {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class CARATTERISTICHE_ANAGRAFICARow : global::System.Data.DataRow {
+            
+            private CARATTERISTICHE_ANAGRAFICADataTable tableCARATTERISTICHE_ANAGRAFICA;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal CARATTERISTICHE_ANAGRAFICARow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableCARATTERISTICHE_ANAGRAFICA = ((CARATTERISTICHE_ANAGRAFICADataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string ANAGRAFICA {
+                get {
+                    return ((string)(this[this.tableCARATTERISTICHE_ANAGRAFICA.ANAGRAFICAColumn]));
+                }
+                set {
+                    this[this.tableCARATTERISTICHE_ANAGRAFICA.ANAGRAFICAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string CARATTERISTICA {
+                get {
+                    return ((string)(this[this.tableCARATTERISTICHE_ANAGRAFICA.CARATTERISTICAColumn]));
+                }
+                set {
+                    this[this.tableCARATTERISTICHE_ANAGRAFICA.CARATTERISTICAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string DESCARATTERISTICA {
+                get {
+                    return ((string)(this[this.tableCARATTERISTICHE_ANAGRAFICA.DESCARATTERISTICAColumn]));
+                }
+                set {
+                    this[this.tableCARATTERISTICHE_ANAGRAFICA.DESCARATTERISTICAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int SEQUENZA {
+                get {
+                    return ((int)(this[this.tableCARATTERISTICHE_ANAGRAFICA.SEQUENZAColumn]));
+                }
+                set {
+                    this[this.tableCARATTERISTICHE_ANAGRAFICA.SEQUENZAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string VALORE {
+                get {
+                    return ((string)(this[this.tableCARATTERISTICHE_ANAGRAFICA.VALOREColumn]));
+                }
+                set {
+                    this[this.tableCARATTERISTICHE_ANAGRAFICA.VALOREColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string DESVALORE {
+                get {
+                    return ((string)(this[this.tableCARATTERISTICHE_ANAGRAFICA.DESVALOREColumn]));
+                }
+                set {
+                    this[this.tableCARATTERISTICHE_ANAGRAFICA.DESVALOREColumn] = value;
+                }
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -16228,6 +16672,40 @@ namespace MPIntranet.Entities {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public BRANDSRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public class CARATTERISTICHE_ANAGRAFICARowChangeEvent : global::System.EventArgs {
+            
+            private CARATTERISTICHE_ANAGRAFICARow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public CARATTERISTICHE_ANAGRAFICARowChangeEvent(CARATTERISTICHE_ANAGRAFICARow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public CARATTERISTICHE_ANAGRAFICARow Row {
                 get {
                     return this.eventRow;
                 }

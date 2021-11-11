@@ -29,6 +29,19 @@ namespace MPIntranet.DataAccess.Articoli
             }
         }
 
+        public void FillCARATTERISTICHE_ANAGRAFICA(ArticoliDS ds, string anagrafica)
+        {
+            string select = @"SELECT * FROM CARATTERISTICHE_ANAGRAFICA WHERE ANAGRAFICA =$P<ANAGRAFICA> ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("ANAGRAFICA", DbType.String, anagrafica);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.CARATTERISTICHE_ANAGRAFICA);
+            }
+        }
+
         public void GetDistintaBase(ArticoliDS ds, int idDiba)
         {
             string select = @"SELECT * FROM DIBA WHERE IDDIBA = $P<IDDIBA>";
@@ -40,7 +53,7 @@ namespace MPIntranet.DataAccess.Articoli
             }
         }
 
-     
+
 
         public void FillDistintaBase(ArticoliDS ds, int idArticolo, bool soloNonCancellati)
         {
@@ -95,7 +108,7 @@ namespace MPIntranet.DataAccess.Articoli
             ParamSet ps = new ParamSet();
             ps.AddParam("ITEM", DbType.String, anagrafica);
 
-            using (DbDataAdapter da = BuildDataAdapter(select,ps))
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
                 da.Fill(ds.Items);
             }
@@ -371,7 +384,7 @@ namespace MPIntranet.DataAccess.Articoli
                 }
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }

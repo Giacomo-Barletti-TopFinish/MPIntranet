@@ -40,6 +40,35 @@
             }
         }
     </div>
+    <div class="row" style="margin-left:50px;">
+        <h3 style="background-color:lightyellow">CARATTERISTICHE ARTICOLO</h3>
+        <div class="col-md-3">
+            @Html.Label("Brand")
+            <input type="text" value="@Model.Caratteristiche.Brand.ToString()" readonly="readonly" />
+        </div>
+
+        <div class="col-md-3">
+            @Html.Label("Colore")
+            <input type="text" value="@Model.Caratteristiche.Colore.ToString()" readonly="readonly" />
+        </div>
+
+        <div class="col-md-3">
+            @Html.Label("Serie")
+            <input type="text" value="@Model.Caratteristiche.Brand.ToString()" readonly="readonly" />
+        </div>
+    </div>
+    <div class="row" style="margin-left:50px;">
+        <div class="col-md-3">
+            @Html.Label("Stato")
+            <input type="text" value="@Model.Caratteristiche.Stato.ToString()" readonly="readonly" />
+        </div>
+
+        <div class="col-md-3">
+            @Html.Label("Materiale")
+            <input type="text" value="@Model.Caratteristiche.Materiale.ToString()" readonly="readonly" />
+        </div>
+
+    </div>
     @foreach (SPElemento elemento in Model.Master.Elementi)
     {
         <div class="row" style="margin-left:50px;">

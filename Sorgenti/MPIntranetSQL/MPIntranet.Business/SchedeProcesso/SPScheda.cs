@@ -21,7 +21,18 @@ namespace MPIntranet.Business.SchedeProcesso
         public string Task { get; set; }
         public Brand Brand { get; set; }
         public SPMaster Master { get; set; }
-
+        private CaratteristicheItem _caratteristiche;
+        public CaratteristicheItem Caratteristiche
+        {
+            get
+            {
+                if (_caratteristiche == null)
+                {
+                    _caratteristiche = new CaratteristicheItem(Anagrafica);
+                }
+                return _caratteristiche;
+            }
+        }
         public List<SPValoreScheda> ValoriScheda { get; set; }
         public static List<SpScheda> EstraiListaSPScheda(bool soloNonCancellati)
         {

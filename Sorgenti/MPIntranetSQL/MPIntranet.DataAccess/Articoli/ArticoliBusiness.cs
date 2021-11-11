@@ -19,6 +19,12 @@ namespace MPIntranet.DataAccess.Articoli
             ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
             a.GetCicliBCDettaglio(ds, codiceTestata);
         }
+        [DataContext]
+        public void FillCARATTERISTICHE_ANAGRAFICA(ArticoliDS ds, string anagrafica)
+        {
+            ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
+            a.FillCARATTERISTICHE_ANAGRAFICA(ds, anagrafica);
+        }
 
         [DataContext]
         public void GetCicliBCCommenti(ArticoliDS ds, string codiceTestata)
