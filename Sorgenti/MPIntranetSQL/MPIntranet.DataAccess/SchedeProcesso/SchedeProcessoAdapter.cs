@@ -57,7 +57,7 @@ namespace MPIntranet.DataAccess.SchedeProcesso
                 da.Fill(ds.SPSCHEDE);
             }
         }
-        public void TrovaScheda(string Codice, string descrizione, int idBrand, string anagrafica, SchedeProcessoDS ds, bool soloNonCancellati)
+        public void TrovaScheda(string Codice, string descrizione, string anagrafica, SchedeProcessoDS ds, bool soloNonCancellati)
         {
 
             ParamSet ps = new ParamSet();
@@ -82,8 +82,6 @@ namespace MPIntranet.DataAccess.SchedeProcesso
 
             AddConditionAndParam(ref where, "DESCRIZIONE", "d1", descrizione.ToUpper(), ps, true);
             AddConditionAndParam(ref where, "CODICE", "co1", Codice.ToUpper(), ps, true);
-            if (idBrand > 0)
-                AddConditionAndParam(ref where, "IDBRAND", "b1", idBrand.ToString().ToUpper(), ps, false);
 
             string select = $"{query}{where}";
             using (DbDataAdapter da = BuildDataAdapter(select, ps))
@@ -91,7 +89,7 @@ namespace MPIntranet.DataAccess.SchedeProcesso
                 da.Fill(ds.SPSCHEDE);
             }
         }
-        public void TrovaScheda(string AreaProduzione, string Task, string anagrafica, SchedeProcessoDS ds, bool soloNonCancellati)
+        public void TrovaScheda(string AreaProduzione, string Task, string anagrafica, bool soloNonCancellati, SchedeProcessoDS ds)
         {
             ParamSet ps = new ParamSet();
 

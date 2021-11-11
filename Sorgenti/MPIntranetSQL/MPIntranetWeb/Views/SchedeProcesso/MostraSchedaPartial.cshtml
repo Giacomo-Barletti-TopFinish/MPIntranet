@@ -7,7 +7,6 @@
     @Html.Hidden("hdAnagrafica", Model.Anagrafica)
     @Html.Hidden("hdCodice", Model.Codice)
     @Html.Hidden("hdDescrizione", Model.Descrizione)
-    @Html.Hidden("hdBrand", Model.Brand.IdBrand)
 
     <div class="row">
         <div class="col-md-4">
@@ -54,7 +53,7 @@
 
         <div class="col-md-3">
             @Html.Label("Serie")
-            <input type="text" value="@Model.Caratteristiche.Brand.ToString()" readonly="readonly" />
+            <input type="text" value="@Model.Caratteristiche.Serie.ToString()" readonly="readonly" />
         </div>
     </div>
     <div class="row" style="margin-left:50px;">

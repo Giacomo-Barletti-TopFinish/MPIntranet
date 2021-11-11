@@ -19,7 +19,6 @@ namespace MPIntranet.Business.SchedeProcesso
         public string Anagrafica { get; set; }
         public string AreaProduzione { get; set; }
         public string Task { get; set; }
-        public Brand Brand { get; set; }
         public SPMaster Master { get; set; }
         private CaratteristicheItem _caratteristiche;
         public CaratteristicheItem Caratteristiche
@@ -44,12 +43,12 @@ namespace MPIntranet.Business.SchedeProcesso
 
             return creaListaSchede(ds);
         }
-        public static List<SpScheda> TrovaSchede(string Codice, string Descrizione, int idBrand, string Anagrafica)
+        public static List<SpScheda> TrovaSchede(string Codice, string Descrizione, string Anagrafica)
         {
             SchedeProcessoDS ds = new SchedeProcessoDS();
             using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
             {
-                bScheda.TrovaScheda(Codice, Descrizione, idBrand, Anagrafica, ds, true);
+                bScheda.TrovaScheda(Codice, Descrizione, Anagrafica, ds, true);
             }
             return creaListaSchede(ds);
         }
@@ -65,12 +64,12 @@ namespace MPIntranet.Business.SchedeProcesso
             return schede;
         }
 
-        public static List<SpScheda> TrovaSchede(string AreaProduzione, string Task, string Anagrafica)
+        public static List<SpScheda> TrovaSchedePerAreaProduzione(string AreaProduzione, string Task, string Anagrafica)
         {
             SchedeProcessoDS ds = new SchedeProcessoDS();
             using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
             {
-                bScheda.TrovaScheda(AreaProduzione, Task, Anagrafica, ds, true);
+                bScheda.TrovaScheda(AreaProduzione, Task, Anagrafica, true, ds);
             }
             return creaListaSchede(ds);
         }
@@ -99,7 +98,6 @@ namespace MPIntranet.Business.SchedeProcesso
             controllo.Master = SPMaster.EstraiSPMaster(riga.IDSPMASTER);
             controllo.Codice = riga.CODICE;
             controllo.Descrizione = riga.DESCRIZIONE;
-            controllo.Brand = Brand.EstraiBrand(riga.IDBRAND);
             controllo.Anagrafica = riga.ANAGRAFICA;
             controllo.AreaProduzione = riga.AREAPRODUZIONE;
             controllo.Task = riga.TASK;
@@ -117,7 +115,6 @@ namespace MPIntranet.Business.SchedeProcesso
             controllo.Master = SPMaster.EstraiSPMaster(idSPMaster);
             controllo.Codice = string.Empty;
             controllo.Descrizione = string.Empty;
-            controllo.Brand = Brand.CreaBrandVuoto();
             controllo.Anagrafica = string.Empty;
             controllo.AreaProduzione = string.Empty;
             controllo.Task = string.Empty;
@@ -137,7 +134,7 @@ namespace MPIntranet.Business.SchedeProcesso
             return CreaScheda(ds.SPSCHEDE.Where(x => x.IDSPSCHEDA == idScheda).FirstOrDefault(), ds);
         }
 
-        public static string SalvaScheda(int idScheda, int IdSPMaster, string anagrafica, int IdBrand, string codice, string descrizione, string areaProduzione, string task, List<ElementoScheda> controlli, string account)
+        public static string SalvaScheda(int idScheda, int IdSPMaster, string anagrafica, string codice, string descrizione, string areaProduzione, string task, List<ElementoScheda> controlli, string account)
         {
 
             SchedeProcessoDS ds = new SchedeProcessoDS();
@@ -151,7 +148,6 @@ namespace MPIntranet.Business.SchedeProcesso
                 {
                     //                    riga.CODICE = codice.ToUpper();
                     riga.DESCRIZIONE = descrizione.ToUpper();
-                    riga.IDBRAND = IdBrand;
                     riga.ANAGRAFICA = anagrafica.ToUpper();
                     riga.DATAMODIFICA = DateTime.Now;
                     riga.UTENTEMODIFICA = account;
@@ -164,7 +160,6 @@ namespace MPIntranet.Business.SchedeProcesso
                     riga.IDSPMASTER = IdSPMaster;
                     riga.AREAPRODUZIONE = areaProduzione.ToUpper();
                     riga.TASK = task.ToUpper();
-                    riga.IDBRAND = IdBrand;
                     riga.ANAGRAFICA = anagrafica.ToUpper();
                     riga.CANCELLATO = false;
                     riga.DATAMODIFICA = DateTime.Now;

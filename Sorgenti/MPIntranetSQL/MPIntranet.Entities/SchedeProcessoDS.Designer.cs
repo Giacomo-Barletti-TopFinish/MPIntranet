@@ -2037,8 +2037,6 @@ namespace MPIntranet.Entities {
             
             private global::System.Data.DataColumn columnANAGRAFICA;
             
-            private global::System.Data.DataColumn columnIDBRAND;
-            
             private global::System.Data.DataColumn columnAREAPRODUZIONE;
             
             private global::System.Data.DataColumn columnTASK;
@@ -2121,14 +2119,6 @@ namespace MPIntranet.Entities {
             public global::System.Data.DataColumn ANAGRAFICAColumn {
                 get {
                     return this.columnANAGRAFICA;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn IDBRANDColumn {
-                get {
-                    return this.columnIDBRAND;
                 }
             }
             
@@ -2217,7 +2207,7 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public SPSCHEDERow AddSPSCHEDERow(int IDSPMASTER, string CODICE, string DESCRIZIONE, string ANAGRAFICA, int IDBRAND, string AREAPRODUZIONE, string TASK, string FOTO, bool CANCELLATO, System.DateTime DATAMODIFICA, string UTENTEMODIFICA) {
+            public SPSCHEDERow AddSPSCHEDERow(int IDSPMASTER, string CODICE, string DESCRIZIONE, string ANAGRAFICA, string AREAPRODUZIONE, string TASK, string FOTO, bool CANCELLATO, System.DateTime DATAMODIFICA, string UTENTEMODIFICA) {
                 SPSCHEDERow rowSPSCHEDERow = ((SPSCHEDERow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -2225,7 +2215,6 @@ namespace MPIntranet.Entities {
                         CODICE,
                         DESCRIZIONE,
                         ANAGRAFICA,
-                        IDBRAND,
                         AREAPRODUZIONE,
                         TASK,
                         FOTO,
@@ -2266,7 +2255,6 @@ namespace MPIntranet.Entities {
                 this.columnCODICE = base.Columns["CODICE"];
                 this.columnDESCRIZIONE = base.Columns["DESCRIZIONE"];
                 this.columnANAGRAFICA = base.Columns["ANAGRAFICA"];
-                this.columnIDBRAND = base.Columns["IDBRAND"];
                 this.columnAREAPRODUZIONE = base.Columns["AREAPRODUZIONE"];
                 this.columnTASK = base.Columns["TASK"];
                 this.columnFOTO = base.Columns["FOTO"];
@@ -2288,8 +2276,6 @@ namespace MPIntranet.Entities {
                 base.Columns.Add(this.columnDESCRIZIONE);
                 this.columnANAGRAFICA = new global::System.Data.DataColumn("ANAGRAFICA", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnANAGRAFICA);
-                this.columnIDBRAND = new global::System.Data.DataColumn("IDBRAND", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnIDBRAND);
                 this.columnAREAPRODUZIONE = new global::System.Data.DataColumn("AREAPRODUZIONE", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAREAPRODUZIONE);
                 this.columnTASK = new global::System.Data.DataColumn("TASK", typeof(string), null, global::System.Data.MappingType.Element);
@@ -2317,7 +2303,6 @@ namespace MPIntranet.Entities {
                 this.columnDESCRIZIONE.MaxLength = 50;
                 this.columnANAGRAFICA.AllowDBNull = false;
                 this.columnANAGRAFICA.MaxLength = 25;
-                this.columnIDBRAND.AllowDBNull = false;
                 this.columnAREAPRODUZIONE.AllowDBNull = false;
                 this.columnAREAPRODUZIONE.MaxLength = 20;
                 this.columnTASK.AllowDBNull = false;
@@ -3546,17 +3531,6 @@ namespace MPIntranet.Entities {
                 }
                 set {
                     this[this.tableSPSCHEDE.ANAGRAFICAColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int IDBRAND {
-                get {
-                    return ((int)(this[this.tableSPSCHEDE.IDBRANDColumn]));
-                }
-                set {
-                    this[this.tableSPSCHEDE.IDBRANDColumn] = value;
                 }
             }
             

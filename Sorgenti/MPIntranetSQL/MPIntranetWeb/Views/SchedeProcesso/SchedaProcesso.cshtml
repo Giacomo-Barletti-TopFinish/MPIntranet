@@ -15,11 +15,6 @@
             <div class="col-lg-9">
                 <div class="row">
                     <div class="col-md-2">
-                        @Html.Label("Brand")
-                        @Html.DropDownList("ddlBrand", new SelectList(@ViewData["ddlBrand"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlBrand" })
-                    </div>
-
-                    <div class="col-md-2">
                         @Html.Label("Anagrafica")
                         @Html.TextBox("txtAnagrafica", null, new { @class = "form-control input-sm ", @id = "txtAnagrafica", @maxlength = "25" })
                     </div>
@@ -219,7 +214,6 @@
         var areaProduzione = $('#ddlAreaProduzione').val();
         var idSPScheda = $('#hdIDScheda').val();
 
-        var brand = $('#ddlBrand').val();
         var anagrafica = $('#txtAnagrafica').val();
 
         codice = codice.toUpperCase();
@@ -252,10 +246,6 @@
             esito = false;
             messaggio += MESSAGGIO_PUNTINO + " " + "Master" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
         }
-        if (brand == '-1') {
-            esito = false;
-            messaggio += MESSAGGIO_PUNTINO + " " + "Brand" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
-        }
         if (anagrafica == '') {
             esito = false;
             messaggio += MESSAGGIO_PUNTINO + " " + "Anagrafica" + " " + MESSAGGIO_DEVE_ESSERE_VALORIZZATO + "</br>";
@@ -279,7 +269,6 @@
                 Descrizione: descrizione,
                 Task: task,
                 AreaProduzione: areaProduzione,
-                Brand: brand,
                 Anagrafica: anagrafica,
                 Controlli: lista
             },
@@ -367,7 +356,6 @@
 
         var codice = $('#txtCodice').val();
         var descrizione = $('#txtDescrizione').val();
-        var brand = $('#ddlBrand').val();
         var anagrafica = $('#txtAnagrafica').val();
 
         codice = codice.toUpperCase();
@@ -384,7 +372,6 @@
             data: {
                 Codice: codice,
                 Descrizione: descrizione,
-                Brand: brand,
                 Anagrafica: anagrafica
             },
             cache: false,
@@ -418,7 +405,6 @@
                 $('#txtCodice').val($('#hdCodice').val());
                 $('#txtDescrizione').val($('#hdDescrizione').val());
                 $('#txtAnagrafica').val($('#hdAnagrafica').val());
-                $('#ddlBrand').val($('#hdBrand').val());
 
                 var task = $('#hdTask').val();
                 var area = $('#hdAreaProduzione').val();
@@ -440,7 +426,6 @@
 
         $('#divRisultati').html('').show();
 
-        $('#ddlBrand').val('@MPIntranet.Entities.ElementiVuoti.Brand');
         $('#txtAnagrafica').val('');
         $('#txtCodice').val('');
         $('#txtDescrizione').val('');

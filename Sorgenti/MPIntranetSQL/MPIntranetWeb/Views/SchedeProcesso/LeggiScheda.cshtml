@@ -15,11 +15,6 @@
             <div class="col-lg-9">
                 <div class="row">
                     <div class="col-md-2">
-                        @Html.Label("Brand")
-                        @Html.DropDownList("ddlBrand", new SelectList(@ViewData["ddlBrand"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlBrand" })
-                    </div>
-
-                    <div class="col-md-2">
                         @Html.Label("Anagrafica")
                         @Html.TextBox("txtAnagrafica", null, new { @class = "form-control input-sm ", @id = "txtAnagrafica", @maxlength = "25" })
                     </div>
@@ -67,7 +62,6 @@
 
         var codice = $('#txtCodice').val();
         var descrizione = $('#txtDescrizione').val();
-        var brand = $('#ddlBrand').val();
         var anagrafica = $('#txtAnagrafica').val();
 
         codice = codice.toUpperCase();
@@ -84,7 +78,6 @@
             data: {
                 Codice: codice,
                 Descrizione: descrizione,
-                Brand: brand,
                 Anagrafica: anagrafica
             },
             cache: false,
@@ -118,7 +111,6 @@
                 $('#txtCodice').val($('#hdCodice').val());
                 $('#txtDescrizione').val($('#hdDescrizione').val());
                 $('#txtAnagrafica').val($('#hdAnagrafica').val());
-                $('#ddlBrand').val($('#hdBrand').val());
 
             },
             error: function (response)
@@ -130,14 +122,9 @@
         });
     }
 
-
-
-
     function PulisciRicerca() {
-
         $('#divRisultati').html('').show();
 
-        $('#ddlBrand').val('@MPIntranet.Entities.ElementiVuoti.Brand');
         $('#txtAnagrafica').val('');
         $('#txtCodice').val('');
         $('#txtDescrizione').val('');

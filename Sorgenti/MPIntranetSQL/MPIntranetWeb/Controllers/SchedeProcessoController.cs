@@ -22,12 +22,6 @@ namespace MPIntranetWeb.Controllers
             areeProduzione.Insert(0, new MPIntranetListItem(string.Empty, string.Empty));
             ViewData.Add("ddlAreaProduzione", areeProduzione);
 
-
-            List<Brand> listaBrands = Brand.EstraiListaBrand();
-            List<MPIntranetListItem> brands = listaBrands.Select(x => new MPIntranetListItem(x.Descrizione, x.IdBrand.ToString())).ToList();
-            brands.Insert(0, new MPIntranetListItem(string.Empty, ElementiVuoti.Brand.ToString()));
-            ViewData.Add("ddlBrand", brands);
-
             return View();
         }
 
@@ -161,7 +155,7 @@ namespace MPIntranetWeb.Controllers
             string messaggio = MPIntranet.Business.SchedeProcesso.SPMaster.SalvaMaster(IdSPMaster, Codice, Descrizione, AreaProduzione, Task, elementiLista, ConnectedUser.ToUpper());
             return Content(messaggio);
         }
-        public ActionResult AggiornaSchedaProcesso(int IdSPScheda, int IdSPMaster, string Codice, string Descrizione, string Task, string AreaProduzione, int Brand, string Anagrafica, string Controlli)
+        public ActionResult AggiornaSchedaProcesso(int IdSPScheda, int IdSPMaster, string Codice, string Descrizione, string Task, string AreaProduzione, string Anagrafica, string Controlli)
         {
             Codice = Codice.ToUpper();
             Descrizione = Descrizione.ToUpper();
@@ -173,14 +167,14 @@ namespace MPIntranetWeb.Controllers
             if(!Item.VerificaEsistenzaItem(Anagrafica))
                 return Content("Scheda non salvata - Anagrafica non presente in Business Central");
 
-            string messaggio = SpScheda.SalvaScheda(IdSPScheda, IdSPMaster, Anagrafica, Brand, Codice, Descrizione, AreaProduzione, Task, elementiScheda.ToList(), ConnectedUser.ToUpper());
+            string messaggio = SpScheda.SalvaScheda(IdSPScheda, IdSPMaster, Anagrafica, Codice, Descrizione, AreaProduzione, Task, elementiScheda.ToList(), ConnectedUser.ToUpper());
             return Content(messaggio);
 
         }
 
-        public ActionResult TrovaScheda(string Codice, string Descrizione, int Brand, string Anagrafica)
+        public ActionResult TrovaScheda(string Codice, string Descrizione, string Anagrafica)
         {
-            List<SpScheda> schede = SpScheda.TrovaSchede(Codice, Descrizione, Brand, Anagrafica);
+            List<SpScheda> schede = SpScheda.TrovaSchede(Codice, Descrizione, Anagrafica);
 
             if (schede.Count == 1)
                 return MostraScheda(schede[0]);
@@ -200,11 +194,6 @@ namespace MPIntranetWeb.Controllers
             areeProduzione.Insert(0, new MPIntranetListItem(string.Empty, string.Empty));
             ViewData.Add("ddlAreaProduzione", areeProduzione);
 
-
-            List<Brand> listaBrands = Brand.EstraiListaBrand();
-            List<MPIntranetListItem> brands = listaBrands.Select(x => new MPIntranetListItem(x.Descrizione, x.IdBrand.ToString())).ToList();
-            brands.Insert(0, new MPIntranetListItem(string.Empty, ElementiVuoti.Brand.ToString()));
-            ViewData.Add("ddlBrand", brands);
             ViewData.Add("IdSPScheda", ElementiVuoti.SPScheda);
 
             return View();
@@ -217,11 +206,6 @@ namespace MPIntranetWeb.Controllers
             areeProduzione.Insert(0, new MPIntranetListItem(string.Empty, string.Empty));
             ViewData.Add("ddlAreaProduzione", areeProduzione);
 
-
-            List<Brand> listaBrands = Brand.EstraiListaBrand();
-            List<MPIntranetListItem> brands = listaBrands.Select(x => new MPIntranetListItem(x.Descrizione, x.IdBrand.ToString())).ToList();
-            brands.Insert(0, new MPIntranetListItem(string.Empty, ElementiVuoti.Brand.ToString()));
-            ViewData.Add("ddlBrand", brands);
             ViewData.Add("IdSPScheda", IdSPScheda);
 
             return View("LeggiScheda");
@@ -236,7 +220,7 @@ namespace MPIntranetWeb.Controllers
         {
             if (scheda.ValoriScheda.Count == 0) return Content("SCHEDA NON TROVATA");
 
-            List<SpScheda> schedeAlternative = SpScheda.TrovaSchede(scheda.AreaProduzione, scheda.Task, scheda.Anagrafica);
+            List<SpScheda> schedeAlternative = SpScheda.TrovaSchedePerAreaProduzione(scheda.AreaProduzione, scheda.Task, scheda.Anagrafica);
             schedeAlternative = schedeAlternative.Where(x => x.Codice != scheda.Codice).ToList();
             ViewData.Add("schedeAlternative", schedeAlternative);
             return PartialView("MostraSchedaPartial", scheda);
