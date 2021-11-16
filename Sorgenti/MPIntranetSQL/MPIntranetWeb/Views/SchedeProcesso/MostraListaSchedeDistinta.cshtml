@@ -1,0 +1,62 @@
+﻿@using MPIntranet.Business
+@model DistintaBC
+
+
+
+<table id="grigliaRisultati" class="table table-condensed table-hover">
+    <thead style="background-color:aliceblue">
+        <tr>
+            <th width="10%">Anagrafica</th>
+            <th width="15%">Area produzione</th>
+            <th width="15%">Task</th>
+            <th width="10%">Operazione</th>
+            <th width="15%">Scheda</th>
+            <th width="2%"></th>
+            <th width="2%"></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ComponenteBC componente in Model.Componenti)
+        {
+            <tr>
+                <td>
+                    @componente.Anagrafica
+                </td>
+                <td width="15%"></td>
+                <td width="10%"></td>
+                <td width="25%"></td>
+                <td width="15%"></td>
+                <td width="2%"></td>
+                <td width="2%"></td>
+                <td></td>
+            </tr>
+            foreach (FaseCicloBC fase in componente.FasiCiclo.OrderByDescending(x => x.Operazione))
+            {
+                <tr>
+                    <td></td>
+                    <td width="15%">@fase.AreaProduzione</td>
+                    <td width="10%">@fase.Task</td>
+                    <td width="25%">@fase.Operazione</td>
+                    <td width="15%">
+                        @if (!string.IsNullOrEmpty(fase.SchedaProcesso))
+                        {
+                            @Html.ActionLink(fase.SchedaProcesso, "LeggiSchedApriSchedaDaCodice", "SchedeProcesso", new { Codice = fase.SchedaProcesso }, new { target = "_blank" });
+                        }
+                    </td>
+                    <td width="2%"></td>
+                    <td width="2%"></td>
+                    <td></td>
+                </tr>
+            }
+            <tr>
+                <td colspan="12">
+                    <hr style="margin-bottom:10px; margin-top:10px !important" />
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+

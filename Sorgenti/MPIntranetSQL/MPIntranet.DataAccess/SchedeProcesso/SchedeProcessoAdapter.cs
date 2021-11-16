@@ -70,7 +70,7 @@ namespace MPIntranet.DataAccess.SchedeProcesso
                 where += " AND CANCELLATO = 0 ";
 
             if (soloAttive)
-                where += String.Format(" AND STATO = '{0}' ",StatoSPScheda.ATTIVA);
+                where += String.Format(" AND STATO = '{0}' ", StatoSPScheda.ATTIVA);
 
             if (anagrafica.Length >= 3 && anagrafica.Substring(1, 1) == "-")
             {
@@ -152,7 +152,21 @@ namespace MPIntranet.DataAccess.SchedeProcesso
                 da.Fill(ds.SPSCHEDE);
             }
         }
+        public void FillSPSchede(string anagrafica, bool soloAttive, SchedeProcessoDS ds)
+        {
+            string select = @"SELECT * FROM SPSCHEDE WHERE ANAGRAFICA=$P<ANAGRAFICA> ";
 
+            if (soloAttive)
+                select += String.Format(" AND STATO = '{0}' ", StatoSPScheda.ATTIVA);
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("ANAGRAFICA", DbType.String, anagrafica);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.SPSCHEDE);
+            }
+        }
         public void FillSPControlli(SchedeProcessoDS ds, bool soloNonCancellati)
         {
             string select = @"SELECT * FROM SPCONTROLLI ";

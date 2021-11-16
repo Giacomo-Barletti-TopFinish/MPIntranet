@@ -61,7 +61,12 @@ namespace MPIntranet.DataAccess.SchedeProcesso
             SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
             a.GetSPScheda(IDScheda, ds);
         }
-
+        [DataContext]
+        public void FillSPSchede(string anagrafica, bool soloAttive,SchedeProcessoDS ds)
+        {
+            SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
+            a.FillSPSchede(anagrafica, soloAttive, ds);
+        }
         [DataContext]
         public void FillSPScheda(string IDSPMaster, SchedeProcessoDS ds, bool soloNonCancellati)
         {
@@ -119,14 +124,6 @@ namespace MPIntranet.DataAccess.SchedeProcesso
             SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
             a.GetElementoLista(ds, idElementoLista);
         }
-
-        [DataContext]
-        public void GetSPScheda(SchedeProcessoDS ds, int idScheda)
-        {
-            SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
-            a.GetSPScheda(idScheda, ds);
-        }
-
         [DataContext(true)]
         public void UpdateTable(string tablename, SchedeProcessoDS ds)
         {

@@ -47,7 +47,7 @@ namespace MPIntranet.Business.SchedeProcesso
 
             return creaListaSchede(ds);
         }
-        public static List<SpScheda> TrovaSchede(string Codice, string Descrizione, string Anagrafica,bool soloAttive)
+        public static List<SpScheda> TrovaSchede(string Codice, string Descrizione, string Anagrafica, bool soloAttive)
         {
             SchedeProcessoDS ds = new SchedeProcessoDS();
             using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
@@ -68,7 +68,7 @@ namespace MPIntranet.Business.SchedeProcesso
             return schede;
         }
 
-        public static List<SpScheda> TrovaSchedePerAreaProduzione(string AreaProduzione, string Task, string Anagrafica,bool soloAttive)
+        public static List<SpScheda> TrovaSchedePerAreaProduzione(string AreaProduzione, string Task, string Anagrafica, bool soloAttive)
         {
             SchedeProcessoDS ds = new SchedeProcessoDS();
             using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
@@ -141,14 +141,27 @@ namespace MPIntranet.Business.SchedeProcesso
             return CreaScheda(ds.SPSCHEDE.Where(x => x.IDSPSCHEDA == idScheda).FirstOrDefault(), ds);
         }
 
+        public static List<SpScheda> EstraiSPScheda(string anagrafica, bool soloAttive)
+        {
+            List<SpScheda> schede = new List<SpScheda>();
+            SchedeProcessoDS ds = new SchedeProcessoDS();
+            using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
+            {
+                bScheda.FillSPSchede(anagrafica, soloAttive, ds);
+            }
 
+            SpScheda scheda = CreaScheda(ds.SPSCHEDE.Where(x => x.ANAGRAFICA == anagrafica).FirstOrDefault(), ds);
+            if (scheda != null)
+                schede.Add(scheda);
+            return schede;
+        }
         public static string SalvaScheda(int idScheda, int IdSPMaster, string anagrafica, string codice, string descrizione, string areaProduzione, string task, List<ElementoScheda> controlli, string account)
         {
 
             SchedeProcessoDS ds = new SchedeProcessoDS();
             using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
             {
-                bScheda.GetSPScheda(ds, idScheda);
+                bScheda.GetSPScheda(idScheda, ds);
                 //  bScheda.FillValoriSchede(ds, idScheda, true);
 
                 SchedeProcessoDS.SPSCHEDERow schedaPadre = ds.SPSCHEDE.Where(x => x.IDSPSCHEDA == idScheda).FirstOrDefault();
@@ -232,7 +245,7 @@ namespace MPIntranet.Business.SchedeProcesso
         }
     }
 
-  
+
 }
 
 

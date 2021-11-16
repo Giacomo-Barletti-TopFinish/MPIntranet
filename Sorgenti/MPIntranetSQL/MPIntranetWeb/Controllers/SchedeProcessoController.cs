@@ -164,8 +164,8 @@ namespace MPIntranetWeb.Controllers
             Anagrafica = Anagrafica.ToUpper();
 
             ElementoScheda[] elementiScheda = JSonSerializer.Deserialize<ElementoScheda[]>(Controlli);
-            if (!Item.VerificaEsistenzaItem(Anagrafica))
-                return Content("Scheda non salvata - Anagrafica non presente in Business Central");
+            //if (!Item.VerificaEsistenzaItem(Anagrafica))
+            //    return Content("Scheda non salvata - Anagrafica non presente in Business Central");
 
             string messaggio = SpScheda.SalvaScheda(IdSPScheda, IdSPMaster, Anagrafica, Codice, Descrizione, AreaProduzione, Task, elementiScheda.ToList(), ConnectedUser.ToUpper());
             return Content(messaggio);
@@ -213,6 +213,22 @@ namespace MPIntranetWeb.Controllers
             return View("LeggiScheda");
         }
 
+        public ActionResult LeggiSchedApriSchedaDaCodice(string Codice)
+        {
+            List<AreaProduzione> aree = MPIntranet.Business.AreaProduzione.EstraiListaAreeProduzione();
+            List<MPIntranetListItem> areeProduzione = aree.Select(x => new MPIntranetListItem(x.ToString(), x.Codice)).ToList();
+            areeProduzione.Insert(0, new MPIntranetListItem(string.Empty, string.Empty));
+            ViewData.Add("ddlAreaProduzione", areeProduzione);
+
+            List<SpScheda> schede = SpScheda.TrovaSchede(Codice, string.Empty, string.Empty, true);
+            if(schede.Count>0)
+            {
+                ViewData.Add("IdSPScheda", schede[0].IdSPScheda);
+
+                return View("LeggiScheda");
+            }
+            return null;
+        }
         public ActionResult MostraScheda(int IdSPScheda)
         {
             SpScheda scheda = SpScheda.EstraiSPScheda(IdSPScheda);
@@ -226,6 +242,56 @@ namespace MPIntranetWeb.Controllers
             schedeAlternative = schedeAlternative.Where(x => x.Codice != scheda.Codice).ToList();
             ViewData.Add("schedeAlternative", schedeAlternative);
             return PartialView("MostraSchedaPartial", scheda);
+        }
+
+        public ActionResult VERIFICASCHEDE()
+        {
+
+            return View();
+        }
+
+        public ActionResult TrovaSchedeDaDistinta(string Anagrafica)
+        {
+            List<DistintaBC> distinte = DistintaBC.EstraiListaDistinteBase(Anagrafica);
+
+            if (distinte.Count != 1)
+            {
+                return PartialView("MostraDistinteBC", distinte);
+            }
+
+            return CreaListaSchedeDistinta(distinte[0]);
+        }
+
+        public ActionResult EstraiDistinta(string Codice, string Versione)
+        {
+            List<DistintaBC> distinte = DistintaBC.EstraiListaDistinteBase(Codice);
+
+            DistintaBC distinta = distinte.Where(x => x.Codice == Codice && x.Versione == Versione).FirstOrDefault();
+            if (distinta == null)
+            {
+                return Content("Nessuna distinta trovata");
+            }
+            return CreaListaSchedeDistinta(distinta);
+        }
+        private ActionResult CreaListaSchedeDistinta(DistintaBC distinta)
+        {
+            distinta.CaricaDistintaCompleta();
+
+            foreach (ComponenteBC componente in distinta.Componenti)
+            {
+                List<SpScheda> schede = SpScheda.EstraiSPScheda(componente.Anagrafica, true);
+                if (schede.Count == 0) continue;
+                foreach (FaseCicloBC fase in componente.FasiCiclo)
+                {
+                    if (string.IsNullOrEmpty(fase.SchedaProcesso))
+                    {
+                        SpScheda scheda = schede.Where(x => x.AreaProduzione == fase.AreaProduzione && x.Task == fase.Task).FirstOrDefault();
+                        if (scheda != null)
+                            fase.SchedaProcesso = scheda.Codice;
+                    }
+                }
+            }
+            return PartialView("MostraListaSchedeDistinta", distinta);
         }
 
     }

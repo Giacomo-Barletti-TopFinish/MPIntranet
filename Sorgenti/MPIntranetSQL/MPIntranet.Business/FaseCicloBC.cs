@@ -27,6 +27,7 @@ namespace MPIntranet.Business
         public decimal Movimentazione { get; set; }
         public string Errore { get; set; }
         public string Nota { get; set; }
+        public string SchedaProduzione { get; set; }
 
         public static List<FaseCicloBC> EstraiListaFaseCiclo(string codiceCiclo)
         {

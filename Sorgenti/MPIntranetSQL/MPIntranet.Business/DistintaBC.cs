@@ -8,12 +8,16 @@ using System.Threading.Tasks;
 
 namespace MPIntranet.Business
 {
+    /// <summary>
+    /// Classe per la gestione delle distinte provenienti da business central
+    /// </summary>
     public class DistintaBC
     {
         public string Codice { get; set; }
         public string Descrizione { get; set; }
         public string Descrizione2 { get; set; }
         public string UnitaMisura { get; set; }
+        public string Versione { get; set; }
         public int Stato { get; set; }
         public List<ComponenteBC> Componenti { get; set; }
         private int idComponente = 0;
@@ -53,6 +57,7 @@ namespace MPIntranet.Business
             distinta.Descrizione2 = riga.Description_2;
             distinta.UnitaMisura = riga.Unit_of_Measure_Code;
             distinta.Stato = riga.Status;
+            distinta.Versione = riga.Version_Nos_;
 
             distinta.Componenti = new List<ComponenteBC>();
             return distinta;

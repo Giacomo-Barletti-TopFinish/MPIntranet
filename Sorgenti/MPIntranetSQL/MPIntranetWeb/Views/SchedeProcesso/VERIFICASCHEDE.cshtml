@@ -1,0 +1,103 @@
+﻿@using MPIntranet.Models.Common
+@{
+    ViewBag.Title = "Verifiche schede Processo";
+    Layout = "~/Views/Shared/_LayoutApplication.cshtml";
+}
+
+
+<div class="content-top">
+    <h2>Verifica Schede Processo</h2>
+</div>
+<div class="content-scheda">
+    @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(49))
+    {
+        <div class="row col-lg-12">
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.Label("Anagrafica")
+                    @Html.TextBox("txtAnagrafica", null, new { @class = "form-control input-sm ", @id = "txtAnagrafica", @maxlength = "25" })
+                </div>
+                <div class="col-md-1" style="padding-top:20px">
+                    <input type="button" onclick="TrovaGruppoSchede()" class="btn btn-primary" value="Trova" />
+                </div>
+                <div class="col-md-1" style="padding-top:20px">
+                    <input type="button" onclick="PulisciRicerca()" class="btn btn-primary" value="Cancella ricerca" />
+                </div>
+            </div>
+        </div>
+        <div class="row col-lg-12">
+            <label class="text-red input-sm" id="lblMessage"></label>
+            <br />
+        </div>
+
+        <div class="row col-lg-12">
+            <div id="divRisultati" style="overflow-y:auto; overflow-x:hidden; height:500px"></div>
+        </div>
+
+    }
+</div>
+
+<script language="javascript" type="text/javascript">
+     $(function ()
+     {
+     });
+
+    function TrovaGruppoSchede() {
+        var anagrafica = $('#txtAnagrafica').val();
+        anagrafica = anagrafica.toUpperCase();
+        $('#txtAnagrafica').val(anagrafica);
+
+
+           var url = '@Url.Action("TrovaSchedeDaDistinta", "SchedeProcesso")';
+        $.ajax({
+            url: url,
+            data: {
+                Anagrafica: anagrafica
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                debugger;
+                $('#divRisultati').html(data).show();
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+
+    function EstraiDistinta(codice, versione) {
+           var url = '@Url.Action("EstraiDistinta", "SchedeProcesso")';
+        $.ajax({
+            url: url,
+            data: {
+                Codice: codice,
+                Versione: versione
+            },
+            cache: false,
+            type: "POST",
+            success: function (data)
+            {
+                $('#divRisultati').html(data).show();
+
+
+            },
+            error: function (response)
+            {
+                document.open();
+                document.write(response.responseText);
+                document.close();
+            }
+        });
+    }
+    function PulisciRicerca() {
+
+        $('#divRisultati').html('').show();
+
+        $('#txtAnagrafica').val('');
+    }
+</script>
