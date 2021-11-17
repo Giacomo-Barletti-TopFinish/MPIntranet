@@ -28,7 +28,7 @@ namespace DisegnaDiBa
         private AutoCompleteStringCollection _autoTask = new AutoCompleteStringCollection();
         private AutoCompleteStringCollection _autoItems = new AutoCompleteStringCollection();
         private int _idComponenteSelezionato;
-        private bool _newrow = false;
+//        private bool _newrow = false;
         private List<TaskArea> _taskAreaProduzione = new List<TaskArea>();
         private List<Item> _items;
 
@@ -118,7 +118,7 @@ namespace DisegnaDiBa
         {
             try
             {
-                _newrow = false;
+ //               _newrow = false;
 
                 if (_articolo == null)
                 {
@@ -271,7 +271,10 @@ namespace DisegnaDiBa
 
         private void btnCercaDiBa_Click(object sender, EventArgs e)
         {
-            _newrow = false;
+  //          _newrow = false;
+            _distinta = null;
+            indiceComponenti = 0;
+            indiceFaseCiclo = 0;
 
             this.Text = string.Empty;
             if (_articolo == null) return;
@@ -564,7 +567,7 @@ namespace DisegnaDiBa
         {
             try
             {
-                _newrow = false;
+      //          _newrow = false;
 
                 Cursor.Current = Cursors.WaitCursor;
 
@@ -636,7 +639,7 @@ namespace DisegnaDiBa
 
         private void tvDiBa_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            _newrow = false;
+  //          _newrow = false;
             if (e.Node.Tag == null) return;
 
             Componente componente = (Componente)e.Node.Tag;
@@ -655,6 +658,7 @@ namespace DisegnaDiBa
 
         private void dgvComponenti_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
+ //           _newrow = false;
             try
             {
                 if (e.RowIndex < 0) return;
@@ -749,55 +753,93 @@ namespace DisegnaDiBa
 
         private void dgvFasiCiclo_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            try
+            //try
+            //{
+            //    if (!_newrow) return;
+            //    if (e.RowIndex == 0) return;
+
+            //    Componente componenteTrovato;
+            //    _distinta.TrovaComponente(_idComponenteSelezionato, out componenteTrovato);
+
+            //    int operazione = 10;
+            //    int idFaseCiclo = -1;
+            //    if (componenteTrovato != null && componenteTrovato.FasiCiclo.Count > 0)
+            //    {
+            //        operazione = componenteTrovato.FasiCiclo.Max(x => x.Operazione) + 10;
+            //        int min = componenteTrovato.FasiCiclo.Min(x => x.IdFaseCiclo);
+            //        idFaseCiclo = estraiIndiceFasiCiclo();
+            //    }
+            //    DataGridViewRow row = dgvFasiCiclo.Rows[e.RowIndex - 1];
+
+            //    row.Cells[clmIDFaseCiclo.Index].Value = idFaseCiclo;
+            //    row.Cells[clmIdDibaFaseCiclo.Index].Value = _distinta.IdDiba;
+            //    row.Cells[clmIdComponenteFaseCiclo.Index].Value = _idComponenteSelezionato;
+            //    row.Cells[clmOperazioneFaseCiclo.Index].Value = operazione;
+            //    row.Cells[clmAreaProduzioneFaseCiclo.Index].Value = string.Empty;
+            //    row.Cells[clmTaskFaseCiclo.Index].Value = string.Empty;
+            //    row.Cells[clmSchedaProcessoFaseCiclo.Index].Value = string.Empty;
+            //    row.Cells[clmSchedaProcessoFaseCiclo.Index].Value = string.Empty;
+            //    row.Cells[clmCollegamentoCicloFaseCiclo.Index].Value = string.Empty;
+            //    row.Cells[clmPeriodoFaseCiclo.Index].Value = 1;
+            //    row.Cells[clmSetupFaseCiclo.Index].Value = 0;
+            //    row.Cells[clmPezziOrariFaseCiclo.Index].Value = 0;
+            //    row.Cells[clmAttesaFaseCiclo.Index].Value = 0;
+            //    row.Cells[clmMovimentazioneFaseCiclo.Index].Value = 0;
+            //    row.Cells[clmErroreFaseCiclo.Index].Value = string.Empty;
+
+            //    row.Cells[clmQuantitaFaseCiclo.Index].Value = 1;
+            //    row.Cells[clmUMQuantitaFaseCiclo.Index].Value = "NR";
+            //    //                row.Cells[clmCollegamentoDiBAFaseCiclo.Index].Value = ExpCicloBusinessCentral.CodiceStandard;
+
+            //    _newrow = false;
+            //}
+            //catch (Exception ex)
+            //{
+            //    MostraEccezione(ex, "Errore in aggiungi fase");
+            //}
+        }
+
+        private void aggiungiFaseVuotaInGriglia(int indiceRiga)
+        {
+            Componente componenteTrovato;
+            _distinta.TrovaComponente(_idComponenteSelezionato, out componenteTrovato);
+
+            int operazione = 10;
+            int idFaseCiclo = -1;
+            if (componenteTrovato != null && componenteTrovato.FasiCiclo.Count > 0)
             {
-                if (!_newrow) return;
-                if (e.RowIndex == 0) return;
-
-                Componente componenteTrovato;
-                _distinta.TrovaComponente(_idComponenteSelezionato, out componenteTrovato);
-
-                int operazione = 10;
-                int idFaseCiclo = -1;
-                if (componenteTrovato != null && componenteTrovato.FasiCiclo.Count > 0)
-                {
-                    operazione = componenteTrovato.FasiCiclo.Max(x => x.Operazione) + 10;
-                    int min = componenteTrovato.FasiCiclo.Min(x => x.IdFaseCiclo);
-                    idFaseCiclo = estraiIndiceFasiCiclo();
-                }
-                DataGridViewRow row = dgvFasiCiclo.Rows[e.RowIndex - 1];
-
-                row.Cells[clmIDFaseCiclo.Index].Value = idFaseCiclo;
-                row.Cells[clmIdDibaFaseCiclo.Index].Value = _distinta.IdDiba;
-                row.Cells[clmIdComponenteFaseCiclo.Index].Value = _idComponenteSelezionato;
-                row.Cells[clmOperazioneFaseCiclo.Index].Value = operazione;
-                row.Cells[clmAreaProduzioneFaseCiclo.Index].Value = string.Empty;
-                row.Cells[clmTaskFaseCiclo.Index].Value = string.Empty;
-                row.Cells[clmSchedaProcessoFaseCiclo.Index].Value = string.Empty;
-                row.Cells[clmSchedaProcessoFaseCiclo.Index].Value = string.Empty;
-                row.Cells[clmCollegamentoCicloFaseCiclo.Index].Value = string.Empty;
-                row.Cells[clmPeriodoFaseCiclo.Index].Value = 1;
-                row.Cells[clmSetupFaseCiclo.Index].Value = 0;
-                row.Cells[clmPezziOrariFaseCiclo.Index].Value = 0;
-                row.Cells[clmAttesaFaseCiclo.Index].Value = 0;
-                row.Cells[clmMovimentazioneFaseCiclo.Index].Value = 0;
-                row.Cells[clmErroreFaseCiclo.Index].Value = string.Empty;
-
-                row.Cells[clmQuantitaFaseCiclo.Index].Value = 1;
-                row.Cells[clmUMQuantitaFaseCiclo.Index].Value = "NR";
-                //                row.Cells[clmCollegamentoDiBAFaseCiclo.Index].Value = ExpCicloBusinessCentral.CodiceStandard;
-
-                _newrow = false;
+                operazione = componenteTrovato.FasiCiclo.Max(x => x.Operazione) + 10;
+                int min = componenteTrovato.FasiCiclo.Min(x => x.IdFaseCiclo);
+                idFaseCiclo = estraiIndiceFasiCiclo();
             }
-            catch (Exception ex)
-            {
-                MostraEccezione(ex, "Errore in aggiungi fase");
-            }
+            DataGridViewRow row = dgvFasiCiclo.Rows[indiceRiga];
+
+            row.Cells[clmIDFaseCiclo.Index].Value = idFaseCiclo;
+            row.Cells[clmIdDibaFaseCiclo.Index].Value = _distinta.IdDiba;
+            row.Cells[clmIdComponenteFaseCiclo.Index].Value = _idComponenteSelezionato;
+            row.Cells[clmOperazioneFaseCiclo.Index].Value = operazione;
+            row.Cells[clmAreaProduzioneFaseCiclo.Index].Value = string.Empty;
+            row.Cells[clmTaskFaseCiclo.Index].Value = string.Empty;
+            row.Cells[clmSchedaProcessoFaseCiclo.Index].Value = string.Empty;
+            row.Cells[clmSchedaProcessoFaseCiclo.Index].Value = string.Empty;
+            row.Cells[clmCollegamentoCicloFaseCiclo.Index].Value = string.Empty;
+            row.Cells[clmPeriodoFaseCiclo.Index].Value = 1;
+            row.Cells[clmSetupFaseCiclo.Index].Value = 0;
+            row.Cells[clmPezziOrariFaseCiclo.Index].Value = 0;
+            row.Cells[clmAttesaFaseCiclo.Index].Value = 0;
+            row.Cells[clmMovimentazioneFaseCiclo.Index].Value = 0;
+            row.Cells[clmErroreFaseCiclo.Index].Value = string.Empty;
+
+            row.Cells[clmQuantitaFaseCiclo.Index].Value = 1;
+            row.Cells[clmUMQuantitaFaseCiclo.Index].Value = "NR";
+            //                row.Cells[clmCollegamentoDiBAFaseCiclo.Index].Value = ExpCicloBusinessCentral.CodiceStandard;
         }
 
         private void dgvFasiCiclo_NewRowNeeded(object sender, DataGridViewRowEventArgs e)
         {
-            _newrow = true;
+    //        _newrow = true;
+            aggiungiFaseVuotaInGriglia(e.Row.Index);
+   //         _newrow = false;
         }
 
         private void dgvComponenti_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
@@ -908,8 +950,9 @@ namespace DisegnaDiBa
 
                 if (e.ColumnIndex == clmTaskFaseCiclo.Index)
                 {
-                    if (string.IsNullOrEmpty(dgvFasiCiclo.Rows[e.RowIndex].Cells[clmAreaProduzioneFaseCiclo.Index].Value as string) &&
-                        !string.IsNullOrEmpty(dgvFasiCiclo.Rows[e.RowIndex].Cells[clmTaskFaseCiclo.Index].Value as string))
+                    //if (string.IsNullOrEmpty(dgvFasiCiclo.Rows[e.RowIndex].Cells[clmAreaProduzioneFaseCiclo.Index].Value as string) &&
+                    //    !string.IsNullOrEmpty(dgvFasiCiclo.Rows[e.RowIndex].Cells[clmTaskFaseCiclo.Index].Value as string))
+                        if (!string.IsNullOrEmpty(dgvFasiCiclo.Rows[e.RowIndex].Cells[clmTaskFaseCiclo.Index].Value as string))
                     {
                         string task = (string)dgvFasiCiclo.Rows[e.RowIndex].Cells[clmTaskFaseCiclo.Index].Value;
                         TaskArea taskArea = _taskAreaProduzione.Where(x => x.Task == task).FirstOrDefault();
