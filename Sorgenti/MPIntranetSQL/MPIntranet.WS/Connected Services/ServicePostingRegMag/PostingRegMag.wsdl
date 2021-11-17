@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/PostingRegMag" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/PostingRegMag" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/PostingRegMag" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="WSPostItemJnl">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="WSPostItemJnl_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="WSPostItemJnl">
+    <part name="parameters" element="tns:WSPostItemJnl" />
+  </message>
+  <message name="WSPostItemJnl_Result">
+    <part name="parameters" element="tns:WSPostItemJnl_Result" />
+  </message>
+  <portType name="PostingRegMag_Port">
+    <operation name="WSPostItemJnl">
+      <input name="WSPostItemJnl" message="tns:WSPostItemJnl" />
+      <output name="WSPostItemJnl_Result" message="tns:WSPostItemJnl_Result" />
+    </operation>
+  </portType>
+  <binding name="PostingRegMag_Binding" type="tns:PostingRegMag_Port">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="WSPostItemJnl">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/PostingRegMag:WSPostItemJnl" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="WSPostItemJnl">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="WSPostItemJnl_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="PostingRegMag">
+    <port name="PostingRegMag_Port" binding="tns:PostingRegMag_Binding">
+      <address location="https://srv-bc.viamattei.metal-plus.it:7147/PROD_WS/METALPLUS/Codeunit/PostingRegMag" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>

@@ -66,6 +66,8 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Text.Encodings.Web, Version=4.0.5.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Text.Encodings.Web.4.7.2\lib\net461\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
@@ -88,6 +90,11 @@
   <ItemGroup>
     <Compile Include="BCServices.cs" />
     <Compile Include="Connected Services\BusinessCentral\Reference.cs" />
+    <Compile Include="Connected Services\ServicePostingRegMag\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Estensioni.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stato.cs" />
@@ -95,6 +102,10 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Connected Services\BusinessCentral\ConnectedService.json" />
+    <None Include="Connected Services\ServicePostingRegMag\MPIntranet.WS.ServicePostingRegMag.WSPostItemJnl_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServicePostingRegMag\PostingRegMag.wsdl" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +116,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Connected Services\BusinessCentral\BC_metadata.xml" />
+    <None Include="Connected Services\ServicePostingRegMag\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\ServicePostingRegMag\configuration.svcinfo" />
+    <None Include="Connected Services\ServicePostingRegMag\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ServicePostingRegMag\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

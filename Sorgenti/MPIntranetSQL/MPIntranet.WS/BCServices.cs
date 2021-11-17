@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net;
 using NAV;
 using Microsoft.OData.Client;
+using System.ServiceModel;
 
 namespace MPIntranet.WS
 {
@@ -16,16 +17,32 @@ namespace MPIntranet.WS
         private string _password = "V0Wz3MIxhXb2OvTv6y81pahROq6pFmqtPk3PTlnOzws=";
         private NAV.NAV _nav;
         private int timer = 1500;
+        string _azienda = "METALPLUS";
         public void CreaConnessione()
         {
             Uri uri = new Uri(_url);
             _nav = new NAV.NAV(uri);
             _nav.Credentials = new NetworkCredential(_user, _password);
         }
+        public void PostingRegMag()
+        {
+            string url = "https://srv-bc.viamattei.metal-plus.it:7147/PROD_WS/WS/METALPLUS/Codeunit/PostingRegMag";
+            if (_azienda != "METALPLUS")
+                url = "https://srv-bc.viamattei.metal-plus.it:7147/PROD_WS/WS/METALPLUS%2008092021/Codeunit/PostingRegMag";
 
+            BasicHttpBinding binding = new BasicHttpBinding();
+            binding.Security.Mode = BasicHttpSecurityMode.Transport;
+            binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+
+            ServicePostingRegMag.PostingRegMag_PortClient ws = new ServicePostingRegMag.PostingRegMag_PortClient(binding, new EndpointAddress(url));
+            ws.ClientCredentials.UserName.UserName = _user;
+            ws.ClientCredentials.UserName.Password = _password;
+            ws.WSPostItemJnl();
+        }
         public void CreaConnessione(string azienda)
         {
-            string url = "https://srv-bc.viamattei.metal-plus.it:7148/PROD_WS/ODataV4/Company('" + azienda + "')/";
+            _azienda = azienda;
+            string url = "https://srv-bc.viamattei.metal-plus.it:7148/PROD_WS/ODataV4/Company('" + _azienda + "')/";
             Uri uri = new Uri(url);
             _nav = new NAV.NAV(uri);
             _nav.Credentials = new NetworkCredential(_user, _password);
@@ -263,6 +280,26 @@ namespace MPIntranet.WS
             fase.Wait_Time_Unit_of_Meas_Code = UMAttesa;
             fase.Routing_Link_Code = collegamento;
             _nav.AddToRigheCICLO(fase);
+            Salva();
+        }
+
+        public void CreaRegistrazioneMagazzino(string ubicazione, string collocazione, string documento, int lineNumber, decimal quantita, string anagrafica)
+        {
+            string batchName = "REGWS";
+            RegMesWS nuovo = new RegMesWS();
+            nuovo.Bin_Code = collocazione;
+            nuovo.Document_No = documento;
+            nuovo.Entry_Type = "Positive Adjmt.";
+            nuovo.Journal_Batch_Name = batchName;
+            nuovo.Journal_Template_Name = "ARTICOLO";
+            nuovo.Line_No = lineNumber;
+            nuovo.Location_Code = ubicazione;
+            nuovo.Quantity = quantita;
+            nuovo.Item_No = anagrafica;
+            nuovo.Unit_Cost = 0;
+            nuovo.Posting_Date = DateTime.Today;
+            _nav.AddToRegMesWS(nuovo);
+
             Salva();
         }
 
