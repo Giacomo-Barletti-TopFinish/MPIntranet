@@ -12,7 +12,7 @@ namespace MPIntranet.Entities.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -71,6 +71,17 @@ namespace MPIntranet.Entities.Properties {
         public string MPI_TESTConnectionString {
             get {
                 return ((string)(this["MPI_TESTConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=srv-sql;Initial Catalog=MPI;Persist Security Info=True;User ID=MPI;Pa" +
+            "ssword=MPI")]
+        public string MPIConnectionString1 {
+            get {
+                return ((string)(this["MPIConnectionString1"]));
             }
         }
     }

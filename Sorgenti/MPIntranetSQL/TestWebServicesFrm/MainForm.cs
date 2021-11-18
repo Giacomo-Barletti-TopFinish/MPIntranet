@@ -271,10 +271,11 @@ namespace TestWebServicesFrm
                 bc.CreaConnessione();
                 StringBuilder sb = new StringBuilder();
                 List<RigheCICLO> righe = bc.EstraiRigheCICLO(txtNoCiclo.Text);
+                
                 sb.AppendLine(string.Format("Trovate {0} righe", righe.Count));
                 foreach (RigheCICLO r in righe)
                 {
-                    sb.AppendLine(string.Format("{0} {1} {2} {3} {4}", r.Operation_No, r.Routing_No, r.No, r.Standard_Task_Code, r.Description));
+                    sb.AppendLine(string.Format("{0} {1} {2} {3} {4} {5}", r.Operation_No, r.Routing_No, r.No, r.Standard_Task_Code, r.Description,r.MTP_Card_Code));
                 }
                 txtMessaggio.Text = sb.ToString();
             }
@@ -413,7 +414,7 @@ namespace TestWebServicesFrm
                 AreaProduzione area = (AreaProduzione)ddlAreaProduzione.SelectedItem;
                 TaskArea task = (TaskArea)ddlTask.SelectedItem;
 
-                bc.AggiungiFase(txtNoCiclo.Text, txtVersioneCiclo.Text, operazione.ToString(), txtTipoFase.Text, area.Codice, task.Task, nSetupFase.Value, txtUMSetupFase.Text,
+                bc.AggiungiFase(txtNoCiclo.Text, txtVersioneCiclo.Text, operazione.ToString(), txtTipoFase.Text, area.Codice, task.Task, nSetupFase.Value, txtUMSetupFase.Text,txtCodiceScheda.Text,
                     nLavorazioneFase.Value, txtUMLavorazioneFase.Text, nAttesaFase.Value, txtUMAttesaFase.Text, nSpostamentoFase.Value, txtUMSpostamentoFase.Text,
                     nDimensioneLottoFase.Value, txtCollegmentoFase.Text,
                     txtCodiceCondizioneFase.Text, txtCodiceLogicheFase.Text, txtCodiceCaratteristicaFase.Text, string.Empty);
@@ -807,5 +808,16 @@ namespace TestWebServicesFrm
             }
         }
 
+        private void groupBox4_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label56_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }

@@ -27,7 +27,6 @@ namespace MPIntranet.Business
         public decimal Movimentazione { get; set; }
         public string Errore { get; set; }
         public string Nota { get; set; }
-        public string SchedaProduzione { get; set; }
 
         public static List<FaseCicloBC> EstraiListaFaseCiclo(string codiceCiclo)
         {
@@ -67,7 +66,7 @@ namespace MPIntranet.Business
             faseCiclo.UMQuantita = string.Empty;
             faseCiclo.AreaProduzione = riga.Work_Center_No_;
             faseCiclo.Task = riga.Standard_Task_Code;
-            faseCiclo.SchedaProcesso = string.Empty;
+            faseCiclo.SchedaProcesso = riga.MTP_Card_Code;
             faseCiclo.CollegamentoCiclo = string.IsNullOrEmpty(riga.Routing_Link_Code) ? string.Empty : riga.Routing_Link_Code;
             faseCiclo.PezziPeriodo = riga.Lot_Size;
             faseCiclo.Periodo = riga.Run_Time;

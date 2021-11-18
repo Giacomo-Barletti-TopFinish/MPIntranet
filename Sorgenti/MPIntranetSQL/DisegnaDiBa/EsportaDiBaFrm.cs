@@ -146,7 +146,7 @@ namespace DisegnaDiBa
                             try
                             {
                                 f.Errore = string.Empty;
-                                bc.AggiungiFase(ciclo, string.Empty, f.Operazione.ToString(), f.Tipo, f.AreaProduzione, f.Task, (decimal)f.TempoSetup, f.UMSetup,
+                                bc.AggiungiFase(ciclo, string.Empty, f.Operazione.ToString(), f.Tipo, f.AreaProduzione, f.Task, (decimal)f.TempoSetup, f.UMSetup,f.SchedaProcesso,
                                     (decimal)f.TempoLavorazione, f.UMLavorazione,
                                     (decimal)f.TempoAttesa, f.UMAttesa, (decimal)f.TempoSpostamento, f.UMSpostamento,
                                     (decimal)f.DimensioneLotto, f.Collegamento, f.Condizione, f.LogicheLavorazione, f.Caratteristica, f.Descrizione);

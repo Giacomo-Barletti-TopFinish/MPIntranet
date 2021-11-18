@@ -167,6 +167,7 @@
             this.txtAnagraficaOdP = new System.Windows.Forms.TextBox();
             this.label42 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.btnEstraiMag = new System.Windows.Forms.Button();
             this.btnRegMag = new System.Windows.Forms.Button();
             this.nQuntitàRegMag = new System.Windows.Forms.NumericUpDown();
             this.label55 = new System.Windows.Forms.Label();
@@ -185,7 +186,8 @@
             this.label48 = new System.Windows.Forms.Label();
             this.ddlAziende = new System.Windows.Forms.ComboBox();
             this.dataSet1 = new System.Data.DataSet();
-            this.btnEstraiMag = new System.Windows.Forms.Button();
+            this.txtCodiceScheda = new System.Windows.Forms.TextBox();
+            this.label56 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -218,11 +220,11 @@
             this.txtMessaggio.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMessaggio.Location = new System.Drawing.Point(12, 625);
+            this.txtMessaggio.Location = new System.Drawing.Point(12, 662);
             this.txtMessaggio.Multiline = true;
             this.txtMessaggio.Name = "txtMessaggio";
             this.txtMessaggio.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtMessaggio.Size = new System.Drawing.Size(1240, 179);
+            this.txtMessaggio.Size = new System.Drawing.Size(1240, 142);
             this.txtMessaggio.TabIndex = 0;
             // 
             // txtDistintaNo
@@ -890,6 +892,8 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.label56);
+            this.groupBox4.Controls.Add(this.txtCodiceScheda);
             this.groupBox4.Controls.Add(this.btnEstraiCommenti);
             this.groupBox4.Controls.Add(this.btnModificaCommentoFase);
             this.groupBox4.Controls.Add(this.nDimensioneLottoFase);
@@ -937,6 +941,7 @@
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Fasi";
+            this.groupBox4.Enter += new System.EventHandler(this.groupBox4_Enter);
             // 
             // btnEstraiCommenti
             // 
@@ -1101,7 +1106,7 @@
             // 
             // btnAggiuntiFase
             // 
-            this.btnAggiuntiFase.Location = new System.Drawing.Point(596, 143);
+            this.btnAggiuntiFase.Location = new System.Drawing.Point(596, 144);
             this.btnAggiuntiFase.Name = "btnAggiuntiFase";
             this.btnAggiuntiFase.Size = new System.Drawing.Size(88, 23);
             this.btnAggiuntiFase.TabIndex = 14;
@@ -1152,7 +1157,7 @@
             // 
             this.txtCommentoFase.Location = new System.Drawing.Point(217, 144);
             this.txtCommentoFase.Name = "txtCommentoFase";
-            this.txtCommentoFase.Size = new System.Drawing.Size(355, 20);
+            this.txtCommentoFase.Size = new System.Drawing.Size(195, 20);
             this.txtCommentoFase.TabIndex = 12;
             // 
             // txtCodiceCondizioneFase
@@ -1337,7 +1342,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 34);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1240, 585);
+            this.tabControl1.Size = new System.Drawing.Size(1240, 622);
             this.tabControl1.TabIndex = 5;
             // 
             // tabPage2
@@ -1468,7 +1473,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1232, 559);
+            this.tabPage1.Size = new System.Drawing.Size(1232, 596);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "DiBa";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -1687,6 +1692,16 @@
             this.tabPage4.Text = "Registrazioni magazzino";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // btnEstraiMag
+            // 
+            this.btnEstraiMag.Location = new System.Drawing.Point(720, 105);
+            this.btnEstraiMag.Name = "btnEstraiMag";
+            this.btnEstraiMag.Size = new System.Drawing.Size(75, 23);
+            this.btnEstraiMag.TabIndex = 15;
+            this.btnEstraiMag.Text = "Estrai Lista";
+            this.btnEstraiMag.UseVisualStyleBackColor = true;
+            this.btnEstraiMag.Click += new System.EventHandler(this.btnEstraiMag_Click);
+            // 
             // btnRegMag
             // 
             this.btnRegMag.Location = new System.Drawing.Point(516, 105);
@@ -1848,15 +1863,22 @@
             // 
             this.dataSet1.DataSetName = "NewDataSet";
             // 
-            // btnEstraiMag
+            // txtCodiceScheda
             // 
-            this.btnEstraiMag.Location = new System.Drawing.Point(720, 105);
-            this.btnEstraiMag.Name = "btnEstraiMag";
-            this.btnEstraiMag.Size = new System.Drawing.Size(75, 23);
-            this.btnEstraiMag.TabIndex = 15;
-            this.btnEstraiMag.Text = "Estrai Lista";
-            this.btnEstraiMag.UseVisualStyleBackColor = true;
-            this.btnEstraiMag.Click += new System.EventHandler(this.btnEstraiMag_Click);
+            this.txtCodiceScheda.Location = new System.Drawing.Point(431, 143);
+            this.txtCodiceScheda.Name = "txtCodiceScheda";
+            this.txtCodiceScheda.Size = new System.Drawing.Size(144, 20);
+            this.txtCodiceScheda.TabIndex = 25;
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(428, 127);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(80, 13);
+            this.label56.TabIndex = 26;
+            this.label56.Text = "Codice Scheda";
+            this.label56.Click += new System.EventHandler(this.label56_Click);
             // 
             // MainForm
             // 
@@ -2067,6 +2089,8 @@
         private System.Windows.Forms.Label label55;
         private System.Windows.Forms.ComboBox ddlCodCollRegMag;
         private System.Windows.Forms.Button btnEstraiMag;
+        private System.Windows.Forms.TextBox txtCodiceScheda;
+        private System.Windows.Forms.Label label56;
     }
 }
 

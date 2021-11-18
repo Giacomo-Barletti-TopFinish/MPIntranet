@@ -258,6 +258,7 @@ namespace MPIntranet.WS
             Salva();
         }
         public void AggiungiFase(string NoCiclo, string versioneCiclo, string operazione, string tipo, string areaProduzione, string task, decimal setup, string UMSetup,
+            string CodiceSchedaProcesso,
          decimal lavorazione, string UMLavorazione, decimal attesa, string UMAttesa, decimal spostamento, string UMSpostamento,
       decimal dimensioneLotto, string collegamento, string condizione, string logica, string caratteristica, string descrizione)
         {
@@ -279,6 +280,7 @@ namespace MPIntranet.WS
             fase.Wait_Time = attesa;
             fase.Wait_Time_Unit_of_Meas_Code = UMAttesa;
             fase.Routing_Link_Code = collegamento;
+            fase.MTP_Card_Code = CodiceSchedaProcesso;
             _nav.AddToRigheCICLO(fase);
             Salva();
         }

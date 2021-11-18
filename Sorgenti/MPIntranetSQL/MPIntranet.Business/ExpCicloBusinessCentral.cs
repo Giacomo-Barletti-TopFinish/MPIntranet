@@ -121,6 +121,7 @@ namespace MPIntranet.Business
                 f.Operazione = faseCiclo.Operazione;
                 f.Descrizione = faseCiclo.Descrizione;
                 f.AreaProduzione = faseCiclo.AreaProduzione;
+                f.SchedaProcesso = faseCiclo.SchedaProcesso;
                 if (string.IsNullOrEmpty(faseCiclo.Anagrafica))
                 {
                     if (string.IsNullOrEmpty(faseCiclo.AreaProduzione))
@@ -232,6 +233,7 @@ namespace MPIntranet.Business
         public string UMAttesa = "ORE";
         public string UMSpostamento = "ORE";
         public string Collegamento;
+        public string SchedaProcesso;
         public string Task { get; set; }
         public string Condizione = string.Empty;
         public string Caratteristica = string.Empty;
