@@ -45,10 +45,11 @@ GO
 create view [dbo].[CicliBCTestata] as
 SELECT * FROM [TEST].[dbo].[MetalPlus_WS$Routing Header$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
 go
-
 create view [dbo].[CicliBCDettaglio] as
-SELECT * FROM [TEST].[dbo].[MetalPlus_WS$Routing Line$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
-go
+select A.*,B.[MTP Card Code] 
+from [TEST].[dbo].[MetalPlus_WS$Routing Line$437dbf0e-84ff-417a-965d-ed2bb9650972] A WITH (NOLOCK)
+INNER JOIN TEST.[dbo].[MetalPlus_WS$Routing Line$acfbaca5-f819-4981-a342-d769a95abeb3] B WITH (NOLOCK)ON A.[Routing No_]=B.[Routing No_] AND A.[Version Code]=B.[Version Code] AND A.[Operation No_]=B.[Operation No_]
+GO
 
 create view [dbo].[CicliBCCommenti] as
 SELECT * FROM [TEST].[dbo].[MetalPlus_WS$Routing Comment Line$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
@@ -88,8 +89,10 @@ create or alter view [dbo].[CicliBCTestata] as
 SELECT * FROM [PROD].[dbo].[METALPLUS$Routing Header$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
 go
 
-create or alter view [dbo].[CicliBCDettaglio] as
-SELECT * FROM [PROD].[dbo].[MetalPlus$Routing Line$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
+create view [dbo].[CicliBCDettaglio] as
+select A.*,B.[MTP Card Code] 
+FROM [PROD].[dbo].[MetalPlus$Routing Line$437dbf0e-84ff-417a-965d-ed2bb9650972] A WITH (NOLOCK)
+INNER JOIN [PROD].[dbo].[METALPLUS$Routing Line$acfbaca5-f819-4981-a342-d769a95abeb3] B WITH (NOLOCK)ON A.[Routing No_]=B.[Routing No_] AND A.[Version Code]=B.[Version Code] AND A.[Operation No_]=B.[Operation No_]
 go
 
 create or alter view [dbo].[CicliBCCommenti] as
