@@ -271,11 +271,11 @@ namespace TestWebServicesFrm
                 bc.CreaConnessione();
                 StringBuilder sb = new StringBuilder();
                 List<RigheCICLO> righe = bc.EstraiRigheCICLO(txtNoCiclo.Text);
-                
+
                 sb.AppendLine(string.Format("Trovate {0} righe", righe.Count));
                 foreach (RigheCICLO r in righe)
                 {
-                    sb.AppendLine(string.Format("{0} {1} {2} {3} {4} {5}", r.Operation_No, r.Routing_No, r.No, r.Standard_Task_Code, r.Description,r.MTP_Card_Code));
+                    sb.AppendLine(string.Format("{0} {1} {2} {3} {4} {5}", r.Operation_No, r.Routing_No, r.No, r.Standard_Task_Code, r.Description, r.MTP_Card_Code));
                 }
                 txtMessaggio.Text = sb.ToString();
             }
@@ -365,17 +365,6 @@ namespace TestWebServicesFrm
             ddlAziende.Items.Add("METALPLUS 08092021");
             ddlAziende.Items.Add("METALPLUS_210621");
         }
-        private void estraiTipoMovimento()
-        {
-            ddlTipoMovimento.Items.Clear();
-            ddlTipoMovimento.Items.Add("Rettifica Positiva");
-            ddlTipoMovimento.Items.Add("Rettifica Negativa");
-        }
-        private void estraiBinCode()
-        {
-            ddlCodCollRegMag.Items.Clear();
-            ddlCodCollRegMag.Items.Add("A1");
-        }
 
         private void ddlAreaProduzione_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -414,7 +403,7 @@ namespace TestWebServicesFrm
                 AreaProduzione area = (AreaProduzione)ddlAreaProduzione.SelectedItem;
                 TaskArea task = (TaskArea)ddlTask.SelectedItem;
 
-                bc.AggiungiFase(txtNoCiclo.Text, txtVersioneCiclo.Text, operazione.ToString(), txtTipoFase.Text, area.Codice, task.Task, nSetupFase.Value, txtUMSetupFase.Text,txtCodiceScheda.Text,
+                bc.AggiungiFase(txtNoCiclo.Text, txtVersioneCiclo.Text, operazione.ToString(), txtTipoFase.Text, area.Codice, task.Task, nSetupFase.Value, txtUMSetupFase.Text, txtCodiceScheda.Text,
                     nLavorazioneFase.Value, txtUMLavorazioneFase.Text, nAttesaFase.Value, txtUMAttesaFase.Text, nSpostamentoFase.Value, txtUMSpostamentoFase.Text,
                     nDimensioneLottoFase.Value, txtCollegmentoFase.Text,
                     txtCodiceCondizioneFase.Text, txtCodiceLogicheFase.Text, txtCodiceCaratteristicaFase.Text, string.Empty);
@@ -646,7 +635,7 @@ namespace TestWebServicesFrm
         private void btnCreaOdP_Click(object sender, EventArgs e)
         {
             txtMessaggio.Text = string.Empty;
-            if(ddlAziende.SelectedIndex==-1)
+            if (ddlAziende.SelectedIndex == -1)
             {
                 txtMessaggio.Text = "Selezionare un'azienda";
                 return;
@@ -704,7 +693,7 @@ namespace TestWebServicesFrm
                 */
                 BCServices bc = new BCServices();
                 bc.CreaConnessione();
-             //   bc.RegMag(txtAnagRegMag.Text, txtUbiRegMag.Text, ddlCodCollRegMag.Text);
+                //   bc.RegMag(txtAnagRegMag.Text, txtUbiRegMag.Text, ddlCodCollRegMag.Text);
                 txtMessaggio.Text = "Rettifica registrata correttamente";
             }
             catch (Exception ex)
@@ -718,14 +707,14 @@ namespace TestWebServicesFrm
             txtMessaggio.Text = string.Empty;
             try
             {
-
+                string azienda = (string)ddlAziende.SelectedItem;
                 BCServices bc = new BCServices();
-                bc.CreaConnessione();
-                List<ODPRilasciato> odps = bc.EstraiOdPRilasciati();
+                bc.CreaConnessione(azienda);
+                List<ODPConfermato> odps = bc.EstraiOdPConfermati();
                 StringBuilder sb = new StringBuilder();
-                sb.AppendLine(string.Format("Trovati {0} odp rilasciati", odps.Count));
+                sb.AppendLine(string.Format("Trovati {0} odp confermati", odps.Count));
                 sb.AppendLine(string.Empty);
-                foreach (ODPRilasciato o in odps)
+                foreach (ODPConfermato o in odps)
                 {
                     sb.AppendLine(string.Format("{0} # {1}", o.No, o.Source_No));
                 }
@@ -815,6 +804,61 @@ namespace TestWebServicesFrm
 
         private void label56_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void btnRegMag_Click(object sender, EventArgs e)
+        {
+            txtMessaggio.Text = string.Empty;
+            try
+            {
+                string azienda = (string)ddlAziende.SelectedItem;
+
+                BCServices bc = new BCServices();
+                bc.CreaConnessione(azienda);
+                bc.CreaRegistrazioneMagazzino(txtUbiRegMag.Text, txtCollocazioneRegMag.Text,1000, txtNrDocRegMag.Text, nQuntitàRegMag.Value, txtAnagRegMag.Text);
+                txtMessaggio.Text = "Operazione terminata con successo";
+            }
+            catch (Exception ex)
+            {
+                txtMessaggio.Text = estraiErrore(ex);
+            }
+        }
+
+        private void btnLeggiRegMag_Click(object sender, EventArgs e)
+        {
+            txtMessaggio.Text = string.Empty;
+            try
+            {
+                string azienda = (string)ddlAziende.SelectedItem;
+                BCServices bc = new BCServices();
+                bc.CreaConnessione(azienda);
+                List<RegMesWS> righe = bc.EstraiRegMag();
+
+                txtMessaggio.Text = string.Format("Operazione terminata con successo. Trovate {0} righe", righe.Count);
+            }
+            catch (Exception ex)
+            {
+                txtMessaggio.Text = estraiErrore(ex);
+            }
+        }
+
+        private void btnEseguiRegMag_Click(object sender, EventArgs e)
+        {
+            txtMessaggio.Text = string.Empty;
+            try
+            {
+                string azienda = (string)ddlAziende.SelectedItem;
+                BCServices bc = new BCServices();
+                bc.CreaConnessione(azienda);
+                bc.PostingRegMag();
+                txtMessaggio.Text = string.Format("Registrazione terminata con successo");
+            }
+            catch (Exception ex)
+            {
+                txtMessaggio.Text = estraiErrore(ex);
+            }
+
 
         }
 

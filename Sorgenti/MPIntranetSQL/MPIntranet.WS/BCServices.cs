@@ -285,7 +285,7 @@ namespace MPIntranet.WS
             Salva();
         }
 
-        public void CreaRegistrazioneMagazzino(string ubicazione, string collocazione, string documento, int lineNumber, decimal quantita, string anagrafica)
+        public void CreaRegistrazioneMagazzino(string ubicazione, string collocazione, int lineNumber, string documento, decimal quantita, string anagrafica)
         {
             string batchName = "REGWS";
             RegMesWS nuovo = new RegMesWS();
@@ -426,7 +426,8 @@ namespace MPIntranet.WS
             NAV.ODPConfermato oDP = new ODPConfermato();
 
             oDP.Source_No = Anagrafica;
-            oDP.Due_Date = data;
+            oDP.Creation_Date = DateTime.Now;
+            oDP.Due_Date= data;
             oDP.Location_Code = ubicazione;
             oDP.Quantity = quantita;
             oDP.Description = descrizione;
@@ -437,6 +438,7 @@ namespace MPIntranet.WS
             Salva();
             oDP.Description = descrizione;
             oDP.Description_2 = descrizione2;
+            oDP.Due_Date = data;
             _nav.UpdateObject(oDP);
             Salva();
             return oDP.No;
@@ -461,6 +463,19 @@ namespace MPIntranet.WS
         {
             List<ODPRilasciato> odps = _nav.ODPRilasciato.ToList();
             return odps;
+
+        }
+        public List<ODPConfermato> EstraiOdPConfermati()
+        {
+            List<ODPConfermato> odps = _nav.ODPConfermato.ToList();
+            return odps;
+
+        }
+
+        public List<RegMesWS> EstraiRegMag()
+        {
+            List<RegMesWS> registrazioni = _nav.RegMesWS.ToList();
+            return registrazioni;
 
         }
 

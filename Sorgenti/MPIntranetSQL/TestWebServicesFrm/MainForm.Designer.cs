@@ -93,6 +93,8 @@
             this.label39 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label56 = new System.Windows.Forms.Label();
+            this.txtCodiceScheda = new System.Windows.Forms.TextBox();
             this.btnEstraiCommenti = new System.Windows.Forms.Button();
             this.btnModificaCommentoFase = new System.Windows.Forms.Button();
             this.nDimensioneLottoFase = new System.Windows.Forms.NumericUpDown();
@@ -167,11 +169,12 @@
             this.txtAnagraficaOdP = new System.Windows.Forms.TextBox();
             this.label42 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.btnEstraiMag = new System.Windows.Forms.Button();
+            this.btnEseguiRegMag = new System.Windows.Forms.Button();
+            this.btnLeggiRegMag = new System.Windows.Forms.Button();
+            this.txtCollocazioneRegMag = new System.Windows.Forms.TextBox();
             this.btnRegMag = new System.Windows.Forms.Button();
             this.nQuntitàRegMag = new System.Windows.Forms.NumericUpDown();
             this.label55 = new System.Windows.Forms.Label();
-            this.ddlCodCollRegMag = new System.Windows.Forms.ComboBox();
             this.label54 = new System.Windows.Forms.Label();
             this.txtUbiRegMag = new System.Windows.Forms.TextBox();
             this.label53 = new System.Windows.Forms.Label();
@@ -179,15 +182,11 @@
             this.label52 = new System.Windows.Forms.Label();
             this.txtNrDocRegMag = new System.Windows.Forms.TextBox();
             this.label51 = new System.Windows.Forms.Label();
-            this.ddlTipoMovimento = new System.Windows.Forms.ComboBox();
-            this.label50 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label49 = new System.Windows.Forms.Label();
             this.label48 = new System.Windows.Forms.Label();
             this.ddlAziende = new System.Windows.Forms.ComboBox();
             this.dataSet1 = new System.Data.DataSet();
-            this.txtCodiceScheda = new System.Windows.Forms.TextBox();
-            this.label56 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -943,6 +942,23 @@
             this.groupBox4.Text = "Fasi";
             this.groupBox4.Enter += new System.EventHandler(this.groupBox4_Enter);
             // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(428, 127);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(80, 13);
+            this.label56.TabIndex = 26;
+            this.label56.Text = "Codice Scheda";
+            this.label56.Click += new System.EventHandler(this.label56_Click);
+            // 
+            // txtCodiceScheda
+            // 
+            this.txtCodiceScheda.Location = new System.Drawing.Point(431, 143);
+            this.txtCodiceScheda.Name = "txtCodiceScheda";
+            this.txtCodiceScheda.Size = new System.Drawing.Size(144, 20);
+            this.txtCodiceScheda.TabIndex = 25;
+            // 
             // btnEstraiCommenti
             // 
             this.btnEstraiCommenti.Location = new System.Drawing.Point(912, 144);
@@ -1351,7 +1367,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1232, 559);
+            this.tabPage2.Size = new System.Drawing.Size(1232, 596);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Anagrafica";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1501,7 +1517,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1232, 559);
+            this.tabPage3.Size = new System.Drawing.Size(1232, 596);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "ODP";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1669,11 +1685,12 @@
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.btnEstraiMag);
+            this.tabPage4.Controls.Add(this.btnEseguiRegMag);
+            this.tabPage4.Controls.Add(this.btnLeggiRegMag);
+            this.tabPage4.Controls.Add(this.txtCollocazioneRegMag);
             this.tabPage4.Controls.Add(this.btnRegMag);
             this.tabPage4.Controls.Add(this.nQuntitàRegMag);
             this.tabPage4.Controls.Add(this.label55);
-            this.tabPage4.Controls.Add(this.ddlCodCollRegMag);
             this.tabPage4.Controls.Add(this.label54);
             this.tabPage4.Controls.Add(this.txtUbiRegMag);
             this.tabPage4.Controls.Add(this.label53);
@@ -1681,39 +1698,55 @@
             this.tabPage4.Controls.Add(this.label52);
             this.tabPage4.Controls.Add(this.txtNrDocRegMag);
             this.tabPage4.Controls.Add(this.label51);
-            this.tabPage4.Controls.Add(this.ddlTipoMovimento);
-            this.tabPage4.Controls.Add(this.label50);
             this.tabPage4.Controls.Add(this.dateTimePicker1);
             this.tabPage4.Controls.Add(this.label49);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(1232, 559);
+            this.tabPage4.Size = new System.Drawing.Size(1232, 596);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Registrazioni magazzino";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // btnEstraiMag
+            // btnEseguiRegMag
             // 
-            this.btnEstraiMag.Location = new System.Drawing.Point(720, 105);
-            this.btnEstraiMag.Name = "btnEstraiMag";
-            this.btnEstraiMag.Size = new System.Drawing.Size(75, 23);
-            this.btnEstraiMag.TabIndex = 15;
-            this.btnEstraiMag.Text = "Estrai Lista";
-            this.btnEstraiMag.UseVisualStyleBackColor = true;
-            this.btnEstraiMag.Click += new System.EventHandler(this.btnEstraiMag_Click);
+            this.btnEseguiRegMag.Location = new System.Drawing.Point(484, 118);
+            this.btnEseguiRegMag.Name = "btnEseguiRegMag";
+            this.btnEseguiRegMag.Size = new System.Drawing.Size(189, 23);
+            this.btnEseguiRegMag.TabIndex = 17;
+            this.btnEseguiRegMag.Text = "Esegui Registrazioni Magazzino";
+            this.btnEseguiRegMag.UseVisualStyleBackColor = true;
+            this.btnEseguiRegMag.Click += new System.EventHandler(this.btnEseguiRegMag_Click);
+            // 
+            // btnLeggiRegMag
+            // 
+            this.btnLeggiRegMag.Location = new System.Drawing.Point(1085, 48);
+            this.btnLeggiRegMag.Name = "btnLeggiRegMag";
+            this.btnLeggiRegMag.Size = new System.Drawing.Size(133, 23);
+            this.btnLeggiRegMag.TabIndex = 16;
+            this.btnLeggiRegMag.Text = "Leggi Righe Magazzino";
+            this.btnLeggiRegMag.UseVisualStyleBackColor = true;
+            this.btnLeggiRegMag.Click += new System.EventHandler(this.btnLeggiRegMag_Click);
+            // 
+            // txtCollocazioneRegMag
+            // 
+            this.txtCollocazioneRegMag.Location = new System.Drawing.Point(681, 47);
+            this.txtCollocazioneRegMag.Name = "txtCollocazioneRegMag";
+            this.txtCollocazioneRegMag.Size = new System.Drawing.Size(100, 20);
+            this.txtCollocazioneRegMag.TabIndex = 15;
             // 
             // btnRegMag
             // 
-            this.btnRegMag.Location = new System.Drawing.Point(516, 105);
+            this.btnRegMag.Location = new System.Drawing.Point(941, 48);
             this.btnRegMag.Name = "btnRegMag";
-            this.btnRegMag.Size = new System.Drawing.Size(75, 23);
+            this.btnRegMag.Size = new System.Drawing.Size(138, 23);
             this.btnRegMag.TabIndex = 14;
-            this.btnRegMag.Text = "Esegui ";
+            this.btnRegMag.Text = "Crea Riga Magazzino";
             this.btnRegMag.UseVisualStyleBackColor = true;
+            this.btnRegMag.Click += new System.EventHandler(this.btnRegMag_Click);
             // 
             // nQuntitàRegMag
             // 
-            this.nQuntitàRegMag.Location = new System.Drawing.Point(1080, 47);
+            this.nQuntitàRegMag.Location = new System.Drawing.Point(809, 47);
             this.nQuntitàRegMag.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -1723,7 +1756,7 @@
             this.nQuntitàRegMag.Size = new System.Drawing.Size(120, 20);
             this.nQuntitàRegMag.TabIndex = 13;
             this.nQuntitàRegMag.Value = new decimal(new int[] {
-            20,
+            10,
             0,
             0,
             0});
@@ -1732,25 +1765,16 @@
             // 
             this.label55.AllowDrop = true;
             this.label55.AutoSize = true;
-            this.label55.Location = new System.Drawing.Point(1077, 20);
+            this.label55.Location = new System.Drawing.Point(806, 20);
             this.label55.Name = "label55";
             this.label55.Size = new System.Drawing.Size(47, 13);
             this.label55.TabIndex = 12;
             this.label55.Text = "Quantità";
             // 
-            // ddlCodCollRegMag
-            // 
-            this.ddlCodCollRegMag.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlCodCollRegMag.FormattingEnabled = true;
-            this.ddlCodCollRegMag.Location = new System.Drawing.Point(920, 47);
-            this.ddlCodCollRegMag.Name = "ddlCodCollRegMag";
-            this.ddlCodCollRegMag.Size = new System.Drawing.Size(121, 21);
-            this.ddlCodCollRegMag.TabIndex = 11;
-            // 
             // label54
             // 
             this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(917, 21);
+            this.label54.Location = new System.Drawing.Point(678, 20);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(67, 13);
             this.label54.TabIndex = 10;
@@ -1758,7 +1782,7 @@
             // 
             // txtUbiRegMag
             // 
-            this.txtUbiRegMag.Location = new System.Drawing.Point(782, 48);
+            this.txtUbiRegMag.Location = new System.Drawing.Point(539, 47);
             this.txtUbiRegMag.Name = "txtUbiRegMag";
             this.txtUbiRegMag.Size = new System.Drawing.Size(100, 20);
             this.txtUbiRegMag.TabIndex = 9;
@@ -1767,7 +1791,7 @@
             // label53
             // 
             this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(779, 21);
+            this.label53.Location = new System.Drawing.Point(536, 20);
             this.label53.Name = "label53";
             this.label53.Size = new System.Drawing.Size(60, 13);
             this.label53.TabIndex = 8;
@@ -1775,7 +1799,7 @@
             // 
             // txtAnagRegMag
             // 
-            this.txtAnagRegMag.Location = new System.Drawing.Point(595, 48);
+            this.txtAnagRegMag.Location = new System.Drawing.Point(372, 47);
             this.txtAnagRegMag.Name = "txtAnagRegMag";
             this.txtAnagRegMag.Size = new System.Drawing.Size(144, 20);
             this.txtAnagRegMag.TabIndex = 7;
@@ -1784,7 +1808,7 @@
             // label52
             // 
             this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(592, 20);
+            this.label52.Location = new System.Drawing.Point(369, 20);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(58, 13);
             this.label52.TabIndex = 6;
@@ -1792,7 +1816,7 @@
             // 
             // txtNrDocRegMag
             // 
-            this.txtNrDocRegMag.Location = new System.Drawing.Point(445, 49);
+            this.txtNrDocRegMag.Location = new System.Drawing.Point(222, 47);
             this.txtNrDocRegMag.Name = "txtNrDocRegMag";
             this.txtNrDocRegMag.Size = new System.Drawing.Size(100, 20);
             this.txtNrDocRegMag.TabIndex = 5;
@@ -1801,33 +1825,15 @@
             // label51
             // 
             this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(442, 21);
+            this.label51.Location = new System.Drawing.Point(219, 20);
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(76, 13);
             this.label51.TabIndex = 4;
             this.label51.Text = "Nr Documento";
             // 
-            // ddlTipoMovimento
-            // 
-            this.ddlTipoMovimento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlTipoMovimento.FormattingEnabled = true;
-            this.ddlTipoMovimento.Location = new System.Drawing.Point(248, 48);
-            this.ddlTipoMovimento.Name = "ddlTipoMovimento";
-            this.ddlTipoMovimento.Size = new System.Drawing.Size(134, 21);
-            this.ddlTipoMovimento.TabIndex = 3;
-            // 
-            // label50
-            // 
-            this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(245, 21);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(83, 13);
-            this.label50.TabIndex = 2;
-            this.label50.Text = "Tipo Movimento";
-            // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(6, 48);
+            this.dateTimePicker1.Location = new System.Drawing.Point(6, 47);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker1.TabIndex = 1;
@@ -1835,7 +1841,7 @@
             // label49
             // 
             this.label49.AutoSize = true;
-            this.label49.Location = new System.Drawing.Point(6, 21);
+            this.label49.Location = new System.Drawing.Point(6, 20);
             this.label49.Name = "label49";
             this.label49.Size = new System.Drawing.Size(108, 13);
             this.label49.TabIndex = 0;
@@ -1862,23 +1868,6 @@
             // dataSet1
             // 
             this.dataSet1.DataSetName = "NewDataSet";
-            // 
-            // txtCodiceScheda
-            // 
-            this.txtCodiceScheda.Location = new System.Drawing.Point(431, 143);
-            this.txtCodiceScheda.Name = "txtCodiceScheda";
-            this.txtCodiceScheda.Size = new System.Drawing.Size(144, 20);
-            this.txtCodiceScheda.TabIndex = 25;
-            // 
-            // label56
-            // 
-            this.label56.AutoSize = true;
-            this.label56.Location = new System.Drawing.Point(428, 127);
-            this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(80, 13);
-            this.label56.TabIndex = 26;
-            this.label56.Text = "Codice Scheda";
-            this.label56.Click += new System.EventHandler(this.label56_Click);
             // 
             // MainForm
             // 
@@ -2081,16 +2070,15 @@
         private System.Windows.Forms.Label label52;
         private System.Windows.Forms.TextBox txtNrDocRegMag;
         private System.Windows.Forms.Label label51;
-        private System.Windows.Forms.ComboBox ddlTipoMovimento;
-        private System.Windows.Forms.Label label50;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button btnRegMag;
         private System.Windows.Forms.NumericUpDown nQuntitàRegMag;
         private System.Windows.Forms.Label label55;
-        private System.Windows.Forms.ComboBox ddlCodCollRegMag;
-        private System.Windows.Forms.Button btnEstraiMag;
         private System.Windows.Forms.TextBox txtCodiceScheda;
         private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.TextBox txtCollocazioneRegMag;
+        private System.Windows.Forms.Button btnLeggiRegMag;
+        private System.Windows.Forms.Button btnEseguiRegMag;
     }
 }
 
