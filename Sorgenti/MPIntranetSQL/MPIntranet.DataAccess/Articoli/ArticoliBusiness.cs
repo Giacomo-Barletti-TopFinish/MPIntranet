@@ -25,7 +25,12 @@ namespace MPIntranet.DataAccess.Articoli
             ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
             a.FillCARATTERISTICHE_ANAGRAFICA(ds, anagrafica);
         }
-
+        [DataContext]
+        public void GetBCMedia(ArticoliDS ds, Guid MediaSetID)
+        {
+            ArticoliAdapter a = new ArticoliAdapter(DbConnection, DbTransaction);
+            a.GetBCMedia(ds, MediaSetID);
+        }
         [DataContext]
         public void GetCicliBCCommenti(ArticoliDS ds, string codiceTestata)
         {

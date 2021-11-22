@@ -77,6 +77,11 @@ go
 CREATE VIEW [DBO].[VersamentiFasiOrdiniProduzione] as
 select * from [TEST].[dbo].[MetalPlus_WS$Capacity Ledger Entry$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
 
+go
+
+create VIEW [DBO].[BCMedia] as 
+select media.*,mediaset.ID as MediaSetID  from [TEST].[dbo].[Tenant Media Set] mediaset WITH (NOLOCK)
+inner join [TEST].[dbo].[Tenant Media] media WITH (NOLOCK) on media.ID = mediaset.[Media ID]
 GO
 USE [MPI]
 GO
@@ -120,3 +125,9 @@ select * from [PROD].[dbo].[MetalPlus$Prod_ Order Routing Line$437dbf0e-84ff-417
 go
 CREATE VIEW [DBO].[VersamentiFasiOrdiniProduzione] as
 select * from [PROD].[dbo].[MetalPlus$Capacity Ledger Entry$437dbf0e-84ff-417a-965d-ed2bb9650972]WITH (NOLOCK)
+
+go
+
+CREATE VIEW [DBO].[BCMedia] as 
+select media.*,mediaset.ID as MediaSetID  from [PROD].[dbo].[Tenant Media Set] mediaset WITH (NOLOCK)
+inner join [PROD].[dbo].[Tenant Media] media WITH (NOLOCK) on media.ID = mediaset.[Media ID]

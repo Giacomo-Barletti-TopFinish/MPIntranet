@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -816,7 +817,7 @@ namespace TestWebServicesFrm
 
                 BCServices bc = new BCServices();
                 bc.CreaConnessione(azienda);
-                bc.CreaRegistrazioneMagazzino(txtUbiRegMag.Text, txtCollocazioneRegMag.Text,1000, txtNrDocRegMag.Text, nQuntitàRegMag.Value, txtAnagRegMag.Text);
+                bc.CreaRegistrazioneMagazzino(txtUbiRegMag.Text, txtCollocazioneRegMag.Text, 1000, txtNrDocRegMag.Text, nQuntitàRegMag.Value, txtAnagRegMag.Text);
                 txtMessaggio.Text = "Operazione terminata con successo";
             }
             catch (Exception ex)
@@ -862,6 +863,49 @@ namespace TestWebServicesFrm
 
         }
 
-        
+        private void btnAnagraficaEstraiImmagine_Click(object sender, EventArgs e)
+        {
+
+            txtMessaggio.Text = string.Empty;
+            try
+            {
+                Item item = Item.EstraiItem(txtAnagrafica.Text);
+                if (item == null) return;
+
+                string filename;
+
+                byte[] immagine = item.EstraiImmagine(out filename);
+
+                string path = @"c:\test\" + filename;
+
+                if (immagine == null) return;
+
+                FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);
+
+                fs.Write(immagine, 0, immagine.Length);
+                fs.Flush();
+                fs.Close();
+
+
+
+                txtMessaggio.Text = path;
+            }
+            catch (Exception ex)
+            {
+                txtMessaggio.Text = estraiErrore(ex);
+            }
+        }
+
+        static string BytesToString(byte[] bytes)
+        {
+            using (MemoryStream stream = new MemoryStream(bytes))
+            {
+                using (StreamReader streamReader = new StreamReader(stream))
+                {
+                    return streamReader.ReadToEnd();
+                }
+            }
+        }
+
     }
 }

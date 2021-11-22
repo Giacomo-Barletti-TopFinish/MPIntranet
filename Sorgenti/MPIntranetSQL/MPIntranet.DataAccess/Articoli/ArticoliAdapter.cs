@@ -42,6 +42,18 @@ namespace MPIntranet.DataAccess.Articoli
             }
         }
 
+        public void GetBCMedia(ArticoliDS ds, Guid MediaSetID)
+        {
+            string select = @"SELECT * FROM BCMedia WHERE MediaSetID =$P<MediaSetID> ";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("MediaSetID", DbType.Guid, MediaSetID);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.BCMedia);
+            }
+        }
         public void GetDistintaBase(ArticoliDS ds, int idDiba)
         {
             string select = @"SELECT * FROM DIBA WHERE IDDIBA = $P<IDDIBA>";

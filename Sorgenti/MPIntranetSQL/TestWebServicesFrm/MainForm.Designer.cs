@@ -187,6 +187,7 @@
             this.label48 = new System.Windows.Forms.Label();
             this.ddlAziende = new System.Windows.Forms.ComboBox();
             this.dataSet1 = new System.Data.DataSet();
+            this.btnAnagraficaEstraiImmagine = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -1374,6 +1375,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.btnAnagraficaEstraiImmagine);
             this.groupBox5.Controls.Add(this.btnConfrontaAnagrafiche);
             this.groupBox5.Controls.Add(this.btnEstraiAllegato);
             this.groupBox5.Controls.Add(this.btnEstraiAnagrafica);
@@ -1869,6 +1871,16 @@
             // 
             this.dataSet1.DataSetName = "NewDataSet";
             // 
+            // btnAnagraficaEstraiImmagine
+            // 
+            this.btnAnagraficaEstraiImmagine.Location = new System.Drawing.Point(783, 33);
+            this.btnAnagraficaEstraiImmagine.Name = "btnAnagraficaEstraiImmagine";
+            this.btnAnagraficaEstraiImmagine.Size = new System.Drawing.Size(106, 23);
+            this.btnAnagraficaEstraiImmagine.TabIndex = 3;
+            this.btnAnagraficaEstraiImmagine.Text = "Estrai immagine";
+            this.btnAnagraficaEstraiImmagine.UseVisualStyleBackColor = true;
+            this.btnAnagraficaEstraiImmagine.Click += new System.EventHandler(this.btnAnagraficaEstraiImmagine_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2079,6 +2091,7 @@
         private System.Windows.Forms.TextBox txtCollocazioneRegMag;
         private System.Windows.Forms.Button btnLeggiRegMag;
         private System.Windows.Forms.Button btnEseguiRegMag;
+        private System.Windows.Forms.Button btnAnagraficaEstraiImmagine;
     }
 }
 

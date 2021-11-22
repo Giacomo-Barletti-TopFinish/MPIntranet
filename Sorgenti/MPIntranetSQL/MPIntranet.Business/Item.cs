@@ -15,6 +15,7 @@ namespace MPIntranet.Business
     {
         public string Anagrafica { get; set; }
         public string Descrizione { get; set; }
+        private Guid Picture { get; set; }
         public string UM { get; set; }
         private CaratteristicheItem _caratteristiche;
         public CaratteristicheItem Caratteristiche
@@ -52,6 +53,7 @@ namespace MPIntranet.Business
             item.Anagrafica = riga.No_;
             item.Descrizione = riga.Description;
             item.UM = riga.Base_Unit_of_Measure;
+            item.Picture = riga.Picture;
             return item;
         }
         public static bool VerificaEsistenzaItem(string anagrafica)
@@ -64,10 +66,41 @@ namespace MPIntranet.Business
 
             return ds.Items.Any(x => x.No_ == anagrafica);
         }
+        public static Item EstraiItem(string anagrafica)
+        {
+            anagrafica = anagrafica.Trim();
+            ArticoliDS ds = new ArticoliDS();
+            using (ArticoliBusiness bArticolo = new ArticoliBusiness())
+            {
+                bArticolo.GetItem(ds, anagrafica);
+            }
 
+            ArticoliDS.ItemsRow riga = ds.Items.Where(x => x.No_ == anagrafica).FirstOrDefault();
+            if (riga == null) return null;
+
+
+            return CreaItem(riga);
+        }
         public override string ToString()
         {
             return Anagrafica;
+        }
+
+        public byte[] EstraiImmagine(out string fileName)
+        {
+            fileName = string.Empty;
+            if(Picture != Guid.Empty)
+            {
+                ArticoliDS ds = new ArticoliDS();
+                using (ArticoliBusiness bArticolo = new ArticoliBusiness())
+                {
+                    bArticolo.GetBCMedia(ds, Picture);
+                }
+                ArticoliDS.BCMediaRow media = ds.BCMedia.Where(x => x.MediaSetID == Picture).FirstOrDefault();
+                fileName = media.File_Name;
+                return media.Content;
+            }
+            return null;
         }
     }
 

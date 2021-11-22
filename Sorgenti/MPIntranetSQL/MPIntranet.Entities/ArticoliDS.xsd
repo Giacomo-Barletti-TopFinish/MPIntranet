@@ -1441,6 +1441,67 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="BCMedia" msprop:Generator_TableClassName="BCMediaDataTable" msprop:Generator_TableVarName="tableBCMedia" msprop:Generator_TablePropName="BCMedia" msprop:Generator_RowDeletingName="BCMediaRowDeleting" msprop:Generator_RowChangingName="BCMediaRowChanging" msprop:Generator_RowEvHandlerName="BCMediaRowChangeEventHandler" msprop:Generator_RowDeletedName="BCMediaRowDeleted" msprop:Generator_UserTableName="BCMedia" msprop:Generator_RowChangedName="BCMediaRowChanged" msprop:Generator_RowEvArgName="BCMediaRowChangeEvent" msprop:Generator_RowClassName="BCMediaRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="timestamp" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columntimestamp" msprop:Generator_ColumnPropNameInRow="timestamp" msprop:Generator_ColumnPropNameInTable="timestampColumn" msprop:Generator_UserColumnName="timestamp" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="ID" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:string" />
+              <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="250" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Content" msprop:Generator_ColumnVarNameInTable="columnContent" msprop:Generator_ColumnPropNameInRow="Content" msprop:Generator_ColumnPropNameInTable="ContentColumn" msprop:Generator_UserColumnName="Content" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="Mime_x0020_Type" msprop:Generator_ColumnVarNameInTable="columnMime_Type" msprop:Generator_ColumnPropNameInRow="Mime_Type" msprop:Generator_ColumnPropNameInTable="Mime_TypeColumn" msprop:Generator_UserColumnName="Mime Type">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Height" msprop:Generator_ColumnVarNameInTable="columnHeight" msprop:Generator_ColumnPropNameInRow="Height" msprop:Generator_ColumnPropNameInTable="HeightColumn" msprop:Generator_UserColumnName="Height" type="xs:int" />
+              <xs:element name="Width" msprop:Generator_ColumnVarNameInTable="columnWidth" msprop:Generator_ColumnPropNameInRow="Width" msprop:Generator_ColumnPropNameInTable="WidthColumn" msprop:Generator_UserColumnName="Width" type="xs:int" />
+              <xs:element name="Company_x0020_Name" msprop:Generator_ColumnVarNameInTable="columnCompany_Name" msprop:Generator_ColumnPropNameInRow="Company_Name" msprop:Generator_ColumnPropNameInTable="Company_NameColumn" msprop:Generator_UserColumnName="Company Name">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Expiration_x0020_Date" msprop:Generator_ColumnVarNameInTable="columnExpiration_Date" msprop:Generator_ColumnPropNameInRow="Expiration_Date" msprop:Generator_ColumnPropNameInTable="Expiration_DateColumn" msprop:Generator_UserColumnName="Expiration Date" type="xs:dateTime" />
+              <xs:element name="Prohibit_x0020_Cache" msprop:Generator_ColumnVarNameInTable="columnProhibit_Cache" msprop:Generator_ColumnPropNameInRow="Prohibit_Cache" msprop:Generator_ColumnPropNameInTable="Prohibit_CacheColumn" msprop:Generator_UserColumnName="Prohibit Cache" type="xs:unsignedByte" />
+              <xs:element name="File_x0020_Name" msprop:Generator_ColumnVarNameInTable="columnFile_Name" msprop:Generator_ColumnPropNameInRow="File_Name" msprop:Generator_ColumnPropNameInTable="File_NameColumn" msprop:Generator_UserColumnName="File Name">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="250" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Security_x0020_Token" msprop:Generator_ColumnVarNameInTable="columnSecurity_Token" msprop:Generator_ColumnPropNameInRow="Security_Token" msprop:Generator_ColumnPropNameInTable="Security_TokenColumn" msprop:Generator_UserColumnName="Security Token">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Creating_x0020_User" msprop:Generator_ColumnVarNameInTable="columnCreating_User" msprop:Generator_ColumnPropNameInRow="Creating_User" msprop:Generator_ColumnPropNameInTable="Creating_UserColumn" msprop:Generator_UserColumnName="Creating User">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="_x0024_systemId" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_ColumnVarNameInTable="_column_systemId" msprop:Generator_ColumnPropNameInRow="__systemId" msprop:Generator_ColumnPropNameInTable="__systemIdColumn" msprop:Generator_UserColumnName="$systemId" type="xs:string" />
+              <xs:element name="_x0024_systemCreatedAt" msprop:Generator_ColumnVarNameInTable="_column_systemCreatedAt" msprop:Generator_ColumnPropNameInRow="__systemCreatedAt" msprop:Generator_ColumnPropNameInTable="__systemCreatedAtColumn" msprop:Generator_UserColumnName="$systemCreatedAt" type="xs:dateTime" />
+              <xs:element name="_x0024_systemCreatedBy" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_ColumnVarNameInTable="_column_systemCreatedBy" msprop:Generator_ColumnPropNameInRow="__systemCreatedBy" msprop:Generator_ColumnPropNameInTable="__systemCreatedByColumn" msprop:Generator_UserColumnName="$systemCreatedBy" type="xs:string" />
+              <xs:element name="_x0024_systemModifiedAt" msprop:Generator_ColumnVarNameInTable="_column_systemModifiedAt" msprop:Generator_ColumnPropNameInRow="__systemModifiedAt" msprop:Generator_ColumnPropNameInTable="__systemModifiedAtColumn" msprop:Generator_UserColumnName="$systemModifiedAt" type="xs:dateTime" />
+              <xs:element name="_x0024_systemModifiedBy" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_ColumnVarNameInTable="_column_systemModifiedBy" msprop:Generator_ColumnPropNameInRow="__systemModifiedBy" msprop:Generator_ColumnPropNameInTable="__systemModifiedByColumn" msprop:Generator_UserColumnName="$systemModifiedBy" type="xs:string" />
+              <xs:element name="MediaSetID" msdata:DataType="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_ColumnVarNameInTable="columnMediaSetID" msprop:Generator_ColumnPropNameInRow="MediaSetID" msprop:Generator_ColumnPropNameInTable="MediaSetIDColumn" msprop:Generator_UserColumnName="MediaSetID" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
