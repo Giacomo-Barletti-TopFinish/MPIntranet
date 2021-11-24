@@ -97,8 +97,23 @@ namespace MPIntranet.WS
             catch
             {
                 return null;
+            } 
+        }
+        public List<PrezziContoLavoro> EstraiListiniContoLavoro()
+        {
+            if (_nav == null) return null;
+            try
+            {
+                return _nav.PrezziContoLavoro.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+                return null;
             }
         }
+
+
         public Articoli EstraiArticolo(string Anagrafica)
         {
             if (_nav == null) return null;
@@ -357,7 +372,7 @@ namespace MPIntranet.WS
             List<CommentiFasi> t = _nav.CommentiFasi.Where(x => x.Routing_No == NoCiclo && x.Version_Code == versioneCiclo).ToList();
             return t;
         }
-
+       
         public void RimuoviCommento(string NoCiclo, string versioneCiclo, string operazione, bool conSalvataggio)
         {
             List<CommentiFasi> commenti = _nav.CommentiFasi.Where(x => x.Routing_No == NoCiclo && x.Version_Code == versioneCiclo).ToList();
@@ -443,6 +458,27 @@ namespace MPIntranet.WS
             Salva();
             return oDP.No;
         }
+        public string CreaListino(string Anagrafica, string Terzista, string Task, DateTime DataInizio,DateTime DataFine)
+
+        {
+
+            NAV.PrezziContoLavoro listini = new PrezziContoLavoro();
+
+            listini.Item_No = Anagrafica;
+            listini.Work_Center_No = Terzista;
+            listini.Standard_Task_Code = Task;
+            listini.Currency_Code = string.Empty;
+            listini.Unit_of_Measure_Code = string.Empty;
+            listini.Variant_Code = string.Empty;
+            listini.Vendor_No = string.Empty;
+            listini.Start_Date = DataInizio;
+            listini.End_Date = DataFine;
+
+            _nav.AddToPrezziContoLavoro(listini);
+            Salva();
+           
+            return listini.Item_No;
+        }
         public void RegMag(string Anagrafica, DateTime Due_Date, decimal Quantity, string Location_Code, string Description, string Description2)
 
         {
@@ -506,7 +542,6 @@ namespace MPIntranet.WS
             return t;
 
         }
-
     }
 
 }

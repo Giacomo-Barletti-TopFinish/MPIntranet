@@ -138,6 +138,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btnAnagraficaEstraiImmagine = new System.Windows.Forms.Button();
             this.btnConfrontaAnagrafiche = new System.Windows.Forms.Button();
             this.btnEstraiAllegato = new System.Windows.Forms.Button();
             this.btnEstraiAnagrafica = new System.Windows.Forms.Button();
@@ -184,10 +185,25 @@
             this.label51 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label49 = new System.Windows.Forms.Label();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.btnCreaListino = new System.Windows.Forms.Button();
+            this.label57 = new System.Windows.Forms.Label();
+            this.txtNomeTerzista = new System.Windows.Forms.TextBox();
+            this.ddlTaskContoLav = new System.Windows.Forms.Label();
+            this.ddlTaskContoLavoro = new System.Windows.Forms.ComboBox();
+            this.label50 = new System.Windows.Forms.Label();
+            this.txtAnagContLavoro = new System.Windows.Forms.TextBox();
+            this.btnEstraiListiniContLav = new System.Windows.Forms.Button();
             this.label48 = new System.Windows.Forms.Label();
             this.ddlAziende = new System.Windows.Forms.ComboBox();
             this.dataSet1 = new System.Data.DataSet();
-            this.btnAnagraficaEstraiImmagine = new System.Windows.Forms.Button();
+            this.Listini = new System.Windows.Forms.GroupBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.dtInizioListinoContoLav = new System.Windows.Forms.DateTimePicker();
+            this.dtFineListinoContoLav = new System.Windows.Forms.DateTimePicker();
+            this.label58 = new System.Windows.Forms.Label();
+            this.label59 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -212,7 +228,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nQuntitàOdP)).BeginInit();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nQuntitàRegMag)).BeginInit();
+            this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
+            this.Listini.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtMessaggio
@@ -1356,6 +1374,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Location = new System.Drawing.Point(12, 34);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -1392,6 +1411,16 @@
             this.groupBox5.TabIndex = 4;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Anagrafiche";
+            // 
+            // btnAnagraficaEstraiImmagine
+            // 
+            this.btnAnagraficaEstraiImmagine.Location = new System.Drawing.Point(783, 33);
+            this.btnAnagraficaEstraiImmagine.Name = "btnAnagraficaEstraiImmagine";
+            this.btnAnagraficaEstraiImmagine.Size = new System.Drawing.Size(106, 23);
+            this.btnAnagraficaEstraiImmagine.TabIndex = 3;
+            this.btnAnagraficaEstraiImmagine.Text = "Estrai immagine";
+            this.btnAnagraficaEstraiImmagine.UseVisualStyleBackColor = true;
+            this.btnAnagraficaEstraiImmagine.Click += new System.EventHandler(this.btnAnagraficaEstraiImmagine_Click);
             // 
             // btnConfrontaAnagrafiche
             // 
@@ -1600,7 +1629,6 @@
             this.btnEstraiOdP.TabIndex = 9;
             this.btnEstraiOdP.Text = "Estrai lista ODP";
             this.btnEstraiOdP.UseVisualStyleBackColor = true;
-            this.btnEstraiOdP.Click += new System.EventHandler(this.btnEstraiOdP_Click);
             // 
             // btnCreaOdP
             // 
@@ -1711,7 +1739,7 @@
             // 
             // btnEseguiRegMag
             // 
-            this.btnEseguiRegMag.Location = new System.Drawing.Point(484, 118);
+            this.btnEseguiRegMag.Location = new System.Drawing.Point(492, 124);
             this.btnEseguiRegMag.Name = "btnEseguiRegMag";
             this.btnEseguiRegMag.Size = new System.Drawing.Size(189, 23);
             this.btnEseguiRegMag.TabIndex = 17;
@@ -1849,6 +1877,91 @@
             this.label49.TabIndex = 0;
             this.label49.Text = "Data di Registrazione";
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.groupBox7);
+            this.tabPage5.Controls.Add(this.groupBox6);
+            this.tabPage5.Controls.Add(this.Listini);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(1232, 596);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Listini conto lavoro";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // btnCreaListino
+            // 
+            this.btnCreaListino.Location = new System.Drawing.Point(1125, 13);
+            this.btnCreaListino.Name = "btnCreaListino";
+            this.btnCreaListino.Size = new System.Drawing.Size(92, 22);
+            this.btnCreaListino.TabIndex = 5;
+            this.btnCreaListino.Text = "Crea Listino";
+            this.btnCreaListino.UseVisualStyleBackColor = true;
+            this.btnCreaListino.Click += new System.EventHandler(this.btnCreaListino_Click);
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(12, 26);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(44, 13);
+            this.label57.TabIndex = 24;
+            this.label57.Text = "Terzista";
+            // 
+            // txtNomeTerzista
+            // 
+            this.txtNomeTerzista.Location = new System.Drawing.Point(15, 42);
+            this.txtNomeTerzista.Name = "txtNomeTerzista";
+            this.txtNomeTerzista.Size = new System.Drawing.Size(170, 20);
+            this.txtNomeTerzista.TabIndex = 0;
+            // 
+            // ddlTaskContoLav
+            // 
+            this.ddlTaskContoLav.AutoSize = true;
+            this.ddlTaskContoLav.Location = new System.Drawing.Point(374, 26);
+            this.ddlTaskContoLav.Name = "ddlTaskContoLav";
+            this.ddlTaskContoLav.Size = new System.Drawing.Size(31, 13);
+            this.ddlTaskContoLav.TabIndex = 22;
+            this.ddlTaskContoLav.Text = "Task";
+            // 
+            // ddlTaskContoLavoro
+            // 
+            this.ddlTaskContoLavoro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlTaskContoLavoro.FormattingEnabled = true;
+            this.ddlTaskContoLavoro.Location = new System.Drawing.Point(377, 42);
+            this.ddlTaskContoLavoro.Name = "ddlTaskContoLavoro";
+            this.ddlTaskContoLavoro.Size = new System.Drawing.Size(177, 21);
+            this.ddlTaskContoLavoro.TabIndex = 2;
+            this.ddlTaskContoLavoro.SelectedIndexChanged += new System.EventHandler(this.ddlTaskContoLavoro_SelectedIndexChanged);
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(195, 26);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(58, 13);
+            this.label50.TabIndex = 20;
+            this.label50.Text = "Anagrafica";
+            // 
+            // txtAnagContLavoro
+            // 
+            this.txtAnagContLavoro.Location = new System.Drawing.Point(198, 42);
+            this.txtAnagContLavoro.MaxLength = 20;
+            this.txtAnagContLavoro.Name = "txtAnagContLavoro";
+            this.txtAnagContLavoro.Size = new System.Drawing.Size(170, 20);
+            this.txtAnagContLavoro.TabIndex = 1;
+            // 
+            // btnEstraiListiniContLav
+            // 
+            this.btnEstraiListiniContLav.Location = new System.Drawing.Point(1125, 41);
+            this.btnEstraiListiniContLav.Name = "btnEstraiListiniContLav";
+            this.btnEstraiListiniContLav.Size = new System.Drawing.Size(92, 22);
+            this.btnEstraiListiniContLav.TabIndex = 6;
+            this.btnEstraiListiniContLav.Text = "Estrai Listini";
+            this.btnEstraiListiniContLav.UseVisualStyleBackColor = true;
+            this.btnEstraiListiniContLav.Click += new System.EventHandler(this.btnEstraiListiniContLav_Click);
+            // 
             // label48
             // 
             this.label48.AutoSize = true;
@@ -1865,21 +1978,82 @@
             this.ddlAziende.Location = new System.Drawing.Point(87, 6);
             this.ddlAziende.Name = "ddlAziende";
             this.ddlAziende.Size = new System.Drawing.Size(160, 21);
-            this.ddlAziende.TabIndex = 7;
+            this.ddlAziende.TabIndex = 0;
             // 
             // dataSet1
             // 
             this.dataSet1.DataSetName = "NewDataSet";
             // 
-            // btnAnagraficaEstraiImmagine
+            // Listini
             // 
-            this.btnAnagraficaEstraiImmagine.Location = new System.Drawing.Point(783, 33);
-            this.btnAnagraficaEstraiImmagine.Name = "btnAnagraficaEstraiImmagine";
-            this.btnAnagraficaEstraiImmagine.Size = new System.Drawing.Size(106, 23);
-            this.btnAnagraficaEstraiImmagine.TabIndex = 3;
-            this.btnAnagraficaEstraiImmagine.Text = "Estrai immagine";
-            this.btnAnagraficaEstraiImmagine.UseVisualStyleBackColor = true;
-            this.btnAnagraficaEstraiImmagine.Click += new System.EventHandler(this.btnAnagraficaEstraiImmagine_Click);
+            this.Listini.Controls.Add(this.label59);
+            this.Listini.Controls.Add(this.label58);
+            this.Listini.Controls.Add(this.dtFineListinoContoLav);
+            this.Listini.Controls.Add(this.dtInizioListinoContoLav);
+            this.Listini.Controls.Add(this.btnCreaListino);
+            this.Listini.Controls.Add(this.btnEstraiListiniContLav);
+            this.Listini.Controls.Add(this.label57);
+            this.Listini.Controls.Add(this.txtAnagContLavoro);
+            this.Listini.Controls.Add(this.txtNomeTerzista);
+            this.Listini.Controls.Add(this.label50);
+            this.Listini.Controls.Add(this.ddlTaskContoLav);
+            this.Listini.Controls.Add(this.ddlTaskContoLavoro);
+            this.Listini.Location = new System.Drawing.Point(7, 6);
+            this.Listini.Name = "Listini";
+            this.Listini.Size = new System.Drawing.Size(1219, 75);
+            this.Listini.TabIndex = 0;
+            this.Listini.TabStop = false;
+            this.Listini.Text = "Listini";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Location = new System.Drawing.Point(7, 88);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(1219, 81);
+            this.groupBox6.TabIndex = 27;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Caratteristiche";
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Location = new System.Drawing.Point(9, 170);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(1216, 63);
+            this.groupBox7.TabIndex = 28;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Listini Validi";
+            // 
+            // dtInizioListinoContoLav
+            // 
+            this.dtInizioListinoContoLav.Location = new System.Drawing.Point(561, 42);
+            this.dtInizioListinoContoLav.Name = "dtInizioListinoContoLav";
+            this.dtInizioListinoContoLav.Size = new System.Drawing.Size(200, 20);
+            this.dtInizioListinoContoLav.TabIndex = 3;
+            // 
+            // dtFineListinoContoLav
+            // 
+            this.dtFineListinoContoLav.Location = new System.Drawing.Point(784, 43);
+            this.dtFineListinoContoLav.Name = "dtFineListinoContoLav";
+            this.dtFineListinoContoLav.Size = new System.Drawing.Size(200, 20);
+            this.dtFineListinoContoLav.TabIndex = 4;
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Location = new System.Drawing.Point(558, 22);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(85, 13);
+            this.label58.TabIndex = 28;
+            this.label58.Text = "Data inizio listino";
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(781, 22);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(79, 13);
+            this.label59.TabIndex = 29;
+            this.label59.Text = "Data fine listino";
             // 
             // MainForm
             // 
@@ -1924,7 +2098,10 @@
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nQuntitàRegMag)).EndInit();
+            this.tabPage5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
+            this.Listini.ResumeLayout(false);
+            this.Listini.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2092,6 +2269,22 @@
         private System.Windows.Forms.Button btnLeggiRegMag;
         private System.Windows.Forms.Button btnEseguiRegMag;
         private System.Windows.Forms.Button btnAnagraficaEstraiImmagine;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Button btnEstraiListiniContLav;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.TextBox txtNomeTerzista;
+        private System.Windows.Forms.Label ddlTaskContoLav;
+        private System.Windows.Forms.ComboBox ddlTaskContoLavoro;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.TextBox txtAnagContLavoro;
+        private System.Windows.Forms.Button btnCreaListino;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.GroupBox Listini;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.DateTimePicker dtFineListinoContoLav;
+        private System.Windows.Forms.DateTimePicker dtInizioListinoContoLav;
     }
 }
 

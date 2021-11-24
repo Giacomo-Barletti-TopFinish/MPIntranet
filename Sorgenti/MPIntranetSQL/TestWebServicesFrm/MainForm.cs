@@ -355,10 +355,22 @@ namespace TestWebServicesFrm
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            List<AreaProduzione> aree = MPIntranet.Business.AreaProduzione.EstraiListaAreeProduzione();
-            ddlAreaProduzione.Items.AddRange(aree.ToArray());
+            caricaddlAreaProduzione();
+            caricaddlTask();
             estraiAziende();
         }
+
+        private void caricaddlAreaProduzione()
+        {
+            List<AreaProduzione> aree = MPIntranet.Business.AreaProduzione.EstraiListaAreeProduzione();
+            ddlAreaProduzione.Items.AddRange(aree.ToArray());
+        }
+        private void caricaddlTask()
+        {
+            List<MPIntranet.Business.Task> tasks = MPIntranet.Business.Task.EstraiListaTask();
+            ddlTaskContoLavoro.Items.AddRange(tasks.ToArray());
+        }
+
         private void estraiAziende()
         {
             ddlAziende.Items.Clear();
@@ -703,7 +715,7 @@ namespace TestWebServicesFrm
             }
         }
 
-        private void btnEstraiOdP_Click(object sender, EventArgs e)
+        private void BtnEstraiOdP_Click(object sender, EventArgs e)
         {
             txtMessaggio.Text = string.Empty;
             try
@@ -744,6 +756,29 @@ namespace TestWebServicesFrm
                 txtDescrizioneOdP.Text = String.Empty;
                 txtDescrizione2.Text = String.Empty;
                 txtMessaggio.Text = "Descrizione Cambiata Correttamente";
+            }
+            catch (Exception ex)
+            {
+                txtMessaggio.Text = estraiErrore(ex);
+            }
+        }
+        private void btnEstraiOdP_Click(object sender, EventArgs e)
+        {
+            txtMessaggio.Text = string.Empty;
+            try
+            {
+                string azienda = (string)ddlAziende.SelectedItem;
+                BCServices bc = new BCServices();
+                bc.CreaConnessione(azienda);
+                List<ODPConfermato> odps = bc.EstraiOdPConfermati();
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(string.Format("Trovati {0} odp confermati", odps.Count));
+                sb.AppendLine(string.Empty);
+                foreach (ODPConfermato o in odps)
+                {
+                    sb.AppendLine(string.Format("{0} # {1}", o.No, o.Source_No));
+                }
+                txtMessaggio.Text = sb.ToString();
             }
             catch (Exception ex)
             {
@@ -907,5 +942,104 @@ namespace TestWebServicesFrm
             }
         }
 
+        private void btnEstraiListiniContLav_Click(object sender, EventArgs e)
+        { {
+                txtMessaggio.Text = string.Empty;
+                try
+                {
+                    if (ddlAziende.SelectedIndex < 0)
+                    {
+                        txtMessaggio.Text = "Selezionare un'azienda";
+                        return;
+                    }
+                    string azienda = (string)ddlAziende.SelectedItem;
+                    BCServices bc = new BCServices();
+                    bc.CreaConnessione(azienda);
+                    List<PrezziContoLavoro> listini = bc.EstraiListiniContoLavoro();
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendLine(string.Format("Trovati {0} listini ", listini.Count));
+                    sb.AppendLine(string.Empty);
+                    foreach (PrezziContoLavoro o in listini)
+                    {
+                        sb.AppendLine(string.Format("{0} # {1} # {2}", o.Item_No, o.Standard_Task_Code, o.Start_Date.ToString()));
+                    }
+
+                    txtMessaggio.Text = sb.ToString();
+                }
+                catch (Exception ex)
+                {
+                    txtMessaggio.Text = estraiErrore(ex);
+                }
+            }
+        }
+
+        private void ddlTaskContoLavoro_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtMessaggio.Text = string.Empty;
+            try
+            {
+                if (string.IsNullOrEmpty(ddlTaskContoLavoro.Text))
+                {
+                    txtMessaggio.Text = "Inserire un codice task";
+                    return;
+                }
+                BCServices bc = new BCServices();
+                bc.CreaConnessione();
+                StringBuilder sb = new StringBuilder();
+                IList<PrezziContoLavoro> task = bc.EstraiListiniContoLavoro();
+                foreach (PrezziContoLavoro o in task)
+                {
+                    sb.AppendLine(ddlTaskContoLavoro.Text);
+                }
+            }
+            catch (Exception ex)
+            {
+                txtMessaggio.Text = estraiErrore(ex);
+            }
+
+        } 
+        
+        private void btnCreaListino_Click(object sender, EventArgs e)
+        {
+            txtMessaggio.Text = string.Empty;
+            if (ddlAziende.SelectedIndex == -1)
+            {
+                txtMessaggio.Text = "Selezionare un'azienda";
+                return;
+            }
+            try
+            {
+                if (string.IsNullOrEmpty(txtNomeTerzista.Text))
+                {
+                    txtMessaggio.Text = "Inserisci il terzista di destinazione";
+                    return;
+                }
+                if (string.IsNullOrEmpty(txtAnagContLavoro.Text))
+                {
+                    txtMessaggio.Text = "Inserire un codice Anagrafica";
+                    return;
+                }
+                
+                if (string.IsNullOrEmpty(ddlTaskContoLavoro.Text))
+                {
+                    txtMessaggio.Text = "Inserisci il task da eseguire";
+                    return;
+                }
+                
+
+                string azienda = (string)ddlAziende.SelectedItem;
+                BCServices bc = new BCServices();
+                bc.CreaConnessione(azienda);
+                StringBuilder sb = new StringBuilder();
+                bc.CreaListino(txtAnagContLavoro.Text,txtNomeTerzista.Text,ddlTaskContoLavoro.Text,dtInizioListinoContoLav.Value,dtFineListinoContoLav.Value);
+                txtMessaggio.Text = "Listino Creato Correttamente";
+            }
+            catch (Exception ex)
+            {
+                txtMessaggio.Text = estraiErrore(ex);
+            }
+        }
+
+        
     }
 }
