@@ -39,7 +39,7 @@ namespace MPIntranet.WS
             ws.ClientCredentials.UserName.Password = _password;
             ws.WSPostItemJnl();
         }
-        private ServicePostingRegMag.PostingRegMag_PortClient CreaFileManagement()
+        public FileManager.FileManagement_PortClient CreaFileManagement()
         {
             string url = "https://srv-bc.viamattei.metal-plus.it:7147/PROD_WS/WS/METALPLUS/Codeunit/FileManagement";
             if (_azienda != "METALPLUS")
@@ -49,7 +49,7 @@ namespace MPIntranet.WS
             binding.Security.Mode = BasicHttpSecurityMode.Transport;
             binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
 
-            ServicePostingRegMag.PostingRegMag_PortClient ws = new ServicePostingRegMag.PostingRegMag_PortClient(binding, new EndpointAddress(url));
+            FileManager.FileManagement_PortClient ws = new FileManager.FileManagement_PortClient(binding, new EndpointAddress(url));
             ws.ClientCredentials.UserName.UserName = _user;
             ws.ClientCredentials.UserName.Password = _password;
 

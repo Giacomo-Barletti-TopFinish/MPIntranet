@@ -943,7 +943,8 @@ namespace TestWebServicesFrm
         }
 
         private void btnEstraiListiniContLav_Click(object sender, EventArgs e)
-        { {
+        {
+            {
                 txtMessaggio.Text = string.Empty;
                 try
                 {
@@ -961,7 +962,7 @@ namespace TestWebServicesFrm
                     sb.AppendLine(string.Empty);
                     foreach (PrezziContoLavoro o in listini)
                     {
-                        sb.AppendLine(string.Format("{0} # {1} # {2} # {3} € ", o.Item_No, o.Standard_Task_Code, o.Start_Date.ToString(),o.Direct_Unit_Cost));
+                        sb.AppendLine(string.Format("{0} # {1} # {2} # {3} € ", o.Item_No, o.Standard_Task_Code, o.Start_Date.ToString(), o.Direct_Unit_Cost));
                     }
 
                     txtMessaggio.Text = sb.ToString();
@@ -997,8 +998,8 @@ namespace TestWebServicesFrm
                 txtMessaggio.Text = estraiErrore(ex);
             }
 
-        } 
-        
+        }
+
         private void btnCreaListino_Click(object sender, EventArgs e)
         {
             txtMessaggio.Text = string.Empty;
@@ -1019,13 +1020,13 @@ namespace TestWebServicesFrm
                     txtMessaggio.Text = "Inserire un codice Anagrafica";
                     return;
                 }
-                
+
                 if (string.IsNullOrEmpty(ddlTaskContoLavoro.Text))
                 {
                     txtMessaggio.Text = "Inserisci il task da eseguire";
                     return;
                 }
-                
+
 
                 string azienda = (string)ddlAziende.SelectedItem;
                 BCServices bc = new BCServices();
@@ -1039,7 +1040,5 @@ namespace TestWebServicesFrm
                 txtMessaggio.Text = estraiErrore(ex);
             }
         }
-
-        
     }
 }
