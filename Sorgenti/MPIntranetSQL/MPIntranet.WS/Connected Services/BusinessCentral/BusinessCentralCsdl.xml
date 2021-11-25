@@ -1731,6 +1731,142 @@
         </NavigationProperty>
         <Annotation Term="NAV.LabelId" String="Articoli" />
       </EntityType>
+      <EntityType Name="CaratteristicheCFG">
+        <Key>
+          <PropertyRef Name="Code" />
+        </Key>
+        <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10">
+          <Annotation Term="NAV.LabelId" String="Codice" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+          <Annotation Term="NAV.AllowEditOnCreate" Bool="true" />
+        </Property>
+        <Property Name="Description" Type="Edm.String" MaxLength="100">
+          <Annotation Term="NAV.LabelId" String="Descrizione" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="MaxLenght" Type="Edm.Int32">
+          <Annotation Term="NAV.LabelId" String="Lunghezza massima" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Int</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="DecodingType" Type="Edm.String">
+          <Annotation Term="NAV.LabelId" String="Tipo decodifica" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="WithoutValues" Type="Edm.Boolean">
+          <Annotation Term="NAV.LabelId" String="Senza valori" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Bool</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Acronym" Type="Edm.String" MaxLength="60">
+          <Annotation Term="NAV.LabelId" String="Acronimo" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Sequence" Type="Edm.Int32">
+          <Annotation Term="NAV.LabelId" String="Sequenza" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Int</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Mandatory" Type="Edm.String">
+          <Annotation Term="NAV.LabelId" String="Obbligatorio" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="UseCode" Type="Edm.Boolean">
+          <Annotation Term="NAV.LabelId" String="Usa codice" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Bool</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="UseDescription" Type="Edm.Boolean">
+          <Annotation Term="NAV.LabelId" String="Usa descrizione" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Bool</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Master" Type="Edm.Boolean">
+          <Annotation Term="NAV.LabelId" String="Master" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Bool</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Connection" Type="Edm.String" MaxLength="10">
+          <Annotation Term="NAV.LabelId" String="Connessione" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="SurchargeType" Type="Edm.String">
+          <Annotation Term="NAV.LabelId" String="Tipo maggiorazione" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="SurchargeNo" Type="Edm.String" MaxLength="20">
+          <Annotation Term="NAV.LabelId" String="Nr. maggiorazione" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="DisableLinkedCharacCopy" Type="Edm.Boolean">
+          <Annotation Term="NAV.LabelId" String="Disabilità copia caratteristiche collegate (prezzi)" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Bool</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="DimensionCode" Type="Edm.String" MaxLength="20">
+          <Annotation Term="NAV.LabelId" String="Codice dimensione" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="DimensionValueCode" Type="Edm.String" MaxLength="20">
+          <Annotation Term="NAV.LabelId" String="Codice valore dimensioni" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="ValuePosting" Type="Edm.String">
+          <Annotation Term="NAV.LabelId" String="Registrazione valore" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="NumericFormat" Type="Edm.String" MaxLength="100">
+          <Annotation Term="NAV.LabelId" String="Formato numerico" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="Step" Type="Edm.Decimal" Scale="Variable">
+          <Annotation Term="NAV.LabelId" String="Passo" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/Real</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="EOS_Print_on_Documents" Type="Edm.String">
+          <Annotation Term="NAV.LabelId" String="Stampa sui documenti" />
+          <Annotation Term="NAV.NavType">
+            <EnumMember>NAV.NavType/String</EnumMember>
+          </Annotation>
+        </Property>
+        <NavigationProperty Name="Connection_Link" Type="Collection(NAV.CaratteristicheCFG)" ContainsTarget="true">
+          <ReferentialConstraint Property="Connection" ReferencedProperty="Code" />
+        </NavigationProperty>
+        <Annotation Term="NAV.LabelId" String="CaratteristicheCFG" />
+      </EntityType>
       <EntityType Name="Cicli">
         <Key>
           <PropertyRef Name="No" />
@@ -1994,6 +2130,9 @@
         </NavigationProperty>
         <NavigationProperty Name="Routing_Link_Code_Link" Type="Collection(NAV.LinkCICLO)" ContainsTarget="true">
           <ReferentialConstraint Property="Routing_Link_Code" ReferencedProperty="Code" />
+        </NavigationProperty>
+        <NavigationProperty Name="EOSCharacteristicCode_Link" Type="Collection(NAV.CaratteristicheCFG)" ContainsTarget="true">
+          <ReferentialConstraint Property="EOSCharacteristicCode" ReferencedProperty="Code" />
         </NavigationProperty>
         <Annotation Term="NAV.LabelId" String="CicliRoutingLine" />
       </EntityType>
@@ -3796,6 +3935,9 @@
         </NavigationProperty>
         <NavigationProperty Name="Routing_Link_Code_Link" Type="Collection(NAV.LinkCICLO)" ContainsTarget="true">
           <ReferentialConstraint Property="Routing_Link_Code" ReferencedProperty="Code" />
+        </NavigationProperty>
+        <NavigationProperty Name="EOSCharacteristicCode_Link" Type="Collection(NAV.CaratteristicheCFG)" ContainsTarget="true">
+          <ReferentialConstraint Property="EOSCharacteristicCode" ReferencedProperty="Code" />
         </NavigationProperty>
         <Annotation Term="NAV.LabelId" String="RigheCICLO" />
       </EntityType>
@@ -30505,6 +30647,7 @@
         <NavigationProperty Name="AccountantPortalUserTasks" Type="Collection(NAV.AccountantPortalUserTasks)" ContainsTarget="true" />
         <NavigationProperty Name="Allegati" Type="Collection(NAV.Allegati)" ContainsTarget="true" />
         <NavigationProperty Name="Articoli" Type="Collection(NAV.Articoli)" ContainsTarget="true" />
+        <NavigationProperty Name="CaratteristicheCFG" Type="Collection(NAV.CaratteristicheCFG)" ContainsTarget="true" />
         <NavigationProperty Name="Cicli" Type="Collection(NAV.Cicli)" ContainsTarget="true" />
         <NavigationProperty Name="CicliRoutingLine" Type="Collection(NAV.CicliRoutingLine)" ContainsTarget="true" />
         <NavigationProperty Name="CommentiCICLO" Type="Collection(NAV.CommentiCICLO)" ContainsTarget="true" />
@@ -30927,6 +31070,28 @@
           </Annotation>
         </EntitySet>
         <EntitySet Name="Articoli" EntityType="NAV.Articoli">
+          <Annotation Term="Org.OData.Capabilities.V1.ChangeTracking">
+            <Record>
+              <PropertyValue Property="Supported" Bool="false" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.DeleteRestrictions">
+            <Record>
+              <PropertyValue Property="Deletable" Bool="true" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.InsertRestrictions">
+            <Record>
+              <PropertyValue Property="Insertable" Bool="true" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.UpdateRestrictions">
+            <Record>
+              <PropertyValue Property="Updatable" Bool="true" />
+            </Record>
+          </Annotation>
+        </EntitySet>
+        <EntitySet Name="CaratteristicheCFG" EntityType="NAV.CaratteristicheCFG">
           <Annotation Term="Org.OData.Capabilities.V1.ChangeTracking">
             <Record>
               <PropertyValue Property="Supported" Bool="false" />
@@ -33230,6 +33395,21 @@
         <Annotation Term="Org.OData.Core.V1.IsLanguageDependent" Bool="true" />
       </Annotations>
       <Annotations Target="NAV.Articoli/EOSConfigurationType">
+        <Annotation Term="Org.OData.Core.V1.IsLanguageDependent" Bool="true" />
+      </Annotations>
+      <Annotations Target="NAV.CaratteristicheCFG/DecodingType">
+        <Annotation Term="Org.OData.Core.V1.IsLanguageDependent" Bool="true" />
+      </Annotations>
+      <Annotations Target="NAV.CaratteristicheCFG/Mandatory">
+        <Annotation Term="Org.OData.Core.V1.IsLanguageDependent" Bool="true" />
+      </Annotations>
+      <Annotations Target="NAV.CaratteristicheCFG/SurchargeType">
+        <Annotation Term="Org.OData.Core.V1.IsLanguageDependent" Bool="true" />
+      </Annotations>
+      <Annotations Target="NAV.CaratteristicheCFG/ValuePosting">
+        <Annotation Term="Org.OData.Core.V1.IsLanguageDependent" Bool="true" />
+      </Annotations>
+      <Annotations Target="NAV.CaratteristicheCFG/EOS_Print_on_Documents">
         <Annotation Term="Org.OData.Core.V1.IsLanguageDependent" Bool="true" />
       </Annotations>
       <Annotations Target="NAV.Cicli/Type">
