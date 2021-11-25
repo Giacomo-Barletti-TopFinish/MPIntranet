@@ -39,6 +39,22 @@ namespace MPIntranet.WS
             ws.ClientCredentials.UserName.Password = _password;
             ws.WSPostItemJnl();
         }
+        private ServicePostingRegMag.PostingRegMag_PortClient CreaFileManagement()
+        {
+            string url = "https://srv-bc.viamattei.metal-plus.it:7147/PROD_WS/WS/METALPLUS/Codeunit/FileManagement";
+            if (_azienda != "METALPLUS")
+                url = "https://srv-bc.viamattei.metal-plus.it:7147/PROD_WS/WS/METALPLUS%2008092021/Codeunit/FileManagement";
+
+            BasicHttpBinding binding = new BasicHttpBinding();
+            binding.Security.Mode = BasicHttpSecurityMode.Transport;
+            binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+
+            ServicePostingRegMag.PostingRegMag_PortClient ws = new ServicePostingRegMag.PostingRegMag_PortClient(binding, new EndpointAddress(url));
+            ws.ClientCredentials.UserName.UserName = _user;
+            ws.ClientCredentials.UserName.Password = _password;
+
+            return ws;
+        }
         public void CreaConnessione(string azienda)
         {
             _azienda = azienda;

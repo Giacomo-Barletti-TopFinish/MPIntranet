@@ -1,0 +1,714 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/FileManagement" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/FileManagement" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/FileManagement" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="BrowseForFolderDialog">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="windowTitle" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="defaultFolderName" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="showNewFolderButton" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="BrowseForFolderDialog_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CreateFileNameWithExtension">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="fileNameWithoutExtension" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="extension" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CreateFileNameWithExtension_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="DownloadTempFile">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="serverFileName" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="DownloadTempFile_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetDirectoryName">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="fileName" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetDirectoryName_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetExtension">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="name" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetExtension_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetFileNameMimeType">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="fileName" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetFileNameMimeType_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetFileNameWithoutExtension">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="filePath" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetFileNameWithoutExtension_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetFileName">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="filePath" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetFileName_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetSafeFileName">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="fileName" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetSafeFileName_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetToFilterText">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="filterString" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="fileName" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetToFilterText_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="HasExtension">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="filePath" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="HasExtension_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="IsAllowedPath">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="path" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="skipError" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="IsAllowedPath_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="IsLocalFileSystemAccessible">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="IsLocalFileSystemAccessible_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="IsValidFileName">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="fileName" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="IsValidFileName_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="Magicpath">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="Magicpath_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="MoveAndRenameServerFile">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="absolutePathToFile" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="relativePathFolder" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="newNameFile" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="MoveAndRenameServerFile_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="OpenFileDialog">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="windowTitle" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="defaultFileName" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="filterString" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="OpenFileDialog_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="SelectFolderDialog">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="windowTitle" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="selectedFolder" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="SelectFolderDialog_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+            <element minOccurs="1" maxOccurs="1" name="selectedFolder" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ServerFileExists">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="filePath" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ServerFileExists_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="StripNotsupportChrInFileName">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="inText" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="StripNotsupportChrInFileName_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ValidateFileExtension">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="filePath" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="validExtensions" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ValidateFileExtension_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="BrowseForFolderDialog">
+    <part name="parameters" element="tns:BrowseForFolderDialog" />
+  </message>
+  <message name="BrowseForFolderDialog_Result">
+    <part name="parameters" element="tns:BrowseForFolderDialog_Result" />
+  </message>
+  <message name="CreateFileNameWithExtension">
+    <part name="parameters" element="tns:CreateFileNameWithExtension" />
+  </message>
+  <message name="CreateFileNameWithExtension_Result">
+    <part name="parameters" element="tns:CreateFileNameWithExtension_Result" />
+  </message>
+  <message name="DownloadTempFile">
+    <part name="parameters" element="tns:DownloadTempFile" />
+  </message>
+  <message name="DownloadTempFile_Result">
+    <part name="parameters" element="tns:DownloadTempFile_Result" />
+  </message>
+  <message name="GetDirectoryName">
+    <part name="parameters" element="tns:GetDirectoryName" />
+  </message>
+  <message name="GetDirectoryName_Result">
+    <part name="parameters" element="tns:GetDirectoryName_Result" />
+  </message>
+  <message name="GetExtension">
+    <part name="parameters" element="tns:GetExtension" />
+  </message>
+  <message name="GetExtension_Result">
+    <part name="parameters" element="tns:GetExtension_Result" />
+  </message>
+  <message name="GetFileNameMimeType">
+    <part name="parameters" element="tns:GetFileNameMimeType" />
+  </message>
+  <message name="GetFileNameMimeType_Result">
+    <part name="parameters" element="tns:GetFileNameMimeType_Result" />
+  </message>
+  <message name="GetFileNameWithoutExtension">
+    <part name="parameters" element="tns:GetFileNameWithoutExtension" />
+  </message>
+  <message name="GetFileNameWithoutExtension_Result">
+    <part name="parameters" element="tns:GetFileNameWithoutExtension_Result" />
+  </message>
+  <message name="GetFileName">
+    <part name="parameters" element="tns:GetFileName" />
+  </message>
+  <message name="GetFileName_Result">
+    <part name="parameters" element="tns:GetFileName_Result" />
+  </message>
+  <message name="GetSafeFileName">
+    <part name="parameters" element="tns:GetSafeFileName" />
+  </message>
+  <message name="GetSafeFileName_Result">
+    <part name="parameters" element="tns:GetSafeFileName_Result" />
+  </message>
+  <message name="GetToFilterText">
+    <part name="parameters" element="tns:GetToFilterText" />
+  </message>
+  <message name="GetToFilterText_Result">
+    <part name="parameters" element="tns:GetToFilterText_Result" />
+  </message>
+  <message name="HasExtension">
+    <part name="parameters" element="tns:HasExtension" />
+  </message>
+  <message name="HasExtension_Result">
+    <part name="parameters" element="tns:HasExtension_Result" />
+  </message>
+  <message name="IsAllowedPath">
+    <part name="parameters" element="tns:IsAllowedPath" />
+  </message>
+  <message name="IsAllowedPath_Result">
+    <part name="parameters" element="tns:IsAllowedPath_Result" />
+  </message>
+  <message name="IsLocalFileSystemAccessible">
+    <part name="parameters" element="tns:IsLocalFileSystemAccessible" />
+  </message>
+  <message name="IsLocalFileSystemAccessible_Result">
+    <part name="parameters" element="tns:IsLocalFileSystemAccessible_Result" />
+  </message>
+  <message name="IsValidFileName">
+    <part name="parameters" element="tns:IsValidFileName" />
+  </message>
+  <message name="IsValidFileName_Result">
+    <part name="parameters" element="tns:IsValidFileName_Result" />
+  </message>
+  <message name="Magicpath">
+    <part name="parameters" element="tns:Magicpath" />
+  </message>
+  <message name="Magicpath_Result">
+    <part name="parameters" element="tns:Magicpath_Result" />
+  </message>
+  <message name="MoveAndRenameServerFile">
+    <part name="parameters" element="tns:MoveAndRenameServerFile" />
+  </message>
+  <message name="MoveAndRenameServerFile_Result">
+    <part name="parameters" element="tns:MoveAndRenameServerFile_Result" />
+  </message>
+  <message name="OpenFileDialog">
+    <part name="parameters" element="tns:OpenFileDialog" />
+  </message>
+  <message name="OpenFileDialog_Result">
+    <part name="parameters" element="tns:OpenFileDialog_Result" />
+  </message>
+  <message name="SelectFolderDialog">
+    <part name="parameters" element="tns:SelectFolderDialog" />
+  </message>
+  <message name="SelectFolderDialog_Result">
+    <part name="parameters" element="tns:SelectFolderDialog_Result" />
+  </message>
+  <message name="ServerFileExists">
+    <part name="parameters" element="tns:ServerFileExists" />
+  </message>
+  <message name="ServerFileExists_Result">
+    <part name="parameters" element="tns:ServerFileExists_Result" />
+  </message>
+  <message name="StripNotsupportChrInFileName">
+    <part name="parameters" element="tns:StripNotsupportChrInFileName" />
+  </message>
+  <message name="StripNotsupportChrInFileName_Result">
+    <part name="parameters" element="tns:StripNotsupportChrInFileName_Result" />
+  </message>
+  <message name="ValidateFileExtension">
+    <part name="parameters" element="tns:ValidateFileExtension" />
+  </message>
+  <message name="ValidateFileExtension_Result">
+    <part name="parameters" element="tns:ValidateFileExtension_Result" />
+  </message>
+  <portType name="FileManagement_Port">
+    <operation name="BrowseForFolderDialog">
+      <input name="BrowseForFolderDialog" message="tns:BrowseForFolderDialog" />
+      <output name="BrowseForFolderDialog_Result" message="tns:BrowseForFolderDialog_Result" />
+    </operation>
+    <operation name="CreateFileNameWithExtension">
+      <input name="CreateFileNameWithExtension" message="tns:CreateFileNameWithExtension" />
+      <output name="CreateFileNameWithExtension_Result" message="tns:CreateFileNameWithExtension_Result" />
+    </operation>
+    <operation name="DownloadTempFile">
+      <input name="DownloadTempFile" message="tns:DownloadTempFile" />
+      <output name="DownloadTempFile_Result" message="tns:DownloadTempFile_Result" />
+    </operation>
+    <operation name="GetDirectoryName">
+      <input name="GetDirectoryName" message="tns:GetDirectoryName" />
+      <output name="GetDirectoryName_Result" message="tns:GetDirectoryName_Result" />
+    </operation>
+    <operation name="GetExtension">
+      <input name="GetExtension" message="tns:GetExtension" />
+      <output name="GetExtension_Result" message="tns:GetExtension_Result" />
+    </operation>
+    <operation name="GetFileNameMimeType">
+      <input name="GetFileNameMimeType" message="tns:GetFileNameMimeType" />
+      <output name="GetFileNameMimeType_Result" message="tns:GetFileNameMimeType_Result" />
+    </operation>
+    <operation name="GetFileNameWithoutExtension">
+      <input name="GetFileNameWithoutExtension" message="tns:GetFileNameWithoutExtension" />
+      <output name="GetFileNameWithoutExtension_Result" message="tns:GetFileNameWithoutExtension_Result" />
+    </operation>
+    <operation name="GetFileName">
+      <input name="GetFileName" message="tns:GetFileName" />
+      <output name="GetFileName_Result" message="tns:GetFileName_Result" />
+    </operation>
+    <operation name="GetSafeFileName">
+      <input name="GetSafeFileName" message="tns:GetSafeFileName" />
+      <output name="GetSafeFileName_Result" message="tns:GetSafeFileName_Result" />
+    </operation>
+    <operation name="GetToFilterText">
+      <input name="GetToFilterText" message="tns:GetToFilterText" />
+      <output name="GetToFilterText_Result" message="tns:GetToFilterText_Result" />
+    </operation>
+    <operation name="HasExtension">
+      <input name="HasExtension" message="tns:HasExtension" />
+      <output name="HasExtension_Result" message="tns:HasExtension_Result" />
+    </operation>
+    <operation name="IsAllowedPath">
+      <input name="IsAllowedPath" message="tns:IsAllowedPath" />
+      <output name="IsAllowedPath_Result" message="tns:IsAllowedPath_Result" />
+    </operation>
+    <operation name="IsLocalFileSystemAccessible">
+      <input name="IsLocalFileSystemAccessible" message="tns:IsLocalFileSystemAccessible" />
+      <output name="IsLocalFileSystemAccessible_Result" message="tns:IsLocalFileSystemAccessible_Result" />
+    </operation>
+    <operation name="IsValidFileName">
+      <input name="IsValidFileName" message="tns:IsValidFileName" />
+      <output name="IsValidFileName_Result" message="tns:IsValidFileName_Result" />
+    </operation>
+    <operation name="Magicpath">
+      <input name="Magicpath" message="tns:Magicpath" />
+      <output name="Magicpath_Result" message="tns:Magicpath_Result" />
+    </operation>
+    <operation name="MoveAndRenameServerFile">
+      <input name="MoveAndRenameServerFile" message="tns:MoveAndRenameServerFile" />
+      <output name="MoveAndRenameServerFile_Result" message="tns:MoveAndRenameServerFile_Result" />
+    </operation>
+    <operation name="OpenFileDialog">
+      <input name="OpenFileDialog" message="tns:OpenFileDialog" />
+      <output name="OpenFileDialog_Result" message="tns:OpenFileDialog_Result" />
+    </operation>
+    <operation name="SelectFolderDialog">
+      <input name="SelectFolderDialog" message="tns:SelectFolderDialog" />
+      <output name="SelectFolderDialog_Result" message="tns:SelectFolderDialog_Result" />
+    </operation>
+    <operation name="ServerFileExists">
+      <input name="ServerFileExists" message="tns:ServerFileExists" />
+      <output name="ServerFileExists_Result" message="tns:ServerFileExists_Result" />
+    </operation>
+    <operation name="StripNotsupportChrInFileName">
+      <input name="StripNotsupportChrInFileName" message="tns:StripNotsupportChrInFileName" />
+      <output name="StripNotsupportChrInFileName_Result" message="tns:StripNotsupportChrInFileName_Result" />
+    </operation>
+    <operation name="ValidateFileExtension">
+      <input name="ValidateFileExtension" message="tns:ValidateFileExtension" />
+      <output name="ValidateFileExtension_Result" message="tns:ValidateFileExtension_Result" />
+    </operation>
+  </portType>
+  <binding name="FileManagement_Binding" type="tns:FileManagement_Port">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="BrowseForFolderDialog">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/FileManagement:BrowseForFolderDialog" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="BrowseForFolderDialog">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="BrowseForFolderDialog_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="CreateFileNameWithExtension">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/FileManagement:CreateFileNameWithExtension" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="CreateFileNameWithExtension">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="CreateFileNameWithExtension_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="DownloadTempFile">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/FileManagement:DownloadTempFile" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="DownloadTempFile">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="DownloadTempFile_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetDirectoryName">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/FileManagement:GetDirectoryName" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetDirectoryName">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetDirectoryName_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetExtension">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/FileManagement:GetExtension" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetExtension">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetExtension_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetFileNameMimeType">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/FileManagement:GetFileNameMimeType" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetFileNameMimeType">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetFileNameMimeType_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetFileNameWithoutExtension">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/FileManagement:GetFileNameWithoutExtension" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetFileNameWithoutExtension">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetFileNameWithoutExtension_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetFileName">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/FileManagement:GetFileName" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetFileName">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetFileName_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetSafeFileName">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/FileManagement:GetSafeFileName" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetSafeFileName">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetSafeFileName_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetToFilterText">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/FileManagement:GetToFilterText" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetToFilterText">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetToFilterText_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="HasExtension">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/FileManagement:HasExtension" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="HasExtension">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="HasExtension_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="IsAllowedPath">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/FileManagement:IsAllowedPath" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="IsAllowedPath">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="IsAllowedPath_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="IsLocalFileSystemAccessible">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/FileManagement:IsLocalFileSystemAccessible" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="IsLocalFileSystemAccessible">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="IsLocalFileSystemAccessible_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="IsValidFileName">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/FileManagement:IsValidFileName" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="IsValidFileName">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="IsValidFileName_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="Magicpath">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/FileManagement:Magicpath" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Magicpath">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Magicpath_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="MoveAndRenameServerFile">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/FileManagement:MoveAndRenameServerFile" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="MoveAndRenameServerFile">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="MoveAndRenameServerFile_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="OpenFileDialog">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/FileManagement:OpenFileDialog" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="OpenFileDialog">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="OpenFileDialog_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="SelectFolderDialog">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/FileManagement:SelectFolderDialog" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="SelectFolderDialog">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="SelectFolderDialog_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ServerFileExists">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/FileManagement:ServerFileExists" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ServerFileExists">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ServerFileExists_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="StripNotsupportChrInFileName">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/FileManagement:StripNotsupportChrInFileName" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="StripNotsupportChrInFileName">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="StripNotsupportChrInFileName_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ValidateFileExtension">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/FileManagement:ValidateFileExtension" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ValidateFileExtension">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ValidateFileExtension_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="FileManagement">
+    <port name="FileManagement_Port" binding="tns:FileManagement_Binding">
+      <address location="https://srv-bc.viamattei.metal-plus.it:7147/PROD_WS/METALPLUS%2008092021/Codeunit/FileManagement" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>

@@ -90,6 +90,11 @@
   <ItemGroup>
     <Compile Include="BCServices.cs" />
     <Compile Include="Connected Services\BusinessCentral\Reference.cs" />
+    <Compile Include="Connected Services\FileManager\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ServicePostingRegMag\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -102,6 +107,70 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Connected Services\BusinessCentral\ConnectedService.json" />
+    <None Include="Connected Services\FileManager\FileManagement.wsdl" />
+    <None Include="Connected Services\FileManager\MPIntranet.WS.FileManager.BrowseForFolderDialog_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FileManager\MPIntranet.WS.FileManager.CreateFileNameWithExtension_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FileManager\MPIntranet.WS.FileManager.DownloadTempFile_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FileManager\MPIntranet.WS.FileManager.GetDirectoryName_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FileManager\MPIntranet.WS.FileManager.GetExtension_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FileManager\MPIntranet.WS.FileManager.GetFileNameMimeType_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FileManager\MPIntranet.WS.FileManager.GetFileNameWithoutExtension_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FileManager\MPIntranet.WS.FileManager.GetFileName_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FileManager\MPIntranet.WS.FileManager.GetSafeFileName_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FileManager\MPIntranet.WS.FileManager.GetToFilterText_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FileManager\MPIntranet.WS.FileManager.HasExtension_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FileManager\MPIntranet.WS.FileManager.IsAllowedPath_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FileManager\MPIntranet.WS.FileManager.IsLocalFileSystemAccessible_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FileManager\MPIntranet.WS.FileManager.IsValidFileName_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FileManager\MPIntranet.WS.FileManager.Magicpath_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FileManager\MPIntranet.WS.FileManager.MoveAndRenameServerFile_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FileManager\MPIntranet.WS.FileManager.OpenFileDialog_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FileManager\MPIntranet.WS.FileManager.SelectFolderDialog_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FileManager\MPIntranet.WS.FileManager.ServerFileExists_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FileManager\MPIntranet.WS.FileManager.StripNotsupportChrInFileName_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FileManager\MPIntranet.WS.FileManager.ValidateFileExtension_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ServicePostingRegMag\MPIntranet.WS.ServicePostingRegMag.WSPostItemJnl_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -116,6 +185,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Connected Services\BusinessCentral\BC_metadata.xml" />
+    <None Include="Connected Services\FileManager\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\FileManager\configuration.svcinfo" />
+    <None Include="Connected Services\FileManager\configuration91.svcinfo" />
     <None Include="Connected Services\ServicePostingRegMag\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -124,6 +199,7 @@
     <None Include="Connected Services\ServicePostingRegMag\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\FileManager\" />
     <WCFMetadataStorage Include="Connected Services\ServicePostingRegMag\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
