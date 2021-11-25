@@ -961,7 +961,7 @@ namespace TestWebServicesFrm
                     sb.AppendLine(string.Empty);
                     foreach (PrezziContoLavoro o in listini)
                     {
-                        sb.AppendLine(string.Format("{0} # {1} # {2}", o.Item_No, o.Standard_Task_Code, o.Start_Date.ToString()));
+                        sb.AppendLine(string.Format("{0} # {1} # {2} # {3} € ", o.Item_No, o.Standard_Task_Code, o.Start_Date.ToString(),o.Direct_Unit_Cost));
                     }
 
                     txtMessaggio.Text = sb.ToString();
@@ -1031,7 +1031,7 @@ namespace TestWebServicesFrm
                 BCServices bc = new BCServices();
                 bc.CreaConnessione(azienda);
                 StringBuilder sb = new StringBuilder();
-                bc.CreaListino(txtAnagContLavoro.Text,txtNomeTerzista.Text,ddlTaskContoLavoro.Text,dtInizioListinoContoLav.Value,dtFineListinoContoLav.Value);
+                bc.CreaListino(txtAnagContLavoro.Text, txtNomeTerzista.Text, ddlTaskContoLavoro.Text, dtInizioListinoContoLav.Value, dtFineListinoContoLav.Value, nCostoListino.Value);
                 txtMessaggio.Text = "Listino Creato Correttamente";
             }
             catch (Exception ex)

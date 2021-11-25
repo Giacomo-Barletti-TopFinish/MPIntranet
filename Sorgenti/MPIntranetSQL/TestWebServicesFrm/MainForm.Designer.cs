@@ -186,24 +186,26 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label49 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.Listini = new System.Windows.Forms.GroupBox();
+            this.label60 = new System.Windows.Forms.Label();
+            this.nCostoListino = new System.Windows.Forms.NumericUpDown();
+            this.label59 = new System.Windows.Forms.Label();
+            this.label58 = new System.Windows.Forms.Label();
+            this.dtFineListinoContoLav = new System.Windows.Forms.DateTimePicker();
+            this.dtInizioListinoContoLav = new System.Windows.Forms.DateTimePicker();
             this.btnCreaListino = new System.Windows.Forms.Button();
+            this.btnEstraiListiniContLav = new System.Windows.Forms.Button();
             this.label57 = new System.Windows.Forms.Label();
+            this.txtAnagContLavoro = new System.Windows.Forms.TextBox();
             this.txtNomeTerzista = new System.Windows.Forms.TextBox();
+            this.label50 = new System.Windows.Forms.Label();
             this.ddlTaskContoLav = new System.Windows.Forms.Label();
             this.ddlTaskContoLavoro = new System.Windows.Forms.ComboBox();
-            this.label50 = new System.Windows.Forms.Label();
-            this.txtAnagContLavoro = new System.Windows.Forms.TextBox();
-            this.btnEstraiListiniContLav = new System.Windows.Forms.Button();
             this.label48 = new System.Windows.Forms.Label();
             this.ddlAziende = new System.Windows.Forms.ComboBox();
             this.dataSet1 = new System.Data.DataSet();
-            this.Listini = new System.Windows.Forms.GroupBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.dtInizioListinoContoLav = new System.Windows.Forms.DateTimePicker();
-            this.dtFineListinoContoLav = new System.Windows.Forms.DateTimePicker();
-            this.label58 = new System.Windows.Forms.Label();
-            this.label59 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -229,8 +231,9 @@
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nQuntitàRegMag)).BeginInit();
             this.tabPage5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             this.Listini.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nCostoListino)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtMessaggio
@@ -1890,6 +1893,96 @@
             this.tabPage5.Text = "Listini conto lavoro";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // groupBox7
+            // 
+            this.groupBox7.Location = new System.Drawing.Point(9, 170);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(1216, 63);
+            this.groupBox7.TabIndex = 28;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Listini Validi";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Location = new System.Drawing.Point(7, 88);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(1219, 81);
+            this.groupBox6.TabIndex = 27;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Caratteristiche";
+            // 
+            // Listini
+            // 
+            this.Listini.Controls.Add(this.label60);
+            this.Listini.Controls.Add(this.nCostoListino);
+            this.Listini.Controls.Add(this.label59);
+            this.Listini.Controls.Add(this.label58);
+            this.Listini.Controls.Add(this.dtFineListinoContoLav);
+            this.Listini.Controls.Add(this.dtInizioListinoContoLav);
+            this.Listini.Controls.Add(this.btnCreaListino);
+            this.Listini.Controls.Add(this.btnEstraiListiniContLav);
+            this.Listini.Controls.Add(this.label57);
+            this.Listini.Controls.Add(this.txtAnagContLavoro);
+            this.Listini.Controls.Add(this.txtNomeTerzista);
+            this.Listini.Controls.Add(this.label50);
+            this.Listini.Controls.Add(this.ddlTaskContoLav);
+            this.Listini.Controls.Add(this.ddlTaskContoLavoro);
+            this.Listini.Location = new System.Drawing.Point(7, 6);
+            this.Listini.Name = "Listini";
+            this.Listini.Size = new System.Drawing.Size(1219, 75);
+            this.Listini.TabIndex = 0;
+            this.Listini.TabStop = false;
+            this.Listini.Text = "Listini";
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Location = new System.Drawing.Point(1003, 18);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(68, 13);
+            this.label60.TabIndex = 31;
+            this.label60.Text = "Prezzo listino";
+            // 
+            // nCostoListino
+            // 
+            this.nCostoListino.DecimalPlaces = 2;
+            this.nCostoListino.Location = new System.Drawing.Point(1004, 41);
+            this.nCostoListino.Name = "nCostoListino";
+            this.nCostoListino.Size = new System.Drawing.Size(78, 20);
+            this.nCostoListino.TabIndex = 30;
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(781, 22);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(79, 13);
+            this.label59.TabIndex = 29;
+            this.label59.Text = "Data fine listino";
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Location = new System.Drawing.Point(558, 22);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(85, 13);
+            this.label58.TabIndex = 28;
+            this.label58.Text = "Data inizio listino";
+            // 
+            // dtFineListinoContoLav
+            // 
+            this.dtFineListinoContoLav.Location = new System.Drawing.Point(784, 42);
+            this.dtFineListinoContoLav.Name = "dtFineListinoContoLav";
+            this.dtFineListinoContoLav.Size = new System.Drawing.Size(200, 20);
+            this.dtFineListinoContoLav.TabIndex = 4;
+            // 
+            // dtInizioListinoContoLav
+            // 
+            this.dtInizioListinoContoLav.Location = new System.Drawing.Point(561, 42);
+            this.dtInizioListinoContoLav.Name = "dtInizioListinoContoLav";
+            this.dtInizioListinoContoLav.Size = new System.Drawing.Size(200, 20);
+            this.dtInizioListinoContoLav.TabIndex = 3;
+            // 
             // btnCreaListino
             // 
             this.btnCreaListino.Location = new System.Drawing.Point(1125, 13);
@@ -1900,6 +1993,16 @@
             this.btnCreaListino.UseVisualStyleBackColor = true;
             this.btnCreaListino.Click += new System.EventHandler(this.btnCreaListino_Click);
             // 
+            // btnEstraiListiniContLav
+            // 
+            this.btnEstraiListiniContLav.Location = new System.Drawing.Point(1125, 41);
+            this.btnEstraiListiniContLav.Name = "btnEstraiListiniContLav";
+            this.btnEstraiListiniContLav.Size = new System.Drawing.Size(92, 22);
+            this.btnEstraiListiniContLav.TabIndex = 6;
+            this.btnEstraiListiniContLav.Text = "Estrai Listini";
+            this.btnEstraiListiniContLav.UseVisualStyleBackColor = true;
+            this.btnEstraiListiniContLav.Click += new System.EventHandler(this.btnEstraiListiniContLav_Click);
+            // 
             // label57
             // 
             this.label57.AutoSize = true;
@@ -1909,12 +2012,29 @@
             this.label57.TabIndex = 24;
             this.label57.Text = "Terzista";
             // 
+            // txtAnagContLavoro
+            // 
+            this.txtAnagContLavoro.Location = new System.Drawing.Point(198, 42);
+            this.txtAnagContLavoro.MaxLength = 20;
+            this.txtAnagContLavoro.Name = "txtAnagContLavoro";
+            this.txtAnagContLavoro.Size = new System.Drawing.Size(170, 20);
+            this.txtAnagContLavoro.TabIndex = 1;
+            // 
             // txtNomeTerzista
             // 
             this.txtNomeTerzista.Location = new System.Drawing.Point(15, 42);
             this.txtNomeTerzista.Name = "txtNomeTerzista";
             this.txtNomeTerzista.Size = new System.Drawing.Size(170, 20);
             this.txtNomeTerzista.TabIndex = 0;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(195, 26);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(58, 13);
+            this.label50.TabIndex = 20;
+            this.label50.Text = "Anagrafica";
             // 
             // ddlTaskContoLav
             // 
@@ -1934,33 +2054,6 @@
             this.ddlTaskContoLavoro.Size = new System.Drawing.Size(177, 21);
             this.ddlTaskContoLavoro.TabIndex = 2;
             this.ddlTaskContoLavoro.SelectedIndexChanged += new System.EventHandler(this.ddlTaskContoLavoro_SelectedIndexChanged);
-            // 
-            // label50
-            // 
-            this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(195, 26);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(58, 13);
-            this.label50.TabIndex = 20;
-            this.label50.Text = "Anagrafica";
-            // 
-            // txtAnagContLavoro
-            // 
-            this.txtAnagContLavoro.Location = new System.Drawing.Point(198, 42);
-            this.txtAnagContLavoro.MaxLength = 20;
-            this.txtAnagContLavoro.Name = "txtAnagContLavoro";
-            this.txtAnagContLavoro.Size = new System.Drawing.Size(170, 20);
-            this.txtAnagContLavoro.TabIndex = 1;
-            // 
-            // btnEstraiListiniContLav
-            // 
-            this.btnEstraiListiniContLav.Location = new System.Drawing.Point(1125, 41);
-            this.btnEstraiListiniContLav.Name = "btnEstraiListiniContLav";
-            this.btnEstraiListiniContLav.Size = new System.Drawing.Size(92, 22);
-            this.btnEstraiListiniContLav.TabIndex = 6;
-            this.btnEstraiListiniContLav.Text = "Estrai Listini";
-            this.btnEstraiListiniContLav.UseVisualStyleBackColor = true;
-            this.btnEstraiListiniContLav.Click += new System.EventHandler(this.btnEstraiListiniContLav_Click);
             // 
             // label48
             // 
@@ -1983,77 +2076,6 @@
             // dataSet1
             // 
             this.dataSet1.DataSetName = "NewDataSet";
-            // 
-            // Listini
-            // 
-            this.Listini.Controls.Add(this.label59);
-            this.Listini.Controls.Add(this.label58);
-            this.Listini.Controls.Add(this.dtFineListinoContoLav);
-            this.Listini.Controls.Add(this.dtInizioListinoContoLav);
-            this.Listini.Controls.Add(this.btnCreaListino);
-            this.Listini.Controls.Add(this.btnEstraiListiniContLav);
-            this.Listini.Controls.Add(this.label57);
-            this.Listini.Controls.Add(this.txtAnagContLavoro);
-            this.Listini.Controls.Add(this.txtNomeTerzista);
-            this.Listini.Controls.Add(this.label50);
-            this.Listini.Controls.Add(this.ddlTaskContoLav);
-            this.Listini.Controls.Add(this.ddlTaskContoLavoro);
-            this.Listini.Location = new System.Drawing.Point(7, 6);
-            this.Listini.Name = "Listini";
-            this.Listini.Size = new System.Drawing.Size(1219, 75);
-            this.Listini.TabIndex = 0;
-            this.Listini.TabStop = false;
-            this.Listini.Text = "Listini";
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Location = new System.Drawing.Point(7, 88);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(1219, 81);
-            this.groupBox6.TabIndex = 27;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Caratteristiche";
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Location = new System.Drawing.Point(9, 170);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(1216, 63);
-            this.groupBox7.TabIndex = 28;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Listini Validi";
-            // 
-            // dtInizioListinoContoLav
-            // 
-            this.dtInizioListinoContoLav.Location = new System.Drawing.Point(561, 42);
-            this.dtInizioListinoContoLav.Name = "dtInizioListinoContoLav";
-            this.dtInizioListinoContoLav.Size = new System.Drawing.Size(200, 20);
-            this.dtInizioListinoContoLav.TabIndex = 3;
-            // 
-            // dtFineListinoContoLav
-            // 
-            this.dtFineListinoContoLav.Location = new System.Drawing.Point(784, 43);
-            this.dtFineListinoContoLav.Name = "dtFineListinoContoLav";
-            this.dtFineListinoContoLav.Size = new System.Drawing.Size(200, 20);
-            this.dtFineListinoContoLav.TabIndex = 4;
-            // 
-            // label58
-            // 
-            this.label58.AutoSize = true;
-            this.label58.Location = new System.Drawing.Point(558, 22);
-            this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(85, 13);
-            this.label58.TabIndex = 28;
-            this.label58.Text = "Data inizio listino";
-            // 
-            // label59
-            // 
-            this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(781, 22);
-            this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(79, 13);
-            this.label59.TabIndex = 29;
-            this.label59.Text = "Data fine listino";
             // 
             // MainForm
             // 
@@ -2099,9 +2121,10 @@
             this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nQuntitàRegMag)).EndInit();
             this.tabPage5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
             this.Listini.ResumeLayout(false);
             this.Listini.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nCostoListino)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2285,6 +2308,8 @@
         private System.Windows.Forms.Label label58;
         private System.Windows.Forms.DateTimePicker dtFineListinoContoLav;
         private System.Windows.Forms.DateTimePicker dtInizioListinoContoLav;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.NumericUpDown nCostoListino;
     }
 }
 

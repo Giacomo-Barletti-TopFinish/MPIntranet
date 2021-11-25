@@ -458,7 +458,7 @@ namespace MPIntranet.WS
             Salva();
             return oDP.No;
         }
-        public string CreaListino(string Anagrafica, string Terzista, string Task, DateTime DataInizio,DateTime DataFine)
+        public string CreaListino(string Anagrafica, string Terzista, string Task, DateTime DataInizio,DateTime DataFine, decimal CostoListino)
 
         {
 
@@ -473,6 +473,7 @@ namespace MPIntranet.WS
             listini.Vendor_No = string.Empty;
             listini.Start_Date = DataInizio;
             listini.End_Date = DataFine;
+            listini.Direct_Unit_Cost = CostoListino;
 
             _nav.AddToPrezziContoLavoro(listini);
             Salva();
