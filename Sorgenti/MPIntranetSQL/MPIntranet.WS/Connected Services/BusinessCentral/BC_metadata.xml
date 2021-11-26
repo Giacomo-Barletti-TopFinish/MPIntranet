@@ -1732,6 +1732,77 @@
                 </NavigationProperty>
                 <Annotation Term="NAV.LabelId" String="Articoli" />
             </EntityType>
+            <EntityType Name="CaratAmmCFG">
+                <Key>
+                    <PropertyRef Name="VariantCode" />
+                    <PropertyRef Name="ItemNo" />
+                    <PropertyRef Name="CharacteristicCode" />
+                </Key>
+                <Property Name="VariantCode" Type="Edm.String" Nullable="false" MaxLength="10">
+                    <Annotation Term="NAV.LabelId" String="Cod. variante" />
+                    <Annotation Term="NAV.NavType">
+                        <EnumMember>NAV.NavType/String</EnumMember>
+                    </Annotation>
+                    <Annotation Term="NAV.AllowEdit" Bool="false" />
+                    <Annotation Term="NAV.AllowEditOnCreate" Bool="true" />
+                </Property>
+                <Property Name="ItemNo" Type="Edm.String" Nullable="false" MaxLength="20">
+                    <Annotation Term="NAV.LabelId" String="Nr. articolo" />
+                    <Annotation Term="NAV.NavType">
+                        <EnumMember>NAV.NavType/String</EnumMember>
+                    </Annotation>
+                    <Annotation Term="NAV.AllowEdit" Bool="false" />
+                    <Annotation Term="NAV.AllowEditOnCreate" Bool="true" />
+                </Property>
+                <Property Name="CharacteristicCode" Type="Edm.String" Nullable="false" MaxLength="10">
+                    <Annotation Term="NAV.LabelId" String="Codice caratteristica" />
+                    <Annotation Term="NAV.NavType">
+                        <EnumMember>NAV.NavType/String</EnumMember>
+                    </Annotation>
+                    <Annotation Term="NAV.AllowEdit" Bool="false" />
+                    <Annotation Term="NAV.AllowEditOnCreate" Bool="true" />
+                </Property>
+                <Property Name="CharacteristicValue" Type="Edm.String" MaxLength="50">
+                    <Annotation Term="NAV.LabelId" String="Valore caratteristica" />
+                    <Annotation Term="NAV.NavType">
+                        <EnumMember>NAV.NavType/String</EnumMember>
+                    </Annotation>
+                </Property>
+                <Property Name="NumericValue" Type="Edm.Decimal" Scale="Variable">
+                    <Annotation Term="NAV.LabelId" String="Valore numerico" />
+                    <Annotation Term="NAV.NavType">
+                        <EnumMember>NAV.NavType/Real</EnumMember>
+                    </Annotation>
+                </Property>
+                <Property Name="Sequence" Type="Edm.Int32">
+                    <Annotation Term="NAV.LabelId" String="Sequenza" />
+                    <Annotation Term="NAV.NavType">
+                        <EnumMember>NAV.NavType/Int</EnumMember>
+                    </Annotation>
+                    <Annotation Term="NAV.AllowEdit" Bool="false" />
+                </Property>
+                <Property Name="RoutingNo" Type="Edm.String" MaxLength="20">
+                    <Annotation Term="NAV.LabelId" String="Nr. ciclo" />
+                    <Annotation Term="NAV.NavType">
+                        <EnumMember>NAV.NavType/String</EnumMember>
+                    </Annotation>
+                    <Annotation Term="NAV.AllowEdit" Bool="false" />
+                </Property>
+                <Property Name="CharacValueDescription" Type="Edm.String" MaxLength="100">
+                    <Annotation Term="NAV.LabelId" String="Descrizione valore caratteristica" />
+                    <Annotation Term="NAV.NavType">
+                        <EnumMember>NAV.NavType/String</EnumMember>
+                    </Annotation>
+                    <Annotation Term="NAV.AllowEdit" Bool="false" />
+                </Property>
+                <NavigationProperty Name="CharacteristicCode_Link" Type="Collection(NAV.CaratteristicheCFG)" ContainsTarget="true">
+                    <ReferentialConstraint Property="CharacteristicCode" ReferencedProperty="Code" />
+                </NavigationProperty>
+                <NavigationProperty Name="RoutingNo_Link" Type="Collection(NAV.TestataCICLO)" ContainsTarget="true">
+                    <ReferentialConstraint Property="RoutingNo" ReferencedProperty="No" />
+                </NavigationProperty>
+                <Annotation Term="NAV.LabelId" String="CaratAmmCFG" />
+            </EntityType>
             <EntityType Name="CaratteristicheArtCFG">
                 <Key>
                     <PropertyRef Name="Variant_Code" />
@@ -30715,6 +30786,7 @@
                 <NavigationProperty Name="AccountantPortalUserTasks" Type="Collection(NAV.AccountantPortalUserTasks)" ContainsTarget="true" />
                 <NavigationProperty Name="Allegati" Type="Collection(NAV.Allegati)" ContainsTarget="true" />
                 <NavigationProperty Name="Articoli" Type="Collection(NAV.Articoli)" ContainsTarget="true" />
+                <NavigationProperty Name="CaratAmmCFG" Type="Collection(NAV.CaratAmmCFG)" ContainsTarget="true" />
                 <NavigationProperty Name="CaratteristicheArtCFG" Type="Collection(NAV.CaratteristicheArtCFG)" ContainsTarget="true" />
                 <NavigationProperty Name="CaratteristicheCFG" Type="Collection(NAV.CaratteristicheCFG)" ContainsTarget="true" />
                 <NavigationProperty Name="Cicli" Type="Collection(NAV.Cicli)" ContainsTarget="true" />
@@ -31139,6 +31211,28 @@
                     </Annotation>
                 </EntitySet>
                 <EntitySet Name="Articoli" EntityType="NAV.Articoli">
+                    <Annotation Term="Org.OData.Capabilities.V1.ChangeTracking">
+                        <Record>
+                            <PropertyValue Property="Supported" Bool="false" />
+                        </Record>
+                    </Annotation>
+                    <Annotation Term="Org.OData.Capabilities.V1.DeleteRestrictions">
+                        <Record>
+                            <PropertyValue Property="Deletable" Bool="true" />
+                        </Record>
+                    </Annotation>
+                    <Annotation Term="Org.OData.Capabilities.V1.InsertRestrictions">
+                        <Record>
+                            <PropertyValue Property="Insertable" Bool="true" />
+                        </Record>
+                    </Annotation>
+                    <Annotation Term="Org.OData.Capabilities.V1.UpdateRestrictions">
+                        <Record>
+                            <PropertyValue Property="Updatable" Bool="true" />
+                        </Record>
+                    </Annotation>
+                </EntitySet>
+                <EntitySet Name="CaratAmmCFG" EntityType="NAV.CaratAmmCFG">
                     <Annotation Term="Org.OData.Capabilities.V1.ChangeTracking">
                         <Record>
                             <PropertyValue Property="Supported" Bool="false" />
