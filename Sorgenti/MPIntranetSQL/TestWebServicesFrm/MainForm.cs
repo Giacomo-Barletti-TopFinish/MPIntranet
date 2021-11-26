@@ -162,6 +162,27 @@ namespace TestWebServicesFrm
             }
         }
 
+        private void btnCambiaCaratArtCFG_Click(object sender, EventArgs e)
+        {
+            txtMessaggio.Text = string.Empty;
+            try
+            {
+                if (string.IsNullOrEmpty(txtAnagCaratCFG.Text))
+                {
+                    txtMessaggio.Text = "Inserire un Anagrafica";
+                    return;
+                }
+                BCServices bc = new BCServices();
+                bc.CreaConnessione();
+                bc.CambiaCaratteristicaArtCFG(txtAnagCaratCFG.Text, txtCodiceCaratCFG.Text, txtValoreCarattCFG.Text);
+                txtMessaggio.Text = "Caratteristica cambiata";
+
+            }
+            catch (Exception ex)
+            {
+                txtMessaggio.Text = estraiErrore(ex);
+            }
+        }
         private void btnAggiungiComponente_Click(object sender, EventArgs e)
         {
             txtMessaggio.Text = string.Empty;
@@ -1055,14 +1076,14 @@ namespace TestWebServicesFrm
                     string azienda = (string)ddlAziende.SelectedItem;
                     BCServices bc = new BCServices();
                     bc.CreaConnessione(azienda);
-                    List<CaratteristicheCFG> caratteristiche = bc.EstraiCaratteristicheCFG();
+                    List<CaratteristicheArtCFG> caratteristiche = bc.EstraiCaratteristicheArtCFG(txtAnagCaratCFG.Text);
                     StringBuilder sb = new StringBuilder();
                     sb.AppendLine(string.Format("Trovate {0} caratteristiche ", caratteristiche.Count));
                     txtMessaggio.Text = sb.ToString();
                     sb.AppendLine(string.Empty);
 
-                    
-                    caratteristiche.ForEach(x => sb.AppendLine(string.Format("{0} - {1} ", x.Code, x.Description)));
+
+                    caratteristiche.ForEach(x => sb.AppendLine(string.Format("{0} - {1} ", x.Characteristic_Code, x.Characteristic_Value)));
 
                     txtMessaggio.Text = sb.ToString();
                 }
@@ -1073,5 +1094,7 @@ namespace TestWebServicesFrm
 
             }
         }
+
+
     }
 }

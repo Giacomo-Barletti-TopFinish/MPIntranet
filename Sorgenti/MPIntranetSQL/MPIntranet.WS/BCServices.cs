@@ -559,13 +559,33 @@ namespace MPIntranet.WS
             return t;
 
         }
-        public List<CaratteristicheCFG> EstraiCaratteristicheCFG()
+        public List<CaratteristicheArtCFG> EstraiCaratteristicheArtCFG(string anagrafica)
 
         {
-            //List<CaratteristicheCFG> c = _nav.CaratteristicheCFG.Where(x => x.Code == Code && x.Description == Description).ToList();
-            List<CaratteristicheCFG> c = _nav.CaratteristicheCFG.ToList();
+            List<CaratteristicheArtCFG> c = _nav.CaratteristicheArtCFG.Where(x => x.Item_No == anagrafica).ToList();
             return c;
-
         }
-    }      
+        
+        
+        //public void CambiaCaratteristicaArtCFG(string anagrafica, string codice, string valore)
+        //{
+            
+        //    NAV.CaratteristicheArtCFG carat = _nav.CaratteristicheArtCFG.Where(x => x.Item_No == anagrafica && x.Characteristic_Code == codice).FirstOrDefault();
+        //    //carat.Numeric_Value = 1;
+        //   carat.Characteristic_Value = valore;
+        //    _nav.UpdateObject(carat);
+        //    Salva();
+         
+        //}
+        public void CambiaCaratteristicaArtCFG(string anagrafica, string codice, string valore)
+        {
+            
+            NAV.CaratAmmCFG carat = _nav.CaratAmmCFG.Where(x => x.ItemNo== anagrafica && x.CharacteristicCode == codice).FirstOrDefault();
+            carat.NumericValue = decimal.Parse(valore);
+           carat.CharacteristicValue = valore;
+            _nav.UpdateObject(carat);
+            Salva();
+         
+        }
+    }
 }
