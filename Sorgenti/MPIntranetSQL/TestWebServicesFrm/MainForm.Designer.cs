@@ -203,9 +203,17 @@
             this.label50 = new System.Windows.Forms.Label();
             this.ddlTaskContoLav = new System.Windows.Forms.Label();
             this.ddlTaskContoLavoro = new System.Windows.Forms.ComboBox();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.btnEstraiCaratCFG = new System.Windows.Forms.Button();
             this.label48 = new System.Windows.Forms.Label();
             this.ddlAziende = new System.Windows.Forms.ComboBox();
             this.dataSet1 = new System.Data.DataSet();
+            this.txtAnagCaratCFG = new System.Windows.Forms.TextBox();
+            this.txtCodiceCaratCFG = new System.Windows.Forms.TextBox();
+            this.Anagrafica = new System.Windows.Forms.Label();
+            this.label61 = new System.Windows.Forms.Label();
+            this.label62 = new System.Windows.Forms.Label();
+            this.txtValoreCarattCFG = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -233,6 +241,7 @@
             this.tabPage5.SuspendLayout();
             this.Listini.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nCostoListino)).BeginInit();
+            this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -1378,6 +1387,7 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Location = new System.Drawing.Point(12, 34);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -2055,6 +2065,33 @@
             this.ddlTaskContoLavoro.TabIndex = 2;
             this.ddlTaskContoLavoro.SelectedIndexChanged += new System.EventHandler(this.ddlTaskContoLavoro_SelectedIndexChanged);
             // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.label62);
+            this.tabPage6.Controls.Add(this.txtValoreCarattCFG);
+            this.tabPage6.Controls.Add(this.label61);
+            this.tabPage6.Controls.Add(this.Anagrafica);
+            this.tabPage6.Controls.Add(this.txtCodiceCaratCFG);
+            this.tabPage6.Controls.Add(this.txtAnagCaratCFG);
+            this.tabPage6.Controls.Add(this.btnEstraiCaratCFG);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(1232, 596);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "Caratteristiche CFG";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // btnEstraiCaratCFG
+            // 
+            this.btnEstraiCaratCFG.Location = new System.Drawing.Point(868, 44);
+            this.btnEstraiCaratCFG.Name = "btnEstraiCaratCFG";
+            this.btnEstraiCaratCFG.Size = new System.Drawing.Size(236, 23);
+            this.btnEstraiCaratCFG.TabIndex = 0;
+            this.btnEstraiCaratCFG.Text = "Estrai Caratteristiche";
+            this.btnEstraiCaratCFG.UseVisualStyleBackColor = true;
+            this.btnEstraiCaratCFG.Click += new System.EventHandler(this.btnEstraiCaratCFG_Click);
+            // 
             // label48
             // 
             this.label48.AutoSize = true;
@@ -2076,6 +2113,54 @@
             // dataSet1
             // 
             this.dataSet1.DataSetName = "NewDataSet";
+            // 
+            // txtAnagCaratCFG
+            // 
+            this.txtAnagCaratCFG.Location = new System.Drawing.Point(23, 44);
+            this.txtAnagCaratCFG.Name = "txtAnagCaratCFG";
+            this.txtAnagCaratCFG.Size = new System.Drawing.Size(136, 20);
+            this.txtAnagCaratCFG.TabIndex = 1;
+            // 
+            // txtCodiceCaratCFG
+            // 
+            this.txtCodiceCaratCFG.Location = new System.Drawing.Point(202, 44);
+            this.txtCodiceCaratCFG.Name = "txtCodiceCaratCFG";
+            this.txtCodiceCaratCFG.Size = new System.Drawing.Size(136, 20);
+            this.txtCodiceCaratCFG.TabIndex = 2;
+            // 
+            // Anagrafica
+            // 
+            this.Anagrafica.AutoSize = true;
+            this.Anagrafica.Location = new System.Drawing.Point(23, 25);
+            this.Anagrafica.Name = "Anagrafica";
+            this.Anagrafica.Size = new System.Drawing.Size(58, 13);
+            this.Anagrafica.TabIndex = 3;
+            this.Anagrafica.Text = "Anagrafica";
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Location = new System.Drawing.Point(199, 25);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(104, 13);
+            this.label61.TabIndex = 4;
+            this.label61.Text = "Codice Caratteristica";
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Location = new System.Drawing.Point(365, 25);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(101, 13);
+            this.label62.TabIndex = 6;
+            this.label62.Text = "Valore Caratteristica";
+            // 
+            // txtValoreCarattCFG
+            // 
+            this.txtValoreCarattCFG.Location = new System.Drawing.Point(368, 44);
+            this.txtValoreCarattCFG.Name = "txtValoreCarattCFG";
+            this.txtValoreCarattCFG.Size = new System.Drawing.Size(136, 20);
+            this.txtValoreCarattCFG.TabIndex = 5;
             // 
             // MainForm
             // 
@@ -2124,6 +2209,8 @@
             this.Listini.ResumeLayout(false);
             this.Listini.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nCostoListino)).EndInit();
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -2310,6 +2397,14 @@
         private System.Windows.Forms.DateTimePicker dtInizioListinoContoLav;
         private System.Windows.Forms.Label label60;
         private System.Windows.Forms.NumericUpDown nCostoListino;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.Button btnEstraiCaratCFG;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.TextBox txtValoreCarattCFG;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.Label Anagrafica;
+        private System.Windows.Forms.TextBox txtCodiceCaratCFG;
+        private System.Windows.Forms.TextBox txtAnagCaratCFG;
     }
 }
 

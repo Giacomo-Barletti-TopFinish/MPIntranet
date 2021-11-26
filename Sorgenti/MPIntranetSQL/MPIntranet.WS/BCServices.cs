@@ -113,7 +113,7 @@ namespace MPIntranet.WS
             catch
             {
                 return null;
-            } 
+            }
         }
         public List<PrezziContoLavoro> EstraiListiniContoLavoro()
         {
@@ -388,7 +388,7 @@ namespace MPIntranet.WS
             List<CommentiFasi> t = _nav.CommentiFasi.Where(x => x.Routing_No == NoCiclo && x.Version_Code == versioneCiclo).ToList();
             return t;
         }
-       
+
         public void RimuoviCommento(string NoCiclo, string versioneCiclo, string operazione, bool conSalvataggio)
         {
             List<CommentiFasi> commenti = _nav.CommentiFasi.Where(x => x.Routing_No == NoCiclo && x.Version_Code == versioneCiclo).ToList();
@@ -458,7 +458,7 @@ namespace MPIntranet.WS
 
             oDP.Source_No = Anagrafica;
             oDP.Creation_Date = DateTime.Now;
-            oDP.Due_Date= data;
+            oDP.Due_Date = data;
             oDP.Location_Code = ubicazione;
             oDP.Quantity = quantita;
             oDP.Description = descrizione;
@@ -474,7 +474,7 @@ namespace MPIntranet.WS
             Salva();
             return oDP.No;
         }
-        public string CreaListino(string Anagrafica, string Terzista, string Task, DateTime DataInizio,DateTime DataFine, decimal CostoListino)
+        public string CreaListino(string Anagrafica, string Terzista, string Task, DateTime DataInizio, DateTime DataFine, decimal CostoListino)
 
         {
 
@@ -493,7 +493,7 @@ namespace MPIntranet.WS
 
             _nav.AddToPrezziContoLavoro(listini);
             Salva();
-           
+
             return listini.Item_No;
         }
         public void RegMag(string Anagrafica, DateTime Due_Date, decimal Quantity, string Location_Code, string Description, string Description2)
@@ -559,6 +559,13 @@ namespace MPIntranet.WS
             return t;
 
         }
-    }
+        public List<CaratteristicheCFG> EstraiCaratteristicheCFG()
 
+        {
+            //List<CaratteristicheCFG> c = _nav.CaratteristicheCFG.Where(x => x.Code == Code && x.Description == Description).ToList();
+            List<CaratteristicheCFG> c = _nav.CaratteristicheCFG.ToList();
+            return c;
+
+        }
+    }      
 }

@@ -1040,5 +1040,38 @@ namespace TestWebServicesFrm
                 txtMessaggio.Text = estraiErrore(ex);
             }
         }
+
+        private void btnEstraiCaratCFG_Click(object sender, EventArgs e)
+        {
+            {
+                txtMessaggio.Text = string.Empty;
+                try
+                {
+                    if (ddlAziende.SelectedIndex < 0)
+                    {
+                        txtMessaggio.Text = "Selezionare un'azienda";
+                        return;
+                    }
+                    string azienda = (string)ddlAziende.SelectedItem;
+                    BCServices bc = new BCServices();
+                    bc.CreaConnessione(azienda);
+                    List<CaratteristicheCFG> caratteristiche = bc.EstraiCaratteristicheCFG();
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendLine(string.Format("Trovate {0} caratteristiche ", caratteristiche.Count));
+                    txtMessaggio.Text = sb.ToString();
+                    sb.AppendLine(string.Empty);
+
+                    
+                    caratteristiche.ForEach(x => sb.AppendLine(string.Format("{0} - {1} ", x.Code, x.Description)));
+
+                    txtMessaggio.Text = sb.ToString();
+                }
+                catch (Exception ex)
+                {
+                    txtMessaggio.Text = estraiErrore(ex);
+                }
+
+            }
+        }
     }
 }
