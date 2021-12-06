@@ -144,8 +144,15 @@ namespace MPIntranet.Business
                     componenteDaCancellare.DATAMODIFICA = DateTime.Now;
                 }
 
+                //Componente radice = componenti.Where(x => x.IdPadre == 0).FirstOrDefault();
+                //if (radice == null) return;
+
+                //salvaComponentiRicorsivo(radice, ds, componenti, utente);
+
                 foreach (Componente componente in componenti.OrderByDescending(x => x.IdPadre))
                 {
+                    //    preparaSalvataggio(componente, ds, utente);
+
                     ArticoliDS.COMPONENTIRow rigaComponente = ds.COMPONENTI.Where(x => x.RowState != System.Data.DataRowState.Deleted && x.IDCOMPONENTE == componente.IdComponente).FirstOrDefault();
 
                     if (rigaComponente == null || componente.IdComponente < 0)
@@ -182,17 +189,77 @@ namespace MPIntranet.Business
                     FaseCiclo.SalvaListaFaseCiclo(componente.FasiCiclo, utente, componente.IdDiba, componente.IdComponente, ds);
                 }
                 DataRow[] root = ds.COMPONENTI.Where(x => x.IsIDPADRENull()).ToArray();
-                DataRow[] altriNodi = ds.COMPONENTI.Where(x => !x.IsIDPADRENull()).OrderByDescending(x => x.IDPADRE).ToArray();
+   //             DataRow[] altriNodi = ds.COMPONENTI.Where(x => !x.IsIDPADRENull()).OrderByDescending(x => x.IDPADRE).ToArray();
 
-
-                bArticolo.UpdateComponentiTable(ds.COMPONENTI.TableName, root);
-                bArticolo.UpdateComponentiTable(ds.COMPONENTI.TableName, altriNodi);
+                salvaComponentiRicorsivo(root, ds, bArticolo);
+                //bArticolo.UpdateComponentiTable(ds.COMPONENTI.TableName, root);
+                //bArticolo.UpdateComponentiTable(ds.COMPONENTI.TableName, altriNodi);
 
                 bArticolo.UpdateTable(ds.FASICICLO.TableName, ds);
 
             }
 
         }
+
+        private static void salvaComponentiRicorsivo(DataRow[] root, ArticoliDS ds, ArticoliBusiness bArticolo)
+        {
+            //     DataRow[] root = ds.COMPONENTI.Where(x => x.IsIDPADRENull()).ToArray();
+            bArticolo.UpdateComponentiTable(ds.COMPONENTI.TableName, root);
+
+            foreach (DataRow riga in root)
+            {
+                int idPadre = riga.Field<int>("IDCOMPONENTE");
+                DataRow[] altriNodi = ds.COMPONENTI.Where(x =>!x.IsIDPADRENull() && x.IDPADRE == idPadre).ToArray();
+                if (altriNodi.Length > 0)
+                    salvaComponentiRicorsivo(altriNodi, ds, bArticolo);
+            }
+        }
+
+        //private static void salvaComponentiRicorsivo(Componente componente, ArticoliDS ds, List<Componente> componenti, string utente)
+        //{
+        //    preparaSalvataggio(componente, ds, utente);
+        //    List<Componente> figli = componenti.Where(x => x.IdPadre == componente.IdComponente).ToList();
+        //    foreach (Componente figlio in figli)
+        //        salvaComponentiRicorsivo(figlio, ds, componenti, utente);
+        //}
+
+        //private static void preparaSalvataggio(Componente componente, ArticoliDS ds, string utente)
+        //{
+        //    ArticoliDS.COMPONENTIRow rigaComponente = ds.COMPONENTI.Where(x => x.RowState != System.Data.DataRowState.Deleted && x.IDCOMPONENTE == componente.IdComponente).FirstOrDefault();
+
+        //    if (rigaComponente == null || componente.IdComponente < 0)
+        //    {
+        //        rigaComponente = ds.COMPONENTI.NewCOMPONENTIRow();
+        //        rigaComponente.IDCOMPONENTE = componente.IdComponente;
+        //        if (componente.IdPadre != 0)
+        //            rigaComponente.IDPADRE = componente.IdPadre;
+        //        rigaComponente.IDDIBA = componente.IdDiba;
+        //        rigaComponente.DESCRIZIONE = componente.Descrizione.ToUpper();
+        //        rigaComponente.ANAGRAFICA = (string.IsNullOrEmpty(componente.Anagrafica)) ? string.Empty : componente.Anagrafica.ToUpper();
+        //        rigaComponente.COLLEGAMENTODIBA = (string.IsNullOrEmpty(componente.CollegamentoDiBa)) ? string.Empty : componente.CollegamentoDiBa.ToUpper();
+        //        rigaComponente.QUANTITA = componente.Quantita;
+        //        rigaComponente.UMQUANTITA = (string.IsNullOrEmpty(componente.UMQuantita)) ? string.Empty : componente.UMQuantita.ToUpper();
+        //        rigaComponente.CANCELLATO = false;
+        //        rigaComponente.DATAMODIFICA = DateTime.Now;
+        //        rigaComponente.UTENTEMODIFICA = utente;
+
+        //        ds.COMPONENTI.AddCOMPONENTIRow(rigaComponente);
+        //    }
+        //    else
+        //    {
+        //        if (componente.IdPadre != 0)
+        //            rigaComponente.IDPADRE = componente.IdPadre;
+        //        rigaComponente.DESCRIZIONE = componente.Descrizione.ToUpper();
+        //        rigaComponente.ANAGRAFICA = (string.IsNullOrEmpty(componente.Anagrafica)) ? string.Empty : componente.Anagrafica.ToUpper();
+        //        rigaComponente.COLLEGAMENTODIBA = (string.IsNullOrEmpty(componente.CollegamentoDiBa)) ? string.Empty : componente.CollegamentoDiBa.ToUpper();
+        //        rigaComponente.QUANTITA = componente.Quantita;
+        //        rigaComponente.UMQUANTITA = (string.IsNullOrEmpty(componente.UMQuantita)) ? string.Empty : componente.UMQuantita.ToUpper();
+        //        rigaComponente.CANCELLATO = false;
+        //        rigaComponente.DATAMODIFICA = DateTime.Now;
+        //        rigaComponente.UTENTEMODIFICA = utente;
+        //    }
+        //    FaseCiclo.SalvaListaFaseCiclo(componente.FasiCiclo, utente, componente.IdDiba, componente.IdComponente, ds);
+        //}
 
         public string CreaEtichetta()
         {

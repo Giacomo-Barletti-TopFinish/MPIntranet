@@ -428,6 +428,7 @@
     <Content Include="Views\SchedeProcesso\VERIFICASCHEDE.cshtml" />
     <Content Include="Views\SchedeProcesso\MostraDistinteBC.cshtml" />
     <Content Include="Views\SchedeProcesso\MostraListaSchedeDistinta.cshtml" />
+    <Content Include="Views\SchedeProcesso\ElementiObbligatoriPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

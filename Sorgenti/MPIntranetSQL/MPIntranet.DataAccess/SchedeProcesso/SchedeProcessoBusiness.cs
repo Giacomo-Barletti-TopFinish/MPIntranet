@@ -13,10 +13,10 @@ namespace MPIntranet.DataAccess.SchedeProcesso
         public SchedeProcessoBusiness() : base() { }
 
         [DataContext]
-        public void FillSPControlli(SchedeProcessoDS ds, bool soloNonCancellati)
+        public void FillSPControlli(SchedeProcessoDS ds, bool soloNonCancellati, bool soloVisibili)
         {
             SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
-            a.FillSPControlli(ds, soloNonCancellati);
+            a.FillSPControlli(ds, soloNonCancellati, soloVisibili);
         }
 
         [DataContext]
@@ -62,7 +62,7 @@ namespace MPIntranet.DataAccess.SchedeProcesso
             a.GetSPScheda(IDScheda, ds);
         }
         [DataContext]
-        public void FillSPSchede(string anagrafica, bool soloAttive,SchedeProcessoDS ds)
+        public void FillSPSchede(string anagrafica, bool soloAttive, SchedeProcessoDS ds)
         {
             SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
             a.FillSPSchede(anagrafica, soloAttive, ds);
@@ -100,6 +100,12 @@ namespace MPIntranet.DataAccess.SchedeProcesso
             a.GetElemento(ds, idSPElemento);
         }
         [DataContext]
+        public void GetElementoObbligatorio(SchedeProcessoDS ds, int idSPElemento)
+        {
+            SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
+            a.GetElementoObbligatorio(ds, idSPElemento);
+        }
+        [DataContext]
         public void GetValoreScheda(SchedeProcessoDS ds, int idSPValoreScheda)
         {
             SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
@@ -110,6 +116,12 @@ namespace MPIntranet.DataAccess.SchedeProcesso
         {
             SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
             a.FillElementi(ds, idSPMaster, soloNonCancellati);
+        }
+        [DataContext]
+        public void FillElementiObbligatori(SchedeProcessoDS ds, int idSchedaObbligatoria, bool soloNonCancellati)
+        {
+            SchedeProcessoAdapter a = new SchedeProcessoAdapter(DbConnection, DbTransaction);
+            a.FillElementiObbligatori(ds, idSchedaObbligatoria, soloNonCancellati);
         }
 
         [DataContext]

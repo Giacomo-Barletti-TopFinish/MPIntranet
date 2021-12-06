@@ -43,6 +43,11 @@
                 @Html.DropDownList("ddlTasks", Enumerable.Empty<SelectListItem>(), new { @class = "form-control input-sm", @id = "ddlTasks" })
             </div>
         </div>
+
+        <div id="elementiObblicatori" class="row">
+
+        </div>
+
         <div class="row">
             <div class="col-md-3">
                 @Html.Label("Controlli")
@@ -117,16 +122,30 @@
                     svuotaCampi();
                 }
             });
+
         });
 
-        $(function () {
 
-            $("#ddlAreaProduzione").change(function () {
-                var selectedText = $(this).find("option:selected").text();
-                var selectedValue = $(this).val();
-                getTasks(selectedValue,'');
+        $("#ddlAreaProduzione").change(function () {
+            var selectedText = $(this).find("option:selected").text();
+            var selectedValue = $(this).val();
+            getTasks(selectedValue,'');
+        });
+
+          var urlEO = '@Url.Action("GetSPMasterEO", "SchedeProcesso")';
+            $.ajax({
+                url: urlEO,
+                data: { IdSPMaster: 1 },
+                cache: false,
+                type: "POST",
+                success: function (data) {
+                    $('#elementiObblicatori').html(data).show();
+
+                },
+                error: function (response) {
+                    svuotaCampi();
+                }
             });
-        });
     });
 
     function getTasks(AreaProduzione,selectedValue) {

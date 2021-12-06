@@ -30,15 +30,16 @@ namespace MPIntranet.Business.SchedeProcesso
         public double Minimo { get; set; }
         public double Massimo { get; set; }
         public double Default { get; set; }
+        public bool Visibile{ get; set; }
 
         public List<SPElementoLista> Elementi = new List<SPElementoLista>();
 
-        public static List<SPControllo> EstraiListaSPControlli(bool soloNonCancellati)
+        public static List<SPControllo> EstraiListaSPControlli(bool soloNonCancellati, bool soloVisibili)
         {
             SchedeProcessoDS ds = new SchedeProcessoDS();
             using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
             {
-                bScheda.FillSPControlli(ds, soloNonCancellati);
+                bScheda.FillSPControlli(ds, soloNonCancellati, soloVisibili);
             }
 
             List<SPControllo> controlli = new List<SPControllo>();
@@ -62,6 +63,8 @@ namespace MPIntranet.Business.SchedeProcesso
             controllo.Minimo = riga.IsMINIMONull() ? 0 : riga.MINIMO;
             controllo.Massimo = riga.IsMASSIMONull() ? 0 : riga.MASSIMO;
             controllo.Default = riga.IsDEFAULTNull() ? 0 : riga.DEFAULT;
+
+            controllo.Visibile = riga.VISIBILE;
 
             controllo.Cancellato = riga.CANCELLATO;
             controllo.DataModifica = riga.DATAMODIFICA;

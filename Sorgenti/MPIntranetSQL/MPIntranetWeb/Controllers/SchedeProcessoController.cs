@@ -32,7 +32,7 @@ namespace MPIntranetWeb.Controllers
             mItems.Insert(0, new MPIntranetListItem(" -- CREA NUOVO MASTER -- ", ElementiVuoti.SPMaster.ToString()));
             ViewData.Add("ddlSPMasters", mItems);
 
-            List<MPIntranetListItem> controlliItems = CreaListaSPControlli(" -- SELEZIONA UN CONTROLLO -- ");
+            List<MPIntranetListItem> controlliItems = CreaListaSPControlli(" -- SELEZIONA UN CONTROLLO -- ",true);
             ViewData.Add("ddlSPControlli", controlliItems);
 
             List<TaskArea> tasks = TaskArea.EstraiListaTaskArea(true);
@@ -40,11 +40,12 @@ namespace MPIntranetWeb.Controllers
             List<MPIntranetListItem> areeProduzione = AreaProduzione.Select(x => new MPIntranetListItem(x, x)).ToList();
             areeProduzione.Insert(0, new MPIntranetListItem(string.Empty, string.Empty));
             ViewData.Add("ddlAreaProduzione", areeProduzione);
+
             return View();
         }
         public ActionResult SPControlli()
         {
-            List<MPIntranetListItem> controlliItems = CreaListaSPControlli(" -- CREA NUOVO CONTROLLO -- ");
+            List<MPIntranetListItem> controlliItems = CreaListaSPControlli(" -- CREA NUOVO CONTROLLO -- ",true);
             ViewData.Add("ddlSPControlli", controlliItems);
             List<MPIntranetListItem> tipiControllo = CreaListaTipoControllo();
             ViewData.Add("ddlTipoControllo", tipiControllo);
@@ -104,11 +105,17 @@ namespace MPIntranetWeb.Controllers
         }
         public ActionResult GetSPMaster(int IdSPMaster)
         {
-            return Json(MPIntranet.Business.SchedeProcesso.SPMaster.EstraiSPMaster(IdSPMaster));
+            SPMaster master = MPIntranet.Business.SchedeProcesso.SPMaster.EstraiSPMaster(IdSPMaster);
+            return Json(master);
         }
-        private List<MPIntranetListItem> CreaListaSPControlli(string etichetta)
+        public ActionResult GetSPMasterEO(int IdSPMaster)
         {
-            List<SPControllo> controlli = SPControllo.EstraiListaSPControlli(true);
+            SPMaster master = MPIntranet.Business.SchedeProcesso.SPMaster.EstraiSPMaster(IdSPMaster);
+            return PartialView("ElementiObbligatoriPartial",master.ElementiObbligatori);
+        }
+        private List<MPIntranetListItem> CreaListaSPControlli(string etichetta, bool soloVisibili)
+        {
+            List<SPControllo> controlli = SPControllo.EstraiListaSPControlli(true, soloVisibili);
             List<MPIntranetListItem> controlliTiems = controlli.Select(x => new MPIntranetListItem(x.ToString(), x.IdSPControllo.ToString())).ToList();
             controlliTiems.Insert(0, new MPIntranetListItem(etichetta, ElementiVuoti.SPControllo.ToString()));
 
@@ -155,7 +162,7 @@ namespace MPIntranetWeb.Controllers
             string messaggio = MPIntranet.Business.SchedeProcesso.SPMaster.SalvaMaster(IdSPMaster, Codice, Descrizione, AreaProduzione, Task, elementiLista, ConnectedUser.ToUpper());
             return Content(messaggio);
         }
-        public ActionResult AggiornaSchedaProcesso(int IdSPScheda, int IdSPMaster, string Codice, string Descrizione, string Task, string AreaProduzione, string Anagrafica, string Controlli)
+        public ActionResult AggiornaSchedaProcesso(int IdSPScheda, int IdSPMaster, string Codice, string Descrizione, string Task, string AreaProduzione, string Anagrafica, string Controlli, string Obbligatori)
         {
             Codice = Codice.ToUpper();
             Descrizione = Descrizione.ToUpper();
@@ -164,10 +171,11 @@ namespace MPIntranetWeb.Controllers
             Anagrafica = Anagrafica.ToUpper();
 
             ElementoScheda[] elementiScheda = JSonSerializer.Deserialize<ElementoScheda[]>(Controlli);
+            ElementoScheda[] elementiObbligatoriScheda = JSonSerializer.Deserialize<ElementoScheda[]>(Obbligatori);
             //if (!Item.VerificaEsistenzaItem(Anagrafica))
             //    return Content("Scheda non salvata - Anagrafica non presente in Business Central");
 
-            string messaggio = SpScheda.SalvaScheda(IdSPScheda, IdSPMaster, Anagrafica, Codice, Descrizione, AreaProduzione, Task, elementiScheda.ToList(), ConnectedUser.ToUpper());
+            string messaggio = SpScheda.SalvaScheda(IdSPScheda, IdSPMaster, Anagrafica, Codice, Descrizione, AreaProduzione, Task, elementiScheda.ToList(), elementiObbligatoriScheda.ToList(), ConnectedUser.ToUpper());
             return Content(messaggio);
 
         }

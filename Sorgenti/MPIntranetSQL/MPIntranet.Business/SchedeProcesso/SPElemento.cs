@@ -20,6 +20,7 @@ namespace MPIntranet.Business.SchedeProcesso
         public int Sequenza { get; set; }
         public bool Obbligatorio { get; set; }
         public SPControllo Controllo { get; set; }
+        public bool ElementoObbligatorioMaster { get; set; }
 
         public static List<SPElemento> EstraiListaSPElementi(int IdSPMaster, bool soloNonCancellati, SchedeProcessoDS ds)
         {
@@ -38,7 +39,50 @@ namespace MPIntranet.Business.SchedeProcesso
             return controlli;
 
         }
+        public static SPElemento EstraiElemento(int IdSPElemento, bool ElementoObbligatorioMaster)
+        {
+            SchedeProcessoDS ds = new SchedeProcessoDS();
+            using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
+            {
+                ds.SPELEMENTIOBBLIGATORI.Clear();
 
+                if (ElementoObbligatorioMaster)
+                {
+                    bScheda.GetElementoObbligatorio(ds, IdSPElemento);
+                    SchedeProcessoDS.SPELEMENTIOBBLIGATORIRow riga = ds.SPELEMENTIOBBLIGATORI.Where(x => x.IDSPELEMENTOOBBLIGATORIO == IdSPElemento).FirstOrDefault();
+                    if (riga != null)
+                        return CreaElementoObbligatorio(riga);
+                }
+                else
+                {
+                    bScheda.GetElemento(ds, IdSPElemento);
+                    SchedeProcessoDS.SPELEMENTIRow riga = ds.SPELEMENTI.Where(x => x.IDSPELEMENTO == IdSPElemento).FirstOrDefault();
+                    if (riga != null)
+                        return CreaElemento(riga);
+                }
+                return null;
+            }
+
+        }
+
+        public static List<SPElemento> EstraiListaSPElementiObbligatori(int idSchedaObbligatoria, bool soloNonCancellati)
+        {
+            SchedeProcessoDS ds = new SchedeProcessoDS();
+            using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
+            {
+                ds.SPELEMENTIOBBLIGATORI.Clear();
+                bScheda.FillElementiObbligatori(ds, idSchedaObbligatoria, soloNonCancellati);
+            }
+
+            List<SPElemento> controlli = new List<SPElemento>();
+            foreach (SchedeProcessoDS.SPELEMENTIOBBLIGATORIRow riga in ds.SPELEMENTIOBBLIGATORI)
+            {
+                SPElemento elemento = CreaElementoObbligatorio(riga);
+                controlli.Add(elemento);
+            }
+            return controlli;
+
+        }
         private static SPElemento CreaElemento(SchedeProcessoDS.SPELEMENTIRow riga)
         {
             if (riga == null) return null;
@@ -50,7 +94,7 @@ namespace MPIntranet.Business.SchedeProcesso
             elemento.Tipo = riga.TIPOELEMENTO;
             elemento.Sequenza = riga.SEQUENZA;
             elemento.Obbligatorio = riga.IsOBBLIGATORIONull() ? false : riga.OBBLIGATORIO;
-
+            elemento.ElementoObbligatorioMaster = false;
             elemento.Cancellato = riga.CANCELLATO;
             elemento.DataModifica = riga.DATAMODIFICA;
             elemento.UtenteModifica = riga.UTENTEMODIFICA;
@@ -60,7 +104,27 @@ namespace MPIntranet.Business.SchedeProcesso
 
             return elemento;
         }
+        private static SPElemento CreaElementoObbligatorio(SchedeProcessoDS.SPELEMENTIOBBLIGATORIRow riga)
+        {
+            if (riga == null) return null;
+            SPElemento elemento = new SPElemento();
+            elemento.IdSPElemento = riga.IDSPELEMENTOOBBLIGATORIO;
+            elemento.IdSPControllo = riga.IsIDSPCONTROLLONull() ? -1 : riga.IDSPCONTROLLO;
+            elemento.IdSPMaster = -1;
+            elemento.Testo = riga.IsTESTONull() ? string.Empty : riga.TESTO;
+            elemento.Tipo = riga.TIPOELEMENTO;
+            elemento.Sequenza = riga.SEQUENZA;
+            elemento.Obbligatorio = riga.IsOBBLIGATORIONull() ? false : riga.OBBLIGATORIO;
+            elemento.ElementoObbligatorioMaster = true;
+            elemento.Cancellato = riga.CANCELLATO;
+            elemento.DataModifica = riga.DATAMODIFICA;
+            elemento.UtenteModifica = riga.UTENTEMODIFICA;
 
+            if (elemento.Tipo == TipoSPElemento.CONTROLLO)
+                elemento.Controllo = SPControllo.EstraiSPControllo(elemento.IdSPControllo);
+
+            return elemento;
+        }
         public override string ToString()
         {
             return Testo;

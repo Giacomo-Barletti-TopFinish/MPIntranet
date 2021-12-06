@@ -24,6 +24,8 @@ namespace MPIntranet.Business.SchedeProcesso
         public string Task { get; set; }
 
         public List<SPElemento> Elementi = new List<SPElemento>();
+        public List<SPElemento> ElementiObbligatori = new List<SPElemento>();
+        public int IdSchedaObbligatoria { get; set; }
 
 
         public static List<SPMaster> EstraiListaSPMaster(bool soloNonCancellati)
@@ -70,21 +72,23 @@ namespace MPIntranet.Business.SchedeProcesso
         private static SPMaster CreaMaster(SchedeProcessoDS.SPMASTERSRow riga, SchedeProcessoDS ds)
         {
             if (riga == null) return null;
-            SPMaster controllo = new SPMaster();
-            controllo.IdSPMaster = riga.IDSPMASTER;
-            controllo.Codice = riga.CODICE;
-            controllo.Descrizione = riga.DESCRIZIONE;
-            controllo.AreaProduzione = riga.AREAPRODUZIONE;
-            controllo.Task = riga.TASK;
+            SPMaster master = new SPMaster();
+            master.IdSPMaster = riga.IDSPMASTER;
+            master.Codice = riga.CODICE;
+            master.Descrizione = riga.DESCRIZIONE;
+            master.AreaProduzione = riga.AREAPRODUZIONE;
+            master.Task = riga.TASK;
+            master.IdSchedaObbligatoria = riga.IDSCHEDAOBBLIGATORIA;
 
-            controllo.Cancellato = riga.CANCELLATO;
-            controllo.DataModifica = riga.DATAMODIFICA;
-            controllo.Descrizione = riga.DESCRIZIONE;
-            controllo.UtenteModifica = riga.UTENTEMODIFICA;
+            master.Cancellato = riga.CANCELLATO;
+            master.DataModifica = riga.DATAMODIFICA;
+            master.Descrizione = riga.DESCRIZIONE;
+            master.UtenteModifica = riga.UTENTEMODIFICA;
 
-            controllo.Elementi = SPElemento.EstraiListaSPElementi(riga.IDSPMASTER, true, ds);
+            master.Elementi = SPElemento.EstraiListaSPElementi(riga.IDSPMASTER, true, ds);
+            master.ElementiObbligatori = SPElemento.EstraiListaSPElementiObbligatori(riga.IDSCHEDAOBBLIGATORIA, true);
 
-            return controllo;
+            return master;
         }
         public static SPMaster EstraiSPMaster(int idMaster)
         {
@@ -115,7 +119,7 @@ namespace MPIntranet.Business.SchedeProcesso
 
                 if (string.IsNullOrEmpty(codice))
                 {
-                    int maxIDSPMasyer = bScheda.GetMaxIDSPMaster()+1;
+                    int maxIDSPMasyer = bScheda.GetMaxIDSPMaster() + 1;
                     codice = "MA" + maxIDSPMasyer.ToString().PadLeft(ds.SPMASTERS.CODICEColumn.MaxLength - 2, '0');
                 }
 
@@ -141,6 +145,7 @@ namespace MPIntranet.Business.SchedeProcesso
                     ds.SPMASTERS.AddSPMASTERSRow(riga);
                 }
 
+
                 if (idMaster > 0)
                 {
                     List<int> listaIdElementi = elementiLista.Where(x => x.IDElemento > 0).Select(x => x.IDElemento).Distinct().ToList();
@@ -155,14 +160,16 @@ namespace MPIntranet.Business.SchedeProcesso
                     }
                 }
 
+                List<int> idControlliObbligatori = SPElemento.EstraiListaSPElementiObbligatori(1, true).Select(x => x.IdSPControllo).Distinct().ToList();
                 int sequenza = 0;
                 foreach (ElementoMaster elemento in elementiLista)
                 {
-                    sequenza++;
-
-                    SPElemento.SalvaElemento(elemento.IDElemento, elemento.IDControllo, riga.IDSPMASTER, elemento.Testo, elemento.Tipo, elemento.Obbligatorio, sequenza, account, ds);
+                    if (!idControlliObbligatori.Contains(elemento.IDControllo))
+                    {
+                        sequenza++;
+                        SPElemento.SalvaElemento(elemento.IDElemento, elemento.IDControllo, riga.IDSPMASTER, elemento.Testo, elemento.Tipo, elemento.Obbligatorio, sequenza, account, ds);
+                    }
                 }
-
                 bScheda.UpdateTableSPMaster(ds);
                 bScheda.UpdateTable(ds.SPELEMENTI.TableName, ds);
 

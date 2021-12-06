@@ -52,6 +52,7 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="VISIBILE" msprop:Generator_ColumnVarNameInTable="columnVISIBILE" msprop:Generator_ColumnPropNameInRow="VISIBILE" msprop:Generator_ColumnPropNameInTable="VISIBILEColumn" msprop:Generator_UserColumnName="VISIBILE" type="xs:boolean" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -163,6 +164,7 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="IDSCHEDAOBBLIGATORIA" msprop:Generator_ColumnVarNameInTable="columnIDSCHEDAOBBLIGATORIA" msprop:Generator_ColumnPropNameInRow="IDSCHEDAOBBLIGATORIA" msprop:Generator_ColumnPropNameInTable="IDSCHEDAOBBLIGATORIAColumn" msprop:Generator_UserColumnName="IDSCHEDAOBBLIGATORIA" type="xs:int" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -285,6 +287,41 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="ELEMENTOOBBLIGATORIO" msprop:Generator_ColumnVarNameInTable="columnELEMENTOOBBLIGATORIO" msprop:Generator_ColumnPropNameInRow="ELEMENTOOBBLIGATORIO" msprop:Generator_ColumnPropNameInTable="ELEMENTOOBBLIGATORIOColumn" msprop:Generator_UserColumnName="ELEMENTOOBBLIGATORIO" type="xs:boolean" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SPELEMENTIOBBLIGATORI" msprop:Generator_TableClassName="SPELEMENTIOBBLIGATORIDataTable" msprop:Generator_TableVarName="tableSPELEMENTIOBBLIGATORI" msprop:Generator_RowChangedName="SPELEMENTIOBBLIGATORIRowChanged" msprop:Generator_TablePropName="SPELEMENTIOBBLIGATORI" msprop:Generator_RowDeletingName="SPELEMENTIOBBLIGATORIRowDeleting" msprop:Generator_RowChangingName="SPELEMENTIOBBLIGATORIRowChanging" msprop:Generator_RowEvHandlerName="SPELEMENTIOBBLIGATORIRowChangeEventHandler" msprop:Generator_RowDeletedName="SPELEMENTIOBBLIGATORIRowDeleted" msprop:Generator_RowClassName="SPELEMENTIOBBLIGATORIRow" msprop:Generator_UserTableName="SPELEMENTIOBBLIGATORI" msprop:Generator_RowEvArgName="SPELEMENTIOBBLIGATORIRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDSPELEMENTOOBBLIGATORIO" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnIDSPELEMENTOOBBLIGATORIO" msprop:Generator_ColumnPropNameInRow="IDSPELEMENTOOBBLIGATORIO" msprop:Generator_ColumnPropNameInTable="IDSPELEMENTOOBBLIGATORIOColumn" msprop:Generator_UserColumnName="IDSPELEMENTOOBBLIGATORIO" type="xs:int" />
+              <xs:element name="IDSPMASTEROBBLIGATORIO" msprop:Generator_ColumnVarNameInTable="columnIDSPMASTEROBBLIGATORIO" msprop:Generator_ColumnPropNameInRow="IDSPMASTEROBBLIGATORIO" msprop:Generator_ColumnPropNameInTable="IDSPMASTEROBBLIGATORIOColumn" msprop:Generator_UserColumnName="IDSPMASTEROBBLIGATORIO" type="xs:int" />
+              <xs:element name="IDSPCONTROLLO" msprop:Generator_ColumnVarNameInTable="columnIDSPCONTROLLO" msprop:Generator_ColumnPropNameInRow="IDSPCONTROLLO" msprop:Generator_ColumnPropNameInTable="IDSPCONTROLLOColumn" msprop:Generator_UserColumnName="IDSPCONTROLLO" type="xs:int" minOccurs="0" />
+              <xs:element name="SEQUENZA" msprop:Generator_ColumnVarNameInTable="columnSEQUENZA" msprop:Generator_ColumnPropNameInRow="SEQUENZA" msprop:Generator_ColumnPropNameInTable="SEQUENZAColumn" msprop:Generator_UserColumnName="SEQUENZA" type="xs:int" />
+              <xs:element name="OBBLIGATORIO" msprop:Generator_ColumnVarNameInTable="columnOBBLIGATORIO" msprop:Generator_ColumnPropNameInRow="OBBLIGATORIO" msprop:Generator_ColumnPropNameInTable="OBBLIGATORIOColumn" msprop:Generator_UserColumnName="OBBLIGATORIO" type="xs:boolean" minOccurs="0" />
+              <xs:element name="TIPOELEMENTO" msprop:Generator_ColumnVarNameInTable="columnTIPOELEMENTO" msprop:Generator_ColumnPropNameInRow="TIPOELEMENTO" msprop:Generator_ColumnPropNameInTable="TIPOELEMENTOColumn" msprop:Generator_UserColumnName="TIPOELEMENTO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TESTO" msprop:Generator_ColumnVarNameInTable="columnTESTO" msprop:Generator_ColumnPropNameInRow="TESTO" msprop:Generator_ColumnPropNameInTable="TESTOColumn" msprop:Generator_UserColumnName="TESTO" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CANCELLATO" msprop:Generator_ColumnVarNameInTable="columnCANCELLATO" msprop:Generator_ColumnPropNameInRow="CANCELLATO" msprop:Generator_ColumnPropNameInTable="CANCELLATOColumn" msprop:Generator_UserColumnName="CANCELLATO" type="xs:boolean" />
+              <xs:element name="DATAMODIFICA" msprop:Generator_ColumnVarNameInTable="columnDATAMODIFICA" msprop:Generator_ColumnPropNameInRow="DATAMODIFICA" msprop:Generator_ColumnPropNameInTable="DATAMODIFICAColumn" msprop:Generator_UserColumnName="DATAMODIFICA" type="xs:dateTime" />
+              <xs:element name="UTENTEMODIFICA" msprop:Generator_ColumnVarNameInTable="columnUTENTEMODIFICA" msprop:Generator_ColumnPropNameInRow="UTENTEMODIFICA" msprop:Generator_ColumnPropNameInTable="UTENTEMODIFICAColumn" msprop:Generator_UserColumnName="UTENTEMODIFICA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -313,6 +350,10 @@
     <xs:unique name="SPVALORISCHEDE_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:SPVALORISCHEDE" />
       <xs:field xpath="mstns:IDSPVALORESCHEDA" />
+    </xs:unique>
+    <xs:unique name="SPELEMENTIOBBLIGATORI_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:SPELEMENTIOBBLIGATORI" />
+      <xs:field xpath="mstns:IDSPELEMENTOOBBLIGATORIO" />
     </xs:unique>
     <xs:keyref name="FK_SPSCHEDE_SPVALORISCHEDE" refer="SPSCHEDE_Constraint1" msdata:ConstraintOnly="true" msdata:DeleteRule="None">
       <xs:selector xpath=".//mstns:SPVALORISCHEDE" />

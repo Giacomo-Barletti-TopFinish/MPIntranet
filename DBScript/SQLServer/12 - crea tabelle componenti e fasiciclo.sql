@@ -169,8 +169,6 @@ CREATE TABLE [TASKAREA]
 );
 GO
 
-create unique index idx_TASKAREA_1 on TASKAREA(TASK)
-
 
 CREATE TABLE [TASKAREA_LOG]
 (

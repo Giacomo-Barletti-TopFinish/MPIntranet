@@ -11,6 +11,108 @@
     @Html.Hidden("hdTask", Model.Master.Task)
     @Html.Hidden("hdIdSPMaster", Model.Master.IdSPMaster)
 
+
+    @foreach (SPElemento elemento in Model.Master.ElementiObbligatori)
+    {
+        <div class="row" style="margin-left:50px;">
+            @if (elemento.Tipo == TipoSPElemento.SESSIONE)
+            {
+                <h3 style="background-color:lightgray">@elemento.Testo</h3>
+            }
+            else
+            {
+                string classe = "CTRO";
+                string valoreElemento = string.Empty;
+                string immagineSRC = string.Empty;
+                int IdSPValoreScheda = -1;
+                if (elemento.Obbligatorio) { classe = "CTRO OBBLIGO"; }
+                SPValoreScheda valore = Model.ValoriScheda.Where(x => x.IdSPElemento == elemento.IdSPElemento && x.ElementoObbligatorio == true).FirstOrDefault();
+                if (valore != null)
+                {
+                    valoreElemento = valore.Valore;
+                    if (elemento.Controllo.Tipo == TipoSPControllo.IMMAGINE)
+                    {
+                        valoreElemento = "C:\\fakepath\\" + valoreElemento;
+                    }
+                    immagineSRC = valore.ImmagineSRC;
+                    IdSPValoreScheda = valore.IdSPValoreScheda;
+                }
+                <div class="col-lg-3"><label>@elemento.Controllo.Descrizione</label></div>
+                if (elemento.Obbligatorio)
+                {
+                    <div class="col-lg-1 small text-red"><label>Obbligatorio</label></div>
+                }
+                else
+                {
+                    <div class="col-lg-1 small text-red"><label></label></div>
+                }
+
+
+                switch (elemento.Controllo.Tipo)
+                {
+                    case TipoSPControllo.CHECKBOX:
+                        {
+                            if (valoreElemento == "true" || valoreElemento == "TRUE")
+                            {
+                                <div class="col-lg-2"><input class="@classe" style="border:solid 1px #000" idvalore="@IdSPValoreScheda" type="checkbox" id="@elemento.IdSPElemento.ToString()" checked /></div>
+                            }
+                            else
+                            {
+                                <div class="col-lg-2"><input class="@classe" style="border:solid 1px #000" idvalore="@IdSPValoreScheda" type="checkbox" id="@elemento.IdSPElemento.ToString()" /></div>
+                            }
+
+                            break;
+                        }
+                    case TipoSPControllo.DATA:
+                        {
+                            <div class="col-lg-2"><input class="@classe" type="date" idvalore="@IdSPValoreScheda" value="@valoreElemento" id="@elemento.IdSPElemento.ToString()" /></div>
+                            break;
+                        }
+                    case TipoSPControllo.LISTA:
+                        {
+                            <div class="col-lg-2">
+                                <select class="CTRL" idvalore="@IdSPValoreScheda" id="@elemento.IdSPElemento.ToString()">
+                                    <option value=""></option>
+                                    @foreach (SPElementoLista listItem in elemento.Controllo.Elementi)
+                                    {
+                                        if (@listItem.Descrizione == valoreElemento)
+                                        {
+                                            <option value="@listItem.Codice" selected>@listItem.Descrizione</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@listItem.Codice">@listItem.Descrizione</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            break;
+                        }
+                    case TipoSPControllo.NUMERO:
+                        {
+                            <div class="col-lg-2"><input class="@classe" idvalore="@IdSPValoreScheda" type="number" value="@valoreElemento" id="@elemento.IdSPElemento.ToString()" /></div>
+                            break;
+                        }
+                    case TipoSPControllo.TESTO:
+                        {
+                            <div class="col-lg-2"><input class="@classe" idvalore="@IdSPValoreScheda" type="text" value="@valoreElemento" id="@elemento.IdSPElemento.ToString()" /></div>
+                            break;
+                        }
+                    case TipoSPControllo.IMMAGINE:
+                        {
+                            <div id="dvPreview" class="col-lg-2">
+                                <img style="height:auto; max-height:320px; max-width:100%; display: block; margin: auto;" id="IMG_@elemento.IdSPElemento.ToString()" src="@immagineSRC" />
+                            </div>
+                            <div class="col-lg-1">
+                                <input class="@classe" idvalore="@IdSPValoreScheda" type="file" value="@valoreElemento" id="@elemento.IdSPElemento.ToString()" />
+                            </div>
+                            break;
+                        }
+                }
+            }
+        </div>
+    }
+
     @foreach (SPElemento elemento in Model.Master.Elementi)
     {
         <div class="row" style="margin-left:50px;">
@@ -25,7 +127,7 @@
                 string immagineSRC = string.Empty;
                 int IdSPValoreScheda = -1;
                 if (elemento.Obbligatorio) { classe = "CTRL OBBLIGO"; }
-                SPValoreScheda valore = Model.ValoriScheda.Where(x => x.IdSPElemento == elemento.IdSPElemento).FirstOrDefault();
+                SPValoreScheda valore = Model.ValoriScheda.Where(x => x.IdSPElemento == elemento.IdSPElemento && x.ElementoObbligatorio == false).FirstOrDefault();
                 if (valore != null)
                 {
                     valoreElemento = valore.Valore;

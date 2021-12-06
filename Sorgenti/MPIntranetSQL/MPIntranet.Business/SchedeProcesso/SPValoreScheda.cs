@@ -19,6 +19,16 @@ namespace MPIntranet.Business.SchedeProcesso
         public String Tipo { get; set; }
         public string Valore { get; set; }
         public string ImmagineSRC { get; set; }
+        public bool ElementoObbligatorio { get; set; }
+
+        public int IdSPControllo
+        {
+            get
+            {
+                SPElemento elemento = SPElemento.EstraiElemento(IdSPElemento, ElementoObbligatorio);
+                return elemento != null ? elemento.IdSPControllo : -1;
+            }
+        }
 
         public static List<SPValoreScheda> EstraiListaSPValoreScheda(int IdSPScheda, bool soloNonCancellati, SchedeProcessoDS ds)
         {
@@ -54,19 +64,21 @@ namespace MPIntranet.Business.SchedeProcesso
             elemento.Valore = valore;
             elemento.ImmagineSRC = riga.IsIMMAGINESRCNull() ? string.Empty : riga.IMMAGINESRC;
 
+            elemento.ElementoObbligatorio = riga.ELEMENTOOBBLIGATORIO;
+
             elemento.Cancellato = riga.CANCELLATO;
             elemento.DataModifica = riga.DATAMODIFICA;
             elemento.UtenteModifica = riga.UTENTEMODIFICA;
 
             return elemento;
         }
-        public static void SalvaValoreScheda(int idValoreScheda, int idElemento, int idSPScheda, string valore, string immagineSRC, string account)
+        public static void SalvaValoreScheda(int idValoreScheda, int idElemento, int idSPScheda, string valore, string immagineSRC, string account, bool elementoObbligatorio)
         {
             SchedeProcessoDS ds = new SchedeProcessoDS();
-            SalvaValoreScheda(idValoreScheda, idElemento, idSPScheda, valore, account, immagineSRC, ds);
+            SalvaValoreScheda(idValoreScheda, idElemento, idSPScheda, valore, account, immagineSRC, elementoObbligatorio, ds);
         }
 
-        public static void SalvaValoreScheda(int idValoreScheda, int idElemento, int idSPScheda, string valore, string immagineSRC, string account, SchedeProcessoDS ds)
+        public static void SalvaValoreScheda(int idValoreScheda, int idElemento, int idSPScheda, string valore, string immagineSRC, string account, bool elementoObbligatorio, SchedeProcessoDS ds)
         {
 
             using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
@@ -99,7 +111,7 @@ namespace MPIntranet.Business.SchedeProcesso
                     riga.IDSPELEMENTO = idElemento;
                     riga.VALORET = valore.ToUpper();
                     riga.IMMAGINESRC = immagineSRC;
-
+                    riga.ELEMENTOOBBLIGATORIO = elementoObbligatorio;
                     riga.CANCELLATO = false;
                     riga.DATAMODIFICA = DateTime.Now;
                     riga.UTENTEMODIFICA = account.ToUpper();

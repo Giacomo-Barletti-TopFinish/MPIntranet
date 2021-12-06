@@ -73,6 +73,7 @@ namespace DisegnaDiBa
                 this.Text = string.Format("{0} {1}", txtArticolo.Text, _distinta.ToString());
 
                 _distinta.CaricaDistintaCompleta();
+                _distinta.CaricaSchedeProcesso();
 
                 creaAlbero();
                 PopolaGrigliaComponenti();

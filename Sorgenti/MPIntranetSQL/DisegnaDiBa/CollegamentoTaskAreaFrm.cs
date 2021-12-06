@@ -85,9 +85,8 @@ namespace DisegnaDiBa
 
                 int idFaseCiclo = -1;
                 idFaseCiclo = estraiIndiceFasiCiclo();
-
-                DataGridViewRow row = dgvTaskArea.Rows[e.RowIndex - 1];
-
+                
+                DataGridViewRow row = dgvTaskArea.Rows[e.RowIndex - 1];                
                 row.Cells[clmIdTaskArea.Index].Value = idFaseCiclo;
                 row.Cells[clmTask.Index].Value = string.Empty;
                 row.Cells[clmAreaProduzione.Index].Value = string.Empty;
@@ -122,7 +121,6 @@ namespace DisegnaDiBa
 
                 List<string> tasks = new List<string>();
                 for (int i = 0; i < dgvTaskArea.Rows.Count - 2; i++)
-                //               foreach (DataGridViewRow riga in dgvTaskArea.Rows)
                 {
                     string valore = (string)dgvTaskArea.Rows[i].Cells[clmTask.Index].Value;
                     tasks.Add(valore);

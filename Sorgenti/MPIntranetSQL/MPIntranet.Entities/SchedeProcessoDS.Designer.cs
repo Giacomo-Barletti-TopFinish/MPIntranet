@@ -36,6 +36,8 @@ namespace MPIntranet.Entities {
         
         private SPVALORISCHEDEDataTable tableSPVALORISCHEDE;
         
+        private SPELEMENTIOBBLIGATORIDataTable tableSPELEMENTIOBBLIGATORI;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -81,6 +83,9 @@ namespace MPIntranet.Entities {
                 }
                 if ((ds.Tables["SPVALORISCHEDE"] != null)) {
                     base.Tables.Add(new SPVALORISCHEDEDataTable(ds.Tables["SPVALORISCHEDE"]));
+                }
+                if ((ds.Tables["SPELEMENTIOBBLIGATORI"] != null)) {
+                    base.Tables.Add(new SPELEMENTIOBBLIGATORIDataTable(ds.Tables["SPELEMENTIOBBLIGATORI"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -157,6 +162,16 @@ namespace MPIntranet.Entities {
         public SPVALORISCHEDEDataTable SPVALORISCHEDE {
             get {
                 return this.tableSPVALORISCHEDE;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public SPELEMENTIOBBLIGATORIDataTable SPELEMENTIOBBLIGATORI {
+            get {
+                return this.tableSPELEMENTIOBBLIGATORI;
             }
         }
         
@@ -245,6 +260,9 @@ namespace MPIntranet.Entities {
                 if ((ds.Tables["SPVALORISCHEDE"] != null)) {
                     base.Tables.Add(new SPVALORISCHEDEDataTable(ds.Tables["SPVALORISCHEDE"]));
                 }
+                if ((ds.Tables["SPELEMENTIOBBLIGATORI"] != null)) {
+                    base.Tables.Add(new SPELEMENTIOBBLIGATORIDataTable(ds.Tables["SPELEMENTIOBBLIGATORI"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -314,6 +332,12 @@ namespace MPIntranet.Entities {
                     this.tableSPVALORISCHEDE.InitVars();
                 }
             }
+            this.tableSPELEMENTIOBBLIGATORI = ((SPELEMENTIOBBLIGATORIDataTable)(base.Tables["SPELEMENTIOBBLIGATORI"]));
+            if ((initTable == true)) {
+                if ((this.tableSPELEMENTIOBBLIGATORI != null)) {
+                    this.tableSPELEMENTIOBBLIGATORI.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -336,6 +360,8 @@ namespace MPIntranet.Entities {
             base.Tables.Add(this.tableSPSCHEDE);
             this.tableSPVALORISCHEDE = new SPVALORISCHEDEDataTable();
             base.Tables.Add(this.tableSPVALORISCHEDE);
+            this.tableSPELEMENTIOBBLIGATORI = new SPELEMENTIOBBLIGATORIDataTable();
+            base.Tables.Add(this.tableSPELEMENTIOBBLIGATORI);
             global::System.Data.ForeignKeyConstraint fkc;
             fkc = new global::System.Data.ForeignKeyConstraint("FK_SPMASTERS_SPELEMENTI", new global::System.Data.DataColumn[] {
                         this.tableSPMASTERS.IDSPMASTERColumn}, new global::System.Data.DataColumn[] {
@@ -393,6 +419,12 @@ namespace MPIntranet.Entities {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private bool ShouldSerializeSPVALORISCHEDE() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        private bool ShouldSerializeSPELEMENTIOBBLIGATORI() {
             return false;
         }
         
@@ -469,6 +501,9 @@ namespace MPIntranet.Entities {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public delegate void SPVALORISCHEDERowChangeEventHandler(object sender, SPVALORISCHEDERowChangeEvent e);
         
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public delegate void SPELEMENTIOBBLIGATORIRowChangeEventHandler(object sender, SPELEMENTIOBBLIGATORIRowChangeEvent e);
+        
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
@@ -495,6 +530,8 @@ namespace MPIntranet.Entities {
             private global::System.Data.DataColumn columnDATAMODIFICA;
             
             private global::System.Data.DataColumn columnUTENTEMODIFICA;
+            
+            private global::System.Data.DataColumn columnVISIBILE;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -611,6 +648,14 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn VISIBILEColumn {
+                get {
+                    return this.columnVISIBILE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -646,7 +691,7 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public SPCONTROLLIRow AddSPCONTROLLIRow(string CODICE, string DESCRIZIONE, string TIPO, double MINIMO, double MASSIMO, double DEFAULT, bool CANCELLATO, System.DateTime DATAMODIFICA, string UTENTEMODIFICA) {
+            public SPCONTROLLIRow AddSPCONTROLLIRow(string CODICE, string DESCRIZIONE, string TIPO, double MINIMO, double MASSIMO, double DEFAULT, bool CANCELLATO, System.DateTime DATAMODIFICA, string UTENTEMODIFICA, bool VISIBILE) {
                 SPCONTROLLIRow rowSPCONTROLLIRow = ((SPCONTROLLIRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -658,7 +703,8 @@ namespace MPIntranet.Entities {
                         DEFAULT,
                         CANCELLATO,
                         DATAMODIFICA,
-                        UTENTEMODIFICA};
+                        UTENTEMODIFICA,
+                        VISIBILE};
                 rowSPCONTROLLIRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSPCONTROLLIRow);
                 return rowSPCONTROLLIRow;
@@ -698,6 +744,7 @@ namespace MPIntranet.Entities {
                 this.columnCANCELLATO = base.Columns["CANCELLATO"];
                 this.columnDATAMODIFICA = base.Columns["DATAMODIFICA"];
                 this.columnUTENTEMODIFICA = base.Columns["UTENTEMODIFICA"];
+                this.columnVISIBILE = base.Columns["VISIBILE"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -723,6 +770,8 @@ namespace MPIntranet.Entities {
                 base.Columns.Add(this.columnDATAMODIFICA);
                 this.columnUTENTEMODIFICA = new global::System.Data.DataColumn("UTENTEMODIFICA", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUTENTEMODIFICA);
+                this.columnVISIBILE = new global::System.Data.DataColumn("VISIBILE", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnVISIBILE);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnIDSPCONTROLLO}, true));
                 this.columnIDSPCONTROLLO.AutoIncrement = true;
@@ -741,6 +790,7 @@ namespace MPIntranet.Entities {
                 this.columnDATAMODIFICA.AllowDBNull = false;
                 this.columnUTENTEMODIFICA.AllowDBNull = false;
                 this.columnUTENTEMODIFICA.MaxLength = 50;
+                this.columnVISIBILE.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1671,6 +1721,8 @@ namespace MPIntranet.Entities {
             
             private global::System.Data.DataColumn columnUTENTEMODIFICA;
             
+            private global::System.Data.DataColumn columnIDSCHEDAOBBLIGATORIA;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public SPMASTERSDataTable() {
@@ -1770,6 +1822,14 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDSCHEDAOBBLIGATORIAColumn {
+                get {
+                    return this.columnIDSCHEDAOBBLIGATORIA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1805,7 +1865,7 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public SPMASTERSRow AddSPMASTERSRow(string AREAPRODUZIONE, string TASK, string CODICE, string DESCRIZIONE, bool CANCELLATO, System.DateTime DATAMODIFICA, string UTENTEMODIFICA) {
+            public SPMASTERSRow AddSPMASTERSRow(string AREAPRODUZIONE, string TASK, string CODICE, string DESCRIZIONE, bool CANCELLATO, System.DateTime DATAMODIFICA, string UTENTEMODIFICA, int IDSCHEDAOBBLIGATORIA) {
                 SPMASTERSRow rowSPMASTERSRow = ((SPMASTERSRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1815,7 +1875,8 @@ namespace MPIntranet.Entities {
                         DESCRIZIONE,
                         CANCELLATO,
                         DATAMODIFICA,
-                        UTENTEMODIFICA};
+                        UTENTEMODIFICA,
+                        IDSCHEDAOBBLIGATORIA};
                 rowSPMASTERSRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSPMASTERSRow);
                 return rowSPMASTERSRow;
@@ -1853,6 +1914,7 @@ namespace MPIntranet.Entities {
                 this.columnCANCELLATO = base.Columns["CANCELLATO"];
                 this.columnDATAMODIFICA = base.Columns["DATAMODIFICA"];
                 this.columnUTENTEMODIFICA = base.Columns["UTENTEMODIFICA"];
+                this.columnIDSCHEDAOBBLIGATORIA = base.Columns["IDSCHEDAOBBLIGATORIA"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1874,6 +1936,8 @@ namespace MPIntranet.Entities {
                 base.Columns.Add(this.columnDATAMODIFICA);
                 this.columnUTENTEMODIFICA = new global::System.Data.DataColumn("UTENTEMODIFICA", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUTENTEMODIFICA);
+                this.columnIDSCHEDAOBBLIGATORIA = new global::System.Data.DataColumn("IDSCHEDAOBBLIGATORIA", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDSCHEDAOBBLIGATORIA);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnIDSPMASTER}, true));
                 this.columnIDSPMASTER.AutoIncrement = true;
@@ -1894,6 +1958,7 @@ namespace MPIntranet.Entities {
                 this.columnDATAMODIFICA.AllowDBNull = false;
                 this.columnUTENTEMODIFICA.AllowDBNull = false;
                 this.columnUTENTEMODIFICA.MaxLength = 50;
+                this.columnIDSCHEDAOBBLIGATORIA.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2501,6 +2566,8 @@ namespace MPIntranet.Entities {
             
             private global::System.Data.DataColumn columnIMMAGINESRC;
             
+            private global::System.Data.DataColumn columnELEMENTOOBBLIGATORIO;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public SPVALORISCHEDEDataTable() {
@@ -2640,6 +2707,14 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn ELEMENTOOBBLIGATORIOColumn {
+                get {
+                    return this.columnELEMENTOOBBLIGATORIO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2675,7 +2750,7 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public SPVALORISCHEDERow AddSPVALORISCHEDERow(int IDSPSCHEDA, int IDSPELEMENTO, string CODICE, string DESCRIZIONE, string TIPO, double VALOREN, string VALORET, System.DateTime VALORED, bool CANCELLATO, System.DateTime DATAMODIFICA, string UTENTEMODIFICA, string IMMAGINESRC) {
+            public SPVALORISCHEDERow AddSPVALORISCHEDERow(int IDSPSCHEDA, int IDSPELEMENTO, string CODICE, string DESCRIZIONE, string TIPO, double VALOREN, string VALORET, System.DateTime VALORED, bool CANCELLATO, System.DateTime DATAMODIFICA, string UTENTEMODIFICA, string IMMAGINESRC, bool ELEMENTOOBBLIGATORIO) {
                 SPVALORISCHEDERow rowSPVALORISCHEDERow = ((SPVALORISCHEDERow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -2690,7 +2765,8 @@ namespace MPIntranet.Entities {
                         CANCELLATO,
                         DATAMODIFICA,
                         UTENTEMODIFICA,
-                        IMMAGINESRC};
+                        IMMAGINESRC,
+                        ELEMENTOOBBLIGATORIO};
                 rowSPVALORISCHEDERow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSPVALORISCHEDERow);
                 return rowSPVALORISCHEDERow;
@@ -2733,6 +2809,7 @@ namespace MPIntranet.Entities {
                 this.columnDATAMODIFICA = base.Columns["DATAMODIFICA"];
                 this.columnUTENTEMODIFICA = base.Columns["UTENTEMODIFICA"];
                 this.columnIMMAGINESRC = base.Columns["IMMAGINESRC"];
+                this.columnELEMENTOOBBLIGATORIO = base.Columns["ELEMENTOOBBLIGATORIO"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2764,6 +2841,8 @@ namespace MPIntranet.Entities {
                 base.Columns.Add(this.columnUTENTEMODIFICA);
                 this.columnIMMAGINESRC = new global::System.Data.DataColumn("IMMAGINESRC", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIMMAGINESRC);
+                this.columnELEMENTOOBBLIGATORIO = new global::System.Data.DataColumn("ELEMENTOOBBLIGATORIO", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnELEMENTOOBBLIGATORIO);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnIDSPVALORESCHEDA}, true));
                 this.columnIDSPVALORESCHEDA.AutoIncrement = true;
@@ -2783,6 +2862,7 @@ namespace MPIntranet.Entities {
                 this.columnUTENTEMODIFICA.AllowDBNull = false;
                 this.columnUTENTEMODIFICA.MaxLength = 50;
                 this.columnIMMAGINESRC.MaxLength = 2147483647;
+                this.columnELEMENTOOBBLIGATORIO.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2869,6 +2949,403 @@ namespace MPIntranet.Entities {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "SPVALORISCHEDEDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class SPELEMENTIOBBLIGATORIDataTable : global::System.Data.TypedTableBase<SPELEMENTIOBBLIGATORIRow> {
+            
+            private global::System.Data.DataColumn columnIDSPELEMENTOOBBLIGATORIO;
+            
+            private global::System.Data.DataColumn columnIDSPMASTEROBBLIGATORIO;
+            
+            private global::System.Data.DataColumn columnIDSPCONTROLLO;
+            
+            private global::System.Data.DataColumn columnSEQUENZA;
+            
+            private global::System.Data.DataColumn columnOBBLIGATORIO;
+            
+            private global::System.Data.DataColumn columnTIPOELEMENTO;
+            
+            private global::System.Data.DataColumn columnTESTO;
+            
+            private global::System.Data.DataColumn columnCANCELLATO;
+            
+            private global::System.Data.DataColumn columnDATAMODIFICA;
+            
+            private global::System.Data.DataColumn columnUTENTEMODIFICA;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public SPELEMENTIOBBLIGATORIDataTable() {
+                this.TableName = "SPELEMENTIOBBLIGATORI";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal SPELEMENTIOBBLIGATORIDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected SPELEMENTIOBBLIGATORIDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDSPELEMENTOOBBLIGATORIOColumn {
+                get {
+                    return this.columnIDSPELEMENTOOBBLIGATORIO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDSPMASTEROBBLIGATORIOColumn {
+                get {
+                    return this.columnIDSPMASTEROBBLIGATORIO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IDSPCONTROLLOColumn {
+                get {
+                    return this.columnIDSPCONTROLLO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn SEQUENZAColumn {
+                get {
+                    return this.columnSEQUENZA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn OBBLIGATORIOColumn {
+                get {
+                    return this.columnOBBLIGATORIO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn TIPOELEMENTOColumn {
+                get {
+                    return this.columnTIPOELEMENTO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn TESTOColumn {
+                get {
+                    return this.columnTESTO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn CANCELLATOColumn {
+                get {
+                    return this.columnCANCELLATO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DATAMODIFICAColumn {
+                get {
+                    return this.columnDATAMODIFICA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn UTENTEMODIFICAColumn {
+                get {
+                    return this.columnUTENTEMODIFICA;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public SPELEMENTIOBBLIGATORIRow this[int index] {
+                get {
+                    return ((SPELEMENTIOBBLIGATORIRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event SPELEMENTIOBBLIGATORIRowChangeEventHandler SPELEMENTIOBBLIGATORIRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event SPELEMENTIOBBLIGATORIRowChangeEventHandler SPELEMENTIOBBLIGATORIRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event SPELEMENTIOBBLIGATORIRowChangeEventHandler SPELEMENTIOBBLIGATORIRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event SPELEMENTIOBBLIGATORIRowChangeEventHandler SPELEMENTIOBBLIGATORIRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void AddSPELEMENTIOBBLIGATORIRow(SPELEMENTIOBBLIGATORIRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public SPELEMENTIOBBLIGATORIRow AddSPELEMENTIOBBLIGATORIRow(int IDSPMASTEROBBLIGATORIO, int IDSPCONTROLLO, int SEQUENZA, bool OBBLIGATORIO, string TIPOELEMENTO, string TESTO, bool CANCELLATO, System.DateTime DATAMODIFICA, string UTENTEMODIFICA) {
+                SPELEMENTIOBBLIGATORIRow rowSPELEMENTIOBBLIGATORIRow = ((SPELEMENTIOBBLIGATORIRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        IDSPMASTEROBBLIGATORIO,
+                        IDSPCONTROLLO,
+                        SEQUENZA,
+                        OBBLIGATORIO,
+                        TIPOELEMENTO,
+                        TESTO,
+                        CANCELLATO,
+                        DATAMODIFICA,
+                        UTENTEMODIFICA};
+                rowSPELEMENTIOBBLIGATORIRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowSPELEMENTIOBBLIGATORIRow);
+                return rowSPELEMENTIOBBLIGATORIRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public SPELEMENTIOBBLIGATORIRow FindByIDSPELEMENTOOBBLIGATORIO(int IDSPELEMENTOOBBLIGATORIO) {
+                return ((SPELEMENTIOBBLIGATORIRow)(this.Rows.Find(new object[] {
+                            IDSPELEMENTOOBBLIGATORIO})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                SPELEMENTIOBBLIGATORIDataTable cln = ((SPELEMENTIOBBLIGATORIDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new SPELEMENTIOBBLIGATORIDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal void InitVars() {
+                this.columnIDSPELEMENTOOBBLIGATORIO = base.Columns["IDSPELEMENTOOBBLIGATORIO"];
+                this.columnIDSPMASTEROBBLIGATORIO = base.Columns["IDSPMASTEROBBLIGATORIO"];
+                this.columnIDSPCONTROLLO = base.Columns["IDSPCONTROLLO"];
+                this.columnSEQUENZA = base.Columns["SEQUENZA"];
+                this.columnOBBLIGATORIO = base.Columns["OBBLIGATORIO"];
+                this.columnTIPOELEMENTO = base.Columns["TIPOELEMENTO"];
+                this.columnTESTO = base.Columns["TESTO"];
+                this.columnCANCELLATO = base.Columns["CANCELLATO"];
+                this.columnDATAMODIFICA = base.Columns["DATAMODIFICA"];
+                this.columnUTENTEMODIFICA = base.Columns["UTENTEMODIFICA"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            private void InitClass() {
+                this.columnIDSPELEMENTOOBBLIGATORIO = new global::System.Data.DataColumn("IDSPELEMENTOOBBLIGATORIO", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDSPELEMENTOOBBLIGATORIO);
+                this.columnIDSPMASTEROBBLIGATORIO = new global::System.Data.DataColumn("IDSPMASTEROBBLIGATORIO", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDSPMASTEROBBLIGATORIO);
+                this.columnIDSPCONTROLLO = new global::System.Data.DataColumn("IDSPCONTROLLO", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIDSPCONTROLLO);
+                this.columnSEQUENZA = new global::System.Data.DataColumn("SEQUENZA", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSEQUENZA);
+                this.columnOBBLIGATORIO = new global::System.Data.DataColumn("OBBLIGATORIO", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOBBLIGATORIO);
+                this.columnTIPOELEMENTO = new global::System.Data.DataColumn("TIPOELEMENTO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTIPOELEMENTO);
+                this.columnTESTO = new global::System.Data.DataColumn("TESTO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTESTO);
+                this.columnCANCELLATO = new global::System.Data.DataColumn("CANCELLATO", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCANCELLATO);
+                this.columnDATAMODIFICA = new global::System.Data.DataColumn("DATAMODIFICA", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDATAMODIFICA);
+                this.columnUTENTEMODIFICA = new global::System.Data.DataColumn("UTENTEMODIFICA", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUTENTEMODIFICA);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnIDSPELEMENTOOBBLIGATORIO}, true));
+                this.columnIDSPELEMENTOOBBLIGATORIO.AutoIncrement = true;
+                this.columnIDSPELEMENTOOBBLIGATORIO.AutoIncrementSeed = -1;
+                this.columnIDSPELEMENTOOBBLIGATORIO.AutoIncrementStep = -1;
+                this.columnIDSPELEMENTOOBBLIGATORIO.AllowDBNull = false;
+                this.columnIDSPELEMENTOOBBLIGATORIO.ReadOnly = true;
+                this.columnIDSPELEMENTOOBBLIGATORIO.Unique = true;
+                this.columnIDSPMASTEROBBLIGATORIO.AllowDBNull = false;
+                this.columnSEQUENZA.AllowDBNull = false;
+                this.columnTIPOELEMENTO.AllowDBNull = false;
+                this.columnTIPOELEMENTO.MaxLength = 12;
+                this.columnTESTO.MaxLength = 25;
+                this.columnCANCELLATO.AllowDBNull = false;
+                this.columnDATAMODIFICA.AllowDBNull = false;
+                this.columnUTENTEMODIFICA.AllowDBNull = false;
+                this.columnUTENTEMODIFICA.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public SPELEMENTIOBBLIGATORIRow NewSPELEMENTIOBBLIGATORIRow() {
+                return ((SPELEMENTIOBBLIGATORIRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new SPELEMENTIOBBLIGATORIRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(SPELEMENTIOBBLIGATORIRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.SPELEMENTIOBBLIGATORIRowChanged != null)) {
+                    this.SPELEMENTIOBBLIGATORIRowChanged(this, new SPELEMENTIOBBLIGATORIRowChangeEvent(((SPELEMENTIOBBLIGATORIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.SPELEMENTIOBBLIGATORIRowChanging != null)) {
+                    this.SPELEMENTIOBBLIGATORIRowChanging(this, new SPELEMENTIOBBLIGATORIRowChangeEvent(((SPELEMENTIOBBLIGATORIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.SPELEMENTIOBBLIGATORIRowDeleted != null)) {
+                    this.SPELEMENTIOBBLIGATORIRowDeleted(this, new SPELEMENTIOBBLIGATORIRowChangeEvent(((SPELEMENTIOBBLIGATORIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.SPELEMENTIOBBLIGATORIRowDeleting != null)) {
+                    this.SPELEMENTIOBBLIGATORIRowDeleting(this, new SPELEMENTIOBBLIGATORIRowChangeEvent(((SPELEMENTIOBBLIGATORIRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void RemoveSPELEMENTIOBBLIGATORIRow(SPELEMENTIOBBLIGATORIRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                SchedeProcessoDS ds = new SchedeProcessoDS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "SPELEMENTIOBBLIGATORIDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -3045,6 +3522,17 @@ namespace MPIntranet.Entities {
                 }
                 set {
                     this[this.tableSPCONTROLLI.UTENTEMODIFICAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool VISIBILE {
+                get {
+                    return ((bool)(this[this.tableSPCONTROLLI.VISIBILEColumn]));
+                }
+                set {
+                    this[this.tableSPCONTROLLI.VISIBILEColumn] = value;
                 }
             }
             
@@ -3493,6 +3981,17 @@ namespace MPIntranet.Entities {
                     this[this.tableSPMASTERS.UTENTEMODIFICAColumn] = value;
                 }
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int IDSCHEDAOBBLIGATORIA {
+                get {
+                    return ((int)(this[this.tableSPMASTERS.IDSCHEDAOBBLIGATORIAColumn]));
+                }
+                set {
+                    this[this.tableSPMASTERS.IDSCHEDAOBBLIGATORIAColumn] = value;
+                }
+            }
         }
         
         /// <summary>
@@ -3881,6 +4380,17 @@ namespace MPIntranet.Entities {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool ELEMENTOOBBLIGATORIO {
+                get {
+                    return ((bool)(this[this.tableSPVALORISCHEDE.ELEMENTOOBBLIGATORIOColumn]));
+                }
+                set {
+                    this[this.tableSPVALORISCHEDE.ELEMENTOOBBLIGATORIOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsCODICENull() {
                 return this.IsNull(this.tableSPVALORISCHEDE.CODICEColumn);
             }
@@ -3961,6 +4471,182 @@ namespace MPIntranet.Entities {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetIMMAGINESRCNull() {
                 this[this.tableSPVALORISCHEDE.IMMAGINESRCColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class SPELEMENTIOBBLIGATORIRow : global::System.Data.DataRow {
+            
+            private SPELEMENTIOBBLIGATORIDataTable tableSPELEMENTIOBBLIGATORI;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal SPELEMENTIOBBLIGATORIRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableSPELEMENTIOBBLIGATORI = ((SPELEMENTIOBBLIGATORIDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int IDSPELEMENTOOBBLIGATORIO {
+                get {
+                    return ((int)(this[this.tableSPELEMENTIOBBLIGATORI.IDSPELEMENTOOBBLIGATORIOColumn]));
+                }
+                set {
+                    this[this.tableSPELEMENTIOBBLIGATORI.IDSPELEMENTOOBBLIGATORIOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int IDSPMASTEROBBLIGATORIO {
+                get {
+                    return ((int)(this[this.tableSPELEMENTIOBBLIGATORI.IDSPMASTEROBBLIGATORIOColumn]));
+                }
+                set {
+                    this[this.tableSPELEMENTIOBBLIGATORI.IDSPMASTEROBBLIGATORIOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int IDSPCONTROLLO {
+                get {
+                    try {
+                        return ((int)(this[this.tableSPELEMENTIOBBLIGATORI.IDSPCONTROLLOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'IDSPCONTROLLO\' in table \'SPELEMENTIOBBLIGATORI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSPELEMENTIOBBLIGATORI.IDSPCONTROLLOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int SEQUENZA {
+                get {
+                    return ((int)(this[this.tableSPELEMENTIOBBLIGATORI.SEQUENZAColumn]));
+                }
+                set {
+                    this[this.tableSPELEMENTIOBBLIGATORI.SEQUENZAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool OBBLIGATORIO {
+                get {
+                    try {
+                        return ((bool)(this[this.tableSPELEMENTIOBBLIGATORI.OBBLIGATORIOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OBBLIGATORIO\' in table \'SPELEMENTIOBBLIGATORI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSPELEMENTIOBBLIGATORI.OBBLIGATORIOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string TIPOELEMENTO {
+                get {
+                    return ((string)(this[this.tableSPELEMENTIOBBLIGATORI.TIPOELEMENTOColumn]));
+                }
+                set {
+                    this[this.tableSPELEMENTIOBBLIGATORI.TIPOELEMENTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string TESTO {
+                get {
+                    try {
+                        return ((string)(this[this.tableSPELEMENTIOBBLIGATORI.TESTOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TESTO\' in table \'SPELEMENTIOBBLIGATORI\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSPELEMENTIOBBLIGATORI.TESTOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool CANCELLATO {
+                get {
+                    return ((bool)(this[this.tableSPELEMENTIOBBLIGATORI.CANCELLATOColumn]));
+                }
+                set {
+                    this[this.tableSPELEMENTIOBBLIGATORI.CANCELLATOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime DATAMODIFICA {
+                get {
+                    return ((global::System.DateTime)(this[this.tableSPELEMENTIOBBLIGATORI.DATAMODIFICAColumn]));
+                }
+                set {
+                    this[this.tableSPELEMENTIOBBLIGATORI.DATAMODIFICAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string UTENTEMODIFICA {
+                get {
+                    return ((string)(this[this.tableSPELEMENTIOBBLIGATORI.UTENTEMODIFICAColumn]));
+                }
+                set {
+                    this[this.tableSPELEMENTIOBBLIGATORI.UTENTEMODIFICAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsIDSPCONTROLLONull() {
+                return this.IsNull(this.tableSPELEMENTIOBBLIGATORI.IDSPCONTROLLOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetIDSPCONTROLLONull() {
+                this[this.tableSPELEMENTIOBBLIGATORI.IDSPCONTROLLOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsOBBLIGATORIONull() {
+                return this.IsNull(this.tableSPELEMENTIOBBLIGATORI.OBBLIGATORIOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetOBBLIGATORIONull() {
+                this[this.tableSPELEMENTIOBBLIGATORI.OBBLIGATORIOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsTESTONull() {
+                return this.IsNull(this.tableSPELEMENTIOBBLIGATORI.TESTOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetTESTONull() {
+                this[this.tableSPELEMENTIOBBLIGATORI.TESTOColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -4154,6 +4840,40 @@ namespace MPIntranet.Entities {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public SPVALORISCHEDERow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public class SPELEMENTIOBBLIGATORIRowChangeEvent : global::System.EventArgs {
+            
+            private SPELEMENTIOBBLIGATORIRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public SPELEMENTIOBBLIGATORIRowChangeEvent(SPELEMENTIOBBLIGATORIRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public SPELEMENTIOBBLIGATORIRow Row {
                 get {
                     return this.eventRow;
                 }

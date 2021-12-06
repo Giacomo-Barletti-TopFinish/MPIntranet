@@ -1,4 +1,5 @@
-﻿using MPIntranet.DataAccess.Articoli;
+﻿using MPIntranet.Business.SchedeProcesso;
+using MPIntranet.DataAccess.Articoli;
 using MPIntranet.Entities;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,60 @@ namespace MPIntranet.Business
             }
             ArticoliDS.DistinteBCTestataRow riga = ds.DistinteBCTestata.Where(x => x.No_ == idDiba).FirstOrDefault();
             return CreaDistintaBC(riga);
+        }
+
+        public void CaricaSchedeProcesso()
+        {
+            foreach (ComponenteBC componente in Componenti)
+            {
+                if (!string.IsNullOrEmpty(componente.Anagrafica))
+                {
+                    List<SpScheda> schede = SpScheda.EstraiSPScheda(componente.Anagrafica, true);
+                    if (schede.Count > 0)
+                    {
+                        foreach (FaseCicloBC fase in componente.FasiCiclo)
+                        {
+                            SpScheda scheda = schede.Where(x => x.AreaProduzione == fase.AreaProduzione && x.Task == fase.Task).FirstOrDefault();
+                            if (scheda != null)
+                            {
+                                fase.SchedaProcesso = scheda.Codice;
+                                foreach (SPValoreScheda valore in scheda.ValoriScheda)
+                                {
+                                    switch (valore.IdSPControllo)
+                                    {
+                                        case 145:
+                                            {
+                                                decimal v;
+                                                if (decimal.TryParse(valore.Valore, out v))
+                                                    fase.PezziPeriodo = v;
+                                            }
+                                            break;
+
+                                        case 147:
+                                            {
+                                                decimal v;
+                                                if (decimal.TryParse(valore.Valore, out v))
+                                                    fase.Periodo = v;
+                                            }
+                                            break;
+
+                                        case 15:
+                                            {
+                                                decimal v;
+                                                if (decimal.TryParse(valore.Valore, out v))
+                                                {
+                                                    fase.PezziPeriodo = v;
+                                                    fase.Periodo = 1;
+                                                }
+                                            }
+                                            break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         public static List<DistintaBC> EstraiListaDistinteBase(string codiceTestata)

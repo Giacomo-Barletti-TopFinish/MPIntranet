@@ -36,6 +36,7 @@ namespace MPIntranet.Business.SchedeProcesso
                 return _caratteristiche;
             }
         }
+
         public List<SPValoreScheda> ValoriScheda { get; set; }
         public static List<SpScheda> EstraiListaSPScheda(bool soloNonCancellati)
         {
@@ -155,7 +156,7 @@ namespace MPIntranet.Business.SchedeProcesso
                 schede.Add(scheda);
             return schede;
         }
-        public static string SalvaScheda(int idScheda, int IdSPMaster, string anagrafica, string codice, string descrizione, string areaProduzione, string task, List<ElementoScheda> controlli, string account)
+        public static string SalvaScheda(int idScheda, int IdSPMaster, string anagrafica, string codice, string descrizione, string areaProduzione, string task, List<ElementoScheda> controlli, List<ElementoScheda> obbligatori, string account)
         {
 
             SchedeProcessoDS ds = new SchedeProcessoDS();
@@ -171,28 +172,6 @@ namespace MPIntranet.Business.SchedeProcesso
                     versione = schedaPadre.VERSIONE + 1;
                     schedaPadre.STATO = StatoSPScheda.STORICO;
                 }
-                //if (riga != null)
-                //{
-                //    //                    riga.CODICE = codice.ToUpper();
-                //    riga.DESCRIZIONE = descrizione.ToUpper();
-                //    riga.ANAGRAFICA = anagrafica.ToUpper();
-                //    riga.DATAMODIFICA = DateTime.Now;
-                //    riga.UTENTEMODIFICA = account;
-                //}
-                //else
-                //{
-                //    riga = ds.SPSCHEDE.NewSPSCHEDERow();
-                //    riga.CODICE = codice.ToUpper();
-                //    riga.DESCRIZIONE = descrizione.ToUpper();
-                //    riga.IDSPMASTER = IdSPMaster;
-                //    riga.AREAPRODUZIONE = areaProduzione.ToUpper();
-                //    riga.TASK = task.ToUpper();
-                //    riga.ANAGRAFICA = anagrafica.ToUpper();
-                //    riga.CANCELLATO = false;
-                //    riga.DATAMODIFICA = DateTime.Now;
-                //    riga.UTENTEMODIFICA = account.ToUpper();
-                //    ds.SPSCHEDE.AddSPSCHEDERow(riga);
-                //}
 
                 SchedeProcessoDS.SPSCHEDERow riga = ds.SPSCHEDE.NewSPSCHEDERow();
                 riga.CODICE = codice.ToUpper();
@@ -208,26 +187,18 @@ namespace MPIntranet.Business.SchedeProcesso
                 riga.UTENTEMODIFICA = account.ToUpper();
                 ds.SPSCHEDE.AddSPSCHEDERow(riga);
 
-                //if (idScheda > 0)
-                //{
-                //    List<int> listaIdValori = controlli.Where(x => x.IDElemento > 0).Select(x => x.IDElemento).Distinct().ToList();
-                //    foreach (SchedeProcessoDS.SPVALORISCHEDERow elemento in ds.SPVALORISCHEDE)
-                //    {
-                //        if (!listaIdValori.Contains(elemento.IDSPELEMENTO))
-                //        {
-                //            elemento.CANCELLATO = true;
-                //            elemento.DATAMODIFICA = DateTime.Now;
-                //            elemento.UTENTEMODIFICA = account;
-                //        }
-                //    }
-                //}
-
                 //   int sequenza = 0;
+                foreach (ElementoScheda controllo in obbligatori)
+                {
+                    if (!string.IsNullOrEmpty(controllo.Filename))
+                        controllo.Valore = (controllo.Filename.Length > 30) ? controllo.Filename.Substring(0, 30) : controllo.Filename;
+                    SPValoreScheda.SalvaValoreScheda(controllo.IDValore, controllo.IDElemento, riga.IDSPSCHEDA, controllo.Valore, controllo.Filedata, account, true, ds);
+                }
                 foreach (ElementoScheda controllo in controlli)
                 {
                     if (!string.IsNullOrEmpty(controllo.Filename))
                         controllo.Valore = (controllo.Filename.Length > 30) ? controllo.Filename.Substring(0, 30) : controllo.Filename;
-                    SPValoreScheda.SalvaValoreScheda(controllo.IDValore, controllo.IDElemento, riga.IDSPSCHEDA, controllo.Valore, controllo.Filedata, account, ds);
+                    SPValoreScheda.SalvaValoreScheda(controllo.IDValore, controllo.IDElemento, riga.IDSPSCHEDA, controllo.Valore, controllo.Filedata, account, false, ds);
                 }
 
                 bScheda.UpdateTableSPScheda(ds);
@@ -239,7 +210,7 @@ namespace MPIntranet.Business.SchedeProcesso
                     bScheda.UpdateTableSPScheda(ds);
                 }
                 string messaggio = string.Format("Scheda {0} creata correttamente. ID scheda {1}", riga.CODICE, riga.IDSPSCHEDA);
-                return "Scheda creata correttamente";
+                return messaggio;
             }
 
         }

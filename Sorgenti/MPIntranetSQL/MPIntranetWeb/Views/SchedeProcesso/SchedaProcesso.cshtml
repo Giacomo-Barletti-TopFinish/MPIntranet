@@ -257,8 +257,13 @@
         $('#lblMessage').html(messaggio);
         if(!esito) return;
 
-        var controlli = getTabellaValori();
+        var controlli = getTabellaValori('.CTRL');
         var lista = JSON.stringify(controlli);
+
+        var controlliObbligatori = getTabellaValori('.CTRO');
+        var listaObbligatori = JSON.stringify(controlliObbligatori);
+
+
         var url = '@Url.Action("AggiornaSchedaProcesso", "SchedeProcesso")';
         $.ajax({
             url: url,
@@ -270,12 +275,14 @@
                 Task: task,
                 AreaProduzione: areaProduzione,
                 Anagrafica: anagrafica,
-                Controlli: lista
+                Controlli: lista,
+                Obbligatori: listaObbligatori
             },
             cache: false,
             type: "POST",
             success: function (data)
             {
+                debugger;
                 $('#lblMessage').html(data);
                 if (data == 'Scheda salvata correttamente')
                     svuotaCampi();
@@ -289,10 +296,10 @@
         });
     }
 
-    function getTabellaValori() {
-
+    function getTabellaValori(tipoControlli) {
+        debugger;
         var data = [];
-        var controlli = $('.CTRL');
+        var controlli = $(tipoControlli);
         for (i = 0; i < controlli.length; i++) {
             var controllo = controlli[i];
             var idValore = $(controllo).attr('idvalore');

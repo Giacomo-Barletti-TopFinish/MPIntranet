@@ -167,11 +167,13 @@ namespace MPIntranet.DataAccess.SchedeProcesso
                 da.Fill(ds.SPSCHEDE);
             }
         }
-        public void FillSPControlli(SchedeProcessoDS ds, bool soloNonCancellati)
+        public void FillSPControlli(SchedeProcessoDS ds, bool soloNonCancellati, bool soloVisibili)
         {
-            string select = @"SELECT * FROM SPCONTROLLI ";
+            string select = @"SELECT * FROM SPCONTROLLI WHERE 1=1";
             if (soloNonCancellati)
-                select += "WHERE CANCELLATO = 0 ";
+                select += "AND CANCELLATO = 0 ";
+            if (soloVisibili)
+                select += "AND VISIBILE = 1 ";
 
             select += "ORDER BY CODICE";
             using (DbDataAdapter da = BuildDataAdapter(select))
@@ -234,6 +236,23 @@ namespace MPIntranet.DataAccess.SchedeProcesso
             }
         }
 
+        public void FillElementiObbligatori(SchedeProcessoDS ds, int idSPMasterObbligatorio, bool soloNonCancellati)
+        {
+            string select = @"SELECT * FROM SPELEMENTIOBBLIGATORI WHERE IDSPMASTEROBBLIGATORIO = $P<IDSPMASTER>";
+            if (soloNonCancellati)
+                select += " AND CANCELLATO = 0 ";
+
+            select += " ORDER BY SEQUENZA";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDSPMASTER", DbType.Int32, idSPMasterObbligatorio);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.SPELEMENTIOBBLIGATORI);
+            }
+        }
+
         public void FillValoriSchede(SchedeProcessoDS ds, int idSPScheda, bool soloNonCancellati)
         {
             string select = @"SELECT * FROM SPVALORISCHEDE WHERE IDSPSCHEDA = $P<IDSPSCHEDA>";
@@ -258,6 +277,18 @@ namespace MPIntranet.DataAccess.SchedeProcesso
             using (DbDataAdapter da = BuildDataAdapter(select, ps))
             {
                 da.Fill(ds.SPELEMENTI);
+            }
+        }
+        public void GetElementoObbligatorio(SchedeProcessoDS ds, int idSPElemento)
+        {
+            string select = @"SELECT * FROM SPELEMENTIOBBLIGATORI WHERE [IDSPELEMENTOOBBLIGATORIO] = $P<IDSPELEMENTO>";
+
+            ParamSet ps = new ParamSet();
+            ps.AddParam("IDSPELEMENTO", DbType.Int32, idSPElemento);
+
+            using (DbDataAdapter da = BuildDataAdapter(select, ps))
+            {
+                da.Fill(ds.SPELEMENTIOBBLIGATORI);
             }
         }
         public void GetValoreScheda(SchedeProcessoDS ds, int idSPValoreScheda)
