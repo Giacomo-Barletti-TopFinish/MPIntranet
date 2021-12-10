@@ -164,6 +164,7 @@ namespace MPIntranet.Business.SchedeProcesso
             {
                 bScheda.GetSPScheda(idScheda, ds);
                 //  bScheda.FillValoriSchede(ds, idScheda, true);
+                codice = string.Empty;
 
                 SchedeProcessoDS.SPSCHEDERow schedaPadre = ds.SPSCHEDE.Where(x => x.IDSPSCHEDA == idScheda).FirstOrDefault();
                 int versione = 1;
@@ -171,6 +172,7 @@ namespace MPIntranet.Business.SchedeProcesso
                 {
                     versione = schedaPadre.VERSIONE + 1;
                     schedaPadre.STATO = StatoSPScheda.STORICO;
+                    codice = schedaPadre.CODICE;
                 }
 
                 SchedeProcessoDS.SPSCHEDERow riga = ds.SPSCHEDE.NewSPSCHEDERow();
@@ -209,7 +211,7 @@ namespace MPIntranet.Business.SchedeProcesso
                     riga.CODICE = string.Format("SP{0}", riga.IDSPSCHEDA.ToString().PadLeft(8, '0'));
                     bScheda.UpdateTableSPScheda(ds);
                 }
-                string messaggio = string.Format("Scheda {0} creata correttamente. ID scheda {1}", riga.CODICE, riga.IDSPSCHEDA);
+                string messaggio = string.Format("Scheda creata correttamente. CODICE: {0}", riga.CODICE);
                 return messaggio;
             }
 
