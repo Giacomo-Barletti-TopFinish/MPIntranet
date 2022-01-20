@@ -39,6 +39,21 @@ namespace MPIntranet.WS
             ws.ClientCredentials.UserName.Password = _password;
             ws.WSPostItemJnl();
         }
+        public void CopiaArticolo()
+        {
+            string url = "https://srv-bc.viamattei.metal-plus.it:7147/PROD_WS/WS/METALPLUS/Codeunit/WS_ProductConfigurator";
+            if (_azienda != "METALPLUS")
+                url = "https://srv-bc.viamattei.metal-plus.it:7147/PROD_WS/WS/METALPLUS%2008092021/Codeunit/WS_ProductConfigurator";
+
+            BasicHttpBinding binding = new BasicHttpBinding();
+            binding.Security.Mode = BasicHttpSecurityMode.Transport;
+            binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+
+            ServicePostingRegMag.PostingRegMag_PortClient ws = new ServicePostingRegMag.PostingRegMag_PortClient(binding, new EndpointAddress(url));
+            ws.ClientCredentials.UserName.UserName = _user;
+            ws.ClientCredentials.UserName.Password = _password;
+            ws.WSPostItemJnl();
+        }
         public FileManager.FileManagement_PortClient CreaFileManagement()
         {
             string url = "https://srv-bc.viamattei.metal-plus.it:7147/PROD_WS/WS/METALPLUS/Codeunit/FileManagement";
@@ -138,7 +153,7 @@ namespace MPIntranet.WS
                 Articoli t = _nav.Articoli.Where(x => x.No == Anagrafica).FirstOrDefault();
                 return t;
             }
-            catch
+            catch(Exception ex)
             {
                 return null;
             }

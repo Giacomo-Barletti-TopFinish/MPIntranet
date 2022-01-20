@@ -95,6 +95,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\ServiceCopiaArticolo\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ServicePostingRegMag\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -171,6 +176,10 @@
     <None Include="Connected Services\FileManager\MPIntranet.WS.FileManager.ValidateFileExtension_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\ServiceCopiaArticolo\MPIntranet.WS.ServiceCopiaArticolo.WS_CopiaArticolo_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCopiaArticolo\WS_ProductConfigurator.wsdl" />
     <None Include="Connected Services\ServicePostingRegMag\MPIntranet.WS.ServicePostingRegMag.WSPostItemJnl_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -185,6 +194,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Connected Services\BusinessCentral\BC_metadata.xml" />
+    <None Include="Connected Services\ServiceCopiaArticolo\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\ServiceCopiaArticolo\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceCopiaArticolo\configuration91.svcinfo" />
     <None Include="Connected Services\FileManager\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -200,6 +215,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\FileManager\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceCopiaArticolo\" />
     <WCFMetadataStorage Include="Connected Services\ServicePostingRegMag\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
