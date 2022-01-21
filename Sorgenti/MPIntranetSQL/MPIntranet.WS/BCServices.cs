@@ -39,7 +39,7 @@ namespace MPIntranet.WS
             ws.ClientCredentials.UserName.Password = _password;
             ws.WSPostItemJnl();
         }
-        public void CopiaArticolo()
+        public void CopiaArticolo(ref string articoloSorgente, ref string tipoArticoloDestinazione)
         {
             string url = "https://srv-bc.viamattei.metal-plus.it:7147/PROD_WS/WS/METALPLUS/Codeunit/WS_ProductConfigurator";
             if (_azienda != "METALPLUS")
@@ -49,10 +49,10 @@ namespace MPIntranet.WS
             binding.Security.Mode = BasicHttpSecurityMode.Transport;
             binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
 
-            ServicePostingRegMag.PostingRegMag_PortClient ws = new ServicePostingRegMag.PostingRegMag_PortClient(binding, new EndpointAddress(url));
+            ServiceCopiaArticolo.WS_ProductConfigurator_PortClient ws = new ServiceCopiaArticolo.WS_ProductConfigurator_PortClient(binding, new EndpointAddress(url));
             ws.ClientCredentials.UserName.UserName = _user;
             ws.ClientCredentials.UserName.Password = _password;
-            ws.WSPostItemJnl();
+            ws.WS_CopiaArticolo(ref articoloSorgente,ref tipoArticoloDestinazione);
         }
         public FileManager.FileManagement_PortClient CreaFileManagement()
         {
