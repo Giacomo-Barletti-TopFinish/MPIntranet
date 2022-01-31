@@ -60,6 +60,8 @@
     <Compile Include="FaseCicloBC.cs" />
     <Compile Include="FaseDistinta.cs" />
     <Compile Include="FaseOrdineProduzione.cs" />
+    <Compile Include="FattureAcquisto.cs" />
+    <Compile Include="FornitoriFattureAcquisto.cs" />
     <Compile Include="OrdineProduzione.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

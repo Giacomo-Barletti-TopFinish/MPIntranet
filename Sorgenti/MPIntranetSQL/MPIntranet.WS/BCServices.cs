@@ -155,7 +155,7 @@ namespace MPIntranet.WS
             }
             catch(Exception ex)
             {
-                return null;
+                throw ex;
             }
         }
         public List<RigheDIBA> EstraiRigheDIBA(string No)
