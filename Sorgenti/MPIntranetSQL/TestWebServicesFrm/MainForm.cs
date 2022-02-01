@@ -1095,6 +1095,47 @@ namespace TestWebServicesFrm
             }
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCopiaAnag_Click(object sender, EventArgs e)
+        {
+            txtMessaggio.Text = string.Empty;
+            try
+            {
+                if (ddlAziende.SelectedIndex < 0)
+                {
+                    txtMessaggio.Text = "Selezionare un'azienda";
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(txtAnagOrig.Text))
+                {
+                    txtMessaggio.Text = "Inserire un codice anagrafica di origine";
+                    return;
+                }
+                if (string.IsNullOrEmpty(txtAnagDest.Text))
+                {
+                    txtMessaggio.Text = "Inserire un codice anagrafica di destinazione";
+                    return;
+                }
+                string azienda = (string)ddlAziende.SelectedItem;
+                BCServices bc = new BCServices();
+                bc.CreaConnessione(azienda);
+                string t = txtAnagOrig.Text;
+                string tt = txtAnagDest.Text;
+                bc.CopiaArticolo(ref t, ref tt );
+                txtMessaggio.Text = "Anagrafica Copiata Correttamente";
+
+            }
+
+            catch (Exception ex)
+            {
+                txtMessaggio.Text = estraiErrore(ex);
+            }
+        }
 
     }
 }
