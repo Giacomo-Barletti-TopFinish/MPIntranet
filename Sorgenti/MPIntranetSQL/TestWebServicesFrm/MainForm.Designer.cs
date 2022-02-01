@@ -204,6 +204,7 @@
             this.ddlTaskContoLav = new System.Windows.Forms.Label();
             this.ddlTaskContoLavoro = new System.Windows.Forms.ComboBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.txtCodiceCaratCFG = new System.Windows.Forms.TextBox();
             this.btnCambiaCaratArtCFG = new System.Windows.Forms.Button();
             this.label62 = new System.Windows.Forms.Label();
             this.txtValoreCarattCFG = new System.Windows.Forms.TextBox();
@@ -214,7 +215,12 @@
             this.label48 = new System.Windows.Forms.Label();
             this.ddlAziende = new System.Windows.Forms.ComboBox();
             this.dataSet1 = new System.Data.DataSet();
-            this.txtCodiceCaratCFG = new System.Windows.Forms.TextBox();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.label63 = new System.Windows.Forms.Label();
+            this.txtAnagOrig = new System.Windows.Forms.TextBox();
+            this.label64 = new System.Windows.Forms.Label();
+            this.txtAnagDest = new System.Windows.Forms.TextBox();
+            this.btnCopiaAnag = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -244,6 +250,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nCostoListino)).BeginInit();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
+            this.tabPage7.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtMessaggio
@@ -1389,6 +1396,7 @@
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage6);
+            this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Location = new System.Drawing.Point(12, 34);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -2084,6 +2092,13 @@
             this.tabPage6.Text = "Caratteristiche CFG";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
+            // txtCodiceCaratCFG
+            // 
+            this.txtCodiceCaratCFG.Location = new System.Drawing.Point(202, 46);
+            this.txtCodiceCaratCFG.Name = "txtCodiceCaratCFG";
+            this.txtCodiceCaratCFG.Size = new System.Drawing.Size(136, 20);
+            this.txtCodiceCaratCFG.TabIndex = 8;
+            // 
             // btnCambiaCaratArtCFG
             // 
             this.btnCambiaCaratArtCFG.Location = new System.Drawing.Point(914, 44);
@@ -2167,12 +2182,63 @@
             // 
             this.dataSet1.DataSetName = "NewDataSet";
             // 
-            // txtCodiceCaratCFG
+            // tabPage7
             // 
-            this.txtCodiceCaratCFG.Location = new System.Drawing.Point(202, 46);
-            this.txtCodiceCaratCFG.Name = "txtCodiceCaratCFG";
-            this.txtCodiceCaratCFG.Size = new System.Drawing.Size(136, 20);
-            this.txtCodiceCaratCFG.TabIndex = 8;
+            this.tabPage7.Controls.Add(this.btnCopiaAnag);
+            this.tabPage7.Controls.Add(this.label64);
+            this.tabPage7.Controls.Add(this.txtAnagDest);
+            this.tabPage7.Controls.Add(this.label63);
+            this.tabPage7.Controls.Add(this.txtAnagOrig);
+            this.tabPage7.Location = new System.Drawing.Point(4, 22);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(1232, 596);
+            this.tabPage7.TabIndex = 6;
+            this.tabPage7.Text = "Copia articolo";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Location = new System.Drawing.Point(25, 23);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(94, 13);
+            this.label63.TabIndex = 5;
+            this.label63.Text = "Anagrafica Origine";
+            // 
+            // txtAnagOrig
+            // 
+            this.txtAnagOrig.Location = new System.Drawing.Point(25, 42);
+            this.txtAnagOrig.Name = "txtAnagOrig";
+            this.txtAnagOrig.Size = new System.Drawing.Size(153, 20);
+            this.txtAnagOrig.TabIndex = 4;
+            this.txtAnagOrig.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Location = new System.Drawing.Point(224, 23);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(122, 13);
+            this.label64.TabIndex = 7;
+            this.label64.Text = "Anagrafica Destinazione";
+            // 
+            // txtAnagDest
+            // 
+            this.txtAnagDest.Location = new System.Drawing.Point(227, 42);
+            this.txtAnagDest.Name = "txtAnagDest";
+            this.txtAnagDest.Size = new System.Drawing.Size(148, 20);
+            this.txtAnagDest.TabIndex = 6;
+            // 
+            // btnCopiaAnag
+            // 
+            this.btnCopiaAnag.Location = new System.Drawing.Point(406, 39);
+            this.btnCopiaAnag.Name = "btnCopiaAnag";
+            this.btnCopiaAnag.Size = new System.Drawing.Size(114, 23);
+            this.btnCopiaAnag.TabIndex = 8;
+            this.btnCopiaAnag.Text = "Copia Articolo";
+            this.btnCopiaAnag.UseVisualStyleBackColor = true;
+            this.btnCopiaAnag.Click += new System.EventHandler(this.btnCopiaAnag_Click);
             // 
             // MainForm
             // 
@@ -2224,6 +2290,8 @@
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
+            this.tabPage7.ResumeLayout(false);
+            this.tabPage7.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2418,6 +2486,12 @@
         private System.Windows.Forms.TextBox txtAnagCaratCFG;
         private System.Windows.Forms.Button btnCambiaCaratArtCFG;
         private System.Windows.Forms.TextBox txtCodiceCaratCFG;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.Button btnCopiaAnag;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.TextBox txtAnagDest;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.TextBox txtAnagOrig;
     }
 }
 
