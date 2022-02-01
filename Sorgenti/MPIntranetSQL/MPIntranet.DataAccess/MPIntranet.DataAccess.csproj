@@ -60,6 +60,8 @@
     <Compile Include="Core\DataContextAttribute.cs" />
     <Compile Include="Documenti\DocumentiAdapter.cs" />
     <Compile Include="Documenti\DocumentiBusiness.cs" />
+    <Compile Include="FattureAcquisto\FattureAcquistoAdapter.cs" />
+    <Compile Include="FattureAcquisto\FattureAcquistoBusiness.cs" />
     <Compile Include="MPIntranetAdapterBase.cs" />
     <Compile Include="MPIntranetBusinessBase.cs" />
     <Compile Include="OrdiniProduzione\OrdiniProduzioneAdapter.cs" />

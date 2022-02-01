@@ -56,6 +56,11 @@
       <DependentUpon>DocumentiDS.xsd</DependentUpon>
     </Compile>
     <Compile Include="ElementiVuoti.cs" />
+    <Compile Include="FattureAcquistoDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FattureAcquistoDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="OrdiniProduzioneDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -107,6 +112,17 @@
     </None>
     <None Include="DocumentiDS.xss">
       <DependentUpon>DocumentiDS.xsd</DependentUpon>
+    </None>
+    <None Include="FattureAcquistoDS.xsc">
+      <DependentUpon>FattureAcquistoDS.xsd</DependentUpon>
+    </None>
+    <None Include="FattureAcquistoDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FattureAcquistoDS.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="FattureAcquistoDS.xss">
+      <DependentUpon>FattureAcquistoDS.xsd</DependentUpon>
     </None>
     <None Include="OrdiniProduzioneDS.xsc">
       <DependentUpon>OrdiniProduzioneDS.xsd</DependentUpon>
