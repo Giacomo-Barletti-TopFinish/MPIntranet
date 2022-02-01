@@ -18,6 +18,17 @@ namespace MPIntranet.DataAccess.FattureAcquisto
             FattureAcquistoAdapter a = new FattureAcquistoAdapter(DbConnection, DbTransaction);
             a.FillFornitoriFattureAcquisto(ds);
         }
-
+        [DataContext]
+        public void FillFattureAcquisto(FattureAcquistoDS ds, string codiceFornitore)
+        {
+            FattureAcquistoAdapter a = new FattureAcquistoAdapter(DbConnection, DbTransaction);
+            a.FillFattureAcquisto(ds, codiceFornitore);
+        }
+        [DataContext]
+        public void FillFattureAcquistoDettaglio(FattureAcquistoDS ds, int IdDocumento, int tipoDocumento)
+        {
+            FattureAcquistoAdapter a = new FattureAcquistoAdapter(DbConnection, DbTransaction);
+            a.FillFattureAcquistoDettaglio(ds, IdDocumento, tipoDocumento);
+        }
     }
 }

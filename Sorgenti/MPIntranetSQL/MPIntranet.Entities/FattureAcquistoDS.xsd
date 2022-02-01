@@ -14,7 +14,7 @@
   <xs:element name="FattureAcquistoDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="FattureAcquistoDS" msprop:Generator_UserDSName="FattureAcquistoDS">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="FornitoriFattureAquisto" msprop:Generator_TableClassName="FornitoriFattureAquistoDataTable" msprop:Generator_TableVarName="tableFornitoriFattureAquisto" msprop:Generator_TablePropName="FornitoriFattureAquisto" msprop:Generator_RowDeletingName="FornitoriFattureAquistoRowDeleting" msprop:Generator_RowChangingName="FornitoriFattureAquistoRowChanging" msprop:Generator_RowEvHandlerName="FornitoriFattureAquistoRowChangeEventHandler" msprop:Generator_RowDeletedName="FornitoriFattureAquistoRowDeleted" msprop:Generator_UserTableName="FornitoriFattureAquisto" msprop:Generator_RowChangedName="FornitoriFattureAquistoRowChanged" msprop:Generator_RowEvArgName="FornitoriFattureAquistoRowChangeEvent" msprop:Generator_RowClassName="FornitoriFattureAquistoRow">
+        <xs:element name="FornitoriFattureAquisto" msprop:Generator_TableClassName="FornitoriFattureAquistoDataTable" msprop:Generator_TableVarName="tableFornitoriFattureAquisto" msprop:Generator_RowChangedName="FornitoriFattureAquistoRowChanged" msprop:Generator_TablePropName="FornitoriFattureAquisto" msprop:Generator_RowDeletingName="FornitoriFattureAquistoRowDeleting" msprop:Generator_RowChangingName="FornitoriFattureAquistoRowChanging" msprop:Generator_RowEvHandlerName="FornitoriFattureAquistoRowChangeEventHandler" msprop:Generator_RowDeletedName="FornitoriFattureAquistoRowDeleted" msprop:Generator_RowClassName="FornitoriFattureAquistoRow" msprop:Generator_UserTableName="FornitoriFattureAquisto" msprop:Generator_RowEvArgName="FornitoriFattureAquistoRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="EOS_x0020_Pay-to_x0020_Vendor_x0020_No_" msprop:Generator_ColumnVarNameInTable="_columnEOS_Pay_to_Vendor_No_" msprop:Generator_ColumnPropNameInRow="_EOS_Pay_to_Vendor_No_" msprop:Generator_ColumnPropNameInTable="_EOS_Pay_to_Vendor_No_Column" msprop:Generator_UserColumnName="EOS Pay-to Vendor No_">
@@ -34,37 +34,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="FattureAcquistoTestata" msprop:Generator_TableClassName="FattureAcquistoTestataDataTable" msprop:Generator_TableVarName="tableFattureAcquistoTestata" msprop:Generator_TablePropName="FattureAcquistoTestata" msprop:Generator_RowDeletingName="FattureAcquistoTestataRowDeleting" msprop:Generator_RowChangingName="FattureAcquistoTestataRowChanging" msprop:Generator_RowEvHandlerName="FattureAcquistoTestataRowChangeEventHandler" msprop:Generator_RowDeletedName="FattureAcquistoTestataRowDeleted" msprop:Generator_UserTableName="FattureAcquistoTestata" msprop:Generator_RowChangedName="FattureAcquistoTestataRowChanged" msprop:Generator_RowEvArgName="FattureAcquistoTestataRowChangeEvent" msprop:Generator_RowClassName="FattureAcquistoTestataRow">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="EOS_x0020_Source_x0020_Doc__x0020_Entry_x0020_No_" msprop:Generator_ColumnVarNameInTable="columnEOS_Source_Doc__Entry_No_" msprop:Generator_ColumnPropNameInRow="EOS_Source_Doc__Entry_No_" msprop:Generator_ColumnPropNameInTable="EOS_Source_Doc__Entry_No_Column" msprop:Generator_UserColumnName="EOS Source Doc_ Entry No_" type="xs:int" />
-              <xs:element name="EOS_x0020_Document_x0020_Type" msprop:Generator_ColumnVarNameInTable="columnEOS_Document_Type" msprop:Generator_ColumnPropNameInRow="EOS_Document_Type" msprop:Generator_ColumnPropNameInTable="EOS_Document_TypeColumn" msprop:Generator_UserColumnName="EOS Document Type" type="xs:int" />
-              <xs:element name="EOS_x0020_Pay-to_x0020_Vendor_x0020_No_" msprop:Generator_ColumnVarNameInTable="_columnEOS_Pay_to_Vendor_No_" msprop:Generator_ColumnPropNameInRow="_EOS_Pay_to_Vendor_No_" msprop:Generator_ColumnPropNameInTable="_EOS_Pay_to_Vendor_No_Column" msprop:Generator_UserColumnName="EOS Pay-to Vendor No_">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="20" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="EOS_x0020_Pay-to_x0020_Name" msprop:Generator_ColumnVarNameInTable="_columnEOS_Pay_to_Name" msprop:Generator_ColumnPropNameInRow="_EOS_Pay_to_Name" msprop:Generator_ColumnPropNameInTable="_EOS_Pay_to_NameColumn" msprop:Generator_UserColumnName="EOS Pay-to Name">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="100" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="EOS_x0020_Vendor_x0020_Invoice_x0020_No_" msprop:Generator_ColumnVarNameInTable="columnEOS_Vendor_Invoice_No_" msprop:Generator_ColumnPropNameInRow="EOS_Vendor_Invoice_No_" msprop:Generator_ColumnPropNameInTable="EOS_Vendor_Invoice_No_Column" msprop:Generator_UserColumnName="EOS Vendor Invoice No_">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="35" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="EOS_x0020_Check_x0020_Total" msprop:Generator_ColumnVarNameInTable="columnEOS_Check_Total" msprop:Generator_ColumnPropNameInRow="EOS_Check_Total" msprop:Generator_ColumnPropNameInTable="EOS_Check_TotalColumn" msprop:Generator_UserColumnName="EOS Check Total" type="xs:decimal" />
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="FattureAcquistoDettaglio" msprop:Generator_TableClassName="FattureAcquistoDettaglioDataTable" msprop:Generator_TableVarName="tableFattureAcquistoDettaglio" msprop:Generator_TablePropName="FattureAcquistoDettaglio" msprop:Generator_RowDeletingName="FattureAcquistoDettaglioRowDeleting" msprop:Generator_RowChangingName="FattureAcquistoDettaglioRowChanging" msprop:Generator_RowEvHandlerName="FattureAcquistoDettaglioRowChangeEventHandler" msprop:Generator_RowDeletedName="FattureAcquistoDettaglioRowDeleted" msprop:Generator_UserTableName="FattureAcquistoDettaglio" msprop:Generator_RowChangedName="FattureAcquistoDettaglioRowChanged" msprop:Generator_RowEvArgName="FattureAcquistoDettaglioRowChangeEvent" msprop:Generator_RowClassName="FattureAcquistoDettaglioRow">
+        <xs:element name="FattureAcquistoDettaglio" msprop:Generator_TableClassName="FattureAcquistoDettaglioDataTable" msprop:Generator_TableVarName="tableFattureAcquistoDettaglio" msprop:Generator_RowChangedName="FattureAcquistoDettaglioRowChanged" msprop:Generator_TablePropName="FattureAcquistoDettaglio" msprop:Generator_RowDeletingName="FattureAcquistoDettaglioRowDeleting" msprop:Generator_RowChangingName="FattureAcquistoDettaglioRowChanging" msprop:Generator_RowEvHandlerName="FattureAcquistoDettaglioRowChangeEventHandler" msprop:Generator_RowDeletedName="FattureAcquistoDettaglioRowDeleted" msprop:Generator_RowClassName="FattureAcquistoDettaglioRow" msprop:Generator_UserTableName="FattureAcquistoDettaglio" msprop:Generator_RowEvArgName="FattureAcquistoDettaglioRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="EOS_x0020_Source_x0020_Doc__x0020_Entry_x0020_No_" msprop:Generator_ColumnVarNameInTable="columnEOS_Source_Doc__Entry_No_" msprop:Generator_ColumnPropNameInRow="EOS_Source_Doc__Entry_No_" msprop:Generator_ColumnPropNameInTable="EOS_Source_Doc__Entry_No_Column" msprop:Generator_UserColumnName="EOS Source Doc_ Entry No_" type="xs:int" />
@@ -116,6 +86,37 @@
               </xs:element>
               <xs:element name="EOS_x0020_Direct_x0020_Unit_x0020_Cost" msprop:Generator_ColumnVarNameInTable="columnEOS_Direct_Unit_Cost" msprop:Generator_ColumnPropNameInRow="EOS_Direct_Unit_Cost" msprop:Generator_ColumnPropNameInTable="EOS_Direct_Unit_CostColumn" msprop:Generator_UserColumnName="EOS Direct Unit Cost" type="xs:decimal" />
               <xs:element name="EOS_x0020_Line_x0020_Amount" msprop:Generator_ColumnVarNameInTable="columnEOS_Line_Amount" msprop:Generator_ColumnPropNameInRow="EOS_Line_Amount" msprop:Generator_ColumnPropNameInTable="EOS_Line_AmountColumn" msprop:Generator_UserColumnName="EOS Line Amount" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="FattureAcquistoTestata" msprop:Generator_TableClassName="FattureAcquistoTestataDataTable" msprop:Generator_TableVarName="tableFattureAcquistoTestata" msprop:Generator_TablePropName="FattureAcquistoTestata" msprop:Generator_RowDeletingName="FattureAcquistoTestataRowDeleting" msprop:Generator_RowChangingName="FattureAcquistoTestataRowChanging" msprop:Generator_RowEvHandlerName="FattureAcquistoTestataRowChangeEventHandler" msprop:Generator_RowDeletedName="FattureAcquistoTestataRowDeleted" msprop:Generator_UserTableName="FattureAcquistoTestata" msprop:Generator_RowChangedName="FattureAcquistoTestataRowChanged" msprop:Generator_RowEvArgName="FattureAcquistoTestataRowChangeEvent" msprop:Generator_RowClassName="FattureAcquistoTestataRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EOS_x0020_Source_x0020_Doc__x0020_Entry_x0020_No_" msprop:Generator_ColumnVarNameInTable="columnEOS_Source_Doc__Entry_No_" msprop:Generator_ColumnPropNameInRow="EOS_Source_Doc__Entry_No_" msprop:Generator_ColumnPropNameInTable="EOS_Source_Doc__Entry_No_Column" msprop:Generator_UserColumnName="EOS Source Doc_ Entry No_" type="xs:int" />
+              <xs:element name="EOS_x0020_Document_x0020_Type" msprop:Generator_ColumnVarNameInTable="columnEOS_Document_Type" msprop:Generator_ColumnPropNameInRow="EOS_Document_Type" msprop:Generator_ColumnPropNameInTable="EOS_Document_TypeColumn" msprop:Generator_UserColumnName="EOS Document Type" type="xs:int" />
+              <xs:element name="EOS_x0020_Pay-to_x0020_Vendor_x0020_No_" msprop:Generator_ColumnVarNameInTable="_columnEOS_Pay_to_Vendor_No_" msprop:Generator_ColumnPropNameInRow="_EOS_Pay_to_Vendor_No_" msprop:Generator_ColumnPropNameInTable="_EOS_Pay_to_Vendor_No_Column" msprop:Generator_UserColumnName="EOS Pay-to Vendor No_">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EOS_x0020_Pay-to_x0020_Name" msprop:Generator_ColumnVarNameInTable="_columnEOS_Pay_to_Name" msprop:Generator_ColumnPropNameInRow="_EOS_Pay_to_Name" msprop:Generator_ColumnPropNameInTable="_EOS_Pay_to_NameColumn" msprop:Generator_UserColumnName="EOS Pay-to Name">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EOS_x0020_Vendor_x0020_Invoice_x0020_No_" msprop:Generator_ColumnVarNameInTable="columnEOS_Vendor_Invoice_No_" msprop:Generator_ColumnPropNameInRow="EOS_Vendor_Invoice_No_" msprop:Generator_ColumnPropNameInTable="EOS_Vendor_Invoice_No_Column" msprop:Generator_UserColumnName="EOS Vendor Invoice No_">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="35" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EOS_x0020_Check_x0020_Total" msprop:Generator_ColumnVarNameInTable="columnEOS_Check_Total" msprop:Generator_ColumnPropNameInRow="EOS_Check_Total" msprop:Generator_ColumnPropNameInTable="EOS_Check_TotalColumn" msprop:Generator_UserColumnName="EOS Check Total" type="xs:decimal" />
+              <xs:element name="EOS_x0020_Receipt_x0020_Date" msprop:Generator_ColumnVarNameInTable="columnEOS_Receipt_Date" msprop:Generator_ColumnPropNameInRow="EOS_Receipt_Date" msprop:Generator_ColumnPropNameInTable="EOS_Receipt_DateColumn" msprop:Generator_UserColumnName="EOS Receipt Date" type="xs:dateTime" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

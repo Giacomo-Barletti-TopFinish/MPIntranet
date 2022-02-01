@@ -26,9 +26,9 @@ namespace MPIntranet.Entities {
         
         private FornitoriFattureAquistoDataTable tableFornitoriFattureAquisto;
         
-        private FattureAcquistoTestataDataTable tableFattureAcquistoTestata;
-        
         private FattureAcquistoDettaglioDataTable tableFattureAcquistoDettaglio;
+        
+        private FattureAcquistoTestataDataTable tableFattureAcquistoTestata;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -61,11 +61,11 @@ namespace MPIntranet.Entities {
                 if ((ds.Tables["FornitoriFattureAquisto"] != null)) {
                     base.Tables.Add(new FornitoriFattureAquistoDataTable(ds.Tables["FornitoriFattureAquisto"]));
                 }
-                if ((ds.Tables["FattureAcquistoTestata"] != null)) {
-                    base.Tables.Add(new FattureAcquistoTestataDataTable(ds.Tables["FattureAcquistoTestata"]));
-                }
                 if ((ds.Tables["FattureAcquistoDettaglio"] != null)) {
                     base.Tables.Add(new FattureAcquistoDettaglioDataTable(ds.Tables["FattureAcquistoDettaglio"]));
+                }
+                if ((ds.Tables["FattureAcquistoTestata"] != null)) {
+                    base.Tables.Add(new FattureAcquistoTestataDataTable(ds.Tables["FattureAcquistoTestata"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -99,9 +99,9 @@ namespace MPIntranet.Entities {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public FattureAcquistoTestataDataTable FattureAcquistoTestata {
+        public FattureAcquistoDettaglioDataTable FattureAcquistoDettaglio {
             get {
-                return this.tableFattureAcquistoTestata;
+                return this.tableFattureAcquistoDettaglio;
             }
         }
         
@@ -109,9 +109,9 @@ namespace MPIntranet.Entities {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public FattureAcquistoDettaglioDataTable FattureAcquistoDettaglio {
+        public FattureAcquistoTestataDataTable FattureAcquistoTestata {
             get {
-                return this.tableFattureAcquistoDettaglio;
+                return this.tableFattureAcquistoTestata;
             }
         }
         
@@ -185,11 +185,11 @@ namespace MPIntranet.Entities {
                 if ((ds.Tables["FornitoriFattureAquisto"] != null)) {
                     base.Tables.Add(new FornitoriFattureAquistoDataTable(ds.Tables["FornitoriFattureAquisto"]));
                 }
-                if ((ds.Tables["FattureAcquistoTestata"] != null)) {
-                    base.Tables.Add(new FattureAcquistoTestataDataTable(ds.Tables["FattureAcquistoTestata"]));
-                }
                 if ((ds.Tables["FattureAcquistoDettaglio"] != null)) {
                     base.Tables.Add(new FattureAcquistoDettaglioDataTable(ds.Tables["FattureAcquistoDettaglio"]));
+                }
+                if ((ds.Tables["FattureAcquistoTestata"] != null)) {
+                    base.Tables.Add(new FattureAcquistoTestataDataTable(ds.Tables["FattureAcquistoTestata"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -230,16 +230,16 @@ namespace MPIntranet.Entities {
                     this.tableFornitoriFattureAquisto.InitVars();
                 }
             }
-            this.tableFattureAcquistoTestata = ((FattureAcquistoTestataDataTable)(base.Tables["FattureAcquistoTestata"]));
-            if ((initTable == true)) {
-                if ((this.tableFattureAcquistoTestata != null)) {
-                    this.tableFattureAcquistoTestata.InitVars();
-                }
-            }
             this.tableFattureAcquistoDettaglio = ((FattureAcquistoDettaglioDataTable)(base.Tables["FattureAcquistoDettaglio"]));
             if ((initTable == true)) {
                 if ((this.tableFattureAcquistoDettaglio != null)) {
                     this.tableFattureAcquistoDettaglio.InitVars();
+                }
+            }
+            this.tableFattureAcquistoTestata = ((FattureAcquistoTestataDataTable)(base.Tables["FattureAcquistoTestata"]));
+            if ((initTable == true)) {
+                if ((this.tableFattureAcquistoTestata != null)) {
+                    this.tableFattureAcquistoTestata.InitVars();
                 }
             }
         }
@@ -254,10 +254,10 @@ namespace MPIntranet.Entities {
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableFornitoriFattureAquisto = new FornitoriFattureAquistoDataTable();
             base.Tables.Add(this.tableFornitoriFattureAquisto);
-            this.tableFattureAcquistoTestata = new FattureAcquistoTestataDataTable();
-            base.Tables.Add(this.tableFattureAcquistoTestata);
             this.tableFattureAcquistoDettaglio = new FattureAcquistoDettaglioDataTable();
             base.Tables.Add(this.tableFattureAcquistoDettaglio);
+            this.tableFattureAcquistoTestata = new FattureAcquistoTestataDataTable();
+            base.Tables.Add(this.tableFattureAcquistoTestata);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -268,13 +268,13 @@ namespace MPIntranet.Entities {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private bool ShouldSerializeFattureAcquistoTestata() {
+        private bool ShouldSerializeFattureAcquistoDettaglio() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        private bool ShouldSerializeFattureAcquistoDettaglio() {
+        private bool ShouldSerializeFattureAcquistoTestata() {
             return false;
         }
         
@@ -337,10 +337,10 @@ namespace MPIntranet.Entities {
         public delegate void FornitoriFattureAquistoRowChangeEventHandler(object sender, FornitoriFattureAquistoRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public delegate void FattureAcquistoTestataRowChangeEventHandler(object sender, FattureAcquistoTestataRowChangeEvent e);
+        public delegate void FattureAcquistoDettaglioRowChangeEventHandler(object sender, FattureAcquistoDettaglioRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public delegate void FattureAcquistoDettaglioRowChangeEventHandler(object sender, FattureAcquistoDettaglioRowChangeEvent e);
+        public delegate void FattureAcquistoTestataRowChangeEventHandler(object sender, FattureAcquistoTestataRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -571,346 +571,6 @@ namespace MPIntranet.Entities {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "FornitoriFattureAquistoDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class FattureAcquistoTestataDataTable : global::System.Data.TypedTableBase<FattureAcquistoTestataRow> {
-            
-            private global::System.Data.DataColumn columnEOS_Source_Doc__Entry_No_;
-            
-            private global::System.Data.DataColumn columnEOS_Document_Type;
-            
-            private global::System.Data.DataColumn _columnEOS_Pay_to_Vendor_No_;
-            
-            private global::System.Data.DataColumn _columnEOS_Pay_to_Name;
-            
-            private global::System.Data.DataColumn columnEOS_Vendor_Invoice_No_;
-            
-            private global::System.Data.DataColumn columnEOS_Check_Total;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public FattureAcquistoTestataDataTable() {
-                this.TableName = "FattureAcquistoTestata";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal FattureAcquistoTestataDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected FattureAcquistoTestataDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn EOS_Source_Doc__Entry_No_Column {
-                get {
-                    return this.columnEOS_Source_Doc__Entry_No_;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn EOS_Document_TypeColumn {
-                get {
-                    return this.columnEOS_Document_Type;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn _EOS_Pay_to_Vendor_No_Column {
-                get {
-                    return this._columnEOS_Pay_to_Vendor_No_;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn _EOS_Pay_to_NameColumn {
-                get {
-                    return this._columnEOS_Pay_to_Name;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn EOS_Vendor_Invoice_No_Column {
-                get {
-                    return this.columnEOS_Vendor_Invoice_No_;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn EOS_Check_TotalColumn {
-                get {
-                    return this.columnEOS_Check_Total;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public FattureAcquistoTestataRow this[int index] {
-                get {
-                    return ((FattureAcquistoTestataRow)(this.Rows[index]));
-                }
-            }
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event FattureAcquistoTestataRowChangeEventHandler FattureAcquistoTestataRowChanging;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event FattureAcquistoTestataRowChangeEventHandler FattureAcquistoTestataRowChanged;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event FattureAcquistoTestataRowChangeEventHandler FattureAcquistoTestataRowDeleting;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public event FattureAcquistoTestataRowChangeEventHandler FattureAcquistoTestataRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void AddFattureAcquistoTestataRow(FattureAcquistoTestataRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public FattureAcquistoTestataRow AddFattureAcquistoTestataRow(int EOS_Source_Doc__Entry_No_, int EOS_Document_Type, string _EOS_Pay_to_Vendor_No_, string _EOS_Pay_to_Name, string EOS_Vendor_Invoice_No_, decimal EOS_Check_Total) {
-                FattureAcquistoTestataRow rowFattureAcquistoTestataRow = ((FattureAcquistoTestataRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        EOS_Source_Doc__Entry_No_,
-                        EOS_Document_Type,
-                        _EOS_Pay_to_Vendor_No_,
-                        _EOS_Pay_to_Name,
-                        EOS_Vendor_Invoice_No_,
-                        EOS_Check_Total};
-                rowFattureAcquistoTestataRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowFattureAcquistoTestataRow);
-                return rowFattureAcquistoTestataRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public FattureAcquistoTestataRow FindByEOS_Source_Doc__Entry_No_(int EOS_Source_Doc__Entry_No_) {
-                return ((FattureAcquistoTestataRow)(this.Rows.Find(new object[] {
-                            EOS_Source_Doc__Entry_No_})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
-                FattureAcquistoTestataDataTable cln = ((FattureAcquistoTestataDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new FattureAcquistoTestataDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal void InitVars() {
-                this.columnEOS_Source_Doc__Entry_No_ = base.Columns["EOS Source Doc_ Entry No_"];
-                this.columnEOS_Document_Type = base.Columns["EOS Document Type"];
-                this._columnEOS_Pay_to_Vendor_No_ = base.Columns["EOS Pay-to Vendor No_"];
-                this._columnEOS_Pay_to_Name = base.Columns["EOS Pay-to Name"];
-                this.columnEOS_Vendor_Invoice_No_ = base.Columns["EOS Vendor Invoice No_"];
-                this.columnEOS_Check_Total = base.Columns["EOS Check Total"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            private void InitClass() {
-                this.columnEOS_Source_Doc__Entry_No_ = new global::System.Data.DataColumn("EOS Source Doc_ Entry No_", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnEOS_Source_Doc__Entry_No_);
-                this.columnEOS_Document_Type = new global::System.Data.DataColumn("EOS Document Type", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnEOS_Document_Type);
-                this._columnEOS_Pay_to_Vendor_No_ = new global::System.Data.DataColumn("EOS Pay-to Vendor No_", typeof(string), null, global::System.Data.MappingType.Element);
-                this._columnEOS_Pay_to_Vendor_No_.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnEOS_Pay_to_Vendor_No_");
-                this._columnEOS_Pay_to_Vendor_No_.ExtendedProperties.Add("Generator_UserColumnName", "EOS Pay-to Vendor No_");
-                base.Columns.Add(this._columnEOS_Pay_to_Vendor_No_);
-                this._columnEOS_Pay_to_Name = new global::System.Data.DataColumn("EOS Pay-to Name", typeof(string), null, global::System.Data.MappingType.Element);
-                this._columnEOS_Pay_to_Name.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnEOS_Pay_to_Name");
-                this._columnEOS_Pay_to_Name.ExtendedProperties.Add("Generator_UserColumnName", "EOS Pay-to Name");
-                base.Columns.Add(this._columnEOS_Pay_to_Name);
-                this.columnEOS_Vendor_Invoice_No_ = new global::System.Data.DataColumn("EOS Vendor Invoice No_", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnEOS_Vendor_Invoice_No_);
-                this.columnEOS_Check_Total = new global::System.Data.DataColumn("EOS Check Total", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnEOS_Check_Total);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnEOS_Source_Doc__Entry_No_}, true));
-                this.columnEOS_Source_Doc__Entry_No_.AllowDBNull = false;
-                this.columnEOS_Source_Doc__Entry_No_.Unique = true;
-                this.columnEOS_Document_Type.AllowDBNull = false;
-                this._columnEOS_Pay_to_Vendor_No_.AllowDBNull = false;
-                this._columnEOS_Pay_to_Vendor_No_.MaxLength = 20;
-                this._columnEOS_Pay_to_Name.AllowDBNull = false;
-                this._columnEOS_Pay_to_Name.MaxLength = 100;
-                this.columnEOS_Vendor_Invoice_No_.AllowDBNull = false;
-                this.columnEOS_Vendor_Invoice_No_.MaxLength = 35;
-                this.columnEOS_Check_Total.AllowDBNull = false;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public FattureAcquistoTestataRow NewFattureAcquistoTestataRow() {
-                return ((FattureAcquistoTestataRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new FattureAcquistoTestataRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override global::System.Type GetRowType() {
-                return typeof(FattureAcquistoTestataRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.FattureAcquistoTestataRowChanged != null)) {
-                    this.FattureAcquistoTestataRowChanged(this, new FattureAcquistoTestataRowChangeEvent(((FattureAcquistoTestataRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.FattureAcquistoTestataRowChanging != null)) {
-                    this.FattureAcquistoTestataRowChanging(this, new FattureAcquistoTestataRowChangeEvent(((FattureAcquistoTestataRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.FattureAcquistoTestataRowDeleted != null)) {
-                    this.FattureAcquistoTestataRowDeleted(this, new FattureAcquistoTestataRowChangeEvent(((FattureAcquistoTestataRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.FattureAcquistoTestataRowDeleting != null)) {
-                    this.FattureAcquistoTestataRowDeleting(this, new FattureAcquistoTestataRowChangeEvent(((FattureAcquistoTestataRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void RemoveFattureAcquistoTestataRow(FattureAcquistoTestataRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                FattureAcquistoDS ds = new FattureAcquistoDS();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "FattureAcquistoTestataDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -1390,6 +1050,361 @@ namespace MPIntranet.Entities {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class FattureAcquistoTestataDataTable : global::System.Data.TypedTableBase<FattureAcquistoTestataRow> {
+            
+            private global::System.Data.DataColumn columnEOS_Source_Doc__Entry_No_;
+            
+            private global::System.Data.DataColumn columnEOS_Document_Type;
+            
+            private global::System.Data.DataColumn _columnEOS_Pay_to_Vendor_No_;
+            
+            private global::System.Data.DataColumn _columnEOS_Pay_to_Name;
+            
+            private global::System.Data.DataColumn columnEOS_Vendor_Invoice_No_;
+            
+            private global::System.Data.DataColumn columnEOS_Check_Total;
+            
+            private global::System.Data.DataColumn columnEOS_Receipt_Date;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public FattureAcquistoTestataDataTable() {
+                this.TableName = "FattureAcquistoTestata";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal FattureAcquistoTestataDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected FattureAcquistoTestataDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn EOS_Source_Doc__Entry_No_Column {
+                get {
+                    return this.columnEOS_Source_Doc__Entry_No_;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn EOS_Document_TypeColumn {
+                get {
+                    return this.columnEOS_Document_Type;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn _EOS_Pay_to_Vendor_No_Column {
+                get {
+                    return this._columnEOS_Pay_to_Vendor_No_;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn _EOS_Pay_to_NameColumn {
+                get {
+                    return this._columnEOS_Pay_to_Name;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn EOS_Vendor_Invoice_No_Column {
+                get {
+                    return this.columnEOS_Vendor_Invoice_No_;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn EOS_Check_TotalColumn {
+                get {
+                    return this.columnEOS_Check_Total;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn EOS_Receipt_DateColumn {
+                get {
+                    return this.columnEOS_Receipt_Date;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public FattureAcquistoTestataRow this[int index] {
+                get {
+                    return ((FattureAcquistoTestataRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event FattureAcquistoTestataRowChangeEventHandler FattureAcquistoTestataRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event FattureAcquistoTestataRowChangeEventHandler FattureAcquistoTestataRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event FattureAcquistoTestataRowChangeEventHandler FattureAcquistoTestataRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event FattureAcquistoTestataRowChangeEventHandler FattureAcquistoTestataRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void AddFattureAcquistoTestataRow(FattureAcquistoTestataRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public FattureAcquistoTestataRow AddFattureAcquistoTestataRow(int EOS_Source_Doc__Entry_No_, int EOS_Document_Type, string _EOS_Pay_to_Vendor_No_, string _EOS_Pay_to_Name, string EOS_Vendor_Invoice_No_, decimal EOS_Check_Total, System.DateTime EOS_Receipt_Date) {
+                FattureAcquistoTestataRow rowFattureAcquistoTestataRow = ((FattureAcquistoTestataRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        EOS_Source_Doc__Entry_No_,
+                        EOS_Document_Type,
+                        _EOS_Pay_to_Vendor_No_,
+                        _EOS_Pay_to_Name,
+                        EOS_Vendor_Invoice_No_,
+                        EOS_Check_Total,
+                        EOS_Receipt_Date};
+                rowFattureAcquistoTestataRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowFattureAcquistoTestataRow);
+                return rowFattureAcquistoTestataRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public FattureAcquistoTestataRow FindByEOS_Source_Doc__Entry_No_(int EOS_Source_Doc__Entry_No_) {
+                return ((FattureAcquistoTestataRow)(this.Rows.Find(new object[] {
+                            EOS_Source_Doc__Entry_No_})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                FattureAcquistoTestataDataTable cln = ((FattureAcquistoTestataDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new FattureAcquistoTestataDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal void InitVars() {
+                this.columnEOS_Source_Doc__Entry_No_ = base.Columns["EOS Source Doc_ Entry No_"];
+                this.columnEOS_Document_Type = base.Columns["EOS Document Type"];
+                this._columnEOS_Pay_to_Vendor_No_ = base.Columns["EOS Pay-to Vendor No_"];
+                this._columnEOS_Pay_to_Name = base.Columns["EOS Pay-to Name"];
+                this.columnEOS_Vendor_Invoice_No_ = base.Columns["EOS Vendor Invoice No_"];
+                this.columnEOS_Check_Total = base.Columns["EOS Check Total"];
+                this.columnEOS_Receipt_Date = base.Columns["EOS Receipt Date"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            private void InitClass() {
+                this.columnEOS_Source_Doc__Entry_No_ = new global::System.Data.DataColumn("EOS Source Doc_ Entry No_", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEOS_Source_Doc__Entry_No_);
+                this.columnEOS_Document_Type = new global::System.Data.DataColumn("EOS Document Type", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEOS_Document_Type);
+                this._columnEOS_Pay_to_Vendor_No_ = new global::System.Data.DataColumn("EOS Pay-to Vendor No_", typeof(string), null, global::System.Data.MappingType.Element);
+                this._columnEOS_Pay_to_Vendor_No_.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnEOS_Pay_to_Vendor_No_");
+                this._columnEOS_Pay_to_Vendor_No_.ExtendedProperties.Add("Generator_UserColumnName", "EOS Pay-to Vendor No_");
+                base.Columns.Add(this._columnEOS_Pay_to_Vendor_No_);
+                this._columnEOS_Pay_to_Name = new global::System.Data.DataColumn("EOS Pay-to Name", typeof(string), null, global::System.Data.MappingType.Element);
+                this._columnEOS_Pay_to_Name.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnEOS_Pay_to_Name");
+                this._columnEOS_Pay_to_Name.ExtendedProperties.Add("Generator_UserColumnName", "EOS Pay-to Name");
+                base.Columns.Add(this._columnEOS_Pay_to_Name);
+                this.columnEOS_Vendor_Invoice_No_ = new global::System.Data.DataColumn("EOS Vendor Invoice No_", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEOS_Vendor_Invoice_No_);
+                this.columnEOS_Check_Total = new global::System.Data.DataColumn("EOS Check Total", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEOS_Check_Total);
+                this.columnEOS_Receipt_Date = new global::System.Data.DataColumn("EOS Receipt Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEOS_Receipt_Date);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnEOS_Source_Doc__Entry_No_}, true));
+                this.columnEOS_Source_Doc__Entry_No_.AllowDBNull = false;
+                this.columnEOS_Source_Doc__Entry_No_.Unique = true;
+                this.columnEOS_Document_Type.AllowDBNull = false;
+                this._columnEOS_Pay_to_Vendor_No_.AllowDBNull = false;
+                this._columnEOS_Pay_to_Vendor_No_.MaxLength = 20;
+                this._columnEOS_Pay_to_Name.AllowDBNull = false;
+                this._columnEOS_Pay_to_Name.MaxLength = 100;
+                this.columnEOS_Vendor_Invoice_No_.AllowDBNull = false;
+                this.columnEOS_Vendor_Invoice_No_.MaxLength = 35;
+                this.columnEOS_Check_Total.AllowDBNull = false;
+                this.columnEOS_Receipt_Date.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public FattureAcquistoTestataRow NewFattureAcquistoTestataRow() {
+                return ((FattureAcquistoTestataRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new FattureAcquistoTestataRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(FattureAcquistoTestataRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.FattureAcquistoTestataRowChanged != null)) {
+                    this.FattureAcquistoTestataRowChanged(this, new FattureAcquistoTestataRowChangeEvent(((FattureAcquistoTestataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.FattureAcquistoTestataRowChanging != null)) {
+                    this.FattureAcquistoTestataRowChanging(this, new FattureAcquistoTestataRowChangeEvent(((FattureAcquistoTestataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.FattureAcquistoTestataRowDeleted != null)) {
+                    this.FattureAcquistoTestataRowDeleted(this, new FattureAcquistoTestataRowChangeEvent(((FattureAcquistoTestataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.FattureAcquistoTestataRowDeleting != null)) {
+                    this.FattureAcquistoTestataRowDeleting(this, new FattureAcquistoTestataRowChangeEvent(((FattureAcquistoTestataRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void RemoveFattureAcquistoTestataRow(FattureAcquistoTestataRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                FattureAcquistoDS ds = new FattureAcquistoDS();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "FattureAcquistoTestataDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class FornitoriFattureAquistoRow : global::System.Data.DataRow {
@@ -1422,87 +1437,6 @@ namespace MPIntranet.Entities {
                 }
                 set {
                     this[this.tableFornitoriFattureAquisto._EOS_Pay_to_NameColumn] = value;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        public partial class FattureAcquistoTestataRow : global::System.Data.DataRow {
-            
-            private FattureAcquistoTestataDataTable tableFattureAcquistoTestata;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            internal FattureAcquistoTestataRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableFattureAcquistoTestata = ((FattureAcquistoTestataDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int EOS_Source_Doc__Entry_No_ {
-                get {
-                    return ((int)(this[this.tableFattureAcquistoTestata.EOS_Source_Doc__Entry_No_Column]));
-                }
-                set {
-                    this[this.tableFattureAcquistoTestata.EOS_Source_Doc__Entry_No_Column] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public int EOS_Document_Type {
-                get {
-                    return ((int)(this[this.tableFattureAcquistoTestata.EOS_Document_TypeColumn]));
-                }
-                set {
-                    this[this.tableFattureAcquistoTestata.EOS_Document_TypeColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string _EOS_Pay_to_Vendor_No_ {
-                get {
-                    return ((string)(this[this.tableFattureAcquistoTestata._EOS_Pay_to_Vendor_No_Column]));
-                }
-                set {
-                    this[this.tableFattureAcquistoTestata._EOS_Pay_to_Vendor_No_Column] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string _EOS_Pay_to_Name {
-                get {
-                    return ((string)(this[this.tableFattureAcquistoTestata._EOS_Pay_to_NameColumn]));
-                }
-                set {
-                    this[this.tableFattureAcquistoTestata._EOS_Pay_to_NameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string EOS_Vendor_Invoice_No_ {
-                get {
-                    return ((string)(this[this.tableFattureAcquistoTestata.EOS_Vendor_Invoice_No_Column]));
-                }
-                set {
-                    this[this.tableFattureAcquistoTestata.EOS_Vendor_Invoice_No_Column] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public decimal EOS_Check_Total {
-                get {
-                    return ((decimal)(this[this.tableFattureAcquistoTestata.EOS_Check_TotalColumn]));
-                }
-                set {
-                    this[this.tableFattureAcquistoTestata.EOS_Check_TotalColumn] = value;
                 }
             }
         }
@@ -1666,6 +1600,98 @@ namespace MPIntranet.Entities {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class FattureAcquistoTestataRow : global::System.Data.DataRow {
+            
+            private FattureAcquistoTestataDataTable tableFattureAcquistoTestata;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal FattureAcquistoTestataRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableFattureAcquistoTestata = ((FattureAcquistoTestataDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int EOS_Source_Doc__Entry_No_ {
+                get {
+                    return ((int)(this[this.tableFattureAcquistoTestata.EOS_Source_Doc__Entry_No_Column]));
+                }
+                set {
+                    this[this.tableFattureAcquistoTestata.EOS_Source_Doc__Entry_No_Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int EOS_Document_Type {
+                get {
+                    return ((int)(this[this.tableFattureAcquistoTestata.EOS_Document_TypeColumn]));
+                }
+                set {
+                    this[this.tableFattureAcquistoTestata.EOS_Document_TypeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string _EOS_Pay_to_Vendor_No_ {
+                get {
+                    return ((string)(this[this.tableFattureAcquistoTestata._EOS_Pay_to_Vendor_No_Column]));
+                }
+                set {
+                    this[this.tableFattureAcquistoTestata._EOS_Pay_to_Vendor_No_Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string _EOS_Pay_to_Name {
+                get {
+                    return ((string)(this[this.tableFattureAcquistoTestata._EOS_Pay_to_NameColumn]));
+                }
+                set {
+                    this[this.tableFattureAcquistoTestata._EOS_Pay_to_NameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string EOS_Vendor_Invoice_No_ {
+                get {
+                    return ((string)(this[this.tableFattureAcquistoTestata.EOS_Vendor_Invoice_No_Column]));
+                }
+                set {
+                    this[this.tableFattureAcquistoTestata.EOS_Vendor_Invoice_No_Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public decimal EOS_Check_Total {
+                get {
+                    return ((decimal)(this[this.tableFattureAcquistoTestata.EOS_Check_TotalColumn]));
+                }
+                set {
+                    this[this.tableFattureAcquistoTestata.EOS_Check_TotalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime EOS_Receipt_Date {
+                get {
+                    return ((global::System.DateTime)(this[this.tableFattureAcquistoTestata.EOS_Receipt_DateColumn]));
+                }
+                set {
+                    this[this.tableFattureAcquistoTestata.EOS_Receipt_DateColumn] = value;
+                }
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -1703,22 +1729,22 @@ namespace MPIntranet.Entities {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public class FattureAcquistoTestataRowChangeEvent : global::System.EventArgs {
+        public class FattureAcquistoDettaglioRowChangeEvent : global::System.EventArgs {
             
-            private FattureAcquistoTestataRow eventRow;
+            private FattureAcquistoDettaglioRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public FattureAcquistoTestataRowChangeEvent(FattureAcquistoTestataRow row, global::System.Data.DataRowAction action) {
+            public FattureAcquistoDettaglioRowChangeEvent(FattureAcquistoDettaglioRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public FattureAcquistoTestataRow Row {
+            public FattureAcquistoDettaglioRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -1737,22 +1763,22 @@ namespace MPIntranet.Entities {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        public class FattureAcquistoDettaglioRowChangeEvent : global::System.EventArgs {
+        public class FattureAcquistoTestataRowChangeEvent : global::System.EventArgs {
             
-            private FattureAcquistoDettaglioRow eventRow;
+            private FattureAcquistoTestataRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public FattureAcquistoDettaglioRowChangeEvent(FattureAcquistoDettaglioRow row, global::System.Data.DataRowAction action) {
+            public FattureAcquistoTestataRowChangeEvent(FattureAcquistoTestataRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public FattureAcquistoDettaglioRow Row {
+            public FattureAcquistoTestataRow Row {
                 get {
                     return this.eventRow;
                 }
