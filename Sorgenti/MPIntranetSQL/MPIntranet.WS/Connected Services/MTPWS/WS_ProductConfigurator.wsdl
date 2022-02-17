@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/WS_ProductConfigurator" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/WS_ProductConfigurator" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/WS_ProductConfigurator" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="Create_FirmPlannedProdOrder">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="itemNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="qty" type="decimal" />
+            <element minOccurs="1" maxOccurs="1" name="dueDate" type="date" />
+            <element minOccurs="1" maxOccurs="1" name="locationCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="prodOrderNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="description" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="description2" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="Create_FirmPlannedProdOrder_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="prodOrderNo" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="WS_CopiaArticolo">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="articoloSorgente" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="tipoArticoloDestinazione" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="WS_CopiaArticolo_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="articoloSorgente" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="tipoArticoloDestinazione" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="Create_FirmPlannedProdOrder">
+    <part name="parameters" element="tns:Create_FirmPlannedProdOrder" />
+  </message>
+  <message name="Create_FirmPlannedProdOrder_Result">
+    <part name="parameters" element="tns:Create_FirmPlannedProdOrder_Result" />
+  </message>
+  <message name="WS_CopiaArticolo">
+    <part name="parameters" element="tns:WS_CopiaArticolo" />
+  </message>
+  <message name="WS_CopiaArticolo_Result">
+    <part name="parameters" element="tns:WS_CopiaArticolo_Result" />
+  </message>
+  <portType name="WS_ProductConfigurator_Port">
+    <operation name="Create_FirmPlannedProdOrder">
+      <input name="Create_FirmPlannedProdOrder" message="tns:Create_FirmPlannedProdOrder" />
+      <output name="Create_FirmPlannedProdOrder_Result" message="tns:Create_FirmPlannedProdOrder_Result" />
+    </operation>
+    <operation name="WS_CopiaArticolo">
+      <input name="WS_CopiaArticolo" message="tns:WS_CopiaArticolo" />
+      <output name="WS_CopiaArticolo_Result" message="tns:WS_CopiaArticolo_Result" />
+    </operation>
+  </portType>
+  <binding name="WS_ProductConfigurator_Binding" type="tns:WS_ProductConfigurator_Port">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="Create_FirmPlannedProdOrder">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WS_ProductConfigurator:Create_FirmPlannedProdOrder" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="Create_FirmPlannedProdOrder">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="Create_FirmPlannedProdOrder_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="WS_CopiaArticolo">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/WS_ProductConfigurator:WS_CopiaArticolo" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="WS_CopiaArticolo">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="WS_CopiaArticolo_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="WS_ProductConfigurator">
+    <port name="WS_ProductConfigurator_Port" binding="tns:WS_ProductConfigurator_Binding">
+      <address location="https://srv-bc.viamattei.metal-plus.it:7147/PROD_WS/TEST%20ODP/Codeunit/WS_ProductConfigurator" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>

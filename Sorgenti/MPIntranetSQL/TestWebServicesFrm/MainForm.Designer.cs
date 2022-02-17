@@ -151,6 +151,7 @@
             this.label41 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btnCreaODPSOA = new System.Windows.Forms.Button();
             this.btnEstraiSingoloOdp = new System.Windows.Forms.Button();
             this.btnCambiaDescrizioneOdP = new System.Windows.Forms.Button();
             this.txtNoOdP = new System.Windows.Forms.TextBox();
@@ -212,15 +213,15 @@
             this.Anagrafica = new System.Windows.Forms.Label();
             this.txtAnagCaratCFG = new System.Windows.Forms.TextBox();
             this.btnEstraiCaratCFG = new System.Windows.Forms.Button();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.btnCopiaAnag = new System.Windows.Forms.Button();
+            this.label64 = new System.Windows.Forms.Label();
+            this.txtAnagDest = new System.Windows.Forms.TextBox();
+            this.label63 = new System.Windows.Forms.Label();
+            this.txtAnagOrig = new System.Windows.Forms.TextBox();
             this.label48 = new System.Windows.Forms.Label();
             this.ddlAziende = new System.Windows.Forms.ComboBox();
             this.dataSet1 = new System.Data.DataSet();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.label63 = new System.Windows.Forms.Label();
-            this.txtAnagOrig = new System.Windows.Forms.TextBox();
-            this.label64 = new System.Windows.Forms.Label();
-            this.txtAnagDest = new System.Windows.Forms.TextBox();
-            this.btnCopiaAnag = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -249,8 +250,8 @@
             this.Listini.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nCostoListino)).BeginInit();
             this.tabPage6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             this.tabPage7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtMessaggio
@@ -1549,6 +1550,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.btnCreaODPSOA);
             this.tabPage3.Controls.Add(this.btnEstraiSingoloOdp);
             this.tabPage3.Controls.Add(this.btnCambiaDescrizioneOdP);
             this.tabPage3.Controls.Add(this.txtNoOdP);
@@ -1574,6 +1576,16 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "ODP";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // btnCreaODPSOA
+            // 
+            this.btnCreaODPSOA.Location = new System.Drawing.Point(491, 292);
+            this.btnCreaODPSOA.Name = "btnCreaODPSOA";
+            this.btnCreaODPSOA.Size = new System.Drawing.Size(213, 36);
+            this.btnCreaODPSOA.TabIndex = 17;
+            this.btnCreaODPSOA.Text = "Crea con servizio SOAP";
+            this.btnCreaODPSOA.UseVisualStyleBackColor = true;
+            this.btnCreaODPSOA.Click += new System.EventHandler(this.btnCreaODPSOA_Click);
             // 
             // btnEstraiSingoloOdp
             // 
@@ -2160,6 +2172,64 @@
             this.btnEstraiCaratCFG.UseVisualStyleBackColor = true;
             this.btnEstraiCaratCFG.Click += new System.EventHandler(this.btnEstraiCaratCFG_Click);
             // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.btnCopiaAnag);
+            this.tabPage7.Controls.Add(this.label64);
+            this.tabPage7.Controls.Add(this.txtAnagDest);
+            this.tabPage7.Controls.Add(this.label63);
+            this.tabPage7.Controls.Add(this.txtAnagOrig);
+            this.tabPage7.Location = new System.Drawing.Point(4, 22);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(1232, 596);
+            this.tabPage7.TabIndex = 6;
+            this.tabPage7.Text = "Copia articolo";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // btnCopiaAnag
+            // 
+            this.btnCopiaAnag.Location = new System.Drawing.Point(406, 39);
+            this.btnCopiaAnag.Name = "btnCopiaAnag";
+            this.btnCopiaAnag.Size = new System.Drawing.Size(114, 23);
+            this.btnCopiaAnag.TabIndex = 8;
+            this.btnCopiaAnag.Text = "Copia Articolo";
+            this.btnCopiaAnag.UseVisualStyleBackColor = true;
+            this.btnCopiaAnag.Click += new System.EventHandler(this.btnCopiaAnag_Click);
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Location = new System.Drawing.Point(224, 23);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(122, 13);
+            this.label64.TabIndex = 7;
+            this.label64.Text = "Anagrafica Destinazione";
+            // 
+            // txtAnagDest
+            // 
+            this.txtAnagDest.Location = new System.Drawing.Point(227, 42);
+            this.txtAnagDest.Name = "txtAnagDest";
+            this.txtAnagDest.Size = new System.Drawing.Size(148, 20);
+            this.txtAnagDest.TabIndex = 6;
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Location = new System.Drawing.Point(25, 23);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(94, 13);
+            this.label63.TabIndex = 5;
+            this.label63.Text = "Anagrafica Origine";
+            // 
+            // txtAnagOrig
+            // 
+            this.txtAnagOrig.Location = new System.Drawing.Point(25, 42);
+            this.txtAnagOrig.Name = "txtAnagOrig";
+            this.txtAnagOrig.Size = new System.Drawing.Size(153, 20);
+            this.txtAnagOrig.TabIndex = 4;
+            this.txtAnagOrig.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
             // label48
             // 
             this.label48.AutoSize = true;
@@ -2181,64 +2251,6 @@
             // dataSet1
             // 
             this.dataSet1.DataSetName = "NewDataSet";
-            // 
-            // tabPage7
-            // 
-            this.tabPage7.Controls.Add(this.btnCopiaAnag);
-            this.tabPage7.Controls.Add(this.label64);
-            this.tabPage7.Controls.Add(this.txtAnagDest);
-            this.tabPage7.Controls.Add(this.label63);
-            this.tabPage7.Controls.Add(this.txtAnagOrig);
-            this.tabPage7.Location = new System.Drawing.Point(4, 22);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(1232, 596);
-            this.tabPage7.TabIndex = 6;
-            this.tabPage7.Text = "Copia articolo";
-            this.tabPage7.UseVisualStyleBackColor = true;
-            // 
-            // label63
-            // 
-            this.label63.AutoSize = true;
-            this.label63.Location = new System.Drawing.Point(25, 23);
-            this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(94, 13);
-            this.label63.TabIndex = 5;
-            this.label63.Text = "Anagrafica Origine";
-            // 
-            // txtAnagOrig
-            // 
-            this.txtAnagOrig.Location = new System.Drawing.Point(25, 42);
-            this.txtAnagOrig.Name = "txtAnagOrig";
-            this.txtAnagOrig.Size = new System.Drawing.Size(153, 20);
-            this.txtAnagOrig.TabIndex = 4;
-            this.txtAnagOrig.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // label64
-            // 
-            this.label64.AutoSize = true;
-            this.label64.Location = new System.Drawing.Point(224, 23);
-            this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(122, 13);
-            this.label64.TabIndex = 7;
-            this.label64.Text = "Anagrafica Destinazione";
-            // 
-            // txtAnagDest
-            // 
-            this.txtAnagDest.Location = new System.Drawing.Point(227, 42);
-            this.txtAnagDest.Name = "txtAnagDest";
-            this.txtAnagDest.Size = new System.Drawing.Size(148, 20);
-            this.txtAnagDest.TabIndex = 6;
-            // 
-            // btnCopiaAnag
-            // 
-            this.btnCopiaAnag.Location = new System.Drawing.Point(406, 39);
-            this.btnCopiaAnag.Name = "btnCopiaAnag";
-            this.btnCopiaAnag.Size = new System.Drawing.Size(114, 23);
-            this.btnCopiaAnag.TabIndex = 8;
-            this.btnCopiaAnag.Text = "Copia Articolo";
-            this.btnCopiaAnag.UseVisualStyleBackColor = true;
-            this.btnCopiaAnag.Click += new System.EventHandler(this.btnCopiaAnag_Click);
             // 
             // MainForm
             // 
@@ -2289,9 +2301,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nCostoListino)).EndInit();
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
             this.tabPage7.ResumeLayout(false);
             this.tabPage7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2492,6 +2504,7 @@
         private System.Windows.Forms.TextBox txtAnagDest;
         private System.Windows.Forms.Label label63;
         private System.Windows.Forms.TextBox txtAnagOrig;
+        private System.Windows.Forms.Button btnCreaODPSOA;
     }
 }
 

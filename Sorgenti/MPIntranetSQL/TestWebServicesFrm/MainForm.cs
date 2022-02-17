@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -398,6 +399,7 @@ namespace TestWebServicesFrm
             ddlAziende.Items.Add("METALPLUS");
             ddlAziende.Items.Add("METALPLUS 08092021");
             ddlAziende.Items.Add("METALPLUS_210621");
+            ddlAziende.Items.Add("TEST ODP");
         }
 
         private void ddlAreaProduzione_SelectedIndexChanged(object sender, EventArgs e)
@@ -1126,7 +1128,7 @@ namespace TestWebServicesFrm
                 bc.CreaConnessione(azienda);
                 string t = txtAnagOrig.Text;
                 string tt = txtAnagDest.Text;
-                bc.CopiaArticolo(ref t, ref tt );
+                bc.CopiaArticolo(ref t, ref tt);
                 txtMessaggio.Text = "Anagrafica Copiata Correttamente";
 
             }
@@ -1137,5 +1139,40 @@ namespace TestWebServicesFrm
             }
         }
 
+        private void btnCreaODPSOA_Click(object sender, EventArgs e)
+        {
+            txtMessaggio.Text = string.Empty;
+            txtNoOdP.Text = string.Empty;
+            if (ddlAziende.SelectedIndex == -1)
+            {
+                txtMessaggio.Text = "Selezionare un'azienda";
+                return;
+            }
+            try
+            {
+                if (string.IsNullOrEmpty(txtAnagraficaOdP.Text))
+                {
+                    txtMessaggio.Text = "Inserire un codice Anagrafica";
+                    return;
+                }
+                if (string.IsNullOrEmpty(txtLocationOdP.Text))
+                {
+                    txtMessaggio.Text = "Inserire una ubicazione";
+                    return;
+                }
+                string azienda = (string)ddlAziende.SelectedItem;
+                BCServices bc = new BCServices();
+                bc.CreaConnessione(azienda);
+                string ODP = string.Empty;
+
+                bc.MTPWS(txtAnagraficaOdP.Text, nQuntitàOdP.Value, dtScadenzaOdP.Value, txtLocationOdP.Text, ref ODP, txtDescrizioneOdP.Text, txtDescrizione2.Text);
+                txtMessaggio.Text = "Ordine Crato Correttamente";
+                txtNoOdP.Text = ODP;
+            }
+            catch (Exception ex)
+            {
+                txtMessaggio.Text = estraiErrore(ex);
+            }
+        }
     }
 }

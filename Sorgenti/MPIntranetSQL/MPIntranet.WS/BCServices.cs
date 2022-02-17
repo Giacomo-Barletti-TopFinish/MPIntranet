@@ -28,7 +28,7 @@ namespace MPIntranet.WS
         {
             string url = "https://srv-bc.viamattei.metal-plus.it:7147/PROD_WS/WS/METALPLUS/Codeunit/PostingRegMag";
             if (_azienda != "METALPLUS")
-                url = "https://srv-bc.viamattei.metal-plus.it:7147/PROD_WS/WS/METALPLUS%2008092021/Codeunit/PostingRegMag";
+                url = "https://srv-bc.viamattei.metal-plus.it:7147/PROD_WS/WS/TEST%20ODP/Codeunit/PostingRegMag";
 
             BasicHttpBinding binding = new BasicHttpBinding();
             binding.Security.Mode = BasicHttpSecurityMode.Transport;
@@ -39,11 +39,29 @@ namespace MPIntranet.WS
             ws.ClientCredentials.UserName.Password = _password;
             ws.WSPostItemJnl();
         }
+        public void MTPWS(string itemNo, decimal qty, DateTime dueDate, string locationCode, ref string prodOrderNo, string description, string description2)
+        {
+            string url = "https://srv-bc.viamattei.metal-plus.it:7147/PROD_WS/WS/METALPLUS/Codeunit/WS_ProductConfigurator";
+            if (_azienda != "METALPLUS")
+                url = "https://srv-bc.viamattei.metal-plus.it:7147/PROD_WS/WS/TEST%20ODP/Codeunit/WS_ProductConfigurator";
+
+            BasicHttpBinding binding = new BasicHttpBinding();
+            binding.Security.Mode = BasicHttpSecurityMode.Transport;
+            binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+
+            string dataStr = dueDate.ToString("yyyy-MM-dd");
+
+            MPIntranet.WS.MTPWS.WS_ProductConfigurator_PortClient ws = new MTPWS.WS_ProductConfigurator_PortClient(binding, new EndpointAddress(url));
+            ws.ClientCredentials.UserName.UserName = _user;
+            ws.ClientCredentials.UserName.Password = _password;
+            ws.Create_FirmPlannedProdOrder(itemNo, qty, dataStr, locationCode, ref prodOrderNo, description, description2);
+
+        }
         public void CopiaArticolo(ref string articoloSorgente, ref string tipoArticoloDestinazione)
         {
             string url = "https://srv-bc.viamattei.metal-plus.it:7147/PROD_WS/WS/METALPLUS/Codeunit/WS_ProductConfigurator";
             if (_azienda != "METALPLUS")
-                url = "https://srv-bc.viamattei.metal-plus.it:7147/PROD_WS/WS/METALPLUS%2008092021/Codeunit/WS_ProductConfigurator";
+                url = "https://srv-bc.viamattei.metal-plus.it:7147/PROD_WS/WS/TEST%20ODP/Codeunit/WS_ProductConfigurator";
 
             BasicHttpBinding binding = new BasicHttpBinding();
             binding.Security.Mode = BasicHttpSecurityMode.Transport;
@@ -52,7 +70,7 @@ namespace MPIntranet.WS
             ServiceCopiaArticolo.WS_ProductConfigurator_PortClient ws = new ServiceCopiaArticolo.WS_ProductConfigurator_PortClient(binding, new EndpointAddress(url));
             ws.ClientCredentials.UserName.UserName = _user;
             ws.ClientCredentials.UserName.Password = _password;
-            ws.WS_CopiaArticolo(ref articoloSorgente,ref tipoArticoloDestinazione);
+            ws.WS_CopiaArticolo(ref articoloSorgente, ref tipoArticoloDestinazione);
         }
         public FileManager.FileManagement_PortClient CreaFileManagement()
         {
@@ -153,7 +171,7 @@ namespace MPIntranet.WS
                 Articoli t = _nav.Articoli.Where(x => x.No == Anagrafica).FirstOrDefault();
                 return t;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -489,6 +507,31 @@ namespace MPIntranet.WS
             Salva();
             return oDP.No;
         }
+        public string CreaOdDPConfermato(string Anagrafica, DateTime data, decimal quantita, string ubicazione, string collocazione, string descrizione, string descrizione2)
+
+        {
+
+            NAV.ODPConfermato oDP = new ODPConfermato();
+
+            oDP.Source_No = Anagrafica;
+            oDP.Creation_Date = DateTime.Now;
+            oDP.Due_Date = data;
+            oDP.Location_Code = ubicazione;
+            oDP.Bin_Code = collocazione;
+            oDP.Quantity = quantita;
+            oDP.Description = descrizione;
+            oDP.Description_2 = descrizione2;
+            oDP.Status = "Confermato";
+            oDP.No = string.Empty;
+            _nav.AddToODPConfermato(oDP);
+            Salva();
+            oDP.Description = descrizione;
+            oDP.Description_2 = descrizione2;
+            oDP.Due_Date = data;
+            _nav.UpdateObject(oDP);
+            Salva();
+            return oDP.No;
+        }
         public string CreaListino(string Anagrafica, string Terzista, string Task, DateTime DataInizio, DateTime DataFine, decimal CostoListino)
 
         {
@@ -580,27 +623,27 @@ namespace MPIntranet.WS
             List<CaratteristicheArtCFG> c = _nav.CaratteristicheArtCFG.Where(x => x.Item_No == anagrafica).ToList();
             return c;
         }
-        
-        
+
+
         //public void CambiaCaratteristicaArtCFG(string anagrafica, string codice, string valore)
         //{
-            
+
         //    NAV.CaratteristicheArtCFG carat = _nav.CaratteristicheArtCFG.Where(x => x.Item_No == anagrafica && x.Characteristic_Code == codice).FirstOrDefault();
         //    //carat.Numeric_Value = 1;
         //   carat.Characteristic_Value = valore;
         //    _nav.UpdateObject(carat);
         //    Salva();
-         
+
         //}
         public void CambiaCaratteristicaArtCFG(string anagrafica, string codice, string valore)
         {
-            
-            NAV.CaratAmmCFG carat = _nav.CaratAmmCFG.Where(x => x.ItemNo== anagrafica && x.CharacteristicCode == codice).FirstOrDefault();
+
+            NAV.CaratAmmCFG carat = _nav.CaratAmmCFG.Where(x => x.ItemNo == anagrafica && x.CharacteristicCode == codice).FirstOrDefault();
             carat.NumericValue = decimal.Parse(valore);
-           carat.CharacteristicValue = valore;
+            carat.CharacteristicValue = valore;
             _nav.UpdateObject(carat);
             Salva();
-         
+
         }
     }
 }
