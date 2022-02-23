@@ -33,6 +33,7 @@ namespace MPIntranet.WS
             BasicHttpBinding binding = new BasicHttpBinding();
             binding.Security.Mode = BasicHttpSecurityMode.Transport;
             binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+            binding.SendTimeout = new TimeSpan(0, 5, 0);
 
             ServicePostingRegMag.PostingRegMag_PortClient ws = new ServicePostingRegMag.PostingRegMag_PortClient(binding, new EndpointAddress(url));
             ws.ClientCredentials.UserName.UserName = _user;
@@ -48,14 +49,26 @@ namespace MPIntranet.WS
             BasicHttpBinding binding = new BasicHttpBinding();
             binding.Security.Mode = BasicHttpSecurityMode.Transport;
             binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+            binding.SendTimeout = new TimeSpan(0, 5, 0);
 
             string dataStr = dueDate.ToString("yyyy-MM-dd");
-
             MPIntranet.WS.MTPWS.WS_ProductConfigurator_PortClient ws = new MTPWS.WS_ProductConfigurator_PortClient(binding, new EndpointAddress(url));
-            ws.ClientCredentials.UserName.UserName = _user;
-            ws.ClientCredentials.UserName.Password = _password;
-            ws.Create_FirmPlannedProdOrder(itemNo, qty, dataStr, locationCode, ref prodOrderNo, description, description2);
-
+            try
+            {
+                ws.ClientCredentials.UserName.UserName = _user;
+                ws.ClientCredentials.UserName.Password = _password;
+                ws.Open();
+                ws.Create_FirmPlannedProdOrder(itemNo, qty, dataStr, locationCode, ref prodOrderNo, description, description2);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (ws != null)
+                    ws.Close();
+            }
         }
         public void CopiaArticolo(ref string articoloSorgente, ref string tipoArticoloDestinazione)
         {
