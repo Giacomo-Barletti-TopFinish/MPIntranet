@@ -39,7 +39,7 @@ namespace MPIntranet.Business
         }
         public override string ToString()
         {
-            return string.Format("{0} {1} {2}",TipoDistinta.TipoDiba,Versione,Descrizione);
+            return string.Format("{0} {1} {2}", TipoDistinta.TipoDiba, Versione, Descrizione);
         }
         public void CreaDaDistintaBC(DistintaBC distintaBC, int idDiba, string utente)
         {
@@ -258,7 +258,11 @@ namespace MPIntranet.Business
                 }
                 else
                 {
-                    ExpComponenteDistintaBusinessCentral componente = new ExpComponenteDistintaBusinessCentral(faseCiclo.Anagrafica, faseCiclo.Quantita, faseCiclo.CollegamentoDiBa, faseCiclo.UMQuantita, faseCiclo.IdFaseCiclo, articolo.Anagrafica, faseCiclo.Descrizione);
+                    //ExpComponenteDistintaBusinessCentral componente = new ExpComponenteDistintaBusinessCentral(faseCiclo.Anagrafica, faseCiclo.Quantita, faseCiclo.CollegamentoDiBa, faseCiclo.UMQuantita, 
+                    //    faseCiclo.IdFaseCiclo, articolo.Anagrafica, faseCiclo.Descrizione);
+                    ExpComponenteDistintaBusinessCentral componente = new ExpComponenteDistintaBusinessCentral(faseCiclo.Anagrafica, faseCiclo.Quantita, faseCiclo.CollegamentoDiBa, faseCiclo.UMQuantita,
+    faseCiclo.IdFaseCiclo, codiceDistinta, faseCiclo.Descrizione);
+
                     distinta.Componenti.Add(componente);
                     distinteExport.Add(distinta);
                     if (ciclo.Fasi.Count > 0)
@@ -278,7 +282,8 @@ namespace MPIntranet.Business
             List<Componente> componentiArticolo = Componenti.Where(x => x.IdPadre == articolo.IdComponente).ToList();
             foreach (Componente componenteArticolo in componentiArticolo)
             {
-                ExpComponenteDistintaBusinessCentral componente = new ExpComponenteDistintaBusinessCentral(componenteArticolo.Anagrafica, componenteArticolo.Quantita, componenteArticolo.CollegamentoDiBa, componenteArticolo.UMQuantita, componenteArticolo.IdComponente, codiceDistinta, componenteArticolo.Descrizione);
+                ExpComponenteDistintaBusinessCentral componente = new ExpComponenteDistintaBusinessCentral(componenteArticolo.Anagrafica, componenteArticolo.Quantita, componenteArticolo.CollegamentoDiBa,
+                    componenteArticolo.UMQuantita, componenteArticolo.IdComponente, codiceDistinta, componenteArticolo.Descrizione);
                 distinta.Componenti.Add(componente);
             }
             distinteExport.Add(distinta);

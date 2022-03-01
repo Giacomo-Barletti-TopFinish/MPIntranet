@@ -881,7 +881,7 @@ namespace DisegnaDiBa
                         foreach(ExpFaseCicloBusinessCentral fc in ciclo.Fasi)
                         {
                             MPIntranet.Business.Task task = tasks.Where(x => x.Codice == fc.Task).FirstOrDefault();
-                            if(task!=null && string.IsNullOrEmpty(fc.Descrizione))
+                            if(task!=null && string.IsNullOrEmpty(task.Descrizione))    // fix Daniela 2
                             {
                                 fc.Descrizione = task.Descrizione;
                             }
