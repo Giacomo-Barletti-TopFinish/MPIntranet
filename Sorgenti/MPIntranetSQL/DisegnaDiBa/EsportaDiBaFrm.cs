@@ -146,7 +146,7 @@ namespace DisegnaDiBa
                             try
                             {
                                 f.Errore = string.Empty;
-                                bc.AggiungiFase(ciclo, string.Empty, f.Operazione.ToString(), f.Tipo, f.AreaProduzione, f.Task, (decimal)f.TempoSetup, f.UMSetup,f.SchedaProcesso,
+                                bc.AggiungiFase(ciclo, string.Empty, f.Operazione.ToString(), f.Tipo, f.AreaProduzione, f.Task, (decimal)f.TempoSetup, f.UMSetup, f.SchedaProcesso,
                                     (decimal)f.TempoLavorazione, f.UMLavorazione,
                                     (decimal)f.TempoAttesa, f.UMAttesa, (decimal)f.TempoSpostamento, f.UMSpostamento,
                                     (decimal)f.DimensioneLotto, f.Collegamento, f.Condizione, f.LogicheLavorazione, f.Caratteristica, f.Descrizione);
@@ -233,7 +233,7 @@ namespace DisegnaDiBa
 
                         List<RigheDIBA> righe = bc.EstraiRigheDIBA(distinta);
                         foreach (RigheDIBA riga in righe)
-                            bc.RimuoviComponente(distinta, string.Empty, riga.Line_No, riga.No,false);
+                            bc.RimuoviComponente(distinta, string.Empty, riga.Line_No, riga.No, false);
 
                         bc.Salva();
 
@@ -242,12 +242,16 @@ namespace DisegnaDiBa
                         {
                             try
                             {
+                                Item item = Item.EstraiItem(c.Anagrafica);
+                                string descrizione = (item == null) ? string.Empty : item.Descrizione;
+
                                 c.Errore = string.Empty;
                                 decimal quantita = (decimal)c.Quantita;
                                 decimal scarto = (decimal)c.Scarto;
                                 decimal arrotondamento = (decimal)c.Arrotondamento;
                                 numeroRiga += 1000;
-                                bc.AggiungiComponente(distinta, string.Empty, numeroRiga, c.Tipo, c.Anagrafica, c.Descrizione, c.CodiceUM, quantita, c.Collegamento, scarto, arrotondamento);
+                                //                                bc.AggiungiComponente(distinta, string.Empty, numeroRiga, c.Tipo, c.Anagrafica, c.Descrizione, c.CodiceUM, quantita, c.Collegamento, scarto, arrotondamento);
+                                bc.AggiungiComponente(distinta, string.Empty, numeroRiga, c.Tipo, c.Anagrafica, descrizione, c.CodiceUM, quantita, c.Collegamento, scarto, arrotondamento);
                                 c.Esito = "OK";
                             }
                             catch (Exception ex)

@@ -256,6 +256,25 @@ namespace MPIntranet.WS
             Salva();
         }
 
+        public void AggiungiComponente(string NoDistinta, string versioneDistinta, int numeroRiga, string tipo, string No, string UM,
+    decimal quantitaPer, string collegamento, decimal scarto, decimal arrotondamento)
+        {
+            RigheDIBA componente = new RigheDIBA();
+
+            componente.Production_BOM_No = NoDistinta;
+            componente.Version_Code = versioneDistinta;
+            componente.Line_No = numeroRiga;
+            componente.Type = tipo;
+            componente.No = No;
+            componente.Unit_of_Measure_Code = UM;
+            componente.Quantity_per = quantitaPer;
+            componente.Routing_Link_Code = collegamento;
+            componente.Scrap_Percent = scarto;
+            componente.MTP_Precious_Quantity = arrotondamento;
+            _nav.AddToRigheDIBA(componente);
+            Salva();
+        }
+
 
         public void RimuoviComponente(string NoDistinta, string versioneDistinta, int numeroRiga, string No, bool conSalvataggio)
         {
