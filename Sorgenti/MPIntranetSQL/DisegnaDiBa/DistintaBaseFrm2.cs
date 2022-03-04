@@ -823,7 +823,7 @@ namespace DisegnaDiBa
             row.Cells[clmSchedaProcessoFaseCiclo.Index].Value = string.Empty;
             row.Cells[clmSchedaProcessoFaseCiclo.Index].Value = string.Empty;
             row.Cells[clmCollegamentoCicloFaseCiclo.Index].Value = string.Empty;
-            row.Cells[clmPeriodoFaseCiclo.Index].Value = 1;
+            row.Cells[clmPeriodoFaseCiclo.Index].Value = 0;
             row.Cells[clmSetupFaseCiclo.Index].Value = 0;
             row.Cells[clmPezziOrariFaseCiclo.Index].Value = 0;
             row.Cells[clmAttesaFaseCiclo.Index].Value = 0;

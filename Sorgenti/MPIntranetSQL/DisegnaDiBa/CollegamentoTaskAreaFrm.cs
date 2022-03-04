@@ -151,12 +151,13 @@ namespace DisegnaDiBa
             {
                 if (dgvTaskArea.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == null)
                 {
-                    MessageBox.Show("Valori nulli per PERIODO non sono ammessi", "ATTEZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                    dgvTaskArea.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = 0;
+                    //MessageBox.Show("Valori nulli per PERIODO non sono ammessi", "ATTEZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //return;
                 }
 
                 double periodo = (double)dgvTaskArea.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-                if (periodo <= 0)
+                if (periodo < 0)
                 {
                     MessageBox.Show("PERIODO deve essere positivo", "ATTEZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
