@@ -42,6 +42,7 @@
             this.disponiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cascataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.organizzaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copiaArticoloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preventiviMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,7 +82,8 @@
             this.distinteRVLToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.apriEsistenteToolStripMenuItem,
             this.businessCentralToolStripMenuItem,
-            this.taskAreaToolStripMenuItem});
+            this.taskAreaToolStripMenuItem,
+            this.copiaArticoloToolStripMenuItem});
             this.distinteRVLToolStripMenuItem.Name = "distinteRVLToolStripMenuItem";
             this.distinteRVLToolStripMenuItem.Size = new System.Drawing.Size(95, 21);
             this.distinteRVLToolStripMenuItem.Text = "Distinte base";
@@ -89,14 +91,14 @@
             // apriEsistenteToolStripMenuItem
             // 
             this.apriEsistenteToolStripMenuItem.Name = "apriEsistenteToolStripMenuItem";
-            this.apriEsistenteToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.apriEsistenteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.apriEsistenteToolStripMenuItem.Text = "Apri ...";
             this.apriEsistenteToolStripMenuItem.Click += new System.EventHandler(this.apriEsistenteToolStripMenuItem_Click);
             // 
             // businessCentralToolStripMenuItem
             // 
             this.businessCentralToolStripMenuItem.Name = "businessCentralToolStripMenuItem";
-            this.businessCentralToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.businessCentralToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.businessCentralToolStripMenuItem.Text = "Business Central...";
             this.businessCentralToolStripMenuItem.Visible = false;
             this.businessCentralToolStripMenuItem.Click += new System.EventHandler(this.businessCentralToolStripMenuItem_Click);
@@ -104,7 +106,7 @@
             // taskAreaToolStripMenuItem
             // 
             this.taskAreaToolStripMenuItem.Name = "taskAreaToolStripMenuItem";
-            this.taskAreaToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.taskAreaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.taskAreaToolStripMenuItem.Text = "Task - Area";
             this.taskAreaToolStripMenuItem.Click += new System.EventHandler(this.taskAreaToolStripMenuItem_Click);
             // 
@@ -154,6 +156,13 @@
             this.organizzaToolStripMenuItem.Text = "Organizza orizzontale";
             this.organizzaToolStripMenuItem.Click += new System.EventHandler(this.organizzaToolStripMenuItem_Click);
             // 
+            // copiaArticoloToolStripMenuItem
+            // 
+            this.copiaArticoloToolStripMenuItem.Name = "copiaArticoloToolStripMenuItem";
+            this.copiaArticoloToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.copiaArticoloToolStripMenuItem.Text = "Copia articolo...";
+            this.copiaArticoloToolStripMenuItem.Click += new System.EventHandler(this.copiaArticoloToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -187,6 +196,7 @@
         private System.Windows.Forms.ToolStripMenuItem taskAreaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem businessCentralToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem apriBusinessCentralMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copiaArticoloToolStripMenuItem;
     }
 }
 

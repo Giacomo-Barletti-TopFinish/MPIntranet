@@ -24,9 +24,9 @@
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\srv-webservices\Publish\MPIIntranet\DisegnaDiBa\</InstallUrl>
-    <MinimumRequiredVersion>2.0.1.20</MinimumRequiredVersion>
-    <ApplicationRevision>21</ApplicationRevision>
-    <ApplicationVersion>2.0.1.%2a</ApplicationVersion>
+    <MinimumRequiredVersion>2.0.2.2</MinimumRequiredVersion>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>2.0.2.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -130,6 +130,12 @@
     <Compile Include="CollegamentoTaskAreaFrm.Designer.cs">
       <DependentUpon>CollegamentoTaskAreaFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CopiaArticoloFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CopiaArticoloFrm.Designer.cs">
+      <DependentUpon>CopiaArticoloFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DistintaBaseFrm2.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,6 +188,9 @@
     </Compile>
     <EmbeddedResource Include="CollegamentoTaskAreaFrm.resx">
       <DependentUpon>CollegamentoTaskAreaFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CopiaArticoloFrm.resx">
+      <DependentUpon>CopiaArticoloFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DistintaBaseFrm2.resx">
       <DependentUpon>DistintaBaseFrm2.cs</DependentUpon>

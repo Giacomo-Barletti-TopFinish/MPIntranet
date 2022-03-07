@@ -122,5 +122,19 @@ namespace DisegnaDiBa
                 base.MostraEccezione(ex, "Errore in apertura finestra distinte business central");
             }
         }
+
+        private void copiaArticoloToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CopiaArticoloFrm form = new CopiaArticoloFrm();
+                form.MdiParent = this;
+                form.Show();
+            }
+            catch (Exception ex)
+            {
+                base.MostraEccezione(ex, "Errore in apertura finestra copia articolo");
+            }
+        }
     }
 }
