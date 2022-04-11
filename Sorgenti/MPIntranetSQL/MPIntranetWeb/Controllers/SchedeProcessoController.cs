@@ -156,6 +156,7 @@ namespace MPIntranetWeb.Controllers
             Descrizione = Descrizione.ToUpper();
             Task = Task.ToUpper();
             AreaProduzione = AreaProduzione.ToUpper();
+            int schedaObbligatorio = 1;
 
             ElementoMaster[] elementiLista = JSonSerializer.Deserialize<ElementoMaster[]>(Lista);
 

@@ -108,6 +108,10 @@ namespace MPIntranet.Business.SchedeProcesso
 
         public static string SalvaMaster(int idMaster, string codice, string descrizione, string areaProduzione, string task, ElementoMaster[] elementiLista, string account)
         {
+            return SalvaMaster(idMaster, codice, descrizione, areaProduzione, task, elementiLista, account, 1);
+        }
+        public static string SalvaMaster(int idMaster, string codice, string descrizione, string areaProduzione, string task, ElementoMaster[] elementiLista, string account, int idSchedaObbligatoria)
+        {
 
             SchedeProcessoDS ds = new SchedeProcessoDS();
             using (SchedeProcessoBusiness bScheda = new SchedeProcessoBusiness())
@@ -130,7 +134,7 @@ namespace MPIntranet.Business.SchedeProcesso
                     riga.AREAPRODUZIONE = areaProduzione.ToUpper();
                     riga.TASK = task.ToUpper();
                     riga.DATAMODIFICA = DateTime.Now;
-                    riga.UTENTEMODIFICA = account;
+                    riga.UTENTEMODIFICA = account.ToUpper();
                 }
                 else
                 {
@@ -142,9 +146,9 @@ namespace MPIntranet.Business.SchedeProcesso
                     riga.CANCELLATO = false;
                     riga.DATAMODIFICA = DateTime.Now;
                     riga.UTENTEMODIFICA = account.ToUpper();
+                    riga.IDSCHEDAOBBLIGATORIA = idSchedaObbligatoria;
                     ds.SPMASTERS.AddSPMASTERSRow(riga);
                 }
-
 
                 if (idMaster > 0)
                 {
