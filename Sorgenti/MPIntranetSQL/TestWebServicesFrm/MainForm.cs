@@ -1174,5 +1174,10 @@ namespace TestWebServicesFrm
                 txtMessaggio.Text = estraiErrore(ex);
             }
         }
+
+        private void lbl_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

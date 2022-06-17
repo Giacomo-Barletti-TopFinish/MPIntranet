@@ -1515,6 +1515,7 @@
             this.lbl.Size = new System.Drawing.Size(58, 13);
             this.lbl.TabIndex = 1;
             this.lbl.Text = "Anagrafica";
+            this.lbl.Click += new System.EventHandler(this.lbl_Click);
             // 
             // button5
             // 

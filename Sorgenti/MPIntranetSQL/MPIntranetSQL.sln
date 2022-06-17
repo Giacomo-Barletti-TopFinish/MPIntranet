@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebServicesFrm", "TestW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FattureAcquisto", "FattureAcquisto\FattureAcquisto.csproj", "{0A419755-1B79-4BD7-9814-21C06114BB20}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPDF", "TestPDF\TestPDF.csproj", "{8CC5BCD7-0E4E-437B-A1DB-5B4DB1618A60}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{0A419755-1B79-4BD7-9814-21C06114BB20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A419755-1B79-4BD7-9814-21C06114BB20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A419755-1B79-4BD7-9814-21C06114BB20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CC5BCD7-0E4E-437B-A1DB-5B4DB1618A60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CC5BCD7-0E4E-437B-A1DB-5B4DB1618A60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CC5BCD7-0E4E-437B-A1DB-5B4DB1618A60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CC5BCD7-0E4E-437B-A1DB-5B4DB1618A60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

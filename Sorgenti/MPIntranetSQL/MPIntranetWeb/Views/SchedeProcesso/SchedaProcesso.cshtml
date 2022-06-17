@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-md-3">
                         @Html.Label("Descrizione")
-                        @Html.TextBox("txtDescrizione", null, new { @class = "form-control input-sm ", @id = "txtDescrizione", @maxlength = "50" })
+                        @Html.TextBox("txtDescrizione", null, new { @class = "form-control input-sm ", @id = "txtDescrizione", @readonly = true, @maxlength = "50" })
                     </div>
                     <div class="col-md-1" style="padding-top:20px">
                         <input type="button" onclick="TrovaScheda()" class="btn btn-primary" value="Trova" />
@@ -45,7 +45,7 @@
                     </div>
 
                     <div class="col-md-4">
-                        @Html.Label("Master")
+                        @Html.Label("Parametri di processo")
                         @Html.DropDownList("ddlSPMasters", Enumerable.Empty<SelectListItem>(), new { @class = "form-control input-sm", @id = "ddlSPMasters" })
                     </div>
 
@@ -102,7 +102,12 @@
             var selectedValue = $(this).val();
             getSchedaProcesso(selectedValue);
         });
-
+        $("#txtAnagrafica").focusout(function () {
+            var selectedValue = $(this).val();
+            debugger;
+            getInformazioniAnagrafica(selectedValue);
+        });
+    
         $('#Upload').click(function () {
 
             var fileUpload = $("#files").get(0);
@@ -113,6 +118,7 @@
             for (var i = 0; i < files.length; i++) {
                 fileData.append(files[i].name, files[i]);
             }
+                      
 
             // eventuali chiavi aggiunte vanno inserite qui... le ritrovi nel controller come elementi della form
             fileData.append('Test', "Test Object values");
@@ -153,7 +159,26 @@
                         document.write(response.responseText);
                         document.close();
                     }
-                });
+         });
+
+    }
+    function getInformazioniAnagrafica(anagrafica) {
+          var url = '@Url.Action("GetInformazioniAnagrafica", "SchedeProcesso")';
+                $.ajax({
+                    url: url,
+                    data: { Anagrafica: anagrafica },
+                    cache: false,
+                    type: "POST",
+                    success: function (data) {
+                        $('#txtDescrizione').val(data);
+                    },
+                    error: function (response) {
+                        document.open();
+                        document.write(response.responseText);
+                        document.close();
+                    }
+         });
+
     }
 
     function getTasks(AreaProduzione,selectedValue) {

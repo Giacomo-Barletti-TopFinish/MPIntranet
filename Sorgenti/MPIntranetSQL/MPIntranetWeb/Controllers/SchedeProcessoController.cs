@@ -29,7 +29,7 @@ namespace MPIntranetWeb.Controllers
         {
             List<SPMaster> masters = MPIntranet.Business.SchedeProcesso.SPMaster.EstraiListaSPMaster(true);
             List<MPIntranetListItem> mItems = masters.Select(x => new MPIntranetListItem(x.Descrizione, x.IdSPMaster.ToString())).ToList();
-            mItems.Insert(0, new MPIntranetListItem(" -- CREA NUOVO MASTER -- ", ElementiVuoti.SPMaster.ToString()));
+            mItems.Insert(0, new MPIntranetListItem(" -- CREA NUOVO PARAMETRO DI PROCESSO -- ", ElementiVuoti.SPMaster.ToString()));
             ViewData.Add("ddlSPMasters", mItems);
 
             List<MPIntranetListItem> controlliItems = CreaListaSPControlli(" -- SELEZIONA UN CONTROLLO -- ",true);
@@ -75,6 +75,12 @@ namespace MPIntranetWeb.Controllers
         {
             SpScheda scheda = SpScheda.CreaSchedaVuota(Master);
             return PartialView("SchedaProcessoPartial", scheda);
+        }
+        public ActionResult GetInformazioniAnagrafica(string Anagrafica)
+        {
+            Item item = Item.EstraiItem(Anagrafica);
+
+            return Content(item==null? string.Empty: item.Descrizione);
         }
 
         public ActionResult UploadFile()

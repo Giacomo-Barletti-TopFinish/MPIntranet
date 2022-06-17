@@ -12,8 +12,8 @@
     @if ((ViewData["MenuAbilitati"] as List<decimal>).Contains(43))
     {
         <div class="row ">
-            <div class="col-md-3">
-                @Html.Label("Masters")
+            <div class="col-md-4">
+                @Html.Label("Parametri")
                 @Html.DropDownList("ddlSPMasters", new SelectList(@ViewData["ddlSPMasters"] as List<MPIntranetListItem>, "Value", "Text"), new { @class = "form-control input-sm", @id = "ddlSPMasters" })
             </div>
         </div>
@@ -44,9 +44,9 @@
             </div>
         </div>
 
-        <div id="elementiObblicatori" class="row">
+       // <div id="elementiObblicatori" class="row">
 
-        </div>
+       // </div>
 
         <div class="row">
             <div class="col-md-3">
@@ -139,7 +139,7 @@
                 cache: false,
                 type: "POST",
                 success: function (data) {
-                    $('#elementiObblicatori').html(data).show();
+                  //  $('#elementiObblicatori').html(data).show();
 
                 },
                 error: function (response) {
