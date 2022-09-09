@@ -50,5 +50,19 @@ namespace TestPDF
 
             txtFilename.Text = sfd.FileName;
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCreaPdfScheda_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtFilename.Text))
+            {
+                MessageBox.Show("Indicare il nome del file", "ATTENZIONE", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+        }
     }
 }

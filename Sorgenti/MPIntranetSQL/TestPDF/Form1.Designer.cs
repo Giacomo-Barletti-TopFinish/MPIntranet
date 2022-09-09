@@ -32,11 +32,14 @@
             this.btnSalvaFile = new System.Windows.Forms.Button();
             this.txtFilename = new System.Windows.Forms.TextBox();
             this.lbl = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnCreaPdfScheda = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnCreaPdfTest
             // 
-            this.btnCreaPdfTest.Location = new System.Drawing.Point(76, 110);
+            this.btnCreaPdfTest.Location = new System.Drawing.Point(371, 40);
             this.btnCreaPdfTest.Name = "btnCreaPdfTest";
             this.btnCreaPdfTest.Size = new System.Drawing.Size(75, 23);
             this.btnCreaPdfTest.TabIndex = 0;
@@ -56,7 +59,7 @@
             // 
             // txtFilename
             // 
-            this.txtFilename.Location = new System.Drawing.Point(76, 43);
+            this.txtFilename.Location = new System.Drawing.Point(66, 41);
             this.txtFilename.Name = "txtFilename";
             this.txtFilename.Size = new System.Drawing.Size(170, 20);
             this.txtFilename.TabIndex = 3;
@@ -70,11 +73,41 @@
             this.lbl.TabIndex = 4;
             this.lbl.Text = "Filename";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(66, 103);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(170, 20);
+            this.textBox1.TabIndex = 6;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(65, 87);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(58, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "ID Scheda";
+            // 
+            // btnCreaPdfScheda
+            // 
+            this.btnCreaPdfScheda.Location = new System.Drawing.Point(259, 101);
+            this.btnCreaPdfScheda.Name = "btnCreaPdfScheda";
+            this.btnCreaPdfScheda.Size = new System.Drawing.Size(115, 23);
+            this.btnCreaPdfScheda.TabIndex = 8;
+            this.btnCreaPdfScheda.Text = "Crea PDF Scheda";
+            this.btnCreaPdfScheda.UseVisualStyleBackColor = true;
+            this.btnCreaPdfScheda.Click += new System.EventHandler(this.btnCreaPdfScheda_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnCreaPdfScheda);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSalvaFile);
             this.Controls.Add(this.txtFilename);
             this.Controls.Add(this.lbl);
@@ -92,6 +125,9 @@
         private System.Windows.Forms.Button btnSalvaFile;
         private System.Windows.Forms.TextBox txtFilename;
         private System.Windows.Forms.Label lbl;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnCreaPdfScheda;
     }
 }
 
